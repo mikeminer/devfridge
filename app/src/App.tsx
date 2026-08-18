@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CLUSTERS,
+  GITHUB_REPO,
   PASTA_MINT,
   PASTA_URL,
   explorerProgramUrl,
@@ -468,6 +469,9 @@ export default function App() {
           rel="noreferrer"
         >
           {PASTA_MINT.toBase58()}
+        </a>
+        <a href={GITHUB_REPO} target="_blank" rel="noreferrer">
+          github.com/mikeminer/devfridge
         </a>
       </footer>
     </div>
