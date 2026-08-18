@@ -2,6 +2,7 @@ import "./polyfill";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import CountdownOverlay from "./components/CountdownOverlay";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AppStateProvider } from "./state";
 import "./index.css";
@@ -12,7 +13,9 @@ try {
     <React.StrictMode>
       <ErrorBoundary>
         <AppStateProvider>
-          <App />
+          <CountdownOverlay>
+            <App />
+          </CountdownOverlay>
         </AppStateProvider>
       </ErrorBoundary>
     </React.StrictMode>
