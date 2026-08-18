@@ -1,0 +1,11 @@
+{
+  "name": "fridge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "app": "npm --prefix app run dev",
+    "app:build": "npm --prefix app run build",
+    "test:unit": "npm --prefix app run test",
+    "test:program": "cargo test --manifest-path programs/fridge/Cargo.toml --lib"
+  }
+}

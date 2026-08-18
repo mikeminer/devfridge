@@ -1,0 +1,74 @@
+import { PublicKey } from "@solana/web3.js";
+import type { ClusterName } from "./constants";
+
+const KEY = "fridge.known-locks.v2";
+
+export type KnownLock = {
+  address: string;
+  mint: string;
+  lockId: string;
+  depositor: string;
+  programId: string;
+  cluster: ClusterName;
+};
+
+function readAll(): KnownLock[] {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as KnownLock[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeAll(rows: KnownLock[]) {
+  localStorage.setItem(KEY, JSON.stringify(rows.slice(-200)));
+}
+
+export function rememberLock(row: KnownLock) {
+  const rows = readAll().filter(
+    (r) => !(r.address === row.address && r.cluster === row.cluster)
+  );
+  rows.push(row);
+  writeAll(rows);
+}
+
+export function forgetLock(address: string, cluster: ClusterName) {
+  writeAll(readAll().filter((r) => !(r.address === address && r.cluster === cluster)));
+}
+
+export function knownLockAddresses(
+  depositor: PublicKey,
+  programId: PublicKey,
+  cluster: ClusterName
+): PublicKey[] {
+  return readAll()
+    .filter(
+      (r) =>
+        r.cluster === cluster &&
+        r.depositor === depositor.toBase58() &&
+        r.programId === programId.toBase58()
+    )
+    .map((r) => new PublicKey(r.address));
+}
+
+export function knownLockIds(
+  depositor: PublicKey,
+  mint: PublicKey,
+  programId: PublicKey,
+  cluster: ClusterName
+): bigint[] {
+  return readAll()
+    .filter(
+      (r) =>
+        r.cluster === cluster &&
+        r.depositor === depositor.toBase58() &&
+        r.mint === mint.toBase58() &&
+        r.programId === programId.toBase58()
+    )
+    .map((r) => BigInt(r.lockId));
+}
+
+

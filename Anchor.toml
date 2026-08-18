@@ -1,0 +1,28 @@
+[toolchain]
+anchor_version = "0.30.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+fridge = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6"
+
+[programs.devnet]
+fridge = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6"
+
+[programs.testnet]
+fridge = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6"
+
+[programs.mainnet]
+fridge = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

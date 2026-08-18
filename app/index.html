@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevFridge — Too many tokens? Fridge them.</title>
+    <link rel="icon" href="./brand/logo-mark.jpg" />
+    <script>
+      (function () {
+        var path = location.pathname || "/";
+        if (path.indexOf("/ipfs/") !== -1 && !path.endsWith("/")) {
+          location.replace(path + "/" + location.search + location.hash);
+          return;
+        }
+        if (path.indexOf("/ipfs/") !== -1) {
+          var base = document.createElement("base");
+          base.href = path.endsWith("/") ? path : path.replace(/[^/]+$/, "");
+          document.head.appendChild(base);
+        }
+        window.global = window;
+        window.process = window.process || { env: { NODE_ENV: "production" } };
+        function show(msg) {
+          var el = document.getElementById("boot-error");
+          if (el) {
+            el.hidden = false;
+            el.textContent = msg;
+          }
+        }
+        window.addEventListener("error", function (ev) {
+          show(ev.message || "App failed to start");
+        });
+        window.addEventListener("unhandledrejection", function (ev) {
+          show(String(ev.reason || "App failed to start"));
+        });
+      })();
+    </script>
+    <style>
+      html, body, #root { min-height: 100%; margin: 0; }
+      body {
+        margin: 0;
+        color: #f4efe6;
+        font-family: "Instrument Sans", Georgia, sans-serif;
+        background:
+          radial-gradient(1200px 600px at 12% -10%, rgba(255, 236, 200, 0.08), transparent 50%),
+          linear-gradient(180deg, #141821 0%, #0b0d12 42%, #151018 100%);
+      }
+      .boot-shell { max-width: 1280px; margin: 0 auto; padding: 22px 20px 72px; }
+      .boot-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+      .boot-logo {
+        width: 52px; height: 52px; border-radius: 14px; object-fit: cover;
+        background: #14161c; box-shadow: inset 0 0 0 1px rgba(255,247,232,.12);
+      }
+      .boot-bar h1 { margin: 0; font-size: 22px; }
+      .boot-bar p { margin: 0; color: #b7b0a4; }
+      .boot-fridge {
+        width: min(360px, 86vw); height: 640px; margin: 24px auto 0; border-radius: 28px;
+        background: linear-gradient(180deg, #f6f8f9 0%, #d5dee3 55%, #c4ced4 100%);
+        box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.35);
+        position: relative;
+      }
+      .boot-plate { position: absolute; top: 78px; left: 0; right: 0; text-align: center; color: #314047; letter-spacing: .28em; font-weight: 700; font-size: 20px; }
+      .boot-led { position: absolute; top: 150px; left: 50%; transform: translateX(-50%); width: 92px; padding: 8px 0; border-radius: 10px; background: #0d1418; color: #9be7ff; text-align: center; }
+      .boot-handle { position: absolute; right: 22px; top: 46%; width: 16px; height: 168px; border-radius: 20px; background: linear-gradient(90deg, #b7c0c6, #f4f7f8 45%, #8c979e); }
+      .boot-note { position: absolute; bottom: 42px; left: 50%; transform: translateX(-50%) rotate(-3deg); background: #f4e1b3; color: #3a2a14; font-size: 11px; padding: 6px 10px; }
+      #boot-error { display: none; margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: rgba(255,142,160,.12); color: #ffd0d7; }
+      #boot-error:not([hidden]) { display: block; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div class="boot-shell">
+        <div class="boot-bar">
+          <img class="boot-logo" src="./brand/logo-mark.jpg" alt="DevFridge" />
+          <div>
+            <h1>DevFridge</h1>
+            <p>Too many tokens? Fridge them.</p>
+          </div>
+        </div>
+        <p id="boot-error" hidden></p>
+        <div class="boot-fridge" aria-hidden="true">
+          <div class="boot-plate">DEVFRIDGE</div>
+          <div class="boot-led">live</div>
+          <div class="boot-handle"></div>
+          <div class="boot-note">open me</div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
