@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { PASTA_URL } from "../lib/constants";
 import logoMark from "../assets/logo-mark.jpg";
 
 /** Midnight at the start of 19 August 2026, Europe/Rome (CEST, UTC+2). */
@@ -35,6 +36,17 @@ export default function CountdownOverlay({ children }: { children: ReactNode }) 
           <h1>Too many tokens? Fridge them.</h1>
           <p className="lede">
             Si apre da solo a mezzanotte del 19 agosto 2026, ora italiana.
+          </p>
+          <p className="countdown-live">
+            Live appointment:{" "}
+            <a href={PASTA_URL} target="_blank" rel="noreferrer">
+              {PASTA_URL}
+            </a>
+          </p>
+          <p className="countdown-credit">
+            Developed for you by pappardelle.eth{" "}
+            <span className="mono">GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W</span>{" "}
+            with amore &lt;3
           </p>
           <div className="countdown-digits" aria-live="polite">
             {left.days > 0 && (

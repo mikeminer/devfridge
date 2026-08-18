@@ -169,6 +169,24 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   color: var(--muted);
 }
+.countdown-live,
+.countdown-credit {
+  margin: 16px 0 0;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.countdown-live a {
+  color: var(--ice);
+  word-break: break-all;
+}
+.countdown-credit {
+  font-size: 13px;
+}
+.countdown-credit .mono {
+  display: inline;
+  word-break: break-all;
+  color: var(--cream);
+}
 .countdown-hidden {
   display: none;
 }
