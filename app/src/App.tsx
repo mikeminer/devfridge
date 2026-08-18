@@ -4,6 +4,7 @@ import {
   PASTA_MINT,
   PASTA_URL,
   explorerProgramUrl,
+  explorerTxUrl,
   type ClusterName,
 } from "./lib/constants";
 import { usePhantom } from "./hooks/usePhantom";
@@ -65,9 +66,11 @@ export default function App() {
   );
   const [locks, setLocks] = useState<DecoratedLock[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [status, setStatus] = useState<{ kind: "ok" | "bad" | "warn"; text: string } | null>(
-    null
-  );
+  const [status, setStatus] = useState<{
+    kind: "ok" | "bad" | "warn";
+    text: string;
+    receipt?: string;
+  } | null>(null);
   const [busy, setBusy] = useState(false);
   const [loadingLocks, setLoadingLocks] = useState(true);
   const [now, setNow] = useState(() => Date.now() / 1000);
@@ -201,6 +204,7 @@ export default function App() {
       setStatus({
         kind: "ok",
         text: `Chilled ${amount} ${mintInfo.symbol} until ${formatWhen(unlockUnix)}.`,
+        receipt: explorerTxUrl(cluster, sig),
       });
       setAmount("");
       setOpen(true);
@@ -225,7 +229,11 @@ export default function App() {
       const sig = await wallet.sendTransaction(tx);
       await confirmSignature(connection, sig);
       forgetLock(lock.address.toBase58(), cluster);
-      setStatus({ kind: "ok", text: `Took ${lock.symbol} out of the fridge.` });
+      setStatus({
+        kind: "ok",
+        text: `Took ${lock.symbol} out of the fridge.`,
+        receipt: explorerTxUrl(cluster, sig),
+      });
       setSelectedId(null);
       await refreshLocks();
       void sig;
@@ -285,7 +293,21 @@ export default function App() {
         </div>
       </header>
 
-      {status && <div className={`banner ${status.kind} toast`}>{status.text}</div>}
+      {status && (
+        <div className={`banner ${status.kind} toast`}>
+          <span>{status.text}</span>
+          {status.receipt && (
+            <a
+              className="receipt mono"
+              href={status.receipt}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Receipt {status.receipt.split("/tx/")[1]?.split("?")[0]}
+            </a>
+          )}
+        </div>
+      )}
 
       <div className="stage">
         <StockPanel

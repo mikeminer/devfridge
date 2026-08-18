@@ -242,6 +242,13 @@ input[type="text"], input[type="datetime-local"] {
 .banner.ok { background: rgba(142, 240, 196, 0.1); color: #d4ffeb; }
 .banner.warn { background: rgba(243, 197, 107, 0.12); color: #ffe7b0; }
 .toast { position: relative; z-index: 4; }
+.banner .receipt {
+  display: block;
+  margin-top: 6px;
+  color: inherit;
+  font-size: 12px;
+  word-break: break-all;
+}
 .ok { color: var(--ok); }
 .box {
   background: rgba(255, 255, 255, 0.04);

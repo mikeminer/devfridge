@@ -108,6 +108,11 @@ export function explorerProgramUrl(cluster: ClusterName, programId: string): str
   return `https://explorer.solana.com/address/${programId}${query}`;
 }
 
+export function explorerTxUrl(cluster: ClusterName, signature: string): string {
+  const query = cluster === "mainnet" ? "" : `?cluster=${cluster}`;
+  return `https://explorer.solana.com/tx/${signature}${query}`;
+}
+
 export const CREATE_LOCK_DISCRIMINATOR = Uint8Array.from([
   171, 216, 92, 167, 165, 8, 153, 90,
 ]);
