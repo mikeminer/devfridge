@@ -32,6 +32,7 @@ import { useAppState } from "./state";
 import Fridge from "./components/Fridge";
 import FundDeploy from "./components/FundDeploy";
 import StockPanel from "./components/StockPanel";
+import TokenLogo from "./components/TokenLogo";
 import logoMark from "./assets/logo-mark.jpg";
 import logoWordmark from "./assets/logo-wordmark.jpg";
 
@@ -326,11 +327,7 @@ export default function App() {
             <>
               <p className="eyebrow">On the shelf</p>
               <div className="inspect-logo">
-                {selected.image ? (
-                  <img src={selected.image} alt="" referrerPolicy="no-referrer" />
-                ) : (
-                  selected.symbol.slice(0, 2)
-                )}
+                <TokenLogo src={selected.image} symbol={selected.symbol} />
               </div>
               <h3>
                 {selected.symbol}

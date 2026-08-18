@@ -1,10 +1,10 @@
 import { formatAmount } from "../lib/fridge";
 import {
-  fallbackGlyph,
   frostHue,
   remainingLabel,
   type DecoratedLock,
 } from "../lib/tokenMeta";
+import TokenLogo from "./TokenLogo";
 
 type Props = {
   open: boolean;
@@ -201,21 +201,7 @@ function TokenJar({
       }}
     >
       <span className="jar-glass">
-        {lock.image ? (
-          <img
-            src={lock.image}
-            alt=""
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              const sib = e.currentTarget.nextElementSibling;
-              if (sib) sib.classList.add("show");
-            }}
-          />
-        ) : null}
-        <span className={`jar-glyph ${lock.image ? "fallback" : ""}`}>
-          {fallbackGlyph(lock.symbol)}
-        </span>
+        <TokenLogo src={lock.image} symbol={lock.symbol} />
         <span className="jar-frost" />
       </span>
       <span className="jar-meta">

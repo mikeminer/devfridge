@@ -16,15 +16,30 @@ export type DecoratedLock = LockAccount & TokenVisual & {
 
 const cache = new Map<string, TokenVisual>();
 
+const IPFS_GATEWAYS = [
+  "https://w3s.link/ipfs/",
+  "https://dweb.link/ipfs/",
+  "https://nftstorage.link/ipfs/",
+  "https://ipfs.io/ipfs/",
+];
+
+export function ipfsCid(uri: string): string | null {
+  const match = uri.match(/(?:ipfs:\/\/|\/ipfs\/)([a-zA-Z0-9]+)/i);
+  return match?.[1] ?? null;
+}
+
 export function rewriteUri(uri: string): string {
-  if (uri.startsWith("ipfs://")) {
-    return `https://ipfs.io/ipfs/${uri.slice("ipfs://".length)}`;
-  }
-  if (uri.startsWith("https://ipfs.io/ipfs/")) return uri;
-  if (uri.startsWith("ar://")) {
-    return `https://arweave.net/${uri.slice("ar://".length)}`;
-  }
+  const cid = ipfsCid(uri);
+  if (cid) return `${IPFS_GATEWAYS[0]}${cid}`;
+  if (uri.startsWith("ar://")) return `https://arweave.net/${uri.slice("ar://".length)}`;
   return uri;
+}
+
+export function imageCandidates(uri: string | null | undefined): string[] {
+  if (!uri) return [];
+  const cid = ipfsCid(uri);
+  if (cid) return [...new Set(IPFS_GATEWAYS.map((g) => `${g}${cid}`))];
+  return [rewriteUri(uri)];
 }
 
 export function fallbackGlyph(symbol: string): string {
@@ -39,17 +54,23 @@ export function frostHue(mint: string): string {
 }
 
 async function imageFromUri(uri: string): Promise<string | null> {
-  try {
-    const res = await fetch(rewriteUri(uri), { signal: AbortSignal.timeout(8000) });
-    if (!res.ok) return null;
-    const type = res.headers.get("content-type") ?? "";
-    if (type.startsWith("image/")) return rewriteUri(uri);
-    const json = (await res.json()) as { image?: string; image_url?: string };
-    const image = json.image || json.image_url;
-    return image ? rewriteUri(image) : null;
-  } catch {
-    return null;
+  const rewritten = rewriteUri(uri);
+  for (const candidate of imageCandidates(uri)) {
+    try {
+      const res = await fetch(candidate, { signal: AbortSignal.timeout(5000) });
+      if (!res.ok) continue;
+      const type = res.headers.get("content-type") ?? "";
+      if (type.startsWith("image/")) return candidate;
+      if (type.includes("json") || type.includes("text")) {
+        const json = (await res.json()) as { image?: string; image_url?: string };
+        const image = json.image || json.image_url;
+        if (image) return rewriteUri(image);
+      }
+    } catch {
+      // try next gateway
+    }
   }
+  return rewritten;
 }
 
 async function imageFromJupiter(mint: string): Promise<Partial<TokenVisual>> {
@@ -79,6 +100,32 @@ async function imageFromJupiter(mint: string): Promise<Partial<TokenVisual>> {
   }
 }
 
+async function imageFromDex(mint: string): Promise<Partial<TokenVisual>> {
+  try {
+    const res = await fetch(
+      `https://api.dexscreener.com/latest/dex/tokens/${mint}`,
+      { signal: AbortSignal.timeout(8000) }
+    );
+    if (!res.ok) return {};
+    const json = (await res.json()) as {
+      pairs?: Array<{
+        baseToken?: { address?: string; name?: string; symbol?: string };
+        info?: { imageUrl?: string };
+      }>;
+    };
+    const pair =
+      json.pairs?.find((p) => p.baseToken?.address === mint) ?? json.pairs?.[0];
+    if (!pair) return {};
+    return {
+      name: pair.baseToken?.name,
+      symbol: pair.baseToken?.symbol,
+      image: pair.info?.imageUrl ? rewriteUri(pair.info.imageUrl) : null,
+    };
+  } catch {
+    return {};
+  }
+}
+
 export async function fetchTokenVisual(
   connection: Connection,
   mint: PublicKey
@@ -94,11 +141,14 @@ export async function fetchTokenVisual(
     image: null,
   };
 
-  const jup = await imageFromJupiter(key);
+  const [jup, dex] = await Promise.all([imageFromJupiter(key), imageFromDex(key)]);
   if (jup.name) visual.name = jup.name;
   if (jup.symbol) visual.symbol = jup.symbol;
   if (jup.decimals != null) visual.decimals = jup.decimals;
   if (jup.image) visual.image = jup.image;
+  if (dex.name && visual.name === "Token-2022") visual.name = dex.name;
+  if (dex.symbol && visual.symbol === "TKN") visual.symbol = dex.symbol;
+  if (dex.image && !visual.image) visual.image = dex.image;
 
   try {
     const mintData = await Promise.race([

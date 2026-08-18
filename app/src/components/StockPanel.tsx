@@ -1,6 +1,6 @@
 import type { MintInfo } from "../lib/fridge";
 import { formatAmount, shortKey } from "../lib/fridge";
-import { fallbackGlyph } from "../lib/tokenMeta";
+import TokenLogo from "./TokenLogo";
 
 const PRESETS: { label: string; seconds: number }[] = [
   { label: "1h", seconds: 3600 },
@@ -62,11 +62,7 @@ export default function StockPanel(props: Props) {
       {mintInfo && (
         <div className="mint-card">
           <div className="mint-logo" style={{ background: "#163039" }}>
-            {mintInfo.image ? (
-              <img src={mintInfo.image} alt="" referrerPolicy="no-referrer" />
-            ) : (
-              fallbackGlyph(mintInfo.symbol)
-            )}
+            <TokenLogo src={mintInfo.image} symbol={mintInfo.symbol} />
           </div>
           <div>
             <div className="symbol">
