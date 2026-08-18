@@ -112,6 +112,15 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
 }
 .powered a:hover { color: var(--brass); }
+.powered .pasta-mint {
+  display: block;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11px;
+  word-break: break-all;
+  max-width: min(520px, 90vw);
+  color: var(--ice);
+}
 
 .cluster, .ghost, .max, .presets button {
   background: rgba(255, 255, 255, 0.04);

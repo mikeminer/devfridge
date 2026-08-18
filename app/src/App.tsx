@@ -438,6 +438,14 @@ export default function App() {
         <a href={PASTA_URL} target="_blank" rel="noreferrer">
           powered by $PASTA
         </a>
+        <a
+          className="pasta-mint mono"
+          href={PASTA_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {PASTA_MINT.toBase58()}
+        </a>
       </footer>
     </div>
   );
