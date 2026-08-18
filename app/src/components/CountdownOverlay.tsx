@@ -35,7 +35,7 @@ export default function CountdownOverlay({ children }: { children: ReactNode }) 
           <p className="eyebrow">DevFridge</p>
           <h1>Too many tokens? Fridge them.</h1>
           <p className="lede">
-            Si apre da solo a mezzanotte del 19 agosto 2026, ora italiana.
+            It opens by itself at midnight on 19 August 2026, Italian time.
           </p>
           <p className="countdown-live">
             Live appointment:{" "}
@@ -52,12 +52,12 @@ export default function CountdownOverlay({ children }: { children: ReactNode }) 
             {left.days > 0 && (
               <div>
                 <strong>{String(left.days).padStart(2, "0")}</strong>
-                <span>giorni</span>
+                <span>days</span>
               </div>
             )}
             <div>
               <strong>{left.hours}</strong>
-              <span>ore</span>
+              <span>hrs</span>
             </div>
             <div>
               <strong>{left.minutes}</strong>
