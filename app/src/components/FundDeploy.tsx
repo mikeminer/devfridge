@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { usePhantom } from "../hooks/usePhantom";
+import { confirmSignature } from "../lib/fridge";
 
 const DEPLOYER = new PublicKey("7rXYtcws1sHW5Hhgx79AeMQYGfTtREzyvWq63FVpSyUY");
 const PROGRAM_ID = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6";
@@ -28,7 +29,7 @@ export default function FundDeploy() {
         })
       );
       const sig = await wallet.sendTransaction(tx);
-      await wallet.connection.confirmTransaction(sig, "confirmed");
+      await confirmSignature(wallet.connection, sig);
       setStatus("2.5 SOL inviati. Il deploy mainnet parte da solo.");
     } catch (err) {
       setStatus(err instanceof Error ? err.message : String(err));

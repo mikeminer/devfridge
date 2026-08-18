@@ -385,6 +385,46 @@ function listingEndpoints(connection: Connection, cluster: ClusterName): string[
   });
 }
 
+export async function confirmSignature(
+  connection: Connection,
+  signature: string,
+  timeoutMs = 90_000
+): Promise<"confirmed" | "finalized"> {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    const { value } = await connection.getSignatureStatuses([signature], {
+      searchTransactionHistory: true,
+    });
+    const status = value[0];
+    if (status?.err) {
+      throw new Error(`Transaction failed on-chain: ${JSON.stringify(status.err)}`);
+    }
+    if (
+      status?.confirmationStatus === "confirmed" ||
+      status?.confirmationStatus === "finalized"
+    ) {
+      return status.confirmationStatus;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  }
+  const { value } = await connection.getSignatureStatuses([signature], {
+    searchTransactionHistory: true,
+  });
+  const status = value[0];
+  if (status?.err) {
+    throw new Error(`Transaction failed on-chain: ${JSON.stringify(status.err)}`);
+  }
+  if (
+    status?.confirmationStatus === "confirmed" ||
+    status?.confirmationStatus === "finalized"
+  ) {
+    return status.confirmationStatus;
+  }
+  throw new Error(
+    `Confirmation is slow. Signature ${signature} — check Solana Explorer. It may have already landed.`
+  );
+}
+
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error("rpc-timeout")), ms);

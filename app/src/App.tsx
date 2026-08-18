@@ -10,6 +10,7 @@ import { usePhantom } from "./hooks/usePhantom";
 import {
   type MintInfo,
   claimTransaction,
+  confirmSignature,
   createLockTransaction,
   fetchAllLocks,
   fetchMintInfo,
@@ -187,7 +188,7 @@ export default function App() {
         programId
       );
       const sig = await wallet.sendTransaction(tx);
-      await connection.confirmTransaction(sig, "confirmed");
+      await confirmSignature(connection, sig);
       const [lockAddress] = lockPda(owner, mintInfo.mint, lockId, programId);
       rememberLock({
         address: lockAddress.toBase58(),
@@ -222,7 +223,7 @@ export default function App() {
     try {
       const tx = await claimTransaction(connection, owner, lock, programId);
       const sig = await wallet.sendTransaction(tx);
-      await connection.confirmTransaction(sig, "confirmed");
+      await confirmSignature(connection, sig);
       forgetLock(lock.address.toBase58(), cluster);
       setStatus({ kind: "ok", text: `Took ${lock.symbol} out of the fridge.` });
       setSelectedId(null);
