@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CLUSTERS,
   GITHUB_REPO,
+  LICENSE_URL,
   PASTA_MINT,
   PASTA_URL,
   explorerProgramUrl,
@@ -473,6 +474,15 @@ export default function App() {
         <a href={GITHUB_REPO} target="_blank" rel="noreferrer">
           github.com/mikeminer/devfridge
         </a>
+        <p className="legal">
+          © 2026 mikeminer. DevFridge name, brand and logo are included.
+          <br />
+          License:{" "}
+          <a href={LICENSE_URL} target="_blank" rel="noreferrer">
+            Business Source License 1.1
+          </a>{" "}
+          (converts to GPL-2.0-or-later on 2030-08-18).
+        </p>
       </footer>
     </div>
   );

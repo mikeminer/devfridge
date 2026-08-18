@@ -15,6 +15,7 @@ export const LOCK_ACCOUNT_SIZE = 8 + 32 + 32 + 8 + 8 + 8 + 1 + 8;
 export const PASTA_MINT = new PublicKey("39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump");
 export const PASTA_URL = "https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump";
 export const GITHUB_REPO = "https://github.com/mikeminer/devfridge";
+export const LICENSE_URL = "https://github.com/mikeminer/devfridge/blob/master/LICENSE";
 export const JUPITER_V6 = new PublicKey("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
 export const REDEMPTION_FEE_BPS = 200n;
 

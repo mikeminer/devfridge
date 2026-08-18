@@ -113,6 +113,21 @@ img { display: block; max-width: 100%; }
 }
 .powered a:hover { color: var(--brass); }
 
+.powered .legal {
+  max-width: min(640px, 92vw);
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+  text-transform: none;
+}
+.powered .legal a {
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ice);
+}
+
 .powered .pasta-mint {
   display: block;
   letter-spacing: 0;
