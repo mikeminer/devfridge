@@ -49,10 +49,10 @@ export default function Fridge({
             <div className="cavity-light" />
             <div className="frost-mist" />
             <div className="cavity">
-              {loading && locks.length === 0 ? (
+              {loading ? (
                 <div className="frost-loading" role="status" aria-live="polite">
                   <Snowflake />
-                  <span>Chilling…</span>
+                  <span>Chilling {serialLabel}…</span>
                 </div>
               ) : (
                 shelves.map((items, index) => (
@@ -117,8 +117,8 @@ export default function Fridge({
                 <small>TOO MANY TOKENS?</small>
               </div>
               <div className="led">
-                <em>{loading && !locks.length ? "··" : locks.length.toString().padStart(2, "0")}</em>
-                <span>{loading && !locks.length ? "scan" : "chilled"}</span>
+                <em>{loading ? "··" : locks.length.toString().padStart(2, "0")}</em>
+                <span>{loading ? "scan" : "chilled"}</span>
               </div>
               <div className="handle">
                 <i />

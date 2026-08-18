@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
-import { resolveRpcEndpoint } from "../lib/constants";
+import { isHttpEndpoint, resolveRpcEndpoint } from "../lib/constants";
 
 type PhantomProvider = {
   isPhantom?: boolean;
@@ -23,10 +23,12 @@ function getProvider(): PhantomProvider | null {
 export function usePhantom(endpoint: string) {
   const [publicKey, setPublicKey] = useState<PublicKey | null>(null);
   const [error, setError] = useState("");
-  const connection = useMemo(
-    () => new Connection(resolveRpcEndpoint(endpoint, "mainnet"), "confirmed"),
-    [endpoint]
-  );
+  const connection = useMemo(() => {
+    const url = isHttpEndpoint(endpoint)
+      ? endpoint.replace(/\/+$/, "")
+      : resolveRpcEndpoint("", "mainnet");
+    return new Connection(url, "confirmed");
+  }, [endpoint]);
 
   const connect = useCallback(async () => {
     setError("");

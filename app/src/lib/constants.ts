@@ -65,10 +65,12 @@ export function alchemyEndpoint(cluster: ClusterName, apiKey: string): string {
 }
 
 export function resolveRpcEndpoint(
-  _custom: string | null | undefined,
+  custom: string | null | undefined,
   cluster: ClusterName,
   _alchemyKey?: string | null
 ): string {
+  const trimmed = (custom ?? "").trim();
+  if (isHttpEndpoint(trimmed)) return trimmed.replace(/\/+$/, "");
   return CLUSTERS[cluster].endpoint;
 }
 
@@ -81,13 +83,17 @@ export const RPC_FALLBACKS: Record<ClusterName, string[]> = {
   ],
   testnet: ["https://api.testnet.solana.com"],
   mainnet: [
+    "https://api.mainnet-beta.solana.com",
     ...(ALCHEMY_API_KEY
       ? [`https://solana-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`]
       : []),
-    "https://api.mainnet-beta.solana.com",
-    "https://solana-rpc.publicnode.com",
   ],
 };
+
+/** GPA listing: official first on mainnet (Alchemy getProgramAccounts is 429). */
+export function listingRpcs(cluster: ClusterName): string[] {
+  return RPC_FALLBACKS[cluster];
+}
 
 export type ClusterName = keyof typeof CLUSTERS;
 

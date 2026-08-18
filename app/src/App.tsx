@@ -108,19 +108,37 @@ export default function App() {
     }
   }, [connection, mintInput, owner]);
 
-  const fetchGen = useRef(0);
+  const clusterRef = useRef(cluster);
+  clusterRef.current = cluster;
+
   const refreshLocks = useCallback(async (silent = false) => {
-    const gen = ++fetchGen.current;
-    if (!silent) setLoadingLocks(true);
+    const net = cluster;
+    if (!silent) {
+      setLoadingLocks(true);
+      setLocks([]);
+      setSelectedId(null);
+    }
     try {
-      const raw = await fetchAllLocks(connection, programId, cluster);
-      if (gen !== fetchGen.current) return;
-      setLocks(await decorateLocks(connection, raw));
+      const raw = await fetchAllLocks(connection, programId, net);
+      if (clusterRef.current !== net) return;
+      setLocks(
+        raw.map((lock) => ({
+          ...lock,
+          name: "Token-2022",
+          symbol: lock.mint.toBase58().slice(0, 4),
+          decimals: 6,
+          image: null,
+          ready: Date.now() / 1000 >= lock.unlockAt,
+        }))
+      );
+      setLoadingLocks(false);
+      const decorated = await decorateLocks(connection, raw);
+      if (clusterRef.current !== net) return;
+      setLocks(decorated);
     } catch {
-      if (gen !== fetchGen.current) return;
+      if (clusterRef.current !== net) return;
       if (!silent) setLocks([]);
-    } finally {
-      if (gen === fetchGen.current) setLoadingLocks(false);
+      setLoadingLocks(false);
     }
   }, [cluster, connection, programId]);
 
@@ -129,10 +147,11 @@ export default function App() {
     setLocks([]);
     setSelectedId(null);
     setMintInfo(null);
+    setStatus(null);
     void refreshLocks(false);
-    const id = window.setInterval(() => void refreshLocks(true), 8000);
+    const id = window.setInterval(() => void refreshLocks(true), 20000);
     return () => window.clearInterval(id);
-  }, [refreshLocks]);
+  }, [cluster, refreshLocks]);
 
   const unlockUnix = useMemo(() => {
     const t = Date.parse(unlockLocal);
@@ -286,6 +305,7 @@ export default function App() {
         />
 
         <Fridge
+          key={cluster}
           open={open}
           onToggle={() => setOpen((v) => !v)}
           locks={locks}
@@ -391,7 +411,7 @@ export default function App() {
               <p className="eyebrow">Inside</p>
               <h3>{open ? "Browse the shelves" : "The door is closed"}</h3>
               <p className="lede">
-                {loadingLocks && !locks.length
+                {loadingLocks
                   ? `Chilling ${CLUSTERS[cluster].label}…`
                   : locks.length
                     ? `${locks.length} live lock${locks.length === 1 ? "" : "s"} on-chain. Click a jar.`

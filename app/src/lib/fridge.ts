@@ -375,10 +375,14 @@ export function clusterFromEndpoint(endpoint: string): ClusterName {
 }
 
 function listingEndpoints(connection: Connection, cluster: ClusterName): string[] {
-  const pool = [connection.rpcEndpoint, ...RPC_FALLBACKS[cluster]];
-  return [...new Set(pool)].filter(
-    (url) => /^https?:\/\//i.test(url) && clusterFromEndpoint(url) === cluster
-  );
+  const pool = [...RPC_FALLBACKS[cluster], connection.rpcEndpoint];
+  return [...new Set(pool)].filter((url) => {
+    if (!/^https?:\/\//i.test(url)) return false;
+    if (clusterFromEndpoint(url) !== cluster) return false;
+    // Alchemy rejects getProgramAccounts (429). Use it for txs, not listing.
+    if (cluster === "mainnet" && url.includes("alchemy.com")) return false;
+    return true;
+  });
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
@@ -507,12 +511,12 @@ export async function fetchAllLocks(
 ): Promise<LockAccount[]> {
   const net = cluster ?? clusterFromEndpoint(connection.rpcEndpoint);
   const endpoints = listingEndpoints(connection, net);
-  const jobs: Promise<LockAccount[]>[] = [
-    withTimeout(fetchLocksBySignatures(connection, programId), 8000),
-    ...endpoints.map((endpoint) =>
-      withTimeout(fetchLocksByGpaAll(endpoint, programId), 8000)
-    ),
-  ];
+  const jobs: Promise<LockAccount[]>[] = endpoints.map((endpoint) =>
+    withTimeout(fetchLocksByGpaAll(endpoint, programId), 8000)
+  );
+  if (clusterFromEndpoint(connection.rpcEndpoint) === net) {
+    jobs.push(withTimeout(fetchLocksBySignatures(connection, programId), 8000));
+  }
 
   const settled = await Promise.allSettled(jobs);
   const found = new Map<string, LockAccount>();

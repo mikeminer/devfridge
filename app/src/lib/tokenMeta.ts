@@ -94,28 +94,36 @@ export async function fetchTokenVisual(
     image: null,
   };
 
-  try {
-    const mintData = await getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID);
-    visual.decimals = mintData.decimals;
-  } catch {
-    // keep default decimals
-  }
+  const jup = await imageFromJupiter(key);
+  if (jup.name) visual.name = jup.name;
+  if (jup.symbol) visual.symbol = jup.symbol;
+  if (jup.decimals != null) visual.decimals = jup.decimals;
+  if (jup.image) visual.image = jup.image;
 
   try {
-    const meta = await getTokenMetadata(connection, mint);
-    if (meta?.name) visual.name = meta.name.trim();
-    if (meta?.symbol) visual.symbol = meta.symbol.trim();
-    if (meta?.uri) visual.image = await imageFromUri(meta.uri);
+    const mintData = await Promise.race([
+      getMint(connection, mint, "confirmed", TOKEN_2022_PROGRAM_ID),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("mint-timeout")), 4000)
+      ),
+    ]);
+    visual.decimals = mintData.decimals;
   } catch {
-    // optional on-chain metadata
+    // keep Jupiter / default decimals
   }
 
   if (!visual.image || visual.symbol === "TKN") {
-    const jup = await imageFromJupiter(key);
-    if (jup.name && visual.name === "Token-2022") visual.name = jup.name;
-    if (jup.symbol && visual.symbol === "TKN") visual.symbol = jup.symbol;
-    if (jup.decimals != null) visual.decimals = jup.decimals;
-    if (jup.image) visual.image = jup.image;
+    try {
+      const meta = await Promise.race([
+        getTokenMetadata(connection, mint),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000)),
+      ]);
+      if (meta?.name && visual.name === "Token-2022") visual.name = meta.name.trim();
+      if (meta?.symbol && visual.symbol === "TKN") visual.symbol = meta.symbol.trim();
+      if (meta?.uri && !visual.image) visual.image = await imageFromUri(meta.uri);
+    } catch {
+      // optional on-chain metadata
+    }
   }
 
   cache.set(key, visual);
