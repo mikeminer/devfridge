@@ -105,12 +105,12 @@ export const PROGRAM_BY_CLUSTER: Record<ClusterName, string> = {
 
 export function explorerProgramUrl(cluster: ClusterName, programId: string): string {
   const query = cluster === "mainnet" ? "" : `?cluster=${cluster}`;
-  return `https://explorer.solana.com/address/${programId}${query}`;
+  return `https://solscan.io/account/${programId}${query}`;
 }
 
 export function explorerTxUrl(cluster: ClusterName, signature: string): string {
   const query = cluster === "mainnet" ? "" : `?cluster=${cluster}`;
-  return `https://explorer.solana.com/tx/${signature}${query}`;
+  return `https://solscan.io/tx/${signature}${query}`;
 }
 
 export const CREATE_LOCK_DISCRIMINATOR = Uint8Array.from([

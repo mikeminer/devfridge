@@ -421,7 +421,7 @@ export async function confirmSignature(
     return status.confirmationStatus;
   }
   throw new Error(
-    `Confirmation is slow. Signature ${signature} — check Solana Explorer. It may have already landed.`
+    `Confirmation is slow. Signature ${signature} — check Solscan. It may have already landed.`
   );
 }
 

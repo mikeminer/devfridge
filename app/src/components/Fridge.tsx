@@ -144,7 +144,7 @@ export default function Fridge({
           href={serialHref}
           target="_blank"
           rel="noreferrer"
-          title={`Open ${serialLabel} program on Solana Explorer`}
+          title={`Open ${serialLabel} program on Solscan`}
         >
           <span>S/N {serialLabel}</span>
           <strong className="mono">{serial}</strong>
