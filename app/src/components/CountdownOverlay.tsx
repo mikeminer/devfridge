@@ -47,6 +47,10 @@ export default function CountdownOverlay({ children }: { children: ReactNode }) 
             Developed for you by pappardelle.eth{" "}
             <span className="mono">GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W</span>{" "}
             with amore &lt;3
+            <br />
+            <a href="https://x.com/anonimocommando" target="_blank" rel="noreferrer">
+              x.com/anonimocommando
+            </a>
           </p>
           <div className="countdown-digits" aria-live="polite">
             {left.days > 0 && (
