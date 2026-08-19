@@ -14,11 +14,14 @@ import {
 } from "@solana/spl-token";
 import { Buffer } from "buffer";
 import {
+  AddressLookupTableAccount,
   Connection,
   PublicKey,
   SystemProgram,
   Transaction,
   TransactionInstruction,
+  TransactionMessage,
+  VersionedTransaction,
   type AccountMeta,
 } from "@solana/web3.js";
 import {
@@ -648,12 +651,30 @@ export async function createLockTransaction(
   return tx;
 }
 
+async function loadLookupTables(
+  connection: Connection,
+  addresses: PublicKey[]
+): Promise<AddressLookupTableAccount[]> {
+  if (addresses.length === 0) return [];
+  const tables = await Promise.all(
+    addresses.map(async (addr) => {
+      const res = await connection.getAddressLookupTable(addr);
+      return res.value;
+    })
+  );
+  return tables.filter((t): t is AddressLookupTableAccount => Boolean(t));
+}
+
+function serializeSize(tx: VersionedTransaction): number {
+  return tx.serialize().length;
+}
+
 export async function claimTransaction(
   connection: Connection,
   depositor: PublicKey,
   lock: LockAccount,
   programId: PublicKey = PROGRAM_ID
-): Promise<Transaction> {
+): Promise<Transaction | VersionedTransaction> {
   if (!lock.depositor.equals(depositor)) {
     throw new Error("Only the original depositor can claim");
   }
@@ -685,65 +706,9 @@ export async function claimTransaction(
   const vault = vaultAddress(lock.mint, lock.address);
   const fee = redemptionFee(lock.amount);
   const isPasta = lock.mint.equals(PASTA_MINT);
-  let extraKeys: AccountMeta[] = [];
-  let swapData = new Uint8Array();
-  let minPastaOut = 0n;
 
-  if (fee > 0n && !isPasta) {
-    const [burnAuthority] = burnPda(programId);
-    const feeAta = getAssociatedTokenAddressSync(
-      lock.mint,
-      burnAuthority,
-      true,
-      TOKEN_2022_PROGRAM_ID
-    );
-    const pastaAta = getAssociatedTokenAddressSync(
-      PASTA_MINT,
-      burnAuthority,
-      true,
-      TOKEN_2022_PROGRAM_ID
-    );
-    tx.add(
-      createAssociatedTokenAccountIdempotentInstruction(
-        depositor,
-        feeAta,
-        burnAuthority,
-        lock.mint,
-        TOKEN_2022_PROGRAM_ID
-      ),
-      createAssociatedTokenAccountIdempotentInstruction(
-        depositor,
-        pastaAta,
-        burnAuthority,
-        PASTA_MINT,
-        TOKEN_2022_PROGRAM_ID
-      )
-    );
-    const route = await fetchPastaBuybackRoute(lock.mint, fee, burnAuthority);
-    tx.add(...route.setup);
-    extraKeys = [
-      { pubkey: PASTA_MINT, isSigner: false, isWritable: true },
-      { pubkey: feeAta, isSigner: false, isWritable: true },
-      { pubkey: pastaAta, isSigner: false, isWritable: true },
-      { pubkey: route.swapProgram, isSigner: false, isWritable: false },
-      ...route.swapAccounts,
-    ];
-    swapData = Uint8Array.from(route.swapData);
-    minPastaOut = route.minPastaOut;
-    tx.add(
-      buildClaimInstruction({
-        depositor,
-        mint: lock.mint,
-        lockId: lock.lockId,
-        programId,
-        swapData,
-        minPastaOut,
-        extraKeys,
-      })
-    );
-    tx.add(...route.cleanup);
-  } else {
-    extraKeys = await extraHookAccounts(
+  if (fee === 0n || isPasta) {
+    const extraKeys = await extraHookAccounts(
       connection,
       lock.mint,
       vault,
@@ -756,15 +721,101 @@ export async function claimTransaction(
         mint: lock.mint,
         lockId: lock.lockId,
         programId,
-        swapData,
+        swapData: new Uint8Array(),
         minPastaOut: isPasta ? fee : 0n,
         extraKeys,
       })
     );
+    tx.feePayer = depositor;
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    return tx;
   }
-  tx.feePayer = depositor;
-  tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-  return tx;
+
+  const [burnAuthority] = burnPda(programId);
+  const feeAta = getAssociatedTokenAddressSync(
+    lock.mint,
+    burnAuthority,
+    true,
+    TOKEN_2022_PROGRAM_ID
+  );
+  const pastaAta = getAssociatedTokenAddressSync(
+    PASTA_MINT,
+    burnAuthority,
+    true,
+    TOKEN_2022_PROGRAM_ID
+  );
+  const prelude: TransactionInstruction[] = [];
+  if (!ataInfo) {
+    prelude.push(
+      createAssociatedTokenAccountIdempotentInstruction(
+        depositor,
+        depositorAta,
+        depositor,
+        lock.mint,
+        TOKEN_2022_PROGRAM_ID
+      )
+    );
+  }
+  prelude.push(
+    createAssociatedTokenAccountIdempotentInstruction(
+      depositor,
+      feeAta,
+      burnAuthority,
+      lock.mint,
+      TOKEN_2022_PROGRAM_ID
+    ),
+    createAssociatedTokenAccountIdempotentInstruction(
+      depositor,
+      pastaAta,
+      burnAuthority,
+      PASTA_MINT,
+      TOKEN_2022_PROGRAM_ID
+    )
+  );
+
+  const { blockhash } = await connection.getLatestBlockhash();
+  let lastError: Error | null = null;
+  for (const maxAccounts of [32, 24, 16]) {
+    try {
+      const route = await fetchPastaBuybackRoute(
+        lock.mint,
+        fee,
+        burnAuthority,
+        maxAccounts
+      );
+      const extraKeys: AccountMeta[] = [
+        { pubkey: PASTA_MINT, isSigner: false, isWritable: true },
+        { pubkey: feeAta, isSigner: false, isWritable: true },
+        { pubkey: pastaAta, isSigner: false, isWritable: true },
+        { pubkey: route.swapProgram, isSigner: false, isWritable: false },
+        ...route.swapAccounts,
+      ];
+      const claimIx = buildClaimInstruction({
+        depositor,
+        mint: lock.mint,
+        lockId: lock.lockId,
+        programId,
+        swapData: Uint8Array.from(route.swapData),
+        minPastaOut: route.minPastaOut,
+        extraKeys,
+      });
+      const ixs = [...prelude, ...route.setup, claimIx, ...route.cleanup];
+      const tables = await loadLookupTables(connection, route.lookupTableAddresses);
+      const message = new TransactionMessage({
+        payerKey: depositor,
+        recentBlockhash: blockhash,
+        instructions: ixs,
+      }).compileToV0Message(tables);
+      const vtx = new VersionedTransaction(message);
+      if (serializeSize(vtx) <= 1232) return vtx;
+      lastError = new Error(
+        `Buyback route still too large (${serializeSize(vtx)} bytes) with maxAccounts=${maxAccounts}`
+      );
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err));
+    }
+  }
+  throw lastError ?? new Error("Could not fit the $PASTA buyback in one transaction");
 }
 
 export function shortKey(key: PublicKey | string): string {

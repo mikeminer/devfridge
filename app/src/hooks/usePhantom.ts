@@ -1,5 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
-import { Connection, PublicKey, Transaction } from "@solana/web3.js";
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  VersionedTransaction,
+} from "@solana/web3.js";
 import { isHttpEndpoint, resolveRpcEndpoint } from "../lib/constants";
 
 type PhantomProvider = {
@@ -7,7 +12,9 @@ type PhantomProvider = {
   publicKey?: { toString(): string };
   connect: () => Promise<{ publicKey: { toString(): string } }>;
   disconnect?: () => Promise<void>;
-  signAndSendTransaction: (tx: Transaction) => Promise<{ signature: string }>;
+  signAndSendTransaction: (
+    tx: Transaction | VersionedTransaction
+  ) => Promise<{ signature: string }>;
 };
 
 function getProvider(): PhantomProvider | null {
@@ -45,12 +52,14 @@ export function usePhantom(endpoint: string) {
     }
   }, []);
 
-  const sendTransaction = useCallback(async (tx: Transaction) => {
+  const sendTransaction = useCallback(async (tx: Transaction | VersionedTransaction) => {
     const p = getProvider();
     if (!p || !publicKey) throw new Error("Connect Phantom first");
-    tx.feePayer = publicKey;
-    if (!tx.recentBlockhash) {
-      tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    if (tx instanceof Transaction) {
+      tx.feePayer = publicKey;
+      if (!tx.recentBlockhash) {
+        tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+      }
     }
     const { signature } = await p.signAndSendTransaction(tx);
     return signature;

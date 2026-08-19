@@ -12,6 +12,7 @@ export type JupiterRoute = {
   swapData: Uint8Array;
   cleanup: TransactionInstruction[];
   minPastaOut: bigint;
+  lookupTableAddresses: PublicKey[];
 };
 
 type SerializedIx = {
@@ -35,10 +36,14 @@ function decodeIx(raw: SerializedIx): TransactionInstruction {
 export async function fetchPastaBuybackRoute(
   inputMint: PublicKey,
   amount: bigint,
-  burnAuthority: PublicKey
+  burnAuthority: PublicKey,
+  maxAccounts = 32
 ): Promise<JupiterRoute> {
   if (amount <= 0n) throw new Error("Nothing to buy back");
-  const quoteUrl = `${QUOTE_URL}?inputMint=${inputMint.toBase58()}&outputMint=${PASTA_MINT.toBase58()}&amount=${amount.toString()}&slippageBps=300`;
+  const quoteUrl =
+    `${QUOTE_URL}?inputMint=${inputMint.toBase58()}` +
+    `&outputMint=${PASTA_MINT.toBase58()}&amount=${amount.toString()}` +
+    `&slippageBps=300&maxAccounts=${maxAccounts}`;
   const quoteRes = await fetch(quoteUrl);
   if (!quoteRes.ok) throw new Error("No Jupiter route from this token to $PASTA");
   const quote = (await quoteRes.json()) as {
@@ -57,14 +62,16 @@ export async function fetchPastaBuybackRoute(
       userPublicKey: burnAuthority.toBase58(),
       wrapAndUnwrapSol: true,
       dynamicComputeUnitLimit: true,
-      asLegacyTransaction: true,
+      asLegacyTransaction: false,
     }),
   });
   if (!swapRes.ok) throw new Error("Failed to build the $PASTA buyback swap");
   const swap = (await swapRes.json()) as {
+    computeBudgetInstructions?: SerializedIx[];
     setupInstructions?: SerializedIx[];
     swapInstruction?: SerializedIx;
     cleanupInstruction?: SerializedIx;
+    addressLookupTableAddresses?: string[];
     error?: string;
   };
   if (!swap.swapInstruction) {
@@ -72,12 +79,16 @@ export async function fetchPastaBuybackRoute(
   }
 
   const swapIx = decodeIx(swap.swapInstruction);
+  const compute = (swap.computeBudgetInstructions ?? []).map(decodeIx);
   return {
-    setup: (swap.setupInstructions ?? []).map(decodeIx),
+    setup: [...compute, ...(swap.setupInstructions ?? []).map(decodeIx)],
     swapProgram: swapIx.programId,
     swapAccounts: swapIx.keys,
     swapData: new Uint8Array(swapIx.data),
     cleanup: swap.cleanupInstruction ? [decodeIx(swap.cleanupInstruction)] : [],
     minPastaOut: BigInt(quote.outAmount),
+    lookupTableAddresses: (swap.addressLookupTableAddresses ?? []).map(
+      (addr) => new PublicKey(addr)
+    ),
   };
 }
