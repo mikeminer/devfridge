@@ -395,21 +395,21 @@ export async function confirmSignature(
 ): Promise<"confirmed" | "finalized"> {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
-    const { value } = await connection.getSignatureStatuses([signature], {
-      searchTransactionHistory: true,
-    });
-    const status = value[0];
-    if (status?.err) {
-      throw new Error(`Transaction failed on-chain: ${JSON.stringify(status.err)}`);
-    }
-    if (
-      status?.confirmationStatus === "confirmed" ||
-      status?.confirmationStatus === "finalized"
-    ) {
-      return status.confirmationStatus;
-    }
+    const landed = await signatureLanded(connection, signature);
+    if (landed) return landed;
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
+  const landed = await signatureLanded(connection, signature);
+  if (landed) return landed;
+  throw new Error(
+    `Transaction did not land. Signature ${signature} is not on-chain. Retry — Phantom and DevFridge must be on the same network, and the wallet needs SOL for fees.`
+  );
+}
+
+async function signatureLanded(
+  connection: Connection,
+  signature: string
+): Promise<"confirmed" | "finalized" | null> {
   const { value } = await connection.getSignatureStatuses([signature], {
     searchTransactionHistory: true,
   });
@@ -423,9 +423,21 @@ export async function confirmSignature(
   ) {
     return status.confirmationStatus;
   }
-  throw new Error(
-    `Confirmation is slow. Signature ${signature} — check Solscan. It may have already landed.`
-  );
+  try {
+    const tx = await connection.getTransaction(signature, {
+      commitment: "confirmed",
+      maxSupportedTransactionVersion: 0,
+    });
+    if (tx?.meta?.err) {
+      throw new Error(`Transaction failed on-chain: ${JSON.stringify(tx.meta.err)}`);
+    }
+    if (tx) return "confirmed";
+  } catch (err) {
+    if (err instanceof Error && err.message.startsWith("Transaction failed on-chain")) {
+      throw err;
+    }
+  }
+  return null;
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {

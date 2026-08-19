@@ -63,7 +63,9 @@ export function usePhantom(endpoint: string) {
     if (tx instanceof Transaction) {
       tx.feePayer = publicKey;
       if (!tx.recentBlockhash) {
-        tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+        const latest = await connection.getLatestBlockhash("confirmed");
+        tx.recentBlockhash = latest.blockhash;
+        tx.lastValidBlockHeight = latest.lastValidBlockHeight;
       }
       if (extraSigners.length) tx.partialSign(...extraSigners);
     }
@@ -75,6 +77,7 @@ export function usePhantom(endpoint: string) {
       out.partialSign(...extraSigners);
       return connection.sendRawTransaction(out.serialize(), {
         skipPreflight: false,
+        maxRetries: 8,
         preflightCommitment: "confirmed",
       });
     }
