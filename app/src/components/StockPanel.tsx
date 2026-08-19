@@ -12,6 +12,7 @@ const PRESETS: { label: string; seconds: number }[] = [
 ];
 
 type Props = {
+  clusterLabel: string;
   connected: boolean;
   mintInput: string;
   onMintInput: (v: string) => void;
@@ -39,6 +40,14 @@ export default function StockPanel(props: Props) {
           takes a 2% fee that automatically buys and burns $PASTA.
         </p>
       </header>
+
+      {props.clusterLabel !== "Mainnet" && (
+        <p className="hint">
+          Locking on {props.clusterLabel}. Approve in Phantom even if the wallet
+          still shows Mainnet — DevFridge submits the transaction to{" "}
+          {props.clusterLabel}.
+        </p>
+      )}
 
       {!props.connected && (
         <p className="hint">Connect Phantom to start stocking.</p>

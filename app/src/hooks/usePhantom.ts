@@ -13,7 +13,9 @@ type PhantomProvider = {
   publicKey?: { toString(): string };
   connect: () => Promise<{ publicKey: { toString(): string } }>;
   disconnect?: () => Promise<void>;
-  signTransaction?: (tx: Transaction) => Promise<Transaction>;
+  signTransaction?: (
+    tx: Transaction | VersionedTransaction
+  ) => Promise<Transaction | VersionedTransaction>;
   signAndSendTransaction: (
     tx: Transaction | VersionedTransaction
   ) => Promise<{ signature: string }>;
@@ -60,6 +62,12 @@ export function usePhantom(endpoint: string) {
   ) => {
     const p = getProvider();
     if (!p || !publicKey) throw new Error("Connect Phantom first");
+    const sendOpts = {
+      skipPreflight: false,
+      maxRetries: 8,
+      preflightCommitment: "confirmed" as const,
+    };
+
     if (tx instanceof Transaction) {
       tx.feePayer = publicKey;
       if (!tx.recentBlockhash) {
@@ -69,18 +77,25 @@ export function usePhantom(endpoint: string) {
       }
       if (extraSigners.length) tx.partialSign(...extraSigners);
     }
-    if (extraSigners.length && tx instanceof Transaction && p.signTransaction) {
+
+    // Always submit on DevFridge's selected cluster RPC. Phantom's
+    // signAndSendTransaction uses the wallet's network, which is often
+    // still Mainnet when the site is on Devnet/Testnet.
+    if (p.signTransaction) {
       const signed = await p.signTransaction(tx);
-      const out = Transaction.from(
-        signed.serialize({ requireAllSignatures: false, verifySignatures: false })
+      if (signed instanceof Transaction) {
+        const out = Transaction.from(
+          signed.serialize({ requireAllSignatures: false, verifySignatures: false })
+        );
+        if (extraSigners.length) out.partialSign(...extraSigners);
+        return connection.sendRawTransaction(out.serialize(), sendOpts);
+      }
+      return connection.sendRawTransaction(
+        (signed as VersionedTransaction).serialize(),
+        sendOpts
       );
-      out.partialSign(...extraSigners);
-      return connection.sendRawTransaction(out.serialize(), {
-        skipPreflight: false,
-        maxRetries: 8,
-        preflightCommitment: "confirmed",
-      });
     }
+
     const { signature } = await p.signAndSendTransaction(tx);
     return signature;
   }, [connection, publicKey]);

@@ -426,6 +426,7 @@ export default function App() {
 
       <div className="stage" id="fridge">
         <StockPanel
+          clusterLabel={CLUSTERS[cluster].label}
           connected={Boolean(owner)}
           mintInput={mintInput}
           onMintInput={setMintInput}
