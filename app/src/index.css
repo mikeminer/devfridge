@@ -17,6 +17,7 @@
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
 html, body, #root { min-height: 100%; }
 
 body {
@@ -435,6 +436,9 @@ input[type="text"], input[type="datetime-local"] {
   display: grid;
   place-items: center;
   perspective: 1800px;
+  isolation: isolate;
+  overflow: hidden;
+  contain: layout paint;
 }
 
 .fridge-glow {
@@ -443,7 +447,7 @@ input[type="text"], input[type="datetime-local"] {
   height: 280px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(155, 231, 255, 0.16), transparent 68%);
-  filter: blur(8px);
+  filter: none;
   transition: opacity 0.8s ease;
 }
 
@@ -513,13 +517,7 @@ input[type="text"], input[type="datetime-local"] {
 }
 
 .is-open .frost-mist {
-  opacity: 1;
-  animation: mist 4.5s ease-in-out infinite;
-}
-
-@keyframes mist {
-  0%, 100% { transform: translateY(8px); opacity: 0.45; }
-  50% { transform: translateY(-6px); opacity: 0.85; }
+  opacity: 0.7;
 }
 
 .cavity {
@@ -628,13 +626,18 @@ input[type="text"], input[type="datetime-local"] {
 .door-shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, transparent 36%, rgba(255,255,255,0.28) 46%, transparent 56%);
+  background: linear-gradient(110deg, transparent 36%, rgba(255,255,255,0.22) 46%, transparent 56%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.is-closed .door-shine {
   animation: gleam 5.5s ease-in-out infinite;
 }
+.is-open .door-shine { animation: none; }
 
 @keyframes gleam {
-  0%, 70%, 100% { transform: translateX(-20%); opacity: 0.15; }
-  82% { transform: translateX(20%); opacity: 0.5; }
+  0%, 70%, 100% { opacity: 0.15; }
+  82% { opacity: 0.5; }
 }
 
 .brand-plate {

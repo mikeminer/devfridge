@@ -119,7 +119,7 @@ export default function App() {
   }, [selected]);
 
   useEffect(() => {
-    const id = window.setInterval(() => setNow(Date.now() / 1000), 1000);
+    const id = window.setInterval(() => setNow(Date.now() / 1000), 5000);
     return () => window.clearInterval(id);
   }, []);
 
