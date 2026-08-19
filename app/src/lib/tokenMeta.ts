@@ -37,6 +37,7 @@ export function rewriteUri(uri: string): string {
 
 export function imageCandidates(uri: string | null | undefined): string[] {
   if (!uri) return [];
+  if (uri.startsWith("/") || uri.startsWith("data:")) return [uri];
   const cid = ipfsCid(uri);
   if (cid) return [...new Set(IPFS_GATEWAYS.map((g) => `${g}${cid}`))];
   return [rewriteUri(uri)];

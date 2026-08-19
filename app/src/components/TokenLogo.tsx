@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fallbackGlyph, imageCandidates } from "../lib/tokenMeta";
 
 type Props = {
@@ -10,22 +10,26 @@ type Props = {
 export default function TokenLogo({ src, symbol, className }: Props) {
   const candidates = imageCandidates(src);
   const [index, setIndex] = useState(0);
-  const url = candidates[index];
 
-  if (!url) {
-    return <span className={`jar-glyph ${className ?? ""}`}>{fallbackGlyph(symbol)}</span>;
-  }
+  useEffect(() => {
+    setIndex(0);
+  }, [src]);
+
+  const url = candidates[index];
+  const failed = !url || index >= candidates.length;
 
   return (
     <>
-      <img
-        className={className}
-        src={url}
-        alt=""
-        referrerPolicy="no-referrer"
-        onError={() => setIndex((n) => n + 1)}
-      />
-      <span className={`jar-glyph fallback ${index >= candidates.length ? "show" : ""}`}>
+      {!failed && (
+        <img
+          className={className}
+          src={url}
+          alt=""
+          decoding="async"
+          onError={() => setIndex((n) => n + 1)}
+        />
+      )}
+      <span className={`jar-glyph fallback ${failed ? "show" : ""}`}>
         {fallbackGlyph(symbol)}
       </span>
     </>

@@ -23,7 +23,6 @@ import {
   nextLockId,
   parseAmount,
   redemptionFee,
-  shortKey,
 } from "./lib/fridge";
 import { forgetLock, rememberLock } from "./lib/lockIndex";
 import {
@@ -39,6 +38,25 @@ import StockPanel from "./components/StockPanel";
 import TokenLogo from "./components/TokenLogo";
 import logoMark from "./assets/logo-mark.jpg";
 import logoWordmark from "./assets/logo-wordmark.jpg";
+
+function CopyableMint({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      window.prompt("Copy mint", value);
+    }
+  }
+  return (
+    <button type="button" className="copy-mint mono" onClick={() => void copy()}>
+      <span>{value}</span>
+      <em>{copied ? "copied" : "copy"}</em>
+    </button>
+  );
+}
 
 function toLocalInput(unix: number): string {
   const d = new Date(unix * 1000);
@@ -392,7 +410,9 @@ export default function App() {
                 </div>
                 <div>
                   <dt>Mint</dt>
-                  <dd className="mono">{shortKey(selected.mint)}</dd>
+                  <dd>
+                    <CopyableMint value={selected.mint.toBase58()} />
+                  </dd>
                 </div>
                 <div>
                   <dt>S/N {CLUSTERS[cluster].label}</dt>
