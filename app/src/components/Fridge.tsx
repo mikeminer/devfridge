@@ -43,16 +43,6 @@ export default function Fridge({
     <div className={`fridge-stage ${open ? "is-open" : "is-closed"}`}>
       <div className="fridge-glow" />
       <div className="fridge">
-        <a
-          className="serial-plate"
-          href={serialHref}
-          target="_blank"
-          rel="noreferrer"
-          title={`Open ${serialLabel} program on Solscan`}
-        >
-          <span>S/N {serialLabel}</span>
-          <strong className="mono">{serial}</strong>
-        </a>
         <div className="fridge-body">
           <div className="fridge-steel top" />
           <div className="interior" aria-hidden={!open}>
@@ -113,36 +103,61 @@ export default function Fridge({
             </div>
           </div>
 
-          <button
-            type="button"
-            className="door"
-            onClick={onToggle}
-            aria-expanded={open}
-            aria-label={open ? "Close DevFridge" : "Open DevFridge"}
-          >
+          <div className="door">
             <div className="door-face front">
-              <div className="door-shine" />
-              <div className="brand-plate">
-                <span>DEVFRIDGE</span>
-                <small>TOO MANY TOKENS?</small>
-              </div>
-              <div className="led">
-                <em>{loading ? "··" : locks.length.toString().padStart(2, "0")}</em>
-                <span>{loading ? "scan" : "chilled"}</span>
-              </div>
-              <div className="handle">
-                <i />
-              </div>
-              <div className="dispense" />
-              <div className="note">open me</div>
+              <button
+                type="button"
+                className="door-toggle"
+                onClick={onToggle}
+                tabIndex={open ? -1 : 0}
+                aria-hidden={open}
+                aria-expanded={open}
+                aria-label={open ? "Close DevFridge" : "Open DevFridge"}
+              >
+                <div className="door-shine" />
+                <div className="brand-plate">
+                  <span>DEVFRIDGE</span>
+                  <small>TOO MANY TOKENS?</small>
+                </div>
+                <div className="led">
+                  <em>{loading ? "··" : locks.length.toString().padStart(2, "0")}</em>
+                  <span>{loading ? "scan" : "chilled"}</span>
+                </div>
+                <div className="handle">
+                  <i />
+                </div>
+                <div className="dispense" />
+                <div className="note">open me</div>
+              </button>
+              <a
+                className="serial-plate"
+                href={serialHref}
+                target="_blank"
+                rel="noreferrer"
+                title={`Open ${serialLabel} program on Solscan`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>S/N {serialLabel}</span>
+                <strong className="mono">{serial}</strong>
+              </a>
             </div>
             <div className="door-face back">
-              <div className="door-bin">
-                <span>Keep frozen</span>
-                <span>until unlock</span>
-              </div>
+              <button
+                type="button"
+                className="door-toggle"
+                onClick={onToggle}
+                tabIndex={open ? 0 : -1}
+                aria-hidden={!open}
+                aria-expanded={open}
+                aria-label={open ? "Close DevFridge" : "Open DevFridge"}
+              >
+                <div className="door-bin">
+                  <span>Keep frozen</span>
+                  <span>until unlock</span>
+                </div>
+              </button>
             </div>
-          </button>
+          </div>
           <div className="fridge-steel bottom" />
         </div>
         <div className="fridge-feet">

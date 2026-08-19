@@ -362,7 +362,6 @@ input[type="text"], input[type="datetime-local"] {
   z-index: 1;
   transform: translateZ(0);
 }
-}
 
 .symbol { color: var(--ice); }
 .mono { font-family: "IBM Plex Mono", monospace; font-size: 12px; }
@@ -592,16 +591,24 @@ input[type="text"], input[type="datetime-local"] {
 .door {
   position: absolute;
   inset: 0;
-  border: 0;
-  padding: 0;
-  background: transparent;
   transform-origin: left center;
   transform-style: preserve-3d;
   transition: transform 1.15s cubic-bezier(0.18, 0.84, 0.22, 1);
   z-index: 4;
+  pointer-events: none;
 }
 
 .is-open .door { transform: rotateY(-112deg); }
+
+.door-toggle {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+}
 
 .door-face {
   position: absolute;
@@ -696,7 +703,7 @@ input[type="text"], input[type="datetime-local"] {
 .dispense {
   position: absolute;
   left: 50%;
-  bottom: 110px;
+  bottom: 124px;
   transform: translateX(-50%);
   width: 54px;
   height: 86px;
@@ -707,7 +714,7 @@ input[type="text"], input[type="datetime-local"] {
 
 .note {
   position: absolute;
-  bottom: 42px;
+  bottom: 72px;
   left: 50%;
   transform: translateX(-50%) rotate(-3deg);
   background: #f4e1b3;
@@ -729,28 +736,36 @@ input[type="text"], input[type="datetime-local"] {
 }
 
 .serial-plate {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 14px;
+  z-index: 5;
   display: grid;
-  gap: 6px;
-  margin: 0 12px 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #d8dde0, #b7c0c6);
+  gap: 3px;
+  margin: 0;
+  padding: 7px 9px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #cfd5d9, #9aa3a9 55%, #8b949a);
   color: #1b2226;
   text-decoration: none;
-  overflow: visible;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45), 0 4px 8px rgba(0,0,0,0.18);
+  pointer-events: auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    inset 0 -1px 0 rgba(0,0,0,0.22),
+    0 1px 2px rgba(0,0,0,0.18);
 }
 .serial-plate span {
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 8px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #3a454b;
 }
 .serial-plate strong {
   display: block;
-  font-size: 10px;
+  font-size: 8.5px;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.35;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-all;
@@ -871,6 +886,6 @@ input[type="text"], input[type="datetime-local"] {
     transform-style: flat;
     width: min(360px, 94vw);
   }
-  .door, .fridge-body { transform-style: flat; }
+  .door, .door-toggle, .fridge-body { transform-style: flat; }
   .jar-glass img { transform: none; }
 }
