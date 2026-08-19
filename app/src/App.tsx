@@ -314,6 +314,9 @@ export default function App() {
           <a href="#fridge" onClick={() => setMenuOpen(false)}>
             Fridge
           </a>
+          <a href="#about" onClick={() => setMenuOpen(false)}>
+            What is DevFridge
+          </a>
           <a href="#tokenomics" onClick={() => setMenuOpen(false)}>
             $PASTA tokenomics
           </a>
@@ -537,6 +540,91 @@ export default function App() {
           )}
         </aside>
       </div>
+
+      <section className="about" id="about">
+        <p className="eyebrow">The club</p>
+        <h2>What is DevFridge?</h2>
+        <div className="about-copy">
+          <p>
+            Most people hunting low-cap memes are looking for the same thing:
+            early tokens without digging through endless noise.
+          </p>
+          <p>
+            The problem is that deploying on Pump.fun takes seconds. That tells
+            you almost nothing about the person behind the token. DevFridge adds
+            another layer.
+          </p>
+          <p>
+            It&apos;s a place for creators who can actually build, experiment
+            with dApps and put part of their own Token-2022 supply behind a
+            transparent on-chain commitment.
+          </p>
+          <p>
+            You bring your token into the Fridge. You lock part of the supply.
+            Your project becomes discoverable inside DevFridge.
+          </p>
+          <p>
+            And that&apos;s where the interesting part starts. DevFridge
+            isn&apos;t supposed to be another token directory. It&apos;s a club.
+          </p>
+          <p>
+            Creators post what they&apos;re building. Communities discover each
+            other. Users can browse tokens already inside the Fridge, including
+            tiny projects still working their way through the bonding curve.
+          </p>
+          <p>
+            Instead of thousands of isolated launches fighting for attention,
+            DevFridge creates a smaller ecosystem where builders and communities
+            can actually find each other.
+          </p>
+          <p>
+            The lock becomes part commitment, part discovery mechanism.
+          </p>
+          <p>A creator can basically say:</p>
+          <blockquote>
+            Here&apos;s my token. Here&apos;s how much of my own supply I put in
+            the Fridge. Here&apos;s when it unlocks. Verify it yourself.
+          </blockquote>
+          <p>
+            That makes DevFridge something creators can promote inside their own
+            communities too.
+          </p>
+          <p>
+            Our tokens are in the Fridge. Someone arriving to inspect one
+            project can naturally discover the others.
+          </p>
+          <p>And underneath all of this sits $PASTA.</p>
+          <p>
+            Creators can lock some of their best Token-2022 projects through the
+            official dApp at{" "}
+            <a href="https://devfridge.cool/" rel="noreferrer">
+              devfridge.cool
+            </a>
+            . A portion of DevFridge&apos;s redeem fees (currently designed as a
+            2% fee) feeds back into the ecosystem through $PASTA buy-and-burn.
+          </p>
+          <p>
+            So $PASTA is not just another token sitting next to DevFridge.
+          </p>
+          <ol className="loop">
+            <li>$PASTA is building the Fridge.</li>
+            <li>The Fridge attracts builders.</li>
+            <li>Builders bring communities.</li>
+            <li>Communities discover other builders.</li>
+          </ol>
+          <p>That&apos;s the loop.</p>
+          <p className="loop-end">
+            Less noise. More builders. More on-chain commitment.
+          </p>
+          <p className="welcome">Welcome to the Fridge.</p>
+        </div>
+        <div className="about-actions">
+          <a href="#fridge">Open the Fridge</a>
+          <a href={PASTA_URL} target="_blank" rel="noreferrer">
+            $PASTA on pump.fun
+          </a>
+        </div>
+      </section>
 
       <section className="tokenomics" id="tokenomics">
         <p className="eyebrow">$PASTA</p>
