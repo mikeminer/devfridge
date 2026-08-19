@@ -8,6 +8,8 @@ import {
   LICENSE_URL,
   PASTA_MINT,
   PASTA_URL,
+  TRUST_ME_VAULT,
+  TRUST_ME_VAULT_URL,
   explorerProgramUrl,
   explorerTxUrl,
   type ClusterName,
@@ -370,6 +372,9 @@ export default function App() {
           <a href="#tokenomics" onClick={() => setMenuOpen(false)}>
             $PASTA tokenomics
           </a>
+          <a href="#roadmap" onClick={() => setMenuOpen(false)}>
+            Roadmap
+          </a>
           <a href={DEV_X_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on X
           </a>
@@ -698,19 +703,246 @@ export default function App() {
       <section className="tokenomics" id="tokenomics">
         <p className="eyebrow">$PASTA</p>
         <h2>Tokenomics</h2>
-        <p className="lede coming-soon">Coming soon.</p>
         <p className="lede">
-          Stay updated: follow the dev on X and turn on notifications. Follow the
-          dev on pump.fun and turn on notifications there too.
+          $PASTA is the official dev token of pappardelle (anonimocommando) on
+          Solana. It is designed as a long-term store of value: a deflationary
+          engine plus a multi-source revenue flywheel that compounds as the
+          Fridge gets used.
         </p>
+
+        <div className="pasta-magnets" aria-label="$PASTA identity">
+          <article className="magnet">
+            <span>Name</span>
+            <strong>$PASTA</strong>
+          </article>
+          <article className="magnet">
+            <span>Chain</span>
+            <strong>Solana</strong>
+          </article>
+          <article className="magnet">
+            <span>Role</span>
+            <strong>Dev token / store of value</strong>
+          </article>
+          <article className="magnet">
+            <span>Issuer</span>
+            <strong>pappardelle.eth</strong>
+          </article>
+        </div>
+        <p className="pasta-mint-card mono">
+          <span>Mint</span>
+          <a href={PASTA_URL} target="_blank" rel="noreferrer">
+            {PASTA_MINT.toBase58()}
+          </a>
+        </p>
+
+        <h3>The Fridge is the burn engine</h3>
+        <p className="lede">
+          Anyone can lock a Token-2022 meme in the Fridge. You do not need $PASTA
+          to operate it. On redeem, a 2% fee is taken from the locked tokens and
+          Jupiter-swapped into $PASTA, then burned. More Fridge usage → more
+          burns → more scarcity.
+        </p>
+        <ol className="flywheel" aria-label="$PASTA flywheel">
+          <li>
+            <i>1</i>
+            <strong>Lock</strong>
+            <span>Token-2022 memes go on the shelf with a public unlock time.</span>
+          </li>
+          <li>
+            <i>2</i>
+            <strong>Redeem</strong>
+            <span>When the timer hits, take them out. The 2% fee is automatic.</span>
+          </li>
+          <li>
+            <i>3</i>
+            <strong>Buy</strong>
+            <span>That fee is swapped on Jupiter into $PASTA.</span>
+          </li>
+          <li>
+            <i>4</i>
+            <strong>Burn</strong>
+            <span>$PASTA is burned. Supply shrinks with every unlock.</span>
+          </li>
+        </ol>
+
+        <h3>Revenue flywheel</h3>
+        <div className="revenue-grid">
+          <article className="fly-jar">
+            <p className="fly-jar-lid">Fridge redemptions</p>
+            <h4>2% buy &amp; burn</h4>
+            <p>
+              Every meme redeemed from the Fridge funds an automatic $PASTA buy
+              and burn. The Fridge is powered by $PASTA; $PASTA is not required
+              to lock.
+            </p>
+          </article>
+          <article className="fly-jar">
+            <p className="fly-jar-lid">Founder locks</p>
+            <h4>Public tranches</h4>
+            <p>
+              The founding allocation sits in the Fridge with on-chain
+              countdowns. When a tranche is claimed, 2% is burned. A portion of
+              each unlock covers project expenses and community bounties on
+              pump.fun.
+            </p>
+          </article>
+          <article className="fly-jar">
+            <p className="fly-jar-lid">Protocol volume</p>
+            <h4>Buyback + re-lock</h4>
+            <p>
+              A share of protocol volume fees is allocated to $PASTA buybacks
+              and Fridge locks. Bought-back tokens are locked rather than burned
+              immediately, stretching the deflationary timeline.
+            </p>
+          </article>
+          <article className="fly-jar">
+            <p className="fly-jar-lid">Trust Me Capital</p>
+            <h4>Hyperliquid vault</h4>
+            <p>
+              A live 24/7 perpetuals vault. Anyone can deposit — no lock-up. The
+              vault keeps 10% of depositor P&amp;L. Trading revenue is
+              periodically directed into $PASTA buybacks.
+            </p>
+            <a
+              className="fly-jar-link mono"
+              href={TRUST_ME_VAULT_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {TRUST_ME_VAULT}
+            </a>
+          </article>
+        </div>
+
+        <h3>Pump.fun launches</h3>
+        <p className="lede">
+          The dev and community periodically launch new memes on pump.fun. Each
+          launch is a catalyst: volume on pump.fun, locks in the Fridge,
+          redemption fees, then another $PASTA burn. Community activity
+          directly reduces supply.
+        </p>
+
+        <h3>Deflationary summary</h3>
+        <div className="receipt" role="table" aria-label="Deflationary summary">
+          <div className="receipt-head" role="row">
+            <span>Mechanism</span>
+            <span>Trigger</span>
+            <span>Effect on $PASTA</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Fridge redemption fee</strong>
+            <span>Any meme redeemed</span>
+            <span>2% auto buy &amp; burn</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Dev lock tranche</strong>
+            <span>Periodic unlock cycle</span>
+            <span>2% of tranche burned</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Protocol revenue</strong>
+            <span>Volume on protocol</span>
+            <span>Buyback + Fridge lock</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Trust Me Capital vault</strong>
+            <span>24/7 trading P&amp;L</span>
+            <span>Buyback, ongoing</span>
+          </div>
+          <p className="receipt-foot">Official tokenomics · posted on X</p>
+        </div>
+
         <div className="tokenomics-actions">
-          <a className="ghost" href={DEV_X_URL} target="_blank" rel="noreferrer">
+          <a href={PASTA_URL} target="_blank" rel="noreferrer">
+            $PASTA on pump.fun
+          </a>
+          <a href={DEV_X_URL} target="_blank" rel="noreferrer">
             Follow on X · @anonimocommando
           </a>
-          <a className="ghost" href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
+          <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
             Follow on pump.fun
           </a>
         </div>
+      </section>
+
+      <section className="roadmap" id="roadmap">
+        <p className="eyebrow">Kitchen plan</p>
+        <h2>Roadmap</h2>
+        <p className="lede">
+          What is already in the Fridge, and what goes on the counter next.
+        </p>
+        <ol className="timeline">
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Fridge program live</h3>
+            <p>
+              Anchor 0.30.1 Token-2022 time-lock on Solana mainnet, devnet and
+              testnet. Same program ID on every cluster.
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>dApp at devfridge.cool</h3>
+            <p>
+              Phantom Chrome frontend. Live on-chain locks, listings isolated by
+              network, token logos, cooker for Token-2022 memes on
+              devnet/testnet.
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>2% buy &amp; burn</h3>
+            <p>
+              Redeem fee is Jupiter-swapped into $PASTA and burned. Not sent to
+              a wallet. Ungraduated pump.fun tokens wait until PumpSwap for a
+              route.
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Open source &amp; IDL</h3>
+            <p>
+              GitHub mikeminer/devfridge under BUSL-1.1. On-chain IDL on mainnet
+              and devnet. Serial plate on the fridge door is the full program ID.
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>$PASTA tokenomics on-site</h3>
+            <p>
+              Flywheel, founder locks, protocol buybacks and the Trust Me
+              Capital vault, published from the official X post.
+            </p>
+          </li>
+          <li className="tl-split" aria-hidden="true">
+            <span>Next on the counter</span>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>Freeze the program</h3>
+            <p>
+              When the Fridge is stable, upgrade authority is removed for good.
+              That makes the on-chain program immutable. Not frozen yet — freeze
+              is one-way.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>Bounties on pump.fun</h3>
+            <p>
+              Community bounties funded from founder unlocks: builders, memes,
+              and Fridge integrations paid on pump.fun.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>App-discovery campaigns</h3>
+            <p>
+              List and campaign DevFridge on app-discovery platforms so builders
+              and communities can find the Fridge without hunting through noise.
+            </p>
+          </li>
+        </ol>
       </section>
 
       <footer className="powered">

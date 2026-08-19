@@ -17,6 +17,9 @@ export const PASTA_URL = "https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18Gr
 export const DEV_X_URL = "https://x.com/anonimocommando";
 export const DEV_PUMP_URL =
   "https://pump.fun/profile/GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";
+export const TRUST_ME_VAULT = "0xf8815770e046d32f606385700f3bc96ffbb4e879";
+export const TRUST_ME_VAULT_URL =
+  "https://app.hyperliquid.xyz/vaults/0xf8815770e046d32f606385700f3bc96ffbb4e879";
 
 export const BUYBACK_GRADUATION_WARNING =
   "This token is still on the pump.fun bonding curve (not graduated to PumpSwap yet). Redeeming takes a 2% fee that Jupiter must swap into $PASTA and burn, and Jupiter has no route until graduation. Wait until this token graduates, then use Take it out. Your lock stays in the fridge until then.";
