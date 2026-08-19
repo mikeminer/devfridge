@@ -6,7 +6,7 @@ import {
   TYPE_SIZE,
   createAssociatedTokenAccountIdempotentInstruction,
   createInitializeMetadataPointerInstruction,
-  createInitializeMintInstruction,
+  createInitializeMint2Instruction,
   createMintToInstruction,
   getAssociatedTokenAddressSync,
   getMintLen,
@@ -55,8 +55,10 @@ export async function createMemeMintTransaction(
     additionalMetadata: [] as [string, string][],
   };
   const mintLen = getMintLen([ExtensionType.MetadataPointer]);
-  const space = mintLen + TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
-  const lamports = await connection.getMinimumBalanceForRentExemption(space);
+  const metadataLen = TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
+  const lamports = await connection.getMinimumBalanceForRentExemption(
+    mintLen + metadataLen
+  );
   const ata = getAssociatedTokenAddressSync(
     mint.publicKey,
     owner,
@@ -68,7 +70,7 @@ export async function createMemeMintTransaction(
     SystemProgram.createAccount({
       fromPubkey: owner,
       newAccountPubkey: mint.publicKey,
-      space,
+      space: mintLen,
       lamports,
       programId: TOKEN_2022_PROGRAM_ID,
     }),
@@ -78,7 +80,7 @@ export async function createMemeMintTransaction(
       mint.publicKey,
       TOKEN_2022_PROGRAM_ID
     ),
-    createInitializeMintInstruction(
+    createInitializeMint2Instruction(
       mint.publicKey,
       COOKER_DECIMALS,
       owner,
@@ -114,4 +116,25 @@ export async function createMemeMintTransaction(
   );
 
   return { tx, mint, amount };
+}
+
+export async function formatSendError(err: unknown): Promise<string> {
+  if (!err) return "Mint failed";
+  const e = err as {
+    message?: string;
+    logs?: string[];
+    getLogs?: (connection?: unknown) => string[] | Promise<string[]>;
+  };
+  let logs: string[] = Array.isArray(e.logs) ? e.logs : [];
+  if (typeof e.getLogs === "function") {
+    try {
+      const got = await e.getLogs();
+      if (Array.isArray(got)) logs = got;
+    } catch {
+      /* logs may already be on the error */
+    }
+  }
+  const fail = logs.find((line) => /Error:|failed/i.test(line) && !/simulation failed/i.test(line));
+  if (fail) return fail.replace(/^Program log: /, "");
+  return e.message || String(err);
 }

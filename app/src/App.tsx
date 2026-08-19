@@ -42,7 +42,7 @@ import Fridge from "./components/Fridge";
 import FundDeploy from "./components/FundDeploy";
 import StockPanel from "./components/StockPanel";
 import TokenLogo from "./components/TokenLogo";
-import { createMemeMintTransaction } from "./lib/cooker";
+import { createMemeMintTransaction, formatSendError } from "./lib/cooker";
 import logoMark from "./assets/logo-mark.jpg";
 import logoWordmark from "./assets/logo-wordmark.jpg";
 
@@ -323,7 +323,7 @@ export default function App() {
         /* lookup is optional after cook */
       }
     } catch (err) {
-      const text = err instanceof Error ? err.message : String(err);
+      const text = await formatSendError(err);
       setCookError(text);
       setStatus({ kind: "bad", text });
     } finally {
