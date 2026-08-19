@@ -16,7 +16,7 @@ export const PASTA_MINT = new PublicKey("39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61
 export const PASTA_URL = "https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump";
 
 export const BUYBACK_GRADUATION_WARNING =
-  "This token is not $PASTA. Redeeming takes a 2% fee that Jupiter must swap into $PASTA and burn. If this coin is still on the pump.fun bonding curve (not graduated to PumpSwap), Jupiter has no route and Take it out cannot run. Wait until this token graduates, then redeem. $PASTA locks can be claimed anytime: the 2% is burned directly, with no swap.";
+  "This token is still on the pump.fun bonding curve (not graduated to PumpSwap yet). Redeeming takes a 2% fee that Jupiter must swap into $PASTA and burn, and Jupiter has no route until graduation. Wait until this token graduates, then use Take it out. Your lock stays in the fridge until then.";
 export const GITHUB_REPO = "https://github.com/mikeminer/devfridge";
 export const LICENSE_URL = "https://github.com/mikeminer/devfridge/blob/master/LICENSE";
 export const JUPITER_V6 = new PublicKey("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");

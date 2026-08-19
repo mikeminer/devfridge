@@ -109,6 +109,36 @@ async function imageFromJupiter(mint: string): Promise<Partial<TokenVisual>> {
   }
 }
 
+const bondingCache = new Map<string, boolean>();
+
+/** True only while the mint still trades solely on the pump.fun bonding curve. */
+export async function isOnPumpBondingCurve(mint: string): Promise<boolean> {
+  const hit = bondingCache.get(mint);
+  if (hit !== undefined) return hit;
+  try {
+    const res = await fetch(
+      `https://api.dexscreener.com/latest/dex/tokens/${mint}`,
+      { signal: AbortSignal.timeout(8000) }
+    );
+    if (!res.ok) {
+      bondingCache.set(mint, false);
+      return false;
+    }
+    const json = (await res.json()) as { pairs?: Array<{ dexId?: string }> };
+    const pairs = json.pairs ?? [];
+    if (pairs.length === 0) {
+      bondingCache.set(mint, false);
+      return false;
+    }
+    const stillOnCurve = pairs.every((p) => (p.dexId ?? "").toLowerCase() === "pumpfun");
+    bondingCache.set(mint, stillOnCurve);
+    return stillOnCurve;
+  } catch {
+    bondingCache.set(mint, false);
+    return false;
+  }
+}
+
 async function imageFromDex(mint: string): Promise<Partial<TokenVisual>> {
   try {
     const res = await fetch(

@@ -31,6 +31,7 @@ import {
   attachLockSignatures,
   decorateLocks,
   fetchTokenVisual,
+  isOnPumpBondingCurve,
   remainingLabel,
 } from "./lib/tokenMeta";
 import { useAppState } from "./state";
@@ -99,6 +100,20 @@ export default function App() {
 
   const owner = wallet.publicKey;
   const selected = locks.find((l) => l.address.toBase58() === selectedId) ?? null;
+  const [needsGraduation, setNeedsGraduation] = useState(false);
+
+  useEffect(() => {
+    setNeedsGraduation(false);
+    if (!selected || selected.mint.equals(PASTA_MINT)) return;
+    const mint = selected.mint.toBase58();
+    let cancelled = false;
+    void isOnPumpBondingCurve(mint).then((onCurve) => {
+      if (!cancelled) setNeedsGraduation(onCurve);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [selected]);
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(Date.now() / 1000), 1000);
@@ -440,7 +455,7 @@ export default function App() {
                   </dd>
                 </div>
               </dl>
-              {!selected.mint.equals(PASTA_MINT) && (
+              {needsGraduation && (
                 <div className="banner warn">{BUYBACK_GRADUATION_WARNING}</div>
               )}
               <button
