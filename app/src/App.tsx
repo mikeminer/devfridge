@@ -491,7 +491,7 @@ export default function App() {
                 type="button"
                 disabled={
                   busy ||
-                  (Boolean(owner) &&
+                  (owner != null &&
                     (!owner.equals(selected.depositor) || now < selected.unlockAt))
                 }
                 onClick={() => {
