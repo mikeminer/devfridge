@@ -54,10 +54,14 @@ export default defineConfig({
     {
       name: "ipfs-html",
       transformIndexHtml(html) {
-        return html
+        const stamped = html
           .replaceAll(" crossorigin", "")
           .replaceAll(' crossorigin=""', "")
           .replace('<script type="module" src="./assets/', '<script defer src="./assets/');
+        return stamped.replace(
+          /src="(\.\/assets\/app\.js)"/g,
+          `src="$1?v=${Date.now()}"`
+        );
       },
     },
     {

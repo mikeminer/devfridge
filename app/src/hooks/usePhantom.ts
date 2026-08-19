@@ -69,8 +69,13 @@ export function usePhantom(endpoint: string) {
     }
     if (extraSigners.length && tx instanceof Transaction && p.signTransaction) {
       const signed = await p.signTransaction(tx);
-      return connection.sendRawTransaction(signed.serialize(), {
+      const out = Transaction.from(
+        signed.serialize({ requireAllSignatures: false, verifySignatures: false })
+      );
+      out.partialSign(...extraSigners);
+      return connection.sendRawTransaction(out.serialize(), {
         skipPreflight: false,
+        preflightCommitment: "confirmed",
       });
     }
     const { signature } = await p.signAndSendTransaction(tx);
