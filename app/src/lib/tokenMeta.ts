@@ -1,6 +1,8 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_2022_PROGRAM_ID, getMint, getTokenMetadata } from "@solana/spl-token";
+import type { ClusterName } from "./constants";
 import type { LockAccount } from "./fridge";
+import { knownLockSignature, rememberLockSignature } from "./lockIndex";
 
 export type TokenVisual = {
   name: string;
@@ -12,6 +14,7 @@ export type TokenVisual = {
 export type DecoratedLock = LockAccount & TokenVisual & {
   ready: boolean;
   preview?: boolean;
+  signature?: string;
 };
 
 const cache = new Map<string, TokenVisual>();
@@ -214,6 +217,29 @@ export async function decorateLocks(
       ready: now >= lock.unlockAt,
     };
   });
+}
+
+export async function attachLockSignatures(
+  connection: Connection,
+  locks: DecoratedLock[],
+  cluster: ClusterName
+): Promise<DecoratedLock[]> {
+  return Promise.all(
+    locks.map(async (lock) => {
+      const cached = knownLockSignature(lock.address.toBase58(), cluster);
+      if (cached) return { ...lock, signature: cached };
+      try {
+        const sigs = await connection.getSignaturesForAddress(lock.address, { limit: 8 });
+        if (sigs.length === 0) return lock;
+        const signature = sigs[sigs.length - 1]?.signature;
+        if (!signature) return lock;
+        rememberLockSignature(lock.address.toBase58(), cluster, signature);
+        return { ...lock, signature };
+      } catch {
+        return lock;
+      }
+    })
+  );
 }
 
 export function remainingLabel(unlockAt: number, now: number): string {

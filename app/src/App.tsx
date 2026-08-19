@@ -27,6 +27,7 @@ import {
 import { forgetLock, rememberLock } from "./lib/lockIndex";
 import {
   type DecoratedLock,
+  attachLockSignatures,
   decorateLocks,
   fetchTokenVisual,
   remainingLabel,
@@ -159,7 +160,9 @@ export default function App() {
       setLoadingLocks(false);
       const decorated = await decorateLocks(connection, raw);
       if (clusterRef.current !== net) return;
-      setLocks(decorated);
+      const withSigs = await attachLockSignatures(connection, decorated, net);
+      if (clusterRef.current !== net) return;
+      setLocks(withSigs);
     } catch {
       if (clusterRef.current !== net) return;
       if (!silent) setLocks([]);
@@ -220,6 +223,7 @@ export default function App() {
         depositor: owner.toBase58(),
         programId: programId.toBase58(),
         cluster,
+        signature: sig,
       });
       setStatus({
         kind: "ok",
@@ -412,6 +416,23 @@ export default function App() {
                   <dt>Mint</dt>
                   <dd>
                     <CopyableMint value={selected.mint.toBase58()} />
+                  </dd>
+                </div>
+                <div>
+                  <dt>Lock tx</dt>
+                  <dd>
+                    {selected.signature ? (
+                      <a
+                        className="mono"
+                        href={explorerTxUrl(cluster, selected.signature)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {selected.signature}
+                      </a>
+                    ) : (
+                      <span className="muted">Looking up…</span>
+                    )}
                   </dd>
                 </div>
                 <div>

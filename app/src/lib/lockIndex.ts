@@ -10,6 +10,7 @@ export type KnownLock = {
   depositor: string;
   programId: string;
   cluster: ClusterName;
+  signature?: string;
 };
 
 function readAll(): KnownLock[] {
@@ -52,6 +53,26 @@ export function knownLockAddresses(
         r.programId === programId.toBase58()
     )
     .map((r) => new PublicKey(r.address));
+}
+
+export function knownLockSignature(address: string, cluster: ClusterName): string | null {
+  return (
+    readAll().find((r) => r.address === address && r.cluster === cluster)?.signature ??
+    null
+  );
+}
+
+export function rememberLockSignature(
+  address: string,
+  cluster: ClusterName,
+  signature: string
+) {
+  const rows = readAll();
+  const hit = rows.find((r) => r.address === address && r.cluster === cluster);
+  if (hit) {
+    hit.signature = signature;
+    writeAll(rows);
+  }
 }
 
 export function knownLockIds(
