@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BUYBACK_GRADUATION_WARNING,
   CLUSTERS,
+  DEV_PUMP_URL,
+  DEV_X_URL,
   GITHUB_REPO,
   LICENSE_URL,
   PASTA_MINT,
@@ -78,6 +80,7 @@ export default function App() {
   const connection = wallet.connection;
 
   const [open, setOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [mintInput, setMintInput] = useState("");
   const [mintInfo, setMintInfo] = useState<(MintInfo & { image?: string | null }) | null>(
     null
@@ -296,6 +299,31 @@ export default function App() {
             <p>Too many tokens? Fridge them.</p>
           </div>
         </div>
+        <button
+          className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
+          type="button"
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <i />
+          <i />
+          <i />
+        </button>
+        <nav className={`site-nav ${menuOpen ? "is-open" : ""}`}>
+          <a href="#fridge" onClick={() => setMenuOpen(false)}>
+            Fridge
+          </a>
+          <a href="#tokenomics" onClick={() => setMenuOpen(false)}>
+            $PASTA tokenomics
+          </a>
+          <a href={DEV_X_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+            Follow on X
+          </a>
+          <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+            Follow on pump.fun
+          </a>
+        </nav>
         <div className="controls">
           <select
             className="cluster"
@@ -339,7 +367,7 @@ export default function App() {
         </div>
       )}
 
-      <div className="stage">
+      <div className="stage" id="fridge">
         <StockPanel
           connected={Boolean(owner)}
           mintInput={mintInput}
@@ -507,6 +535,24 @@ export default function App() {
           )}
         </aside>
       </div>
+
+      <section className="tokenomics" id="tokenomics">
+        <p className="eyebrow">$PASTA</p>
+        <h2>Tokenomics</h2>
+        <p className="lede coming-soon">Coming soon.</p>
+        <p className="lede">
+          Stay updated: follow the dev on X and turn on notifications. Follow the
+          dev on pump.fun and turn on notifications there too.
+        </p>
+        <div className="tokenomics-actions">
+          <a className="ghost" href={DEV_X_URL} target="_blank" rel="noreferrer">
+            Follow on X · @anonimocommando
+          </a>
+          <a className="ghost" href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
+            Follow on pump.fun
+          </a>
+        </div>
+      </section>
 
       <footer className="powered">
         <img className="wordmark" src={logoWordmark} alt="DevFridge" />

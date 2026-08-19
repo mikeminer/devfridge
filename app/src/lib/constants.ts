@@ -14,6 +14,9 @@ export const BURN_SEED = "burn";
 export const LOCK_ACCOUNT_SIZE = 8 + 32 + 32 + 8 + 8 + 8 + 1 + 8;
 export const PASTA_MINT = new PublicKey("39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump");
 export const PASTA_URL = "https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump";
+export const DEV_X_URL = "https://x.com/anonimocommando";
+export const DEV_PUMP_URL =
+  "https://pump.fun/profile/GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";
 
 export const BUYBACK_GRADUATION_WARNING =
   "This token is still on the pump.fun bonding curve (not graduated to PumpSwap yet). Redeeming takes a 2% fee that Jupiter must swap into $PASTA and burn, and Jupiter has no route until graduation. Wait until this token graduates, then use Take it out. Your lock stays in the fridge until then.";

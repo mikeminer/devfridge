@@ -16,6 +16,7 @@
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
 html, body, #root { min-height: 100%; }
 
 body {
@@ -63,9 +64,76 @@ img { display: block; max-width: 100%; }
 
 .topbar {
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 18px;
   position: relative;
   z-index: 3;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 10px 11px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.menu-toggle i {
+  display: block;
+  height: 2px;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.menu-toggle.is-open i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.is-open i:nth-child(2) { opacity: 0; }
+.menu-toggle.is-open i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.site-nav a:hover { color: var(--brass); }
+
+.tokenomics {
+  position: relative;
+  z-index: 2;
+  margin-top: 28px;
+  background: rgba(16, 14, 16, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px 22px;
+}
+.tokenomics h2 {
+  margin: 0 0 8px;
+  letter-spacing: -0.04em;
+}
+.coming-soon {
+  color: var(--ice);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tokenomics-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.tokenomics-actions a {
+  text-decoration: none;
 }
 
 .logo, .logo-img {
@@ -733,6 +801,19 @@ input[type="text"], input[type="datetime-local"] {
 
 @media (max-width: 720px) {
   .topbar, .controls { flex-wrap: wrap; }
+  .menu-toggle { display: flex; margin-left: auto; }
+  .site-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 0 4px;
+  }
+  .site-nav.is-open { display: flex; }
+  .site-nav a {
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
+  }
   .fridge-stage { min-height: 560px; perspective: none; }
   .fridge {
     transform: none;
