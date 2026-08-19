@@ -137,27 +137,14 @@ export default function App() {
   const clusterRef = useRef(cluster);
   clusterRef.current = cluster;
 
-  const refreshLocks = useCallback(async (silent = false) => {
+  const refreshLocks = useCallback(async () => {
     const net = cluster;
-    if (!silent) {
-      setLoadingLocks(true);
-      setLocks([]);
-      setSelectedId(null);
-    }
+    setLoadingLocks(true);
+    setLocks([]);
+    setSelectedId(null);
     try {
       const raw = await fetchAllLocks(connection, programId, net);
       if (clusterRef.current !== net) return;
-      setLocks(
-        raw.map((lock) => ({
-          ...lock,
-          name: "Token-2022",
-          symbol: lock.mint.toBase58().slice(0, 4),
-          decimals: 6,
-          image: null,
-          ready: Date.now() / 1000 >= lock.unlockAt,
-        }))
-      );
-      setLoadingLocks(false);
       const decorated = await decorateLocks(connection, raw);
       if (clusterRef.current !== net) return;
       const withSigs = await attachLockSignatures(connection, decorated, net);
@@ -165,21 +152,24 @@ export default function App() {
       setLocks(withSigs);
     } catch {
       if (clusterRef.current !== net) return;
-      if (!silent) setLocks([]);
-      setLoadingLocks(false);
+      setLocks([]);
+    } finally {
+      if (clusterRef.current === net) setLoadingLocks(false);
     }
   }, [cluster, connection, programId]);
 
   useEffect(() => {
-    setLoadingLocks(true);
-    setLocks([]);
-    setSelectedId(null);
     setMintInfo(null);
     setStatus(null);
-    void refreshLocks(false);
-    const id = window.setInterval(() => void refreshLocks(true), 20000);
-    return () => window.clearInterval(id);
+    void refreshLocks();
   }, [cluster, refreshLocks]);
+
+  function toggleDoor() {
+    setOpen((wasOpen) => {
+      if (!wasOpen) void refreshLocks();
+      return !wasOpen;
+    });
+  }
 
   const unlockUnix = useMemo(() => {
     const t = Date.parse(unlockLocal);
@@ -355,7 +345,7 @@ export default function App() {
         <Fridge
           key={cluster}
           open={open}
-          onToggle={() => setOpen((v) => !v)}
+          onToggle={toggleDoor}
           locks={locks}
           selected={selectedId}
           onSelect={(id) => {
@@ -491,7 +481,7 @@ export default function App() {
                   {programId.toBase58()}
                 </a>
               </p>
-              <button className="ghost" type="button" onClick={() => setOpen((v) => !v)}>
+              <button className="ghost" type="button" onClick={toggleDoor}>
                 {open ? "Close door" : "Open door"}
               </button>
             </>
