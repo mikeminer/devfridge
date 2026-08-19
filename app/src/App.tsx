@@ -675,6 +675,17 @@ export default function App() {
             Our tokens are in the Fridge. Someone arriving to inspect one
             project can naturally discover the others.
           </p>
+          <p>
+            Promotion inside the club is not another shill thread. Got a meme
+            still on the bonding curve? Freeze a slice in a time-lock. Then
+            promote the Fridge itself — one hub where multiple communities skip
+            the pump.fun noise and actually find each other.
+          </p>
+          <p>
+            When your community graduates your token, they also meet the other
+            listings on the shelf. Your token. Ours. Every project already in
+            the Fridge. We promote the kitchen, not a single launch.
+          </p>
           <p>And underneath all of this sits $PASTA — the first proof of the club.</p>
           <p>
             Instead of transferring the remaining founder bag to other wallets,
@@ -697,8 +708,9 @@ export default function App() {
           <ol className="loop">
             <li>$PASTA is building the Fridge.</li>
             <li>The Fridge attracts builders.</li>
-            <li>Builders bring communities.</li>
-            <li>Communities discover other builders.</li>
+            <li>Builders lock a slice and bring their communities.</li>
+            <li>Communities promote the hub, not only their own token.</li>
+            <li>Graduation of one listing pulls eyes onto the whole shelf.</li>
           </ol>
           <p>That&apos;s the loop.</p>
           <p className="loop-end">
