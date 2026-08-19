@@ -100,7 +100,11 @@ export default function Cooker(props: Props) {
                   />
                 </div>
               </div>
-              <p className="range-hint">{COOKER_DECIMALS} decimals · minted to your wallet</p>
+              <p className="range-hint">
+                {COOKER_DECIMALS} decimals · minted to your wallet. Take it out
+                burns 2% of this mint here ({props.clusterLabel} has no Jupiter
+                $PASTA route).
+              </p>
               {props.error && <div className="banner bad">{props.error}</div>}
               {props.cooked && (
                 <div className="cooked-plate">

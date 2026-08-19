@@ -113,6 +113,7 @@ export default function App() {
 
   useEffect(() => {
     setNeedsGraduation(false);
+    if (cluster !== "mainnet") return;
     if (!selected || selected.mint.equals(PASTA_MINT)) return;
     const mint = selected.mint.toBase58();
     let cancelled = false;
@@ -122,7 +123,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [selected]);
+  }, [selected, cluster]);
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(Date.now() / 1000), 5000);
@@ -265,13 +266,18 @@ export default function App() {
     setBusy(true);
     setStatus(null);
     try {
-      const tx = await claimTransaction(connection, owner, lock, programId);
+      const tx = await claimTransaction(connection, owner, lock, programId, {
+        localFeeBurn: cluster !== "mainnet",
+      });
       const sig = await wallet.sendTransaction(tx);
       await confirmSignature(connection, sig);
       forgetLock(lock.address.toBase58(), cluster);
       setStatus({
         kind: "ok",
-        text: `Took ${lock.symbol} out of the fridge.`,
+        text:
+          cluster === "mainnet"
+            ? `Took ${lock.symbol} out of the fridge.`
+            : `Took ${lock.symbol} out. 2% of this token was burned on ${CLUSTERS[cluster].label} (Jupiter $PASTA buyback is mainnet-only).`,
         receipt: explorerTxUrl(cluster, sig),
       });
       setSelectedId(null);
@@ -542,6 +548,13 @@ export default function App() {
                   </dd>
                 </div>
               </dl>
+              {cluster !== "mainnet" && (
+                <div className="banner warn">
+                  On {CLUSTERS[cluster].label}, Take it out burns 2% of this
+                  token in place. Jupiter has no $PASTA route here — the 2%
+                  buy-and-burn of $PASTA is mainnet-only.
+                </div>
+              )}
               {needsGraduation && (
                 <div className="banner warn">{BUYBACK_GRADUATION_WARNING}</div>
               )}

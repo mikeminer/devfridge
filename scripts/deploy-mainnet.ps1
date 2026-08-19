@@ -11,9 +11,8 @@ Write-Host "deployer=$(solana address)"
 Write-Host "balance=$(solana balance)"
 Write-Host "program=$programId"
 
-if (-not (Test-Path $so)) {
-  cargo-build-sbf --manifest-path programs/fridge/Cargo.toml
-}
+Write-Host "Building MAINNET fridge (Jupiter $PASTA buy-and-burn). Features: none."
+cargo-build-sbf --manifest-path programs/fridge/Cargo.toml
 
 solana program deploy $so `
   --program-id $kp `

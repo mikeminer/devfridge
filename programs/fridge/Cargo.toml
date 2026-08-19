@@ -15,6 +15,9 @@ no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
 idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+# Devnet/testnet only: burn the 2% fee of the locked mint. Do not enable on mainnet
+# (mainnet must Jupiter-buy and burn $PASTA).
+test-cluster = []
 
 [dependencies]
 anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }

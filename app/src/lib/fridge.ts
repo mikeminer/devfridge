@@ -685,7 +685,8 @@ export async function claimTransaction(
   connection: Connection,
   depositor: PublicKey,
   lock: LockAccount,
-  programId: PublicKey = PROGRAM_ID
+  programId: PublicKey = PROGRAM_ID,
+  opts: { localFeeBurn?: boolean } = {}
 ): Promise<Transaction | VersionedTransaction> {
   if (!lock.depositor.equals(depositor)) {
     throw new Error("Only the original depositor can claim");
@@ -718,8 +719,9 @@ export async function claimTransaction(
   const vault = vaultAddress(lock.mint, lock.address);
   const fee = redemptionFee(lock.amount);
   const isPasta = lock.mint.equals(PASTA_MINT);
+  const localFeeBurn = Boolean(opts.localFeeBurn);
 
-  if (fee === 0n || isPasta) {
+  if (fee === 0n || isPasta || localFeeBurn) {
     const extraKeys = await extraHookAccounts(
       connection,
       lock.mint,

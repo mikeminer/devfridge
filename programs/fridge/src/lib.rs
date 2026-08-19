@@ -142,7 +142,11 @@ pub mod fridge {
         }
 
         if fee > 0 {
-            if is_pasta {
+            // Mainnet: $PASTA burns the fee; other mints Jupiter-buy $PASTA then burn.
+            // test-cluster (devnet/testnet): no Jupiter / no $PASTA liquidity, so burn
+            // 2% of the locked mint in place. Never enable test-cluster on mainnet.
+            if is_pasta || cfg!(feature = "test-cluster") {
+                let _ = (&swap_data, min_pasta_out);
                 token_2022::burn(
                     CpiContext::new_with_signer(
                         ctx.accounts.token_program.to_account_info(),
