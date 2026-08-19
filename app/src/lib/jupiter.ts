@@ -45,13 +45,15 @@ export async function fetchPastaBuybackRoute(
     `&outputMint=${PASTA_MINT.toBase58()}&amount=${amount.toString()}` +
     `&slippageBps=300&maxAccounts=${maxAccounts}`;
   const quoteRes = await fetch(quoteUrl);
-  if (!quoteRes.ok) throw new Error("No Jupiter route from this token to $PASTA");
-  const quote = (await quoteRes.json()) as {
+  const quote = (await quoteRes.json().catch(() => ({}))) as {
     outAmount?: string;
     error?: string;
+    errorCode?: string;
   };
-  if (!quote.outAmount) {
-    throw new Error(quote.error || "Jupiter cannot buy $PASTA with this token");
+  if (!quoteRes.ok || !quote.outAmount) {
+    throw new Error(
+      "No Jupiter route from this token to $PASTA. If it is still on the pump.fun bonding curve, wait until it graduates to PumpSwap, then redeem. Until then the lock stays in the fridge and Take it out cannot run."
+    );
   }
 
   const swapRes = await fetch(SWAP_IX_URL, {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  BUYBACK_GRADUATION_WARNING,
   CLUSTERS,
   GITHUB_REPO,
   LICENSE_URL,
@@ -439,6 +440,9 @@ export default function App() {
                   </dd>
                 </div>
               </dl>
+              {!selected.mint.equals(PASTA_MINT) && (
+                <div className="banner warn">{BUYBACK_GRADUATION_WARNING}</div>
+              )}
               <button
                 className="primary"
                 type="button"
