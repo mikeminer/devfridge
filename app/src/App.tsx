@@ -958,6 +958,14 @@ export default function App() {
               and communities can find the Fridge without hunting through noise.
             </p>
           </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>$PASTA promotions on DEXes</h3>
+            <p>
+              Run $PASTA promo campaigns on DEX venues so traders find the
+              token where they already swap — not only inside the Fridge.
+            </p>
+          </li>
         </ol>
       </section>
 
