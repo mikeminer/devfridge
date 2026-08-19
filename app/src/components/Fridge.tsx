@@ -43,6 +43,16 @@ export default function Fridge({
     <div className={`fridge-stage ${open ? "is-open" : "is-closed"}`}>
       <div className="fridge-glow" />
       <div className="fridge">
+        <a
+          className="serial-plate"
+          href={serialHref}
+          target="_blank"
+          rel="noreferrer"
+          title={`Open ${serialLabel} program on Solscan`}
+        >
+          <span>S/N {serialLabel}</span>
+          <strong className="mono">{serial}</strong>
+        </a>
         <div className="fridge-body">
           <div className="fridge-steel top" />
           <div className="interior" aria-hidden={!open}>
@@ -139,16 +149,6 @@ export default function Fridge({
           <i />
           <i />
         </div>
-        <a
-          className="serial-plate"
-          href={serialHref}
-          target="_blank"
-          rel="noreferrer"
-          title={`Open ${serialLabel} program on Solscan`}
-        >
-          <span>S/N {serialLabel}</span>
-          <strong className="mono">{serial}</strong>
-        </a>
       </div>
       <div className="floor-shadow" />
     </div>

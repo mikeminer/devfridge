@@ -731,7 +731,7 @@ input[type="text"], input[type="datetime-local"] {
 .serial-plate {
   display: grid;
   gap: 6px;
-  margin: 10px 12px 8px;
+  margin: 0 12px 12px;
   padding: 10px 12px;
   border-radius: 8px;
   background: linear-gradient(180deg, #d8dde0, #b7c0c6);
