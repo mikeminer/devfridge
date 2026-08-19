@@ -625,13 +625,20 @@ export default function App() {
           </p>
           <p>
             The problem is that deploying on Pump.fun takes seconds. That tells
-            you almost nothing about the person behind the token. DevFridge adds
-            another layer.
+            you almost nothing about the person behind the token. A transfer to
+            another wallet tells you even less. If the founder still holds those
+            wallets, it only looks like they sold or distributed. They didn&apos;t.
+            DevFridge adds another layer.
           </p>
           <p>
             It&apos;s a place for creators who can actually build, experiment
             with dApps and put part of their own Token-2022 supply behind a
-            transparent on-chain commitment.
+            transparent on-chain commitment — instead of hopping bags across
+            wallets they still control.
+          </p>
+          <p>
+            You don&apos;t hide the bag. You put it on a shelf. Time-locked.
+            Public countdown. Anyone can verify it on-chain and inside the dapp.
           </p>
           <p>
             You bring your token into the Fridge. You lock part of the supply.
@@ -661,13 +668,20 @@ export default function App() {
           </blockquote>
           <p>
             That makes DevFridge something creators can promote inside their own
-            communities too.
+            communities too. Not &quot;trust me, I didn&apos;t sell.&quot; A
+            lock you can open and inspect.
           </p>
           <p>
             Our tokens are in the Fridge. Someone arriving to inspect one
             project can naturally discover the others.
           </p>
-          <p>And underneath all of this sits $PASTA.</p>
+          <p>And underneath all of this sits $PASTA — the first proof of the club.</p>
+          <p>
+            Instead of transferring the remaining founder bag to other wallets,
+            the supply still in the founder&apos;s hands was bought and
+            time-locked in the Fridge: 10% of supply, one year, verifiable
+            on-chain and on the shelf.
+          </p>
           <p>
             Creators can lock some of their best Token-2022 projects through the
             official dApp at{" "}
