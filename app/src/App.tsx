@@ -491,11 +491,13 @@ export default function App() {
                 type="button"
                 disabled={
                   busy ||
-                  !owner ||
-                  !owner.equals(selected.depositor) ||
-                  now < selected.unlockAt
+                  (Boolean(owner) &&
+                    (!owner.equals(selected.depositor) || now < selected.unlockAt))
                 }
-                onClick={() => void onClaim(selected)}
+                onClick={() => {
+                  if (!owner) void wallet.connect();
+                  else void onClaim(selected);
+                }}
               >
                 {!owner
                   ? "Connect to claim"
