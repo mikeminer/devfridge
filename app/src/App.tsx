@@ -81,7 +81,7 @@ export default function App() {
   const wallet = usePhantom(endpoint);
   const connection = wallet.connection;
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mintInput, setMintInput] = useState("");
   const [mintInfo, setMintInfo] = useState<(MintInfo & { image?: string | null }) | null>(
@@ -132,10 +132,6 @@ export default function App() {
     setCookError("");
   }, [cluster]);
 
-  useEffect(() => {
-    const t = window.setTimeout(() => setOpen(true), 700);
-    return () => window.clearTimeout(t);
-  }, []);
 
   const loadMint = useCallback(async () => {
     if (!owner) {
