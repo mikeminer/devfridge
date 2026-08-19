@@ -719,7 +719,11 @@ export async function claimTransaction(
   const vault = vaultAddress(lock.mint, lock.address);
   const fee = redemptionFee(lock.amount);
   const isPasta = lock.mint.equals(PASTA_MINT);
-  const localFeeBurn = Boolean(opts.localFeeBurn);
+  const endpoint = connection.rpcEndpoint.toLowerCase();
+  const localFeeBurn =
+    Boolean(opts.localFeeBurn) ||
+    endpoint.includes("devnet") ||
+    endpoint.includes("testnet");
 
   if (fee === 0n || isPasta || localFeeBurn) {
     const extraKeys = await extraHookAccounts(
