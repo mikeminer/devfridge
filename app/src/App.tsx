@@ -928,6 +928,22 @@ export default function App() {
           </li>
           <li className="is-next">
             <p className="tl-badge">Next</p>
+            <h3>Telegram group</h3>
+            <p>
+              A public Telegram group for builders and communities already in
+              the Fridge — locks, launches, and day-to-day kitchen talk.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>Telegram channel</h3>
+            <p>
+              An official Telegram channel for announcements: unlocks, bounties,
+              new listings, and Fridge releases.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
             <h3>Bounties on pump.fun</h3>
             <p>
               Community bounties funded from founder unlocks: builders, memes,

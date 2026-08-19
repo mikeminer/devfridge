@@ -498,7 +498,7 @@ img { display: block; max-width: 100%; }
   bottom: 18px;
   width: 3px;
   border-radius: 99px;
-  background: linear-gradient(180deg, #8ef0c4 0%, #8ef0c4 55%, var(--brass) 100%);
+  background: linear-gradient(180deg, #8ef0c4 0%, #8ef0c4 42%, var(--brass) 100%);
   box-shadow: 0 0 12px rgba(142, 240, 196, 0.25);
 }
 .timeline li {
