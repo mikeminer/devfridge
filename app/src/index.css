@@ -939,6 +939,220 @@ input[type="text"], input[type="datetime-local"] {
 .jar-meta strong { font-size: 11px; }
 .jar-meta small, .jar-meta em { font-size: 10px; color: #b9d6de; font-style: normal; }
 
+.cooker-stage {
+  position: relative;
+  z-index: 2;
+  margin: 28px auto 0;
+  width: min(720px, 100%);
+}
+.cooker {
+  filter: drop-shadow(0 28px 40px rgba(0, 0, 0, 0.45));
+}
+.cooktop {
+  position: relative;
+  border-radius: 22px 22px 8px 8px;
+  padding: 22px 22px 16px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 28%),
+    linear-gradient(180deg, #2a2e33 0%, #14171b 70%, #0d0f12 100%);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
+}
+.grate {
+  position: absolute;
+  inset: 18px 18px 48px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 18px, rgba(180,190,198,0.12) 18px 20px),
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(180,190,198,0.08) 18px 20px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+.burners {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 6px 8px 10px;
+}
+.burner {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, #1a1d22 42%, #0b0c0e 70%);
+  box-shadow: inset 0 0 0 3px #3a4046, inset 0 0 0 7px #121416, 0 8px 12px rgba(0,0,0,0.35);
+}
+.burner i {
+  display: block;
+  width: 58%;
+  height: 58%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #5a636b;
+}
+.burner i:last-of-type {
+  position: absolute;
+  width: 28%;
+  height: 28%;
+  background: #0b0c0e;
+}
+.burner.lit {
+  box-shadow:
+    inset 0 0 0 3px #6a4a32,
+    inset 0 0 0 7px #121416,
+    0 0 18px rgba(255, 140, 70, 0.35);
+}
+.burner.lit em {
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe7a8, #ff7a2a 55%, transparent 70%);
+  opacity: 0.55;
+}
+.is-cooking .burner.lit em {
+  animation: flame 0.7s ease-in-out infinite;
+}
+@keyframes flame {
+  0%, 100% { transform: scale(0.86); opacity: 0.4; }
+  50% { transform: scale(1.18); opacity: 0.9; }
+}
+.knob-rail {
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 10px 0;
+}
+.knob {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, #d7dde2, #8b949a, #f4f7f8, #6f787e);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.7);
+  position: relative;
+}
+.knob::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 3px;
+  height: 10px;
+  background: #1b2226;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+.knob.is-on { transform: rotate(118deg); }
+.range-body {
+  margin-top: -6px;
+  border-radius: 10px 10px 22px 22px;
+  padding: 18px 20px 16px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.16), transparent 8% 92%, rgba(255,255,255,0.18)),
+    linear-gradient(180deg, #f6f8f9 0%, #d5dee3 55%, #c4ced4 100%);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35);
+}
+.range-steel {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7f8b93, #d5dee4, #7f8b93);
+  margin-bottom: 12px;
+}
+.range-brand {
+  margin: 0;
+  text-align: center;
+  color: #314047;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 15px;
+}
+.range-brand small {
+  display: block;
+  margin-top: 4px;
+  letter-spacing: 0.14em;
+  font-size: 9px;
+  font-weight: 600;
+  color: #5a666c;
+}
+.range-lede, .range-hint {
+  color: #4a555b;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.range-lede { margin: 8px 0 14px; }
+.range-hint { margin: 8px 0 0; font-size: 11px; }
+.oven {
+  margin: 0;
+}
+.oven-glass {
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(180, 235, 255, 0.12), transparent 46%),
+    linear-gradient(180deg, #10181c, #0b1114);
+  box-shadow: inset 0 0 0 6px #cfd8dd, inset 0 0 30px rgba(0,0,0,0.45);
+}
+.oven-glass label { color: #b9d6de; }
+.oven-glass input {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(155, 231, 255, 0.16);
+  color: var(--ink);
+}
+.cooker-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 10px;
+}
+.cook-btn {
+  width: 100%;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 14px;
+  padding: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #20150c;
+  background: linear-gradient(180deg, #ffd7a0, #e08a3a 58%, #c56a22);
+  box-shadow: 0 8px 16px rgba(197, 106, 34, 0.28);
+}
+.cook-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cooked-plate {
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(155, 231, 255, 0.08);
+  color: #e8fbff;
+}
+.cooked-plate a { color: var(--ice); word-break: break-all; }
+.cooked-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.cooked-actions .ghost {
+  width: auto;
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(155, 231, 255, 0.25);
+  background: transparent;
+  color: #d7f6ff;
+}
+.cooker-feet {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+.cooker-feet i {
+  width: 34px;
+  height: 10px;
+  background: #6d757b;
+  border-radius: 0 0 6px 6px;
+}
+
 @media (max-width: 1080px) {
   .stage { grid-template-columns: 1fr; }
   .fridge { height: 580px; }
@@ -968,4 +1182,7 @@ input[type="text"], input[type="datetime-local"] {
   }
   .door, .door-toggle, .fridge-body { transform-style: flat; }
   .jar-glass img { transform: none; }
+  .cooker-stage { width: min(720px, 94vw); }
+  .burners { grid-template-columns: repeat(2, 1fr); max-width: 280px; margin: 0 auto; }
+  .cooker-row { grid-template-columns: 1fr; }
 }

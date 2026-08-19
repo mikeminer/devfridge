@@ -37,10 +37,12 @@ import {
   remainingLabel,
 } from "./lib/tokenMeta";
 import { useAppState } from "./state";
+import Cooker, { type CookedMint } from "./components/Cooker";
 import Fridge from "./components/Fridge";
 import FundDeploy from "./components/FundDeploy";
 import StockPanel from "./components/StockPanel";
 import TokenLogo from "./components/TokenLogo";
+import { createMemeMintTransaction } from "./lib/cooker";
 import logoMark from "./assets/logo-mark.jpg";
 import logoWordmark from "./assets/logo-wordmark.jpg";
 
@@ -104,6 +106,8 @@ export default function App() {
   const owner = wallet.publicKey;
   const selected = locks.find((l) => l.address.toBase58() === selectedId) ?? null;
   const [needsGraduation, setNeedsGraduation] = useState(false);
+  const [cookError, setCookError] = useState("");
+  const [cooked, setCooked] = useState<CookedMint | null>(null);
 
   useEffect(() => {
     setNeedsGraduation(false);
@@ -122,6 +126,11 @@ export default function App() {
     const id = window.setInterval(() => setNow(Date.now() / 1000), 5000);
     return () => window.clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    setCooked(null);
+    setCookError("");
+  }, [cluster]);
 
   useEffect(() => {
     const t = window.setTimeout(() => setOpen(true), 700);
@@ -272,6 +281,51 @@ export default function App() {
       void sig;
     } catch (err) {
       setStatus({ kind: "bad", text: err instanceof Error ? err.message : String(err) });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function onCookMeme(fields: { name: string; symbol: string; supply: string }) {
+    if (cluster === "mainnet") return;
+    setCookError("");
+    if (!owner) {
+      void wallet.connect();
+      return;
+    }
+    setBusy(true);
+    setStatus(null);
+    try {
+      const { tx, mint, amount } = await createMemeMintTransaction(
+        connection,
+        owner,
+        fields
+      );
+      const sig = await wallet.sendTransaction(tx, [mint]);
+      await confirmSignature(connection, sig);
+      const mintStr = mint.publicKey.toBase58();
+      setMintInput(mintStr);
+      setCooked({
+        mint: mintStr,
+        name: fields.name.trim(),
+        symbol: fields.symbol.trim().toUpperCase(),
+        signature: sig,
+      });
+      setStatus({
+        kind: "ok",
+        text: `Cooked ${fields.symbol.trim().toUpperCase()}. ${amount.toString()} base units are in your wallet.`,
+        receipt: explorerTxUrl(cluster, sig),
+      });
+      try {
+        const info = await fetchMintInfo(connection, mintStr, owner);
+        setMintInfo({ ...info, image: null });
+      } catch {
+        /* lookup is optional after cook */
+      }
+    } catch (err) {
+      const text = err instanceof Error ? err.message : String(err);
+      setCookError(text);
+      setStatus({ kind: "bad", text });
     } finally {
       setBusy(false);
     }
@@ -540,6 +594,24 @@ export default function App() {
           )}
         </aside>
       </div>
+
+      {cluster !== "mainnet" && (
+        <Cooker
+          clusterLabel={CLUSTERS[cluster].label}
+          connected={Boolean(owner)}
+          busy={busy}
+          error={cookError}
+          cooked={cooked}
+          mintHref={(mint) => explorerProgramUrl(cluster, mint)}
+          txHref={(signature) => explorerTxUrl(cluster, signature)}
+          onConnect={() => void wallet.connect()}
+          onCook={(fields) => void onCookMeme(fields)}
+          onUseInFridge={(mint) => {
+            setMintInput(mint);
+            document.getElementById("fridge")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+        />
+      )}
 
       <section className="about" id="about">
         <p className="eyebrow">The club</p>

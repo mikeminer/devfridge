@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import {
   Connection,
+  Keypair,
   PublicKey,
   Transaction,
   VersionedTransaction,
@@ -12,6 +13,7 @@ type PhantomProvider = {
   publicKey?: { toString(): string };
   connect: () => Promise<{ publicKey: { toString(): string } }>;
   disconnect?: () => Promise<void>;
+  signTransaction?: (tx: Transaction) => Promise<Transaction>;
   signAndSendTransaction: (
     tx: Transaction | VersionedTransaction
   ) => Promise<{ signature: string }>;
@@ -52,7 +54,10 @@ export function usePhantom(endpoint: string) {
     }
   }, []);
 
-  const sendTransaction = useCallback(async (tx: Transaction | VersionedTransaction) => {
+  const sendTransaction = useCallback(async (
+    tx: Transaction | VersionedTransaction,
+    extraSigners: Keypair[] = []
+  ) => {
     const p = getProvider();
     if (!p || !publicKey) throw new Error("Connect Phantom first");
     if (tx instanceof Transaction) {
@@ -60,6 +65,13 @@ export function usePhantom(endpoint: string) {
       if (!tx.recentBlockhash) {
         tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
       }
+      if (extraSigners.length) tx.partialSign(...extraSigners);
+    }
+    if (extraSigners.length && tx instanceof Transaction && p.signTransaction) {
+      const signed = await p.signTransaction(tx);
+      return connection.sendRawTransaction(signed.serialize(), {
+        skipPreflight: false,
+      });
     }
     const { signature } = await p.signAndSendTransaction(tx);
     return signature;

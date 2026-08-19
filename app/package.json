@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@solana/spl-token": "^0.4.13",
+    "@solana/spl-token-metadata": "^0.1.6",
     "@solana/wallet-adapter-base": "^0.9.27",
     "@solana/wallet-adapter-phantom": "^0.9.28",
     "@solana/wallet-adapter-react": "^0.15.39",
