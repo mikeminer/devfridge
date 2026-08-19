@@ -42,8 +42,13 @@ export function imageCandidates(uri: string | null | undefined): string[] {
   if (!uri) return [];
   if (uri.startsWith("/") || uri.startsWith("data:")) return [uri];
   const cid = ipfsCid(uri);
-  if (cid) return [...new Set(IPFS_GATEWAYS.map((g) => `${g}${cid}`))];
-  return [rewriteUri(uri)];
+  if (cid) {
+    const proxied = `/api/token-logo?cid=${encodeURIComponent(cid)}`;
+    const weserv = `https://wsrv.nl/?url=${encodeURIComponent(`https://w3s.link/ipfs/${cid}`)}&output=webp&n=-1`;
+    return [proxied, weserv, ...IPFS_GATEWAYS.map((g) => `${g}${cid}`)];
+  }
+  const abs = rewriteUri(uri);
+  return [`/api/token-logo?url=${encodeURIComponent(abs)}`, abs];
 }
 
 export function fallbackGlyph(symbol: string): string {

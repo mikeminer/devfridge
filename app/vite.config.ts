@@ -14,6 +14,44 @@ export default defineConfig({
     }),
     react(),
     {
+      name: "token-logo-dev",
+      configureServer(server) {
+        server.middlewares.use("/api/token-logo", (req, res) => {
+          void (async () => {
+            try {
+              const host = req.headers.host || "127.0.0.1";
+              const url = new URL(req.url || "/", `http://${host}`);
+              const cid = url.searchParams.get("cid") || "";
+              const src = cid
+                ? `https://w3s.link/ipfs/${cid}`
+                : url.searchParams.get("url") || "";
+              if (!src) {
+                res.statusCode = 400;
+                res.end("missing");
+                return;
+              }
+              const upstream = await fetch(src, {
+                headers: { accept: "image/*", "user-agent": "DevFridge/1.0" },
+              });
+              if (!upstream.ok) {
+                res.statusCode = upstream.status;
+                res.end("upstream");
+                return;
+              }
+              const type = upstream.headers.get("content-type") || "image/webp";
+              const buf = Buffer.from(await upstream.arrayBuffer());
+              res.setHeader("content-type", type);
+              res.setHeader("cache-control", "public, max-age=3600");
+              res.end(buf);
+            } catch {
+              res.statusCode = 502;
+              res.end("fail");
+            }
+          })();
+        });
+      },
+    },
+    {
       name: "ipfs-html",
       transformIndexHtml(html) {
         return html
