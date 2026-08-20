@@ -107,6 +107,18 @@ export function listingRpcs(cluster: ClusterName): string[] {
   return RPC_FALLBACKS[cluster];
 }
 
+/** Same-origin JSON-RPC proxy so the browser is not blocked by CORS / Alchemy. */
+export function browserRpcUrl(cluster: ClusterName, fallback: string): string {
+  if (typeof window === "undefined") {
+    return isHttpEndpoint(fallback) ? fallback : CLUSTERS[cluster].endpoint;
+  }
+  const path = window.location.pathname || "/";
+  if (path.includes("/ipfs/") || path.includes(".ipfs.")) {
+    return isHttpEndpoint(fallback) ? fallback : CLUSTERS[cluster].endpoint;
+  }
+  return `${window.location.origin}/api/rpc?cluster=${cluster}`;
+}
+
 export type ClusterName = keyof typeof CLUSTERS;
 
 export const PROGRAM_BY_CLUSTER: Record<ClusterName, string> = {

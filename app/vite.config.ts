@@ -14,6 +14,72 @@ export default defineConfig({
     }),
     react(),
     {
+      name: "rpc-dev",
+      configureServer(server) {
+        server.middlewares.use("/api/rpc", (req, res) => {
+          void (async () => {
+            if (req.method === "OPTIONS") {
+              res.statusCode = 204;
+              res.end();
+              return;
+            }
+            if (req.method !== "POST") {
+              res.statusCode = 405;
+              res.end("method");
+              return;
+            }
+            try {
+              const host = req.headers.host || "127.0.0.1";
+              const url = new URL(req.url || "/", `http://${host}`);
+              const cluster = (url.searchParams.get("cluster") || "mainnet").toLowerCase();
+              const chunks: Buffer[] = [];
+              for await (const chunk of req) chunks.push(Buffer.from(chunk));
+              const text = Buffer.concat(chunks).toString("utf8");
+              const payload = JSON.parse(text) as { method?: string };
+              const method = payload.method || "";
+              const rpcs: Record<string, string[]> = {
+                mainnet: [
+                  "https://api.mainnet.solana.com",
+                  "https://api.mainnet-beta.solana.com",
+                ],
+                devnet: ["https://api.devnet.solana.com"],
+                testnet: ["https://api.testnet.solana.com"],
+              };
+              const list = rpcs[cluster] || [];
+              if (method === "getProgramAccounts") {
+                /* keep public RPCs only */
+              }
+              let last = "rpc failed";
+              for (const rpc of list) {
+                try {
+                  const upstream = await fetch(rpc, {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: text,
+                  });
+                  const body = Buffer.from(await upstream.arrayBuffer());
+                  if (!upstream.ok) {
+                    last = `${rpc} ${upstream.status}`;
+                    continue;
+                  }
+                  res.setHeader("content-type", "application/json");
+                  res.end(body);
+                  return;
+                } catch (err) {
+                  last = err instanceof Error ? err.message : String(err);
+                }
+              }
+              res.statusCode = 502;
+              res.end(last);
+            } catch {
+              res.statusCode = 502;
+              res.end("fail");
+            }
+          })();
+        });
+      },
+    },
+    {
       name: "locks-dev",
       configureServer(server) {
         server.middlewares.use("/api/locks", (req, res) => {

@@ -8,7 +8,7 @@ const PROGRAM_ID = "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6";
 const LAMPORTS = 2_500_000_000;
 
 export default function FundDeploy() {
-  const wallet = usePhantom("https://api.mainnet-beta.solana.com");
+  const wallet = usePhantom("mainnet", "https://api.mainnet-beta.solana.com");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);

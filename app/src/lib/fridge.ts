@@ -288,7 +288,18 @@ export async function fetchMintInfo(
     throw new Error("Mint address is not a valid public key");
   }
 
-  const acc = await connection.getAccountInfo(mint);
+  let acc;
+  try {
+    acc = await connection.getAccountInfo(mint);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (/Failed to fetch|failed to get info/i.test(msg)) {
+      throw new Error(
+        "Could not reach Solana RPC to read this mint. Retry — the fridge uses a same-origin RPC proxy."
+      );
+    }
+    throw err;
+  }
   if (!acc) throw new Error("Mint account not found");
   if (!acc.owner.equals(TOKEN_2022_PROGRAM_ID)) {
     throw new Error("This mint is not Token-2022");

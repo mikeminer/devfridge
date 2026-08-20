@@ -6,7 +6,12 @@ import {
   Transaction,
   VersionedTransaction,
 } from "@solana/web3.js";
-import { isHttpEndpoint, resolveRpcEndpoint } from "../lib/constants";
+import {
+  browserRpcUrl,
+  isHttpEndpoint,
+  resolveRpcEndpoint,
+  type ClusterName,
+} from "../lib/constants";
 
 type PhantomProvider = {
   isPhantom?: boolean;
@@ -31,15 +36,15 @@ function getProvider(): PhantomProvider | null {
   return null;
 }
 
-export function usePhantom(endpoint: string) {
+export function usePhantom(cluster: ClusterName, fallbackEndpoint?: string) {
   const [publicKey, setPublicKey] = useState<PublicKey | null>(null);
   const [error, setError] = useState("");
   const connection = useMemo(() => {
-    const url = isHttpEndpoint(endpoint)
-      ? endpoint.replace(/\/+$/, "")
-      : resolveRpcEndpoint("", "mainnet");
-    return new Connection(url, "confirmed");
-  }, [endpoint]);
+    const fallback = isHttpEndpoint(fallbackEndpoint ?? "")
+      ? (fallbackEndpoint as string).replace(/\/+$/, "")
+      : resolveRpcEndpoint("", cluster);
+    return new Connection(browserRpcUrl(cluster, fallback), "confirmed");
+  }, [cluster, fallbackEndpoint]);
 
   const connect = useCallback(async () => {
     setError("");

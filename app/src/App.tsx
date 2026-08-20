@@ -80,7 +80,7 @@ export default function App() {
     programId,
     endpoint,
   } = useAppState();
-  const wallet = usePhantom(endpoint);
+  const wallet = usePhantom(cluster, endpoint);
   const connection = wallet.connection;
 
   const [open, setOpen] = useState(false);
