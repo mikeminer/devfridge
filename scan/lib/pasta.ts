@@ -1,17 +1,11 @@
 import { PASTA_MINT, BURN_ADDRESS } from "./constants";
+import { usdPrice } from "./price";
 import { rpc } from "./rpc";
 
 export async function pastaWidget() {
   let price: number | null = null;
   try {
-    const res = await fetch(`https://lite-api.jup.ag/price/v2?ids=${PASTA_MINT}`, {
-      signal: AbortSignal.timeout(8000),
-    });
-    const json = (await res.json()) as {
-      data?: Record<string, { price?: string | number }>;
-    };
-    const p = json.data?.[PASTA_MINT]?.price;
-    price = p == null ? null : Number(p);
+    price = await usdPrice(PASTA_MINT);
   } catch {
     price = null;
   }

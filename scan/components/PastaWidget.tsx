@@ -3,18 +3,27 @@
 import { useEffect, useState } from "react";
 import { PASTA_MINT } from "@/lib/constants";
 
+function fmtUsd(n: number): string {
+  if (n >= 1) return `$${n.toFixed(4)}`;
+  if (n >= 0.01) return `$${n.toPrecision(3)}`;
+  return `$${n.toFixed(8).replace(/0+$/, "").replace(/\.$/, "")}`;
+}
+
 export default function PastaWidget() {
   const [price, setPrice] = useState<number | null>(null);
   const [burned, setBurned] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     void fetch("/api/pasta")
       .then((r) => r.json())
       .then((d) => {
-        setPrice(typeof d.price === "number" ? d.price : null);
-        setBurned(d.burned ?? null);
+        const n = Number(d.price);
+        setPrice(Number.isFinite(n) && n > 0 ? n : null);
+        setBurned(typeof d.burned === "string" && d.burned ? d.burned : null);
       })
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => setReady(true));
   }, []);
 
   return (
@@ -22,7 +31,7 @@ export default function PastaWidget() {
       <div>
         <p className="text-[10px] font-bold tracking-[0.2em] text-ice">POWERED BY $PASTA BUYBACKS</p>
         <p className="text-sm text-mute">
-          {price != null ? `$${price < 0.01 ? price.toExponential(2) : price.toPrecision(4)}` : "Price…"}
+          {!ready ? "Price…" : price != null ? fmtUsd(price) : "Price n/a"}
           {burned ? ` · burned ${burned}` : ""}
         </p>
       </div>

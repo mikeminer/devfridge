@@ -11,6 +11,7 @@ import {
 import { PASTA_MINT, PASTA_CAUTION, PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
 import { parseMint } from "./format";
 import { publicLogoUrl } from "./logo";
+import { usdPrice } from "./price";
 import { connection, rpc } from "./rpc";
 import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
 
@@ -75,25 +76,7 @@ async function jupiterToken(mint: string) {
 }
 
 async function jupiterPrice(mint: string): Promise<number | null> {
-  for (const url of [
-    `https://lite-api.jup.ag/price/v2?ids=${mint}`,
-    `https://api.jup.ag/price/v2?ids=${mint}`,
-  ]) {
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-      if (!res.ok) continue;
-      const json = (await res.json()) as {
-        data?: Record<string, { price?: string | number }>;
-      };
-      const p = json.data?.[mint]?.price;
-      if (p == null) continue;
-      const n = typeof p === "number" ? p : Number(p);
-      if (Number.isFinite(n)) return n;
-    } catch {
-      /* next */
-    }
-  }
-  return null;
+  return usdPrice(mint);
 }
 
 async function dex(mint: string) {
