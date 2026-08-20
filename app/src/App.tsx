@@ -4,6 +4,7 @@ import {
   CLUSTERS,
   DEV_PUMP_URL,
   DEV_X_URL,
+  PASTA_TG_GROUP_URL,
   PASTA_TG_URL,
   GITHUB_REPO,
   LICENSE_URL,
@@ -422,7 +423,10 @@ export default function App() {
             Follow on X
           </a>
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
-            Telegram
+            Channel
+          </a>
+          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+            Group
           </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on pump.fun
@@ -780,7 +784,10 @@ export default function App() {
             $PASTA on pump.fun
           </a>
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
-            Telegram · @pastamemelovers
+            Telegram channel · @pastamemelovers
+          </a>
+          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
+            Telegram group
           </a>
         </div>
       </section>
@@ -945,7 +952,10 @@ export default function App() {
             Follow on X · @anonimocommando
           </a>
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
-            Telegram · @pastamemelovers
+            Telegram channel · @pastamemelovers
+          </a>
+          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
+            Telegram group
           </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
             Follow on pump.fun
@@ -1002,6 +1012,27 @@ export default function App() {
               Capital vault, published from the official X post.
             </p>
           </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Telegram channel</h3>
+            <p>
+              Official announcements: unlocks, bounties, new listings, and Fridge
+              releases.{" "}
+              <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
+                @pastamemelovers
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Telegram group</h3>
+            <p>
+              Public kitchen for builders and communities already in the Fridge.{" "}
+              <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
+                Join the group
+              </a>
+            </p>
+          </li>
           <li className="tl-split" aria-hidden="true">
             <span>Next on the counter</span>
           </li>
@@ -1012,22 +1043,6 @@ export default function App() {
               When the Fridge is stable, upgrade authority is removed for good.
               That makes the on-chain program immutable. Not frozen yet — freeze
               is one-way.
-            </p>
-          </li>
-          <li className="is-next">
-            <p className="tl-badge">Next</p>
-            <h3>Telegram group</h3>
-            <p>
-              A public Telegram group for builders and communities already in
-              the Fridge — locks, launches, and day-to-day kitchen talk.
-            </p>
-          </li>
-          <li className="is-next">
-            <p className="tl-badge">Next</p>
-            <h3>Telegram channel</h3>
-            <p>
-              An official Telegram channel for announcements: unlocks, bounties,
-              new listings, and Fridge releases.
             </p>
           </li>
           <li className="is-next">
@@ -1071,7 +1086,10 @@ export default function App() {
           {PASTA_MINT.toBase58()}
         </a>
         <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
-          Telegram · @pastamemelovers
+          Telegram channel · @pastamemelovers
+        </a>
+        <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
+          Telegram group
         </a>
         <a href={GITHUB_REPO} target="_blank" rel="noreferrer">
           github.com/mikeminer/devfridge
