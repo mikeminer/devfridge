@@ -110,6 +110,7 @@ export default function App() {
   const [needsGraduation, setNeedsGraduation] = useState(false);
   const [cookError, setCookError] = useState("");
   const [cooked, setCooked] = useState<CookedMint | null>(null);
+  const [scanError, setScanError] = useState("");
 
   useEffect(() => {
     setNeedsGraduation(false);
@@ -164,11 +165,14 @@ export default function App() {
   const clusterRef = useRef(cluster);
   clusterRef.current = cluster;
 
-  const refreshLocks = useCallback(async () => {
+  const refreshLocks = useCallback(async (opts?: { keep?: boolean }) => {
     const net = cluster;
     setLoadingLocks(true);
-    setLocks([]);
-    setSelectedId(null);
+    setScanError("");
+    if (!opts?.keep) {
+      setLocks([]);
+      setSelectedId(null);
+    }
     try {
       const raw = await fetchAllLocks(connection, programId, net);
       if (clusterRef.current !== net) return;
@@ -177,9 +181,11 @@ export default function App() {
       const withSigs = await attachLockSignatures(connection, decorated, net);
       if (clusterRef.current !== net) return;
       setLocks(withSigs);
-    } catch {
+      setScanError("");
+    } catch (err) {
       if (clusterRef.current !== net) return;
-      setLocks([]);
+      setScanError(err instanceof Error ? err.message : String(err));
+      if (!opts?.keep) setLocks([]);
     } finally {
       if (clusterRef.current === net) setLoadingLocks(false);
     }
@@ -193,7 +199,7 @@ export default function App() {
 
   function toggleDoor() {
     setOpen((wasOpen) => {
-      if (!wasOpen) void refreshLocks();
+      if (!wasOpen) void refreshLocks({ keep: true });
       return !wasOpen;
     });
   }
@@ -252,7 +258,7 @@ export default function App() {
       const info = await fetchMintInfo(connection, mintInfo.mint.toBase58(), owner);
       const visual = await fetchTokenVisual(connection, info.mint);
       setMintInfo({ ...info, image: visual.image });
-      await refreshLocks();
+      await refreshLocks({ keep: true });
       void sig;
     } catch (err) {
       setStatus({ kind: "bad", text: err instanceof Error ? err.message : String(err) });
@@ -281,7 +287,7 @@ export default function App() {
         receipt: explorerTxUrl(cluster, sig),
       });
       setSelectedId(null);
-      await refreshLocks();
+      await refreshLocks({ keep: true });
       void sig;
     } catch (err) {
       setStatus({ kind: "bad", text: err instanceof Error ? err.message : String(err) });
@@ -400,7 +406,7 @@ export default function App() {
               </option>
             ))}
           </select>
-          <button className="ghost" type="button" onClick={() => void refreshLocks()}>
+          <button className="ghost" type="button" onClick={() => void refreshLocks({ keep: true })}>
             {loadingLocks ? "Scanning…" : "Refresh"}
           </button>
           {wallet.connected ? (
@@ -463,6 +469,7 @@ export default function App() {
           }}
           now={now}
           loading={loadingLocks}
+          scanError={scanError}
           serial={programId.toBase58()}
           serialLabel={CLUSTERS[cluster].label}
           serialHref={explorerProgramUrl(cluster, programId.toBase58())}
@@ -587,7 +594,9 @@ export default function App() {
               <p className="lede">
                 {loadingLocks
                   ? `Chilling ${CLUSTERS[cluster].label}…`
-                  : locks.length
+                  : scanError
+                    ? scanError
+                    : locks.length
                     ? `${locks.length} live lock${locks.length === 1 ? "" : "s"} on-chain. Click a jar.`
                     : "Shelves are empty. Nothing is locked in DevFridge right now."}
               </p>

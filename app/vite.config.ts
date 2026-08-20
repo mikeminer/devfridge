@@ -14,6 +14,84 @@ export default defineConfig({
     }),
     react(),
     {
+      name: "locks-dev",
+      configureServer(server) {
+        server.middlewares.use("/api/locks", (req, res) => {
+          void (async () => {
+            try {
+              const host = req.headers.host || "127.0.0.1";
+              const url = new URL(req.url || "/", `http://${host}`);
+              const cluster = (url.searchParams.get("cluster") || "mainnet").toLowerCase();
+              const program =
+                url.searchParams.get("program") ||
+                "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6";
+              const rpcs: Record<string, string[]> = {
+                mainnet: [
+                  "https://api.mainnet.solana.com",
+                  "https://api.mainnet-beta.solana.com",
+                ],
+                devnet: ["https://api.devnet.solana.com"],
+                testnet: ["https://api.testnet.solana.com"],
+              };
+              const list = rpcs[cluster];
+              if (!list) {
+                res.statusCode = 400;
+                res.end("bad cluster");
+                return;
+              }
+              let last = "scan failed";
+              for (const rpc of list) {
+                try {
+                  const upstream = await fetch(rpc, {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                      jsonrpc: "2.0",
+                      id: 1,
+                      method: "getProgramAccounts",
+                      params: [
+                        program,
+                        {
+                          encoding: "base64",
+                          commitment: "confirmed",
+                          filters: [{ dataSize: 105 }],
+                        },
+                      ],
+                    }),
+                  });
+                  const body = (await upstream.json()) as {
+                    error?: { message?: string };
+                    result?: Array<{
+                      pubkey: string;
+                      account: { data: [string, string] };
+                    }>;
+                  };
+                  if (!upstream.ok || body.error || !Array.isArray(body.result)) {
+                    last = body.error?.message || `gpa ${upstream.status}`;
+                    continue;
+                  }
+                  const accounts = body.result.map((row) => ({
+                    pubkey: row.pubkey,
+                    data: row.account.data[0],
+                  }));
+                  res.setHeader("content-type", "application/json");
+                  res.end(JSON.stringify({ cluster, program, accounts }));
+                  return;
+                } catch (err) {
+                  last = err instanceof Error ? err.message : String(err);
+                }
+              }
+              res.statusCode = 502;
+              res.end(last);
+            } catch {
+              res.statusCode = 502;
+              res.end("fail");
+            }
+          })();
+        });
+      },
+    },
+    {
       name: "token-logo-dev",
       configureServer(server) {
         server.middlewares.use("/api/token-logo", (req, res) => {

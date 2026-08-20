@@ -87,13 +87,14 @@ export function resolveRpcEndpoint(
 
 export const RPC_FALLBACKS: Record<ClusterName, string[]> = {
   devnet: [
+    "https://api.devnet.solana.com",
     ...(ALCHEMY_API_KEY
       ? [`https://solana-devnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`]
       : []),
-    "https://api.devnet.solana.com",
   ],
   testnet: ["https://api.testnet.solana.com"],
   mainnet: [
+    "https://api.mainnet.solana.com",
     "https://api.mainnet-beta.solana.com",
     ...(ALCHEMY_API_KEY
       ? [`https://solana-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`]

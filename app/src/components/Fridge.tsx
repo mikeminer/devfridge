@@ -14,6 +14,7 @@ type Props = {
   onSelect: (id: string | null) => void;
   now: number;
   loading?: boolean;
+  scanError?: string;
   serial: string;
   serialLabel: string;
   serialHref: string;
@@ -30,6 +31,7 @@ export default function Fridge({
   onSelect,
   now,
   loading,
+  scanError,
   serial,
   serialLabel,
   serialHref,
@@ -61,7 +63,11 @@ export default function Fridge({
                   <div className="shelf-row">
                     {items.length === 0 ? (
                       <div className="shelf-empty">
-                        {index === 1 && locks.length === 0 ? "Nothing locked" : ""}
+                        {index === 1 && locks.length === 0
+                          ? scanError
+                            ? "Scan failed"
+                            : "Nothing locked"
+                          : ""}
                       </div>
                     ) : (
                       items.map((lock, slot) => (

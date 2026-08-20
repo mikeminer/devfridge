@@ -40,6 +40,25 @@ export function forgetLock(address: string, cluster: ClusterName) {
   writeAll(readAll().filter((r) => !(r.address === address && r.cluster === cluster)));
 }
 
+export function knownClusterAddresses(
+  programId: PublicKey,
+  cluster: ClusterName
+): PublicKey[] {
+  const seen = new Set<string>();
+  const keys: PublicKey[] = [];
+  for (const row of readAll()) {
+    if (row.cluster !== cluster || row.programId !== programId.toBase58()) continue;
+    if (seen.has(row.address)) continue;
+    seen.add(row.address);
+    try {
+      keys.push(new PublicKey(row.address));
+    } catch {
+      /* skip */
+    }
+  }
+  return keys;
+}
+
 export function knownLockAddresses(
   depositor: PublicKey,
   programId: PublicKey,

@@ -37,7 +37,12 @@ import {
   type ClusterName,
 } from "./constants";
 import { fetchPastaBuybackRoute } from "./jupiter";
-import { forgetLock, knownLockAddresses, rememberLock } from "./lockIndex";
+import {
+  forgetLock,
+  knownClusterAddresses,
+  knownLockAddresses,
+  rememberLock,
+} from "./lockIndex";
 
 export type LockAccount = {
   address: PublicKey;
@@ -383,7 +388,7 @@ function listingEndpoints(connection: Connection, cluster: ClusterName): string[
     if (!/^https?:\/\//i.test(url)) return false;
     if (clusterFromEndpoint(url) !== cluster) return false;
     // Alchemy rejects getProgramAccounts (429). Use it for txs, not listing.
-    if (cluster === "mainnet" && url.includes("alchemy.com")) return false;
+    if (url.includes("alchemy.com")) return false;
     return true;
   });
 }
@@ -499,7 +504,67 @@ async function fetchLocksByGpaAll(
   const accounts = await conn.getProgramAccounts(programId, {
     filters: [{ dataSize: 8 + 32 + 32 + 8 + 8 + 8 + 1 + 8 }],
   });
-  return accounts.map((acc) => decodeLock(acc.pubkey, acc.account.data));
+  const locks: LockAccount[] = [];
+  for (const acc of accounts) {
+    try {
+      locks.push(decodeLock(acc.pubkey, Uint8Array.from(acc.account.data)));
+    } catch {
+      /* not a lock account */
+    }
+  }
+  return locks;
+}
+
+async function fetchLocksFromSiteApi(
+  cluster: ClusterName,
+  programId: PublicKey
+): Promise<LockAccount[]> {
+  if (typeof window === "undefined") return [];
+  const url = new URL("/api/locks", window.location.href);
+  url.searchParams.set("cluster", cluster);
+  url.searchParams.set("program", programId.toBase58());
+  const res = await fetch(url.toString(), { signal: AbortSignal.timeout(15000) });
+  if (!res.ok) throw new Error(`locks api ${res.status}`);
+  const body = (await res.json()) as {
+    accounts?: Array<{ pubkey: string; data: string }>;
+  };
+  if (!Array.isArray(body.accounts)) throw new Error("locks api empty");
+  const locks: LockAccount[] = [];
+  for (const row of body.accounts) {
+    try {
+      const raw = Uint8Array.from(atob(row.data), (c) => c.charCodeAt(0));
+      locks.push(decodeLock(new PublicKey(row.pubkey), raw));
+    } catch {
+      /* skip */
+    }
+  }
+  return locks;
+}
+
+async function fetchLocksByKnown(
+  connection: Connection,
+  programId: PublicKey,
+  cluster: ClusterName
+): Promise<LockAccount[]> {
+  const keys = knownClusterAddresses(programId, cluster);
+  if (keys.length === 0) return [];
+  const locks: LockAccount[] = [];
+  for (let i = 0; i < keys.length; i += 100) {
+    const chunk = keys.slice(i, i + 100);
+    const infos = await connection.getMultipleAccountsInfo(chunk, "confirmed");
+    infos.forEach((info, j) => {
+      if (!info) {
+        forgetLock(chunk[j].toBase58(), cluster);
+        return;
+      }
+      try {
+        locks.push(decodeLock(chunk[j], Uint8Array.from(info.data)));
+      } catch {
+        forgetLock(chunk[j].toBase58(), cluster);
+      }
+    });
+  }
+  return locks;
 }
 
 function pubkeyOf(value: unknown): string {
@@ -566,11 +631,14 @@ export async function fetchAllLocks(
 ): Promise<LockAccount[]> {
   const net = cluster ?? clusterFromEndpoint(connection.rpcEndpoint);
   const endpoints = listingEndpoints(connection, net);
-  const jobs: Promise<LockAccount[]>[] = endpoints.map((endpoint) =>
-    withTimeout(fetchLocksByGpaAll(endpoint, programId), 8000)
-  );
+  const jobs: Promise<LockAccount[]>[] = [
+    withTimeout(fetchLocksFromSiteApi(net, programId), 15000),
+    ...endpoints.map((endpoint) =>
+      withTimeout(fetchLocksByGpaAll(endpoint, programId), 20000)
+    ),
+  ];
   if (clusterFromEndpoint(connection.rpcEndpoint) === net) {
-    jobs.push(withTimeout(fetchLocksBySignatures(connection, programId), 8000));
+    jobs.push(withTimeout(fetchLocksBySignatures(connection, programId), 15000));
   }
 
   const settled = await Promise.allSettled(jobs);
@@ -581,6 +649,21 @@ export async function fetchAllLocks(
       found.set(lock.address.toBase58(), lock);
       rememberDecoded(lock, programId, net);
     }
+  }
+  if (found.size === 0) {
+    try {
+      for (const lock of await fetchLocksByKnown(connection, programId, net)) {
+        found.set(lock.address.toBase58(), lock);
+      }
+    } catch {
+      /* cache miss */
+    }
+  }
+  const scanned = settled.some((result) => result.status === "fulfilled");
+  if (found.size === 0 && !scanned) {
+    throw new Error(
+      `Could not scan ${net} locks. The listing RPC timed out or blocked getProgramAccounts.`
+    );
   }
   return [...found.values()].sort((a, b) => b.createdAt - a.createdAt);
 }
