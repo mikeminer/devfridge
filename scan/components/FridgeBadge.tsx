@@ -43,7 +43,7 @@ export default function FridgeBadge({
             mono
           />
         </dl>
-        <LockList locks={shown} now={now} />
+        <LockList locks={shown} now={now} decimals={decimals} />
         {mint && (
           <a className="fridge-key mt-4" href={`/badge?mint=${mint}`}>
             Embed this badge on your site →
@@ -66,7 +66,7 @@ export default function FridgeBadge({
           <Row label="Last unlock" value={fmtUnlock(fridge.unlockAt)} />
           <Row label="Locked by" value={lockers.map((w) => shortKey(w)).join(" · ") || "—"} mono />
         </dl>
-        <LockList locks={shown} now={now} />
+        <LockList locks={shown} now={now} decimals={decimals} />
       </section>
     );
   }
@@ -105,7 +105,15 @@ function Row({
   );
 }
 
-function LockList({ locks, now }: { locks: FridgeLock[]; now: number }) {
+function LockList({
+  locks,
+  now,
+  decimals,
+}: {
+  locks: FridgeLock[];
+  now: number;
+  decimals: number;
+}) {
   if (locks.length === 0) return null;
   return (
     <ul className="mt-4 grid gap-2 text-xs">
@@ -114,7 +122,8 @@ function LockList({ locks, now }: { locks: FridgeLock[]; now: number }) {
         return (
           <li key={lock.address} className="rounded-xl border border-line bg-navy/40 px-3 py-2">
             <p className="text-mute">
-              {live ? "Active vault" : "Unclaimed vault"} · locked by{" "}
+              {live ? "Active vault" : "Unclaimed vault"} · {fmtAmount(lock.amount, decimals)} tokens
+              {" · locked by "}
               <span className="font-mono text-ink">{shortKey(lock.depositor)}</span>
             </p>
             <p className="mt-1 font-mono">
