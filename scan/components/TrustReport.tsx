@@ -51,7 +51,16 @@ export default function TrustReportView({ report }: { report: Report }) {
             <CopyMint mint={report.mint} />
             <p className="mt-1 text-xs text-mute">{ageLabel(report.identity.ageSeconds)}</p>
           </div>
-          <BoostModal mint={report.mint} />
+          {report.fridge.status === "fridged" ? (
+            <BoostModal mint={report.mint} />
+          ) : (
+            <a
+              className="rounded-xl bg-ice px-4 py-2 text-center text-sm font-semibold text-navy"
+              href={report.links.fridge}
+            >
+              Fridge it on devfridge.cool
+            </a>
+          )}
         </div>
         {report.identity.description && (
           <p className="mt-4 text-sm text-mute">{report.identity.description}</p>

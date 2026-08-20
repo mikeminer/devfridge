@@ -24,6 +24,17 @@ export async function POST(req: NextRequest) {
     }
     new PublicKey(mint);
 
+    const fridge = await fridgeForMint(mint);
+    if (fridge.status !== "fridged") {
+      return NextResponse.json(
+        {
+          error: "Only fridged tokens can be boosted. Lock supply on devfridge.cool first.",
+          cta: "https://devfridge.cool/",
+        },
+        { status: 400 }
+      );
+    }
+
     const conn = connection();
     const tx = await conn.getTransaction(signature, {
       maxSupportedTransactionVersion: 0,
@@ -63,7 +74,6 @@ export async function POST(req: NextRequest) {
     } catch {
       /* identity optional */
     }
-    const fridge = await fridgeForMint(mint);
     const now = Date.now();
     const row = {
       mint,
