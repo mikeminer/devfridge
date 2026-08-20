@@ -1,4 +1,4 @@
-# @devfridgebot
+# @frigopastabot
 
 Official Telegram bot for DevFridge + $PASTA. Speaks like an Italian who understands DeFi. Same scanner data as [scan.devfridge.cool](https://scan.devfridge.cool/). Official contacts only: [connect.devfridge.cool](https://connect.devfridge.cool/).
 
@@ -40,6 +40,6 @@ HELIUS_API_KEY               # optional, better holders/burns
 
 Point BotFather webhook is set automatically when `WEBHOOK_URL` is present.
 
-Create the bot with [@BotFather](https://t.me/BotFather), display name **DevFridge Bot**, username **`devfridgebot`**. Add it to the alerts channel as admin if you want broadcasts.
+Telegram: [t.me/frigopastabot](https://t.me/frigopastabot). Display name **FrigoPasta**. Add it to the alerts channel as admin if you want broadcasts.
 
 There is no Supabase here: recent/boosted are read from scan.devfridge.cool; registrations and broadcast dedupe live in `data/store.json`.

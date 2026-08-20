@@ -15,7 +15,7 @@ bot.use(async (ctx, next) => {
   const type = ctx.chat?.type;
   if (!type || type === "private") return next();
   const text = ctx.message?.text || ctx.update.message?.text || "";
-  const me = ctx.me.username ? `@${ctx.me.username}` : "@devfridgebot";
+  const me = ctx.me.username ? `@${ctx.me.username}` : "@frigopastabot";
   const isCmd = text.startsWith("/");
   const replyToBot = ctx.message?.reply_to_message?.from?.id === ctx.me.id;
   const mentioned = text.toLowerCase().includes(me.toLowerCase());
@@ -39,6 +39,10 @@ void bot.api.setMyCommands([
   { command: "boosted", description: "Active boosts" },
   { command: "help", description: "All commands" },
 ]);
+void bot.api.setMyShortDescription("Al dente on-chain. Official chef of DevFridge + $PASTA.");
+void bot.api.setMyDescription(
+  "Official DevFridge + $PASTA chef. Scan tokens, check the fridge, grab badges. Only trust contacts on connect.devfridge.cool"
+);
 
 startCron(bot);
 
@@ -51,12 +55,12 @@ if (WEBHOOK_URL && WEBHOOK_SECRET) {
   app.listen(PORT, async () => {
     const url = `${WEBHOOK_URL.replace(/\/$/, "")}/webhook/${WEBHOOK_SECRET}`;
     await bot.api.setWebhook(url);
-    console.log(`@devfridgebot webhook on :${PORT} → ${url}`);
+    console.log(`@frigopastabot webhook on :${PORT} → ${url}`);
   });
 } else {
   app.listen(PORT, () => console.log(`health on :${PORT}`));
   void bot.start({
-    onStart: (info) => console.log(`@devfridgebot polling as @${info.username}`),
+    onStart: (info) => console.log(`@frigopastabot polling as @${info.username}`),
   });
 }
 
