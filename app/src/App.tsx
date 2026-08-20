@@ -4,6 +4,7 @@ import {
   CLUSTERS,
   DEV_PUMP_URL,
   DEV_X_URL,
+  PASTA_TG_URL,
   GITHUB_REPO,
   LICENSE_URL,
   PASTA_MINT,
@@ -420,6 +421,9 @@ export default function App() {
           <a href={DEV_X_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on X
           </a>
+          <a href={PASTA_TG_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+            Telegram
+          </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on pump.fun
           </a>
@@ -775,6 +779,9 @@ export default function App() {
           <a href={PASTA_URL} target="_blank" rel="noreferrer">
             $PASTA on pump.fun
           </a>
+          <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
+            Telegram · @pastamemelovers
+          </a>
         </div>
       </section>
 
@@ -937,6 +944,9 @@ export default function App() {
           <a href={DEV_X_URL} target="_blank" rel="noreferrer">
             Follow on X · @anonimocommando
           </a>
+          <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
+            Telegram · @pastamemelovers
+          </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
             Follow on pump.fun
           </a>
@@ -1059,6 +1069,9 @@ export default function App() {
           rel="noreferrer"
         >
           {PASTA_MINT.toBase58()}
+        </a>
+        <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
+          Telegram · @pastamemelovers
         </a>
         <a href={GITHUB_REPO} target="_blank" rel="noreferrer">
           github.com/mikeminer/devfridge

@@ -17,6 +17,7 @@ export const PASTA_URL = "https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18Gr
 export const DEV_X_URL = "https://x.com/anonimocommando";
 export const DEV_PUMP_URL =
   "https://pump.fun/profile/GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";
+export const PASTA_TG_URL = "https://t.me/pastamemelovers";
 export const TRUST_ME_VAULT = "0xf8815770e046d32f606385700f3bc96ffbb4e879";
 export const TRUST_ME_VAULT_URL =
   "https://app.hyperliquid.xyz/vaults/0xf8815770e046d32f606385700f3bc96ffbb4e879";
