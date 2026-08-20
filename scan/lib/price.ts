@@ -1,4 +1,6 @@
-const NO_STORE = { cache: "no-store" as const, signal: AbortSignal.timeout(8000) };
+function noStore(): RequestInit {
+  return { cache: "no-store", signal: AbortSignal.timeout(8000) };
+}
 
 /** Live USD spot. DexScreener first — Jupiter fetch was getting stuck in Next cache. */
 export async function usdPrice(mint: string): Promise<number | null> {
@@ -12,7 +14,7 @@ async function jupiterUsd(mint: string): Promise<number | null> {
     `https://api.jup.ag/price/v3?ids=${mint}`,
   ]) {
     try {
-      const res = await fetch(url, NO_STORE);
+      const res = await fetch(url, noStore());
       if (!res.ok) continue;
       const json = (await res.json()) as Record<string, unknown>;
       const row =
@@ -29,7 +31,7 @@ async function jupiterUsd(mint: string): Promise<number | null> {
 
 async function dexUsd(mint: string): Promise<number | null> {
   try {
-    const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${mint}`, NO_STORE);
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${mint}`, noStore());
     if (!res.ok) return null;
     const json = (await res.json()) as {
       pairs?: Array<{ priceUsd?: string; liquidity?: { usd?: number } }>;
@@ -47,7 +49,7 @@ async function dexUsd(mint: string): Promise<number | null> {
 
 async function pumpUsd(mint: string): Promise<number | null> {
   try {
-    const res = await fetch(`https://frontend-api-v3.pump.fun/coins/${mint}`, NO_STORE);
+    const res = await fetch(`https://frontend-api-v3.pump.fun/coins/${mint}`, noStore());
     if (!res.ok) return null;
     const json = (await res.json()) as {
       usd_market_cap?: number;
