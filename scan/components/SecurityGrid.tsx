@@ -38,7 +38,7 @@ export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
   return (
     <article className="nutri-label">
       <header className="nutri-head">
-        <p className="nutri-kicker">Dichiarazione nutrizionale</p>
+        <p className="nutri-kicker">Nutrition declaration</p>
         <h3>TRUST FACTS</h3>
         <p className="nutri-sub">Typical values per mint</p>
       </header>
