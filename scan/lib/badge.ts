@@ -1,4 +1,4 @@
-import type { FridgeStatus } from "./fridge";
+import { hasOpenVault, type FridgeStatus } from "./fridge";
 import { fmtAmount, fmtUnlock, xmlEscape } from "./format";
 
 export type BadgeTheme = "dark" | "light";
@@ -61,21 +61,21 @@ export function renderBadgeSvg(
     return { svg, width: 420, height: 60 };
   }
 
-  if (style === "compact") {
-    const label =
-      fridge.status === "fridged"
-        ? "🧊 FRIDGED"
-        : fridge.status === "expired"
-          ? "🔓 EXPIRED"
-          : "⚠️ NOT FRIDGED";
-    const bg = fridge.status === "fridged" ? t.bg : fridge.status === "expired" ? t.bgExp : t.bgWarn;
-    const border = fridge.status === "fridged" ? t.border : fridge.status === "expired" ? t.borderExp : t.borderWarn;
-    return { svg: compactChip(label, bg, border, t.text), width: 160, height: 32 };
-  }
-
-  if (fridge.status === "fridged") {
-    const locked = fmtAmount(fridge.activeAmount, decimals);
-    const unlock = fmtUnlock(fridge.unlockAt);
+  if (hasOpenVault(fridge)) {
+    const now = Math.floor(Date.now() / 1000);
+    const live = fridge.locks.filter((l) => l.unlockAt > now);
+    const locked = fmtAmount(
+      live.length
+        ? live.reduce((s, l) => s + BigInt(l.amount), 0n).toString()
+        : fridge.activeAmount,
+      decimals
+    );
+    const unlock = live.length
+      ? fmtUnlock(Math.max(...live.map((l) => l.unlockAt)))
+      : "until claimed";
+    if (style === "compact") {
+      return { svg: compactChip("🧊 FRIDGED", t.bg, t.border, t.text), width: 160, height: 32 };
+    }
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="420" height="90" viewBox="0 0 420 90" role="img" aria-label="FRIDGED verified onchain">
   <rect x="0.5" y="0.5" width="419" height="89" rx="8" fill="${t.bg}" stroke="${t.border}"/>
@@ -87,15 +87,8 @@ export function renderBadgeSvg(
     return { svg, width: 420, height: 90 };
   }
 
-  if (fridge.status === "expired") {
-    const unlock = fmtUnlock(fridge.unlockAt);
-    const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="60" viewBox="0 0 420 60" role="img">
-  <rect x="0.5" y="0.5" width="419" height="59" rx="8" fill="${t.bgExp}" stroke="${t.borderExp}"/>
-  <text x="16" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="${t.mute}">🔓 FRIDGE EXPIRED</text>
-  <text x="16" y="46" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="${t.mute}">Was locked until ${xmlEscape(unlock)} · devfridge.cool</text>
-</svg>`;
-    return { svg, width: 420, height: 60 };
+  if (style === "compact") {
+    return { svg: compactChip("⚠️ NOT FRIDGED", t.bgWarn, t.borderWarn, t.text), width: 160, height: 32 };
   }
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>

@@ -22,6 +22,11 @@ export type FridgeStatus = {
   depositor: string | null;
 };
 
+/** True while at least one lock account still exists (even if unlock time passed). */
+export function hasOpenVault(fridge: FridgeStatus): boolean {
+  return fridge.locks.length > 0;
+}
+
 function u64(buf: Uint8Array, offset: number): bigint {
   const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
   return view.getBigUint64(offset, true);

@@ -41,7 +41,7 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
   const html = useMemo(() => {
     if (!resolved) return "";
     const w = style === "compact" ? 160 : 420;
-    const h = style === "compact" ? 32 : fridge?.status === "fridged" ? 90 : 60;
+    const h = style === "compact" ? 32 : fridge && fridge.locks.length > 0 ? 90 : 60;
     return `<!-- DevFridge Verification Badge — devfridge.cool -->
 <a href="${scannerUrl}" target="_blank" rel="noopener">
   <img
@@ -52,7 +52,7 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
     style="border-radius:8px;"
   />
 </a>`;
-  }, [valid, resolved, mint, theme, style, scannerUrl, fridge?.status]);
+  }, [valid, resolved, mint, theme, style, scannerUrl, fridge?.status, fridge?.locks.length]);
 
   const prompt = useMemo(() => {
     if (!resolved) return "";
@@ -179,7 +179,14 @@ My current site code is: [PASTE YOUR CODE HERE]`;
           </div>
           {scan && (
             <ul className="mt-4 grid gap-1 text-sm text-mute">
-              <li>Fridge: {scan.fridge.status}</li>
+              <li>
+                Fridge:{" "}
+                {scan.fridge.locks.length > 0
+                  ? "fridged"
+                  : scan.fridge.status === "expired"
+                    ? "none"
+                    : scan.fridge.status}
+              </li>
               {scan.security
                 .filter((c) => c.id === "mint" || c.id === "freeze")
                 .map((c) => (
