@@ -15,15 +15,27 @@ export default function PastaWidget() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    void fetch("/api/pasta")
-      .then((r) => r.json())
-      .then((d) => {
+    let stop = false;
+    async function load() {
+      try {
+        const r = await fetch(`/api/pasta?t=${Date.now()}`, { cache: "no-store" });
+        const d = await r.json();
+        if (stop) return;
         const n = Number(d.price);
         setPrice(Number.isFinite(n) && n > 0 ? n : null);
         setBurned(typeof d.burned === "string" && d.burned ? d.burned : null);
-      })
-      .catch(() => undefined)
-      .finally(() => setReady(true));
+      } catch {
+        /* keep last */
+      } finally {
+        if (!stop) setReady(true);
+      }
+    }
+    void load();
+    const id = window.setInterval(() => void load(), 30_000);
+    return () => {
+      stop = true;
+      window.clearInterval(id);
+    };
   }, []);
 
   return (
