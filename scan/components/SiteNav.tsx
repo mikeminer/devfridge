@@ -15,6 +15,9 @@ export default function SiteNav() {
         <Link className="text-mute hover:text-ice" href="/">
           Scanner
         </Link>
+        <Link className="text-mute hover:text-ice" href="/#feature">
+          Get featured
+        </Link>
         <Link className="text-mute hover:text-ice" href="/badge">
           Badge
         </Link>

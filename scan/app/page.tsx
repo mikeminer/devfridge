@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import SearchBar from "@/components/SearchBar";
 import PastaWidget from "@/components/PastaWidget";
 import Feeds from "@/components/Feeds";
+import BoostSubscribe from "@/components/BoostSubscribe";
 import { isMintAddress } from "@/lib/format";
 
 export default function HomePage({
@@ -34,6 +35,9 @@ export default function HomePage({
       <SearchBar />
       <div className="mx-auto mt-6 max-w-2xl">
         <PastaWidget />
+      </div>
+      <div className="mx-auto mt-10 max-w-3xl">
+        <BoostSubscribe />
       </div>
       <div className="mt-12">
         <Feeds />
