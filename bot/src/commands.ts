@@ -51,10 +51,10 @@ export function registerCommands(bot: Bot) {
     await ctx.reply(
       `${say.ciao(l)}\n\n` +
         (l === "it"
-          ? "Io sono @PastaBot — il sous-chef di DevFridge e $PASTA.\nUnico punto ufficiale: " +
+          ? "Io sono @devfridgebot — il sous-chef di DevFridge e $PASTA.\nUnico punto ufficiale: " +
             CONNECT_URL +
             "\n\nProva /pasta o /help."
-          : "I'm @PastaBot — sous-chef for DevFridge and $PASTA.\nOnly official door: " +
+          : "I'm @devfridgebot — sous-chef for DevFridge and $PASTA.\nOnly official door: " +
             CONNECT_URL +
             "\n\nTry /pasta or /help."),
       { link_preview_options: { is_disabled: true } }
@@ -63,7 +63,7 @@ export function registerCommands(bot: Bot) {
 
   bot.command("help", async (ctx) => {
     await ctx.reply(
-      `🍝 @PastaBot — Al dente on-chain.\n\n` +
+      `🍝 @devfridgebot — Al dente on-chain.\n\n` +
         `━━━━ 🍝 $PASTA ━━━━\n` +
         `/pasta      $PASTA price + stats\n` +
         `/burn       Burn tracker\n` +
@@ -211,7 +211,7 @@ export function registerCommands(bot: Bot) {
         `  • ${CONNECT_URL} — only official contacts\n\n` +
         `🔨 IN PROGRESS\n` +
         `  • Mint/freeze authority revocation ($PASTA)\n` +
-        `  • @PastaBot — this bot\n\n` +
+        `  • @devfridgebot — this bot\n\n` +
         `🔜 NEXT\n` +
         `  • Freeze the program (immutable)\n` +
         `  • Dappster.fun integration\n` +

@@ -49,9 +49,9 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     hint: "Public kitchen — invite only from this page",
   },
   {
-    label: "PastaBot",
-    href: "https://t.me/PastaBot",
-    hint: "@PastaBot — official Telegram chef",
+    label: "DevFridge bot",
+    href: "https://t.me/devfridgebot",
+    hint: "@devfridgebot — official Telegram chef",
   },
   {
     label: "$PASTA on pump.fun",
