@@ -2,6 +2,7 @@ import { PublicKey } from "@solana/web3.js";
 import {
   TOKEN_2022_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
+  getAssociatedTokenAddressSync,
   getMint,
   getExtensionTypes,
   ExtensionType,
@@ -9,7 +10,7 @@ import {
 } from "@solana/spl-token";
 import { PASTA_MINT, PASTA_CAUTION, PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
 import { connection, rpc } from "./rpc";
-import { fridgeForMint, type FridgeStatus } from "./fridge";
+import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
 
 export type CheckLevel = "safe" | "caution" | "danger" | "unknown";
 
@@ -257,10 +258,7 @@ const EXT_NAMES: Partial<Record<ExtensionType, string>> = {
   [ExtensionType.DefaultAccountState]: "Default account state",
 };
 
-async function heliusHolders(mint: string): Promise<{
-  holders: number | null;
-  top10Pct: number | null;
-} | null> {
+async function holderCountHelius(mint: string): Promise<number | null> {
   const key = process.env.HELIUS_API_KEY || process.env.NEXT_PUBLIC_HELIUS_API_KEY;
   if (!key) return null;
   try {
@@ -271,25 +269,61 @@ async function heliusHolders(mint: string): Promise<{
         jsonrpc: "2.0",
         id: 1,
         method: "getTokenAccounts",
-        params: { mint, limit: 1000, options: { showZeroBalance: false } },
+        params: { mint, limit: 1, options: { showZeroBalance: false } },
       }),
       signal: AbortSignal.timeout(12000),
     });
-    const json = (await res.json()) as {
-      result?: {
-        total?: number;
-        token_accounts?: Array<{ amount?: string }>;
-      };
-    };
-    const accounts = json.result?.token_accounts ?? [];
-    const holders = json.result?.total ?? accounts.length;
-    const amounts = accounts
+    const json = (await res.json()) as { result?: { total?: number } };
+    return json.result?.total ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function fridgeVaultAddresses(
+  mint: string,
+  locks: FridgeLock[],
+  tokenProgram: TrustReport["identity"]["tokenProgram"]
+): Set<string> {
+  const mintKey = new PublicKey(mint);
+  const programs =
+    tokenProgram === "token"
+      ? [TOKEN_PROGRAM_ID]
+      : tokenProgram === "token-2022"
+        ? [TOKEN_2022_PROGRAM_ID]
+        : [TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID];
+  const vaults = new Set<string>();
+  for (const lock of locks) {
+    const owner = new PublicKey(lock.address);
+    for (const program of programs) {
+      vaults.add(
+        getAssociatedTokenAddressSync(mintKey, owner, true, program).toBase58()
+      );
+    }
+  }
+  return vaults;
+}
+
+async function top10Concentration(
+  mint: string,
+  supply: bigint,
+  locks: FridgeLock[],
+  tokenProgram: TrustReport["identity"]["tokenProgram"]
+): Promise<number | null> {
+  if (supply <= 0n) return null;
+  try {
+    const result = await rpc<{
+      value?: Array<{ address?: string; amount?: string }>;
+    }>("getTokenLargestAccounts", [mint]);
+    const vaults = fridgeVaultAddresses(mint, locks, tokenProgram);
+    const amounts = (result?.value ?? [])
+      .filter((a) => a.address && !vaults.has(a.address))
       .map((a) => BigInt(a.amount || "0"))
-      .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0));
-    const total = amounts.reduce((s, n) => s + n, 0n);
-    const top = amounts.slice(0, 10).reduce((s, n) => s + n, 0n);
-    const top10Pct = total > 0n ? Number((top * 10000n) / total) / 100 : null;
-    return { holders, top10Pct };
+      .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0))
+      .slice(0, 10);
+    if (amounts.length === 0) return null;
+    const top = amounts.reduce((s, n) => s + n, 0n);
+    return Number((top * 10000n) / supply) / 100;
   } catch {
     return null;
   }
@@ -355,7 +389,10 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   }
 
   const json = mpl?.uri ? await metadataJson(mpl.uri) : null;
-  const holders = await heliusHolders(mintKey);
+  const [holderCount, top10Pct] = await Promise.all([
+    holderCountHelius(mintKey),
+    top10Concentration(mintKey, supply, fridge.locks, tokenProgram),
+  ]);
 
   const name =
     jupTok?.name ||
@@ -445,20 +482,19 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     });
   }
 
-  if (holders?.top10Pct != null) {
-    const pct = holders.top10Pct;
+  if (top10Pct != null) {
     security.push({
       id: "top10",
       label: "Top 10 holders %",
-      level: pct > 70 ? "danger" : pct > 40 ? "caution" : "safe",
-      detail: `Top 10 hold ${pct.toFixed(1)}% of known supply.`,
+      level: top10Pct > 70 ? "danger" : top10Pct > 40 ? "caution" : "safe",
+      detail: `Top 10 accounts hold ${top10Pct.toFixed(1)}% of supply (Fridge vaults excluded).`,
     });
   } else {
     security.push({
       id: "top10",
       label: "Top 10 holders %",
       level: "unknown",
-      detail: "Set HELIUS_API_KEY for holder concentration.",
+      detail: "Could not read largest token accounts from RPC.",
     });
   }
 
@@ -565,7 +601,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       volume24h,
       supply: supply.toString(),
       circulating: supply.toString(),
-      holders: holders?.holders ?? null,
+      holders: holderCount,
       note: priceUsd == null ? "No price data — low liquidity token" : undefined,
     },
     security,

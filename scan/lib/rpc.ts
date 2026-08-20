@@ -7,9 +7,26 @@ function heliusUrl(): string | null {
   return `https://mainnet.helius-rpc.com/?api-key=${key}`;
 }
 
+function alchemyUrl(): string | null {
+  const key = process.env.ALCHEMY_API_KEY || process.env.VITE_ALCHEMY_API_KEY || "";
+  if (!key) return null;
+  return `https://solana-mainnet.g.alchemy.com/v2/${key}`;
+}
+
+function rpcLabel(url: string): string {
+  if (url.includes("helius")) return "helius";
+  if (url.includes("alchemy")) return "alchemy";
+  try {
+    return new URL(url).host;
+  } catch {
+    return "rpc";
+  }
+}
+
 export function rpcUrls(): string[] {
   const urls = [
     heliusUrl(),
+    alchemyUrl(),
     "https://api.mainnet.solana.com",
     "https://api.mainnet-beta.solana.com",
   ].filter((u): u is string => Boolean(u));
@@ -34,12 +51,12 @@ export async function rpc<T = unknown>(
       });
       const json = (await res.json()) as { result?: T; error?: { message?: string } };
       if (!res.ok || json.error) {
-        errors.push(`${url}: ${json.error?.message || res.status}`);
+        errors.push(`${rpcLabel(url)}: ${json.error?.message || res.status}`);
         continue;
       }
       return json.result as T;
     } catch (err) {
-      errors.push(`${url}: ${err instanceof Error ? err.message : String(err)}`);
+      errors.push(`${rpcLabel(url)}: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
   throw new Error(errors[0] || "RPC failed");
