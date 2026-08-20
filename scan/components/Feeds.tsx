@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import TokenLogo from "./TokenLogo";
 
 type Card = {
   mint: string;
@@ -87,13 +88,7 @@ function TokenCard({ token, boosted }: { token: Card; boosted?: boolean }) {
   const hours = Math.ceil(left / 3600000);
   return (
     <Link href={`/t/${token.mint}`} className="ice-card flex items-center gap-3 p-3 hover:border-ice">
-      {token.image ? (
-        <img src={token.image} alt="" className="h-10 w-10 rounded-xl object-cover" />
-      ) : (
-        <div className="grid h-10 w-10 place-items-center rounded-xl bg-fridge text-xs text-ice">
-          {(token.symbol || "?").slice(0, 2)}
-        </div>
-      )}
+      <TokenLogo src={token.image} symbol={token.symbol || "?"} size="sm" />
       <div className="min-w-0 flex-1">
         <p className="truncate font-semibold">
           {token.name} <span className="text-mute">${token.symbol}</span>

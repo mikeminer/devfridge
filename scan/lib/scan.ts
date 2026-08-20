@@ -9,6 +9,7 @@ import {
   unpackMint,
 } from "@solana/spl-token";
 import { PASTA_MINT, PASTA_CAUTION, PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
+import { publicLogoUrl } from "./logo";
 import { connection, rpc } from "./rpc";
 import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
 
@@ -407,12 +408,13 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     dexData?.best?.baseToken?.symbol ||
     mpl?.symbol ||
     "???";
-  const image =
+  const image = publicLogoUrl(
     jupTok?.icon ||
-    pump?.image_uri ||
-    dexData?.best?.info?.imageUrl ||
-    json?.image ||
-    null;
+      pump?.image_uri ||
+      dexData?.best?.info?.imageUrl ||
+      json?.image ||
+      null
+  );
   const description = (pump?.description || json?.description || "").slice(0, 600);
 
   let platform: TrustReport["identity"]["platform"] = "custom";

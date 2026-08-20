@@ -4,6 +4,7 @@ import type { TrustReport as Report } from "@/lib/scan";
 import FridgeBadge from "./FridgeBadge";
 import SecurityGrid from "./SecurityGrid";
 import BoostModal from "./BoostModal";
+import TokenLogo from "./TokenLogo";
 
 function ageLabel(seconds: number | null) {
   if (seconds == null) return "Unknown age";
@@ -31,17 +32,7 @@ export default function TrustReportView({ report }: { report: Report }) {
     <div className="grid gap-4">
       <section className="ice-card p-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          {report.identity.image ? (
-            <img
-              src={report.identity.image}
-              alt=""
-              className="h-16 w-16 rounded-2xl object-cover"
-            />
-          ) : (
-            <div className="grid h-16 w-16 place-items-center rounded-2xl bg-fridge text-ice">
-              {report.identity.symbol.slice(0, 2)}
-            </div>
-          )}
+          <TokenLogo src={report.identity.image} symbol={report.identity.symbol} />
           <div className="min-w-0 flex-1">
             <p className="text-xs text-ice">{PLATFORM[report.identity.platform]}</p>
             <h2 className="truncate text-2xl font-bold">
