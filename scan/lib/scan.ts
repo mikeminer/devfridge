@@ -8,7 +8,7 @@ import {
   ExtensionType,
   unpackMint,
 } from "@solana/spl-token";
-import { PASTA_MINT, PASTA_CAUTION, PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
+import { PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
 import { parseMint } from "./format";
 import { publicLogoUrl } from "./logo";
 import { usdPrice } from "./price";
@@ -467,7 +467,6 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
 
   const security: SecurityCheck[] = [];
 
-  const pasta = mintKey === PASTA_MINT;
   if (mintAuthority === null) {
     security.push({
       id: "mint",
@@ -480,10 +479,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     security.push({
       id: "mint",
       label: "Mint authority revoked",
-      level: pasta ? "caution" : "danger",
-      detail: pasta
-        ? PASTA_CAUTION
-        : `Mint authority still set (${mintAuthority.slice(0, 4)}…${mintAuthority.slice(-4)}).`,
+      level: "danger",
+      detail: `Mint authority still set (${mintAuthority.slice(0, 4)}…${mintAuthority.slice(-4)}).`,
       amount: "Active",
     });
   } else {
@@ -508,10 +505,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     security.push({
       id: "freeze",
       label: "Freeze authority revoked",
-      level: pasta ? "caution" : "danger",
-      detail: pasta
-        ? PASTA_CAUTION
-        : `Freeze authority still set (${freezeAuthority.slice(0, 4)}…${freezeAuthority.slice(-4)}).`,
+      level: "danger",
+      detail: `Freeze authority still set (${freezeAuthority.slice(0, 4)}…${freezeAuthority.slice(-4)}).`,
       amount: "Active",
     });
   } else {

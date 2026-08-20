@@ -194,11 +194,6 @@ My current site code is: [PASTE YOUR CODE HERE]`;
                     {c.label}: {c.level.toUpperCase()} — {c.detail}
                   </li>
                 ))}
-              {resolved === PASTA_MINT && (
-                <li className="text-caution">
-                  ⚠️ Mint/freeze authority being revoked — in progress. Track on devfridge.cool
-                </li>
-              )}
             </ul>
           )}
         </section>

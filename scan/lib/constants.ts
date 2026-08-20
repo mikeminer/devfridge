@@ -27,6 +27,3 @@ export const BOOST_TIERS = {
 } as const;
 
 export type BoostTier = keyof typeof BOOST_TIERS;
-
-export const PASTA_CAUTION =
-  "Dev is actively revoking authorities. Track progress on devfridge.cool";

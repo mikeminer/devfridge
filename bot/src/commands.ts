@@ -106,8 +106,7 @@ export function registerCommands(bot: Bot) {
         `🔥 Burned:     ${pasta.burned ?? "—"} PASTA\n` +
         `👥 Holders:    ${holders.holders?.toLocaleString() ?? "—"}\n` +
         `🏦 Supply:     ${(holders.supply || 0).toLocaleString()}\n\n` +
-        `📍 Mint: <code>${PASTA_MINT}</code>\n` +
-        `⚠️ Mint/freeze revocation in progress. Track on ${FRIDGE_URL}`;
+        `📍 Mint: <code>${PASTA_MINT}</code>`;
       await ctx.reply(text, {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
@@ -123,7 +122,7 @@ export function registerCommands(bot: Bot) {
 
   bot.command("buy", async (ctx) => {
     await ctx.reply(
-      `🍝 Buy $PASTA — al dente, always.\n\nMint: <code>${PASTA_MINT}</code>\n\n⚠️ Mint/freeze authority revocation in progress.\nDYOR. Not financial advice.\n\nOfficial contacts: ${CONNECT_URL}`,
+      `🍝 Buy $PASTA — al dente, always.\n\nMint: <code>${PASTA_MINT}</code>\n\nMint and freeze authority are revoked.\nDYOR. Not financial advice.\n\nOfficial contacts: ${CONNECT_URL}`,
       {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
@@ -209,8 +208,8 @@ export function registerCommands(bot: Bot) {
         `  • TRUST ME CAPITAL vault — Hyperliquid live\n` +
         `  • ${SCANNER_URL} — scanner + badge + boost\n` +
         `  • ${CONNECT_URL} — only official contacts\n\n` +
+        `  • $PASTA mint/freeze revoked\n\n` +
         `🔨 IN PROGRESS\n` +
-        `  • Mint/freeze authority revocation ($PASTA)\n` +
         `  • @frigopastabot — this bot\n\n` +
         `🔜 NEXT\n` +
         `  • Freeze the program (immutable)\n` +
@@ -392,8 +391,6 @@ export function registerCommands(bot: Bot) {
         .slice(0, 6)
         .map((c) => `   ${icon(c.level)} ${esc(c.label)}${c.amount ? `: ${esc(c.amount)}` : ""}`)
         .join("\n");
-      const pastaNote =
-        mint === PASTA_MINT ? `\n⚠️ $PASTA: mint/freeze revocation in progress. Track on ${FRIDGE_URL}` : "";
       const text =
         `🔍 Scanning: $${esc(r.identity.symbol)}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
         `${fridgeBlock}\n\n🔐 Security\n${sec}\n\n` +
@@ -401,7 +398,7 @@ export function registerCommands(bot: Bot) {
         `   MCap:    ${money(r.market.marketCap)}\n` +
         `   24h Vol: ${money(r.market.volume24h)}\n` +
         `   Holders: ${r.market.holders?.toLocaleString() ?? "—"}\n` +
-        `   Age:     ${age}\n\n🚀 Platform: ${esc(r.identity.platform)}${pastaNote}`;
+        `   Age:     ${age}\n\n🚀 Platform: ${esc(r.identity.platform)}`;
       await ctx.reply(text.slice(0, 4000), {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
