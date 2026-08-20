@@ -1,29 +1,14 @@
 import type { FridgeStatus } from "@/lib/fridge";
-
-function fmtAmount(raw: string, decimals = 6) {
-  try {
-    const n = Number(BigInt(raw)) / 10 ** decimals;
-    return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
-  } catch {
-    return raw;
-  }
-}
-
-function fmtTime(unix: number | null) {
-  if (!unix) return "—";
-  return new Date(unix * 1000).toISOString().replace("T", " ").slice(0, 16) + " UTC";
-}
-
-function short(k: string) {
-  return `${k.slice(0, 4)}…${k.slice(-4)}`;
-}
+import { fmtAmount, fmtUnlock, remainingLabel, shortKey } from "@/lib/format";
 
 export default function FridgeBadge({
   fridge,
   decimals = 6,
+  mint,
 }: {
   fridge: FridgeStatus;
   decimals?: number;
+  mint?: string;
 }) {
   if (fridge.status === "unavailable") {
     return (
@@ -45,11 +30,15 @@ export default function FridgeBadge({
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-mute">Unlocks</dt>
-            <dd>{fmtTime(fridge.unlockAt)}</dd>
+            <dd>{fmtUnlock(fridge.unlockAt)}</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="text-mute">Time remaining</dt>
+            <dd>{remainingLabel(fridge.unlockAt)}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-mute">Dev wallet</dt>
-            <dd className="font-mono">{fridge.depositor ? short(fridge.depositor) : "—"}</dd>
+            <dd className="font-mono">{fridge.depositor ? shortKey(fridge.depositor) : "—"}</dd>
           </div>
           {fridge.locks[0] && (
             <div className="flex justify-between gap-4">
@@ -61,12 +50,20 @@ export default function FridgeBadge({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {short(fridge.locks[0].address)} ↗
+                  {shortKey(fridge.locks[0].address)} ↗
                 </a>
               </dd>
             </div>
           )}
         </dl>
+        {mint && (
+          <a
+            className="mt-4 inline-flex rounded-xl border border-ice px-4 py-2 text-sm font-semibold text-ice"
+            href={`/badge?mint=${mint}`}
+          >
+            Embed this badge on your site →
+          </a>
+        )}
       </section>
     );
   }
@@ -75,7 +72,9 @@ export default function FridgeBadge({
     return (
       <section className="rounded-2xl border border-caution/50 bg-card p-5">
         <p className="text-lg font-bold tracking-[0.18em] text-caution">🔓 FRIDGE EXPIRED</p>
-        <p className="mt-2 text-sm text-mute">Was locked until {fmtTime(fridge.unlockAt)}. Vault now unlocked.</p>
+        <p className="mt-2 text-sm text-mute">
+          Was locked until {fmtUnlock(fridge.unlockAt)}. Vault is now unlocked. Dev can withdraw.
+        </p>
       </section>
     );
   }
@@ -83,12 +82,15 @@ export default function FridgeBadge({
   return (
     <section className="rounded-2xl border border-caution/40 bg-card p-5">
       <p className="text-lg font-bold tracking-[0.18em] text-caution">⚠️ NOT FRIDGED</p>
-      <p className="mt-2 text-sm text-mute">Dev has not timelocked supply.</p>
+      <p className="mt-2 text-sm text-mute">
+        Dev has not timelocked supply in DevFridge. Community cannot verify rug protection.
+      </p>
+      <p className="mt-2 text-sm text-mute">Are you the dev?</p>
       <a
         className="mt-4 inline-flex rounded-xl bg-ice px-4 py-2 text-sm font-semibold text-navy"
-        href="https://devfridge.cool/#fridge"
+        href={mint ? `https://devfridge.cool/?mint=${mint}` : "https://devfridge.cool/"}
       >
-        Lock your tokens on devfridge.cool
+        Lock on devfridge.cool
       </a>
     </section>
   );

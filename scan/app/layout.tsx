@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import WalletProviders from "@/components/WalletProviders";
+import SiteNav from "@/components/SiteNav";
 
 const space = Space_Grotesk({
   subsets: ["latin"],
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${space.variable} font-sans antialiased`}>
-        <WalletProviders>{children}</WalletProviders>
+        <WalletProviders>
+          <SiteNav />
+          {children}
+        </WalletProviders>
       </body>
     </html>
   );

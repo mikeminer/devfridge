@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PASTA_MINT } from "@/lib/constants";
+import { isMintAddress } from "@/lib/format";
 
 const KEY = "scan.recent";
 
@@ -23,12 +24,12 @@ export default function SearchBar({ initial = "" }: { initial?: string }) {
 
   function go(mint: string) {
     const v = mint.trim();
-    if (v.length < 32) {
+    if (!isMintAddress(v)) {
       setError("Invalid Solana address");
       return;
     }
     setError("");
-    const next = [v, ...recent.filter((x) => x !== v)].slice(0, 8);
+    const next = [v, ...recent.filter((x) => x !== v)].slice(0, 5);
     localStorage.setItem(KEY, JSON.stringify(next));
     router.push(`/t/${v}`);
   }
@@ -49,7 +50,7 @@ export default function SearchBar({ initial = "" }: { initial?: string }) {
           onChange={(e) => setValue(e.target.value.trim())}
           onPaste={(e) => {
             const text = e.clipboardData.getData("text").trim();
-            if (text.length >= 32) {
+            if (isMintAddress(text)) {
               window.setTimeout(() => go(text), 0);
             }
           }}

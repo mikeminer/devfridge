@@ -67,7 +67,7 @@ export default function TrustReportView({ report }: { report: Report }) {
         )}
       </section>
 
-      <FridgeBadge fridge={report.fridge} decimals={report.identity.decimals} />
+      <FridgeBadge fridge={report.fridge} decimals={report.identity.decimals} mint={report.mint} />
 
       <section className="ice-card p-5">
         <h3 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">MARKET</h3>
@@ -96,6 +96,9 @@ export default function TrustReportView({ report }: { report: Report }) {
           </a>
           <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.dexscreener} target="_blank" rel="noreferrer">
             DexScreener
+          </a>
+          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.solscan} target="_blank" rel="noreferrer">
+            Solscan
           </a>
         </div>
       </section>

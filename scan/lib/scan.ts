@@ -44,7 +44,7 @@ export type TrustReport = {
   };
   security: SecurityCheck[];
   fridge: FridgeStatus;
-  links: { jupiter: string; birdeye: string; dexscreener: string; fridge: string };
+  links: { jupiter: string; birdeye: string; dexscreener: string; fridge: string; solscan: string };
   warnings: string[];
 };
 
@@ -611,6 +611,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       birdeye: `https://birdeye.so/token/${mintKey}?chain=solana`,
       dexscreener: `https://dexscreener.com/solana/${mintKey}`,
       fridge: `https://devfridge.cool/?mint=${mintKey}`,
+      solscan: `https://solscan.io/token/${mintKey}`,
     },
     warnings,
   };

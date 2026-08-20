@@ -18,6 +18,7 @@ type Card = {
 export default function Feeds() {
   const [boosted, setBoosted] = useState<Card[]>([]);
   const [recent, setRecent] = useState<Card[]>([]);
+  const [tab, setTab] = useState<"boosted" | "recent">("boosted");
 
   async function load() {
     const [b, r] = await Promise.all([
@@ -35,9 +36,25 @@ export default function Feeds() {
   }, []);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid gap-6">
+      <div className="flex gap-2">
+        <button
+          type="button"
+          className={`rounded-lg px-3 py-1 text-sm font-bold tracking-widest ${tab === "boosted" ? "bg-ice text-navy" : "text-mute"}`}
+          onClick={() => setTab("boosted")}
+        >
+          🔥 BOOSTED
+        </button>
+        <button
+          type="button"
+          className={`rounded-lg px-3 py-1 text-sm font-bold tracking-widest ${tab === "recent" ? "bg-ice text-navy" : "text-mute"}`}
+          onClick={() => setTab("recent")}
+        >
+          🕐 RECENT SCANS
+        </button>
+      </div>
+      {tab === "boosted" ? (
       <section>
-        <h2 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">🔥 BOOSTED TOKENS</h2>
         {boosted.length === 0 ? (
           <p className="text-sm text-mute">No active boosts. Be the first — scan a mint and boost it.</p>
         ) : (
@@ -48,8 +65,8 @@ export default function Feeds() {
           </div>
         )}
       </section>
+      ) : (
       <section>
-        <h2 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">RECENTLY SCANNED</h2>
         {recent.length === 0 ? (
           <p className="text-sm text-mute">No scans yet.</p>
         ) : (
@@ -60,6 +77,7 @@ export default function Feeds() {
           </div>
         )}
       </section>
+      )}
     </div>
   );
 }

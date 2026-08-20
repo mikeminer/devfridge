@@ -26,19 +26,6 @@ export default async function TokenPage({ params }: { params: { mint: string } }
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
-      <header className="mb-6 flex items-center justify-between gap-3">
-        <a href="/" className="flex items-center gap-2">
-          <img
-            src="https://devfridge.cool/brand/logo-mark.jpg"
-            alt=""
-            className="h-9 w-9 rounded-xl object-cover"
-          />
-          <span className="text-sm font-bold tracking-widest text-ice">SCAN</span>
-        </a>
-        <a className="text-xs text-mute hover:text-ice" href="https://devfridge.cool">
-          Open Fridge
-        </a>
-      </header>
       <SearchBar initial={mint} />
       <div className="mt-4">
         <PastaWidget />

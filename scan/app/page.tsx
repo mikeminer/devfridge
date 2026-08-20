@@ -1,12 +1,20 @@
+import { redirect } from "next/navigation";
 import SearchBar from "@/components/SearchBar";
 import PastaWidget from "@/components/PastaWidget";
 import Feeds from "@/components/Feeds";
+import { isMintAddress } from "@/lib/format";
 
-export default function HomePage() {
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams?: { mint?: string };
+}) {
+  const q = searchParams?.mint?.trim();
+  if (q && isMintAddress(q)) redirect(`/t/${q}`);
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:py-14">
       <header className="mb-10 flex flex-col items-center text-center">
-        <a href="https://devfridge.cool" className="mb-5">
+        <a href="/" className="mb-5">
           <img
             src="https://devfridge.cool/brand/logo-mark.jpg"
             alt="DevFridge"

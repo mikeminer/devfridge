@@ -74,7 +74,7 @@ export async function listBoosts(includeExpired = false): Promise<BoostRecord[]>
 
 export async function addRecent(row: RecentScan) {
   const recent = await listRecent();
-  const next = [row, ...recent.filter((r) => r.mint !== row.mint)].slice(0, 10);
+  const next = [row, ...recent.filter((r) => r.mint !== row.mint)].slice(0, 20);
   mem.recent = next;
   await kvSet("recent", next);
 }
@@ -82,5 +82,5 @@ export async function addRecent(row: RecentScan) {
 export async function listRecent(): Promise<RecentScan[]> {
   const stored = await kvGet<RecentScan[]>("recent", mem.recent);
   mem.recent = stored;
-  return stored.slice(0, 10);
+  return stored.slice(0, 20);
 }
