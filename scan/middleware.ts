@@ -14,15 +14,15 @@ function ipOf(req: NextRequest): string {
 
 export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
-  if (host.startsWith("health.")) {
+  if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
     const path = url.pathname;
     if (path === "/" || path === "") {
       const accept = req.headers.get("accept") || "";
-      if (accept.includes("application/json") && !accept.includes("text/html")) {
+      if (host.startsWith("health.") && accept.includes("application/json") && !accept.includes("text/html")) {
         url.pathname = "/api/health";
       } else {
-        url.pathname = "/health";
+        url.pathname = host.startsWith("connect.") ? "/connect" : "/health";
       }
       return NextResponse.rewrite(url);
     }
@@ -49,5 +49,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/health", "/api/badge", "/api/badge/:path*"],
+  matcher: ["/", "/health", "/connect", "/api/badge", "/api/badge/:path*"],
 };

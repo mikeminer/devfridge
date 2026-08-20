@@ -4,6 +4,7 @@ import {
   CLUSTERS,
   DEV_PUMP_URL,
   DEV_X_URL,
+  CONNECT_URL,
   PASTA_TG_GROUP_URL,
   PASTA_TG_URL,
   GITHUB_REPO,
@@ -419,6 +420,9 @@ export default function App() {
           <a href="https://health.devfridge.cool" onClick={() => setMenuOpen(false)}>
             Health
           </a>
+          <a href={CONNECT_URL} onClick={() => setMenuOpen(false)}>
+            Connect
+          </a>
           <a href={DEV_X_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on X
           </a>
@@ -789,6 +793,9 @@ export default function App() {
           <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
             Telegram group
           </a>
+          <a href={CONNECT_URL}>
+            Official contacts
+          </a>
         </div>
       </section>
 
@@ -1090,6 +1097,9 @@ export default function App() {
         </a>
         <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
           Telegram group
+        </a>
+        <a href={CONNECT_URL}>
+          Official contacts · connect.devfridge.cool
         </a>
         <a href={GITHUB_REPO} target="_blank" rel="noreferrer">
           github.com/mikeminer/devfridge

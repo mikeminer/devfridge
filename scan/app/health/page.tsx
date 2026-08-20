@@ -20,6 +20,10 @@ export default function HealthPage() {
           scanner
         </a>
         {" · "}
+        <a className="text-ice hover:underline" href="https://connect.devfridge.cool">
+          connect
+        </a>
+        {" · "}
         Too many tokens? Fridge them.
       </footer>
     </main>
