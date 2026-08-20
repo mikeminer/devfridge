@@ -157,7 +157,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
                 void preview(PASTA_MINT);
               }}
             >
-              Demo $PASTA
+              $PASTA
             </button>
           </div>
           {error && <p className="text-sm text-danger">{error}</p>}
