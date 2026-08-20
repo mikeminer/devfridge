@@ -332,7 +332,7 @@ export function registerCommands(bot: Bot) {
             `Status:  FRIDGED ✓\n` +
             `Locked:  ${fmtAmt(fridge.activeAmount, dec)} ${esc(sym)}\n` +
             `Unlocks: ${fmtUnlock(fridge.unlockAt)}\n` +
-            `Dev:     ${shortKey(fridge.depositor || "")}\n` +
+            `Locked by: ${shortKey(fridge.depositor || "")}\n` +
             `PDA:     ${shortKey(lock?.address || "")}\n\n` +
             `${say.fridged(l)}`,
           {
@@ -383,7 +383,7 @@ export function registerCommands(bot: Bot) {
           `🧊 FRIDGED ✓ VERIFIED ONCHAIN\n` +
           `   Locked:  ${fmtAmt(f.activeAmount, r.identity.decimals)} ${esc(r.identity.symbol)}\n` +
           `   Unlocks: ${fmtUnlock(f.unlockAt)}\n` +
-          `   Dev:     ${shortKey(f.depositor || "")}\n` +
+          `   Locked by: ${shortKey(f.depositor || "")}\n` +
           `   PDA:     ${shortKey(f.locks[0]?.address || "")}`;
       } else if (f.status === "expired") {
         fridgeBlock = `🔓 FRIDGE EXPIRED\n${say.thawed(l)}`;

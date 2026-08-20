@@ -582,13 +582,13 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
 
   security.push({
     id: "dev",
-    label: "Dev wallet clean",
+    label: "Fridge lock",
     level: fridge.status === "fridged" ? "safe" : "caution",
     detail:
       fridge.status === "fridged"
-        ? "Dev has a live Fridge lock — on-chain commitment instead of wallet hopping."
-        : "No automated rug history. Fridge lock is the verifiable signal.",
-    amount: fridge.status === "fridged" ? "Fridged" : "Unlocked",
+        ? "Live Fridge lock — on-chain commitment instead of wallet hopping."
+        : "No live Fridge lock. Vault expiry is not the same as a claimed vault.",
+    amount: fridge.status === "fridged" ? "Fridged" : fridge.status === "expired" ? "Expired" : "None",
   });
 
   if (mpl) {

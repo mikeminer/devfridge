@@ -71,24 +71,25 @@ export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
       .filter((x): x is FridgeLock => x != null && x.mint === mint);
 
     const now = Math.floor(Date.now() / 1000);
-    const active = locks.filter((l) => l.unlockAt > now);
+    const active = locks.filter((l) => l.unlockAt > now).sort((a, b) => b.unlockAt - a.unlockAt);
+    const expired = locks.filter((l) => l.unlockAt <= now).sort((a, b) => b.unlockAt - a.unlockAt);
+    const sum = (rows: FridgeLock[]) => rows.reduce((s, l) => s + BigInt(l.amount), 0n).toString();
+    const ordered = [...active, ...expired];
     if (active.length > 0) {
-      const total = active.reduce((s, l) => s + BigInt(l.amount), 0n);
-      const latest = [...active].sort((a, b) => b.unlockAt - a.unlockAt)[0];
       return {
         status: "fridged",
-        locks,
-        activeAmount: total.toString(),
-        unlockAt: latest.unlockAt,
-        depositor: latest.depositor,
+        locks: ordered,
+        activeAmount: sum(active),
+        unlockAt: active[0].unlockAt,
+        depositor: active[0].depositor,
       };
     }
     if (locks.length > 0) {
-      const last = [...locks].sort((a, b) => b.unlockAt - a.unlockAt)[0];
+      const last = expired[0];
       return {
         status: "expired",
-        locks,
-        activeAmount: "0",
+        locks: ordered,
+        activeAmount: sum(locks),
         unlockAt: last.unlockAt,
         depositor: last.depositor,
       };

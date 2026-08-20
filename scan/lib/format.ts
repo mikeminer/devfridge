@@ -34,6 +34,17 @@ export function shortKey(k: string): string {
   return `${k.slice(0, 4)}…${k.slice(-4)}`;
 }
 
+export function lockedPercent(amount: string, supply?: string | null): string | null {
+  try {
+    const a = BigInt(amount);
+    const s = BigInt(supply || "0");
+    if (s <= 0n || a < 0n) return null;
+    return `${(Number((a * 10000n) / s) / 100).toFixed(2)}%`;
+  } catch {
+    return null;
+  }
+}
+
 const BASE58_CHUNK = /[1-9A-HJ-NP-Za-km-z]{32,44}/g;
 const INVISIBLE = /[\u200B-\u200D\uFEFF\u00A0\u2060\u180E]/g;
 

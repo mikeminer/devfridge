@@ -1,14 +1,16 @@
-import type { FridgeStatus } from "@/lib/fridge";
-import { fmtAmount, fmtUnlock, remainingLabel, shortKey } from "@/lib/format";
+import type { FridgeLock, FridgeStatus } from "@/lib/fridge";
+import { fmtAmount, fmtUnlock, lockedPercent, remainingLabel, shortKey } from "@/lib/format";
 
 export default function FridgeBadge({
   fridge,
   decimals = 6,
   mint,
+  supply,
 }: {
   fridge: FridgeStatus;
   decimals?: number;
   mint?: string;
+  supply?: string | null;
 }) {
   if (fridge.status === "unavailable") {
     return (
@@ -19,48 +21,31 @@ export default function FridgeBadge({
     );
   }
 
+  const now = Math.floor(Date.now() / 1000);
+  const active = fridge.locks.filter((l) => l.unlockAt > now);
+  const shown = fridge.status === "fridged" ? active : fridge.locks;
+  const amount = fridge.activeAmount;
+  const pct = lockedPercent(amount, supply);
+  const lockers = unique(shown.map((l) => l.depositor));
+
   if (fridge.status === "fridged") {
     return (
       <section className="rounded-2xl border-2 border-ice bg-fridge p-5 shadow-ice">
         <p className="text-lg font-bold tracking-[0.18em] text-ice">🧊 FRIDGED · VERIFIED ONCHAIN</p>
         <dl className="mt-4 grid gap-2 text-sm text-ink">
-          <div className="flex justify-between gap-4">
-            <dt className="text-mute">Amount locked</dt>
-            <dd>{fmtAmount(fridge.activeAmount, decimals)} tokens</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-mute">Unlocks</dt>
-            <dd>{fmtUnlock(fridge.unlockAt)}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-mute">Time remaining</dt>
-            <dd>{remainingLabel(fridge.unlockAt)}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-mute">Dev wallet</dt>
-            <dd className="font-mono">{fridge.depositor ? shortKey(fridge.depositor) : "—"}</dd>
-          </div>
-          {fridge.locks[0] && (
-            <div className="flex justify-between gap-4">
-              <dt className="text-mute">Vault PDA</dt>
-              <dd>
-                <a
-                  className="font-mono text-ice hover:underline"
-                  href={`https://solscan.io/account/${fridge.locks[0].address}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {shortKey(fridge.locks[0].address)} ↗
-                </a>
-              </dd>
-            </div>
-          )}
+          <Row label="Amount locked" value={`${fmtAmount(amount, decimals)} tokens`} />
+          {pct && <Row label="% of supply locked" value={pct} />}
+          <Row label="Unlocks" value={fmtUnlock(fridge.unlockAt)} />
+          <Row label="Time remaining" value={remainingLabel(fridge.unlockAt)} />
+          <Row
+            label={lockers.length > 1 ? "Locked by" : "Locked by"}
+            value={lockers.map((w) => shortKey(w)).join(" · ")}
+            mono
+          />
         </dl>
+        <LockList locks={shown} now={now} />
         {mint && (
-          <a
-            className="fridge-key mt-4"
-            href={`/badge?mint=${mint}`}
-          >
+          <a className="fridge-key mt-4" href={`/badge?mint=${mint}`}>
             Embed this badge on your site →
           </a>
         )}
@@ -73,8 +58,15 @@ export default function FridgeBadge({
       <section className="rounded-2xl border border-caution/50 bg-card p-5">
         <p className="text-lg font-bold tracking-[0.18em] text-caution">🔓 FRIDGE EXPIRED</p>
         <p className="mt-2 text-sm text-mute">
-          Was locked until {fmtUnlock(fridge.unlockAt)}. Vault is now unlocked. Dev can withdraw.
+          Last lock ended {fmtUnlock(fridge.unlockAt)}. Unlock time has passed — locker can claim.
         </p>
+        <dl className="mt-4 grid gap-2 text-sm text-ink">
+          <Row label="Still in vaults" value={`${fmtAmount(amount, decimals)} tokens`} />
+          {pct && <Row label="% of supply in vaults" value={pct} />}
+          <Row label="Last unlock" value={fmtUnlock(fridge.unlockAt)} />
+          <Row label="Locked by" value={lockers.map((w) => shortKey(w)).join(" · ") || "—"} mono />
+        </dl>
+        <LockList locks={shown} now={now} />
       </section>
     );
   }
@@ -83,9 +75,9 @@ export default function FridgeBadge({
     <section className="rounded-2xl border border-caution/40 bg-card p-5">
       <p className="text-lg font-bold tracking-[0.18em] text-caution">⚠️ NOT FRIDGED</p>
       <p className="mt-2 text-sm text-mute">
-        Dev has not timelocked supply in DevFridge. Community cannot verify rug protection.
+        No timelock vaults found for this mint. Community cannot verify rug protection.
       </p>
-      <p className="mt-2 text-sm text-mute">Are you the dev?</p>
+      <p className="mt-2 text-sm text-mute">Are you the locker?</p>
       <a
         className="fridge-key fridge-key-primary mt-4"
         href={mint ? `https://devfridge.cool/?mint=${mint}` : "https://devfridge.cool/"}
@@ -94,4 +86,56 @@ export default function FridgeBadge({
       </a>
     </section>
   );
+}
+
+function Row({
+  label,
+  value,
+  mono,
+}: {
+  label: string;
+  value: string;
+  mono?: boolean;
+}) {
+  return (
+    <div className="flex justify-between gap-4">
+      <dt className="text-mute">{label}</dt>
+      <dd className={mono ? "font-mono" : ""}>{value}</dd>
+    </div>
+  );
+}
+
+function LockList({ locks, now }: { locks: FridgeLock[]; now: number }) {
+  if (locks.length === 0) return null;
+  return (
+    <ul className="mt-4 grid gap-2 text-xs">
+      {locks.map((lock) => {
+        const live = lock.unlockAt > now;
+        return (
+          <li key={lock.address} className="rounded-xl border border-line bg-navy/40 px-3 py-2">
+            <p className="text-mute">
+              {live ? "Active vault" : "Unclaimed vault"} · locked by{" "}
+              <span className="font-mono text-ink">{shortKey(lock.depositor)}</span>
+            </p>
+            <p className="mt-1 font-mono">
+              <a
+                className="text-ice hover:underline"
+                href={`https://solscan.io/account/${lock.address}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {shortKey(lock.address)} ↗
+              </a>
+              {" · "}
+              {live ? `unlocks ${fmtUnlock(lock.unlockAt)}` : `ended ${fmtUnlock(lock.unlockAt)}`}
+            </p>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function unique(values: string[]): string[] {
+  return [...new Set(values.filter(Boolean))];
 }

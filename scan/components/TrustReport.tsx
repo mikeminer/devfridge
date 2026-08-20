@@ -53,7 +53,12 @@ export default function TrustReportView({ report }: { report: Report }) {
         )}
       </section>
 
-      <FridgeBadge fridge={report.fridge} decimals={report.identity.decimals} mint={report.mint} />
+      <FridgeBadge
+        fridge={report.fridge}
+        decimals={report.identity.decimals}
+        mint={report.mint}
+        supply={report.market.supply}
+      />
 
       {report.fridge.status === "fridged" ? (
         <BoostSubscribe fixedMint={report.mint} />
