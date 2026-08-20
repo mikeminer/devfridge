@@ -1,0 +1,125 @@
+"use client";
+
+import type { TrustReport as Report } from "@/lib/scan";
+import FridgeBadge from "./FridgeBadge";
+import SecurityGrid from "./SecurityGrid";
+import BoostModal from "./BoostModal";
+
+function ageLabel(seconds: number | null) {
+  if (seconds == null) return "Unknown age";
+  const h = Math.floor(seconds / 3600);
+  if (h < 24) return `Launched ${h}h ago`;
+  return `Launched ${Math.floor(h / 24)}d ago`;
+}
+
+function money(n: number | null) {
+  if (n == null || !Number.isFinite(n)) return "—";
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(2)}M`;
+  if (n >= 1e3) return `$${(n / 1e3).toFixed(1)}K`;
+  if (n < 0.0001) return `$${n.toExponential(2)}`;
+  return `$${n.toPrecision(4)}`;
+}
+
+const PLATFORM = {
+  "pump.fun": "🚀 pump.fun",
+  stonkfun: "📈 stonkfun",
+  custom: "⚙️ Custom",
+};
+
+export default function TrustReportView({ report }: { report: Report }) {
+  return (
+    <div className="grid gap-4">
+      <section className="ice-card p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          {report.identity.image ? (
+            <img
+              src={report.identity.image}
+              alt=""
+              className="h-16 w-16 rounded-2xl object-cover"
+            />
+          ) : (
+            <div className="grid h-16 w-16 place-items-center rounded-2xl bg-fridge text-ice">
+              {report.identity.symbol.slice(0, 2)}
+            </div>
+          )}
+          <div className="min-w-0 flex-1">
+            <p className="text-xs text-ice">{PLATFORM[report.identity.platform]}</p>
+            <h2 className="truncate text-2xl font-bold">
+              {report.identity.name}{" "}
+              <span className="text-mute">${report.identity.symbol}</span>
+            </h2>
+            <CopyMint mint={report.mint} />
+            <p className="mt-1 text-xs text-mute">{ageLabel(report.identity.ageSeconds)}</p>
+          </div>
+          <BoostModal mint={report.mint} />
+        </div>
+        {report.identity.description && (
+          <p className="mt-4 text-sm text-mute">{report.identity.description}</p>
+        )}
+      </section>
+
+      <FridgeBadge fridge={report.fridge} decimals={report.identity.decimals} />
+
+      <section className="ice-card p-5">
+        <h3 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">MARKET</h3>
+        <div className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+          <Stat label="Price" value={money(report.market.priceUsd)} />
+          <Stat label="Market cap" value={money(report.market.marketCap)} />
+          <Stat label="24h volume" value={money(report.market.volume24h)} />
+          <Stat
+            label="Supply"
+            value={
+              report.market.supply
+                ? (Number(report.market.supply) / 10 ** report.identity.decimals).toLocaleString()
+                : "—"
+            }
+          />
+          <Stat label="Holders" value={report.market.holders?.toLocaleString() ?? "—"} />
+          <Stat label="Program" value={report.identity.tokenProgram} />
+        </div>
+        {report.market.note && <p className="mt-3 text-sm text-caution">{report.market.note}</p>}
+        <div className="mt-4 flex flex-wrap gap-2 text-xs">
+          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.jupiter} target="_blank" rel="noreferrer">
+            Jupiter
+          </a>
+          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.birdeye} target="_blank" rel="noreferrer">
+            Birdeye
+          </a>
+          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.dexscreener} target="_blank" rel="noreferrer">
+            DexScreener
+          </a>
+        </div>
+      </section>
+
+      <section className="ice-card p-5">
+        <h3 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">🔐 SECURITY CHECKS</h3>
+        <SecurityGrid checks={report.security} />
+      </section>
+
+      {report.warnings.length > 0 && (
+        <p className="text-xs text-caution">{report.warnings.join(" · ")}</p>
+      )}
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-line bg-navy/50 p-3">
+      <p className="text-[10px] tracking-widest text-mute">{label}</p>
+      <p className="mt-1 font-semibold">{value}</p>
+    </div>
+  );
+}
+
+function CopyMint({ mint }: { mint: string }) {
+  return (
+    <button
+      type="button"
+      className="mt-1 truncate font-mono text-xs text-mute hover:text-ice"
+      onClick={() => void navigator.clipboard.writeText(mint)}
+    >
+      {mint.slice(0, 6)}…{mint.slice(-6)} · copy
+    </button>
+  );
+}

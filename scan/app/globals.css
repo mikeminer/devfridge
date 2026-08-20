@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(900px 480px at 12% -10%, rgba(79, 195, 247, 0.12), transparent 50%),
+    radial-gradient(700px 400px at 90% 0%, rgba(34, 197, 94, 0.05), transparent 46%),
+    #0a0e1a;
+  color: #e2e8f0;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+.ice-card {
+  background: #0f1629;
+  border: 1px solid #1e2d4a;
+  border-radius: 22px;
+  box-shadow: 0 0 40px rgba(79, 195, 247, 0.08);
+}
+
+.ice-input {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #1e2d4a;
+  background: #0a0e1a;
+  color: #e2e8f0;
+  padding: 16px 18px;
+  outline: none;
+}
+.ice-input:focus {
+  border-color: #4fc3f7;
+  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+}
