@@ -32,6 +32,14 @@ export const OFFICIAL_SITES: OfficialLink[] = [
   },
 ];
 
+export const OFFICIAL_BOT: OfficialLink[] = [
+  {
+    label: "Official Telegram bot",
+    href: "https://t.me/frigopastabot",
+    hint: "@frigopastabot — FrigoPasta, the only official chef",
+  },
+];
+
 export const OFFICIAL_SOCIAL: OfficialLink[] = [
   {
     label: "X",
@@ -47,11 +55,6 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     label: "Telegram group",
     href: "https://t.me/+RbLG3dqqM5tiZmRk",
     hint: "Public kitchen — invite only from this page",
-  },
-  {
-    label: "FrigoPasta",
-    href: "https://t.me/frigopastabot",
-    hint: "@frigopastabot — official Telegram chef",
   },
   {
     label: "$PASTA on pump.fun",

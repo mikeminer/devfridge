@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   CONNECT_ORIGIN,
+  OFFICIAL_BOT,
   OFFICIAL_CHAIN,
   OFFICIAL_SITES,
   OFFICIAL_SOCIAL,
@@ -28,6 +29,7 @@ export default function ConnectBoard() {
         <p className="mt-4 font-mono text-xs text-ice">{CONNECT_ORIGIN}</p>
       </section>
 
+      <Group title="Official Telegram bot" items={OFFICIAL_BOT} />
       <Group title="Official sites" items={OFFICIAL_SITES} />
       <Group title="Talk & listings" items={OFFICIAL_SOCIAL} />
       <Group title="On-chain" items={OFFICIAL_CHAIN} copyable />
