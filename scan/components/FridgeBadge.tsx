@@ -23,10 +23,11 @@ export default function FridgeBadge({
 
   const now = Math.floor(Date.now() / 1000);
   const active = fridge.locks.filter((l) => l.unlockAt > now);
-  const shown = fridge.status === "fridged" ? active : fridge.locks;
   const amount = fridge.activeAmount;
   const pct = lockedPercent(amount, supply);
-  const lockers = unique(shown.map((l) => l.depositor));
+  const lockers = unique(
+    (fridge.status === "fridged" ? active : fridge.locks).map((l) => l.depositor)
+  );
 
   if (fridge.status === "fridged") {
     return (
@@ -43,7 +44,7 @@ export default function FridgeBadge({
             mono
           />
         </dl>
-        <LockList locks={shown} now={now} decimals={decimals} />
+        <LockList locks={fridge.locks} now={now} decimals={decimals} />
         {mint && (
           <a className="fridge-key mt-4" href={`/badge?mint=${mint}`}>
             Embed this badge on your site →
@@ -66,7 +67,7 @@ export default function FridgeBadge({
           <Row label="Last unlock" value={fmtUnlock(fridge.unlockAt)} />
           <Row label="Locked by" value={lockers.map((w) => shortKey(w)).join(" · ") || "—"} mono />
         </dl>
-        <LockList locks={shown} now={now} decimals={decimals} />
+        <LockList locks={fridge.locks} now={now} decimals={decimals} />
       </section>
     );
   }

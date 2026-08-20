@@ -36,7 +36,6 @@ export async function listAllLocks(): Promise<Lock[]> {
       {
         encoding: "base64",
         commitment: "confirmed",
-        filters: [{ dataSize: LOCK_ACCOUNT_SIZE }],
       },
     ]
   );

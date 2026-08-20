@@ -62,15 +62,12 @@ export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
       {
         encoding: "base64",
         commitment: "confirmed",
-        filters: [
-          { dataSize: LOCK_ACCOUNT_SIZE },
-          { memcmp: { offset: 40, bytes: mint } },
-        ],
+        filters: [{ memcmp: { offset: 40, bytes: mint } }],
       },
     ]);
     const locks = (rows || [])
       .map((row) => {
-        const raw = Uint8Array.from(atob(row.account.data[0]), (c) => c.charCodeAt(0));
+        const raw = Uint8Array.from(Buffer.from(row.account.data[0], "base64"));
         return decodeLock(row.pubkey, raw);
       })
       .filter((x): x is FridgeLock => x != null && x.mint === mint);
