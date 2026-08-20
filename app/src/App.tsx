@@ -411,6 +411,12 @@ export default function App() {
           <a href="#roadmap" onClick={() => setMenuOpen(false)}>
             Roadmap
           </a>
+          <a href="https://scan.devfridge.cool" onClick={() => setMenuOpen(false)}>
+            Scanner
+          </a>
+          <a href="https://health.devfridge.cool" onClick={() => setMenuOpen(false)}>
+            Health
+          </a>
           <a href={DEV_X_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on X
           </a>

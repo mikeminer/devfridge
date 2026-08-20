@@ -303,6 +303,13 @@ button {
     0 0 12px rgba(79, 195, 247, 0.1) !important;
 }
 
+.health-gauge {
+  min-height: 128px;
+}
+.health-gauge::before {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .fridge-key {
     width: 100%;
