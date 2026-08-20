@@ -2,6 +2,7 @@ import { PROGRAM_ID, PASTA_MINT } from "./constants";
 import { fridgeForMint } from "./fridge";
 import { usdPrice } from "./price";
 import { rpc } from "./rpc";
+import { storeBackend } from "./store";
 
 export type CheckStatus = "ok" | "degraded" | "error";
 
@@ -67,7 +68,7 @@ export async function runHealth(): Promise<HealthReport> {
     }),
   ]);
 
-  const kv = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+  const backend = storeBackend();
 
   const rpcCheck: HealthCheck = slot.ok
     ? { id: "rpc", label: "Solana RPC", status: "ok", ms: slot.ms, detail: `slot ${slot.value.toLocaleString()}` }
@@ -130,10 +131,10 @@ export async function runHealth(): Promise<HealthReport> {
 
   const storeCheck: HealthCheck = {
     id: "store",
-    label: "Boost store",
+    label: "Feed store",
     status: "ok",
     ms: 0,
-    detail: kv ? "Vercel KV" : "in-memory",
+    detail: backend === "kv" ? "Vercel KV" : backend === "cache" ? "runtime cache" : "in-memory",
   };
 
   const scanCheck: HealthCheck = {
@@ -154,7 +155,7 @@ export async function runHealth(): Promise<HealthReport> {
     status,
     ts: Date.now(),
     rpc: rpcCheck.status === "ok" ? "ok" : "degraded",
-    db: kv ? "ok" : "memory",
+    db: backend === "memory" ? "memory" : "ok",
     fridge: fridgeCheck.status === "ok" ? "ok" : "error",
     checks,
   };

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import TokenLogo from "./TokenLogo";
+import { readLocalRecent } from "./RememberScan";
 
 type Card = {
   mint: string;
@@ -21,13 +22,26 @@ export default function Feeds() {
   const [recent, setRecent] = useState<Card[]>([]);
   const [tab, setTab] = useState<"boosted" | "recent">("boosted");
 
+  function mergeRecent(server: Card[]): Card[] {
+    const local = readLocalRecent() as Card[];
+    const map = new Map<string, Card>();
+    for (const row of [...server, ...local]) {
+      if (!row?.mint) continue;
+      const prev = map.get(row.mint);
+      if (!prev || (row.scannedAt || 0) > (prev.scannedAt || 0)) map.set(row.mint, row);
+    }
+    return [...map.values()]
+      .sort((a, b) => (b.scannedAt || 0) - (a.scannedAt || 0))
+      .slice(0, 20);
+  }
+
   async function load() {
     const [b, r] = await Promise.all([
       fetch("/api/feed/boosted").then((x) => x.json()),
       fetch("/api/feed/recent").then((x) => x.json()),
     ]);
     setBoosted(b.tokens || []);
-    setRecent(r.tokens || []);
+    setRecent(mergeRecent((r.tokens || []) as Card[]));
   }
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   }
   try {
     const report = await scanMint(mint);
-    void addRecent({
+    await addRecent({
       mint: report.mint,
       name: report.identity.name,
       symbol: report.identity.symbol,

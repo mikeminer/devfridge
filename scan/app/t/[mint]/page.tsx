@@ -1,6 +1,7 @@
 import SearchBar from "@/components/SearchBar";
 import PastaWidget from "@/components/PastaWidget";
 import TrustReportView from "@/components/TrustReport";
+import RememberScan from "@/components/RememberScan";
 import { scanMint } from "@/lib/scan";
 import { addRecent } from "@/lib/store";
 import { parseMint } from "@/lib/format";
@@ -35,7 +36,19 @@ export default async function TokenPage({ params }: { params: { mint: string } }
         {error ? (
           <div className="ice-card p-5 text-caution">{error}</div>
         ) : report ? (
-          <TrustReportView report={report} />
+          <>
+            <RememberScan
+              token={{
+                mint: report.mint,
+                name: report.identity.name,
+                symbol: report.identity.symbol,
+                image: report.identity.image,
+                fridged: report.fridge.status === "fridged",
+                scannedAt: Date.now(),
+              }}
+            />
+            <TrustReportView report={report} />
+          </>
         ) : null}
       </div>
     </main>

@@ -25,35 +25,69 @@ const mem = {
   recent: [] as RecentScan[],
 };
 
+const CACHE_TTL = 60 * 60 * 24 * 30;
+
 function kvEnabled() {
   return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 }
 
-async function kvGet<T>(key: string, fallback: T): Promise<T> {
-  if (!kvEnabled()) return fallback;
+export function storeBackend(): "kv" | "cache" | "memory" {
+  if (kvEnabled()) return "kv";
+  if (process.env.VERCEL) return "cache";
+  return "memory";
+}
+
+async function runtimeGet<T>(key: string): Promise<T | undefined> {
   try {
-    const res = await fetch(`${process.env.KV_REST_API_URL}/get/${key}`, {
-      headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
-    });
-    if (!res.ok) return fallback;
-    const json = (await res.json()) as { result?: string | null };
-    if (!json.result) return fallback;
-    return JSON.parse(json.result) as T;
+    const { getCache } = await import("@vercel/functions");
+    const hit = await getCache().get(key);
+    if (hit == null) return undefined;
+    return hit as T;
   } catch {
-    return fallback;
+    return undefined;
   }
 }
 
+async function runtimeSet(key: string, value: unknown) {
+  try {
+    const { getCache } = await import("@vercel/functions");
+    await getCache().set(key, value, { ttl: CACHE_TTL, name: key, tags: ["feed"] });
+  } catch {
+    /* local / unsupported */
+  }
+}
+
+async function kvGet<T>(key: string, fallback: T): Promise<T> {
+  if (kvEnabled()) {
+    try {
+      const res = await fetch(`${process.env.KV_REST_API_URL}/get/${key}`, {
+        headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+      });
+      if (res.ok) {
+        const json = (await res.json()) as { result?: string | null };
+        if (json.result) return JSON.parse(json.result) as T;
+      }
+    } catch {
+      /* fall through */
+    }
+  }
+  const cached = await runtimeGet<T>(key);
+  if (cached != null) return cached;
+  return fallback;
+}
+
 async function kvSet(key: string, value: unknown) {
-  if (!kvEnabled()) return;
-  await fetch(`${process.env.KV_REST_API_URL}/set/${key}`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(JSON.stringify(value)),
-  });
+  if (kvEnabled()) {
+    await fetch(`${process.env.KV_REST_API_URL}/set/${key}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(JSON.stringify(value)),
+    });
+  }
+  await runtimeSet(key, value);
 }
 
 export async function addBoost(row: BoostRecord) {
