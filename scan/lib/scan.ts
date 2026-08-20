@@ -22,7 +22,31 @@ export type SecurityCheck = {
   label: string;
   level: CheckLevel;
   detail: string;
+  amount?: string;
 };
+
+export type TrustGrade = "A" | "B" | "C" | "D" | "E";
+
+export function gradeFromLevel(level: CheckLevel): TrustGrade {
+  if (level === "safe") return "A";
+  if (level === "caution") return "C";
+  if (level === "danger") return "E";
+  return "C";
+}
+
+export function trustGrade(checks: SecurityCheck[]): TrustGrade {
+  const pts = checks.reduce((sum, c) => {
+    if (c.level === "danger") return sum + 4;
+    if (c.level === "caution") return sum + 2;
+    if (c.level === "unknown") return sum + 1;
+    return sum;
+  }, 0);
+  if (pts === 0) return "A";
+  if (pts <= 2) return "B";
+  if (pts <= 4) return "C";
+  if (pts <= 7) return "D";
+  return "E";
+}
 
 export type TrustReport = {
   mint: string;
@@ -231,17 +255,44 @@ async function metadataJson(uri: string) {
   }
 }
 
-const EXT_NAMES: Partial<Record<ExtensionType, string>> = {
+const EXT_NAMES: Partial<Record<number, string>> = {
   [ExtensionType.TransferFeeConfig]: "Transfer fee",
-  [ExtensionType.InterestBearingConfig]: "Interest bearing",
+  [ExtensionType.TransferFeeAmount]: "Transfer fee amount",
+  [ExtensionType.MintCloseAuthority]: "Mint close authority",
+  [ExtensionType.ConfidentialTransferMint]: "Confidential transfer",
+  [ExtensionType.DefaultAccountState]: "Default account state",
+  [ExtensionType.ImmutableOwner]: "Immutable owner",
+  [ExtensionType.MemoTransfer]: "Memo transfer",
   [ExtensionType.NonTransferable]: "Non-transferable",
+  [ExtensionType.InterestBearingConfig]: "Interest bearing",
+  [ExtensionType.CpiGuard]: "CPI guard",
   [ExtensionType.PermanentDelegate]: "Permanent delegate",
   [ExtensionType.TransferHook]: "Transfer hook",
   [ExtensionType.MetadataPointer]: "Metadata pointer",
   [ExtensionType.TokenMetadata]: "Token metadata",
-  [ExtensionType.ConfidentialTransferMint]: "Confidential transfer",
-  [ExtensionType.DefaultAccountState]: "Default account state",
+  [ExtensionType.GroupPointer]: "Group pointer",
+  [ExtensionType.TokenGroup]: "Token group",
+  [ExtensionType.GroupMemberPointer]: "Group member pointer",
+  [ExtensionType.ScaledUiAmountConfig]: "Scaled UI amount",
+  [ExtensionType.PausableConfig]: "Pausable",
+  [ExtensionType.PermissionedBurn]: "Permissioned burn",
 };
+
+const RISKY_EXT = /fee|hook|non-transfer|delegate|pausable|permissioned|default account/i;
+
+function listExtensions(types: number[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const t of types) {
+    if (t === ExtensionType.Uninitialized) continue;
+    if (!Number.isInteger(t) || t < 1 || t > 40) continue;
+    const name = EXT_NAMES[t] || `Type ${t}`;
+    if (seen.has(name)) continue;
+    seen.add(name);
+    out.push(name);
+  }
+  return out;
+}
 
 async function holderCountHelius(mint: string): Promise<number | null> {
   const key = process.env.HELIUS_API_KEY || process.env.NEXT_PUBLIC_HELIUS_API_KEY;
@@ -356,7 +407,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       supply = unpacked.supply;
       try {
         const types = getExtensionTypes(acc.data);
-        extensions = types.map((t) => EXT_NAMES[t] || `Extension ${t}`);
+        extensions = listExtensions(types as unknown as number[]);
       } catch {
         /* */
       }
@@ -423,6 +474,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Mint authority revoked",
       level: "safe",
       detail: "No one can mint more supply.",
+      amount: "Revoked",
     });
   } else if (mintAuthority) {
     security.push({
@@ -432,6 +484,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       detail: pasta
         ? PASTA_CAUTION
         : `Mint authority still set (${mintAuthority.slice(0, 4)}…${mintAuthority.slice(-4)}).`,
+      amount: "Active",
     });
   } else {
     security.push({
@@ -439,6 +492,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Mint authority revoked",
       level: "unknown",
       detail: "Could not read mint authority.",
+      amount: "Unknown",
     });
   }
 
@@ -448,6 +502,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Freeze authority revoked",
       level: "safe",
       detail: "Accounts cannot be frozen.",
+      amount: "Revoked",
     });
   } else if (freezeAuthority) {
     security.push({
@@ -457,6 +512,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       detail: pasta
         ? PASTA_CAUTION
         : `Freeze authority still set (${freezeAuthority.slice(0, 4)}…${freezeAuthority.slice(-4)}).`,
+      amount: "Active",
     });
   } else {
     security.push({
@@ -464,6 +520,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Freeze authority revoked",
       level: "unknown",
       detail: "Could not read freeze authority.",
+      amount: "Unknown",
     });
   }
 
@@ -473,6 +530,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Top 10 holders %",
       level: top10Pct > 70 ? "danger" : top10Pct > 40 ? "caution" : "safe",
       detail: `Top 10 accounts hold ${top10Pct.toFixed(1)}% of supply (Fridge vaults excluded).`,
+      amount: `${top10Pct.toFixed(1)}%`,
     });
   } else {
     security.push({
@@ -480,6 +538,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Top 10 holders %",
       level: "unknown",
       detail: "Could not read largest token accounts from RPC.",
+      amount: "n/a",
     });
   }
 
@@ -493,6 +552,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "LP locked",
       level: "caution",
       detail: "Still on the pump.fun bonding curve (not graduated).",
+      amount: "Curve",
     });
   } else if (hasDex && !onCurve) {
     security.push({
@@ -500,6 +560,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "LP locked",
       level: "caution",
       detail: "Pool exists on a DEX. Manual LP lock/burn not fully verified.",
+      amount: "Unverified",
     });
   } else if (!hasDex) {
     security.push({
@@ -507,6 +568,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "LP locked",
       level: "danger",
       detail: "No DEX liquidity found.",
+      amount: "None",
     });
   } else {
     security.push({
@@ -514,6 +576,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "LP locked",
       level: "caution",
       detail: "Only pump.fun curve liquidity detected.",
+      amount: "Curve",
     });
   }
 
@@ -525,6 +588,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       fridge.status === "fridged"
         ? "Dev has a live Fridge lock — on-chain commitment instead of wallet hopping."
         : "No automated rug history. Fridge lock is the verifiable signal.",
+    amount: fridge.status === "fridged" ? "Fridged" : "Unlocked",
   });
 
   if (mpl) {
@@ -535,6 +599,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       detail: mpl.isMutable
         ? "Metaplex metadata can still be changed."
         : "Metaplex metadata is immutable.",
+      amount: mpl.isMutable ? "Mutable" : "Immutable",
     });
   } else {
     security.push({
@@ -545,6 +610,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
         tokenProgram === "token-2022"
           ? "Token-2022 metadata pointer — treat as mutable unless frozen on-chain."
           : "No Metaplex metadata account.",
+      amount: tokenProgram === "token-2022" ? "Pointer" : "None",
     });
   }
 
@@ -552,10 +618,11 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     security.push({
       id: "t22",
       label: "Token-2022 extensions",
-      level: extensions.some((e) => /fee|hook|non-transfer|delegate/i.test(e))
-        ? "caution"
-        : "safe",
-      detail: extensions.length ? extensions.join(", ") : "Token-2022 with no exotic extensions listed.",
+      level: extensions.some((e) => RISKY_EXT.test(e)) ? "caution" : "safe",
+      detail: extensions.length
+        ? extensions.join(", ")
+        : "Token-2022 with no exotic extensions listed.",
+      amount: extensions.length ? extensions.join(" · ") : "None",
     });
   } else {
     security.push({
@@ -563,6 +630,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       label: "Token-2022 extensions",
       level: "safe",
       detail: "Classic SPL token (no Token-2022 extensions).",
+      amount: "SPL",
     });
   }
 

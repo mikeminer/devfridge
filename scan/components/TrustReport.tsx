@@ -125,10 +125,7 @@ export default function TrustReportView({ report }: { report: Report }) {
         </div>
       </section>
 
-      <section className="ice-card p-5">
-        <h3 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">🔐 SECURITY CHECKS</h3>
-        <SecurityGrid checks={report.security} />
-      </section>
+      <SecurityGrid checks={report.security} />
 
       {report.warnings.length > 0 && (
         <p className="text-xs text-caution">{report.warnings.join(" · ")}</p>
