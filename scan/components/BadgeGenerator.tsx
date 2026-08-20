@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { PASTA_MINT } from "@/lib/constants";
-import { isMintAddress } from "@/lib/format";
+import { parseMint } from "@/lib/format";
 import type { FridgeStatus } from "@/lib/fridge";
 import type { TrustReport } from "@/lib/scan";
 
@@ -26,38 +26,40 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (isMintAddress(initialMint)) void preview(initialMint);
+    const v = parseMint(initialMint);
+    if (v) void preview(v);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMint]);
 
-  const valid = isMintAddress(mint);
-  const badgeSrc = valid
-    ? `${origin()}/api/badge?mint=${mint}&theme=${theme}&style=${style}`
+  const resolved = parseMint(mint);
+  const valid = Boolean(resolved);
+  const badgeSrc = resolved
+    ? `${origin()}/api/badge?mint=${resolved}&theme=${theme}&style=${style}`
     : "";
-  const scannerUrl = valid ? `${origin()}/t/${mint}` : "";
+  const scannerUrl = resolved ? `${origin()}/t/${resolved}` : "";
 
   const html = useMemo(() => {
-    if (!valid) return "";
+    if (!resolved) return "";
     const w = style === "compact" ? 160 : 420;
     const h = style === "compact" ? 32 : fridge?.status === "fridged" ? 90 : 60;
     return `<!-- DevFridge Verification Badge — devfridge.cool -->
 <a href="${scannerUrl}" target="_blank" rel="noopener">
   <img
-    src="${origin()}/api/badge?mint=${mint}&theme=${theme}&style=${style}"
+    src="${origin()}/api/badge?mint=${resolved}&theme=${theme}&style=${style}"
     alt="DevFridge Verification Badge"
     width="${w}"
     height="${h}"
     style="border-radius:8px;"
   />
 </a>`;
-  }, [valid, mint, theme, style, scannerUrl, fridge?.status]);
+  }, [valid, resolved, mint, theme, style, scannerUrl, fridge?.status]);
 
   const prompt = useMemo(() => {
-    if (!valid) return "";
+    if (!resolved) return "";
     return `I want to add a DevFridge verification badge to my token website.
 
-Token mint: ${mint}
-Badge URL: ${origin()}/api/badge?mint=${mint}&theme=${theme}
+Token mint: ${resolved}
+Badge URL: ${origin()}/api/badge?mint=${resolved}&theme=${theme}
 Scanner link: ${scannerUrl}
 
 The badge is a live SVG image served from the URL above. It shows whether my token's
@@ -68,14 +70,15 @@ Webflow / Framer / etc.] website. Add it to [INSERT WHERE: the hero section / fo
 about page / sidebar]. Make it link to the scanner URL. Keep the existing design consistent.
 
 My current site code is: [PASTE YOUR CODE HERE]`;
-  }, [valid, mint, theme, scannerUrl]);
+  }, [valid, resolved, theme, scannerUrl]);
 
   async function preview(addr = mint) {
-    const v = addr.trim();
-    if (!isMintAddress(v)) {
-      setError("Invalid Solana address");
+    const v = parseMint(addr);
+    if (!v) {
+      setError("Invalid Solana address — paste the mint or a pump.fun / Dexscreener link");
       return;
     }
+    setMint(v);
     setError("");
     setBusy(true);
     try {
@@ -109,14 +112,15 @@ My current site code is: [PASTE YOUR CODE HERE]`;
         <div className="mt-4 grid gap-3">
           <input
             className="ice-input font-mono text-sm"
-            placeholder="Token mint address"
+            placeholder="Mint, pump.fun link, or Dexscreener URL"
             value={mint}
             onChange={(e) => setMint(e.target.value.trim())}
             onPaste={(e) => {
-              const text = e.clipboardData.getData("text").trim();
-              if (isMintAddress(text)) {
-                setMint(text);
-                window.setTimeout(() => void preview(text), 0);
+              const parsed = parseMint(e.clipboardData.getData("text"));
+              if (parsed) {
+                e.preventDefault();
+                setMint(parsed);
+                window.setTimeout(() => void preview(parsed), 0);
               }
             }}
           />
@@ -183,7 +187,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
                     {c.label}: {c.level.toUpperCase()} — {c.detail}
                   </li>
                 ))}
-              {mint === PASTA_MINT && (
+              {resolved === PASTA_MINT && (
                 <li className="text-caution">
                   ⚠️ Mint/freeze authority being revoked — in progress. Track on devfridge.cool
                 </li>

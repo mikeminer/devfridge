@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PASTA_MINT } from "@/lib/constants";
-import { isMintAddress } from "@/lib/format";
+import { parseMint } from "@/lib/format";
 
 const KEY = "scan.recent";
 
@@ -23,12 +23,13 @@ export default function SearchBar({ initial = "" }: { initial?: string }) {
   }, []);
 
   function go(mint: string) {
-    const v = mint.trim();
-    if (!isMintAddress(v)) {
-      setError("Invalid Solana address");
+    const v = parseMint(mint);
+    if (!v) {
+      setError("Invalid Solana address — paste the mint or a pump.fun / Dexscreener link");
       return;
     }
     setError("");
+    setValue(v);
     const next = [v, ...recent.filter((x) => x !== v)].slice(0, 5);
     localStorage.setItem(KEY, JSON.stringify(next));
     router.push(`/t/${v}`);
@@ -45,13 +46,15 @@ export default function SearchBar({ initial = "" }: { initial?: string }) {
       >
         <input
           className="ice-input font-mono text-sm sm:text-base"
-          placeholder="Enter token mint address..."
+          placeholder="Mint, pump.fun link, or Dexscreener URL"
           value={value}
           onChange={(e) => setValue(e.target.value.trim())}
           onPaste={(e) => {
-            const text = e.clipboardData.getData("text").trim();
-            if (isMintAddress(text)) {
-              window.setTimeout(() => go(text), 0);
+            const parsed = parseMint(e.clipboardData.getData("text"));
+            if (parsed) {
+              e.preventDefault();
+              setValue(parsed);
+              window.setTimeout(() => go(parsed), 0);
             }
           }}
         />

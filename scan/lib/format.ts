@@ -1,3 +1,5 @@
+import { PublicKey } from "@solana/web3.js";
+
 export function fmtAmount(raw: string, decimals = 6): string {
   try {
     const n = Number(BigInt(raw)) / 10 ** decimals;
@@ -32,10 +34,63 @@ export function shortKey(k: string): string {
   return `${k.slice(0, 4)}…${k.slice(-4)}`;
 }
 
-const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+const BASE58_CHUNK = /[1-9A-HJ-NP-Za-km-z]{32,44}/g;
+const INVISIBLE = /[\u200B-\u200D\uFEFF\u00A0\u2060\u180E]/g;
+
+function asMint(value: string): string | null {
+  try {
+    return new PublicKey(value).toBase58();
+  } catch {
+    return null;
+  }
+}
+
+function mintFromUrl(raw: string): string | null {
+  try {
+    const href = /^https?:\/\//i.test(raw) ? raw : `https://${raw.replace(/^\/\//, "")}`;
+    const u = new URL(href);
+    for (const key of ["mint", "token", "address", "ca"]) {
+      const v = u.searchParams.get(key);
+      if (v) {
+        const ok = asMint(v.trim());
+        if (ok) return ok;
+      }
+    }
+    const parts = u.pathname.split("/").filter(Boolean);
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const ok = asMint(decodeURIComponent(parts[i]));
+      if (ok) return ok;
+    }
+  } catch {
+    /* not a URL */
+  }
+  return null;
+}
+
+/** Pull a canonical Solana mint out of a CA, pump.fun/Dexscreener URL, or messy paste. */
+export function parseMint(value: string): string | null {
+  if (!value) return null;
+  const cleaned = value.replace(INVISIBLE, "").trim();
+  if (!cleaned) return null;
+
+  const exact = asMint(cleaned);
+  if (exact) return exact;
+
+  if (/^https?:\/\//i.test(cleaned) || cleaned.includes("/") || cleaned.includes("?")) {
+    const fromUrl = mintFromUrl(cleaned);
+    if (fromUrl) return fromUrl;
+  }
+
+  const chunks = cleaned.match(BASE58_CHUNK) || [];
+  for (const chunk of chunks) {
+    const ok = asMint(chunk);
+    if (ok) return ok;
+  }
+  return null;
+}
 
 export function isMintAddress(value: string): boolean {
-  return BASE58.test(value.trim());
+  return parseMint(value) !== null;
 }
 
 export function xmlEscape(s: string): string {

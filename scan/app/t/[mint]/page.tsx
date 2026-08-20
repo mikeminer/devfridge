@@ -3,11 +3,12 @@ import PastaWidget from "@/components/PastaWidget";
 import TrustReportView from "@/components/TrustReport";
 import { scanMint } from "@/lib/scan";
 import { addRecent } from "@/lib/store";
+import { parseMint } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
 export default async function TokenPage({ params }: { params: { mint: string } }) {
-  const mint = decodeURIComponent(params.mint);
+  const mint = parseMint(decodeURIComponent(params.mint)) || decodeURIComponent(params.mint);
   let report = null;
   let error = "";
   try {

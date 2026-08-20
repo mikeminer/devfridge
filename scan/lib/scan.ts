@@ -9,6 +9,7 @@ import {
   unpackMint,
 } from "@solana/spl-token";
 import { PASTA_MINT, PASTA_CAUTION, PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
+import { parseMint } from "./format";
 import { publicLogoUrl } from "./logo";
 import { connection, rpc } from "./rpc";
 import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
@@ -332,12 +333,11 @@ async function top10Concentration(
 
 export async function scanMint(mintStr: string): Promise<TrustReport> {
   const warnings: string[] = [];
-  let mint: PublicKey;
-  try {
-    mint = new PublicKey(mintStr.trim());
-  } catch {
-    throw new Error("Invalid Solana address");
+  const parsed = parseMint(mintStr);
+  if (!parsed) {
+    throw new Error("Invalid Solana address — paste the mint or a pump.fun / Dexscreener link");
   }
+  const mint = new PublicKey(parsed);
   const mintKey = mint.toBase58();
 
   const conn = connection();

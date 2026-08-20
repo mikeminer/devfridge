@@ -10,7 +10,7 @@ import {
   TransactionInstruction,
 } from "@solana/web3.js";
 import { BOOST_TIERS, TREASURY, type BoostTier } from "@/lib/constants";
-import { isMintAddress } from "@/lib/format";
+import { parseMint } from "@/lib/format";
 
 export default function BoostSubscribe({
   fixedMint,
@@ -30,8 +30,8 @@ export default function BoostSubscribe({
   async function boost(tier: BoostTier) {
     setStatus("");
     setNeedFridge(false);
-    const m = (fixedMint || mint).trim();
-    if (!isMintAddress(m)) {
+    const m = parseMint(fixedMint || mint);
+    if (!m) {
       setStatus("Enter a valid mint address first.");
       return;
     }
@@ -90,9 +90,16 @@ export default function BoostSubscribe({
       {!fixedMint && (
         <input
           className="ice-input mt-4 font-mono text-sm"
-          placeholder="Your Token-2022 mint address"
+          placeholder="Mint or pump.fun / Dexscreener URL"
           value={mint}
           onChange={(e) => setMint(e.target.value.trim())}
+          onPaste={(e) => {
+            const parsed = parseMint(e.clipboardData.getData("text"));
+            if (parsed) {
+              e.preventDefault();
+              setMint(parsed);
+            }
+          }}
         />
       )}
 
@@ -117,8 +124,8 @@ export default function BoostSubscribe({
         <a
           className="fridge-key fridge-key-primary mt-4"
           href={
-            isMintAddress(fixedMint || mint)
-              ? `https://devfridge.cool/?mint=${fixedMint || mint}`
+            parseMint(fixedMint || mint)
+              ? `https://devfridge.cool/?mint=${parseMint(fixedMint || mint)}`
               : "https://devfridge.cool/"
           }
         >

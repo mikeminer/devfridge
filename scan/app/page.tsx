@@ -3,15 +3,15 @@ import SearchBar from "@/components/SearchBar";
 import PastaWidget from "@/components/PastaWidget";
 import Feeds from "@/components/Feeds";
 import BoostSubscribe from "@/components/BoostSubscribe";
-import { isMintAddress } from "@/lib/format";
+import { parseMint } from "@/lib/format";
 
 export default function HomePage({
   searchParams,
 }: {
   searchParams?: { mint?: string };
 }) {
-  const q = searchParams?.mint?.trim();
-  if (q && isMintAddress(q)) redirect(`/t/${q}`);
+  const q = parseMint(searchParams?.mint || "");
+  if (q) redirect(`/t/${q}`);
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:py-14">
       <header className="mb-10 flex flex-col items-center text-center">
