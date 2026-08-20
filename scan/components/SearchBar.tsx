@@ -55,27 +55,20 @@ export default function SearchBar({ initial = "" }: { initial?: string }) {
             }
           }}
         />
-        <button
-          className="rounded-2xl bg-ice px-6 py-3 font-semibold text-navy"
-          type="submit"
-        >
+        <button className="fridge-key fridge-key-primary px-8" type="submit">
           Scan
         </button>
       </form>
       {error && <p className="mt-2 text-sm text-danger">{error}</p>}
       <div className="mt-3 flex flex-wrap gap-2 text-xs">
-        <button
-          type="button"
-          className="rounded-full border border-line px-3 py-1 text-mute hover:text-ice"
-          onClick={() => go(PASTA_MINT)}
-        >
+        <button type="button" className="fridge-chip" onClick={() => go(PASTA_MINT)}>
           Demo $PASTA
         </button>
         {recent.map((m) => (
           <button
             key={m}
             type="button"
-            className="rounded-full border border-line px-3 py-1 font-mono text-mute hover:text-ice"
+            className="fridge-chip font-mono"
             onClick={() => go(m)}
           >
             {m.slice(0, 4)}…{m.slice(-4)}

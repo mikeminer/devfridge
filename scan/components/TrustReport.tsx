@@ -3,7 +3,7 @@
 import type { TrustReport as Report } from "@/lib/scan";
 import FridgeBadge from "./FridgeBadge";
 import SecurityGrid from "./SecurityGrid";
-import BoostModal from "./BoostModal";
+import BoostSubscribe from "./BoostSubscribe";
 import TokenLogo from "./TokenLogo";
 
 function ageLabel(seconds: number | null) {
@@ -42,14 +42,9 @@ export default function TrustReportView({ report }: { report: Report }) {
             <CopyMint mint={report.mint} />
             <p className="mt-1 text-xs text-mute">{ageLabel(report.identity.ageSeconds)}</p>
           </div>
-          {report.fridge.status === "fridged" ? (
-            <BoostModal mint={report.mint} />
-          ) : (
-            <a
-              className="rounded-xl bg-ice px-4 py-2 text-center text-sm font-semibold text-navy"
-              href={report.links.fridge}
-            >
-              Fridge it on devfridge.cool
+          {report.fridge.status !== "fridged" && (
+            <a className="fridge-key fridge-key-primary" href={report.links.fridge}>
+              Fridge it
             </a>
           )}
         </div>
@@ -59,6 +54,42 @@ export default function TrustReportView({ report }: { report: Report }) {
       </section>
 
       <FridgeBadge fridge={report.fridge} decimals={report.identity.decimals} mint={report.mint} />
+
+      {report.fridge.status === "fridged" ? (
+        <BoostSubscribe fixedMint={report.mint} />
+      ) : (
+        <section className="ice-card p-5">
+          <p className="text-[10px] font-bold tracking-[0.2em] text-ice">GET FEATURED</p>
+          <h3 className="mt-1 text-xl font-bold">Three fridge slots — lock first</h3>
+          <p className="mt-2 text-sm text-mute">
+            24h · 0.1 SOL · 48h · 0.18 SOL · 7d · 0.5 SOL. Only tokens with a live Fridge lock can
+            boost. Fees buy and burn $PASTA.
+          </p>
+          <div className="mt-4 grid gap-3 opacity-70 sm:grid-cols-3">
+            <div className="fridge-plan fridge-plan-24h pointer-events-none">
+              <span className="fridge-plan-kicker">Featured slot</span>
+              <span className="fridge-plan-label">24h Boost</span>
+              <span className="fridge-plan-price">0.1 SOL</span>
+              <span className="fridge-plan-go">Fridge required</span>
+            </div>
+            <div className="fridge-plan fridge-plan-48h pointer-events-none">
+              <span className="fridge-plan-kicker">Featured slot</span>
+              <span className="fridge-plan-label">48h Boost</span>
+              <span className="fridge-plan-price">0.18 SOL</span>
+              <span className="fridge-plan-go">Fridge required</span>
+            </div>
+            <div className="fridge-plan fridge-plan-7d pointer-events-none">
+              <span className="fridge-plan-kicker">Featured slot</span>
+              <span className="fridge-plan-label">7d Boost</span>
+              <span className="fridge-plan-price">0.5 SOL</span>
+              <span className="fridge-plan-go">Fridge required</span>
+            </div>
+          </div>
+          <a className="fridge-key fridge-key-primary mt-4" href={report.links.fridge}>
+            Fridge it on devfridge.cool
+          </a>
+        </section>
+      )}
 
       <section className="ice-card p-5">
         <h3 className="mb-3 text-sm font-bold tracking-[0.16em] text-ice">MARKET</h3>
@@ -79,16 +110,16 @@ export default function TrustReportView({ report }: { report: Report }) {
         </div>
         {report.market.note && <p className="mt-3 text-sm text-caution">{report.market.note}</p>}
         <div className="mt-4 flex flex-wrap gap-2 text-xs">
-          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.jupiter} target="_blank" rel="noreferrer">
+          <a className="fridge-chip" href={report.links.jupiter} target="_blank" rel="noreferrer">
             Jupiter
           </a>
-          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.birdeye} target="_blank" rel="noreferrer">
+          <a className="fridge-chip" href={report.links.birdeye} target="_blank" rel="noreferrer">
             Birdeye
           </a>
-          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.dexscreener} target="_blank" rel="noreferrer">
+          <a className="fridge-chip" href={report.links.dexscreener} target="_blank" rel="noreferrer">
             DexScreener
           </a>
-          <a className="rounded-full border border-line px-3 py-1 text-ice" href={report.links.solscan} target="_blank" rel="noreferrer">
+          <a className="fridge-chip" href={report.links.solscan} target="_blank" rel="noreferrer">
             Solscan
           </a>
         </div>

@@ -96,32 +96,33 @@ export default function BoostSubscribe({
         />
       )}
 
-      <div className={`mt-4 grid gap-2 ${compact ? "" : "sm:grid-cols-3"}`}>
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {(Object.keys(BOOST_TIERS) as BoostTier[]).map((tier) => (
           <button
             key={tier}
             type="button"
             disabled={busy}
-            className="rounded-xl border border-line px-4 py-3 text-left hover:border-ice disabled:opacity-50"
+            className={`fridge-plan fridge-plan-${tier}`}
             onClick={() => void boost(tier)}
           >
-            <span className="block text-lg">{BOOST_TIERS[tier].fire}</span>
-            <span className="font-semibold">{BOOST_TIERS[tier].label}</span>
-            <span className="mt-1 block text-ice">{BOOST_TIERS[tier].sol} SOL</span>
+            <span className="fridge-plan-kicker">{compact ? "Slot" : "Featured slot"}</span>
+            <span className="fridge-plan-label">{BOOST_TIERS[tier].label}</span>
+            <span className="fridge-plan-price">{BOOST_TIERS[tier].sol} SOL</span>
+            <span className="fridge-plan-go">Lock in</span>
           </button>
         ))}
       </div>
 
       {needFridge && (
         <a
-          className="mt-4 inline-flex rounded-xl bg-ice px-4 py-2 text-sm font-semibold text-navy"
+          className="fridge-key fridge-key-primary mt-4"
           href={
             isMintAddress(fixedMint || mint)
               ? `https://devfridge.cool/?mint=${fixedMint || mint}`
               : "https://devfridge.cool/"
           }
         >
-          Fridge it on devfridge.cool first
+          Fridge it first
         </a>
       )}
       {status && <p className="mt-3 text-sm text-mute">{status}</p>}

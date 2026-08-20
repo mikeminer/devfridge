@@ -38,20 +38,20 @@ export default function Feeds() {
 
   return (
     <div className="grid gap-6">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          className={`rounded-lg px-3 py-1 text-sm font-bold tracking-widest ${tab === "boosted" ? "bg-ice text-navy" : "text-mute"}`}
+          className={`fridge-tab ${tab === "boosted" ? "is-on" : ""}`}
           onClick={() => setTab("boosted")}
         >
-          🔥 BOOSTED
+          Boosted
         </button>
         <button
           type="button"
-          className={`rounded-lg px-3 py-1 text-sm font-bold tracking-widest ${tab === "recent" ? "bg-ice text-navy" : "text-mute"}`}
+          className={`fridge-tab ${tab === "recent" ? "is-on" : ""}`}
           onClick={() => setTab("recent")}
         >
-          🕐 RECENT SCANS
+          Recent scans
         </button>
       </div>
       {tab === "boosted" ? (

@@ -58,7 +58,7 @@ export default function FridgeBadge({
         </dl>
         {mint && (
           <a
-            className="mt-4 inline-flex rounded-xl border border-ice px-4 py-2 text-sm font-semibold text-ice"
+            className="fridge-key mt-4"
             href={`/badge?mint=${mint}`}
           >
             Embed this badge on your site →
@@ -87,7 +87,7 @@ export default function FridgeBadge({
       </p>
       <p className="mt-2 text-sm text-mute">Are you the dev?</p>
       <a
-        className="mt-4 inline-flex rounded-xl bg-ice px-4 py-2 text-sm font-semibold text-navy"
+        className="fridge-key fridge-key-primary mt-4"
         href={mint ? `https://devfridge.cool/?mint=${mint}` : "https://devfridge.cool/"}
       >
         Lock on devfridge.cool

@@ -19,12 +19,19 @@ input,
 button {
   font: inherit;
 }
+button {
+  cursor: pointer;
+}
 
 .ice-card {
-  background: #0f1629;
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.05), transparent 28%),
+    #0f1629;
   border: 1px solid #1e2d4a;
   border-radius: 22px;
-  box-shadow: 0 0 40px rgba(79, 195, 247, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 40px rgba(79, 195, 247, 0.08);
 }
 
 .ice-input {
@@ -39,4 +46,274 @@ button {
 .ice-input:focus {
   border-color: #4fc3f7;
   box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
+}
+
+/* Appliance control-panel chrome — matches devfridge.cool fridge buttons */
+.fridge-topbar {
+  position: relative;
+  z-index: 20;
+  border-bottom: 1px solid rgba(79, 195, 247, 0.16);
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.08), transparent 55%),
+    linear-gradient(180deg, #121a2e 0%, #0a0e1a 100%);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.fridge-key {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 14px 8px 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(79, 195, 247, 0.28);
+  color: #d7f6ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.16), transparent 42%),
+    linear-gradient(180deg, #1a2a3c 0%, #0c1524 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.4),
+    0 0 12px rgba(79, 195, 247, 0.1);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+.fridge-key::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4fc3f7;
+  box-shadow: 0 0 8px #4fc3f7;
+}
+.fridge-key:hover {
+  color: #fff;
+  border-color: rgba(79, 195, 247, 0.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 18px rgba(79, 195, 247, 0.28);
+}
+.fridge-key:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.fridge-key-primary {
+  padding: 12px 22px;
+  border: 0;
+  color: #072033;
+  letter-spacing: 0.12em;
+  background:
+    linear-gradient(180deg, #9be7ff 0%, #4fc3f7 46%, #2aa4d8 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -8px 14px rgba(10, 60, 90, 0.28),
+    0 0 18px rgba(79, 195, 247, 0.35);
+}
+.fridge-key-primary::before {
+  display: none;
+}
+.fridge-key-primary:hover {
+  color: #031018;
+  border-color: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 0 26px rgba(79, 195, 247, 0.5);
+}
+
+.fridge-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 12px 5px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 195, 247, 0.22);
+  color: #b7d7ea;
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.1), transparent 60%),
+    #0a1220;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.fridge-chip::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4fc3f7;
+  box-shadow: 0 0 6px #4fc3f7;
+}
+.fridge-chip:hover {
+  color: #e2f7ff;
+  border-color: rgba(79, 195, 247, 0.55);
+}
+
+.fridge-tab {
+  position: relative;
+  min-height: 36px;
+  padding: 8px 14px 8px 26px;
+  border-radius: 12px;
+  border: 1px solid rgba(79, 195, 247, 0.18);
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: rgba(10, 14, 26, 0.6);
+}
+.fridge-tab::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #314155;
+  box-shadow: none;
+}
+.fridge-tab.is-on {
+  color: #d7f6ff;
+  border-color: rgba(79, 195, 247, 0.5);
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.16), transparent 50%),
+    #132033;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 14px rgba(79, 195, 247, 0.18);
+}
+.fridge-tab.is-on::before {
+  background: #4fc3f7;
+  box-shadow: 0 0 8px #4fc3f7;
+}
+
+.fridge-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  min-height: 148px;
+  padding: 18px 16px 22px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(79, 195, 247, 0.32);
+  color: #e2f4ff;
+  background:
+    linear-gradient(180deg, rgba(155, 231, 255, 0.14), transparent 34%),
+    linear-gradient(180deg, #1a3148 0%, #0c1828 48%, #071018 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -16px 28px rgba(0, 0, 0, 0.45),
+    0 0 22px rgba(79, 195, 247, 0.14);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
+}
+.fridge-plan::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #4fc3f7;
+  box-shadow: 0 0 10px #4fc3f7;
+}
+.fridge-plan::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.55), transparent);
+}
+.fridge-plan:hover:not(:disabled) {
+  border-color: rgba(79, 195, 247, 0.75);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 28px rgba(79, 195, 247, 0.32);
+}
+.fridge-plan:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.fridge-plan-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9be7ff;
+}
+.fridge-plan-label {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.fridge-plan-price {
+  margin-top: auto;
+  padding-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #4fc3f7;
+  text-shadow: 0 0 12px rgba(79, 195, 247, 0.45);
+}
+.fridge-plan-go {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b7d7ea;
+}
+.fridge-plan-48h {
+  border-color: rgba(79, 195, 247, 0.45);
+}
+.fridge-plan-7d {
+  border-color: rgba(155, 231, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -16px 28px rgba(0, 0, 0, 0.4),
+    0 0 28px rgba(79, 195, 247, 0.28);
+}
+
+.wallet-adapter-button {
+  background:
+    linear-gradient(180deg, rgba(79, 195, 247, 0.16), transparent 42%),
+    linear-gradient(180deg, #1a2a3c 0%, #0c1524 100%) !important;
+  border: 1px solid rgba(79, 195, 247, 0.28) !important;
+  border-radius: 14px !important;
+  height: 42px !important;
+  color: #d7f6ff !important;
+  font-family: inherit !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 0 12px rgba(79, 195, 247, 0.1) !important;
+}
+
+@media (max-width: 640px) {
+  .fridge-key {
+    width: 100%;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 9px 10px 9px 22px;
+  }
+  .fridge-key::before {
+    left: 10px;
+  }
+  .fridge-key-primary {
+    padding: 9px 14px;
+  }
 }

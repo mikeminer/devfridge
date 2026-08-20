@@ -27,7 +27,7 @@ export default function PastaWidget() {
         </p>
       </div>
       <a
-        className="text-xs font-semibold text-ice hover:underline"
+        className="fridge-chip"
         href={`https://pump.fun/coin/${PASTA_MINT}`}
         target="_blank"
         rel="noreferrer"

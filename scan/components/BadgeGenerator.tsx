@@ -139,7 +139,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
             </select>
             <button
               type="button"
-              className="rounded-xl bg-ice px-4 py-2 font-semibold text-navy disabled:opacity-50"
+              className="fridge-key fridge-key-primary disabled:opacity-50"
               disabled={busy}
               onClick={() => void preview()}
             >
@@ -147,7 +147,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
             </button>
             <button
               type="button"
-              className="rounded-xl border border-line px-4 py-2 text-mute"
+              className="fridge-key"
               onClick={() => {
                 setMint(PASTA_MINT);
                 void preview(PASTA_MINT);
@@ -198,14 +198,14 @@ My current site code is: [PASTE YOUR CODE HERE]`;
           <div className="flex gap-2">
             <button
               type="button"
-              className={`rounded-lg px-3 py-1 text-sm font-semibold ${tab === "html" ? "bg-ice text-navy" : "text-mute"}`}
+              className={`fridge-tab ${tab === "html" ? "is-on" : ""}`}
               onClick={() => setTab("html")}
             >
               {"</>"} HTML snippet
             </button>
             <button
               type="button"
-              className={`rounded-lg px-3 py-1 text-sm font-semibold ${tab === "ai" ? "bg-ice text-navy" : "text-mute"}`}
+              className={`fridge-tab ${tab === "ai" ? "is-on" : ""}`}
               onClick={() => setTab("ai")}
             >
               🤖 AI prompt
@@ -216,7 +216,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
               <pre className="mt-4 overflow-x-auto rounded-xl bg-navy p-4 text-xs text-ink">{html}</pre>
               <button
                 type="button"
-                className="mt-3 rounded-xl border border-ice px-4 py-2 text-sm text-ice"
+                className="fridge-key mt-3"
                 onClick={() => copy(html, "html")}
               >
                 {copied === "html" ? "Copied!" : "Copy snippet"}
@@ -233,7 +233,7 @@ My current site code is: [PASTE YOUR CODE HERE]`;
               </pre>
               <button
                 type="button"
-                className="mt-3 rounded-xl border border-ice px-4 py-2 text-sm text-ice"
+                className="fridge-key mt-3"
                 onClick={() => copy(prompt, "ai")}
               >
                 {copied === "ai" ? "Copied!" : "Copy AI prompt"}

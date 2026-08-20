@@ -2,29 +2,31 @@ import Link from "next/link";
 
 export default function SiteNav() {
   return (
-    <nav className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 py-4">
-      <Link href="/" className="flex items-center gap-2">
-        <img
-          src="https://devfridge.cool/brand/logo-mark.jpg"
-          alt=""
-          className="h-8 w-8 rounded-lg object-cover"
-        />
-        <span className="text-xs font-bold tracking-[0.18em] text-ice">SCAN</span>
-      </Link>
-      <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
-        <Link className="text-mute hover:text-ice" href="/">
-          Scanner
+    <header className="fridge-topbar">
+      <nav className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
+          <img
+            src="https://devfridge.cool/brand/logo-mark.jpg"
+            alt=""
+            className="h-8 w-8 rounded-lg object-cover ring-1 ring-ice/30"
+          />
+          <span className="text-xs font-bold tracking-[0.18em] text-ice">SCAN</span>
         </Link>
-        <Link className="text-mute hover:text-ice" href="/#feature">
-          Get featured
-        </Link>
-        <Link className="text-mute hover:text-ice" href="/badge">
-          Badge
-        </Link>
-        <a className="text-mute hover:text-ice" href="https://devfridge.cool">
-          Fridge
-        </a>
-      </div>
-    </nav>
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
+          <Link className="fridge-key justify-center" href="/">
+            Scanner
+          </Link>
+          <Link className="fridge-key justify-center" href="/#feature">
+            Featured
+          </Link>
+          <Link className="fridge-key justify-center" href="/badge">
+            Badge
+          </Link>
+          <a className="fridge-key fridge-key-primary justify-center" href="https://devfridge.cool">
+            Fridge
+          </a>
+        </div>
+      </nav>
+    </header>
   );
 }
