@@ -73,6 +73,12 @@ function toLocalInput(unix: number): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
+function mintFromUrl(): string {
+  if (typeof window === "undefined") return "";
+  const q = new URLSearchParams(window.location.search).get("mint")?.trim() ?? "";
+  return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(q) ? q : "";
+}
+
 export default function App() {
   const {
     cluster,
@@ -85,7 +91,8 @@ export default function App() {
 
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mintInput, setMintInput] = useState("");
+  const [mintInput, setMintInput] = useState(mintFromUrl);
+  const queryMintLookedUp = useRef(false);
   const [mintInfo, setMintInfo] = useState<(MintInfo & { image?: string | null }) | null>(
     null
   );
@@ -136,6 +143,15 @@ export default function App() {
     setCookError("");
   }, [cluster]);
 
+  useEffect(() => {
+    const mint = mintFromUrl();
+    if (!mint) return;
+    setMintInput(mint);
+    const node = document.getElementById("fridge");
+    window.setTimeout(() => {
+      node?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }, []);
 
   const loadMint = useCallback(async () => {
     if (!owner) {
@@ -161,6 +177,14 @@ export default function App() {
       setMintError(err instanceof Error ? err.message : String(err));
     }
   }, [connection, mintInput, owner]);
+
+  useEffect(() => {
+    const mint = mintFromUrl();
+    if (!mint || !owner || queryMintLookedUp.current) return;
+    if (mintInput !== mint) return;
+    queryMintLookedUp.current = true;
+    void loadMint();
+  }, [owner, mintInput, loadMint]);
 
   const clusterRef = useRef(cluster);
   clusterRef.current = cluster;
