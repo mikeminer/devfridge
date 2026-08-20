@@ -1,5 +1,5 @@
 import { hasOpenVault, type FridgeStatus } from "./fridge";
-import { fmtAmount, fmtUnlock, xmlEscape } from "./format";
+import { fmtAmount, fmtUnlock, lockedPercent, xmlEscape } from "./format";
 
 export type BadgeTheme = "dark" | "light";
 export type BadgeStyle = "full" | "compact";
@@ -41,7 +41,7 @@ function compactChip(label: string, bg: string, border: string, text: string) {
 
 export function renderBadgeSvg(
   fridge: FridgeStatus,
-  opts: { theme?: BadgeTheme; style?: BadgeStyle; decimals?: number } = {}
+  opts: { theme?: BadgeTheme; style?: BadgeStyle; decimals?: number; supply?: string | null } = {}
 ): { svg: string; width: number; height: number } {
   const theme = opts.theme === "light" ? "light" : "dark";
   const style = opts.style === "compact" ? "compact" : "full";
@@ -64,25 +64,28 @@ export function renderBadgeSvg(
   if (hasOpenVault(fridge)) {
     const now = Math.floor(Date.now() / 1000);
     const live = fridge.locks.filter((l) => l.unlockAt > now);
-    const locked = fmtAmount(
-      live.length
-        ? live.reduce((s, l) => s + BigInt(l.amount), 0n).toString()
-        : fridge.activeAmount,
-      decimals
-    );
+    const liveAmount = live.length
+      ? live.reduce((s, l) => s + BigInt(l.amount), 0n).toString()
+      : "0";
+    const locked = fmtAmount(live.length ? liveAmount : fridge.activeAmount, decimals);
+    const pct = live.length ? lockedPercent(liveAmount, opts.supply) : null;
     const unlock = live.length
       ? fmtUnlock(Math.max(...live.map((l) => l.unlockAt)))
       : "until claimed";
     if (style === "compact") {
-      return { svg: compactChip("🧊 FRIDGED", t.bg, t.border, t.text), width: 160, height: 32 };
+      const label = pct ? `🧊 ${pct} FRIDGED` : "🧊 FRIDGED";
+      return { svg: compactChip(label, t.bg, t.border, t.text), width: 160, height: 32 };
     }
+    const stats = pct
+      ? `Locked: ${xmlEscape(locked)} · ${xmlEscape(pct)} of supply · Unlocks: ${xmlEscape(unlock)}`
+      : `Locked: ${xmlEscape(locked)} · Unlocks: ${xmlEscape(unlock)}`;
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="420" height="90" viewBox="0 0 420 90" role="img" aria-label="FRIDGED verified onchain">
   <rect x="0.5" y="0.5" width="419" height="89" rx="8" fill="${t.bg}" stroke="${t.border}"/>
   <text x="16" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="${t.accent}">🧊 FRIDGED · VERIFIED ONCHAIN</text>
   <text x="404" y="28" text-anchor="end" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" fill="${t.mute}">devfridge.cool</text>
-  <text x="16" y="54" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="${t.text}">Locked: ${xmlEscape(locked)} · Unlocks: ${xmlEscape(unlock)}</text>
-  <text x="16" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="${t.mute}">Live on-chain timelock · scan.devfridge.cool</text>
+  <text x="16" y="54" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="${t.text}">${stats}</text>
+  <text x="16" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="${t.mute}">Active timelock only · scan.devfridge.cool</text>
 </svg>`;
     return { svg, width: 420, height: 90 };
   }

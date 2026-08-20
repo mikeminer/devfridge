@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { fridgeForMint } from "@/lib/fridge";
 import { fallbackBadgeSvg, renderBadgeSvg, type BadgeStyle, type BadgeTheme } from "@/lib/badge";
 import { parseMint } from "@/lib/format";
+import { rpc } from "@/lib/rpc";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,8 +28,18 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const fridge = await fridgeForMint(mint);
-    const { svg } = renderBadgeSvg(fridge, { theme, style });
+    const [fridge, supplyInfo] = await Promise.all([
+      fridgeForMint(mint),
+      rpc<{ value?: { amount?: string; decimals?: number } }>("getTokenSupply", [mint]).catch(
+        () => null
+      ),
+    ]);
+    const { svg } = renderBadgeSvg(fridge, {
+      theme,
+      style,
+      supply: supplyInfo?.value?.amount ?? null,
+      decimals: supplyInfo?.value?.decimals ?? 6,
+    });
     return svgResponse(svg);
   } catch {
     return svgResponse(fallbackBadgeSvg(), 200);
