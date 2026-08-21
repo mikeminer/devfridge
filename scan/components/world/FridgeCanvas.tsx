@@ -4,7 +4,6 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   ContactShadows,
-  Environment,
   Float,
   PointerLockControls,
   Sparkles,
@@ -44,7 +43,13 @@ const SHELVES: [number, number, number, number, number, number][] = [
   [2, 0.6, -10, 6, 1.2, 1],
 ];
 
-export default function FridgeCanvas({ faction, room }: { faction: Faction; room: string }) {
+export default function FridgeCanvas({
+  faction,
+  room,
+}: {
+  faction: Faction | null;
+  room: string;
+}) {
   const [hp, setHp] = useState(100);
   const [kills, setKills] = useState(0);
   const [msg, setMsg] = useState(
@@ -73,8 +78,14 @@ export default function FridgeCanvas({ faction, room }: { faction: Faction; room
         <ambientLight intensity={0.25} />
         <pointLight position={[0, 7.4, 0]} intensity={50} color="#7dd3fc" castShadow />
         <pointLight position={[0, 2.2, 0]} intensity={18} color="#fbbf24" />
-        <Suspense fallback={null}>
-          <Environment preset="warehouse" />
+        <Suspense
+          fallback={
+            <mesh>
+              <boxGeometry args={[2, 2, 2]} />
+              <meshBasicMaterial color="#4fc3f7" wireframe />
+            </mesh>
+          }
+        >
           <Arena />
           <Player
             faction={faction}
@@ -93,11 +104,11 @@ export default function FridgeCanvas({ faction, room }: { faction: Faction; room
         </div>
         <div className="absolute left-4 top-4 ice-card pointer-events-auto max-w-xs p-3 text-xs">
           <p className="text-[10px] font-bold tracking-[0.18em] text-ice">TEAM</p>
-          <p className="mt-1 text-base font-bold" style={{ color: faction.color }}>
-            {faction.teamName}
+          <p className="mt-1 text-base font-bold" style={{ color: faction?.color || "#7dd3fc" }}>
+            {faction?.teamName || "Spectator"}
           </p>
           <p className="text-mute">
-            via ${faction.symbol} · {faction.name}
+            {faction ? `via $${faction.symbol} · ${faction.name}` : "Look around — lock a token to fight"}
           </p>
           <p className="mt-2 text-mute">HP {hp} · Kills {kills}</p>
           <p className="mt-2 text-mute">{msg}</p>
@@ -192,7 +203,7 @@ function Player({
   onKill,
   onMsg,
 }: {
-  faction: Faction;
+  faction: Faction | null;
   onHp: (n: number) => void;
   hpRef: React.MutableRefObject<number>;
   onKill: () => void;
@@ -227,7 +238,8 @@ function Player({
       .then((r) => r.json())
       .then((j: { tokens?: { mint: string; symbol?: string }[] }) => {
         const rows = j.tokens || [];
-        const enemies = rows.filter((t) => teamFromMint(t.mint) !== faction.team);
+        const myTeam = faction?.team;
+        const enemies = rows.filter((t) => !myTeam || teamFromMint(t.mint) !== myTeam);
         const spawns: [number, number][] = [
           [-10, -10],
           [10, -10],
@@ -249,7 +261,7 @@ function Player({
           };
         });
         if (bots.length === 0) {
-          const enemyTeam = faction.team === "pastalovers" ? "shelf" : "pastalovers";
+          const enemyTeam = faction?.team === "pastalovers" ? "shelf" : "pastalovers";
           bots = [
             {
               id: "bot-rival",
@@ -268,7 +280,7 @@ function Player({
         setTick((n) => n + 1);
       })
       .catch(() => {
-        const enemyTeam = faction.team === "pastalovers" ? "shelf" : "pastalovers";
+        const enemyTeam = faction?.team === "pastalovers" ? "shelf" : "pastalovers";
         dummies.current = [
           {
             id: "bot-rival",
@@ -284,7 +296,7 @@ function Player({
         ];
         setTick((n) => n + 1);
       });
-  }, [faction.team]);
+  }, [faction?.team]);
 
   useEffect(() => {
     const shoot = () => {
@@ -296,11 +308,13 @@ function Player({
         onMsg("Miss.");
         return;
       }
+      if (!faction) {
+        onMsg("Spectating — lock a token to shoot.");
+        return;
+      }
       const team = String(hit.object.userData.team || "") as WorldTeam;
       if (team && team === faction.team) {
-        onMsg(
-          `Friendly fire blocked — ${faction.teamName} don't shoot each other`
-        );
+        onMsg(`Friendly fire blocked — ${faction.teamName} don't shoot each other`);
         return;
       }
       const id = String(hit.object.userData.id || "");
@@ -319,7 +333,7 @@ function Player({
     };
     window.addEventListener("mousedown", shoot);
     return () => window.removeEventListener("mousedown", shoot);
-  }, [camera, dir, faction.team, faction.teamName, onKill, onMsg, ray, scene]);
+  }, [camera, dir, faction, onKill, onMsg, ray, scene]);
 
   useFrame((_, dt) => {
     const t = Math.min(dt, 0.05);
@@ -351,7 +365,12 @@ function Player({
       d.pos.z += Math.cos(d.yaw) * 1.2 * t;
       d.pos.x = THREE.MathUtils.clamp(d.pos.x, -16, 16);
       d.pos.z = THREE.MathUtils.clamp(d.pos.z, -16, 16);
-      if (d.team !== faction.team && d.pos.distanceTo(camera.position) < 14 && Math.random() < t * 0.25) {
+      if (
+        faction &&
+        d.team !== faction.team &&
+        d.pos.distanceTo(camera.position) < 14 &&
+        Math.random() < t * 0.25
+      ) {
         hpRef.current = Math.max(0, hpRef.current - 8);
         onHp(hpRef.current);
         if (hpRef.current <= 0) {

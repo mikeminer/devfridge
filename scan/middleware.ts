@@ -15,6 +15,9 @@ function ipOf(req: NextRequest): string {
 export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
   const path = req.nextUrl.pathname;
+  if (/\.(glb|gltf|png|jpg|jpeg|webp|svg|ico|txt|xml)$/i.test(path)) {
+    return NextResponse.next();
+  }
 
   if (host.startsWith("world.")) {
     const url = req.nextUrl.clone();

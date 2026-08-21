@@ -528,3 +528,6 @@ button {
 body.world-play {
   overflow: hidden;
 }
+body.world-play .wallet-adapter-modal {
+  z-index: 10050;
+}
