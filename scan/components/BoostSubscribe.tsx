@@ -59,15 +59,6 @@ export default function BoostSubscribe({
         throw new Error("This wallet cannot sign locally. Use Phantom or Solflare.");
       }
 
-      setStatus("Building on-chain buy & burn…");
-      const builtRes = await fetch("/api/boost/build", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ mint: m, tier, payer: publicKey.toBase58() }),
-      });
-      const built = await builtRes.json();
-      if (!builtRes.ok) throw new Error(built.error || "Could not build boost");
-
       const pendingKey = `devfridge-boost-sig:${m}:${tier}:${publicKey.toBase58()}`;
       let sig = "";
       try {
@@ -77,37 +68,82 @@ export default function BoostSubscribe({
       }
 
       const rpc = boostConnection();
-      if (!sig) {
-        setStatus("Sign once: wrap SOL, Jupiter-buy $PASTA, burn it, list the boost.");
-        const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
-        const signed = await signTransaction(tx);
-        sig = await rpc.sendRawTransaction(signed.serialize(), {
-          skipPreflight: false,
-          preflightCommitment: "confirmed",
-          maxRetries: 5,
-        });
-        try {
-          sessionStorage.setItem(pendingKey, sig);
-        } catch {
-          /* ignore */
-        }
-        setStatus("Confirming on Solana…");
-        try {
-          await rpc.confirmTransaction(
-            {
-              signature: sig,
-              blockhash: built.blockhash,
-              lastValidBlockHeight: built.lastValidBlockHeight,
-            },
-            "confirmed"
-          );
-        } catch (err) {
+      if (sig) {
+        const st = await rpc.getSignatureStatus(sig, { searchTransactionHistory: true });
+        if (!st.value) {
           try {
             sessionStorage.removeItem(pendingKey);
           } catch {
             /* ignore */
           }
-          throw err;
+          sig = "";
+        }
+      }
+      if (!sig) {
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          setStatus(
+            attempt === 1
+              ? "Building on-chain buy & burn…"
+              : "Blockhash expired — rebuilding. Sign again (you were not charged)."
+          );
+          const builtRes = await fetch("/api/boost/build", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ mint: m, tier, payer: publicKey.toBase58() }),
+          });
+          const built = await builtRes.json();
+          if (!builtRes.ok) throw new Error(built.error || "Could not build boost");
+          setStatus("Sign now — the tx expires in about a minute.");
+          const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
+          const signed = await signTransaction(tx);
+          try {
+            sig = await rpc.sendRawTransaction(signed.serialize(), {
+              skipPreflight: false,
+              preflightCommitment: "processed",
+              maxRetries: 8,
+            });
+          } catch (err) {
+            const msg = err instanceof Error ? err.message : String(err);
+            if (attempt < 2 && /block height|blockhash|expired/i.test(msg)) continue;
+            throw err;
+          }
+          try {
+            sessionStorage.setItem(pendingKey, sig);
+          } catch {
+            /* ignore */
+          }
+          setStatus("Confirming on Solana…");
+          const started = Date.now();
+          let landed = false;
+          while (Date.now() - started < 45_000) {
+            const st = await rpc.getSignatureStatus(sig, { searchTransactionHistory: true });
+            if (st.value?.err) {
+              try {
+                sessionStorage.removeItem(pendingKey);
+              } catch {
+                /* ignore */
+              }
+              throw new Error(`Boost failed on-chain: ${JSON.stringify(st.value.err)}`);
+            }
+            if (
+              st.value?.confirmationStatus === "confirmed" ||
+              st.value?.confirmationStatus === "finalized"
+            ) {
+              landed = true;
+              break;
+            }
+            await new Promise((r) => setTimeout(r, 1000));
+          }
+          if (landed) break;
+          try {
+            sessionStorage.removeItem(pendingKey);
+          } catch {
+            /* ignore */
+          }
+          if (attempt < 2) continue;
+          throw new Error(
+            `Boost transaction not confirmed yet. Check https://solscan.io/tx/${sig}`
+          );
         }
       } else {
         setStatus("Found a pending boost signature. Indexing it…");
@@ -134,6 +170,10 @@ export default function BoostSubscribe({
       if (/insufficient|debit|no record of a prior credit|0x1/i.test(raw)) {
         setStatus(
           `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.05).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees. ${raw}`
+        );
+      } else if (/block height exceeded|blockhash/i.test(raw)) {
+        setStatus(
+          "The transaction expired before it landed (Phantom took too long). You were not charged. Click Buy & burn again and approve quickly."
         );
       } else {
         setStatus(raw);

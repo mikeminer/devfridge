@@ -173,10 +173,6 @@ export async function buildProgramBoostTx(args: {
   }
 
   let lastError: Error | null = null;
-  const latest = await rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>(
-    "getLatestBlockhash",
-    [{ commitment: "confirmed" }]
-  );
 
   for (const maxAccounts of [32, 24, 16]) {
     try {
@@ -226,28 +222,18 @@ export async function buildProgramBoostTx(args: {
         );
       }
       ixs.push(boostIx);
+      const latest = await rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>(
+        "getLatestBlockhash",
+        [{ commitment: "confirmed" }]
+      );
       const message = new TransactionMessage({
         payerKey: args.payer,
         recentBlockhash: latest.value.blockhash,
         instructions: ixs,
       }).compileToV0Message(alts);
       const tx = new VersionedTransaction(message);
-      const serialized = Buffer.from(tx.serialize()).toString("base64");
-      const sim = await rpc<{ value?: { err?: unknown; logs?: string[] } }>("simulateTransaction", [
-        serialized,
-        { encoding: "base64", sigVerify: false, replaceRecentBlockhash: true },
-      ]).catch(() => null);
-      if (sim?.value?.err) {
-        const logs = (sim.value.logs || []).join("\n");
-        if (/insufficient|debit|no record of a prior credit|0x1/i.test(logs + JSON.stringify(sim.value.err))) {
-          throw new Error(
-            `Need about ${(Number(needed) / 1e9).toFixed(2)} SOL free (package + rent + fees). Phantom reported insufficient SOL during simulation.`
-          );
-        }
-        throw new Error(`Boost simulation failed: ${JSON.stringify(sim.value.err)}`);
-      }
       return {
-        transaction: serialized,
+        transaction: Buffer.from(tx.serialize()).toString("base64"),
         blockhash: latest.value.blockhash,
         lastValidBlockHeight: latest.value.lastValidBlockHeight,
         minPastaOut: route.minPastaOut.toString(),
