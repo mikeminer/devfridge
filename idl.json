@@ -1,0 +1,130 @@
+{
+  "address": "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6",
+  "metadata": {
+    "name": "fridge",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Token-2022 time-lock vaults"
+  },
+  "instructions": [
+    {
+      "name": "create_lock",
+      "discriminator": [171, 216, 92, 167, 165, 8, 153, 90],
+      "accounts": [
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "mint" },
+        { "name": "depositor_ata", "writable": true },
+        { "name": "lock", "writable": true },
+        { "name": "vault", "writable": true },
+        { "name": "token_program" },
+        { "name": "associated_token_program" },
+        { "name": "system_program" }
+      ],
+      "args": [
+        { "name": "amount", "type": "u64" },
+        { "name": "unlock_at", "type": "i64" },
+        { "name": "lock_id", "type": "u64" }
+      ]
+    },
+    {
+      "name": "claim",
+      "discriminator": [62, 198, 214, 193, 213, 159, 108, 210],
+      "accounts": [
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "mint", "writable": true },
+        { "name": "depositor_ata", "writable": true },
+        { "name": "lock", "writable": true },
+        { "name": "vault", "writable": true },
+        { "name": "burn_authority" },
+        { "name": "token_program" },
+        { "name": "associated_token_program" },
+        { "name": "system_program" }
+      ],
+      "args": [
+        { "name": "swap_data", "type": "bytes" },
+        { "name": "min_pasta_out", "type": "u64" }
+      ]
+    },
+    {
+      "name": "boost",
+      "discriminator": [198, 156, 184, 145, 58, 140, 148, 22],
+      "accounts": [
+        { "name": "payer", "writable": true, "signer": true },
+        { "name": "mint" },
+        { "name": "lock" },
+        { "name": "boost", "writable": true },
+        { "name": "wsol_mint" },
+        { "name": "wsol_ata", "writable": true },
+        { "name": "pasta_mint", "writable": true },
+        { "name": "pasta_ata", "writable": true },
+        { "name": "burn_authority" },
+        { "name": "token_program" },
+        { "name": "wsol_token_program" },
+        { "name": "associated_token_program" },
+        { "name": "system_program" }
+      ],
+      "args": [
+        { "name": "tier", "type": "u8" },
+        { "name": "swap_data", "type": "bytes" },
+        { "name": "min_pasta_out", "type": "u64" }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Lock",
+      "discriminator": [8, 255, 36, 202, 210, 22, 57, 137]
+    },
+    {
+      "name": "Boost",
+      "discriminator": [161, 53, 13, 23, 230, 62, 118, 153]
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "InvalidAmount", "msg": "Amount must be greater than zero" },
+    { "code": 6001, "name": "InvalidUnlockTime", "msg": "Unlock time must be in the future" },
+    { "code": 6002, "name": "InvalidMint", "msg": "Mint must be a Token-2022 mint" },
+    { "code": 6003, "name": "InvalidTokenAccount", "msg": "Token account mint or owner is invalid" },
+    { "code": 6004, "name": "InvalidAuthority", "msg": "Signer is not the token account authority" },
+    { "code": 6005, "name": "Unauthorized", "msg": "Only the original depositor can claim" },
+    { "code": 6006, "name": "LockNotMatured", "msg": "Lock has not reached unlock_at" },
+    { "code": 6007, "name": "Overflow", "msg": "Arithmetic overflow" },
+    { "code": 6008, "name": "InsufficientBalance", "msg": "Depositor ATA balance is below the lock amount" },
+    { "code": 6009, "name": "MissingSwapRoute", "msg": "A Jupiter route is required to buy and burn PASTA" },
+    { "code": 6010, "name": "InvalidSwapProgram", "msg": "Swap program must be Jupiter v6" },
+    { "code": 6011, "name": "BuybackFailed", "msg": "Buyback did not produce enough PASTA to burn" },
+    { "code": 6012, "name": "InvalidBoostTier", "msg": "Boost tier must be 0=24h, 1=48h, or 2=7d" },
+    { "code": 6013, "name": "NeedLiveLock", "msg": "Boost requires a live Fridge lock that has not unlocked yet" }
+  ],
+  "types": [
+    {
+      "name": "Lock",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "depositor", "type": "pubkey" },
+          { "name": "mint", "type": "pubkey" },
+          { "name": "amount", "type": "u64" },
+          { "name": "created_at", "type": "i64" },
+          { "name": "unlock_at", "type": "i64" },
+          { "name": "bump", "type": "u8" },
+          { "name": "lock_id", "type": "u64" }
+        ]
+      }
+    },
+    {
+      "name": "Boost",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "payer", "type": "pubkey" },
+          { "name": "mint", "type": "pubkey" },
+          { "name": "tier", "type": "u8" },
+          { "name": "created_at", "type": "i64" },
+          { "name": "expires_at", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    }
+  ]
+}

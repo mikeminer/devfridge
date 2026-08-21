@@ -26,6 +26,13 @@ export function scanPageUrl(mint: string): string {
 
 export const LOCK_ACCOUNT_SIZE = 105;
 export const LOCK_DISC = Uint8Array.from([8, 255, 36, 202, 210, 22, 57, 137]);
+export const BOOST_SEED = "boost";
+export const BURN_SEED = "burn";
+export const WSOL_MINT = "So11111111111111111111111111111111111111112";
+export const JUPITER_V6 = "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4";
+export const BOOST_IX_DISC = Uint8Array.from([198, 156, 184, 145, 58, 140, 148, 22]);
+export const BOOST_ACC_DISC = Uint8Array.from([161, 53, 13, 23, 230, 62, 118, 153]);
+export const BOOST_ACCOUNT_SIZE = 90;
 
 export const BOOST_TIERS = {
   "24h": { label: "24h Boost", sol: 0.1, hours: 24, fire: "🔥" },
@@ -34,3 +41,4 @@ export const BOOST_TIERS = {
 } as const;
 
 export type BoostTier = keyof typeof BOOST_TIERS;
+export const TIER_INDEX: Record<BoostTier, number> = { "24h": 0, "48h": 1, "7d": 2 };

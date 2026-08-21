@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PublicKey } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
-import { buildBoostSwap } from "@/lib/boost";
+import { buildProgramBoostTx } from "@/lib/boost";
 import { fridgeForMint } from "@/lib/fridge";
 import { parseMint } from "@/lib/format";
-import { quoteSolToPasta } from "@/lib/jupiter";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -21,9 +20,10 @@ export async function POST(req: NextRequest) {
     }
     new PublicKey(payer);
 
-    const lamports = Math.round(BOOST_TIERS[tier].sol * 1_000_000_000);
-    const [fridge, quote] = await Promise.all([fridgeForMint(mint), quoteSolToPasta(lamports)]);
-    if (fridge.status !== "fridged") {
+    const fridge = await fridgeForMint(mint);
+    const now = Math.floor(Date.now() / 1000);
+    const live = fridge.locks.find((l) => l.unlockAt > now);
+    if (fridge.status !== "fridged" || !live) {
       return NextResponse.json(
         {
           error: "Only fridged tokens can be boosted. Lock supply on devfridge.cool first.",
@@ -33,21 +33,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const built = await buildBoostSwap({
+    const built = await buildProgramBoostTx({
       payer: new PublicKey(payer),
+      mint,
       tier,
-      quote,
+      lock: live,
     });
     return NextResponse.json({
       ok: true,
-      step: "swap",
       ...built,
       hours: BOOST_TIERS[tier].hours,
       sol: BOOST_TIERS[tier].sol,
     });
   } catch (err) {
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Could not build $PASTA buy" },
+      { error: err instanceof Error ? err.message : "Could not build on-chain $PASTA boost" },
       { status: 502 }
     );
   }

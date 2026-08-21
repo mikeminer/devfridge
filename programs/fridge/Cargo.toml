@@ -22,3 +22,4 @@ test-cluster = []
 [dependencies]
 anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
 anchor-spl = { version = "0.30.1", features = ["token_2022"] }
+# token (legacy SPL) is used to wrap SOL for featured-boost Jupiter buybacks.

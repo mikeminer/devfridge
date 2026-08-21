@@ -16,19 +16,12 @@ export async function POST(req: NextRequest) {
       mint?: string;
       tier?: BoostTier;
       signature?: string;
-      swapSignature?: string;
-      payer?: string;
     };
     const mint = parseMint(body.mint || "") || "";
     const tier = body.tier;
     const signature = body.signature?.trim() || "";
-    const swapSignature = body.swapSignature?.trim() || "";
-    const payer = body.payer?.trim() || "";
-    if (!mint || !tier || !BOOST_TIERS[tier] || !signature || !swapSignature) {
-      return NextResponse.json(
-        { error: "mint, tier, swap signature and burn signature required" },
-        { status: 400 }
-      );
+    if (!mint || !tier || !BOOST_TIERS[tier] || !signature) {
+      return NextResponse.json({ error: "mint, tier and signature required" }, { status: 400 });
     }
     new PublicKey(mint);
 
@@ -43,13 +36,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const verified = await verifyBoostTransaction({
-      burnSignature: signature,
-      swapSignature,
-      mint,
-      tier,
-      payer: payer || undefined,
-    });
+    const verified = await verifyBoostTransaction({ signature, mint });
 
     let name = mint.slice(0, 4);
     let symbol = "TKN";
@@ -68,13 +55,12 @@ export async function POST(req: NextRequest) {
       name,
       symbol,
       image,
-      tier,
+      tier: verified.tier || tier,
       signature,
-      payer: "",
+      payer: verified.payer || "",
       createdAt: verified.createdAt,
       expiresAt: verified.expiresAt,
       fridged: true,
-      burned: verified.burned,
     };
     invalidateBoostChainCache();
     await addBoost(row);
@@ -82,7 +68,6 @@ export async function POST(req: NextRequest) {
       ok: true,
       boost: row,
       hours: BOOST_TIERS[tier].hours,
-      burned: verified.burned,
     });
   } catch (err) {
     return NextResponse.json(
