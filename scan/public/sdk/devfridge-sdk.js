@@ -154,24 +154,8 @@
       }
     }
 
-    // Fallback: if no plan matched but lock is active, use the smallest plan
-    // only when its minLockAmount requirement is also satisfied (or absent).
-    if (!matchedPlan && daysRemaining > 0) {
-      var smallest = planNames.slice().sort(
-        function (a, b) {
-          return this.plans[a].minLockDays - this.plans[b].minLockDays;
-        }.bind(this)
-      );
-      for (var k = 0; k < smallest.length; k++) {
-        var sp = this.plans[smallest[k]];
-        if (sp.minLockAmount != null && lockAmount < sp.minLockAmount) {
-          continue;
-        }
-        matchedPlan = smallest[k];
-        needsRenewal = daysRemaining <= sp.renewalThresholdDays;
-        break;
-      }
-    }
+    // No fallback: if no plan matched (duration too short or amount too low),
+    // the subscription is not active regardless of remaining lock time.
 
     // active requires both time remaining AND a qualifying plan
     var isActive = daysRemaining > 0 && matchedPlan !== null;
