@@ -20,6 +20,9 @@ export default function SiteNav() {
           <a className="fridge-key justify-center" href="https://scan.devfridge.cool/badge">
             Badge
           </a>
+          <a className="fridge-key justify-center" href="https://world.devfridge.cool">
+            World
+          </a>
           <a className="fridge-key justify-center" href="https://docs.devfridge.cool">
             Docs
           </a>

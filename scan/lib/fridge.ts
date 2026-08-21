@@ -122,3 +122,21 @@ export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
     };
   }
 }
+
+export async function locksForDepositor(wallet: string): Promise<FridgeLock[]> {
+  new PublicKey(wallet);
+  const rows = await rpcRace<Array<{ pubkey: string; account: { data: [string, string] } }>>(
+    "getProgramAccounts",
+    [
+      PROGRAM_ID,
+      {
+        encoding: "base64",
+        commitment: "confirmed",
+        filters: [{ memcmp: { offset: 8, bytes: wallet } }],
+      },
+    ]
+  ).catch(() => [] as Array<{ pubkey: string; account: { data: [string, string] } }>);
+  return (rows || [])
+    .map((row) => decodeLock(row.pubkey, Uint8Array.from(Buffer.from(row.account.data[0], "base64"))))
+    .filter((x): x is FridgeLock => x != null && x.depositor === wallet);
+}

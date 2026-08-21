@@ -18,6 +18,14 @@ export const DOC_PAGES: DocLink[] = [
       "Lock Solana Token-2022 supply on-chain, scan for a live Fridge, and feature a memecoin by buying and burning $PASTA.",
   },
   {
+    href: "/world",
+    slug: "world",
+    title: "Fridge world",
+    nav: "World",
+    description:
+      "Shooter inside the Fridge. Your faction is the live lock with the highest USD value. Same mint cannot kill teammates.",
+  },
+  {
     href: "/feature",
     slug: "feature",
     title: "Feature a Solana memecoin",

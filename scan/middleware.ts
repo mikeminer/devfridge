@@ -16,6 +16,19 @@ export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
   const path = req.nextUrl.pathname;
 
+  if (host.startsWith("world.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/world";
+    else if (
+      !path.startsWith("/world") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next")
+    ) {
+      url.pathname = `/world${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("docs.")) {
     const url = req.nextUrl.clone();
     if (path === "/" || path === "") url.pathname = "/docs";

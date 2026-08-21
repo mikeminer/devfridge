@@ -21,6 +21,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Trust report and Fridge badge",
   },
   {
+    label: "World",
+    href: "https://world.devfridge.cool",
+    hint: "Fridge shooter — your faction is your largest live lock",
+  },
+  {
     label: "Docs",
     href: "https://docs.devfridge.cool",
     hint: "How to fridge, scan, and feature a memecoin",
