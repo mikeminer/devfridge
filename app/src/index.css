@@ -884,6 +884,9 @@ input[type="text"], input[type="datetime-local"] {
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
+.is-open .interior {
+  z-index: 5;
+}
 
 .cavity-light {
   position: absolute;
@@ -912,14 +915,33 @@ input[type="text"], input[type="datetime-local"] {
 .cavity {
   position: relative;
   height: 100%;
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  padding: 18px 14px 16px;
-  gap: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 10px 16px 14px;
+  gap: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 231, 255, 0.45) rgba(255, 255, 255, 0.04);
+}
+.cavity::-webkit-scrollbar {
+  width: 7px;
+}
+.cavity::-webkit-scrollbar-track {
+  margin: 12px 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 99px;
+}
+.cavity::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(186, 236, 255, 0.55), rgba(79, 195, 247, 0.28));
+  border-radius: 99px;
 }
 
 .shelf {
   position: relative;
+  flex: 0 0 auto;
+  min-height: 118px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -947,7 +969,8 @@ input[type="text"], input[type="datetime-local"] {
 }
 
 .frost-loading {
-  grid-row: 1 / -1;
+  min-height: 100%;
+  flex: 1;
   display: grid;
   place-items: center;
   align-content: center;
@@ -972,10 +995,16 @@ input[type="text"], input[type="datetime-local"] {
   100% { transform: rotate(360deg) scale(0.92); opacity: 0.7; }
 }
 
-.crisper {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
+.is-open .door-toggle {
+  pointer-events: none;
+}
+.is-open .door-face.back {
+  pointer-events: auto;
+}
+.is-open .door-face.back .door-toggle {
+  pointer-events: auto;
+  inset: 18% auto 18% 0;
+  width: 72px;
 }
 
 .door {

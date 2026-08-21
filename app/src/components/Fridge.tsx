@@ -36,10 +36,10 @@ export default function Fridge({
   serialLabel,
   serialHref,
 }: Props) {
-  const shelves = Array.from({ length: SHELF_COUNT }, (_, i) =>
+  const shelfCount = Math.max(SHELF_COUNT, Math.ceil(locks.length / PER_SHELF) || SHELF_COUNT);
+  const shelves = Array.from({ length: shelfCount }, (_, i) =>
     locks.slice(i * PER_SHELF, i * PER_SHELF + PER_SHELF)
   );
-  const overflow = locks.slice(SHELF_COUNT * PER_SHELF);
 
   return (
     <div className={`fridge-stage ${open ? "is-open" : "is-closed"}`}>
@@ -90,21 +90,6 @@ export default function Fridge({
                   </div>
                 </div>
               ))
-              )}
-              {overflow.length > 0 && (
-                <div className="crisper">
-                  {overflow.map((lock) => (
-                    <TokenJar
-                      key={lock.address.toBase58()}
-                      lock={lock}
-                      now={now}
-                      compact
-                      selected={selected === lock.address.toBase58()}
-                      delay={240}
-                      onSelect={() => onSelect(lock.address.toBase58())}
-                    />
-                  ))}
-                </div>
               )}
             </div>
           </div>
