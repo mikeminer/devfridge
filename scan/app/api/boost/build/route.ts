@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Could not build on-chain $PASTA boost" },
+      { error: err instanceof Error ? err.message : "Could not build feature payment" },
       { status: 502 }
     );
   }

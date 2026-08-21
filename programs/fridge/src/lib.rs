@@ -2,6 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{
     instruction::{AccountMeta, Instruction},
     program::invoke_signed,
+    system_instruction,
 };
 use anchor_lang::system_program;
 use anchor_spl::{
@@ -18,6 +19,7 @@ declare_id!("9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6");
 pub const LOCK_SEED: &[u8] = b"lock";
 pub const BURN_SEED: &[u8] = b"burn";
 pub const BOOST_SEED: &[u8] = b"boost";
+pub const BOOST_VAULT_SEED: &[u8] = b"boost_vault";
 pub const PASTA_MINT: Pubkey = pubkey!("39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump");
 pub const WSOL_MINT: Pubkey = pubkey!("So11111111111111111111111111111111111111112");
 pub const JUPITER_V6: Pubkey = pubkey!("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
@@ -183,43 +185,101 @@ pub mod fridge {
         Ok(())
     }
 
-    /// Pay SOL. The program wraps it, Jupiter-buys $PASTA as the burn PDA, burns
-    /// that $PASTA, and writes an on-chain boost timer. One atomic tx — the payer
-    /// never holds the bought $PASTA.
-    pub fn boost<'info>(
-        ctx: Context<'_, '_, 'info, 'info, BoostFeature<'info>>,
-        tier: u8,
-        swap_data: Vec<u8>,
-        min_pasta_out: u64,
-    ) -> Result<()> {
+    /// Pay SOL into the program vault and start the on-chain featured timer.
+    /// $PASTA buy-and-burn is performed by `crank_buyback` from that vault.
+    pub fn boost(ctx: Context<BoostFeature>, tier: u8) -> Result<()> {
         let now = Clock::get()?.unix_timestamp;
         let tier_idx = tier as usize;
         require!(tier_idx < BOOST_TIER_LAMPORTS.len(), FridgeError::InvalidBoostTier);
         let lamports = BOOST_TIER_LAMPORTS[tier_idx];
         let duration = BOOST_TIER_SECS[tier_idx];
 
-        require!(
-            ctx.accounts.lock.unlock_at > now,
-            FridgeError::NeedLiveLock
-        );
+        require!(ctx.accounts.lock.unlock_at > now, FridgeError::NeedLiveLock);
         require_keys_eq!(
             ctx.accounts.lock.mint,
             ctx.accounts.mint.key(),
             FridgeError::InvalidMint
         );
 
+        if ctx.accounts.vault.lamports() == 0 {
+            let vault_bump = [ctx.bumps.vault];
+            let vault_seeds: &[&[u8]] = &[BOOST_VAULT_SEED, vault_bump.as_ref()];
+            invoke_signed(
+                &system_instruction::create_account(
+                    ctx.accounts.payer.key,
+                    ctx.accounts.vault.key,
+                    lamports,
+                    0,
+                    &system_program::ID,
+                ),
+                &[
+                    ctx.accounts.payer.to_account_info(),
+                    ctx.accounts.vault.to_account_info(),
+                    ctx.accounts.system_program.to_account_info(),
+                ],
+                &[vault_seeds],
+            )?;
+        } else {
+            system_program::transfer(
+                CpiContext::new(
+                    ctx.accounts.system_program.to_account_info(),
+                    system_program::Transfer {
+                        from: ctx.accounts.payer.to_account_info(),
+                        to: ctx.accounts.vault.to_account_info(),
+                    },
+                ),
+                lamports,
+            )?;
+        }
+
+        let boost = &mut ctx.accounts.boost;
+        let base = if boost.expires_at > now { boost.expires_at } else { now };
+        boost.payer = ctx.accounts.payer.key();
+        boost.mint = ctx.accounts.mint.key();
+        boost.tier = tier;
+        if boost.created_at == 0 {
+            boost.created_at = now;
+        }
+        boost.expires_at = base
+            .checked_add(duration)
+            .ok_or(error!(FridgeError::Overflow))?;
+        boost.bump = ctx.bumps.boost;
+        Ok(())
+    }
+
+    /// Permissionless crank: wrap SOL from the boost vault, Jupiter-buy $PASTA, burn it.
+    pub fn crank_buyback<'info>(
+        ctx: Context<'_, '_, 'info, 'info, CrankBuyback<'info>>,
+        amount: u64,
+        swap_data: Vec<u8>,
+        min_pasta_out: u64,
+    ) -> Result<()> {
+        require!(amount > 0, FridgeError::InvalidAmount);
+        let rent_min = Rent::get()?.minimum_balance(0);
+        require!(
+            ctx.accounts
+                .vault
+                .lamports()
+                .saturating_sub(rent_min)
+                >= amount,
+            FridgeError::InsufficientVault
+        );
         require!(!swap_data.is_empty(), FridgeError::MissingSwapRoute);
         require!(ctx.remaining_accounts.len() >= 1, FridgeError::MissingSwapRoute);
 
+        let vault_bump = [ctx.bumps.vault];
+        let vault_seeds: &[&[u8]] = &[BOOST_VAULT_SEED, vault_bump.as_ref()];
+
         system_program::transfer(
-            CpiContext::new(
+            CpiContext::new_with_signer(
                 ctx.accounts.system_program.to_account_info(),
                 system_program::Transfer {
-                    from: ctx.accounts.payer.to_account_info(),
+                    from: ctx.accounts.vault.to_account_info(),
                     to: ctx.accounts.wsol_ata.to_account_info(),
                 },
+                &[vault_seeds],
             ),
-            lamports,
+            amount,
         )?;
         token::sync_native(CpiContext::new(
             ctx.accounts.wsol_token_program.to_account_info(),
@@ -239,7 +299,6 @@ pub mod fridge {
         let burn_bump = [ctx.bumps.burn_authority];
         let burn_seeds: &[&[u8]] = &[BURN_SEED, burn_bump.as_ref()];
         let burn_key = ctx.accounts.burn_authority.key();
-
         let metas: Vec<AccountMeta> = jupiter_accounts
             .iter()
             .map(|acc| {
@@ -254,7 +313,6 @@ pub mod fridge {
         let mut infos = Vec::with_capacity(jupiter_accounts.len() + 1);
         infos.push(jupiter_program.clone());
         infos.extend(jupiter_accounts.iter().cloned());
-
         invoke_signed(
             &Instruction {
                 program_id: JUPITER_V6,
@@ -276,7 +334,6 @@ pub mod fridge {
             ctx.accounts.burn_authority.key(),
             FridgeError::InvalidAuthority
         );
-
         token_2022::burn(
             CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
@@ -289,19 +346,6 @@ pub mod fridge {
             ),
             ctx.accounts.pasta_ata.amount,
         )?;
-
-        let boost = &mut ctx.accounts.boost;
-        let base = if boost.expires_at > now { boost.expires_at } else { now };
-        boost.payer = ctx.accounts.payer.key();
-        boost.mint = ctx.accounts.mint.key();
-        boost.tier = tier;
-        if boost.created_at == 0 {
-            boost.created_at = now;
-        }
-        boost.expires_at = base
-            .checked_add(duration)
-            .ok_or(error!(FridgeError::Overflow))?;
-        boost.bump = ctx.bumps.boost;
         Ok(())
     }
 }
@@ -558,34 +602,47 @@ pub struct BoostFeature<'info> {
     )]
     pub boost: Box<Account<'info, Boost>>,
 
+    /// CHECK: SOL vault. Program later wraps this and burns $PASTA via crank_buyback.
+    #[account(mut, seeds = [BOOST_VAULT_SEED], bump)]
+    pub vault: UncheckedAccount<'info>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct CrankBuyback<'info> {
+    #[account(mut)]
+    pub cranker: Signer<'info>,
+
+    /// CHECK: SOL collected from boost payments.
+    #[account(mut, seeds = [BOOST_VAULT_SEED], bump)]
+    pub vault: UncheckedAccount<'info>,
+
     #[account(address = WSOL_MINT)]
     pub wsol_mint: Box<InterfaceAccount<'info, Mint>>,
 
     #[account(
         init_if_needed,
-        payer = payer,
+        payer = cranker,
         associated_token::mint = wsol_mint,
         associated_token::authority = burn_authority,
         associated_token::token_program = wsol_token_program
     )]
     pub wsol_ata: Box<InterfaceAccount<'info, TokenAccount>>,
 
-    #[account(
-        mut,
-        address = PASTA_MINT
-    )]
+    #[account(mut, address = PASTA_MINT)]
     pub pasta_mint: Box<InterfaceAccount<'info, Mint>>,
 
     #[account(
         init_if_needed,
-        payer = payer,
+        payer = cranker,
         associated_token::mint = pasta_mint,
         associated_token::authority = burn_authority,
         associated_token::token_program = token_program
     )]
     pub pasta_ata: Box<InterfaceAccount<'info, TokenAccount>>,
 
-    /// CHECK: burn PDA, Jupiter user + $PASTA burn authority. Does not hold SOL.
+    /// CHECK: Jupiter user + $PASTA burn authority.
     #[account(seeds = [BURN_SEED], bump)]
     pub burn_authority: UncheckedAccount<'info>,
 
@@ -650,6 +707,8 @@ pub enum FridgeError {
     InvalidBoostTier,
     #[msg("Boost requires a live Fridge lock that has not unlocked yet")]
     NeedLiveLock,
+    #[msg("Boost vault does not hold enough SOL to buy back $PASTA")]
+    InsufficientVault,
 }
 
 #[cfg(test)]
@@ -685,5 +744,10 @@ mod tests {
         assert_eq!(BOOST_TIER_SECS[0], 86_400);
         assert_eq!(BOOST_TIER_SECS[1], 172_800);
         assert_eq!(BOOST_TIER_SECS[2], 604_800);
+    }
+
+    #[test]
+    fn boost_vault_seed() {
+        assert_eq!(BOOST_VAULT_SEED, b"boost_vault");
     }
 }

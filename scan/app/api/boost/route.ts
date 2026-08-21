@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { PublicKey } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
-import { invalidateBoostChainCache, verifyBoostTransaction } from "@/lib/boost";
+import { invalidateBoostChainCache, runCrankBuyback, verifyBoostTransaction } from "@/lib/boost";
 import { addBoost, listBoosts } from "@/lib/store";
 import { fridgeForMint } from "@/lib/fridge";
 import { scanMint } from "@/lib/scan";
@@ -65,6 +66,7 @@ export async function POST(req: NextRequest) {
     };
     invalidateBoostChainCache();
     await addBoost(row);
+    waitUntil(runCrankBuyback().then(() => undefined, () => undefined));
     return NextResponse.json({
       ok: true,
       boost: row,

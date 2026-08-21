@@ -68,7 +68,8 @@ export default function TrustReportView({ report }: { report: Report }) {
           <h3 className="mt-1 text-xl font-bold">Three fridge slots — lock first</h3>
           <p className="mt-2 text-sm text-mute">
             24h · 0.1 SOL · 48h · 0.18 SOL · 7d · 0.5 SOL. Only tokens with a live Fridge lock can
-            boost. The SOL buys $PASTA on Jupiter and burns it. The listing lasts the whole package.
+            boost. You pay SOL; the program buys $PASTA and burns it. The listing lasts the whole
+            package.
           </p>
           <div className="mt-4 grid gap-3 opacity-70 sm:grid-cols-3">
             <div className="fridge-plan fridge-plan-24h pointer-events-none">

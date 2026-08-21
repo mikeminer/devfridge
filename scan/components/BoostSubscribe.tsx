@@ -4,12 +4,10 @@ import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import {
-  AddressLookupTableAccount,
   Connection,
   PublicKey,
+  Transaction,
   TransactionInstruction,
-  TransactionMessage,
-  VersionedTransaction,
 } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
 import { parseMint } from "@/lib/format";
@@ -39,14 +37,15 @@ type Plan = {
     keys: { pubkey: string; isSigner: boolean; isWritable: boolean }[];
     data: string;
   }>;
-  alts: { key: string; data: string }[];
-  minPastaOut?: string;
   error?: string;
 };
 
-function compilePlan(plan: Plan, payer: PublicKey, blockhash: string): VersionedTransaction {
-  const ixs = plan.instructions.map(
-    (ix) =>
+function compileLegacy(plan: Plan, payer: PublicKey, blockhash: string): Transaction {
+  const tx = new Transaction();
+  tx.feePayer = payer;
+  tx.recentBlockhash = blockhash;
+  for (const ix of plan.instructions) {
+    tx.add(
       new TransactionInstruction({
         programId: new PublicKey(ix.programId),
         keys: ix.keys.map((k) => ({
@@ -56,20 +55,9 @@ function compilePlan(plan: Plan, payer: PublicKey, blockhash: string): Versioned
         })),
         data: Buffer.from(b64ToBytes(ix.data)),
       })
-  );
-  const alts = plan.alts.map(
-    (row) =>
-      new AddressLookupTableAccount({
-        key: new PublicKey(row.key),
-        state: AddressLookupTableAccount.deserialize(b64ToBytes(row.data)),
-      })
-  );
-  const message = new TransactionMessage({
-    payerKey: payer,
-    recentBlockhash: blockhash,
-    instructions: ixs,
-  }).compileToV0Message(alts);
-  return new VersionedTransaction(message);
+    );
+  }
+  return tx;
 }
 
 export default function BoostSubscribe({
@@ -112,7 +100,7 @@ export default function BoostSubscribe({
       }
 
       const rpc = boostConnection();
-      setStatus("Building on-chain buy & burn…");
+      setStatus("Building feature payment…");
       const builtRes = await fetch("/api/boost/build", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -131,12 +119,14 @@ export default function BoostSubscribe({
             : "Blockhash expired. Sign again (you were not charged)."
         );
         const latest = await rpc.getLatestBlockhash("confirmed");
-        const tx = compilePlan(plan, publicKey, latest.blockhash);
+        const tx = compileLegacy(plan, publicKey, latest.blockhash);
         const signed = await signTransaction(tx);
         const still = await rpc.isBlockhashValid(latest.blockhash, { commitment: "processed" });
         if (!still.value) {
           if (attempt < 3) continue;
-          throw new Error("Blockhash expired while Phantom was open. You were not charged — click Buy & burn and approve immediately.");
+          throw new Error(
+            "Blockhash expired while Phantom was open. You were not charged — click Feature and approve immediately."
+          );
         }
         const wire = bytesToB64(signed.serialize());
         const sent = await fetch("/api/boost/send", {
@@ -182,17 +172,18 @@ export default function BoostSubscribe({
       if (!res.ok) throw new Error(json.error || "Boost record failed");
       const hours = BOOST_TIERS[tier].hours;
       const last = hours >= 48 ? `${Math.round(hours / 24)} days` : `${hours} hours`;
-      setStatus(`Featured for ${last}. $PASTA bought and burned in the Fridge program.`);
+      setStatus(`Featured for ${last}. The program will buy and burn $PASTA from its vault.`);
       window.dispatchEvent(new Event("devfridge:boosted"));
+      void fetch("/api/boost/crank", { method: "POST" }).catch(() => {});
     } catch (err) {
       const raw = err instanceof Error ? err.message : String(err);
       if (/insufficient|debit|no record of a prior credit|0x1/i.test(raw)) {
         setStatus(
-          `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.05).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees.`
+          `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.02).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees.`
         );
       } else if (/block height exceeded|blockhash/i.test(raw)) {
         setStatus(
-          "The transaction expired before it landed. You were not charged. Click Buy & burn again and approve Phantom immediately."
+          "The transaction expired before it landed. You were not charged. Click Feature again and approve Phantom immediately."
         );
       } else {
         setStatus(raw);
@@ -207,9 +198,9 @@ export default function BoostSubscribe({
       <p className="text-[10px] font-bold tracking-[0.2em] text-ice">GET FEATURED</p>
       <h2 className="mt-1 text-xl font-bold sm:text-2xl">Feature your fridged token</h2>
       <p className="mt-2 text-sm text-mute">
-        One signature. The Fridge program wraps your SOL, Jupiter-buys $PASTA as the burn PDA, and
-        burns it in the same transaction — you never receive that $PASTA. Approve Phantom as soon
-        as it opens. Live Fridge lock required.
+        One signature: you pay SOL and the token is featured immediately. The Fridge program later
+        wraps that SOL, Jupiter-buys $PASTA, and burns it — that $PASTA never hits your wallet. Live
+        Fridge lock required.
       </p>
 
       {!fixedMint && (
@@ -240,7 +231,7 @@ export default function BoostSubscribe({
             <span className="fridge-plan-kicker">{compact ? "Slot" : "Featured slot"}</span>
             <span className="fridge-plan-label">{BOOST_TIERS[tier].label}</span>
             <span className="fridge-plan-price">{BOOST_TIERS[tier].sol} SOL</span>
-            <span className="fridge-plan-go">{busy ? "Working…" : "Buy & burn"}</span>
+            <span className="fridge-plan-go">{busy ? "Working…" : "Feature"}</span>
           </button>
         ))}
       </div>
