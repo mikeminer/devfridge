@@ -27,6 +27,7 @@ export function rpcUrls(): string[] {
   const urls = [
     heliusUrl(),
     alchemyUrl(),
+    "https://solana-rpc.publicnode.com",
     "https://api.mainnet.solana.com",
     "https://api.mainnet-beta.solana.com",
   ].filter((u): u is string => Boolean(u));

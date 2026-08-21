@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import {
+  Connection,
   PublicKey,
   SystemProgram,
   Transaction,
@@ -12,6 +13,12 @@ import {
 import { BOOST_TIERS, TREASURY, type BoostTier } from "@/lib/constants";
 import { parseMint } from "@/lib/format";
 
+function boostConnection(): Connection {
+  const endpoint =
+    typeof window === "undefined" ? "/api/solana" : `${window.location.origin}/api/solana`;
+  return new Connection(endpoint, "confirmed");
+}
+
 export default function BoostSubscribe({
   fixedMint,
   compact,
@@ -19,8 +26,7 @@ export default function BoostSubscribe({
   fixedMint?: string;
   compact?: boolean;
 }) {
-  const { publicKey, sendTransaction, connected } = useWallet();
-  const { connection } = useConnection();
+  const { publicKey, signTransaction, connected } = useWallet();
   const { setVisible } = useWalletModal();
   const [mint, setMint] = useState(fixedMint ?? "");
   const [status, setStatus] = useState("");
@@ -48,7 +54,12 @@ export default function BoostSubscribe({
         setBusy(false);
         return;
       }
+      if (!signTransaction) {
+        throw new Error("This wallet cannot sign locally. Use Phantom or Solflare.");
+      }
+      const rpc = boostConnection();
       const lamports = Math.round(BOOST_TIERS[tier].sol * 1_000_000_000);
+      const latest = await rpc.getLatestBlockhash("confirmed");
       const tx = new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: publicKey,
@@ -61,8 +72,22 @@ export default function BoostSubscribe({
           data: Buffer.from(`devfridge-boost:${tier}:${m}`),
         })
       );
-      const sig = await sendTransaction(tx, connection);
-      await connection.confirmTransaction(sig, "confirmed");
+      tx.feePayer = publicKey;
+      tx.recentBlockhash = latest.blockhash;
+      const signed = await signTransaction(tx);
+      const sig = await rpc.sendRawTransaction(signed.serialize(), {
+        skipPreflight: false,
+        preflightCommitment: "confirmed",
+        maxRetries: 3,
+      });
+      await rpc.confirmTransaction(
+        {
+          signature: sig,
+          blockhash: latest.blockhash,
+          lastValidBlockHeight: latest.lastValidBlockHeight,
+        },
+        "confirmed"
+      );
       const res = await fetch("/api/boost", {
         method: "POST",
         headers: { "content-type": "application/json" },
