@@ -121,8 +121,12 @@
       };
     }
 
-    // Calculate original lock duration in days
-    var totalLockDays = Math.floor((best.unlockAt - best.createdAt) / 86400);
+    // Pre-compute each lock's original duration in days
+    for (var j = 0; j < activeLocks.length; j++) {
+      activeLocks[j]._durationDays = Math.floor(
+        (activeLocks[j].unlockAt - activeLocks[j].createdAt) / 86400
+      );
+    }
 
     // Match the best-fitting plan (sorted by minLockDays descending to match longest first)
     var planNames = Object.keys(this.plans);
@@ -134,24 +138,29 @@
 
     var matchedPlan = null;
     var needsRenewal = false;
-
-    // Sum amounts across all active locks (not just bestLock)
     var lockAmount = 0;
-    for (var j = 0; j < activeLocks.length; j++) {
-      lockAmount += Number(activeLocks[j].amount) || 0;
-    }
 
     for (var i = 0; i < sorted.length; i++) {
       var name = sorted[i];
       var plan = this.plans[name];
-      if (totalLockDays >= plan.minLockDays) {
-        if (plan.minLockAmount != null && lockAmount < plan.minLockAmount) {
-          continue;
+
+      // Sum only locks whose individual duration meets this plan's minLockDays
+      var qualifyingAmount = 0;
+      var hasQualifyingLock = false;
+      for (var k = 0; k < activeLocks.length; k++) {
+        if (activeLocks[k]._durationDays >= plan.minLockDays) {
+          qualifyingAmount += Number(activeLocks[k].amount) || 0;
+          hasQualifyingLock = true;
         }
-        matchedPlan = name;
-        needsRenewal = daysRemaining <= plan.renewalThresholdDays;
-        break;
       }
+
+      if (!hasQualifyingLock) continue;
+      if (plan.minLockAmount != null && qualifyingAmount < plan.minLockAmount) continue;
+
+      matchedPlan = name;
+      lockAmount = qualifyingAmount;
+      needsRenewal = daysRemaining <= plan.renewalThresholdDays;
+      break;
     }
 
     // No fallback: if no plan matched (duration too short or amount too low),
