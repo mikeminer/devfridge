@@ -232,24 +232,27 @@ export async function verifyBoostTransaction(args: {
 }) {
   await waitForTx(args.signature);
   const [pda] = boostPda(new PublicKey(args.mint));
-  const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
-    pda.toBase58(),
-    { encoding: "base64" },
-  ]);
-  if (!acc?.value?.data?.[0]) {
-    throw new Error("On-chain boost account was not created — was the program upgraded?");
+  const started = Date.now();
+  while (Date.now() - started < 20_000) {
+    const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
+      pda.toBase58(),
+      { encoding: "base64" },
+    ]).catch(() => null);
+    if (acc?.value?.data?.[0]) {
+      const row = decodeBoost(pda.toBase58(), Buffer.from(acc.value.data[0], "base64"));
+      if (row && row.expiresAt > Date.now()) {
+        return {
+          burned: "0",
+          createdAt: row.createdAt,
+          expiresAt: row.expiresAt,
+          payer: row.payer,
+          tier: row.tier,
+        };
+      }
+    }
+    await new Promise((r) => setTimeout(r, 800));
   }
-  const row = decodeBoost(pda.toBase58(), Buffer.from(acc.value.data[0], "base64"));
-  if (!row || row.expiresAt <= Date.now()) {
-    throw new Error("Boost did not land on-chain with a live expiry");
-  }
-  return {
-    burned: "0",
-    createdAt: row.createdAt,
-    expiresAt: row.expiresAt,
-    payer: row.payer,
-    tier: row.tier,
-  };
+  throw new Error("On-chain boost account was not created — was the program upgraded?");
 }
 
 let chainCache: { at: number; rows: BoostRecord[] } | null = null;

@@ -40,6 +40,21 @@ type Plan = {
   error?: string;
 };
 
+async function waitForBoostedMint(mint: string): Promise<boolean> {
+  const started = Date.now();
+  while (Date.now() - started < 20_000) {
+    try {
+      const res = await fetch("/api/feed/boosted", { cache: "no-store" });
+      const json = (await res.json()) as { tokens?: { mint?: string }[] };
+      if ((json.tokens || []).some((t) => t.mint === mint)) return true;
+    } catch {
+      /* keep polling */
+    }
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
+}
+
 function compileLegacy(plan: Plan, payer: PublicKey, blockhash: string): Transaction {
   const tx = new Transaction();
   tx.feePayer = payer;
@@ -163,16 +178,21 @@ export default function BoostSubscribe({
         throw new Error(`Boost not confirmed yet. Check https://solscan.io/tx/${sig}`);
       }
 
+      setStatus("Indexing the featured listing…");
       const res = await fetch("/api/boost", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ mint: m, tier, signature: sig }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Boost record failed");
       const hours = BOOST_TIERS[tier].hours;
       const last = hours >= 48 ? `${Math.round(hours / 24)} days` : `${hours} hours`;
-      setStatus(`Featured for ${last}. The program will buy and burn $PASTA from its vault.`);
+      const featured = `Featured for ${last}. The program will buy and burn $PASTA from its vault.`;
+      if (!res.ok) {
+        const live = await waitForBoostedMint(m);
+        if (!live) throw new Error(json.error || "Boost record failed");
+      }
+      setStatus(featured);
       window.dispatchEvent(new Event("devfridge:boosted"));
       void fetch("/api/boost/crank", { method: "POST" }).catch(() => {});
     } catch (err) {
