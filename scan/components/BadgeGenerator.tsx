@@ -22,6 +22,7 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
   const [copied, setCopied] = useState("");
   const [fridge, setFridge] = useState<FridgeStatus | null>(null);
   const [scan, setScan] = useState<TrustReport | null>(null);
+  const [tickerName, setTickerName] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,7 +34,7 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
 
   const resolved = parseMint(mint);
   const valid = Boolean(resolved);
-  const ticker = displayTicker(scan?.identity.symbol);
+  const ticker = displayTicker(tickerName || scan?.identity.symbol);
   const badgeSrc = resolved
     ? `${origin()}/api/badge?mint=${resolved}&theme=${theme}&style=${style}`
     : "";
@@ -87,18 +88,33 @@ My current site code is: [PASTE YOUR CODE HERE]`;
     setMint(v);
     setError("");
     setBusy(true);
+    setScan(null);
+    setTickerName("");
     try {
-      const [f, s] = await Promise.all([
-        fetch(`/api/fridge?mint=${v}`).then((r) => r.json()),
-        fetch(`/api/scan?mint=${v}`).then((r) => r.json()),
+      const [f, t] = await Promise.all([
+        fetch(`/api/fridge?mint=${v}`, { signal: AbortSignal.timeout(8000) }).then((r) => r.json()),
+        fetch(`/api/ticker?mint=${v}`, { signal: AbortSignal.timeout(4000) })
+          .then((r) => r.json())
+          .catch(() => ({ ticker: "" })),
       ]);
       setFridge(f);
-      setScan(s.error ? null : s);
+      if (t?.ticker) setTickerName(String(t.ticker));
     } catch {
       setError("Could not preview badge");
     } finally {
       setBusy(false);
     }
+    void fetch(`/api/scan?mint=${v}`)
+      .then((r) => r.json())
+      .then((s) => {
+        if (!s?.error) {
+          setScan(s);
+          if (s?.identity?.symbol) {
+            setTickerName((prev) => prev || s.identity.symbol);
+          }
+        }
+      })
+      .catch(() => undefined);
   }
 
   function copy(text: string, which: string) {

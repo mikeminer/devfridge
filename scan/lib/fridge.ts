@@ -1,6 +1,9 @@
 import { PublicKey } from "@solana/web3.js";
 import { LOCK_ACCOUNT_SIZE, LOCK_DISC, PROGRAM_ID } from "./constants";
-import { rpc } from "./rpc";
+import { rpcRace } from "./rpc";
+
+const fridgeMemo = new Map<string, { at: number; value: FridgeStatus }>();
+const FRIDGE_TTL_MS = 30_000;
 
 export type FridgeLock = {
   address: string;
@@ -54,8 +57,10 @@ export function decodeLock(address: string, data: Uint8Array): FridgeLock | null
 }
 
 export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
+  const hit = fridgeMemo.get(mint);
+  if (hit && Date.now() - hit.at < FRIDGE_TTL_MS) return hit.value;
   try {
-    const rows = await rpc<
+    const rows = await rpcRace<
       Array<{ pubkey: string; account: { data: [string, string] } }>
     >("getProgramAccounts", [
       PROGRAM_ID,
@@ -77,32 +82,35 @@ export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
     const expired = locks.filter((l) => l.unlockAt <= now).sort((a, b) => b.unlockAt - a.unlockAt);
     const sum = (rows: FridgeLock[]) => rows.reduce((s, l) => s + BigInt(l.amount), 0n).toString();
     const ordered = [...active, ...expired];
+    let value: FridgeStatus;
     if (active.length > 0) {
-      return {
+      value = {
         status: "fridged",
         locks: ordered,
         activeAmount: sum(active),
         unlockAt: active[0].unlockAt,
         depositor: active[0].depositor,
       };
-    }
-    if (locks.length > 0) {
+    } else if (locks.length > 0) {
       const last = expired[0];
-      return {
+      value = {
         status: "expired",
         locks: ordered,
         activeAmount: sum(locks),
         unlockAt: last.unlockAt,
         depositor: last.depositor,
       };
+    } else {
+      value = {
+        status: "none",
+        locks: [],
+        activeAmount: "0",
+        unlockAt: null,
+        depositor: null,
+      };
     }
-    return {
-      status: "none",
-      locks: [],
-      activeAmount: "0",
-      unlockAt: null,
-      depositor: null,
-    };
+    fridgeMemo.set(mint, { at: Date.now(), value });
+    return value;
   } catch (err) {
     return {
       status: "unavailable",

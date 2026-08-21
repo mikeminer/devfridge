@@ -50,7 +50,7 @@ export async function rpc<T = unknown>(
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
         cache: "no-store",
-        signal: AbortSignal.timeout(12000),
+        signal: AbortSignal.timeout(5000),
       });
       const json = (await res.json()) as { result?: T; error?: { message?: string } };
       if (!res.ok || json.error) {
@@ -63,4 +63,42 @@ export async function rpc<T = unknown>(
     }
   }
   throw new Error(errors[0] || "RPC failed");
+}
+
+/** First healthy provider wins — used for slow GPAs so a hung RPC does not block the UI. */
+export async function rpcRace<T = unknown>(method: string, params: unknown[]): Promise<T> {
+  const urls = rpcUrls();
+  if (urls.length === 0) throw new Error("RPC failed");
+  const errors: string[] = [];
+  return await new Promise<T>((resolve, reject) => {
+    let pending = urls.length;
+    let done = false;
+    for (const url of urls) {
+      fetch(url, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(6000),
+      })
+        .then(async (res) => {
+          const json = (await res.json()) as { result?: T; error?: { message?: string } };
+          if (!res.ok || json.error) {
+            throw new Error(json.error?.message || String(res.status));
+          }
+          return json.result as T;
+        })
+        .then((result) => {
+          if (!done) {
+            done = true;
+            resolve(result);
+          }
+        })
+        .catch((err) => {
+          errors.push(`${rpcLabel(url)}: ${err instanceof Error ? err.message : String(err)}`);
+          pending -= 1;
+          if (!done && pending === 0) reject(new Error(errors[0] || "RPC failed"));
+        });
+    }
+  });
 }

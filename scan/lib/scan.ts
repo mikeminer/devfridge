@@ -169,21 +169,6 @@ async function stonkCoin(mint: string) {
   }
 }
 
-async function tokenAge(mint: string): Promise<number | null> {
-  try {
-    const sigs = await rpc<Array<{ blockTime?: number | null }>>(
-      "getSignaturesForAddress",
-      [mint, { limit: 1000 }]
-    );
-    if (!sigs?.length) return null;
-    const last = sigs[sigs.length - 1];
-    if (!last.blockTime) return null;
-    return Math.max(0, Math.floor(Date.now() / 1000) - last.blockTime);
-  } catch {
-    return null;
-  }
-}
-
 async function firstTxPrograms(mint: string): Promise<string[]> {
   try {
     const sigs = await rpc<Array<{ signature: string }>>("getSignaturesForAddress", [
@@ -376,7 +361,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   const mintKey = mint.toBase58();
 
   const conn = connection();
-  const [fridge, jupTok, price, dexData, pump, isStonk, age, programs, mpl] =
+  const [fridge, jupTok, price, dexData, pump, isStonk, programs, mpl] =
     await Promise.all([
       fridgeForMint(mintKey),
       jupiterToken(mintKey),
@@ -384,7 +369,6 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       dex(mintKey),
       pumpCoin(mintKey),
       stonkCoin(mintKey),
-      tokenAge(mintKey),
       firstTxPrograms(mintKey),
       metaplexMeta(mintKey),
     ]);
@@ -640,7 +624,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       platform,
       ageSeconds: pump?.created_timestamp
         ? Math.max(0, Math.floor(Date.now() / 1000) - Math.floor(pump.created_timestamp / 1000))
-        : age,
+        : null,
       tokenProgram,
       decimals,
     },
