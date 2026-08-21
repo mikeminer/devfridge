@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { Connection, VersionedTransaction } from "@solana/web3.js";
+import { Connection, Transaction, VersionedTransaction } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
 import { fmtAmount, parseMint } from "@/lib/format";
 
@@ -20,6 +20,10 @@ function b64ToBytes(b64: string): Uint8Array {
   return out;
 }
 
+function pendingKey(payer: string, mint: string, tier: string) {
+  return `devfridge-boost:${payer}:${mint}:${tier}`;
+}
+
 export default function BoostSubscribe({
   fixedMint,
   compact,
@@ -34,6 +38,24 @@ export default function BoostSubscribe({
   const [busy, setBusy] = useState(false);
   const [needFridge, setNeedFridge] = useState(false);
 
+  async function sendAndConfirm(
+    rpc: Connection,
+    signed: Transaction | VersionedTransaction,
+    blockhash?: string,
+    lastValidBlockHeight?: number
+  ) {
+    const sig = await rpc.sendRawTransaction(signed.serialize(), {
+      skipPreflight: signed instanceof VersionedTransaction,
+      maxRetries: 4,
+    });
+    if (blockhash && lastValidBlockHeight) {
+      await rpc.confirmTransaction({ signature: sig, blockhash, lastValidBlockHeight }, "confirmed");
+    } else {
+      await rpc.confirmTransaction(sig, "confirmed");
+    }
+    return sig;
+  }
+
   async function boost(tier: BoostTier) {
     setStatus("");
     setNeedFridge(false);
@@ -47,6 +69,8 @@ export default function BoostSubscribe({
       return;
     }
     setBusy(true);
+    const payer = publicKey.toBase58();
+    const key = pendingKey(payer, m, tier);
     try {
       const fridge = await fetch(`/api/fridge?mint=${m}`).then((r) => r.json());
       if (fridge.status !== "fridged") {
@@ -59,52 +83,91 @@ export default function BoostSubscribe({
         throw new Error("This wallet cannot sign locally. Use Phantom or Solflare.");
       }
 
-      setStatus("Quoting Jupiter to buy $PASTA…");
-      const builtRes = await fetch("/api/boost/build", {
+      const rpc = boostConnection();
+      let swapSig = "";
+      try {
+        swapSig = sessionStorage.getItem(key) || "";
+      } catch {
+        swapSig = "";
+      }
+
+      if (!swapSig) {
+        setStatus("Sign 1 of 2: Jupiter buys $PASTA with your SOL…");
+        const builtRes = await fetch("/api/boost/build", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ mint: m, tier, payer }),
+        });
+        const built = await builtRes.json();
+        if (!builtRes.ok) throw new Error(built.error || "Could not build $PASTA buy");
+        const swapTx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
+        const signedSwap = await signTransaction(swapTx);
+        swapSig = await sendAndConfirm(rpc, signedSwap, undefined, built.lastValidBlockHeight);
+        try {
+          sessionStorage.setItem(key, swapSig);
+        } catch {
+          /* ignore */
+        }
+      } else {
+        setStatus("Swap already landed. Sign 2 of 2 to burn $PASTA…");
+      }
+
+      setStatus("Sign 2 of 2: burn $PASTA and list the boost…");
+      const burnRes = await fetch("/api/boost/burn-build", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ mint: m, tier, payer: publicKey.toBase58() }),
+        body: JSON.stringify({ mint: m, tier, payer, swapSignature: swapSig }),
       });
-      const built = await builtRes.json();
-      if (!builtRes.ok) throw new Error(built.error || "Could not build $PASTA buyback");
-
-      setStatus("Sign to buy $PASTA and burn it…");
-      const rpc = boostConnection();
-      const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
-      const signed = await signTransaction(tx);
-      const sig = await rpc.sendRawTransaction(signed.serialize(), {
-        skipPreflight: true,
-        maxRetries: 3,
-      });
-      try {
-        await rpc.confirmTransaction(
-          {
-            signature: sig,
-            blockhash: built.blockhash,
-            lastValidBlockHeight: built.lastValidBlockHeight,
-          },
-          "confirmed"
-        );
-      } catch {
-        /* server verify retries getTransaction */
-      }
+      const burnBuilt = await burnRes.json();
+      if (!burnRes.ok) throw new Error(burnBuilt.error || "Could not build $PASTA burn");
+      const burnTx = Transaction.from(b64ToBytes(burnBuilt.transaction));
+      const signedBurn = await signTransaction(burnTx);
+      const burnSig = await sendAndConfirm(
+        rpc,
+        signedBurn,
+        burnBuilt.blockhash,
+        burnBuilt.lastValidBlockHeight
+      );
 
       const res = await fetch("/api/boost", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ mint: m, tier, signature: sig }),
+        body: JSON.stringify({
+          mint: m,
+          tier,
+          signature: burnSig,
+          swapSignature: swapSig,
+          payer,
+        }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Boost record failed");
-      const burned = json.burned ? fmtAmount(String(json.burned), 6) : fmtAmount(String(built.outAmount || "0"), 6);
+      try {
+        sessionStorage.removeItem(key);
+      } catch {
+        /* ignore */
+      }
+      const burned = json.burned
+        ? fmtAmount(String(json.burned), 6)
+        : fmtAmount(String(burnBuilt.amount || "0"), 6);
       const hours = BOOST_TIERS[tier].hours;
       const last = hours >= 48 ? `${Math.round(hours / 24)} days` : `${hours} hours`;
-      setStatus(
-        `Featured for ${last}. Jupiter bought and burned ${burned} $PASTA.`
-      );
+      setStatus(`Featured for ${last}. Burned ${burned} $PASTA.`);
       window.dispatchEvent(new Event("devfridge:boosted"));
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : String(err));
+      const msg = err instanceof Error ? err.message : String(err);
+      const pending = (() => {
+        try {
+          return Boolean(sessionStorage.getItem(key));
+        } catch {
+          return false;
+        }
+      })();
+      setStatus(
+        pending
+          ? `${msg} SOL already bought $PASTA — click Buy & burn again to sign only the burn.`
+          : msg
+      );
     } finally {
       setBusy(false);
     }
@@ -115,8 +178,9 @@ export default function BoostSubscribe({
       <p className="text-[10px] font-bold tracking-[0.2em] text-ice">GET FEATURED</p>
       <h2 className="mt-1 text-xl font-bold sm:text-2xl">Feature your fridged token</h2>
       <p className="mt-2 text-sm text-mute">
-        Pay SOL. Jupiter buys $PASTA and burns it. Your token stays in the Boosted feed for the
-        whole package (24h, 48h, or 7 days). Only tokens with a live Fridge lock can subscribe.
+        Two signatures, on purpose: Jupiter buys $PASTA, then a second tx burns it. That split is
+        more reliable than stuffing the burn into Jupiter&apos;s swap. Your token stays in Boosted
+        for the whole package (24h, 48h, or 7 days). Live Fridge lock required.
       </p>
 
       {!fixedMint && (

@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PublicKey } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
-import { buildBoostSwap } from "@/lib/boost";
+import { buildBoostBurn, pastaBoughtInSwap } from "@/lib/boost";
 import { fridgeForMint } from "@/lib/fridge";
 import { parseMint } from "@/lib/format";
-import { quoteSolToPasta } from "@/lib/jupiter";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,17 +11,25 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as { mint?: string; tier?: BoostTier; payer?: string };
+    const body = (await req.json()) as {
+      mint?: string;
+      tier?: BoostTier;
+      payer?: string;
+      swapSignature?: string;
+    };
     const mint = parseMint(body.mint || "");
     const tier = body.tier;
     const payer = body.payer?.trim() || "";
-    if (!mint || !tier || !BOOST_TIERS[tier] || !payer) {
-      return NextResponse.json({ error: "mint, tier and payer required" }, { status: 400 });
+    const swapSignature = body.swapSignature?.trim() || "";
+    if (!mint || !tier || !BOOST_TIERS[tier] || !payer || !swapSignature) {
+      return NextResponse.json(
+        { error: "mint, tier, payer and swapSignature required" },
+        { status: 400 }
+      );
     }
     new PublicKey(payer);
 
-    const lamports = Math.round(BOOST_TIERS[tier].sol * 1_000_000_000);
-    const [fridge, quote] = await Promise.all([fridgeForMint(mint), quoteSolToPasta(lamports)]);
+    const fridge = await fridgeForMint(mint);
     if (fridge.status !== "fridged") {
       return NextResponse.json(
         {
@@ -33,21 +40,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const built = await buildBoostSwap({
+    const amount = await pastaBoughtInSwap(swapSignature, payer);
+    const built = await buildBoostBurn({
       payer: new PublicKey(payer),
+      mint,
       tier,
-      quote,
+      amount,
     });
     return NextResponse.json({
       ok: true,
-      step: "swap",
+      step: "burn",
       ...built,
-      hours: BOOST_TIERS[tier].hours,
-      sol: BOOST_TIERS[tier].sol,
     });
   } catch (err) {
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Could not build $PASTA buy" },
+      { error: err instanceof Error ? err.message : "Could not build $PASTA burn" },
       { status: 502 }
     );
   }

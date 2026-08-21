@@ -1,41 +1,14 @@
-import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import { PASTA_MINT } from "./constants";
 
 const SOL_MINT = "So11111111111111111111111111111111111111112";
 const QUOTE_URL = "https://lite-api.jup.ag/swap/v1/quote";
-const SWAP_IX_URL = "https://lite-api.jup.ag/swap/v1/swap-instructions";
-
-type SerializedIx = {
-  programId: string;
-  accounts: Array<{ pubkey: string; isSigner: boolean; isWritable: boolean }>;
-  data: string;
-};
+const SWAP_URL = "https://lite-api.jup.ag/swap/v1/swap";
 
 export type JupiterQuote = {
   outAmount: string;
   otherAmountThreshold: string;
   raw: unknown;
 };
-
-export type JupiterSwapIxs = {
-  compute: TransactionInstruction[];
-  setup: TransactionInstruction[];
-  swap: TransactionInstruction;
-  cleanup: TransactionInstruction[];
-  lookupTableAddresses: PublicKey[];
-};
-
-function decodeIx(raw: SerializedIx): TransactionInstruction {
-  return new TransactionInstruction({
-    programId: new PublicKey(raw.programId),
-    keys: raw.accounts.map((a) => ({
-      pubkey: new PublicKey(a.pubkey),
-      isSigner: a.isSigner,
-      isWritable: a.isWritable,
-    })),
-    data: Buffer.from(raw.data, "base64"),
-  });
-}
 
 export async function quoteSolToPasta(lamports: number): Promise<JupiterQuote> {
   const url =
@@ -58,12 +31,11 @@ export async function quoteSolToPasta(lamports: number): Promise<JupiterQuote> {
   };
 }
 
-export async function pastaBuyInstructions(args: {
+export async function swapSolToPastaTx(args: {
   quote: JupiterQuote;
   payer: string;
-  destinationTokenAccount: string;
-}): Promise<JupiterSwapIxs> {
-  const res = await fetch(SWAP_IX_URL, {
+}): Promise<{ swapTransaction: string; lastValidBlockHeight?: number }> {
+  const res = await fetch(SWAP_URL, {
     method: "POST",
     headers: { "content-type": "application/json" },
     cache: "no-store",
@@ -71,28 +43,23 @@ export async function pastaBuyInstructions(args: {
     body: JSON.stringify({
       quoteResponse: args.quote.raw,
       userPublicKey: args.payer,
-      destinationTokenAccount: args.destinationTokenAccount,
       wrapAndUnwrapSol: true,
       dynamicComputeUnitLimit: true,
+      prioritizationFeeLamports: "auto",
       asLegacyTransaction: false,
     }),
   });
-  const swap = (await res.json().catch(() => ({}))) as {
-    computeBudgetInstructions?: SerializedIx[];
-    setupInstructions?: SerializedIx[];
-    swapInstruction?: SerializedIx;
-    cleanupInstruction?: SerializedIx;
-    addressLookupTableAddresses?: string[];
+  const json = (await res.json().catch(() => ({}))) as {
+    swapTransaction?: string;
+    lastValidBlockHeight?: number;
     error?: string;
+    simulationError?: unknown;
   };
-  if (!res.ok || !swap.swapInstruction) {
-    throw new Error(swap.error || "Jupiter did not return a $PASTA buy instruction.");
+  if (!res.ok || !json.swapTransaction) {
+    throw new Error(json.error || "Jupiter did not return a $PASTA swap transaction.");
   }
   return {
-    compute: (swap.computeBudgetInstructions ?? []).map(decodeIx),
-    setup: (swap.setupInstructions ?? []).map(decodeIx),
-    swap: decodeIx(swap.swapInstruction),
-    cleanup: swap.cleanupInstruction ? [decodeIx(swap.cleanupInstruction)] : [],
-    lookupTableAddresses: (swap.addressLookupTableAddresses ?? []).map((a) => new PublicKey(a)),
+    swapTransaction: json.swapTransaction,
+    lastValidBlockHeight: json.lastValidBlockHeight,
   };
 }

@@ -16,12 +16,19 @@ export async function POST(req: NextRequest) {
       mint?: string;
       tier?: BoostTier;
       signature?: string;
+      swapSignature?: string;
+      payer?: string;
     };
     const mint = parseMint(body.mint || "") || "";
     const tier = body.tier;
     const signature = body.signature?.trim() || "";
-    if (!mint || !tier || !BOOST_TIERS[tier] || !signature) {
-      return NextResponse.json({ error: "mint, tier and signature required" }, { status: 400 });
+    const swapSignature = body.swapSignature?.trim() || "";
+    const payer = body.payer?.trim() || "";
+    if (!mint || !tier || !BOOST_TIERS[tier] || !signature || !swapSignature) {
+      return NextResponse.json(
+        { error: "mint, tier, swap signature and burn signature required" },
+        { status: 400 }
+      );
     }
     new PublicKey(mint);
 
@@ -36,7 +43,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const verified = await verifyBoostTransaction(signature, { mint, tier });
+    const verified = await verifyBoostTransaction({
+      burnSignature: signature,
+      swapSignature,
+      mint,
+      tier,
+      payer: payer || undefined,
+    });
 
     let name = mint.slice(0, 4);
     let symbol = "TKN";

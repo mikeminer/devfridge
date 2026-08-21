@@ -1,28 +1,38 @@
 import {
-  AddressLookupTableAccount,
+  ComputeBudgetProgram,
   PublicKey,
+  Transaction,
   TransactionInstruction,
-  TransactionMessage,
-  VersionedTransaction,
 } from "@solana/web3.js";
 import {
   TOKEN_2022_PROGRAM_ID,
   createAssociatedTokenAccountIdempotentInstruction,
+  createTransferCheckedInstruction,
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
 import { BURN_ADDRESS, BOOST_TIERS, PASTA_MINT, type BoostTier } from "./constants";
-import { pastaBuyInstructions, quoteSolToPasta, type JupiterQuote } from "./jupiter";
+import { quoteSolToPasta, swapSolToPastaTx, type JupiterQuote } from "./jupiter";
 import { rpc } from "./rpc";
 import type { BoostRecord } from "./store";
 
 export const BOOST_MEMO_PROGRAM = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr";
 const MEMO_RE = /devfridge-boost:(24h|48h|7d):([1-9A-HJ-NP-Za-km-z]{32,44})/;
+const PASTA_DECIMALS = 6;
 
 export function pastaBurnAta(): PublicKey {
   return getAssociatedTokenAddressSync(
     new PublicKey(PASTA_MINT),
     new PublicKey(BURN_ADDRESS),
     true,
+    TOKEN_2022_PROGRAM_ID
+  );
+}
+
+export function pastaUserAta(payer: PublicKey): PublicKey {
+  return getAssociatedTokenAddressSync(
+    new PublicKey(PASTA_MINT),
+    payer,
+    false,
     TOKEN_2022_PROGRAM_ID
   );
 }
@@ -41,77 +51,32 @@ export function boostMemo(tier: BoostTier, mint: string): string {
   return `devfridge-boost:${tier}:${mint}`;
 }
 
-export async function buildBoostTransaction(args: {
+export async function buildBoostSwap(args: {
   payer: PublicKey;
-  mint: string;
   tier: BoostTier;
   quote?: JupiterQuote;
 }): Promise<{
   transaction: string;
   outAmount: string;
   minPastaOut: string;
-  destAta: string;
-  blockhash: string;
-  lastValidBlockHeight: number;
+  lastValidBlockHeight?: number;
 }> {
   const lamports = Math.round(BOOST_TIERS[args.tier].sol * 1_000_000_000);
-  const destAta = pastaBurnAta();
   const quote = args.quote ?? (await quoteSolToPasta(lamports));
-  const swap = await pastaBuyInstructions({
+  const swap = await swapSolToPastaTx({
     quote,
     payer: args.payer.toBase58(),
-    destinationTokenAccount: destAta.toBase58(),
   });
-
-  const createAta = createAssociatedTokenAccountIdempotentInstruction(
-    args.payer,
-    destAta,
-    new PublicKey(BURN_ADDRESS),
-    new PublicKey(PASTA_MINT),
-    TOKEN_2022_PROGRAM_ID
-  );
-  const memo = new TransactionInstruction({
-    programId: new PublicKey(BOOST_MEMO_PROGRAM),
-    keys: [{ pubkey: args.payer, isSigner: true, isWritable: false }],
-    data: Buffer.from(boostMemo(args.tier, args.mint), "utf8"),
-  });
-
-  const ixs = [...swap.compute, createAta, ...swap.setup, swap.swap, ...swap.cleanup, memo];
-  const [alts, latest] = await Promise.all([
-    Promise.all(swap.lookupTableAddresses.map((addr) => loadLookupTable(addr))),
-    rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>("getLatestBlockhash", [
-      { commitment: "confirmed" },
-    ]),
-  ]);
-  const message = new TransactionMessage({
-    payerKey: args.payer,
-    recentBlockhash: latest.value.blockhash,
-    instructions: ixs,
-  }).compileToV0Message(alts.filter((a): a is AddressLookupTableAccount => Boolean(a)));
-  const tx = new VersionedTransaction(message);
   return {
-    transaction: Buffer.from(tx.serialize()).toString("base64"),
+    transaction: swap.swapTransaction,
     outAmount: quote.outAmount,
     minPastaOut: quote.otherAmountThreshold,
-    destAta: destAta.toBase58(),
-    blockhash: latest.value.blockhash,
-    lastValidBlockHeight: latest.value.lastValidBlockHeight,
+    lastValidBlockHeight: swap.lastValidBlockHeight,
   };
 }
 
-async function loadLookupTable(addr: PublicKey): Promise<AddressLookupTableAccount | null> {
-  const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
-    addr.toBase58(),
-    { encoding: "base64" },
-  ]).catch(() => null);
-  if (!acc?.value?.data?.[0]) return null;
-  return new AddressLookupTableAccount({
-    key: addr,
-    state: AddressLookupTableAccount.deserialize(Buffer.from(acc.value.data[0], "base64")),
-  });
-}
-
 type TokenBal = {
+  accountIndex?: number;
   mint?: string;
   owner?: string;
   uiTokenAmount?: { amount?: string };
@@ -130,54 +95,151 @@ type RpcTx = {
   transaction?: { message?: unknown };
 };
 
-function pastaDeltaToBurn(tx: RpcTx): bigint {
-  const pre = BigInt(
-    (tx.meta?.preTokenBalances || []).find((b) => b.mint === PASTA_MINT && b.owner === BURN_ADDRESS)
-      ?.uiTokenAmount?.amount || "0"
-  );
-  const post = BigInt(
-    (tx.meta?.postTokenBalances || []).find((b) => b.mint === PASTA_MINT && b.owner === BURN_ADDRESS)
-      ?.uiTokenAmount?.amount || "0"
-  );
-  return post > pre ? post - pre : 0n;
-}
-
-export async function verifyBoostTransaction(signature: string, expect: { mint: string; tier: BoostTier }) {
+async function waitForTx(signature: string): Promise<RpcTx> {
   let tx: RpcTx | null = null;
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 10; i++) {
     tx = await rpc<RpcTx | null>("getTransaction", [
       signature,
       { encoding: "jsonParsed", maxSupportedTransactionVersion: 0, commitment: "confirmed" },
     ]).catch(() => null);
-    if (tx?.meta && !tx.meta.err) break;
-    if (tx?.meta?.err) throw new Error("Boost transaction failed on-chain");
-    await new Promise((r) => setTimeout(r, 750));
+    if (tx?.meta && !tx.meta.err) return tx;
+    if (tx?.meta?.err) {
+      const err = JSON.stringify(tx.meta.err);
+      throw new Error(`Transaction failed on-chain: ${err}`);
+    }
+    await new Promise((r) => setTimeout(r, 800));
   }
-  if (!tx || !tx.meta || tx.meta.err) {
-    throw new Error("Boost transaction not confirmed");
+  throw new Error("Transaction not confirmed yet — try Buy & burn again to finish the burn.");
+}
+
+function tokenDelta(tx: RpcTx, mint: string, owner?: string): bigint {
+  const pres = tx.meta?.preTokenBalances || [];
+  const posts = tx.meta?.postTokenBalances || [];
+  if (owner) {
+    const pre = BigInt(
+      pres.find((b) => b.mint === mint && b.owner === owner)?.uiTokenAmount?.amount || "0"
+    );
+    const post = BigInt(
+      posts.find((b) => b.mint === mint && b.owner === owner)?.uiTokenAmount?.amount || "0"
+    );
+    if (post > pre) return post - pre;
   }
-  const blob = `${JSON.stringify(tx)}\n${(tx.meta?.logMessages || []).join("\n")}`;
+  let best = 0n;
+  for (const post of posts) {
+    if (post.mint !== mint || post.owner === BURN_ADDRESS) continue;
+    const preRow = pres.find((p) => p.accountIndex === post.accountIndex);
+    const d =
+      BigInt(post.uiTokenAmount?.amount || "0") - BigInt(preRow?.uiTokenAmount?.amount || "0");
+    if (d > best) best = d;
+  }
+  return best;
+}
+
+export async function pastaBoughtInSwap(swapSignature: string, payer: string): Promise<bigint> {
+  const tx = await waitForTx(swapSignature);
+  const got = tokenDelta(tx, PASTA_MINT, payer);
+  if (got <= 0n) {
+    throw new Error("Jupiter swap did not deliver $PASTA to your wallet.");
+  }
+  return got;
+}
+
+export async function buildBoostBurn(args: {
+  payer: PublicKey;
+  mint: string;
+  tier: BoostTier;
+  amount: bigint;
+}): Promise<{
+  transaction: string;
+  blockhash: string;
+  lastValidBlockHeight: number;
+  amount: string;
+}> {
+  if (args.amount <= 0n) throw new Error("Nothing to burn");
+  const payer = args.payer;
+  const userAta = pastaUserAta(payer);
+  const burnAta = pastaBurnAta();
+  const pasta = new PublicKey(PASTA_MINT);
+
+  const tx = new Transaction().add(
+    ComputeBudgetProgram.setComputeUnitLimit({ units: 200_000 }),
+    ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 100_000 }),
+    createAssociatedTokenAccountIdempotentInstruction(
+      payer,
+      burnAta,
+      new PublicKey(BURN_ADDRESS),
+      pasta,
+      TOKEN_2022_PROGRAM_ID
+    ),
+    createTransferCheckedInstruction(
+      userAta,
+      pasta,
+      burnAta,
+      payer,
+      args.amount,
+      PASTA_DECIMALS,
+      [],
+      TOKEN_2022_PROGRAM_ID
+    ),
+    new TransactionInstruction({
+      programId: new PublicKey(BOOST_MEMO_PROGRAM),
+      keys: [{ pubkey: payer, isSigner: true, isWritable: false }],
+      data: Buffer.from(boostMemo(args.tier, args.mint), "utf8"),
+    })
+  );
+  tx.feePayer = payer;
+  const latest = await rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>(
+    "getLatestBlockhash",
+    [{ commitment: "confirmed" }]
+  );
+  tx.recentBlockhash = latest.value.blockhash;
+  return {
+    transaction: tx.serialize({ requireAllSignatures: false, verifySignatures: false }).toString("base64"),
+    blockhash: latest.value.blockhash,
+    lastValidBlockHeight: latest.value.lastValidBlockHeight,
+    amount: args.amount.toString(),
+  };
+}
+
+export async function verifyBoostTransaction(args: {
+  burnSignature: string;
+  swapSignature: string;
+  mint: string;
+  tier: BoostTier;
+  payer?: string;
+}) {
+  const burnTx = await waitForTx(args.burnSignature);
+  const blob = `${JSON.stringify(burnTx)}\n${(burnTx.meta?.logMessages || []).join("\n")}`;
   const memo = parseBoostMemo(blob);
   if (!memo) {
-    throw new Error("Missing boost memo — $PASTA was not burned with a featured-slot tag");
+    throw new Error("Missing boost memo — burn was not tagged with the featured slot.");
   }
-  if (memo.mint !== expect.mint || memo.tier !== expect.tier) {
+  if (memo.mint !== args.mint || memo.tier !== args.tier) {
     throw new Error("Boost memo does not match this mint and package");
   }
-  const burned = pastaDeltaToBurn(tx);
+  const burned = tokenDelta(burnTx, PASTA_MINT, BURN_ADDRESS);
   if (burned <= 0n) {
     throw new Error("$PASTA was not sent to the burn address");
   }
-  const spent = (tx.meta?.preBalances?.[0] || 0) - (tx.meta?.postBalances?.[0] || 0);
-  const expected = Math.round(BOOST_TIERS[expect.tier].sol * 1_000_000_000);
-  if (spent < expected * 0.75) {
+
+  const swapTx = await waitForTx(args.swapSignature);
+  const spent = (swapTx.meta?.preBalances?.[0] || 0) - (swapTx.meta?.postBalances?.[0] || 0);
+  const expected = Math.round(BOOST_TIERS[args.tier].sol * 1_000_000_000);
+  if (spent < expected * 0.7) {
     throw new Error("Boost did not spend the package SOL on the $PASTA buy");
   }
-  const createdAt = (tx.blockTime ? tx.blockTime * 1000 : Date.now());
+  if (args.payer) {
+    const bought = tokenDelta(swapTx, PASTA_MINT, args.payer);
+    if (bought <= 0n) {
+      throw new Error("Jupiter swap did not buy $PASTA");
+    }
+  }
+
+  const createdAt = (burnTx.blockTime ? burnTx.blockTime * 1000 : Date.now());
   return {
     burned: burned.toString(),
     createdAt,
-    expiresAt: createdAt + BOOST_TIERS[expect.tier].hours * 3600 * 1000,
+    expiresAt: createdAt + BOOST_TIERS[args.tier].hours * 3600 * 1000,
   };
 }
 
