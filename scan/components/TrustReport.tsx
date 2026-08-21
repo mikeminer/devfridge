@@ -133,6 +133,14 @@ export default function TrustReportView({ report }: { report: Report }) {
 
       <SecurityGrid checks={report.security} />
 
+      <p className="text-xs text-mute">
+        Review the{" "}
+        <a className="text-ice hover:underline" href="https://docs.devfridge.cool/methodology">
+          scoring methodology
+        </a>{" "}
+        before acting. DevFridge reports observable signals and does not certify tokens as safe.
+      </p>
+
       {report.warnings.length > 0 && (
         <p className="text-xs text-caution">{report.warnings.join(" · ")}</p>
       )}

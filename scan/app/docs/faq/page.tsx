@@ -6,6 +6,14 @@ export const metadata: Metadata = docMeta("faq");
 
 const faqs = [
   {
+    q: "Does a paid Feature placement improve a token's risk grade?",
+    a: "No. Sponsorship changes only labeled placement and duration. It never changes checks, source data, warnings, or the risk grade.",
+  },
+  {
+    q: "Does a high grade mean a token is safe?",
+    a: "No. The grade summarizes only the checks displayed in the report at scan time. It is not an audit, endorsement, or guarantee against loss.",
+  },
+  {
     q: "Can I feature a token that is not fridged?",
     a: "No. Get Featured requires a live Fridge lock that has not reached unlock_at.",
   },
@@ -39,7 +47,7 @@ const jsonLd = {
 
 export default function FaqDoc() {
   return (
-    <DocsShell kicker="FAQ" title="Feature and Fridge questions">
+    <DocsShell kicker="FAQ" title="Scanner, Feature, and Fridge questions">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {faqs.map((f) => (
         <section key={f.q}>

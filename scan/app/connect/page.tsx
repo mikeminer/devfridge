@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import ConnectBoard from "@/components/ConnectBoard";
 
 export const metadata: Metadata = {
-  title: "connect.devfridge.cool — Official DevFridge contacts",
+  title: { absolute: "Official DevFridge contacts — connect.devfridge.cool" },
   description:
     "The only official meeting point for DevFridge and $PASTA. Do not trust any other contact.",
+  alternates: { canonical: "https://connect.devfridge.cool" },
+  openGraph: {
+    type: "website",
+    url: "https://connect.devfridge.cool",
+    title: "Official DevFridge contacts",
+    description: "Canonical public contacts for DevFridge, its scanner, repository, and community.",
+    images: [{ url: "https://devfridge.cool/brand/logo-lockup.jpg" }],
+  },
 };
 
 export default function ConnectPage() {

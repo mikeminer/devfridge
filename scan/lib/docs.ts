@@ -52,10 +52,34 @@ export const DOC_PAGES: DocLink[] = [
   {
     href: "/scan",
     slug: "scan",
-    title: "Trust scanner",
+    title: "Solana token risk scanner",
     nav: "Scanner",
     description:
-      "scan.devfridge.cool checks mint, freeze, holders, and whether the mint has a live DevFridge lock.",
+      "scan.devfridge.cool checks authorities, holder concentration, market signals, and live DevFridge locks.",
+  },
+  {
+    href: "/methodology",
+    slug: "methodology",
+    title: "Risk-grade methodology",
+    nav: "Methodology",
+    description:
+      "How DevFridge derives risk grades from visible checks, handles missing data, and separates sponsorship from results.",
+  },
+  {
+    href: "/security",
+    slug: "security",
+    title: "Security and disclosure",
+    nav: "Security",
+    description:
+      "Program verification details, security scope, disclosure process, and current independent-audit status.",
+  },
+  {
+    href: "/listing-kit",
+    slug: "listing-kit",
+    title: "DevFridge listing kit",
+    nav: "Listing kit",
+    description:
+      "Verified links, project descriptions, categories, and assets for ecosystem directories and partners.",
   },
   {
     href: "/badge",
@@ -97,7 +121,7 @@ export function docMeta(slug: string) {
   const page = DOC_PAGES.find((p) => p.slug === slug) || DOC_PAGES[0];
   const url = docUrl(page.href);
   return {
-    title: `${page.title} — docs.devfridge.cool`,
+    title: { absolute: `${page.title} — docs.devfridge.cool` },
     description: page.description,
     alternates: { canonical: url },
     openGraph: {
@@ -106,12 +130,20 @@ export function docMeta(slug: string) {
       url,
       siteName: "DevFridge docs",
       type: "website" as const,
-      images: [{ url: "https://devfridge.cool/brand/logo-mark.jpg" }],
+      images: [
+        {
+          url: "https://devfridge.cool/brand/logo-lockup.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${page.title} — DevFridge`,
+        },
+      ],
     },
     twitter: {
-      card: "summary" as const,
+      card: "summary_large_image" as const,
       title: page.title,
       description: page.description,
+      images: ["https://devfridge.cool/brand/logo-lockup.jpg"],
     },
   };
 }

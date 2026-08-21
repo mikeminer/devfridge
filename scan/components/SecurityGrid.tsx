@@ -26,11 +26,11 @@ function trustGrade(checks: SecurityCheck[]): TrustGrade {
 const LETTERS: TrustGrade[] = ["A", "B", "C", "D", "E"];
 
 const MEANING: Record<TrustGrade, string> = {
-  A: "Excellent — cold and clean",
-  B: "Good — a few warm spots",
-  C: "Average — check the label",
-  D: "Poor — high concentration / unlocked risk",
-  E: "Bad — treat as a hot meal",
+  A: "No flagged signals in the checks below",
+  B: "Limited signals need review",
+  C: "Several signals need review",
+  D: "Material risk signals detected",
+  E: "Severe risk signals detected",
 };
 
 export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
@@ -39,7 +39,7 @@ export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
     <article className="nutri-label">
       <header className="nutri-head">
         <p className="nutri-kicker">Nutrition declaration</p>
-        <h3>TRUST FACTS</h3>
+        <h3>RISK FACTS</h3>
         <p className="nutri-sub">Typical values per mint</p>
       </header>
 
@@ -64,8 +64,8 @@ export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
       })}
 
       <footer className="nutri-foot">
-        <p className="nutri-score-label">Trust-Score</p>
-        <div className="nutri-scale" role="img" aria-label={`Trust-Score ${overall}`}>
+        <p className="nutri-score-label">Risk grade</p>
+        <div className="nutri-scale" role="img" aria-label={`Risk grade ${overall}`}>
           {LETTERS.map((letter) => (
             <span
               key={letter}
@@ -79,8 +79,9 @@ export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
           <strong>{overall}</strong> — {MEANING[overall]}
         </p>
         <p className="nutri-legal">
-          * Fridge vaults excluded from holder %. LP lock is not a certified lab test. Reference
-          intake of a fridged Token-2022 mint.
+          * The grade uses only the checks displayed above. Sponsored placements never change it.
+          This automated report is not an audit, endorsement, or guarantee of safety. Fridge vaults
+          are excluded from holder concentration where data is available.
         </p>
       </footer>
     </article>

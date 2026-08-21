@@ -63,7 +63,7 @@ export default function Feeds() {
           className={`fridge-tab ${tab === "boosted" ? "is-on" : ""}`}
           onClick={() => setTab("boosted")}
         >
-          Boosted
+          Sponsored
         </button>
         <button
           type="button"
@@ -75,8 +75,11 @@ export default function Feeds() {
       </div>
       {tab === "boosted" ? (
       <section>
+        <p className="mb-3 text-xs text-mute">
+          Paid placements. Sponsorship never changes scan checks, risk grades, or recent-scan order.
+        </p>
         {boosted.length === 0 ? (
-          <p className="text-sm text-mute">No active boosts. Be the first — scan a mint and boost it.</p>
+          <p className="text-sm text-mute">No active sponsored placements.</p>
         ) : (
           <div className="grid gap-2">
             {boosted.map((t) => (
@@ -126,7 +129,7 @@ function TokenCard({ token, boosted }: { token: Card; boosted?: boolean }) {
           {boosted && token.expiresAt ? ` · ${leftLabel(token.expiresAt)}` : ""}
         </p>
       </div>
-      {boosted && <span className="text-xs text-ice">🔥 Boosted</span>}
+      {boosted && <span className="text-xs text-ice">Sponsored</span>}
     </Link>
   );
 }

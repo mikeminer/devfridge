@@ -222,6 +222,9 @@ export default function BoostSubscribe({
         wraps that SOL, Jupiter-buys $PASTA, and burns it — that $PASTA never hits your wallet. Live
         Fridge lock required.
       </p>
+      <p className="mt-2 text-xs text-mute">
+        This is a labeled sponsored placement. Payment never changes scanner checks or risk grades.
+      </p>
 
       {!fixedMint && (
         <input

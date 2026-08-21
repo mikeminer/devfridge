@@ -2,8 +2,16 @@ import type { Metadata } from "next";
 import HealthBoard from "@/components/HealthBoard";
 
 export const metadata: Metadata = {
-  title: "health.devfridge.cool — DevFridge status",
+  title: { absolute: "DevFridge service status — health.devfridge.cool" },
   description: "Live health of DevFridge, the scanner, Solana RPC, and $PASTA price feeds.",
+  alternates: { canonical: "https://health.devfridge.cool" },
+  openGraph: {
+    type: "website",
+    url: "https://health.devfridge.cool",
+    title: "DevFridge service status",
+    description: "Live health of DevFridge, the scanner, Solana RPC, and market-data feeds.",
+    images: [{ url: "https://devfridge.cool/brand/logo-lockup.jpg" }],
+  },
 };
 
 export default function HealthPage() {
