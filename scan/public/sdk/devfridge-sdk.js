@@ -20,6 +20,7 @@
    * @param {Object} config.plans            - Subscription plans keyed by name
    * @param {number} config.plans[].minLockDays          - Minimum lock duration to qualify
    * @param {number} config.plans[].renewalThresholdDays - Days remaining that trigger renewal
+   * @param {number} [config.plans[].minLockAmount]      - Minimum token amount to qualify (raw units)
    * @param {string} [config.scannerUrl]     - Override scanner base URL
    * @param {string} [config.fridgeUrl]      - Override fridge dApp URL
    * @param {number} [config.cacheTTL]       - Cache TTL in ms (default 60000)
@@ -45,6 +46,11 @@
       if (p.renewalThresholdDays >= p.minLockDays) {
         throw new Error(
           "DevFridgeSDK: plan '" + names[i] + "' renewalThresholdDays must be < minLockDays"
+        );
+      }
+      if (p.minLockAmount != null && (typeof p.minLockAmount !== "number" || p.minLockAmount < 0)) {
+        throw new Error(
+          "DevFridgeSDK: plan '" + names[i] + "' minLockAmount must be a number >= 0"
         );
       }
     }
@@ -129,10 +135,15 @@
     var matchedPlan = null;
     var needsRenewal = false;
 
+    var lockAmount = best.amount || 0;
+
     for (var i = 0; i < sorted.length; i++) {
       var name = sorted[i];
       var plan = this.plans[name];
       if (totalLockDays >= plan.minLockDays) {
+        if (plan.minLockAmount != null && lockAmount < plan.minLockAmount) {
+          continue;
+        }
         matchedPlan = name;
         needsRenewal = daysRemaining <= plan.renewalThresholdDays;
         break;

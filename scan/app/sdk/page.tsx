@@ -44,7 +44,8 @@ export default function SdkHome() {
       <ol>
         <li>
           <strong>Developer</strong> configures plans with{" "}
-          <code>minLockDays</code> and <code>renewalThresholdDays</code>.
+          <code>minLockDays</code>, <code>renewalThresholdDays</code>, and optionally{" "}
+          <code>minLockAmount</code>.
         </li>
         <li>
           <strong>User</strong> connects wallet and locks tokens on{" "}
@@ -113,7 +114,7 @@ import { DevFridgeSDK } from "https://sdk.devfridge.cool/sdk/devfridge-sdk.js";`
   tokenMint: "YOUR_TOKEN_MINT_ADDRESS",
   plans: {
     weekly:  { minLockDays: 14, renewalThresholdDays: 7 },
-    monthly: { minLockDays: 60, renewalThresholdDays: 29 },
+    monthly: { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 1000000 },
   }
 });`}</code>
       </pre>
@@ -145,6 +146,7 @@ if (status.active && !status.needsRenewal) {
     [name: string]: {
       minLockDays: number,          // Minimum lock duration to qualify
       renewalThresholdDays: number, // When to flag needsRenewal
+      minLockAmount?: number,       // Minimum token amount to qualify (raw units)
     }
   },
 
@@ -162,6 +164,7 @@ if (status.active && !status.needsRenewal) {
             <th>Plan type</th>
             <th>Suggested <code>minLockDays</code></th>
             <th>Suggested <code>renewalThresholdDays</code></th>
+            <th><code>minLockAmount</code></th>
           </tr>
         </thead>
         <tbody>
@@ -169,27 +172,33 @@ if (status.active && !status.needsRenewal) {
             <td>Weekly</td>
             <td>14</td>
             <td>7</td>
+            <td>optional</td>
           </tr>
           <tr>
             <td>Monthly</td>
             <td>60</td>
             <td>29</td>
+            <td>optional</td>
           </tr>
           <tr>
             <td>Quarterly</td>
             <td>120</td>
             <td>29</td>
+            <td>optional</td>
           </tr>
           <tr>
             <td>Annual</td>
             <td>400</td>
             <td>29</td>
+            <td>optional</td>
           </tr>
         </tbody>
       </table>
       <p>
         <code>renewalThresholdDays</code> must be strictly less than{" "}
-        <code>minLockDays</code>. The values are fully customizable &mdash; the table above is a
+        <code>minLockDays</code>. <code>minLockAmount</code> is optional &mdash; when set, the
+        locked amount must meet or exceed the value (in raw token units, i.e. with decimals applied)
+        for the plan to match. The values are fully customizable &mdash; the table above is a
         starting point.
       </p>
 
