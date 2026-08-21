@@ -23,7 +23,7 @@ export const DOC_PAGES: DocLink[] = [
     title: "Fridge world",
     nav: "World",
     description:
-      "Shooter inside the Fridge. Your faction is the live lock with the highest USD value. Same mint cannot kill teammates.",
+      "Two teams: Pastalovers ($PASTA lock) vs The Shelf (any other live lock). Teammates cannot kill each other.",
   },
   {
     href: "/feature",

@@ -13,6 +13,8 @@ export type Faction = {
   image: string | null;
   usd: number;
   color: string;
+  team: "pastalovers" | "shelf";
+  teamName: string;
 };
 
 const FridgeCanvas = dynamic(() => import("./FridgeCanvas"), { ssr: false });
@@ -62,7 +64,7 @@ export default function WorldApp() {
       {!connected || !publicKey ? (
         <Gate
           title="Enter the Fridge"
-          body="Connect the wallet that locked a Token-2022. Your faction is the live lock with the highest USD value. Same mint cannot kill each other."
+          body="Connect the wallet that locked a Token-2022. Two teams: Pastalovers ($PASTA lock) vs The Shelf (any other live lock). Highest USD lock wins if you locked both. Teammates cannot kill each other."
           cta="Connect wallet"
           onClick={() => setVisible(true)}
         />
@@ -71,7 +73,7 @@ export default function WorldApp() {
       ) : faction === null ? (
         <Gate
           title="No live Fridge lock"
-          body="Lock a Token-2022 on devfridge.cool to join its faction. Expired locks do not count."
+          body="Lock $PASTA to join Pastalovers, or any other Token-2022 to join The Shelf. Expired locks do not count."
           cta="Fridge a token"
           href="https://devfridge.cool"
         />

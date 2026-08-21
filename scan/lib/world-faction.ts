@@ -1,6 +1,31 @@
-import { locksForDepositor, type FridgeLock } from "./fridge";
+import { PASTA_MINT } from "./constants";
+import { locksForDepositor } from "./fridge";
 import { tokenIdentity } from "./identity";
 import { usdPrice } from "./price";
+
+export type WorldTeam = "pastalovers" | "shelf";
+
+export const TEAM_META: Record<
+  WorldTeam,
+  { id: WorldTeam; name: string; color: string; blurb: string }
+> = {
+  pastalovers: {
+    id: "pastalovers",
+    name: "Pastalovers",
+    color: "#f59e0b",
+    blurb: "Live $PASTA lock — you cook in the pot.",
+  },
+  shelf: {
+    id: "shelf",
+    name: "The Shelf",
+    color: "#4fc3f7",
+    blurb: "Live lock of any other token — you live on the ice shelves.",
+  },
+};
+
+export function teamFromMint(mint: string): WorldTeam {
+  return mint === PASTA_MINT ? "pastalovers" : "shelf";
+}
 
 export type WorldFaction = {
   wallet: string;
@@ -12,13 +37,9 @@ export type WorldFaction = {
   amount: string;
   lockAddress: string;
   color: string;
+  team: WorldTeam;
+  teamName: string;
 };
-
-function colorFromMint(mint: string): string {
-  let h = 0;
-  for (let i = 0; i < mint.length; i++) h = (h * 33 + mint.charCodeAt(i)) >>> 0;
-  return `hsl(${h % 360} 70% 55%)`;
-}
 
 export async function factionForWallet(wallet: string): Promise<WorldFaction | null> {
   const locks = await locksForDepositor(wallet);
@@ -41,6 +62,8 @@ export async function factionForWallet(wallet: string): Promise<WorldFaction | n
     symbol: "TKN",
     image: null as string | null,
   }));
+  const team = teamFromMint(top.lock.mint);
+  const meta = TEAM_META[team];
   return {
     wallet,
     mint: top.lock.mint,
@@ -50,10 +73,12 @@ export async function factionForWallet(wallet: string): Promise<WorldFaction | n
     usd: top.usd,
     amount: top.lock.amount,
     lockAddress: top.lock.address,
-    color: colorFromMint(top.lock.mint),
+    color: meta.color,
+    team,
+    teamName: meta.name,
   };
 }
 
-export function sameFaction(a?: string | null, b?: string | null): boolean {
+export function sameTeam(a?: WorldTeam | null, b?: WorldTeam | null): boolean {
   return Boolean(a && b && a === b);
 }

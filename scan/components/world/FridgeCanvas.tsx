@@ -4,12 +4,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { PointerLockControls } from "@react-three/drei";
 import * as THREE from "three";
+import { PASTA_MINT } from "@/lib/constants";
+import { teamFromMint, type WorldTeam } from "@/lib/world-faction";
 import type { Faction } from "./WorldApp";
 
 type Dummy = {
   id: string;
   mint: string;
   symbol: string;
+  team: WorldTeam;
   color: string;
   pos: THREE.Vector3;
   hp: number;
@@ -31,7 +34,9 @@ const SHELVES: [number, number, number, number, number, number][] = [
 export default function FridgeCanvas({ faction, room }: { faction: Faction; room: string }) {
   const [hp, setHp] = useState(100);
   const [kills, setKills] = useState(0);
-  const [msg, setMsg] = useState("Click to enter the Fridge. WASD move, click shoot. Same ticker is team.");
+  const [msg, setMsg] = useState(
+    "Click to enter. WASD move, click shoot. Pastalovers vs The Shelf — no friendly fire."
+  );
   const [roomUrl, setRoomUrl] = useState("");
   const hpRef = useRef(100);
 
@@ -70,20 +75,20 @@ export default function FridgeCanvas({ faction, room }: { faction: Faction; room
           <div className="absolute left-0 top-1/2 h-[2px] w-4 -translate-y-1/2 bg-ice/80" />
         </div>
         <div className="absolute left-4 top-4 ice-card pointer-events-auto max-w-xs p-3 text-xs">
-          <p className="text-[10px] font-bold tracking-[0.18em] text-ice">FACTION</p>
+          <p className="text-[10px] font-bold tracking-[0.18em] text-ice">TEAM</p>
           <p className="mt-1 text-base font-bold" style={{ color: faction.color }}>
-            ${faction.symbol}
+            {faction.teamName}
           </p>
-          <p className="text-mute">{faction.name}</p>
+          <p className="text-mute">
+            via ${faction.symbol} · {faction.name}
+          </p>
           <p className="mt-2 text-mute">HP {hp} · Kills {kills}</p>
           <p className="mt-2 text-mute">{msg}</p>
         </div>
         <div className="absolute right-4 top-4 ice-card pointer-events-auto max-w-sm p-3 text-xs">
-          <p className="text-mute">Invite (same fridge):</p>
-          <p className="mt-1 break-all text-[11px] text-ice">{roomUrl || "world.devfridge.cool"}</p>
-          <p className="mt-2 text-mute">
-            Teammates = same mint. You cannot damage ${faction.symbol}.
-          </p>
+          <p className="text-mute">Pastalovers = $PASTA lock. The Shelf = any other live lock.</p>
+          <p className="mt-2 text-mute">You cannot kill your own team.</p>
+          <p className="mt-2 break-all text-[11px] text-ice">{roomUrl || "world.devfridge.cool"}</p>
         </div>
       </div>
     </>
@@ -167,32 +172,56 @@ function Player({
     fetch("/api/feed/boosted")
       .then((r) => r.json())
       .then((j: { tokens?: { mint: string; symbol?: string }[] }) => {
-        const others = (j.tokens || []).filter((t) => t.mint !== faction.mint).slice(0, 4);
+        const rows = j.tokens || [];
+        const enemies = rows.filter((t) => teamFromMint(t.mint) !== faction.team);
         const spawns: [number, number][] = [
           [-10, -10],
           [10, -10],
           [-10, 10],
           [10, 10],
         ];
-        dummies.current = others.map((t, i) => ({
-          id: `bot-${t.mint.slice(0, 6)}`,
-          mint: t.mint,
-          symbol: t.symbol || "TKN",
-          color: `hsl(${(i * 80 + 20) % 360} 70% 55%)`,
-          pos: new THREE.Vector3(spawns[i][0], 1, spawns[i][1]),
-          hp: 100,
-          yaw: 0,
-          bot: true,
-        }));
+        let bots = enemies.slice(0, 4).map((t, i) => {
+          const team = teamFromMint(t.mint);
+          return {
+            id: `bot-${t.mint.slice(0, 6)}`,
+            mint: t.mint,
+            symbol: t.symbol || "TKN",
+            team,
+            color: team === "pastalovers" ? "#f59e0b" : "#4fc3f7",
+            pos: new THREE.Vector3(spawns[i][0], 1, spawns[i][1]),
+            hp: 100,
+            yaw: 0,
+            bot: true,
+          };
+        });
+        if (bots.length === 0) {
+          const enemyTeam = faction.team === "pastalovers" ? "shelf" : "pastalovers";
+          bots = [
+            {
+              id: "bot-rival",
+              mint: enemyTeam === "pastalovers" ? PASTA_MINT : "shelf-bot",
+              symbol: enemyTeam === "pastalovers" ? "PASTA" : "SHELF",
+              team: enemyTeam,
+              color: enemyTeam === "pastalovers" ? "#f59e0b" : "#4fc3f7",
+              pos: new THREE.Vector3(-9, 1, -8),
+              hp: 100,
+              yaw: 0,
+              bot: true,
+            },
+          ];
+        }
+        dummies.current = bots;
         setTick((n) => n + 1);
       })
       .catch(() => {
+        const enemyTeam = faction.team === "pastalovers" ? "shelf" : "pastalovers";
         dummies.current = [
           {
-            id: "bot-pasta",
-            mint: "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
-            symbol: "PASTA",
-            color: "#f59e0b",
+            id: "bot-rival",
+            mint: enemyTeam === "pastalovers" ? PASTA_MINT : "shelf-bot",
+            symbol: enemyTeam === "pastalovers" ? "PASTA" : "SHELF",
+            team: enemyTeam,
+            color: enemyTeam === "pastalovers" ? "#f59e0b" : "#4fc3f7",
             pos: new THREE.Vector3(-9, 1, -8),
             hp: 100,
             yaw: 0,
@@ -201,7 +230,7 @@ function Player({
         ];
         setTick((n) => n + 1);
       });
-  }, [faction.mint]);
+  }, [faction.team]);
 
   useEffect(() => {
     const shoot = () => {
@@ -213,9 +242,11 @@ function Player({
         onMsg("Miss.");
         return;
       }
-      const mint = String(hit.object.userData.mint || "");
-      if (mint && mint === faction.mint) {
-        onMsg(`Friendly fire blocked — same faction $${hit.object.userData.symbol || ""}`);
+      const team = String(hit.object.userData.team || "") as WorldTeam;
+      if (team && team === faction.team) {
+        onMsg(
+          `Friendly fire blocked — ${faction.teamName} don't shoot each other`
+        );
         return;
       }
       const id = String(hit.object.userData.id || "");
@@ -234,7 +265,7 @@ function Player({
     };
     window.addEventListener("mousedown", shoot);
     return () => window.removeEventListener("mousedown", shoot);
-  }, [camera, dir, faction.mint, onKill, onMsg, ray, scene]);
+  }, [camera, dir, faction.team, faction.teamName, onKill, onMsg, ray, scene]);
 
   useFrame((_, dt) => {
     const t = Math.min(dt, 0.05);
@@ -266,7 +297,7 @@ function Player({
       d.pos.z += Math.cos(d.yaw) * 1.2 * t;
       d.pos.x = THREE.MathUtils.clamp(d.pos.x, -16, 16);
       d.pos.z = THREE.MathUtils.clamp(d.pos.z, -16, 16);
-      if (d.mint !== faction.mint && d.pos.distanceTo(camera.position) < 14 && Math.random() < t * 0.25) {
+      if (d.team !== faction.team && d.pos.distanceTo(camera.position) < 14 && Math.random() < t * 0.25) {
         hpRef.current = Math.max(0, hpRef.current - 8);
         onHp(hpRef.current);
         if (hpRef.current <= 0) {
@@ -295,7 +326,16 @@ function BotMesh({ dummy }: { dummy: Dummy }) {
     if (ref.current) ref.current.position.copy(dummy.pos);
   });
   return (
-    <mesh ref={ref} userData={{ actor: true, id: dummy.id, mint: dummy.mint, symbol: dummy.symbol }}>
+    <mesh
+      ref={ref}
+      userData={{
+        actor: true,
+        id: dummy.id,
+        mint: dummy.mint,
+        symbol: dummy.symbol,
+        team: dummy.team,
+      }}
+    >
       <cylinderGeometry args={[0.45, 0.45, 1.6, 10]} />
       <meshStandardMaterial color={dummy.color} />
     </mesh>

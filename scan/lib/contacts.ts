@@ -23,7 +23,7 @@ export const OFFICIAL_SITES: OfficialLink[] = [
   {
     label: "World",
     href: "https://world.devfridge.cool",
-    hint: "Fridge shooter — your faction is your largest live lock",
+    hint: "Pastalovers vs The Shelf — lock decides your team",
   },
   {
     label: "Docs",
