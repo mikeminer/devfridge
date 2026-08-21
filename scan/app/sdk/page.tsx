@@ -211,11 +211,12 @@ if (status.active && !status.needsRenewal) {
       <p>Returns a Promise resolving to:</p>
       <pre>
         <code>{`{
-  active: boolean,          // true if lock exists and daysRemaining > 0
+  active: boolean,          // true if daysRemaining > 0 AND a plan qualifies
   plan: string | null,      // Matched plan name or null
   daysRemaining: number,    // Days until best lock expires
-  needsRenewal: boolean,    // true when daysRemaining <= threshold
-  renewalUrl: string | null,// URL to devfridge.cool (when renewal needed)
+  needsRenewal: boolean,    // true when active AND daysRemaining <= threshold
+  renewalUrl: string | null,// URL to devfridge.cool (when renewal needed or not active)
+  totalLockAmount: number,  // Sum of all active lock amounts
   wallet: string,           // The checked wallet
   locks: Lock[],            // All locks (active + expired)
   activeLocks: Lock[],      // Only active locks

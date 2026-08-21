@@ -135,7 +135,11 @@
     var matchedPlan = null;
     var needsRenewal = false;
 
-    var lockAmount = best.amount || 0;
+    // Sum amounts across all active locks (not just bestLock)
+    var lockAmount = 0;
+    for (var j = 0; j < activeLocks.length; j++) {
+      lockAmount += activeLocks[j].amount || 0;
+    }
 
     for (var i = 0; i < sorted.length; i++) {
       var name = sorted[i];
@@ -150,25 +154,35 @@
       }
     }
 
-    // If no plan matched but lock is active, use the smallest plan
+    // Fallback: if no plan matched but lock is active, use the smallest plan
+    // only when its minLockAmount requirement is also satisfied (or absent).
     if (!matchedPlan && daysRemaining > 0) {
       var smallest = planNames.slice().sort(
         function (a, b) {
           return this.plans[a].minLockDays - this.plans[b].minLockDays;
         }.bind(this)
       );
-      if (smallest.length > 0) {
-        matchedPlan = smallest[0];
-        needsRenewal = daysRemaining <= this.plans[matchedPlan].renewalThresholdDays;
+      for (var k = 0; k < smallest.length; k++) {
+        var sp = this.plans[smallest[k]];
+        if (sp.minLockAmount != null && lockAmount < sp.minLockAmount) {
+          continue;
+        }
+        matchedPlan = smallest[k];
+        needsRenewal = daysRemaining <= sp.renewalThresholdDays;
+        break;
       }
     }
 
+    // active requires both time remaining AND a qualifying plan
+    var isActive = daysRemaining > 0 && matchedPlan !== null;
+
     return {
-      active: daysRemaining > 0,
+      active: isActive,
       plan: matchedPlan,
       daysRemaining: daysRemaining,
-      needsRenewal: needsRenewal,
-      renewalUrl: needsRenewal ? this.getLockUrl() : null,
+      needsRenewal: isActive && needsRenewal,
+      renewalUrl: isActive && needsRenewal ? this.getLockUrl() : (!isActive ? this.getLockUrl() : null),
+      totalLockAmount: lockAmount,
       wallet: wallet,
       locks: data.locks || [],
       activeLocks: activeLocks,
