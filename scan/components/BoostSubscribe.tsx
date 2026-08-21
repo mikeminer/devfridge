@@ -27,6 +27,12 @@ function b64ToBytes(b64: string): Uint8Array {
   return out;
 }
 
+function bytesToB64(bytes: Uint8Array): string {
+  let s = "";
+  for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
+  return btoa(s);
+}
+
 type Plan = {
   instructions: Array<{
     programId: string;
@@ -48,7 +54,7 @@ function compilePlan(plan: Plan, payer: PublicKey, blockhash: string): Versioned
           isSigner: k.isSigner,
           isWritable: k.isWritable,
         })),
-        data: b64ToBytes(ix.data),
+        data: Buffer.from(b64ToBytes(ix.data)),
       })
   );
   const alts = plan.alts.map(
@@ -121,22 +127,30 @@ export default function BoostSubscribe({
       for (let attempt = 1; attempt <= 3; attempt++) {
         setStatus(
           attempt === 1
-            ? "Sign now — approve Phantom quickly."
+            ? "Sign now — approve Phantom immediately."
             : "Blockhash expired. Sign again (you were not charged)."
         );
-        const { blockhash } = await rpc.getLatestBlockhash("processed");
-        const tx = compilePlan(plan, publicKey, blockhash);
+        const latest = await rpc.getLatestBlockhash("confirmed");
+        const tx = compilePlan(plan, publicKey, latest.blockhash);
         const signed = await signTransaction(tx);
-        try {
-          sig = await rpc.sendRawTransaction(signed.serialize(), {
-            skipPreflight: true,
-            maxRetries: 4,
-          });
-        } catch (err) {
-          const msg = err instanceof Error ? err.message : String(err);
-          if (attempt < 3 && /block height|blockhash|expired/i.test(msg)) continue;
-          throw err;
+        const still = await rpc.isBlockhashValid(latest.blockhash, { commitment: "processed" });
+        if (!still.value) {
+          if (attempt < 3) continue;
+          throw new Error("Blockhash expired while Phantom was open. You were not charged — click Buy & burn and approve immediately.");
         }
+        const wire = bytesToB64(signed.serialize());
+        const sent = await fetch("/api/boost/send", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ transaction: wire }),
+        });
+        const sentJson = await sent.json();
+        if (!sent.ok) {
+          const msg = String(sentJson.error || "send failed");
+          if (attempt < 3 && /blockhash|block height|expired|0x1/i.test(msg)) continue;
+          throw new Error(msg);
+        }
+        sig = sentJson.signature;
         setStatus("Confirming on Solana…");
         const started = Date.now();
         let landed = false;

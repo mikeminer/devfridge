@@ -2,6 +2,7 @@
   "framework": "nextjs",
   "functions": {
     "app/api/boost/build/route.ts": { "maxDuration": 30 },
+    "app/api/boost/send/route.ts": { "maxDuration": 30 },
     "app/api/boost/route.ts": { "maxDuration": 60 },
     "app/api/feed/boosted/route.ts": { "maxDuration": 20 }
   }
