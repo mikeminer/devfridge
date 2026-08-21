@@ -32,15 +32,15 @@ export default function HomePage({
         </p>
       </header>
 
+      <div className="mx-auto mb-6 max-w-3xl">
+        <Feeds />
+      </div>
       <SearchBar />
       <div className="mx-auto mt-6 max-w-2xl">
         <PastaWidget />
       </div>
       <div className="mx-auto mt-10 max-w-3xl">
         <BoostSubscribe />
-      </div>
-      <div className="mt-12">
-        <Feeds />
       </div>
       <footer className="mt-16 text-center text-xs text-mute">
         <a className="text-ice hover:underline" href="https://devfridge.cool">
