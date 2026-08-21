@@ -138,7 +138,7 @@
     // Sum amounts across all active locks (not just bestLock)
     var lockAmount = 0;
     for (var j = 0; j < activeLocks.length; j++) {
-      lockAmount += activeLocks[j].amount || 0;
+      lockAmount += Number(activeLocks[j].amount) || 0;
     }
 
     for (var i = 0; i < sorted.length; i++) {
