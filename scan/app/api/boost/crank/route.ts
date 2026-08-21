@@ -8,11 +8,14 @@ export const maxDuration = 60;
 export async function GET() {
   try {
     const lamports = await vaultLamports();
-    return NextResponse.json({
-      ok: true,
-      vaultLamports: lamports.toString(),
-      vaultSol: Number(lamports) / 1e9,
-    });
+    return NextResponse.json(
+      {
+        ok: true,
+        vaultLamports: lamports.toString(),
+        vaultSol: Number(lamports) / 1e9,
+      },
+      { headers: { "cache-control": "no-store" } }
+    );
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : "vault balance failed" },

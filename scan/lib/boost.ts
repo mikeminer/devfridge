@@ -337,6 +337,10 @@ export async function runCrankBuyback(): Promise<CrankResult> {
 
   const programId = new PublicKey(PROGRAM_ID);
   const [burnAuthority] = burnPda();
+  const burnLamports = await rpc<{ value: number }>("getBalance", [
+    burnAuthority.toBase58(),
+    { commitment: "confirmed" },
+  ]).then((r) => BigInt(typeof r === "number" ? r : r.value));
   const wsolMint = new PublicKey(WSOL_MINT);
   const pastaMint = new PublicKey(PASTA_MINT);
   const wsolAta = getAssociatedTokenAddressSync(wsolMint, burnAuthority, true, TOKEN_PROGRAM_ID);
@@ -348,7 +352,7 @@ export async function runCrankBuyback(): Promise<CrankResult> {
   );
 
   let lastError: Error | null = null;
-  for (const maxAccounts of [32, 24, 16]) {
+  for (const maxAccounts of [64, 48, 32]) {
     try {
       const route = await fetchPastaBuybackRoute(
         WSOL_MINT,
@@ -415,18 +419,38 @@ export async function runCrankBuyback(): Promise<CrankResult> {
         typeof latest === "object" && latest && "value" in latest
           ? latest.value.blockhash
           : String((latest as { blockhash?: string }).blockhash || "");
+      const ixs: TransactionInstruction[] = [
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 1_400_000 }),
+        ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 50_000 }),
+      ];
+      if (burnLamports < 5_000_000n) {
+        ixs.push(
+          SystemProgram.transfer({
+            fromPubkey: cranker.publicKey,
+            toPubkey: burnAuthority,
+            lamports: 5_000_000,
+          })
+        );
+      }
+      ixs.push(crankIx);
       const message = new TransactionMessage({
         payerKey: cranker.publicKey,
         recentBlockhash: blockhash,
-        instructions: [
-          ComputeBudgetProgram.setComputeUnitLimit({ units: 1_400_000 }),
-          ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 50_000 }),
-          crankIx,
-        ],
+        instructions: ixs,
       }).compileToV0Message(altRows);
       const tx = new VersionedTransaction(message);
       tx.sign([cranker]);
       const wire = Buffer.from(tx.serialize()).toString("base64");
+      const sim = await rpc<{
+        value?: { err?: unknown; logs?: string[] | null };
+      }>("simulateTransaction", [
+        wire,
+        { encoding: "base64", sigVerify: false, commitment: "processed", replaceRecentBlockhash: true },
+      ]).catch(() => null);
+      if (sim?.value?.err) {
+        const logs = (sim.value.logs || []).slice(-12).join(" | ");
+        throw new Error(`crank simulate: ${JSON.stringify(sim.value.err)} ${logs}`);
+      }
       const signature = await rpc<string>("sendTransaction", [
         wire,
         {
@@ -454,6 +478,7 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       return { ok: true, signature, amount: spend.toString() };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
+      if (!/no routes found|no jupiter route/i.test(lastError.message)) break;
     }
   }
   return {

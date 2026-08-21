@@ -2,35 +2,56 @@ import { PublicKey, TransactionInstruction, type AccountMeta } from "@solana/web
 import { PASTA_MINT } from "./constants";
 
 const SOL_MINT = "So11111111111111111111111111111111111111112";
-const QUOTE_URL = "https://lite-api.jup.ag/swap/v1/quote";
-const SWAP_URL = "https://lite-api.jup.ag/swap/v1/swap";
+const JUPITER_HOSTS = ["https://lite-api.jup.ag/swap/v1", "https://api.jup.ag/swap/v1"];
+const SWAP_URL = `${JUPITER_HOSTS[0]}/swap`;
 
 export type JupiterQuote = {
   outAmount: string;
   otherAmountThreshold: string;
   raw: unknown;
+  host: string;
 };
 
+function quoteQueries(lamports: number, maxAccounts: number): string[] {
+  const base =
+    `inputMint=${SOL_MINT}&outputMint=${PASTA_MINT}&amount=${lamports}` +
+    `&swapMode=ExactIn&maxAccounts=${maxAccounts}`;
+  return [
+    `${base}&slippageBps=150&onlyDirectRoutes=true&dexes=${encodeURIComponent("Pump.fun Amm")}`,
+    `${base}&slippageBps=200&onlyDirectRoutes=true`,
+    `${base}&slippageBps=200`,
+  ];
+}
+
 export async function quoteSolToPasta(lamports: number, maxAccounts = 32): Promise<JupiterQuote> {
-  const url =
-    `${QUOTE_URL}?inputMint=${SOL_MINT}` +
-    `&outputMint=${PASTA_MINT}&amount=${lamports}` +
-    `&slippageBps=150&swapMode=ExactIn&maxAccounts=${maxAccounts}` +
-    `&onlyDirectRoutes=true&dexes=${encodeURIComponent("Pump.fun Amm")}`;
-  const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(12000) });
-  const json = (await res.json().catch(() => ({}))) as {
-    outAmount?: string;
-    otherAmountThreshold?: string;
-    error?: string;
-  };
-  if (!res.ok || !json.outAmount) {
-    throw new Error(json.error || "No Jupiter route to buy $PASTA with SOL.");
+  let last = "No Jupiter route to buy $PASTA with SOL.";
+  for (const host of JUPITER_HOSTS) {
+    for (const query of quoteQueries(lamports, maxAccounts)) {
+      try {
+        const res = await fetch(`${host}/quote?${query}`, {
+          cache: "no-store",
+          signal: AbortSignal.timeout(12000),
+        });
+        const json = (await res.json().catch(() => ({}))) as {
+          outAmount?: string;
+          otherAmountThreshold?: string;
+          error?: string;
+        };
+        if (res.ok && json.outAmount) {
+          return {
+            outAmount: json.outAmount,
+            otherAmountThreshold: json.otherAmountThreshold || json.outAmount,
+            raw: json,
+            host,
+          };
+        }
+        last = json.error || last;
+      } catch (err) {
+        last = err instanceof Error ? err.message : last;
+      }
+    }
   }
-  return {
-    outAmount: json.outAmount,
-    otherAmountThreshold: json.otherAmountThreshold || json.outAmount,
-    raw: json,
-  };
+  throw new Error(last);
 }
 
 export async function swapSolToPastaTx(args: {
@@ -66,7 +87,7 @@ export async function swapSolToPastaTx(args: {
   };
 }
 
-const SWAP_IX_URL = "https://lite-api.jup.ag/swap/v1/swap-instructions";
+
 
 type SerializedIx = {
   programId: string;
@@ -103,7 +124,7 @@ export async function fetchPastaBuybackRoute(
   maxAccounts = 32
 ): Promise<JupiterRoute> {
   const quote = await quoteSolToPasta(Number(amount), maxAccounts);
-  const res = await fetch(SWAP_IX_URL, {
+  const res = await fetch(`${quote.host}/swap-instructions`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     cache: "no-store",
