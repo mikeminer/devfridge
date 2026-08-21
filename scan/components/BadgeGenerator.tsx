@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { PASTA_MINT } from "@/lib/constants";
-import { parseMint } from "@/lib/format";
+import { PASTA_MINT, SCAN_URL, scanPageUrl } from "@/lib/constants";
+import { displayTicker, parseMint } from "@/lib/format";
 import type { FridgeStatus } from "@/lib/fridge";
 import type { TrustReport } from "@/lib/scan";
 
@@ -33,44 +33,50 @@ export default function BadgeGenerator({ initialMint = "" }: { initialMint?: str
 
   const resolved = parseMint(mint);
   const valid = Boolean(resolved);
+  const ticker = displayTicker(scan?.identity.symbol);
   const badgeSrc = resolved
     ? `${origin()}/api/badge?mint=${resolved}&theme=${theme}&style=${style}`
     : "";
-  const scannerUrl = resolved ? `${origin()}/t/${resolved}` : "";
+  const scannerUrl = resolved ? scanPageUrl(resolved) : "";
 
   const html = useMemo(() => {
     if (!resolved) return "";
-    const w = style === "compact" ? 160 : 420;
+    const w = style === "compact" ? 220 : 420;
     const h = style === "compact" ? 32 : fridge && fridge.locks.length > 0 ? 90 : 60;
-    return `<!-- DevFridge Verification Badge — devfridge.cool -->
-<a href="${scannerUrl}" target="_blank" rel="noopener">
+    const alt = ticker
+      ? `DevFridge ${ticker} live scan`
+      : "DevFridge live token scan";
+    return `<!-- DevFridge Verification Badge — ${SCAN_URL} -->
+<a href="${scannerUrl}" target="_blank" rel="noopener noreferrer">
   <img
-    src="${origin()}/api/badge?mint=${resolved}&theme=${theme}&style=${style}"
-    alt="DevFridge Verification Badge"
+    src="${SCAN_URL}/api/badge?mint=${resolved}&theme=${theme}&style=${style}"
+    alt="${alt}"
     width="${w}"
     height="${h}"
     style="border-radius:8px;"
   />
 </a>`;
-  }, [valid, resolved, mint, theme, style, scannerUrl, fridge?.status, fridge?.locks.length]);
+  }, [valid, resolved, mint, theme, style, scannerUrl, fridge?.status, fridge?.locks.length, ticker]);
 
   const prompt = useMemo(() => {
     if (!resolved) return "";
     return `I want to add a DevFridge verification badge to my token website.
 
 Token mint: ${resolved}
-Badge URL: ${origin()}/api/badge?mint=${resolved}&theme=${theme}
-Scanner link: ${scannerUrl}
+Ticker: ${ticker || "(shown live on the badge)"}
+Badge image: ${SCAN_URL}/api/badge?mint=${resolved}&theme=${theme}&style=${style}
+Live scan (open in a new tab): ${scannerUrl}
 
-The badge is a live SVG image served from the URL above. It shows whether my token's
-supply is timelocked in the DevFridge vault on Solana mainnet, updating every 60 seconds.
+The badge is a live SVG. It includes the token ticker and Fridge lock status.
+Wrap it in an <a href="${scannerUrl}" target="_blank" rel="noopener noreferrer">
+so a click opens a fresh live scan of this mint on scan.devfridge.cool.
 
 Please integrate this badge into my [INSERT YOUR STACK: React / Next.js / HTML / Vue /
 Webflow / Framer / etc.] website. Add it to [INSERT WHERE: the hero section / footer /
-about page / sidebar]. Make it link to the scanner URL. Keep the existing design consistent.
+about page / sidebar]. Keep the existing design consistent.
 
 My current site code is: [PASTE YOUR CODE HERE]`;
-  }, [valid, resolved, theme, scannerUrl]);
+  }, [valid, resolved, theme, style, scannerUrl, ticker]);
 
   async function preview(addr = mint) {
     const v = parseMint(addr);
@@ -107,7 +113,8 @@ My current site code is: [PASTE YOUR CODE HERE]`;
       <section className="ice-card p-5">
         <h2 className="text-lg font-bold">Badge generator</h2>
         <p className="mt-1 text-sm text-mute">
-          Embed a live on-chain Fridge badge. Free. No JS. Updates every 60s.
+          Embed a live on-chain Fridge badge with the token ticker. Clicks open a
+          fresh scan at scan.devfridge.cool/t/mint. Free. No JS. Updates every 60s.
         </p>
         <div className="mt-4 grid gap-3">
           <input
@@ -166,19 +173,30 @@ My current site code is: [PASTE YOUR CODE HERE]`;
 
       {valid && (
         <section className="ice-card p-5">
-          <h3 className="text-sm font-bold tracking-[0.16em] text-ice">LIVE PREVIEW</h3>
+          <h3 className="text-sm font-bold tracking-[0.16em] text-ice">
+            LIVE PREVIEW{ticker ? ` · ${ticker}` : ""}
+          </h3>
           <div className="mt-4 overflow-x-auto rounded-xl border border-line bg-navy p-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={badgeSrc}
-              src={badgeSrc}
-              alt="DevFridge badge preview"
-              className="max-w-full"
-              style={{ borderRadius: 8 }}
-            />
+            <a href={scannerUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                key={badgeSrc}
+                src={badgeSrc}
+                alt={ticker ? `DevFridge ${ticker} live scan` : "DevFridge live token scan"}
+                className="max-w-full"
+                style={{ borderRadius: 8 }}
+              />
+            </a>
           </div>
+          <p className="mt-3 break-all text-xs text-mute">
+            Opens in a new tab:{" "}
+            <a className="text-ice underline" href={scannerUrl} target="_blank" rel="noopener noreferrer">
+              {scannerUrl}
+            </a>
+          </p>
           {scan && (
             <ul className="mt-4 grid gap-1 text-sm text-mute">
+              {ticker && <li>Ticker: {ticker}</li>}
               <li>
                 Fridge:{" "}
                 {scan.fridge.locks.length > 0
@@ -228,8 +246,8 @@ My current site code is: [PASTE YOUR CODE HERE]`;
                 {copied === "html" ? "Copied!" : "Copy snippet"}
               </button>
               <p className="mt-3 text-sm text-mute">
-                Paste this before {"</body>"} in your site, or add the {"<img>"} tag anywhere in your
-                HTML. The badge updates live from the blockchain — no maintenance needed.
+                Paste this before {"</body>"} in your site. The badge shows the ticker and links to
+                a live scan of this mint in a new tab. It updates from the chain every 60s.
               </p>
             </>
           ) : (

@@ -83,7 +83,7 @@ async function jupiterToken(mint: string) {
   try {
     const res = await fetch(
       `https://lite-api.jup.ag/tokens/v2/search?query=${mint}`,
-      { signal: AbortSignal.timeout(8000) }
+      { cache: "no-store", signal: AbortSignal.timeout(8000) }
     );
     if (!res.ok) return null;
     const rows = (await res.json()) as Array<{
@@ -107,7 +107,7 @@ async function dex(mint: string) {
   try {
     const res = await fetch(
       `https://api.dexscreener.com/latest/dex/tokens/${mint}`,
-      { signal: AbortSignal.timeout(8000) }
+      { cache: "no-store", signal: AbortSignal.timeout(8000) }
     );
     if (!res.ok) return null;
     const json = (await res.json()) as {
@@ -136,6 +136,7 @@ async function dex(mint: string) {
 async function pumpCoin(mint: string) {
   try {
     const res = await fetch(`https://frontend-api.pump.fun/coins/${mint}`, {
+      cache: "no-store",
       signal: AbortSignal.timeout(8000),
     });
     if (!res.ok) return null;
@@ -157,7 +158,7 @@ async function stonkCoin(mint: string) {
   try {
     const res = await fetch(
       `https://www.stonkfun.xyz/api/public/v1/tokens?search=${mint}`,
-      { signal: AbortSignal.timeout(6000) }
+      { cache: "no-store", signal: AbortSignal.timeout(6000) }
     );
     if (!res.ok) return null;
     const json = (await res.json()) as { tokens?: Array<{ mint?: string }> } | Array<{ mint?: string }>;
@@ -247,7 +248,7 @@ function readBorshString(buf: Buffer, offset: number): string {
 async function metadataJson(uri: string) {
   if (!uri.startsWith("http")) return null;
   try {
-    const res = await fetch(uri, { signal: AbortSignal.timeout(6000) });
+    const res = await fetch(uri, { cache: "no-store", signal: AbortSignal.timeout(6000) });
     if (!res.ok) return null;
     return (await res.json()) as { image?: string; description?: string; name?: string };
   } catch {

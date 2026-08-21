@@ -17,6 +17,13 @@ export const BURN_ADDRESS =
 export const PUMPFUN_PROGRAM = "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P";
 export const TOKEN_METADATA_PROGRAM = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s";
 
+export const SCAN_URL =
+  process.env.NEXT_PUBLIC_SCAN_URL || "https://scan.devfridge.cool";
+
+export function scanPageUrl(mint: string): string {
+  return `${SCAN_URL}/t/${mint}`;
+}
+
 export const LOCK_ACCOUNT_SIZE = 105;
 export const LOCK_DISC = Uint8Array.from([8, 255, 36, 202, 210, 22, 57, 137]);
 

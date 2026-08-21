@@ -3,6 +3,7 @@ import { fridgeForMint } from "@/lib/fridge";
 import { fallbackBadgeSvg, renderBadgeSvg, type BadgeStyle, type BadgeTheme } from "@/lib/badge";
 import { parseMint } from "@/lib/format";
 import { rpc } from "@/lib/rpc";
+import { tokenTicker } from "@/lib/ticker";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,17 +29,20 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const [fridge, supplyInfo] = await Promise.all([
+    const [fridge, supplyInfo, ticker] = await Promise.all([
       fridgeForMint(mint),
       rpc<{ value?: { amount?: string; decimals?: number } }>("getTokenSupply", [mint]).catch(
         () => null
       ),
+      tokenTicker(mint).catch(() => ""),
     ]);
     const { svg } = renderBadgeSvg(fridge, {
       theme,
       style,
       supply: supplyInfo?.value?.amount ?? null,
       decimals: supplyInfo?.value?.decimals ?? 6,
+      ticker,
+      mint,
     });
     return svgResponse(svg);
   } catch {

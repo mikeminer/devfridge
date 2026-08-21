@@ -104,6 +104,15 @@ export function isMintAddress(value: string): boolean {
   return parseMint(value) !== null;
 }
 
+export function displayTicker(symbol?: string | null): string {
+  const raw = String(symbol || "")
+    .replace(/^\$+/g, "")
+    .replace(/\s+/g, "")
+    .trim();
+  if (!raw || raw === "???" || raw.toLowerCase() === "unknown") return "";
+  return `$${raw.slice(0, 12)}`;
+}
+
 export function xmlEscape(s: string): string {
   return s
     .replace(/&/g, "&amp;")

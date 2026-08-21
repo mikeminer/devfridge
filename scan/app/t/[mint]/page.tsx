@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from "next/cache";
+import type { Metadata } from "next";
 import SearchBar from "@/components/SearchBar";
 import PastaWidget from "@/components/PastaWidget";
 import TrustReportView from "@/components/TrustReport";
@@ -7,8 +9,19 @@ import { addRecent } from "@/lib/store";
 import { parseMint } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
+export function generateMetadata({ params }: { params: { mint: string } }): Metadata {
+  const mint = parseMint(decodeURIComponent(params.mint)) || decodeURIComponent(params.mint);
+  return {
+    title: `Live scan · ${mint.slice(0, 4)}…${mint.slice(-4)}`,
+    robots: { index: true },
+  };
+}
 
 export default async function TokenPage({ params }: { params: { mint: string } }) {
+  noStore();
   const mint = parseMint(decodeURIComponent(params.mint)) || decodeURIComponent(params.mint);
   let report = null;
   let error = "";

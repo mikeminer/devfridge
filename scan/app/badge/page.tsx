@@ -14,7 +14,8 @@ export default function BadgePage({
     <main className="mx-auto max-w-3xl px-4 py-8">
       <h1 className="text-3xl font-bold">Embed a live Fridge badge</h1>
       <p className="mt-2 text-sm text-mute">
-        Free, verifiable on-chain. Drop an image tag on your site, Linktree, docs, or Telegram.
+        Free, verifiable on-chain. The badge shows the token ticker and opens a live scan of
+        that mint on scan.devfridge.cool in a new tab.
       </p>
       <div className="mt-6">
         <PastaWidget />
