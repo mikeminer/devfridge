@@ -471,3 +471,56 @@ button {
     padding: 9px 14px;
   }
 }
+
+.docs-prose p {
+  margin: 0 0 1rem;
+  color: #94a3b8;
+  line-height: 1.65;
+}
+.docs-prose h2 {
+  margin: 1.75rem 0 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.docs-prose h3 {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.docs-prose ul,
+.docs-prose ol {
+  margin: 0 0 1rem 1.2rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+.docs-prose li {
+  margin-bottom: 0.35rem;
+}
+.docs-prose a {
+  color: #4fc3f7;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.docs-prose code {
+  font-size: 0.85em;
+  color: #d7f6ff;
+  word-break: break-all;
+}
+.docs-prose table {
+  width: 100%;
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  border-collapse: collapse;
+}
+.docs-prose th,
+.docs-prose td {
+  border-bottom: 1px solid #1e2d4a;
+  padding: 0.55rem 0.4rem;
+  text-align: left;
+}
+.docs-prose th {
+  color: #e2e8f0;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

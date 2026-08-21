@@ -21,6 +21,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Trust report and Fridge badge",
   },
   {
+    label: "Docs",
+    href: "https://docs.devfridge.cool",
+    hint: "How to fridge, scan, and feature a memecoin",
+  },
+  {
     label: "Health",
     href: "https://health.devfridge.cool",
     hint: "Live status of Fridge, RPC, and $PASTA",

@@ -14,9 +14,26 @@ function ipOf(req: NextRequest): string {
 
 export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
+  const path = req.nextUrl.pathname;
+
+  if (host.startsWith("docs.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/docs";
+    else if (
+      !path.startsWith("/docs") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next") &&
+      path !== "/sitemap.xml" &&
+      path !== "/robots.txt" &&
+      path !== "/llms.txt"
+    ) {
+      url.pathname = `/docs${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
-    const path = url.pathname;
     if (path === "/" || path === "") {
       const accept = req.headers.get("accept") || "";
       if (host.startsWith("health.") && accept.includes("application/json") && !accept.includes("text/html")) {
@@ -49,5 +66,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/health", "/connect", "/api/badge", "/api/badge/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

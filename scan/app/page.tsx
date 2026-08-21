@@ -47,6 +47,10 @@ export default function HomePage({
           devfridge.cool
         </a>
         {" · "}
+        <a className="text-ice hover:underline" href="https://docs.devfridge.cool">
+          docs
+        </a>
+        {" · "}
         Too many tokens? Fridge them.
       </footer>
     </main>
