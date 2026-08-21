@@ -49,6 +49,8 @@ export async function rpc<T = unknown>(
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(12000),
       });
       const json = (await res.json()) as { result?: T; error?: { message?: string } };
       if (!res.ok || json.error) {

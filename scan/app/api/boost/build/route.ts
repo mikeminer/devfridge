@@ -4,6 +4,7 @@ import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
 import { buildBoostTransaction } from "@/lib/boost";
 import { fridgeForMint } from "@/lib/fridge";
 import { parseMint } from "@/lib/format";
+import { quoteSolToPasta } from "@/lib/jupiter";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,7 +21,8 @@ export async function POST(req: NextRequest) {
     }
     new PublicKey(payer);
 
-    const fridge = await fridgeForMint(mint);
+    const lamports = Math.round(BOOST_TIERS[tier].sol * 1_000_000_000);
+    const [fridge, quote] = await Promise.all([fridgeForMint(mint), quoteSolToPasta(lamports)]);
     if (fridge.status !== "fridged") {
       return NextResponse.json(
         {
@@ -35,6 +37,7 @@ export async function POST(req: NextRequest) {
       payer: new PublicKey(payer),
       mint,
       tier,
+      quote,
     });
     return NextResponse.json({
       ok: true,

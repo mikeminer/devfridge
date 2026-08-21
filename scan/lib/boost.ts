@@ -1,4 +1,5 @@
 import {
+  AddressLookupTableAccount,
   PublicKey,
   TransactionInstruction,
   TransactionMessage,
@@ -10,8 +11,8 @@ import {
   getAssociatedTokenAddressSync,
 } from "@solana/spl-token";
 import { BURN_ADDRESS, BOOST_TIERS, PASTA_MINT, type BoostTier } from "./constants";
-import { pastaBuyInstructions, quoteSolToPasta } from "./jupiter";
-import { connection, rpc } from "./rpc";
+import { pastaBuyInstructions, quoteSolToPasta, type JupiterQuote } from "./jupiter";
+import { rpc } from "./rpc";
 import type { BoostRecord } from "./store";
 
 export const BOOST_MEMO_PROGRAM = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr";
@@ -44,6 +45,7 @@ export async function buildBoostTransaction(args: {
   payer: PublicKey;
   mint: string;
   tier: BoostTier;
+  quote?: JupiterQuote;
 }): Promise<{
   transaction: string;
   outAmount: string;
@@ -54,7 +56,7 @@ export async function buildBoostTransaction(args: {
 }> {
   const lamports = Math.round(BOOST_TIERS[args.tier].sol * 1_000_000_000);
   const destAta = pastaBurnAta();
-  const quote = await quoteSolToPasta(lamports);
+  const quote = args.quote ?? (await quoteSolToPasta(lamports));
   const swap = await pastaBuyInstructions({
     quote,
     payer: args.payer.toBase58(),
@@ -75,27 +77,38 @@ export async function buildBoostTransaction(args: {
   });
 
   const ixs = [...swap.compute, createAta, ...swap.setup, swap.swap, ...swap.cleanup, memo];
-  const conn = connection();
-  const alts = [];
-  for (const addr of swap.lookupTableAddresses) {
-    const res = await conn.getAddressLookupTable(addr);
-    if (res.value) alts.push(res.value);
-  }
-  const latest = await conn.getLatestBlockhash("confirmed");
+  const [alts, latest] = await Promise.all([
+    Promise.all(swap.lookupTableAddresses.map((addr) => loadLookupTable(addr))),
+    rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>("getLatestBlockhash", [
+      { commitment: "confirmed" },
+    ]),
+  ]);
   const message = new TransactionMessage({
     payerKey: args.payer,
-    recentBlockhash: latest.blockhash,
+    recentBlockhash: latest.value.blockhash,
     instructions: ixs,
-  }).compileToV0Message(alts);
+  }).compileToV0Message(alts.filter((a): a is AddressLookupTableAccount => Boolean(a)));
   const tx = new VersionedTransaction(message);
   return {
     transaction: Buffer.from(tx.serialize()).toString("base64"),
     outAmount: quote.outAmount,
     minPastaOut: quote.otherAmountThreshold,
     destAta: destAta.toBase58(),
-    blockhash: latest.blockhash,
-    lastValidBlockHeight: latest.lastValidBlockHeight,
+    blockhash: latest.value.blockhash,
+    lastValidBlockHeight: latest.value.lastValidBlockHeight,
   };
+}
+
+async function loadLookupTable(addr: PublicKey): Promise<AddressLookupTableAccount | null> {
+  const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
+    addr.toBase58(),
+    { encoding: "base64" },
+  ]).catch(() => null);
+  if (!acc?.value?.data?.[0]) return null;
+  return new AddressLookupTableAccount({
+    key: addr,
+    state: AddressLookupTableAccount.deserialize(Buffer.from(acc.value.data[0], "base64")),
+  });
 }
 
 type TokenBal = {

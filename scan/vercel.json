@@ -1,3 +1,8 @@
 {
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "functions": {
+    "app/api/boost/build/route.ts": { "maxDuration": 30 },
+    "app/api/boost/route.ts": { "maxDuration": 30 },
+    "app/api/feed/boosted/route.ts": { "maxDuration": 20 }
+  }
 }
