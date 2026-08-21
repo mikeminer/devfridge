@@ -28,7 +28,7 @@ export default function HomePage({
         </h1>
         <p className="mt-3 max-w-lg text-sm text-mute">
           Paste any Solana mint. We score mint/freeze, liquidity, and the verifiable 🧊 DevFridge
-          timelock. Boost fees buy and burn $PASTA.
+          timelock. Boost SOL buys $PASTA on Jupiter and burns it for the full package time.
         </p>
       </header>
 

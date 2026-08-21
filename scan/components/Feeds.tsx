@@ -46,8 +46,13 @@ export default function Feeds() {
 
   useEffect(() => {
     void load();
-    const id = window.setInterval(() => void load(), 60_000);
-    return () => window.clearInterval(id);
+    const id = window.setInterval(() => void load(), 30_000);
+    const onBoost = () => void load();
+    window.addEventListener("devfridge:boosted", onBoost);
+    return () => {
+      window.clearInterval(id);
+      window.removeEventListener("devfridge:boosted", onBoost);
+    };
   }, []);
 
   return (
@@ -97,9 +102,17 @@ export default function Feeds() {
   );
 }
 
+function leftLabel(expiresAt?: number) {
+  if (!expiresAt) return "";
+  const ms = Math.max(0, expiresAt - Date.now());
+  const d = Math.floor(ms / 86400000);
+  const h = Math.floor((ms % 86400000) / 3600000);
+  if (d >= 1) return `${d}d ${h}h left`;
+  const hours = Math.max(1, Math.ceil(ms / 3600000));
+  return `${hours}h left`;
+}
+
 function TokenCard({ token, boosted }: { token: Card; boosted?: boolean }) {
-  const left = token.expiresAt ? Math.max(0, token.expiresAt - Date.now()) : 0;
-  const hours = Math.ceil(left / 3600000);
   return (
     <Link href={`/t/${token.mint}`} className="ice-card flex items-center gap-3 p-3 hover:border-ice">
       <TokenLogo src={token.image} symbol={token.symbol || "?"} size="sm" />
@@ -109,7 +122,8 @@ function TokenCard({ token, boosted }: { token: Card; boosted?: boolean }) {
         </p>
         <p className="text-xs text-mute">
           {token.fridged ? "🧊 Fridged" : "Not fridged"}
-          {boosted && token.expiresAt ? ` · ${hours}h left` : ""}
+          {boosted && token.tier ? ` · ${token.tier} boost` : ""}
+          {boosted && token.expiresAt ? ` · ${leftLabel(token.expiresAt)}` : ""}
         </p>
       </div>
       {boosted && <span className="text-xs text-ice">🔥 Boosted</span>}

@@ -3,20 +3,21 @@
 import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import {
-  Connection,
-  PublicKey,
-  SystemProgram,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
-import { BOOST_TIERS, TREASURY, type BoostTier } from "@/lib/constants";
-import { parseMint } from "@/lib/format";
+import { Connection, VersionedTransaction } from "@solana/web3.js";
+import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
+import { fmtAmount, parseMint } from "@/lib/format";
 
 function boostConnection(): Connection {
   const endpoint =
     typeof window === "undefined" ? "/api/solana" : `${window.location.origin}/api/solana`;
   return new Connection(endpoint, "confirmed");
+}
+
+function b64ToBytes(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
 }
 
 export default function BoostSubscribe({
@@ -57,37 +58,37 @@ export default function BoostSubscribe({
       if (!signTransaction) {
         throw new Error("This wallet cannot sign locally. Use Phantom or Solflare.");
       }
+
+      setStatus("Quoting Jupiter to buy $PASTA…");
+      const builtRes = await fetch("/api/boost/build", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ mint: m, tier, payer: publicKey.toBase58() }),
+      });
+      const built = await builtRes.json();
+      if (!builtRes.ok) throw new Error(built.error || "Could not build $PASTA buyback");
+
+      setStatus("Sign to buy $PASTA and burn it…");
       const rpc = boostConnection();
-      const lamports = Math.round(BOOST_TIERS[tier].sol * 1_000_000_000);
-      const latest = await rpc.getLatestBlockhash("confirmed");
-      const tx = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: new PublicKey(TREASURY),
-          lamports,
-        }),
-        new TransactionInstruction({
-          programId: new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"),
-          keys: [],
-          data: Buffer.from(`devfridge-boost:${tier}:${m}`),
-        })
-      );
-      tx.feePayer = publicKey;
-      tx.recentBlockhash = latest.blockhash;
+      const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
       const signed = await signTransaction(tx);
       const sig = await rpc.sendRawTransaction(signed.serialize(), {
-        skipPreflight: false,
-        preflightCommitment: "confirmed",
+        skipPreflight: true,
         maxRetries: 3,
       });
-      await rpc.confirmTransaction(
-        {
-          signature: sig,
-          blockhash: latest.blockhash,
-          lastValidBlockHeight: latest.lastValidBlockHeight,
-        },
-        "confirmed"
-      );
+      try {
+        await rpc.confirmTransaction(
+          {
+            signature: sig,
+            blockhash: built.blockhash,
+            lastValidBlockHeight: built.lastValidBlockHeight,
+          },
+          "confirmed"
+        );
+      } catch {
+        /* server verify retries getTransaction */
+      }
+
       const res = await fetch("/api/boost", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -95,7 +96,13 @@ export default function BoostSubscribe({
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Boost record failed");
-      setStatus(`Featured for ${BOOST_TIERS[tier].label}. SOL goes to $PASTA buyback/burn.`);
+      const burned = json.burned ? fmtAmount(String(json.burned), 6) : fmtAmount(String(built.outAmount || "0"), 6);
+      const hours = BOOST_TIERS[tier].hours;
+      const last = hours >= 48 ? `${Math.round(hours / 24)} days` : `${hours} hours`;
+      setStatus(
+        `Featured for ${last}. Jupiter bought and burned ${burned} $PASTA.`
+      );
+      window.dispatchEvent(new Event("devfridge:boosted"));
     } catch (err) {
       setStatus(err instanceof Error ? err.message : String(err));
     } finally {
@@ -108,8 +115,8 @@ export default function BoostSubscribe({
       <p className="text-[10px] font-bold tracking-[0.2em] text-ice">GET FEATURED</p>
       <h2 className="mt-1 text-xl font-bold sm:text-2xl">Feature your fridged token</h2>
       <p className="mt-2 text-sm text-mute">
-        Pay SOL to appear in the Boosted feed. Only tokens with a live Fridge lock can subscribe.
-        Fees buy and burn $PASTA.
+        Pay SOL. Jupiter buys $PASTA and burns it. Your token stays in the Boosted feed for the
+        whole package (24h, 48h, or 7 days). Only tokens with a live Fridge lock can subscribe.
       </p>
 
       {!fixedMint && (
@@ -140,7 +147,7 @@ export default function BoostSubscribe({
             <span className="fridge-plan-kicker">{compact ? "Slot" : "Featured slot"}</span>
             <span className="fridge-plan-label">{BOOST_TIERS[tier].label}</span>
             <span className="fridge-plan-price">{BOOST_TIERS[tier].sol} SOL</span>
-            <span className="fridge-plan-go">Lock in</span>
+            <span className="fridge-plan-go">{busy ? "Working…" : "Buy & burn"}</span>
           </button>
         ))}
       </div>

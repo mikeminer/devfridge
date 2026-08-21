@@ -9,6 +9,7 @@ export type BoostRecord = {
   expiresAt: number;
   createdAt: number;
   fridged: boolean;
+  burned?: string;
 };
 
 export type RecentScan = {
@@ -90,20 +91,53 @@ async function kvSet(key: string, value: unknown) {
   await runtimeSet(key, value);
 }
 
+function mergeBoosts(rows: BoostRecord[]): BoostRecord[] {
+  const map = new Map<string, BoostRecord>();
+  for (const row of rows) {
+    if (!row?.mint || !row.expiresAt) continue;
+    const prev = map.get(row.mint);
+    if (!prev) {
+      map.set(row.mint, row);
+      continue;
+    }
+    const newer = row.expiresAt >= prev.expiresAt ? row : prev;
+    const older = newer === row ? prev : row;
+    map.set(row.mint, {
+      ...newer,
+      name:
+        newer.name && newer.name !== newer.mint.slice(0, 4) ? newer.name : older.name || newer.name,
+      symbol: newer.symbol && newer.symbol !== "TKN" ? newer.symbol : older.symbol || newer.symbol,
+      image: newer.image || older.image || null,
+      burned: newer.burned || older.burned,
+      fridged: newer.fridged || older.fridged,
+    });
+  }
+  const rank = { "7d": 3, "48h": 2, "24h": 1 };
+  return [...map.values()].sort(
+    (a, b) => rank[b.tier] - rank[a.tier] || b.expiresAt - a.expiresAt
+  );
+}
+
 export async function addBoost(row: BoostRecord) {
   const boosts = await listBoosts(true);
-  const next = [row, ...boosts.filter((b) => b.mint !== row.mint || b.signature !== row.signature)];
+  const next = mergeBoosts([row, ...boosts]);
   mem.boosts = next;
   await kvSet("boosts", next);
 }
 
 export async function listBoosts(includeExpired = false): Promise<BoostRecord[]> {
   const stored = await kvGet<BoostRecord[]>("boosts", mem.boosts);
-  mem.boosts = stored;
+  let chain: BoostRecord[] = [];
+  try {
+    const { boostsFromChain } = await import("./boost");
+    chain = await boostsFromChain();
+  } catch {
+    chain = [];
+  }
+  const merged = mergeBoosts([...chain, ...stored]);
+  mem.boosts = merged;
   const now = Date.now();
-  const rows = includeExpired ? stored : stored.filter((b) => b.expiresAt > now);
-  const rank = { "7d": 3, "48h": 2, "24h": 1 };
-  return [...rows].sort((a, b) => rank[b.tier] - rank[a.tier] || b.expiresAt - a.expiresAt);
+  return includeExpired ? merged : merged.filter((b) => b.expiresAt > now);
 }
 
 export async function addRecent(row: RecentScan) {

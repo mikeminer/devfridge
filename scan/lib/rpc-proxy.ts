@@ -3,6 +3,7 @@ import { rpcUrls } from "@/lib/rpc";
 
 const ALLOWED = new Set([
   "getAccountInfo",
+  "getMultipleAccounts",
   "getMultipleAccountsInfo",
   "getProgramAccounts",
   "getLatestBlockhash",
