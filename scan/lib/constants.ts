@@ -6,6 +6,9 @@ export const PASTA_MINT =
   process.env.NEXT_PUBLIC_PASTA_MINT ||
   "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump";
 
+/** PumpSwap SOL/$PASTA pool (DexScreener). */
+export const PASTA_PUMPSWAP_POOL = "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5";
+
 export const TREASURY =
   process.env.NEXT_PUBLIC_TREASURY_WALLET ||
   "GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";

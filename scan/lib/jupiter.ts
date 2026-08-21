@@ -15,7 +15,8 @@ export async function quoteSolToPasta(lamports: number, maxAccounts = 32): Promi
   const url =
     `${QUOTE_URL}?inputMint=${SOL_MINT}` +
     `&outputMint=${PASTA_MINT}&amount=${lamports}` +
-    `&slippageBps=150&swapMode=ExactIn&maxAccounts=${maxAccounts}`;
+    `&slippageBps=150&swapMode=ExactIn&maxAccounts=${maxAccounts}` +
+    `&onlyDirectRoutes=true&dexes=${encodeURIComponent("Pump.fun Amm")}`;
   const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(12000) });
   const json = (await res.json().catch(() => ({}))) as {
     outAmount?: string;
