@@ -525,8 +525,12 @@ button {
   text-transform: uppercase;
 }
 
-body.world-play {
+body.world-play,
+body.world-soon {
   overflow: hidden;
+}
+body.world-soon .fridge-topbar {
+  display: none;
 }
 body.world-play .wallet-adapter-modal {
   z-index: 10050;

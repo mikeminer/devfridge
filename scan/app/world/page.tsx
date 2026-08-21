@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import WorldApp from "@/components/world/WorldApp";
+import ComingSoon from "@/components/world/ComingSoon";
 
 export const metadata: Metadata = {
-  title: "world.devfridge.cool — Fridge metaverse",
+  title: "world.devfridge.cool — Coming soon",
   description:
-    "A shooter inside the Fridge. Pastalovers lock $PASTA. The Shelf locks any other token. Teammates cannot kill each other.",
+    "The Fridge metaverse opens 31 August 2026. Pastalovers vs The Shelf.",
 };
 
 export default function WorldPage() {
-  return <WorldApp />;
+  return <ComingSoon />;
 }
