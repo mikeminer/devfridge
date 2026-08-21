@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PublicKey } from "@solana/web3.js";
 import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
-import { buildProgramBoostTx } from "@/lib/boost";
+import { buildProgramBoostPlan } from "@/lib/boost";
 import { fridgeForMint } from "@/lib/fridge";
 import { parseMint } from "@/lib/format";
 
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const built = await buildProgramBoostTx({
+    const built = await buildProgramBoostPlan({
       payer: new PublicKey(payer),
       mint,
       tier,

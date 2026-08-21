@@ -1,11 +1,8 @@
 import {
-  AddressLookupTableAccount,
   ComputeBudgetProgram,
   PublicKey,
   SystemProgram,
   TransactionInstruction,
-  TransactionMessage,
-  VersionedTransaction,
 } from "@solana/web3.js";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -118,29 +115,36 @@ export function decodeBoost(address: string, data: Uint8Array): BoostRecord | nu
   };
 }
 
-async function loadLookupTable(addr: PublicKey): Promise<AddressLookupTableAccount | null> {
-  const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
-    addr.toBase58(),
-    { encoding: "base64" },
-  ]).catch(() => null);
-  if (!acc?.value?.data?.[0]) return null;
-  return new AddressLookupTableAccount({
-    key: addr,
-    state: AddressLookupTableAccount.deserialize(Buffer.from(acc.value.data[0], "base64")),
-  });
+export type BoostPlanIx = {
+  programId: string;
+  keys: { pubkey: string; isSigner: boolean; isWritable: boolean }[];
+  data: string;
+};
+
+export type BoostPlan = {
+  instructions: BoostPlanIx[];
+  alts: { key: string; data: string }[];
+  minPastaOut: string;
+};
+
+function serializeIx(ix: TransactionInstruction): BoostPlanIx {
+  return {
+    programId: ix.programId.toBase58(),
+    keys: ix.keys.map((k) => ({
+      pubkey: k.pubkey.toBase58(),
+      isSigner: k.isSigner,
+      isWritable: k.isWritable,
+    })),
+    data: Buffer.from(ix.data).toString("base64"),
+  };
 }
 
-export async function buildProgramBoostTx(args: {
+export async function buildProgramBoostPlan(args: {
   payer: PublicKey;
   mint: string;
   tier: BoostTier;
   lock: FridgeLock;
-}): Promise<{
-  transaction: string;
-  blockhash: string;
-  lastValidBlockHeight: number;
-  minPastaOut: string;
-}> {
+}): Promise<BoostPlan> {
   const mint = new PublicKey(args.mint);
   const programId = new PublicKey(PROGRAM_ID);
   const [burnAuthority] = burnPda();
@@ -205,9 +209,6 @@ export async function buildProgramBoostTx(args: {
         ],
         data,
       });
-      const alts = (
-        await Promise.all(route.lookupTableAddresses.map((addr) => loadLookupTable(addr)))
-      ).filter((a): a is AddressLookupTableAccount => Boolean(a));
       const ixs: TransactionInstruction[] = [
         ComputeBudgetProgram.setComputeUnitLimit({ units: 1_400_000 }),
         ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 20_000 }),
@@ -222,20 +223,19 @@ export async function buildProgramBoostTx(args: {
         );
       }
       ixs.push(boostIx);
-      const latest = await rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>(
-        "getLatestBlockhash",
-        [{ commitment: "confirmed" }]
-      );
-      const message = new TransactionMessage({
-        payerKey: args.payer,
-        recentBlockhash: latest.value.blockhash,
-        instructions: ixs,
-      }).compileToV0Message(alts);
-      const tx = new VersionedTransaction(message);
+      const altRows: { key: string; data: string }[] = [];
+      for (const addr of route.lookupTableAddresses) {
+        const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
+          addr.toBase58(),
+          { encoding: "base64" },
+        ]).catch(() => null);
+        if (acc?.value?.data?.[0]) {
+          altRows.push({ key: addr.toBase58(), data: acc.value.data[0] });
+        }
+      }
       return {
-        transaction: Buffer.from(tx.serialize()).toString("base64"),
-        blockhash: latest.value.blockhash,
-        lastValidBlockHeight: latest.value.lastValidBlockHeight,
+        instructions: ixs.map(serializeIx),
+        alts: altRows,
         minPastaOut: route.minPastaOut.toString(),
       };
     } catch (err) {
