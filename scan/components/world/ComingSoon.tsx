@@ -37,8 +37,11 @@ export default function ComingSoon() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) document.body.classList.remove("world-soon");
+  }, [open]);
+
   if (!open) {
-    document.body.classList.remove("world-soon");
     return <WorldApp />;
   }
 
