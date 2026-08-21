@@ -1,0 +1,17 @@
+{
+  "services": {
+    "bot": {
+      "root": "bot",
+      "entrypoint": "src/index.ts"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "bot"
+      }
+    }
+  ]
+}
