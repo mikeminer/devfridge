@@ -16,3 +16,6 @@ app/tmp-verify
 id.json
 *.log
 .solana
+
+.vercel
+.env*
