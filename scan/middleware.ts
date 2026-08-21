@@ -48,6 +48,22 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (host.startsWith("sdk.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/sdk";
+    else if (
+      !path.startsWith("/sdk") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next") &&
+      path !== "/sitemap.xml" &&
+      path !== "/robots.txt" &&
+      path !== "/llms.txt"
+    ) {
+      url.pathname = `/sdk${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
     if (path === "/" || path === "") {
