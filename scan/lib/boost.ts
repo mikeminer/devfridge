@@ -200,7 +200,7 @@ type RpcTx = {
 
 async function waitForTx(signature: string): Promise<RpcTx> {
   const started = Date.now();
-  while (Date.now() - started < 50_000) {
+  while (Date.now() - started < 15_000) {
     const st = await rpc<{ value?: Array<{ confirmationStatus?: string; err?: unknown } | null> }>(
       "getSignatureStatuses",
       [[signature], { searchTransactionHistory: true }]

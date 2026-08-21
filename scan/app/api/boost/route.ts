@@ -5,7 +5,7 @@ import { BOOST_TIERS, type BoostTier } from "@/lib/constants";
 import { invalidateBoostChainCache, runCrankBuyback, verifyBoostTransaction } from "@/lib/boost";
 import { addBoost, listBoosts } from "@/lib/store";
 import { fridgeForMint } from "@/lib/fridge";
-import { scanMint } from "@/lib/scan";
+import { tokenIdentity } from "@/lib/identity";
 import { parseMint } from "@/lib/format";
 
 export const runtime = "nodejs";
@@ -38,25 +38,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const verified = await verifyBoostTransaction({ signature, mint });
-
-    let name = mint.slice(0, 4);
-    let symbol = "TKN";
-    let image: string | null = null;
-    try {
-      const report = await scanMint(mint);
-      name = report.identity.name;
-      symbol = report.identity.symbol;
-      image = report.identity.image;
-    } catch {
-      /* identity optional */
-    }
+    const [verified, ident] = await Promise.all([
+      verifyBoostTransaction({ signature, mint }),
+      tokenIdentity(mint).catch(() => ({
+        name: mint.slice(0, 4),
+        symbol: "TKN",
+        image: null as string | null,
+      })),
+    ]);
 
     const row = {
       mint,
-      name,
-      symbol,
-      image,
+      name: ident.name,
+      symbol: ident.symbol,
+      image: ident.image,
       tier: verified.tier || tier,
       signature,
       payer: verified.payer || "",

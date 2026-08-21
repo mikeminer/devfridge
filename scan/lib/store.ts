@@ -135,9 +135,14 @@ export async function listBoosts(includeExpired = false): Promise<BoostRecord[]>
     chain = [];
   }
   const merged = mergeBoosts([...chain, ...stored]);
-  mem.boosts = merged;
+  const { fillIdentity, isPlaceholderIdentity } = await import("./identity");
+  const filled = await Promise.all(merged.map((row) => fillIdentity(row)));
+  if (filled.some((row, i) => isPlaceholderIdentity(merged[i]) && !isPlaceholderIdentity(row))) {
+    await kvSet("boosts", filled);
+  }
+  mem.boosts = filled;
   const now = Date.now();
-  return includeExpired ? merged : merged.filter((b) => b.expiresAt > now);
+  return includeExpired ? filled : filled.filter((b) => b.expiresAt > now);
 }
 
 export async function addRecent(row: RecentScan) {
