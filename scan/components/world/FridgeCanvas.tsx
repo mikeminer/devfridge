@@ -41,6 +41,14 @@ export default function FridgeCanvas({
     const el = host.current;
     if (!el) return;
 
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : "WebGL failed");
+      return;
+    }
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x4aa3c7);
     scene.fog = new THREE.Fog(0x4aa3c7, 18, 48);
@@ -48,7 +56,6 @@ export default function FridgeCanvas({
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 80);
     camera.position.set(0, 1.7, 12);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(el.clientWidth, el.clientHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -387,6 +394,7 @@ export default function FridgeCanvas({
           </p>
           <p className="mt-2 text-mute">HP {hp} · Kills {kills}</p>
           <p className="mt-2 text-mute">{msg}</p>
+          <p className="mt-2 text-[10px] text-mute">webgl vanilla · three r170</p>
         </div>
       </div>
     </>
