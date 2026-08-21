@@ -67,7 +67,7 @@ export default function WorldApp() {
   const canFight = Boolean(connected && faction);
 
   return (
-    <div className="relative h-[calc(100dvh-58px)] min-h-[520px] w-full overflow-hidden bg-[#070b14]">
+    <div className="relative h-[calc(100dvh-58px)] min-h-[520px] w-full overflow-hidden bg-[#4aa3c7]">
       <FridgeCanvas faction={faction && connected ? faction : null} room={room} />
       {!connected || !publicKey ? (
         <div className="pointer-events-none absolute inset-0 z-10 grid place-items-end bg-gradient-to-t from-black/70 via-transparent to-transparent p-6 sm:place-items-center">
