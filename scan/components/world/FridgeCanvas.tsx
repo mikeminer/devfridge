@@ -1,12 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls } from "@react-three/drei";
+import {
+  ContactShadows,
+  Environment,
+  Float,
+  PointerLockControls,
+  Sparkles,
+  useAnimations,
+  useGLTF,
+} from "@react-three/drei";
 import * as THREE from "three";
+import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { PASTA_MINT } from "@/lib/constants";
 import { teamFromMint, type WorldTeam } from "@/lib/world-faction";
 import type { Faction } from "./WorldApp";
+
+useGLTF.preload("/world/Soldier.glb");
+useGLTF.preload("/world/Xbot.glb");
+useGLTF.preload("/world/Duck.glb");
 
 type Dummy = {
   id: string;
@@ -50,23 +63,27 @@ export default function FridgeCanvas({ faction, room }: { faction: Faction; room
   return (
     <>
       <Canvas
+        shadows
         camera={{ fov: 75, position: [0, 1.6, 12] }}
         onPointerDown={() => setMsg("")}
         style={{ height: "100%", width: "100%" }}
       >
         <color attach="background" args={["#071018"]} />
-        <fog attach="fog" args={["#071018", 12, 38]} />
-        <ambientLight intensity={0.35} />
-        <pointLight position={[0, 8, 0]} intensity={40} color="#4fc3f7" />
-        <pointLight position={[0, 2, 0]} intensity={12} color="#fbbf24" />
-        <Arena />
-        <Player
-          faction={faction}
-          onHp={setHp}
-          hpRef={hpRef}
-          onKill={() => setKills((k) => k + 1)}
-          onMsg={setMsg}
-        />
+        <fog attach="fog" args={["#071018", 14, 42]} />
+        <ambientLight intensity={0.25} />
+        <pointLight position={[0, 7.4, 0]} intensity={50} color="#7dd3fc" castShadow />
+        <pointLight position={[0, 2.2, 0]} intensity={18} color="#fbbf24" />
+        <Suspense fallback={null}>
+          <Environment preset="warehouse" />
+          <Arena />
+          <Player
+            faction={faction}
+            onHp={setHp}
+            hpRef={hpRef}
+            onKill={() => setKills((k) => k + 1)}
+            onMsg={setMsg}
+          />
+        </Suspense>
         <PointerLockControls />
       </Canvas>
       <div className="pointer-events-none absolute inset-0">
@@ -95,38 +112,75 @@ export default function FridgeCanvas({ faction, room }: { faction: Faction; room
   );
 }
 
+function IceWall({
+  position,
+  args,
+}: {
+  position: [number, number, number];
+  args: [number, number, number];
+}) {
+  return (
+    <mesh position={position}>
+      <boxGeometry args={args} />
+      <meshPhysicalMaterial
+        color="#7ec8e3"
+        roughness={0.12}
+        metalness={0.05}
+        transmission={0.55}
+        thickness={1.2}
+        transparent
+        opacity={0.9}
+        ior={1.3}
+      />
+    </mesh>
+  );
+}
+
 function Arena() {
+  const duck = useGLTF("/world/Duck.glb");
   return (
     <group>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[40, 40]} />
-        <meshStandardMaterial color="#0b1528" metalness={0.2} roughness={0.4} />
+        <meshStandardMaterial color="#0b1528" metalness={0.35} roughness={0.28} />
       </mesh>
       <mesh position={[0, 8, 0]}>
         <boxGeometry args={[40, 0.4, 40]} />
         <meshStandardMaterial color="#0a1222" />
       </mesh>
-      {[
-        [0, 4, -20, 40, 8, 0.5],
-        [0, 4, 20, 40, 8, 0.5],
-        [-20, 4, 0, 0.5, 8, 40],
-        [20, 4, 0, 0.5, 8, 40],
-      ].map(([x, y, z, w, h, d], i) => (
-        <mesh key={i} position={[x, y, z]}>
-          <boxGeometry args={[w, h, d]} />
-          <meshStandardMaterial color="#123047" transparent opacity={0.85} />
-        </mesh>
-      ))}
+      <IceWall position={[0, 4, -20]} args={[40, 8, 0.45]} />
+      <IceWall position={[0, 4, 20]} args={[40, 8, 0.45]} />
+      <IceWall position={[-20, 4, 0]} args={[0.45, 8, 40]} />
+      <IceWall position={[20, 4, 0]} args={[0.45, 8, 40]} />
       {SHELVES.map(([x, y, z, w, h, d], i) => (
-        <mesh key={`s${i}`} position={[x, y, z]} userData={{ cover: true }}>
+        <mesh key={`s${i}`} position={[x, y, z]} castShadow receiveShadow userData={{ cover: true }}>
           <boxGeometry args={[w, h, d]} />
-          <meshStandardMaterial color="#1a3a55" metalness={0.3} roughness={0.35} />
+          <meshStandardMaterial color="#1a3a55" metalness={0.45} roughness={0.3} />
         </mesh>
       ))}
-      <mesh position={[0, 0.2, 0]}>
-        <cylinderGeometry args={[1.4, 1.6, 0.4, 24]} />
-        <meshStandardMaterial color="#c2410c" emissive="#7c2d12" emissiveIntensity={0.4} />
+      <mesh position={[0, 0.35, 0]} castShadow>
+        <cylinderGeometry args={[1.5, 1.7, 0.7, 28]} />
+        <meshStandardMaterial color="#c2410c" emissive="#9a3412" emissiveIntensity={0.55} />
       </mesh>
+      <Sparkles count={80} scale={[36, 8, 36]} size={3} speed={0.35} color="#7dd3fc" />
+      <ContactShadows opacity={0.45} scale={40} blur={2.4} far={8} />
+      {[
+        [-8, 2.7, -6],
+        [8, 2.7, -6],
+        [-8, 2.7, 6],
+        [8, 2.7, 6],
+        [-2, 1.5, 10],
+        [2, 1.5, -10],
+      ].map((p, i) => (
+        <Float key={i} speed={1.2} floatIntensity={0.4} rotationIntensity={0.3}>
+          <primitive
+            object={duck.scene.clone()}
+            position={p as [number, number, number]}
+            scale={1.6}
+            rotation={[0, (i * Math.PI) / 3, 0]}
+          />
+        </Float>
+      ))}
     </group>
   );
 }
@@ -321,23 +375,53 @@ function Player({
 }
 
 function BotMesh({ dummy }: { dummy: Dummy }) {
-  const ref = useRef<THREE.Mesh>(null);
-  useFrame(() => {
-    if (ref.current) ref.current.position.copy(dummy.pos);
-  });
-  return (
-    <mesh
-      ref={ref}
-      userData={{
+  const url = dummy.team === "pastalovers" ? "/world/Soldier.glb" : "/world/Xbot.glb";
+  const { scene, animations } = useGLTF(url);
+  const clone = useMemo(() => cloneSkinned(scene), [scene]);
+  const group = useRef<THREE.Group>(null);
+  const { actions } = useAnimations(animations, group);
+
+  useEffect(() => {
+    clone.traverse((obj: THREE.Object3D) => {
+      const mesh = obj as THREE.Mesh;
+      mesh.userData = {
         actor: true,
         id: dummy.id,
         mint: dummy.mint,
         symbol: dummy.symbol,
         team: dummy.team,
-      }}
-    >
-      <cylinderGeometry args={[0.45, 0.45, 1.6, 10]} />
-      <meshStandardMaterial color={dummy.color} />
-    </mesh>
+      };
+      if (mesh.isMesh) {
+        mesh.castShadow = true;
+        const mat = mesh.material;
+        if (mat && !Array.isArray(mat) && "emissive" in mat) {
+          const m = mat.clone() as THREE.MeshStandardMaterial;
+          m.emissive = new THREE.Color(dummy.color);
+          m.emissiveIntensity = 0.18;
+          mesh.material = m;
+        }
+      }
+    });
+  }, [clone, dummy]);
+
+  useEffect(() => {
+    const walk = actions.Walk || actions.walk || Object.values(actions)[0];
+    walk?.reset().fadeIn(0.2).play();
+    return () => {
+      walk?.fadeOut(0.2);
+    };
+  }, [actions]);
+
+  useFrame(() => {
+    if (!group.current) return;
+    group.current.position.copy(dummy.pos);
+    group.current.position.y = 0;
+    group.current.rotation.y = dummy.yaw;
+  });
+
+  return (
+    <group ref={group} scale={1}>
+      <primitive object={clone} />
+    </group>
   );
 }

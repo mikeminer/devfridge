@@ -1,0 +1,3 @@
+Soldier.glb, Xbot.glb — three.js examples (https://threejs.org/examples/) Mixamo characters, MIT
+Duck.glb — Khronos glTF Sample Models, CC-BY
+Environment lighting — @react-three/drei warehouse HDR

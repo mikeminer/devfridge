@@ -24,6 +24,11 @@ export default function WorldDoc() {
         team. No live lock → you cannot fight. Teammates cannot kill each other.
       </p>
       <p>
+        Characters are Mixamo rigs from the official{" "}
+        <a href="https://threejs.org/examples/">three.js examples</a> (Soldier / Xbot). Shelf props
+        use the Khronos Duck sample. Ice walls use MeshPhysicalMaterial transmission.
+      </p>
+      <p>
         <a className="fridge-key fridge-key-primary" href="https://world.devfridge.cool">
           Enter the Fridge
         </a>
