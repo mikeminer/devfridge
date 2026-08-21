@@ -14,9 +14,27 @@ export const fetchCache = "force-no-store";
 
 export function generateMetadata({ params }: { params: { mint: string } }): Metadata {
   const mint = parseMint(decodeURIComponent(params.mint)) || decodeURIComponent(params.mint);
+  const shortMint = `${mint.slice(0, 4)}…${mint.slice(-4)}`;
+  const url = `https://scan.devfridge.cool/t/${mint}`;
+  const description = `Live Solana risk report for ${shortMint}: authorities, holder concentration, market signals, and DevFridge timelocks.`;
   return {
-    title: `Live scan · ${mint.slice(0, 4)}…${mint.slice(-4)}`,
-    robots: { index: true },
+    title: `Solana token report ${shortMint}`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      url,
+      title: `Solana token risk report ${shortMint}`,
+      description,
+      images: [{ url: "https://devfridge.cool/brand/logo-lockup.jpg" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Solana token risk report ${shortMint}`,
+      description,
+      images: ["https://devfridge.cool/brand/logo-lockup.jpg"],
+    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -42,9 +60,6 @@ export default async function TokenPage({ params }: { params: { mint: string } }
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
       <SearchBar initial={mint} />
-      <div className="mt-4">
-        <PastaWidget />
-      </div>
       <div className="mt-6">
         {error ? (
           <div className="ice-card p-5 text-caution">{error}</div>
@@ -63,6 +78,9 @@ export default async function TokenPage({ params }: { params: { mint: string } }
             <TrustReportView report={report} />
           </>
         ) : null}
+      </div>
+      <div className="mt-6">
+        <PastaWidget />
       </div>
     </main>
   );

@@ -6,6 +6,20 @@ Solana Anchor dApp for time-locking **Token-2022** balances.
 
 License: [Business Source License 1.1](LICENSE) (converts to GPL-2.0-or-later on 2030-08-18).
 
+## Live products
+
+- Scanner: https://scan.devfridge.cool
+- Documentation: https://docs.devfridge.cool
+- Risk methodology: https://docs.devfridge.cool/methodology
+- Security and disclosure: https://docs.devfridge.cool/security
+- Listing and partner kit: https://docs.devfridge.cool/listing-kit
+- Status: https://health.devfridge.cool
+- Official contacts: https://connect.devfridge.cool
+
+DevFridge Scan reports observable on-chain and market signals. Its risk grade is not an audit,
+endorsement, investment recommendation, or guarantee. Sponsored placements never change scan
+checks, warnings, thresholds, or grades.
+
 Any wallet can create multiple independent locks by pasting a mint address, choosing a positive amount, and setting an unlock date. Tokens move into a PDA-owned associated token vault. Only the original depositor can claim, and only after `unlock_at`. Claim closes the vault and the lock PDA so rent returns to the depositor.
 
 ## Program
@@ -53,4 +67,10 @@ Then set the program ID in the dApp **Program & RPC** panel. Use a private RPC i
 ```bash
 cargo test --manifest-path programs/fridge/Cargo.toml --lib
 cd app && npm test
+cd ../scan && npm run build
+cd ../bot && npm run typecheck
 ```
+
+GitHub Actions runs program tests, scanner and app builds, app unit tests, and bot type-checking for
+every pull request. See [SECURITY.md](SECURITY.md) for the current audit status and vulnerability
+reporting process.

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            scan/package-lock.json
+            bot/package-lock.json
+      - name: Install scanner dependencies
+        run: npm ci --prefix scan
+      - name: Build scanner
+        run: npm run build --prefix scan
+      - name: Install app dependencies
+        run: npm ci --prefix app
+      - name: Test app
+        run: npm test --prefix app
+      - name: Build app
+        run: npm run build --prefix app
+      - name: Install bot dependencies
+        run: npm ci --prefix bot
+      - name: Type-check bot
+        run: npm run typecheck --prefix bot
+
+  program:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Test Solana program
+        run: cargo test --manifest-path programs/fridge/Cargo.toml --lib

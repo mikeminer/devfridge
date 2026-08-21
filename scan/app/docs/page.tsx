@@ -9,7 +9,7 @@ const jsonLd = {
   "@type": "TechArticle",
   headline: "DevFridge docs",
   description:
-    "Lock Solana Token-2022 supply on-chain and feature a memecoin by buying and burning $PASTA.",
+    "Verify Solana Token-2022 timelocks, inspect token risk signals, and integrate live scan badges.",
   url: DOCS_ORIGIN,
   datePublished: "2026-08-21",
   dateModified: "2026-08-21",
@@ -23,11 +23,15 @@ export default function DocsHome() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p>
         DevFridge is an on-chain Token-2022 time-lock on Solana. The scanner at{" "}
-        <a href="https://scan.devfridge.cool">scan.devfridge.cool</a> is the only token scanner that
-        checks whether a mint has a live Fridge vault. Token devs can then <strong>Get Featured</strong>:
+        <a href="https://scan.devfridge.cool">scan.devfridge.cool</a> combines authority, holder,
+        market, and live Fridge vault signals in a shareable report. Token devs can then <strong>Get Featured</strong>:
         one Phantom signature pays SOL, the listing starts immediately, and the Fridge program buys{" "}
         <a href="https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump">$PASTA</a> and
         burns it.
+      </p>
+      <p>
+        Scanner results are independent from sponsorship. Paid placements are labeled and never
+        change checks, warnings, or risk grades. A scan is not an audit or guarantee of safety.
       </p>
 
       <h2>Who this is for</h2>
