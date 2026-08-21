@@ -57,6 +57,14 @@ export const DOC_PAGES: DocLink[] = [
     description: "Embed a live Fridge badge that links to the token scan page.",
   },
   {
+    href: "/tokenomics",
+    slug: "tokenomics",
+    title: "$PASTA tokenomics",
+    nav: "Tokenomics",
+    description:
+      "On-chain $PASTA burns: 2% Fridge claim fee and Get Featured SOL packages that buy and burn $PASTA.",
+  },
+  {
     href: "/program",
     slug: "program",
     title: "Program IDs and fees",

@@ -864,43 +864,43 @@ export default function App() {
           </li>
         </ol>
 
-        <h3>Revenue flywheel</h3>
+        <h3>On-chain burn sources (live)</h3>
         <div className="revenue-grid">
           <article className="fly-jar">
             <p className="fly-jar-lid">Fridge redemptions</p>
             <h4>2% buy &amp; burn</h4>
             <p>
-              Every meme redeemed from the Fridge funds an automatic $PASTA buy
-              and burn. The Fridge is powered by $PASTA; $PASTA is not required
-              to lock.
+              Anyone can lock a Token-2022 mint, including $PASTA. Each wallet
+              has its own vault. On claim, 2% is taken: if the mint is $PASTA it
+              is burned; otherwise Jupiter buys $PASTA and burns it.
+            </p>
+          </article>
+          <article className="fly-jar">
+            <p className="fly-jar-lid">Get Featured</p>
+            <h4>SOL → $PASTA burn</h4>
+            <p>
+              A live Fridge lock is required for the TRUST badge and to buy a
+              featured slot on scan.devfridge.cool. Packages: 0.1 SOL / 24h,
+              0.18 SOL / 48h, 0.5 SOL / 7d. That SOL goes to the program vault,
+              then Jupiter-buys $PASTA and burns it. The buyer never holds that
+              $PASTA.
             </p>
           </article>
           <article className="fly-jar">
             <p className="fly-jar-lid">Founder locks</p>
             <h4>Public tranches</h4>
             <p>
-              The founding allocation sits in the Fridge with on-chain
-              countdowns. When a tranche is claimed, 2% is burned. A portion of
-              each unlock covers project expenses and community bounties on
-              pump.fun.
-            </p>
-          </article>
-          <article className="fly-jar">
-            <p className="fly-jar-lid">Protocol volume</p>
-            <h4>Buyback + re-lock</h4>
-            <p>
-              A share of protocol volume fees is allocated to $PASTA buybacks
-              and Fridge locks. Bought-back tokens are locked rather than burned
-              immediately, stretching the deflationary timeline.
+              Founder $PASTA sitting in the Fridge is the same program: when a
+              tranche is claimed, 2% is burned with everyone else.
             </p>
           </article>
           <article className="fly-jar">
             <p className="fly-jar-lid">Trust Me Capital</p>
             <h4>Hyperliquid vault</h4>
             <p>
-              A live 24/7 perpetuals vault. Anyone can deposit — no lock-up. The
-              vault keeps 10% of depositor P&amp;L. Trading revenue is
-              periodically directed into $PASTA buybacks.
+              Separate from the Fridge program. Anyone can deposit — no lock-up.
+              The vault keeps 10% of depositor P&amp;L. Trading revenue may be
+              directed into $PASTA buybacks.
             </p>
             <a
               className="fly-jar-link mono"
@@ -930,8 +930,13 @@ export default function App() {
           </div>
           <div className="receipt-row" role="row">
             <strong>Fridge redemption fee</strong>
-            <span>Any meme redeemed</span>
+            <span>Any Token-2022 claimed</span>
             <span>2% auto buy &amp; burn</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Get Featured</strong>
+            <span>0.1 / 0.18 / 0.5 SOL</span>
+            <span>SOL → $PASTA burn</span>
           </div>
           <div className="receipt-row" role="row">
             <strong>Dev lock tranche</strong>
@@ -939,16 +944,11 @@ export default function App() {
             <span>2% of tranche burned</span>
           </div>
           <div className="receipt-row" role="row">
-            <strong>Protocol revenue</strong>
-            <span>Volume on protocol</span>
-            <span>Buyback + Fridge lock</span>
-          </div>
-          <div className="receipt-row" role="row">
             <strong>Trust Me Capital vault</strong>
             <span>24/7 trading P&amp;L</span>
-            <span>Buyback, ongoing</span>
+            <span>Buyback (off Fridge program)</span>
           </div>
-          <p className="receipt-foot">Official tokenomics · posted on X</p>
+          <p className="receipt-foot">Official tokenomics · Fridge program on-chain</p>
         </div>
 
         <div className="tokenomics-actions">
