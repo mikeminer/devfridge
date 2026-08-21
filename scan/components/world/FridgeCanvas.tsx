@@ -50,11 +50,12 @@ export default function FridgeCanvas({
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x4aa3c7);
-    scene.fog = new THREE.Fog(0x4aa3c7, 18, 48);
+    scene.background = new THREE.Color(0x152033);
+    scene.fog = new THREE.Fog(0x152033, 28, 55);
 
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 80);
     camera.position.set(0, 1.7, 12);
+    camera.lookAt(0, 1.2, 0);
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(el.clientWidth, el.clientHeight);
@@ -65,18 +66,17 @@ export default function FridgeCanvas({
     renderer.domElement.style.height = "100%";
 
     const controls = new PointerLockControls(camera, renderer.domElement);
-    scene.add(controls.object);
 
     const onClick = () => controls.lock();
     renderer.domElement.addEventListener("click", onClick);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-    const ice = new THREE.PointLight(0x7dd3fc, 80, 40);
-    ice.position.set(0, 7, 0);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const ice = new THREE.PointLight(0x7dd3fc, 4, 42);
+    ice.position.set(0, 6.5, 0);
     scene.add(ice);
-    const pot = new THREE.PointLight(0xfbbf24, 30, 18);
-    pot.position.set(0, 2, 0);
-    scene.add(pot);
+    const potLight = new THREE.PointLight(0xfbbf24, 2.2, 16);
+    potLight.position.set(0, 2, 0);
+    scene.add(potLight);
 
     const floor = new THREE.Mesh(
       new THREE.PlaneGeometry(40, 40),
@@ -85,13 +85,10 @@ export default function FridgeCanvas({
     floor.rotation.x = -Math.PI / 2;
     scene.add(floor);
 
-    const iceMat = new THREE.MeshPhysicalMaterial({
-      color: 0x9ee4f5,
-      roughness: 0.08,
-      transmission: 0.45,
-      thickness: 0.8,
-      transparent: true,
-      opacity: 0.92,
+    const iceMat = new THREE.MeshStandardMaterial({
+      color: 0x2a5570,
+      metalness: 0.15,
+      roughness: 0.45,
     });
     const wall = (w: number, h: number, d: number, x: number, y: number, z: number) => {
       const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), iceMat);
@@ -373,7 +370,7 @@ export default function FridgeCanvas({
 
   return (
     <>
-      <div ref={host} className="absolute inset-0 h-full w-full bg-[#4aa3c7]" />
+      <div ref={host} className="absolute inset-0 h-full w-full bg-[#152033]" />
       {!ready && (
         <p className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-navy">
           Starting WebGL…
