@@ -68,25 +68,49 @@ export default function BoostSubscribe({
       const built = await builtRes.json();
       if (!builtRes.ok) throw new Error(built.error || "Could not build boost");
 
-      setStatus("Sign once: wrap SOL, Jupiter-buy $PASTA, burn it, list the boost.");
-      const rpc = boostConnection();
-      const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
-      const signed = await signTransaction(tx);
-      const sig = await rpc.sendRawTransaction(signed.serialize(), {
-        skipPreflight: true,
-        maxRetries: 4,
-      });
+      const pendingKey = `devfridge-boost-sig:${m}:${tier}:${publicKey.toBase58()}`;
+      let sig = "";
       try {
-        await rpc.confirmTransaction(
-          {
-            signature: sig,
-            blockhash: built.blockhash,
-            lastValidBlockHeight: built.lastValidBlockHeight,
-          },
-          "confirmed"
-        );
+        sig = sessionStorage.getItem(pendingKey) || "";
       } catch {
-        /* server verify retries */
+        sig = "";
+      }
+
+      const rpc = boostConnection();
+      if (!sig) {
+        setStatus("Sign once: wrap SOL, Jupiter-buy $PASTA, burn it, list the boost.");
+        const tx = VersionedTransaction.deserialize(b64ToBytes(built.transaction));
+        const signed = await signTransaction(tx);
+        sig = await rpc.sendRawTransaction(signed.serialize(), {
+          skipPreflight: false,
+          preflightCommitment: "confirmed",
+          maxRetries: 5,
+        });
+        try {
+          sessionStorage.setItem(pendingKey, sig);
+        } catch {
+          /* ignore */
+        }
+        setStatus("Confirming on Solana…");
+        try {
+          await rpc.confirmTransaction(
+            {
+              signature: sig,
+              blockhash: built.blockhash,
+              lastValidBlockHeight: built.lastValidBlockHeight,
+            },
+            "confirmed"
+          );
+        } catch (err) {
+          try {
+            sessionStorage.removeItem(pendingKey);
+          } catch {
+            /* ignore */
+          }
+          throw err;
+        }
+      } else {
+        setStatus("Found a pending boost signature. Indexing it…");
       }
 
       const res = await fetch("/api/boost", {
@@ -96,6 +120,11 @@ export default function BoostSubscribe({
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Boost record failed");
+      try {
+        sessionStorage.removeItem(pendingKey);
+      } catch {
+        /* ignore */
+      }
       const hours = BOOST_TIERS[tier].hours;
       const last = hours >= 48 ? `${Math.round(hours / 24)} days` : `${hours} hours`;
       setStatus(`Featured for ${last}. $PASTA bought and burned in the Fridge program.`);

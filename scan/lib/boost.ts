@@ -265,16 +265,31 @@ type RpcTx = {
 };
 
 async function waitForTx(signature: string): Promise<RpcTx> {
-  for (let i = 0; i < 10; i++) {
-    const tx = await rpc<RpcTx | null>("getTransaction", [
-      signature,
-      { encoding: "jsonParsed", maxSupportedTransactionVersion: 0, commitment: "confirmed" },
-    ]).catch(() => null);
-    if (tx?.meta && !tx.meta.err) return tx;
-    if (tx?.meta?.err) throw new Error(`Boost transaction failed on-chain: ${JSON.stringify(tx.meta.err)}`);
-    await new Promise((r) => setTimeout(r, 800));
+  const started = Date.now();
+  while (Date.now() - started < 50_000) {
+    const st = await rpc<{ value?: Array<{ confirmationStatus?: string; err?: unknown } | null> }>(
+      "getSignatureStatuses",
+      [[signature], { searchTransactionHistory: true }]
+    ).catch(() => null);
+    const row = st?.value?.[0];
+    if (row?.err) {
+      throw new Error(`Boost transaction failed on-chain: ${JSON.stringify(row.err)}`);
+    }
+    if (row?.confirmationStatus === "confirmed" || row?.confirmationStatus === "finalized") {
+      const tx = await rpc<RpcTx | null>("getTransaction", [
+        signature,
+        { encoding: "jsonParsed", maxSupportedTransactionVersion: 0, commitment: "confirmed" },
+      ]).catch(() => null);
+      if (tx?.meta && !tx.meta.err) return tx;
+      if (tx?.meta?.err) {
+        throw new Error(`Boost transaction failed on-chain: ${JSON.stringify(tx.meta.err)}`);
+      }
+    }
+    await new Promise((r) => setTimeout(r, 1200));
   }
-  throw new Error("Boost transaction not confirmed yet");
+  throw new Error(
+    `Boost transaction not confirmed yet. Check https://solscan.io/tx/${signature} — if it succeeded, click Buy & burn again to index it.`
+  );
 }
 
 export async function verifyBoostTransaction(args: {
