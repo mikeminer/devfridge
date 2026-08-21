@@ -30,8 +30,9 @@ export default function SdkHome() {
         The DevFridge SDK lets any site gate access behind a{" "}
         <a href="https://docs.devfridge.cool/fridge">Fridge timelock</a>. Instead of recurring
         payments, users lock your project&rsquo;s token on{" "}
-        <a href="https://devfridge.cool">devfridge.cool</a>. As long as the lock is active and
-        above the renewal threshold, the subscription is valid.
+        <a href="https://devfridge.cool">devfridge.cool</a>. As long as qualifying locks meet the
+        required duration and amount, and remain above the renewal threshold, the subscription is
+        valid.
       </p>
       <p>
         When remaining days drop below the threshold (e.g. 29 days for a monthly plan), the user
@@ -52,8 +53,15 @@ export default function SdkHome() {
           <a href="https://devfridge.cool">devfridge.cool</a>.
         </li>
         <li>
-          <strong>SDK</strong> checks the on-chain lock via{" "}
-          <code>scan.devfridge.cool/api/sdk/check</code> and returns subscription status.
+          <strong>SDK</strong> fetches all on-chain locks via{" "}
+          <code>scan.devfridge.cool/api/sdk/check</code>, filters locks that individually meet{" "}
+          <code>minLockDays</code>, sums their amounts, and checks against{" "}
+          <code>minLockAmount</code>.
+        </li>
+        <li>
+          <code>active</code> is <code>true</code> only when qualifying locks satisfy both duration
+          and amount requirements. <code>daysRemaining</code> and <code>needsRenewal</code> are
+          computed from the best <em>qualifying</em> lock, not the global best lock.
         </li>
         <li>
           When <code>daysRemaining &lt;= renewalThresholdDays</code>, the SDK flags{" "}
@@ -113,8 +121,9 @@ import { DevFridgeSDK } from "https://sdk.devfridge.cool/sdk/devfridge-sdk.js";`
         <code>{`const fridge = new DevFridgeSDK({
   tokenMint: "YOUR_TOKEN_MINT_ADDRESS",
   plans: {
-    weekly:  { minLockDays: 14, renewalThresholdDays: 7 },
-    monthly: { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 1000000 },
+    basic:   { minLockDays: 14, renewalThresholdDays: 7 },
+    pro:     { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 10_000_000_000_000 },
+    //                                                     ↑ 10M tokens × 10^6 decimals
   }
 });`}</code>
       </pre>
@@ -196,10 +205,11 @@ if (status.active && !status.needsRenewal) {
       </table>
       <p>
         <code>renewalThresholdDays</code> must be strictly less than{" "}
-        <code>minLockDays</code>. <code>minLockAmount</code> is optional &mdash; when set, the
-        locked amount must meet or exceed the value (in raw token units, i.e. with decimals applied)
-        for the plan to match. The values are fully customizable &mdash; the table above is a
-        starting point.
+        <code>minLockDays</code>. <code>minLockAmount</code> is optional &mdash; when set, the SDK
+        sums amounts only from locks whose individual duration &ge; <code>minLockDays</code>, then
+        checks the sum against <code>minLockAmount</code> (in raw token units, i.e. with decimals
+        applied). Short-duration locks never contribute to the qualifying amount, preventing gaming
+        via a small long lock combined with a large short lock.
       </p>
 
       {/* ── API Reference ── */}
@@ -211,16 +221,16 @@ if (status.active && !status.needsRenewal) {
       <p>Returns a Promise resolving to:</p>
       <pre>
         <code>{`{
-  active: boolean,          // true if daysRemaining > 0 AND a plan qualifies
-  plan: string | null,      // Matched plan name or null
-  daysRemaining: number,    // Days until best lock expires
+  active: boolean,          // true only if qualifying locks meet duration AND amount
+  plan: string | null,      // Matched plan name, or null if none qualifies
+  daysRemaining: number,    // Days until best *qualifying* lock expires
   needsRenewal: boolean,    // true when active AND daysRemaining <= threshold
   renewalUrl: string | null,// URL to devfridge.cool (when renewal needed or not active)
-  totalLockAmount: number,  // Sum of all active lock amounts
+  totalLockAmount: number,  // Sum of qualifying lock amounts (duration-filtered)
   wallet: string,           // The checked wallet
   locks: Lock[],            // All locks (active + expired)
   activeLocks: Lock[],      // Only active locks
-  bestLock: Lock | null,    // Lock with furthest unlockAt
+  bestLock: Lock | null,    // Lock with furthest unlockAt (global, unfiltered)
 }`}</code>
       </pre>
 
@@ -330,7 +340,11 @@ const url = fridge.getBadgeUrl({ theme: "light", style: "full" });
     const fridge = new DevFridgeSDK({
       tokenMint: "YOUR_MINT_HERE",
       plans: {
-        monthly: { minLockDays: 60, renewalThresholdDays: 29 }
+        monthly: {
+          minLockDays: 60,
+          renewalThresholdDays: 29,
+          minLockAmount: 10_000_000_000_000, // optional: 10M tokens × 10^6
+        }
       }
     });
 
@@ -380,7 +394,7 @@ const fridge = new DevFridgeSDK({
   tokenMint: "YOUR_MINT_HERE",
   plans: {
     weekly:  { minLockDays: 14, renewalThresholdDays: 7 },
-    monthly: { minLockDays: 60, renewalThresholdDays: 29 },
+    monthly: { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 10_000_000_000_000 },
   }
 });
 
@@ -437,24 +451,45 @@ function App({ walletAddress }) {
       <h3>Server-side check (Node.js)</h3>
       <pre>
         <code>{`// Server-side subscription verification
-async function verifySubscription(wallet, mint, minDays = 60, threshold = 29) {
+async function verifySubscription(wallet, mint, {
+  minDays = 60,
+  threshold = 29,
+  minAmount = 0,     // raw token units (e.g. 10_000_000_000_000 for 10M × 10^6)
+} = {}) {
   const res = await fetch(
     \`https://scan.devfridge.cool/api/sdk/check?wallet=\${wallet}&mint=\${mint}\`
   );
   const data = await res.json();
-  if (!data.bestLock || data.daysRemaining <= 0) {
-    return { valid: false, reason: "no_active_lock" };
+  const now = data.ts;
+
+  // Filter locks that individually meet the duration requirement
+  const qualifying = (data.activeLocks || []).filter((l) => {
+    const duration = Math.floor((l.unlockAt - l.createdAt) / 86400);
+    return duration >= minDays;
+  });
+
+  if (qualifying.length === 0) {
+    return { valid: false, reason: "no_qualifying_lock" };
   }
-  const totalDays = Math.floor(
-    (data.bestLock.unlockAt - data.bestLock.createdAt) / 86400
-  );
-  if (totalDays < minDays) {
-    return { valid: false, reason: "lock_too_short" };
+
+  // Sum amounts only from qualifying locks
+  const totalAmount = qualifying.reduce((s, l) => s + Number(l.amount), 0);
+  if (minAmount > 0 && totalAmount < minAmount) {
+    return { valid: false, reason: "amount_too_low", totalAmount };
   }
+
+  // daysRemaining from the best qualifying lock
+  const bestUnlock = Math.max(...qualifying.map((l) => l.unlockAt));
+  const daysRemaining = Math.floor((bestUnlock - now) / 86400);
+  if (daysRemaining <= 0) {
+    return { valid: false, reason: "expired" };
+  }
+
   return {
     valid: true,
-    daysRemaining: data.daysRemaining,
-    needsRenewal: data.daysRemaining <= threshold,
+    daysRemaining,
+    totalAmount,
+    needsRenewal: daysRemaining <= threshold,
   };
 }`}</code>
       </pre>
@@ -478,6 +513,10 @@ My token mint: [PASTE YOUR MINT HERE]
 I want a monthly plan:
 - minLockDays: 60 (user must lock for at least 60 days)
 - renewalThresholdDays: 29 (prompt renewal at 29 days remaining)
+- minLockAmount: 10_000_000_000_000 (optional: require at least 10M tokens × 10^6 decimals)
+
+The SDK only counts locks whose individual duration >= minLockDays toward the
+qualifying amount. Short locks never contribute.
 
 Steps:
 1. Add the SDK script tag to my HTML
@@ -509,7 +548,10 @@ Create a <SubscriptionGate> component that:
 
 Plans config:
   weekly:  { minLockDays: 14, renewalThresholdDays: 7 }
-  monthly: { minLockDays: 60, renewalThresholdDays: 29 }`}</code>
+  monthly: { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 10_000_000_000_000 }
+
+Note: the SDK sums only locks whose individual duration >= minLockDays.
+status.totalLockAmount reflects the qualifying amount, not the total.`}</code>
       </pre>
 
       <h3>Prompt 3 &mdash; Server-side verification</h3>
@@ -521,11 +563,14 @@ Endpoint to call: GET https://scan.devfridge.cool/api/sdk/check?wallet=WALLET&mi
 For each authenticated request:
 1. Get the user's wallet address from their session
 2. Call the SDK check endpoint with their wallet and my token mint: [PASTE MINT]
-3. Verify: daysRemaining > 0 AND original lock duration >= 60 days
-4. If valid, proceed with the request
-5. If not valid, return 403 with a message to lock tokens
+3. Filter activeLocks: keep only locks where (unlockAt - createdAt) / 86400 >= 60
+4. Sum amounts of qualifying locks only
+5. Verify: qualifying locks exist AND sum >= minLockAmount AND best qualifying unlockAt > now
+6. If valid, proceed with the request
+7. If not valid, return 403 with a message to lock tokens
 
-The original lock duration = (bestLock.unlockAt - bestLock.createdAt) / 86400
+IMPORTANT: do NOT use bestLock alone — it may not meet the duration requirement.
+Always filter by individual lock duration before summing amounts.
 
 Cache the result for 5 minutes per wallet to avoid excessive API calls.
 Never trust client-side subscription checks alone for sensitive operations.`}</code>
@@ -547,12 +592,16 @@ Rules:
   2x the access period so there's always a buffer before renewal)
 - renewalThresholdDays = when to prompt for a new lock
   (must be < minLockDays)
+- minLockAmount = optional minimum token amount in raw units
+  (e.g. 10_000_000_000_000 for 10M tokens with 6 decimals)
+- Only locks whose individual duration >= minLockDays count toward the
+  qualifying amount — short locks are excluded
 - Longer locks mean the user doesn't need to renew as often
 - A 180-day lock on a monthly plan (minLockDays: 60) gives ~151 days
   of access before the renewal prompt at 29 days remaining
 
 Set up the DevFridgeSDK with these plans and create the UI to show
-which plan the user qualifies for based on their lock duration.`}</code>
+which plan the user qualifies for based on their lock duration and amount.`}</code>
       </pre>
 
       {/* ── Concepts ── */}
@@ -584,8 +633,10 @@ which plan the user qualifies for based on their lock duration.`}</code>
         &mdash; there is no centralized database that can be tampered with.
       </p>
       <p>
-        For sensitive operations, always verify subscription server-side using the REST API
-        rather than trusting client-side checks alone.
+        The SDK evaluates each lock individually: only locks whose original duration &ge;{" "}
+        <code>minLockDays</code> contribute to the qualifying amount. This prevents gaming via short
+        high-value locks combined with long low-value locks. For sensitive operations, always verify
+        subscription server-side using the REST API rather than trusting client-side checks alone.
       </p>
 
       <p>
