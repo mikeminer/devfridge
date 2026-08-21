@@ -1,5 +1,6 @@
 import {
   AddressLookupTableAccount,
+  ComputeBudgetProgram,
   PublicKey,
   SystemProgram,
   TransactionInstruction,
@@ -150,6 +151,26 @@ export async function buildProgramBoostTx(args: {
   const pastaAta = getAssociatedTokenAddressSync(pastaMint, burnAuthority, true, TOKEN_2022_PROGRAM_ID);
   const lamports = BigInt(Math.round(BOOST_TIERS[args.tier].sol * 1_000_000_000));
   const tier = TIER_INDEX[args.tier];
+  const cushion = 20_000_000n;
+  const feeHeadroom = 40_000_000n;
+
+  const [payerLamports, burnLamports] = await Promise.all([
+    rpc<{ value: number }>("getBalance", [args.payer.toBase58(), { commitment: "confirmed" }]).then(
+      (r) => BigInt(typeof r === "number" ? r : r.value)
+    ),
+    rpc<{ value: number }>("getBalance", [burnAuthority.toBase58(), { commitment: "confirmed" }]).then(
+      (r) => BigInt(typeof r === "number" ? r : r.value)
+    ),
+  ]);
+  const fundBurn = burnLamports < 15_000_000n ? cushion : 0n;
+  const needed = lamports + fundBurn + feeHeadroom;
+  if (payerLamports < needed) {
+    const have = Number(payerLamports) / 1e9;
+    const want = Number(needed) / 1e9;
+    throw new Error(
+      `Need about ${want.toFixed(2)} SOL in this wallet (${BOOST_TIERS[args.tier].sol} package + rent and fees). Connected wallet has ${have.toFixed(3)} SOL.`
+    );
+  }
 
   let lastError: Error | null = null;
   const latest = await rpc<{ value: { blockhash: string; lastValidBlockHeight: number } }>(
@@ -191,14 +212,42 @@ export async function buildProgramBoostTx(args: {
       const alts = (
         await Promise.all(route.lookupTableAddresses.map((addr) => loadLookupTable(addr)))
       ).filter((a): a is AddressLookupTableAccount => Boolean(a));
+      const ixs: TransactionInstruction[] = [
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 1_400_000 }),
+        ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 20_000 }),
+      ];
+      if (fundBurn > 0n) {
+        ixs.push(
+          SystemProgram.transfer({
+            fromPubkey: args.payer,
+            toPubkey: burnAuthority,
+            lamports: Number(fundBurn),
+          })
+        );
+      }
+      ixs.push(boostIx);
       const message = new TransactionMessage({
         payerKey: args.payer,
         recentBlockhash: latest.value.blockhash,
-        instructions: [...route.compute, boostIx],
+        instructions: ixs,
       }).compileToV0Message(alts);
       const tx = new VersionedTransaction(message);
+      const serialized = Buffer.from(tx.serialize()).toString("base64");
+      const sim = await rpc<{ value?: { err?: unknown; logs?: string[] } }>("simulateTransaction", [
+        serialized,
+        { encoding: "base64", sigVerify: false, replaceRecentBlockhash: true },
+      ]).catch(() => null);
+      if (sim?.value?.err) {
+        const logs = (sim.value.logs || []).join("\n");
+        if (/insufficient|debit|no record of a prior credit|0x1/i.test(logs + JSON.stringify(sim.value.err))) {
+          throw new Error(
+            `Need about ${(Number(needed) / 1e9).toFixed(2)} SOL free (package + rent + fees). Phantom reported insufficient SOL during simulation.`
+          );
+        }
+        throw new Error(`Boost simulation failed: ${JSON.stringify(sim.value.err)}`);
+      }
       return {
-        transaction: Buffer.from(tx.serialize()).toString("base64"),
+        transaction: serialized,
         blockhash: latest.value.blockhash,
         lastValidBlockHeight: latest.value.lastValidBlockHeight,
         minPastaOut: route.minPastaOut.toString(),

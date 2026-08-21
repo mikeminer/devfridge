@@ -101,7 +101,14 @@ export default function BoostSubscribe({
       setStatus(`Featured for ${last}. $PASTA bought and burned in the Fridge program.`);
       window.dispatchEvent(new Event("devfridge:boosted"));
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : String(err));
+      const raw = err instanceof Error ? err.message : String(err);
+      if (/insufficient|debit|no record of a prior credit|0x1/i.test(raw)) {
+        setStatus(
+          `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.05).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees. ${raw}`
+        );
+      } else {
+        setStatus(raw);
+      }
     } finally {
       setBusy(false);
     }
@@ -113,8 +120,8 @@ export default function BoostSubscribe({
       <h2 className="mt-1 text-xl font-bold sm:text-2xl">Feature your fridged token</h2>
       <p className="mt-2 text-sm text-mute">
         One signature. The Fridge program wraps your SOL, Jupiter-buys $PASTA as the burn PDA, and
-        burns it in the same transaction — you never receive that $PASTA. The boost timer lives
-        on-chain for 24h, 48h, or 7 days. Live Fridge lock required.
+        burns it in the same transaction — you never receive that $PASTA. Keep a little extra SOL
+        for rent and fees (about 0.15 SOL total for 24h). Live Fridge lock required.
       </p>
 
       {!fixedMint && (
