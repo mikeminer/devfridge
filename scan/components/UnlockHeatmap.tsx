@@ -11,7 +11,8 @@ export default function UnlockHeatmap({
   locks: FridgeLock[];
   decimals?: number;
 }) {
-  const valid = locks.filter((l) => l.unlockAt > 0);
+  const now = Math.floor(Date.now() / 1000);
+  const valid = locks.filter((l) => l.unlockAt > now);
   if (valid.length < 2) return null;
 
   const sorted = [...valid].sort((a, b) => a.unlockAt - b.unlockAt);
@@ -40,9 +41,14 @@ export default function UnlockHeatmap({
                 className="h-6 flex-1 rounded-sm"
                 style={{ backgroundColor: intensityColor(intensity) }}
               />
-              <span className="min-w-[90px] text-right text-[10px] text-mute">
+              <a
+                className="min-w-[90px] text-right text-[10px] text-ice hover:underline"
+                href={`https://solscan.io/account/${lock.address}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {fmtUnlock(lock.unlockAt)}
-              </span>
+              </a>
               <span className="min-w-[80px] text-right font-mono text-[10px] text-ink">
                 {fmtAmount(lock.amount, decimals)}
               </span>
