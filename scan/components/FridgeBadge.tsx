@@ -1,5 +1,6 @@
 import type { FridgeLock, FridgeStatus } from "@/lib/fridge";
 import { fmtAmount, fmtUnlock, lockedPercent, remainingLabel, shortKey } from "@/lib/format";
+import UnlockHeatmap from "./UnlockHeatmap";
 
 export default function FridgeBadge({
   fridge,
@@ -45,6 +46,7 @@ export default function FridgeBadge({
           />
         </dl>
         <LockList locks={fridge.locks} now={now} decimals={decimals} />
+        <UnlockHeatmap locks={fridge.locks} decimals={decimals} />
         {mint && (
           <a className="fridge-key mt-4" href={`/badge?mint=${mint}`}>
             Embed this badge on your site →
@@ -68,6 +70,7 @@ export default function FridgeBadge({
           <Row label="Locked by" value={lockers.map((w) => shortKey(w)).join(" · ") || "—"} mono />
         </dl>
         <LockList locks={fridge.locks} now={now} decimals={decimals} />
+        <UnlockHeatmap locks={fridge.locks} decimals={decimals} />
       </section>
     );
   }
