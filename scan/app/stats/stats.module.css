@@ -1,0 +1,87 @@
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--muted, #888);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: var(--card-bg, #1a1a1a);
+  border: 1px solid var(--border, #333);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted, #888);
+}
+
+.value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sub {
+  font-size: 0.8rem;
+  color: var(--muted, #888);
+}
+
+.methodology {
+  border-top: 1px solid var(--border, #333);
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.methodology h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.methodology ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.methodology code {
+  background: var(--card-bg, #1a1a1a);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.footer {
+  color: var(--muted, #888);
+  font-size: 0.85rem;
+}
+
+.footer code {
+  background: var(--card-bg, #1a1a1a);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}

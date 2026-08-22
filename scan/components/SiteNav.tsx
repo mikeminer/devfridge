@@ -26,6 +26,9 @@ export default function SiteNav() {
           <a className="fridge-key justify-center" href="https://docs.devfridge.cool">
             Docs
           </a>
+          <a className="fridge-key justify-center" href="https://scan.devfridge.cool/stats">
+            Stats
+          </a>
           <a className="fridge-key justify-center" href="https://health.devfridge.cool">
             Health
           </a>
