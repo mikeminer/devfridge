@@ -951,6 +951,48 @@ export default function App() {
           <p className="receipt-foot">Official tokenomics · Fridge program on-chain</p>
         </div>
 
+        <h3>Holder concentration</h3>
+        <p className="lede">
+          Full disclosure of top-20 holders, insider wallets, and verification
+          methodology is published in the repo and kept up to date.
+        </p>
+        <div className="receipt" role="table" aria-label="Holder summary">
+          <div className="receipt-head" role="row">
+            <span>Category</span>
+            <span>% of supply</span>
+            <span>Status</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>PumpSwap LP</strong>
+            <span>44.9%</span>
+            <span>Program-owned (not withdrawable)</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Founder (pappardelle)</strong>
+            <span>10.9%</span>
+            <span>100% Fridge-locked until Aug 2027</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Other top-10 wallets</strong>
+            <span>~22%</span>
+            <span>Unidentified community holders</span>
+          </div>
+          <div className="receipt-row" role="row">
+            <strong>Remaining holders</strong>
+            <span>~22%</span>
+            <span>Distributed (&lt;2% each)</span>
+          </div>
+          <p className="receipt-foot">
+            <a
+              href="https://github.com/mikeminer/devfridge/blob/master/HOLDERS.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Full holder breakdown with wallet addresses and verification steps →
+            </a>
+          </p>
+        </div>
+
         <div className="tokenomics-actions">
           <a href={PASTA_URL} target="_blank" rel="noreferrer">
             $PASTA on pump.fun

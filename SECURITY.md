@@ -95,6 +95,7 @@ We commit to:
 ## Known Limitations
 
 1. **No formal audit.** See above.
-2. **Thin liquidity.** $PASTA is a micro-cap token. The Jupiter buyback path depends on available DEX liquidity at claim time. Low liquidity may cause claims of non-PASTA tokens to fail or suffer high slippage.
+2. **Thin liquidity.** $PASTA is a micro-cap token (~$8.9k FDV). The Jupiter buyback path depends on available DEX liquidity at claim time. Low liquidity may cause claims of non-PASTA tokens to fail or suffer high slippage.
 3. **Program is not frozen.** The upgrade authority has not been revoked. The deployer can upgrade the program. This is disclosed, not hidden.
 4. **Permissionless crank.** Anyone can call `crank_buyback`. This is by design (protocol-owned liquidity disposal), but means the timing of PASTA burns is not controlled by the team.
+5. **Holder concentration.** Top-10 holders control ~78% of supply (including the LP pool at 45%). See [`HOLDERS.md`](HOLDERS.md) for full wallet-level breakdown, insider disclosures, and verification methodology.
