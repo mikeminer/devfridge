@@ -1,8 +1,8 @@
 "use client";
 
 import type { FridgeLock } from "@/lib/fridge";
-import { bucketLocks, intensityColor } from "@/lib/heatmap";
-import { fmtAmount } from "@/lib/format";
+import { intensityColor } from "@/lib/heatmap";
+import { fmtAmount, fmtUnlock } from "@/lib/format";
 
 export default function UnlockHeatmap({
   locks,
@@ -11,8 +11,17 @@ export default function UnlockHeatmap({
   locks: FridgeLock[];
   decimals?: number;
 }) {
-  const buckets = bucketLocks(locks);
-  if (buckets.length === 0) return null;
+  const valid = locks.filter((l) => l.unlockAt > 0);
+  if (valid.length < 2) return null;
+
+  const sorted = [...valid].sort((a, b) => a.unlockAt - b.unlockAt);
+  const maxAmount = sorted.reduce(
+    (m, l) => {
+      const v = BigInt(l.amount);
+      return v > m ? v : m;
+    },
+    0n,
+  );
 
   return (
     <div className="mt-4">
@@ -20,35 +29,26 @@ export default function UnlockHeatmap({
         Unlock Heatmap
       </p>
 
-      <div className="flex gap-[2px] overflow-x-auto rounded-lg">
-        {buckets.map((b, i) => (
-          <div key={i} className="group relative min-w-[24px] flex-1">
-            <div
-              className="h-8 rounded-sm transition-transform hover:scale-y-[1.25]"
-              style={{ backgroundColor: intensityColor(b.intensity) }}
-            />
-            <div
-              className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2
-                         hidden -translate-x-1/2 rounded-lg border border-line
-                         bg-navy px-3 py-2 text-xs text-ink shadow-lg
-                         whitespace-nowrap group-hover:block"
-            >
-              <p className="font-semibold">{b.label}</p>
-              <p>{fmtAmount(b.totalAmount.toString(), decimals)} tokens</p>
-              <p className="text-mute">
-                {b.lockCount} lock{b.lockCount !== 1 ? "s" : ""}
-              </p>
+      <div className="flex flex-col gap-[2px]">
+        {sorted.map((lock) => {
+          const intensity = maxAmount > 0n
+            ? Number((BigInt(lock.amount) * 1000n) / maxAmount) / 1000
+            : 0;
+          return (
+            <div key={lock.address} className="flex items-center gap-2">
+              <div
+                className="h-6 flex-1 rounded-sm"
+                style={{ backgroundColor: intensityColor(intensity) }}
+              />
+              <span className="min-w-[90px] text-right text-[10px] text-mute">
+                {fmtUnlock(lock.unlockAt)}
+              </span>
+              <span className="min-w-[80px] text-right font-mono text-[10px] text-ink">
+                {fmtAmount(lock.amount, decimals)}
+              </span>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-1 flex justify-between text-[10px] text-mute">
-        <span>{buckets[0].label}</span>
-        {buckets.length > 2 && (
-          <span>{buckets[Math.floor(buckets.length / 2)].label}</span>
-        )}
-        <span>{buckets[buckets.length - 1].label}</span>
+          );
+        })}
       </div>
 
       <div className="mt-2 flex items-center gap-2 text-[10px] text-mute">
