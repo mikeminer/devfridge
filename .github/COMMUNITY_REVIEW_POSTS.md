@@ -12,7 +12,7 @@ Post these in the channels listed below. Log any credible responses in this file
 
 ---
 
-## Post: Solana Stack Exchange
+## Post: Solana Stack Exchange https://solana.stackexchange.com/questions/24481/security-review-request-token-2022-time-lock-vault-anchor-0-30-750-loc
 
 **Title:** Security review request: Token-2022 time-lock vault (Anchor 0.30, 750 LOC)
 
