@@ -14,7 +14,7 @@ function json(body: { message: string }, status: number): NextResponse {
 export async function POST(req: NextRequest) {
   const apiKey = req.headers.get("x-api-key");
   if (!verifyApiKey(apiKey)) {
-    return json({ message: "Unauthorized" }, 401);
+    return json({ message: "Unauthorized" }, 400);
   }
 
   const quest = req.nextUrl.searchParams.get("quest") || "";
