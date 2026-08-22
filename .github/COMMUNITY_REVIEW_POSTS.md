@@ -82,6 +82,14 @@ If you review Anchor programs or have experience with Token-2022 edge cases, I'd
 
 ---
 
+## Posted
+
+| Channel | Date | URL | Status |
+|---------|------|-----|--------|
+| Solana Stack Exchange | 2026-08-22 | https://solana.stackexchange.com/questions/24481/security-review-request-token-2022-time-lock-vault-anchor-0-30-750-loc | Posted |
+| r/solana | 2026-08-22 | https://www.reddit.com/r/solana/ (posted by u/anonimocommando, flair: Dev/Tech) | Posted |
+| Solana Tech Discord | — | — | Skipped: account lacks write permission in server channels |
+
 ## Response log
 
 | Date | Channel | Reviewer | Finding | Severity | Status |
