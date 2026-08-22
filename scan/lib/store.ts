@@ -157,3 +157,44 @@ export async function listRecent(): Promise<RecentScan[]> {
   mem.recent = stored;
   return stored.slice(0, 20);
 }
+
+/* ── Zealy action logs ─────────────────────────────────── */
+
+export type ZealyActionLog = {
+  action: string;
+  mint: string;
+  ts: number;
+};
+
+export async function addZealyLog(wallet: string, action: string, mint: string) {
+  const key = `zealy:action:${wallet}`;
+  const logs = await kvGet<ZealyActionLog[]>(key, []);
+  const exists = logs.some((l) => l.action === action && l.mint === mint);
+  if (exists) return;
+  const next = [...logs, { action, mint, ts: Date.now() }].slice(-50);
+  await kvSet(key, next);
+}
+
+export async function getZealyLog(wallet: string): Promise<ZealyActionLog[]> {
+  return kvGet<ZealyActionLog[]>(`zealy:action:${wallet}`, []);
+}
+
+/* ── Badge referer tracking ────────────────────────────── */
+
+export type BadgeReferer = {
+  domain: string;
+  ts: number;
+};
+
+export async function addBadgeReferer(mint: string, domain: string) {
+  const key = `zealy:badge-referer:${mint}`;
+  const refs = await kvGet<BadgeReferer[]>(key, []);
+  const exists = refs.some((r) => r.domain === domain);
+  if (exists) return;
+  const next = [...refs, { domain, ts: Date.now() }].slice(-20);
+  await kvSet(key, next);
+}
+
+export async function getBadgeReferers(mint: string): Promise<BadgeReferer[]> {
+  return kvGet<BadgeReferer[]>(`zealy:badge-referer:${mint}`, []);
+}

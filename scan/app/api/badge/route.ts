@@ -4,6 +4,7 @@ import { fallbackBadgeSvg, renderBadgeSvg, type BadgeStyle, type BadgeTheme } fr
 import { parseMint } from "@/lib/format";
 import { rpc } from "@/lib/rpc";
 import { tokenTicker } from "@/lib/ticker";
+import { addBadgeReferer } from "@/lib/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,6 +27,18 @@ export async function GET(req: NextRequest) {
 
   if (!mint) {
     return svgResponse(fallbackBadgeSvg(), 400);
+  }
+
+  const referer = req.headers.get("referer") || "";
+  if (referer) {
+    try {
+      const domain = new URL(referer).hostname;
+      if (domain && !domain.endsWith("devfridge.cool")) {
+        addBadgeReferer(mint, domain).catch(() => {});
+      }
+    } catch {
+      /* invalid referer URL */
+    }
   }
 
   try {

@@ -5,6 +5,7 @@ import FridgeBadge from "./FridgeBadge";
 import SecurityGrid from "./SecurityGrid";
 import BoostSubscribe from "./BoostSubscribe";
 import TokenLogo from "./TokenLogo";
+import ZealyVerify from "./ZealyVerify";
 
 function ageLabel(seconds: number | null) {
   if (seconds == null) return "Unknown age";
@@ -144,6 +145,8 @@ export default function TrustReportView({ report }: { report: Report }) {
       {report.warnings.length > 0 && (
         <p className="text-xs text-caution">{report.warnings.join(" · ")}</p>
       )}
+
+      <ZealyVerify mint={report.mint} />
     </div>
   );
 }
