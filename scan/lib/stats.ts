@@ -1,7 +1,24 @@
 import { PublicKey } from "@solana/web3.js";
-import { PROGRAM_ID, LOCK_DISC, LOCK_ACCOUNT_SIZE, BOOST_VAULT_SEED, PASTA_MINT, BURN_ADDRESS } from "./constants";
+import { PROGRAM_ID, LOCK_DISC, LOCK_ACCOUNT_SIZE, BOOST_VAULT_SEED, PASTA_MINT, BURN_ADDRESS, PASTA_PUMPSWAP_POOL } from "./constants";
 import { rpc } from "./rpc";
 import { decodeLock } from "./fridge";
+
+export type LiquidityInfo = {
+  /** Pool address (PumpSwap). */
+  pool: string;
+  /** USD liquidity (from DexScreener). */
+  usd: number | null;
+  /** SOL in pool. */
+  quoteSol: number | null;
+  /** PASTA in pool. */
+  baseTokens: number | null;
+  /** LP mint address. */
+  lpMint: string;
+  /** LP token supply (0 = burned/permanently locked). */
+  lpSupply: string;
+  /** Whether LP is permanently burned (supply == 0). */
+  lpBurned: boolean;
+};
 
 export type ProtocolStats = {
   /** Total number of lock accounts currently on-chain (active + expired unclaimed). */
@@ -18,6 +35,8 @@ export type ProtocolStats = {
   pastaBurned: string | null;
   /** $PASTA price in USD. */
   pastaPrice: number | null;
+  /** Live liquidity data. */
+  liquidity: LiquidityInfo | null;
   /** Timestamp of this snapshot. */
   ts: number;
 };
@@ -99,6 +118,32 @@ export async function protocolStats(): Promise<ProtocolStats> {
     pastaPrice = null;
   }
 
+  // 5. Liquidity info (DexScreener + LP mint supply check)
+  let liquidity: LiquidityInfo | null = null;
+  try {
+    const LP_MINT = "9Yi9cwm3Non7LoFkxC6eKgp38CSbbXPvYH3VTrz2KC4V";
+    const [dexRes, lpRes] = await Promise.all([
+      fetch(
+        `https://api.dexscreener.com/tokens/v1/solana/${PASTA_MINT}`,
+        { signal: AbortSignal.timeout(8000) }
+      ).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      rpc<{ value?: { amount?: string } }>("getTokenSupply", [LP_MINT]).catch(() => null),
+    ]);
+    const pair = Array.isArray(dexRes) ? dexRes[0] : dexRes;
+    const lpSupply = lpRes?.value?.amount ?? "0";
+    liquidity = {
+      pool: PASTA_PUMPSWAP_POOL,
+      usd: pair?.liquidity?.usd ?? null,
+      quoteSol: pair?.liquidity?.quote ?? null,
+      baseTokens: pair?.liquidity?.base ?? null,
+      lpMint: LP_MINT,
+      lpSupply,
+      lpBurned: lpSupply === "0",
+    };
+  } catch {
+    liquidity = null;
+  }
+
   const value: ProtocolStats = {
     lockCount: locks.length,
     depositors: depositorSet.size,
@@ -107,6 +152,7 @@ export async function protocolStats(): Promise<ProtocolStats> {
     boostVaultLamports,
     pastaBurned,
     pastaPrice,
+    liquidity,
     ts: Date.now(),
   };
 

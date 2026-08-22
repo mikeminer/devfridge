@@ -81,6 +81,53 @@ export default async function StatsPage() {
         </article>
       </div>
 
+      <h2 className={styles.sectionTitle}>Liquidity</h2>
+      {stats.liquidity ? (
+        <div className={styles.grid}>
+          <article className={styles.card}>
+            <span className={styles.label}>Pool liquidity</span>
+            <strong className={styles.value}>
+              ${stats.liquidity.usd?.toLocaleString("en-US", { maximumFractionDigits: 0 }) ?? "—"}
+            </strong>
+            <span className={styles.sub}>
+              {stats.liquidity.quoteSol?.toFixed(2) ?? "?"} SOL /{" "}
+              {stats.liquidity.baseTokens
+                ? formatNumber(Math.floor(stats.liquidity.baseTokens))
+                : "?"}{" "}
+              PASTA
+            </span>
+          </article>
+
+          <article className={styles.card}>
+            <span className={styles.label}>LP status</span>
+            <strong className={`${styles.value} ${stats.liquidity.lpBurned ? styles.good : ""}`}>
+              {stats.liquidity.lpBurned ? "Burned (permanent)" : `Supply: ${stats.liquidity.lpSupply}`}
+            </strong>
+            <span className={styles.sub}>
+              {stats.liquidity.lpBurned
+                ? "LP tokens burned on bonding curve graduation — liquidity cannot be withdrawn"
+                : "LP tokens exist — check if locked"}
+            </span>
+          </article>
+
+          <article className={styles.card}>
+            <span className={styles.label}>DEX</span>
+            <strong className={styles.value}>PumpSwap</strong>
+            <span className={styles.sub}>
+              <a
+                href={`https://dexscreener.com/solana/${stats.liquidity.pool}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on DexScreener
+              </a>
+            </span>
+          </article>
+        </div>
+      ) : (
+        <p>Liquidity data unavailable.</p>
+      )}
+
       <section className={styles.methodology}>
         <h2>How this data is collected</h2>
         <ul>
@@ -99,6 +146,11 @@ export default async function StatsPage() {
           </li>
           <li>
             <strong>Price:</strong> Jupiter Price API v2.
+          </li>
+          <li>
+            <strong>Liquidity:</strong> DexScreener API for USD depth + SOL/token
+            reserves. LP burn verified via <code>getTokenSupply</code> on the LP
+            mint (<code>9Yi9cwm3...KC4V</code>) — supply of 0 confirms permanent burn.
           </li>
         </ul>
         <p>

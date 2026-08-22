@@ -51,6 +51,16 @@
   color: var(--muted, #888);
 }
 
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.good {
+  color: #4ade80;
+}
+
 .methodology {
   border-top: 1px solid var(--border, #333);
   padding-top: 2rem;
