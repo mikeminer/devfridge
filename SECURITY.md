@@ -20,11 +20,19 @@ DevFridge Scan reports observable on-chain and market signals. Its risk grade is
 
 ### Automated Analysis
 
-| Tool | Status | Report |
+| Tool | Status | Result |
 |------|--------|--------|
-| `cargo clippy -- -D warnings` | CI (every push) | See GitHub Actions |
-| `cargo audit` | CI (every push) | See GitHub Actions |
-| Sec3 X-ray | CI (every push) | See GitHub Actions artifacts |
+| `cargo clippy -- -D warnings` | CI (every push) | Clean — zero warnings |
+| `cargo audit` | CI (every push) | 2 advisories in Solana SDK transitive deps (see below) |
+| Sec3 X-ray v0.0.6 | CI (every push) | **No issues detected** across all 4 attack surfaces |
+
+**Sec3 X-ray report summary (2026-08-22):**
+Analyzed all 4 instruction entry points (`create_lock`, `claim`, `boost`, `crank_buyback`). Result: "No issues detected."
+Full report available as a GitHub Actions artifact on every push.
+
+**cargo audit known advisories (upstream, not fixable without Anchor version bump):**
+- `RUSTSEC-2024-0344`: `curve25519-dalek` timing variability — transitive dep from Solana SDK. Does not affect Fridge program logic (no custom scalar operations).
+- `RUSTSEC-2022-0093`: `ed25519-dalek` double-key oracle — transitive dep from Solana SDK. Does not affect Fridge (no custom ed25519 signing).
 
 ### Sealevel-Attacks Checklist
 
