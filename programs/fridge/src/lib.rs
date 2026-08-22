@@ -265,7 +265,7 @@ pub mod fridge {
             FridgeError::InsufficientVault
         );
         require!(!swap_data.is_empty(), FridgeError::MissingSwapRoute);
-        require!(ctx.remaining_accounts.len() >= 1, FridgeError::MissingSwapRoute);
+        require!(!ctx.remaining_accounts.is_empty(), FridgeError::MissingSwapRoute);
 
         let vault_bump = [ctx.bumps.vault];
         let vault_seeds: &[&[u8]] = &[BOOST_VAULT_SEED, vault_bump.as_ref()];
