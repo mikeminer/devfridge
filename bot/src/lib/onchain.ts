@@ -32,7 +32,7 @@ export async function pastaHolders() {
           jsonrpc: "2.0",
           id: 1,
           method: "getTokenAccounts",
-          params: { mint: PASTA_MINT, limit: 1, options: { showZeroBalance: false } },
+          params: { mint: PASTA_MINT, options: { showZeroBalance: false } },
         }),
         signal: AbortSignal.timeout(12000),
       });
