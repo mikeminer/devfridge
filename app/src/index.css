@@ -1101,6 +1101,8 @@ input[type="text"], input[type="datetime-local"] {
 }
 .led em { font-style: normal; font-size: 22px; display: block; }
 .led span { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; }
+.led-tvl { top: 216px; }
+.led-tvl em { font-size: 16px; }
 
 .handle {
   position: absolute;

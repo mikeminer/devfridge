@@ -48,6 +48,7 @@ import FundDeploy from "./components/FundDeploy";
 import StockPanel from "./components/StockPanel";
 import TokenLogo from "./components/TokenLogo";
 import { createMemeMintTransaction, formatSendError } from "./lib/cooker";
+import { fetchTvl } from "./lib/tvl";
 import logoMark from "./assets/logo-mark.jpg";
 import logoWordmark from "./assets/logo-wordmark.jpg";
 
@@ -121,6 +122,7 @@ export default function App() {
   const [cookError, setCookError] = useState("");
   const [cooked, setCooked] = useState<CookedMint | null>(null);
   const [scanError, setScanError] = useState("");
+  const [tvlUsd, setTvlUsd] = useState<number | null>(null);
 
   useEffect(() => {
     setNeedsGraduation(false);
@@ -209,6 +211,13 @@ export default function App() {
       if (clusterRef.current !== net) return;
       setLocks(withSigs);
       setScanError("");
+      if (net === "mainnet") {
+        fetchTvl(withSigs).then((r) => {
+          if (clusterRef.current === net) setTvlUsd(r.totalUsd);
+        }).catch(() => {});
+      } else {
+        setTvlUsd(null);
+      }
     } catch (err) {
       if (clusterRef.current !== net) return;
       setScanError(err instanceof Error ? err.message : String(err));
@@ -515,6 +524,7 @@ export default function App() {
           serial={programId.toBase58()}
           serialLabel={CLUSTERS[cluster].label}
           serialHref={explorerProgramUrl(cluster, programId.toBase58())}
+          tvlUsd={tvlUsd}
         />
 
         <aside className="inspect">

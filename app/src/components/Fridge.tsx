@@ -18,10 +18,17 @@ type Props = {
   serial: string;
   serialLabel: string;
   serialHref: string;
+  tvlUsd?: number | null;
 };
 
 const SHELF_COUNT = 4;
 const PER_SHELF = 3;
+
+function formatTvl(usd: number): string {
+  if (usd >= 1_000_000) return `$${(usd / 1_000_000).toFixed(1)}M`;
+  if (usd >= 1_000) return `$${(usd / 1_000).toFixed(1)}K`;
+  return `$${Math.round(usd).toLocaleString("en-US")}`;
+}
 
 export default function Fridge({
   open,
@@ -35,6 +42,7 @@ export default function Fridge({
   serial,
   serialLabel,
   serialHref,
+  tvlUsd,
 }: Props) {
   const shelfCount = Math.max(SHELF_COUNT, Math.ceil(locks.length / PER_SHELF) || SHELF_COUNT);
   const shelves = Array.from({ length: shelfCount }, (_, i) =>
@@ -114,6 +122,12 @@ export default function Fridge({
                   <em>{loading ? "··" : locks.length.toString().padStart(2, "0")}</em>
                   <span>{loading ? "scan" : "chilled"}</span>
                 </div>
+                {tvlUsd != null && (
+                  <div className="led led-tvl">
+                    <em>{formatTvl(tvlUsd)}</em>
+                    <span>TVL</span>
+                  </div>
+                )}
                 <div className="handle">
                   <i />
                 </div>
