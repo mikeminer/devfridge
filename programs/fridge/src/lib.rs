@@ -16,6 +16,20 @@ use anchor_spl::{
 
 declare_id!("9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6");
 
+#[cfg(not(feature = "no-entrypoint"))]
+use solana_security_txt::security_txt;
+
+#[cfg(not(feature = "no-entrypoint"))]
+security_txt! {
+    name: "DevFridge",
+    project_url: "https://devfridge.cool",
+    contacts: "link:https://connect.devfridge.cool,link:https://github.com/mikeminer/devfridge/security/advisories",
+    policy: "https://github.com/mikeminer/devfridge/blob/master/SECURITY.md",
+    preferred_languages: "en",
+    source_code: "https://github.com/mikeminer/devfridge",
+    auditors: "None"
+}
+
 pub const LOCK_SEED: &[u8] = b"lock";
 pub const BURN_SEED: &[u8] = b"burn";
 pub const BOOST_SEED: &[u8] = b"boost";
