@@ -6,6 +6,8 @@
     "app": "npm --prefix app run dev",
     "app:build": "npm --prefix app run build",
     "test:unit": "npm --prefix app run test",
-    "test:program": "cargo test --manifest-path programs/fridge/Cargo.toml --lib"
+    "test:program": "cargo test --manifest-path programs/fridge/Cargo.toml --lib",
+    "team": "npm --prefix team run dev",
+    "team:build": "npm --prefix team run build"
   }
 }
