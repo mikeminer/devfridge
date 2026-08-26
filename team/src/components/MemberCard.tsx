@@ -3,6 +3,7 @@ import type { TierNumber } from "../config/tiers";
 import { PASTA_DECIMALS } from "../config/constants";
 import { RoleBadge } from "./RoleBadge";
 import { LockStatus } from "./LockStatus";
+import { SocialLinks } from "./SocialLinks";
 
 type Props = {
   member: TeamMemberWithVerification;
@@ -59,6 +60,8 @@ export function MemberCard({ member }: Props) {
           )}
         </div>
       )}
+
+      {member.socials && <SocialLinks socials={member.socials} />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { TeamMemberWithVerification } from "../hooks/useTeamMembers";
-import type { TeamMember } from "../lib/api";
+import type { TeamMember, Socials } from "../lib/api";
 import type { TierNumber } from "../config/tiers";
 import { TIERS } from "../config/tiers";
 import { AddMemberForm } from "./AddMemberForm";
@@ -8,8 +8,8 @@ import { EditMemberModal } from "./EditMemberModal";
 
 type Props = {
   members: TeamMemberWithVerification[];
-  onAdd: (wallet: string, role: string, tier: number, displayName: string | null) => Promise<void>;
-  onEdit: (wallet: string, role: string, tier: number, displayName: string | null) => Promise<void>;
+  onAdd: (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => Promise<void>;
+  onEdit: (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => Promise<void>;
   onRemove: (wallet: string) => Promise<void>;
 };
 

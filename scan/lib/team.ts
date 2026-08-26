@@ -1,9 +1,19 @@
+export type Socials = {
+  x?: string;
+  github?: string;
+  telegram?: string;
+  discord?: string;
+  farcaster?: string;
+  pumpfun?: string;
+};
+
 export type TeamMember = {
   wallet: string;
   role: string;
   tier: 1 | 2 | 3 | 4 | 5;
   displayName: string | null;
   avatar: string | null;
+  socials?: Socials | null;
   addedAt: number;
 };
 

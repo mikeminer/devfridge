@@ -1,10 +1,19 @@
 import { useState } from "react";
-import type { TeamMember } from "../lib/api";
+import type { TeamMember, Socials } from "../lib/api";
 import { TIERS, type TierNumber } from "../config/tiers";
+
+const SOCIAL_FIELDS: { key: keyof Socials; label: string; placeholder: string }[] = [
+  { key: "x", label: "X (Twitter)", placeholder: "handle (without @)" },
+  { key: "github", label: "GitHub", placeholder: "username" },
+  { key: "telegram", label: "Telegram", placeholder: "username" },
+  { key: "discord", label: "Discord", placeholder: "username" },
+  { key: "farcaster", label: "Farcaster", placeholder: "username" },
+  { key: "pumpfun", label: "PumpFun", placeholder: "username" },
+];
 
 type Props = {
   member: TeamMember;
-  onSave: (wallet: string, role: string, tier: number, displayName: string | null) => Promise<void>;
+  onSave: (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => Promise<void>;
   onClose: () => void;
 };
 
@@ -12,8 +21,34 @@ export function EditMemberModal({ member, onSave, onClose }: Props) {
   const [displayName, setDisplayName] = useState(member.displayName || "");
   const [tier, setTier] = useState<TierNumber>(member.tier);
   const [role, setRole] = useState(member.role);
+  const [socials, setSocials] = useState<Record<string, string>>(() => {
+    const init: Record<string, string> = {};
+    if (member.socials) {
+      for (const { key } of SOCIAL_FIELDS) {
+        if (member.socials[key]) init[key] = member.socials[key]!;
+      }
+    }
+    return init;
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  function updateSocial(key: string, value: string) {
+    setSocials((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function buildSocials(): Socials | null {
+    const result: Socials = {};
+    let hasAny = false;
+    for (const { key } of SOCIAL_FIELDS) {
+      const val = socials[key]?.trim();
+      if (val) {
+        result[key] = val;
+        hasAny = true;
+      }
+    }
+    return hasAny ? result : null;
+  }
 
   async function handleSave() {
     setLoading(true);
@@ -23,7 +58,8 @@ export function EditMemberModal({ member, onSave, onClose }: Props) {
         member.wallet,
         role.trim() || TIERS[tier].label,
         tier,
-        displayName.trim() || null
+        displayName.trim() || null,
+        buildSocials()
       );
       onClose();
     } catch (err) {
@@ -59,7 +95,7 @@ export function EditMemberModal({ member, onSave, onClose }: Props) {
           </select>
         </div>
 
-        <div className="form-group">
+        <div className="form-group" style={{ marginBottom: 12 }}>
           <label>Role Title</label>
           <input
             type="text"
@@ -67,6 +103,18 @@ export function EditMemberModal({ member, onSave, onClose }: Props) {
             onChange={(e) => setRole(e.target.value)}
           />
         </div>
+
+        {SOCIAL_FIELDS.map(({ key, label, placeholder }) => (
+          <div className="form-group" style={{ marginBottom: 12 }} key={key}>
+            <label>{label}</label>
+            <input
+              type="text"
+              value={socials[key] || ""}
+              onChange={(e) => updateSocial(key, e.target.value)}
+              placeholder={placeholder}
+            />
+          </div>
+        ))}
 
         {error && <div className="error-bar" style={{ marginTop: 12 }}>{error}</div>}
 

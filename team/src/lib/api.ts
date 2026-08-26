@@ -1,11 +1,21 @@
 import { SCAN_API_URL } from "../config/constants";
 
+export type Socials = {
+  x?: string;
+  github?: string;
+  telegram?: string;
+  discord?: string;
+  farcaster?: string;
+  pumpfun?: string;
+};
+
 export type TeamMember = {
   wallet: string;
   role: string;
-  tier: 1 | 2 | 3 | 4;
+  tier: 1 | 2 | 3 | 4 | 5;
   displayName: string | null;
   avatar: string | null;
+  socials?: Socials | null;
   addedAt: number;
 };
 
@@ -17,7 +27,7 @@ export async function fetchTeam(): Promise<TeamMember[]> {
 }
 
 export async function addMember(
-  member: { wallet: string; role: string; tier: number; displayName: string | null; avatar: string | null },
+  member: { wallet: string; role: string; tier: number; displayName: string | null; avatar: string | null; socials?: Socials | null },
   signature: string,
   message: string,
   signer: string

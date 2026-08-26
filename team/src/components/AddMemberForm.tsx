@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { TIERS, type TierNumber } from "../config/tiers";
+import type { Socials } from "../lib/api";
+
+const SOCIAL_FIELDS: { key: keyof Socials; label: string; placeholder: string }[] = [
+  { key: "x", label: "X (Twitter)", placeholder: "handle (without @)" },
+  { key: "github", label: "GitHub", placeholder: "username" },
+  { key: "telegram", label: "Telegram", placeholder: "username" },
+  { key: "discord", label: "Discord", placeholder: "username" },
+  { key: "farcaster", label: "Farcaster", placeholder: "username" },
+  { key: "pumpfun", label: "PumpFun", placeholder: "username" },
+];
 
 type Props = {
-  onSubmit: (wallet: string, role: string, tier: number, displayName: string | null) => Promise<void>;
+  onSubmit: (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => Promise<void>;
 };
 
 export function AddMemberForm({ onSubmit }: Props) {
@@ -10,8 +20,26 @@ export function AddMemberForm({ onSubmit }: Props) {
   const [displayName, setDisplayName] = useState("");
   const [tier, setTier] = useState<TierNumber>(4);
   const [role, setRole] = useState("");
+  const [socials, setSocials] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  function updateSocial(key: string, value: string) {
+    setSocials((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function buildSocials(): Socials | null {
+    const result: Socials = {};
+    let hasAny = false;
+    for (const { key } of SOCIAL_FIELDS) {
+      const val = socials[key]?.trim();
+      if (val) {
+        result[key] = val;
+        hasAny = true;
+      }
+    }
+    return hasAny ? result : null;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,12 +52,14 @@ export function AddMemberForm({ onSubmit }: Props) {
         wallet.trim(),
         role.trim() || TIERS[tier].label,
         tier,
-        displayName.trim() || null
+        displayName.trim() || null,
+        buildSocials()
       );
       setWallet("");
       setDisplayName("");
       setRole("");
       setTier(4);
+      setSocials({});
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to add member");
     } finally {
@@ -77,6 +107,17 @@ export function AddMemberForm({ onSubmit }: Props) {
           placeholder={TIERS[tier].label}
         />
       </div>
+      {SOCIAL_FIELDS.map(({ key, label, placeholder }) => (
+        <div className="form-group" key={key}>
+          <label>{label} (optional)</label>
+          <input
+            type="text"
+            value={socials[key] || ""}
+            onChange={(e) => updateSocial(key, e.target.value)}
+            placeholder={placeholder}
+          />
+        </div>
+      ))}
       <div className="form-group full">
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? "Signing..." : "Add Member"}

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { ADMIN_WALLET } from "../config/constants";
 import { buildAdminMessage, encodeBase58 } from "../lib/auth";
-import { addMember, removeMember, type TeamMember } from "../lib/api";
+import { addMember, removeMember, type TeamMember, type Socials } from "../lib/api";
 
 type UseAdminProps = {
   publicKey: PublicKey | null;
@@ -14,14 +14,14 @@ export function useAdmin({ publicKey, signMessage, onUpdate }: UseAdminProps) {
   const isAdmin = publicKey?.toBase58() === ADMIN_WALLET;
 
   const add = useCallback(
-    async (wallet: string, role: string, tier: number, displayName: string | null) => {
+    async (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => {
       if (!publicKey || !isAdmin) throw new Error("Not admin");
       const message = buildAdminMessage("add", wallet, { tier, role });
       const msgBytes = new TextEncoder().encode(message);
       const sigBytes = await signMessage(msgBytes);
       const signature = encodeBase58(sigBytes);
       await addMember(
-        { wallet, role, tier, displayName, avatar: null },
+        { wallet, role, tier, displayName, avatar: null, socials: socials ?? null },
         signature,
         message,
         publicKey.toBase58()
@@ -45,14 +45,14 @@ export function useAdmin({ publicKey, signMessage, onUpdate }: UseAdminProps) {
   );
 
   const edit = useCallback(
-    async (wallet: string, role: string, tier: number, displayName: string | null) => {
+    async (wallet: string, role: string, tier: number, displayName: string | null, socials?: Socials | null) => {
       if (!publicKey || !isAdmin) throw new Error("Not admin");
       const message = buildAdminMessage("edit", wallet, { tier, role });
       const msgBytes = new TextEncoder().encode(message);
       const sigBytes = await signMessage(msgBytes);
       const signature = encodeBase58(sigBytes);
       await addMember(
-        { wallet, role, tier, displayName, avatar: null },
+        { wallet, role, tier, displayName, avatar: null, socials: socials ?? null },
         signature,
         message,
         publicKey.toBase58()

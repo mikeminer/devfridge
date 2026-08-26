@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { listTeam, upsertMember, type TeamMember } from "@/lib/team";
+import { listTeam, upsertMember, type TeamMember, type Socials } from "@/lib/team";
 import { verifyAdminSignature } from "@/lib/auth";
 import { PublicKey } from "@solana/web3.js";
 
@@ -40,12 +40,13 @@ export async function POST(req: NextRequest) {
       tier?: number;
       displayName?: string | null;
       avatar?: string | null;
+      socials?: Socials | null;
       signature?: string;
       message?: string;
       signer?: string;
     };
 
-    const { wallet, role, tier, displayName, avatar, signature, message, signer } = body;
+    const { wallet, role, tier, displayName, avatar, socials, signature, message, signer } = body;
 
     if (!wallet || !role || !tier || !signature || !message || !signer) {
       return cors(NextResponse.json({ error: "Missing required fields" }, { status: 400 }));
@@ -72,6 +73,7 @@ export async function POST(req: NextRequest) {
       tier: tier as 1 | 2 | 3 | 4 | 5,
       displayName: displayName ?? null,
       avatar: avatar ?? null,
+      socials: socials ?? null,
       addedAt: Math.floor(Date.now() / 1000),
     };
 
