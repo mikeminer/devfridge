@@ -75,18 +75,35 @@ export async function verifyMemberLock(
       return durationSeconds >= minDurationSeconds;
     });
 
-    // Best lock by furthest unlock (across all active, for display)
+    // Weighted average remaining days and duration, weighted by amount
+    const now = Math.floor(Date.now() / 1000);
+    let weightedRemaining = 0;
+    let weightedDuration = 0;
+    const totalNum = Number(totalLocked);
+    if (totalNum > 0) {
+      for (const lock of data.activeLocks) {
+        const amt = Number(toBigInt(lock.amount));
+        const weight = amt / totalNum;
+        const remaining = Math.max(0, lock.unlockAt - now) / 86400;
+        const duration = (lock.unlockAt - lock.createdAt) / 86400;
+        weightedRemaining += remaining * weight;
+        weightedDuration += duration * weight;
+      }
+    }
+    const daysRemaining = Math.floor(weightedRemaining);
+    const durationDays = Math.round(weightedDuration);
+
+    // Best lock by furthest unlock (for reference)
     const allSorted = [...data.activeLocks].sort((a, b) => b.unlockAt - a.unlockAt);
     const displayBest = allSorted[0];
-    const now = Math.floor(Date.now() / 1000);
 
     if (qualifying.length === 0) {
       return {
         status: "insufficient",
         bestLock: displayBest,
         lockedAmount: totalLocked,
-        daysRemaining: Math.floor((displayBest.unlockAt - now) / 86400),
-        lockDurationDays: (displayBest.unlockAt - displayBest.createdAt) / 86400,
+        daysRemaining,
+        lockDurationDays: durationDays,
       };
     }
 
@@ -95,9 +112,6 @@ export async function verifyMemberLock(
       (sum, lock) => sum + toBigInt(lock.amount),
       0n
     );
-
-    const daysRemaining = Math.floor((displayBest.unlockAt - now) / 86400);
-    const durationDays = (displayBest.unlockAt - displayBest.createdAt) / 86400;
 
     if (qualifyingAmount < tierDef.minAmount) {
       return {
