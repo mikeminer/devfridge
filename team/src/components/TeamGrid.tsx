@@ -9,8 +9,14 @@ type Props = {
 export function TeamGrid({ members, loading }: Props) {
   if (loading) {
     return (
-      <div className="empty-state">
-        <p>Loading team...</p>
+      <div className="team-grid">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="member-card skeleton-card">
+            <div className="skeleton-line skeleton-wide" />
+            <div className="skeleton-line skeleton-medium" />
+            <div className="skeleton-line skeleton-narrow" />
+          </div>
+        ))}
       </div>
     );
   }
