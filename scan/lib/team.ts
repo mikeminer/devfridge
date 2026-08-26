@@ -33,7 +33,12 @@ async function kvGet<T>(key: string, fallback: T): Promise<T> {
       });
       if (res.ok) {
         const json = (await res.json()) as { result?: string | null };
-        if (json.result) return JSON.parse(json.result) as T;
+        if (json.result) {
+          let parsed: unknown = JSON.parse(json.result);
+          // Handle legacy double-encoded values
+          if (typeof parsed === "string") parsed = JSON.parse(parsed);
+          return parsed as T;
+        }
       }
     } catch {
       /* fall through */
@@ -50,7 +55,7 @@ async function kvSet(key: string, value: unknown) {
         Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
         "content-type": "application/json",
       },
-      body: JSON.stringify(JSON.stringify(value)),
+      body: JSON.stringify(value),
     });
   }
 }
