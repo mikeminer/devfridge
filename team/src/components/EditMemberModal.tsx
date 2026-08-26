@@ -51,7 +51,7 @@ export function EditMemberModal({ member, onSave, onClose }: Props) {
         <div className="form-group" style={{ marginBottom: 12 }}>
           <label>Tier</label>
           <select value={tier} onChange={(e) => setTier(Number(e.target.value) as TierNumber)}>
-            {([1, 2, 3, 4] as TierNumber[]).map((t) => (
+            {([1, 2, 3, 4, 5] as TierNumber[]).map((t) => (
               <option key={t} value={t}>
                 T{t} — {TIERS[t].label}
               </option>

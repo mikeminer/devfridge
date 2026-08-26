@@ -2,7 +2,7 @@ import { PASTA_DECIMALS } from "./constants";
 
 const D = BigInt(10 ** PASTA_DECIMALS);
 
-export type TierNumber = 1 | 2 | 3 | 4;
+export type TierNumber = 1 | 2 | 3 | 4 | 5;
 
 export type TierDef = {
   label: string;
@@ -45,5 +45,13 @@ export const TIERS: Record<TierNumber, TierDef> = {
     minDays: 30,
     color: "#10b981",
     bgColor: "rgba(16, 185, 129, 0.15)",
+  },
+  5: {
+    label: "Verified Investor",
+    minAmount: 0n,
+    minAmountDisplay: "Any",
+    minDays: 1,
+    color: "#e2e8f0",
+    bgColor: "rgba(226, 232, 240, 0.12)",
   },
 };

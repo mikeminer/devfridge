@@ -57,8 +57,8 @@ export async function POST(req: NextRequest) {
       return cors(NextResponse.json({ error: "Invalid wallet address" }, { status: 400 }));
     }
 
-    if (![1, 2, 3, 4].includes(tier)) {
-      return cors(NextResponse.json({ error: "Invalid tier (must be 1-4)" }, { status: 400 }));
+    if (![1, 2, 3, 4, 5].includes(tier)) {
+      return cors(NextResponse.json({ error: "Invalid tier (must be 1-5)" }, { status: 400 }));
     }
 
     const valid = await verifyAdminSignature(message, signature, signer);
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     const member: TeamMember = {
       wallet,
       role,
-      tier: tier as 1 | 2 | 3 | 4,
+      tier: tier as 1 | 2 | 3 | 4 | 5,
       displayName: displayName ?? null,
       avatar: avatar ?? null,
       addedAt: Math.floor(Date.now() / 1000),

@@ -1,7 +1,7 @@
 export type TeamMember = {
   wallet: string;
   role: string;
-  tier: 1 | 2 | 3 | 4;
+  tier: 1 | 2 | 3 | 4 | 5;
   displayName: string | null;
   avatar: string | null;
   addedAt: number;
