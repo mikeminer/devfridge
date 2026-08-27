@@ -1128,6 +1128,31 @@ export default function App() {
               token where they already swap — not only inside the Fridge.
             </p>
           </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>Zealy campaigns</h3>
+            <p>
+              Quests and missions on Zealy to grow the user base and help the
+              community understand how the Fridge works — from first lock to
+              full protocol fluency.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>CoinGecko listing</h3>
+            <p>
+              Get $PASTA listed on CoinGecko for reliable price tracking,
+              market data visibility, and trust signals across the ecosystem.
+            </p>
+          </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>DefiLlama listing</h3>
+            <p>
+              TVL adapter submitted to DefiLlama so on-chain Fridge deposits
+              are tracked transparently alongside every other Solana protocol.
+            </p>
+          </li>
         </ol>
       </section>
 
