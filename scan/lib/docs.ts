@@ -82,6 +82,14 @@ export const DOC_PAGES: DocLink[] = [
       "Verified links, project descriptions, categories, and assets for ecosystem directories and partners.",
   },
   {
+    href: "/bot",
+    slug: "bot",
+    title: "Telegram bot — @frigopastabot",
+    nav: "Telegram bot",
+    description:
+      "Free Telegram bot for trust reports, $PASTA stats, Fridge lock checks, badge generation, and expiry alerts.",
+  },
+  {
     href: "/badge",
     slug: "badge",
     title: "Fridge badge",

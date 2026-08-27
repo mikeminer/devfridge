@@ -64,6 +64,19 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (host.startsWith("bot.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/bot";
+    else if (
+      !path.startsWith("/bot") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next")
+    ) {
+      url.pathname = `/bot${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
     if (path === "/" || path === "") {

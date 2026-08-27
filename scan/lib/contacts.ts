@@ -36,6 +36,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Live status of Fridge, RPC, and $PASTA",
   },
   {
+    label: "Bot",
+    href: "https://bot.devfridge.cool",
+    hint: "Telegram bot landing page — add @frigopastabot to your group",
+  },
+  {
     label: "Team",
     href: "https://team.devfridge.cool",
     hint: "Team dashboard and applications",
