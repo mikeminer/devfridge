@@ -36,6 +36,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Live status of Fridge, RPC, and $PASTA",
   },
   {
+    label: "Team",
+    href: "https://team.devfridge.cool",
+    hint: "Team dashboard and applications",
+  },
+  {
     label: "Connect",
     href: CONNECT_ORIGIN,
     hint: "This page — the only official meeting point",
@@ -55,6 +60,11 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     label: "X",
     href: "https://x.com/anonimocommando",
     hint: "@anonimocommando",
+  },
+  {
+    label: "Discord",
+    href: "https://discord.com/invite/9RSrhuUtu",
+    hint: "Official DevFridge Discord server",
   },
   {
     label: "Telegram channel",
