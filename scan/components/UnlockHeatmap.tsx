@@ -31,7 +31,7 @@ export default function UnlockHeatmap({
       </p>
 
       <div className="flex flex-col gap-1">
-        {buckets.map((bucket) => {
+        {buckets.filter((b) => b.lockCount > 0).map((bucket) => {
           const pct =
             totalAmount > 0n
               ? Number((bucket.totalAmount * 10000n) / totalAmount) / 100
