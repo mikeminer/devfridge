@@ -92,6 +92,8 @@ async function jupiterToken(mint: string) {
       symbol?: string;
       icon?: string;
       decimals?: number;
+      isVerified?: boolean;
+      tags?: string[];
     }>;
     return rows.find((r) => r.id === mint) ?? rows[0] ?? null;
   } catch {
@@ -102,6 +104,8 @@ async function jupiterToken(mint: string) {
 async function jupiterPrice(mint: string): Promise<number | null> {
   return usdPrice(mint);
 }
+
+
 
 async function dex(mint: string) {
   try {
@@ -611,6 +615,35 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       level: "safe",
       detail: "Classic SPL token (no Token-2022 extensions).",
       amount: "SPL",
+    });
+  }
+
+  const jupTags = jupTok?.tags ?? [];
+  const isStrict = jupTags.includes("strict");
+
+  if (isStrict) {
+    security.push({
+      id: "jup-strict",
+      label: "Jupiter Strict List",
+      level: "safe",
+      detail: `On Jupiter's verified strict list.${jupTags.length ? ` Tags: ${jupTags.join(", ")}` : ""}`,
+      amount: "Listed",
+    });
+  } else if (jupTok && !isStrict) {
+    security.push({
+      id: "jup-strict",
+      label: "Jupiter Strict List",
+      level: "caution",
+      detail: `Not on Jupiter's strict list.${jupTags.length ? ` Tags: ${jupTags.join(", ")}` : ""}`,
+      amount: "Not listed",
+    });
+  } else {
+    security.push({
+      id: "jup-strict",
+      label: "Jupiter Strict List",
+      level: "unknown",
+      detail: "Could not check Jupiter strict list.",
+      amount: "Unknown",
     });
   }
 
