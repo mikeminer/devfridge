@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { FridgeLock, FridgeStatus } from "@/lib/fridge";
 import { fmtAmount, fmtUnlock, lockedPercent, shortKey } from "@/lib/format";
 import UnlockHeatmap from "./UnlockHeatmap";
@@ -129,50 +132,131 @@ function LockList({
         Locks by size and time
       </p>
       <ul className="grid gap-2 text-xs">
-        {locks.map((lock) => {
-          const live = lock.unlockAt > now;
-          const secs = lock.unlockAt - now;
-          const days = Math.floor(secs / 86400);
-          const hours = Math.floor((secs % 86400) / 3600);
-          const timeLeft = live
-            ? days > 0
-              ? `${days}d ${hours}h left`
-              : `${hours}h left`
-            : "unlocked";
-          const weight =
-            totalAmount > 0n
-              ? (Number((BigInt(lock.amount) * 10000n) / totalAmount) / 100).toFixed(1)
-              : "0";
-          return (
-            <li key={lock.address} className="rounded-xl border border-line bg-navy/40 px-3 py-2">
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-mute">
-                  <span className={live ? "text-ice font-semibold" : "text-mute"}>
-                    {fmtAmount(lock.amount, decimals)} tokens
-                  </span>
-                  {" · "}
-                  {weight}% of locked
-                </p>
-                <span className={`font-mono ${live ? "text-ink" : "text-mute"}`}>
-                  {timeLeft}
-                </span>
-              </div>
-              <p className="mt-1 font-mono text-mute">
-                <a
-                  className="text-ice hover:underline"
-                  href={`https://solscan.io/account/${lock.address}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {shortKey(lock.address)} ↗
-                </a>
-                {" · locked by "}
-                <span className="text-ink">{shortKey(lock.depositor)}</span>
-              </p>
-            </li>
-          );
-        })}
+        {locks.map((lock) => (
+          <LockRow
+            key={lock.address}
+            lock={lock}
+            now={now}
+            decimals={decimals}
+            totalAmount={totalAmount}
+          />
+        ))}
       </ul>
+    </div>
+  );
+}
+
+function LockRow({
+  lock,
+  now,
+  decimals,
+  totalAmount,
+}: {
+  lock: FridgeLock;
+  now: number;
+  decimals: number;
+  totalAmount: bigint;
+}) {
+  const [open, setOpen] = useState(false);
+  const live = lock.unlockAt > now;
+  const secs = lock.unlockAt - now;
+  const days = Math.floor(secs / 86400);
+  const hours = Math.floor((secs % 86400) / 3600);
+  const timeLeft = live
+    ? days > 0
+      ? `${days}d ${hours}h left`
+      : `${hours}h left`
+    : "unlocked";
+  const weight =
+    totalAmount > 0n
+      ? (Number((BigInt(lock.amount) * 10000n) / totalAmount) / 100).toFixed(1)
+      : "0";
+  const rawTokens = Number(BigInt(lock.amount)) / 10 ** decimals;
+
+  return (
+    <li className="rounded-xl border border-line bg-navy/40 px-3 py-2">
+      <button
+        type="button"
+        className="flex w-full items-center justify-between gap-2 text-left"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <p className="text-mute">
+          <span className={live ? "text-ice font-semibold" : "text-mute"}>
+            {fmtAmount(lock.amount, decimals)} tokens
+          </span>
+          {" · "}
+          {weight}% of locked
+        </p>
+        <span className="flex items-center gap-2">
+          <span className={`font-mono ${live ? "text-ink" : "text-mute"}`}>
+            {timeLeft}
+          </span>
+          <span className="text-mute text-[10px]">{open ? "▲" : "▼"}</span>
+        </span>
+      </button>
+
+      {open && (
+        <div className="mt-2 grid gap-1.5 border-t border-line/50 pt-2 text-[11px]">
+          <DetailRow label="Vault" mono>
+            <a
+              className="text-ice hover:underline"
+              href={`https://solscan.io/account/${lock.address}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {lock.address} ↗
+            </a>
+          </DetailRow>
+          <DetailRow label="Depositor" mono>
+            <a
+              className="text-ice hover:underline"
+              href={`https://solscan.io/account/${lock.depositor}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {lock.depositor} ↗
+            </a>
+          </DetailRow>
+          <DetailRow label="Lock ID">
+            <span className="font-mono text-ink">{lock.lockId}</span>
+          </DetailRow>
+          <DetailRow label="Raw amount">
+            <span className="font-mono text-ink">
+              {BigInt(lock.amount).toLocaleString()} ({rawTokens.toLocaleString()} tokens)
+            </span>
+          </DetailRow>
+          <DetailRow label="Created">
+            <span className="text-ink">{fmtUnlock(lock.createdAt)}</span>
+          </DetailRow>
+          <DetailRow label="Unlocks at">
+            <span className={live ? "text-ice font-semibold" : "text-mute"}>
+              {fmtUnlock(lock.unlockAt)}
+            </span>
+          </DetailRow>
+          <DetailRow label="Status">
+            <span className={live ? "text-ice font-semibold" : "text-caution"}>
+              {live ? `Active — ${timeLeft}` : "Expired — claimable"}
+            </span>
+          </DetailRow>
+        </div>
+      )}
+    </li>
+  );
+}
+
+function DetailRow({
+  label,
+  mono,
+  children,
+}: {
+  label: string;
+  mono?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+      <span className="text-mute shrink-0">{label}</span>
+      <span className={`${mono ? "font-mono" : ""} break-all text-right`}>{children}</span>
     </div>
   );
 }
