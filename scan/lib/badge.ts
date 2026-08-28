@@ -117,8 +117,8 @@ export function renderBadgeSvg(
       ? `🧊 ${ticker} · FRIDGED · VERIFIED ONCHAIN`
       : "🧊 FRIDGED · VERIFIED ONCHAIN";
     const stats = pct
-      ? `Locked: ${xmlEscape(locked)} · ${xmlEscape(pct)} of supply · Unlocks: ${xmlEscape(unlock)}`
-      : `Locked: ${xmlEscape(locked)} · Unlocks: ${xmlEscape(unlock)}`;
+      ? `Locked: ${xmlEscape(locked)} · ${xmlEscape(pct)} of supply`
+      : `Locked: ${xmlEscape(locked)}`;
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="90" viewBox="0 0 420 90" role="img" aria-label="${xmlEscape(title)}">
   ${open}
