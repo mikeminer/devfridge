@@ -92,3 +92,25 @@ export async function removeMember(wallet: string): Promise<TeamMember[]> {
   await kvSet(KV_KEY, next);
   return next;
 }
+
+/* ── Team Config (applications open/closed) ──────────── */
+
+const CONFIG_KEY = "team:config";
+
+export type TeamConfig = {
+  applicationsOpen: boolean;
+};
+
+let memConfig: TeamConfig = { applicationsOpen: false };
+
+export async function getTeamConfig(): Promise<TeamConfig> {
+  const stored = await kvGet<TeamConfig>(CONFIG_KEY, memConfig);
+  memConfig = stored;
+  return stored;
+}
+
+export async function setTeamConfig(config: TeamConfig): Promise<TeamConfig> {
+  memConfig = config;
+  await kvSet(CONFIG_KEY, config);
+  return config;
+}
