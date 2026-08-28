@@ -1153,6 +1153,15 @@ export default function App() {
               are tracked transparently alongside every other Solana protocol.
             </p>
           </li>
+          <li className="is-next">
+            <p className="tl-badge">Next</p>
+            <h3>Jupiter Strict List</h3>
+            <p>
+              Apply for $PASTA verification on Jupiter's strict list once
+              community, liquidity, and social presence meet the threshold —
+              unlocking trusted visibility across Jupiter's swap UI.
+            </p>
+          </li>
         </ol>
       </section>
 
