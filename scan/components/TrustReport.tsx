@@ -59,6 +59,7 @@ export default function TrustReportView({ report }: { report: Report }) {
         decimals={report.identity.decimals}
         mint={report.mint}
         supply={report.market.supply}
+        priceUsd={report.market.priceUsd}
       />
 
       {report.fridge.status === "fridged" ? (

@@ -7,11 +7,13 @@ export default function FridgeBadge({
   decimals = 6,
   mint,
   supply,
+  priceUsd,
 }: {
   fridge: FridgeStatus;
   decimals?: number;
   mint?: string;
   supply?: string | null;
+  priceUsd?: number | null;
 }) {
   if (fridge.status === "unavailable") {
     return (
@@ -45,7 +47,7 @@ export default function FridgeBadge({
           />
         </dl>
         <LockList locks={fridge.locks} now={now} decimals={decimals} />
-        <UnlockHeatmap locks={fridge.locks} decimals={decimals} />
+        <UnlockHeatmap locks={fridge.locks} decimals={decimals} priceUsd={priceUsd} />
         {mint && (
           <a className="fridge-key mt-4" href={`/badge?mint=${mint}`}>
             Embed this badge on your site →
@@ -69,7 +71,7 @@ export default function FridgeBadge({
           <Row label="Locked by" value={lockers.map((w) => shortKey(w)).join(" · ") || "—"} mono />
         </dl>
         <LockList locks={fridge.locks} now={now} decimals={decimals} />
-        <UnlockHeatmap locks={fridge.locks} decimals={decimals} />
+        <UnlockHeatmap locks={fridge.locks} decimals={decimals} priceUsd={priceUsd} />
       </section>
     );
   }
