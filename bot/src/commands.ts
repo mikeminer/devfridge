@@ -326,13 +326,23 @@ export function registerCommands(bot: Bot) {
       const dec = report?.identity.decimals ?? 6;
       if (fridge.status === "fridged") {
         const lock = fridge.locks[0];
+        const now = Math.floor(Date.now() / 1000);
+        const activeLocks = fridge.locks.filter((l: { unlockAt: number }) => l.unlockAt > now);
+        const lockLines = activeLocks.map((l: { amount: string; unlockAt: number }) => {
+          const days = Math.floor((l.unlockAt - now) / 86400);
+          const timeLeft = days > 365
+            ? `${Math.floor(days / 365)}y ${Math.floor((days % 365) / 30)}m`
+            : days > 0 ? `${days}d` : "<1d";
+          return `• ${fmtAmt(l.amount, dec)} ${esc(sym)} — ${timeLeft} left`;
+        }).join("\n");
         await ctx.reply(
           `🧊 Fridge Check: $${esc(sym)}\n\n` +
             `Status:  FRIDGED ✓\n` +
             `Locked:  ${fmtAmt(fridge.activeAmount, dec)} ${esc(sym)}\n` +
-            `Unlocks: ${fmtUnlock(fridge.unlockAt)}\n` +
+            `Active locks: ${activeLocks.length}\n` +
             `Locked by: ${shortKey(fridge.depositor || "")}\n` +
             `PDA:     ${shortKey(lock?.address || "")}\n\n` +
+            (activeLocks.length > 0 ? `${lockLines}\n\n` : "") +
             `${say.fridged(l)}`,
           {
             parse_mode: "HTML",
@@ -378,12 +388,21 @@ export function registerCommands(bot: Bot) {
             : `${Math.floor(r.identity.ageSeconds / 86400)}d`;
       let fridgeBlock = `⚠️ NOT FRIDGED\nDev has not locked supply in DevFridge.\nNo rug protection verified.`;
       if (f.status === "fridged") {
+        const now = Math.floor(Date.now() / 1000);
+        const activeLocks = f.locks.filter((l: { unlockAt: number }) => l.unlockAt > now);
+        const lockLines = activeLocks.map((l: { amount: string; unlockAt: number }) => {
+          const days = Math.floor((l.unlockAt - now) / 86400);
+          const timeLeft = days > 365
+            ? `${Math.floor(days / 365)}y ${Math.floor((days % 365) / 30)}m`
+            : days > 0 ? `${days}d` : "<1d";
+          return `   • ${fmtAmt(l.amount, r.identity.decimals)} ${esc(r.identity.symbol)} — ${timeLeft} left`;
+        }).join("\n");
         fridgeBlock =
           `🧊 FRIDGED ✓ VERIFIED ONCHAIN\n` +
           `   Locked:  ${fmtAmt(f.activeAmount, r.identity.decimals)} ${esc(r.identity.symbol)}\n` +
-          `   Unlocks: ${fmtUnlock(f.unlockAt)}\n` +
+          `   Active locks: ${activeLocks.length}\n` +
           `   Locked by: ${shortKey(f.depositor || "")}\n` +
-          `   PDA:     ${shortKey(f.locks[0]?.address || "")}`;
+          (activeLocks.length > 0 ? `\n${lockLines}` : "");
       } else if (f.status === "expired") {
         fridgeBlock = `🔓 FRIDGE EXPIRED\n${say.thawed(l)}`;
       }
