@@ -42,6 +42,7 @@ export default function ListingKitDoc() {
         <li><a href="https://health.devfridge.cool">Operational status</a></li>
         <li><a href="https://connect.devfridge.cool">Official contacts</a></li>
         <li><a href="https://scan.devfridge.cool/badge">Badge generator</a></li>
+        <li><a href="https://sdk.devfridge.cool">SDK</a></li>
       </ul>
 
       <h2>On-chain identifier</h2>

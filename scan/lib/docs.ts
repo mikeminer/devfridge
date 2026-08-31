@@ -97,6 +97,14 @@ export const DOC_PAGES: DocLink[] = [
     description: "Embed a live Fridge badge that links to the token scan page.",
   },
   {
+    href: "/sdk",
+    slug: "sdk",
+    title: "DevFridge SDK",
+    nav: "SDK",
+    description:
+      "Gate site access using on-chain Fridge timelocks instead of a recurring subscription.",
+  },
+  {
     href: "/tokenomics",
     slug: "tokenomics",
     title: "$PASTA tokenomics",
