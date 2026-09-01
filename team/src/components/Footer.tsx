@@ -52,6 +52,11 @@ const PRODUCTS = [
     description: "Find every verified DevFridge contact, community channel and official link.",
   },
   {
+    name: "Team Directory",
+    href: "https://team.devfridge.cool",
+    description: "Review team roles and verify every member's public $PASTA commitment on-chain.",
+  },
+  {
     name: "FrigoPasta Bot",
     href: "https://bot.devfridge.cool",
     description: "Run token scans and Fridge checks directly from Telegram chats and groups.",
