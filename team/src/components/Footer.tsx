@@ -16,6 +16,74 @@ export function Footer() {
           — publicly verifiable on Solana.
         </p>
 
+        <h3 style={{ marginTop: 28 }}>What the DevFridge Team Does</h3>
+        <div className="team-value-grid">
+          <article className="team-value-card">
+            <strong>Build the protocol</strong>
+            <p>Maintain the non-custodial Token-2022 timelock vault and its public interfaces.</p>
+          </article>
+          <article className="team-value-card">
+            <strong>Make risk visible</strong>
+            <p>Improve the Solana token scanner, methodology, status monitoring and security documentation.</p>
+          </article>
+          <article className="team-value-card">
+            <strong>Ship useful tools</strong>
+            <p>Develop the SDK, live badges and Telegram bot used to check locks and token signals.</p>
+          </article>
+          <article className="team-value-card">
+            <strong>Support the community</strong>
+            <p>Moderate public channels, explain the product, collect feedback and support integrations.</p>
+          </article>
+        </div>
+
+        <h3 style={{ marginTop: 28 }}>Why Join</h3>
+        <ul className="benefit-list">
+          <li>
+            <strong>A public, verifiable role.</strong> Your name, wallet, role and chosen social
+            profiles appear in the official DevFridge directory.
+          </li>
+          <li>
+            <strong>On-chain proof of commitment.</strong> Your status is checked against a real
+            Solana timelock instead of relying on a self-declared title.
+          </li>
+          <li>
+            <strong>Visible contribution surface.</strong> Work across the protocol, scanner, SDK,
+            bot, documentation, partnerships or community operations.
+          </li>
+          <li>
+            <strong>Clear role tiers.</strong> Each role has a published minimum commitment and
+            duration, with status updating automatically when a lock changes or expires.
+          </li>
+          <li>
+            <strong>Direct access to the builder network.</strong> Collaborate with the people
+            maintaining DevFridge and help shape practical tools for Solana communities.
+          </li>
+        </ul>
+
+        <div className="join-panel">
+          <div>
+            <strong>Want to contribute?</strong>
+            <p>
+              Choose an area where you can help, contact the CEO through the official directory,
+              and agree on a role. Verification begins only after the role is assigned and the
+              required timelock is visible on-chain.
+            </p>
+          </div>
+          <a
+            className="btn btn-primary"
+            href="https://connect.devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=team-application"
+            target="_blank"
+            rel="noopener"
+          >
+            Contact the team
+          </a>
+        </div>
+        <p className="membership-note">
+          Team membership does not guarantee compensation, token returns or investment outcomes.
+          Locked tokens remain unavailable until their unlock date. Review the published security
+          information before committing funds.
+        </p>
+
         <h3 style={{ marginTop: 28 }}>How Verification Works</h3>
         <ol className="logic-list">
           <li>
