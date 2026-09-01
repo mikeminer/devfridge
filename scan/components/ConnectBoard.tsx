@@ -10,6 +10,8 @@ import {
   type OfficialLink,
 } from "@/lib/contacts";
 
+const X_COMMUNITY_URL = process.env.NEXT_PUBLIC_X_COMMUNITY_URL?.trim();
+
 export default function ConnectBoard() {
   return (
     <div className="grid gap-5">
@@ -27,6 +29,28 @@ export default function ConnectBoard() {
           <li>If a link is not on this page, it is not us — treat it as a scam.</li>
         </ul>
         <p className="mt-4 font-mono text-xs text-ice">{CONNECT_ORIGIN}</p>
+      </section>
+
+      <section className="ice-card border-ice/50 p-6">
+        <p className="text-[10px] font-bold tracking-[0.22em] text-ice">$PASTA X COMMUNITY</p>
+        <h2 className="mt-2 text-2xl font-bold">Join the public $PASTA kitchen on X.</h2>
+        <p className="mt-3 text-sm leading-relaxed text-mute">
+          Meet builders, Pump.fun users, testers, and DevFridge contributors in one public,
+          opt-in community. The official invitation will always be published here first.
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <a
+            className="fridge-key fridge-key-primary"
+            href={X_COMMUNITY_URL || "https://x.com/AnonimoCommando"}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {X_COMMUNITY_URL ? "Join the $PASTA Community" : "Follow for the community invite"}
+          </a>
+          {!X_COMMUNITY_URL && (
+            <span className="text-xs text-mute">Community launch in progress on X.</span>
+          )}
+        </div>
       </section>
 
       <Group title="Official Telegram bot" items={OFFICIAL_BOT} />
