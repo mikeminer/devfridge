@@ -75,7 +75,7 @@ export function Footer() {
             target="_blank"
             rel="noopener"
           >
-            Apply through Google Form
+            Apply to the DevFridge Team
           </a>
         </div>
         <p className="membership-note">
