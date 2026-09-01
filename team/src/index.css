@@ -154,6 +154,114 @@ button { cursor: pointer; }
   margin-top: 24px;
 }
 
+.visitor-secondary-actions {
+  margin-top: 16px;
+}
+
+.wallet-check {
+  max-width: 760px;
+  margin-top: 26px;
+  padding: 18px;
+  border: 1px solid rgba(155, 231, 255, 0.2);
+  border-radius: 18px;
+  background: rgba(8, 8, 10, 0.48);
+}
+
+.wallet-check-form label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wallet-check-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.wallet-check-controls input {
+  min-width: 0;
+  flex: 1;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.04);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+.wallet-check-controls input:focus {
+  border-color: var(--ice);
+  box-shadow: 0 0 0 3px rgba(155, 231, 255, 0.1);
+}
+
+.wallet-check-controls .btn {
+  white-space: nowrap;
+}
+
+.wallet-check-form p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.wallet-check-message {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.wallet-check-error {
+  border: 1px solid rgba(255, 142, 160, 0.35);
+  color: var(--danger);
+  background: rgba(255, 142, 160, 0.08);
+}
+
+.wallet-check-result {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.wallet-check-result > div {
+  min-width: 0;
+}
+
+.wallet-check-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wallet-check-result strong {
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.wallet-check-result.status-fridged {
+  border-color: rgba(105, 231, 177, 0.35);
+}
+
+.wallet-check-result.status-fridged > div:first-child strong {
+  color: var(--ok);
+}
+
+.wallet-check-result.status-expired > div:first-child strong,
+.wallet-check-result.status-open > div:first-child strong {
+  color: var(--muted);
+}
+
 .visitor-link {
   padding: 8px 4px;
   color: var(--ice);
@@ -698,6 +806,19 @@ button { cursor: pointer; }
   .visitor-actions .btn {
     justify-content: center;
     width: 100%;
+  }
+
+  .wallet-check-controls {
+    flex-direction: column;
+  }
+
+  .wallet-check-controls .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .wallet-check-result {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .visitor-link {

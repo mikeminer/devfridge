@@ -3,6 +3,7 @@ import { TeamGrid } from "./components/TeamGrid";
 import { AdminGuard } from "./components/AdminGuard";
 import { AdminPanel } from "./components/AdminPanel";
 import { Footer } from "./components/Footer";
+import { WalletCheck } from "./components/WalletCheck";
 import { usePhantom } from "./hooks/usePhantom";
 import { useTeamMembers } from "./hooks/useTeamMembers";
 import { useAdmin } from "./hooks/useAdmin";
@@ -31,15 +32,8 @@ export function App() {
           Review public team roles, wallets and time-locked commitments without signing in.
           Every status below is independently checked against Solana.
         </p>
-        <div className="visitor-actions">
-          <a
-            className="btn btn-primary"
-            href="https://scan.devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=verified-team"
-            target="_blank"
-            rel="noopener"
-          >
-            Check a wallet
-          </a>
+        <WalletCheck />
+        <div className="visitor-actions visitor-secondary-actions">
           <a
             className="btn"
             href="https://devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=verified-team"
