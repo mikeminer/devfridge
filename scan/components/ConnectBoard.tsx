@@ -10,7 +10,9 @@ import {
   type OfficialLink,
 } from "@/lib/contacts";
 
-const X_COMMUNITY_URL = process.env.NEXT_PUBLIC_X_COMMUNITY_URL?.trim();
+const X_COMMUNITY_URL =
+  process.env.NEXT_PUBLIC_X_COMMUNITY_URL?.trim() ||
+  "https://x.com/i/chat/group_join/g2094869082621227268/1ZTG1n781l";
 
 export default function ConnectBoard() {
   return (
