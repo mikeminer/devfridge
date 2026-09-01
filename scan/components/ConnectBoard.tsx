@@ -5,6 +5,7 @@ import {
   CONNECT_ORIGIN,
   OFFICIAL_BOT,
   OFFICIAL_CHAIN,
+  OFFICIAL_CICCIA,
   OFFICIAL_SITES,
   OFFICIAL_SOCIAL,
   type OfficialLink,
@@ -61,6 +62,7 @@ export default function ConnectBoard() {
       <Group title="Official Telegram bot" items={OFFICIAL_BOT} />
       <Group title="Official sites" items={OFFICIAL_SITES} />
       <Group title="Talk & listings" items={OFFICIAL_SOCIAL} />
+      <Group title="CICCIA SQUAD" items={OFFICIAL_CICCIA} copyable />
       <Group title="On-chain" items={OFFICIAL_CHAIN} copyable />
     </div>
   );

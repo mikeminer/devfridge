@@ -98,6 +98,20 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
   },
 ];
 
+export const OFFICIAL_CICCIA: OfficialLink[] = [
+  {
+    label: "Join the CICCIA SQUAD",
+    href: "https://join.pump.fun/HSag/gmczlf4v",
+    hint: "Official CICCIA SQUAD community on Pump.fun",
+  },
+  {
+    label: "CICCIA Salsiccia — official mascot",
+    href: "https://pump.fun/coin/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+    hint: "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+    copy: "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+  },
+];
+
 export const OFFICIAL_CHAIN: OfficialLink[] = [
   {
     label: "$PASTA mint",
