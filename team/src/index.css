@@ -721,6 +721,56 @@ button { cursor: pointer; }
   margin: 0;
 }
 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 138px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+
+.product-card:hover {
+  border-color: rgba(139, 218, 255, 0.48);
+  background: rgba(139, 218, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.product-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--ice);
+}
+
+.product-card-heading strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.product-card small {
+  margin-top: auto;
+  color: var(--ice);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
 .benefit-list {
   display: grid;
   gap: 10px;
@@ -810,6 +860,10 @@ button { cursor: pointer; }
   }
 
   .team-value-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
     grid-template-columns: 1fr;
   }
 

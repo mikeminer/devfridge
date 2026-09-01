@@ -1,5 +1,73 @@
 import { TIERS, type TierNumber } from "../config/tiers";
 
+const PRODUCTS = [
+  {
+    name: "Fridge Vault",
+    href: "https://devfridge.cool",
+    description: "Lock Token-2022 supply on-chain with a public, non-custodial timelock.",
+  },
+  {
+    name: "Token Scanner",
+    href: "https://scan.devfridge.cool",
+    description: "Review token trust signals, Fridge locks and live on-chain reports.",
+  },
+  {
+    name: "Fridge Badge",
+    href: "https://scan.devfridge.cool/badge",
+    description: "Generate an embeddable, live badge that links to a token's public trust report.",
+  },
+  {
+    name: "DevFridge OSINT",
+    href: "https://osint.devfridge.cool",
+    description: "Investigate Solana token identity, related launches and observable risk signals.",
+  },
+  {
+    name: "DevFridge Agent",
+    href: "https://agent.devfridge.cool",
+    description: "Run the paid DexScreener research desk with OSINT vetoes and a non-custodial flow.",
+  },
+  {
+    name: "$PASTA Market",
+    href: "https://pasta.devfridge.cool",
+    description: "Follow the official $PASTA mint, market links and live DexScreener chart.",
+  },
+  {
+    name: "DevFridge Meme",
+    href: "https://meme.devfridge.cool",
+    description: "Open the DevFridge meme product and community creative experience.",
+  },
+  {
+    name: "Developer SDK",
+    href: "https://sdk.devfridge.cool",
+    description: "Integrate DevFridge lock checks, badges and scanner data into other products.",
+  },
+  {
+    name: "Documentation",
+    href: "https://docs.devfridge.cool",
+    description: "Read the guides for the protocol, scanner, SDK, security model and integrations.",
+  },
+  {
+    name: "DevFridge Connect",
+    href: "https://connect.devfridge.cool",
+    description: "Find every verified DevFridge contact, community channel and official link.",
+  },
+  {
+    name: "FrigoPasta Bot",
+    href: "https://bot.devfridge.cool",
+    description: "Run token scans and Fridge checks directly from Telegram chats and groups.",
+  },
+  {
+    name: "DevFridge World",
+    href: "https://world.devfridge.cool",
+    description: "Enter the community game where your on-chain lock determines your team.",
+  },
+  {
+    name: "System Health",
+    href: "https://health.devfridge.cool",
+    description: "Check the live operational status of the Fridge, Solana RPC and $PASTA services.",
+  },
+] as const;
+
 export function Footer() {
   const linkStyle = { color: "var(--ice)" };
 
@@ -34,6 +102,27 @@ export function Footer() {
             <strong>Support the community</strong>
             <p>Moderate public channels, explain the product, collect feedback and support integrations.</p>
           </article>
+        </div>
+
+        <h3 style={{ marginTop: 28 }}>DevFridge Products</h3>
+        <p>Explore the products and public resources built and maintained by the DevFridge team.</p>
+        <div className="product-grid">
+          {PRODUCTS.map((product) => (
+            <a
+              className="product-card"
+              href={product.href}
+              key={product.href}
+              target="_blank"
+              rel="noopener"
+            >
+              <span className="product-card-heading">
+                <strong>{product.name}</strong>
+                <span aria-hidden="true">↗</span>
+              </span>
+              <span>{product.description}</span>
+              <small>{product.href.replace("https://", "")}</small>
+            </a>
+          ))}
         </div>
 
         <h3 style={{ marginTop: 28 }}>Why Join</h3>
@@ -181,6 +270,8 @@ export function Footer() {
           <a href="https://sdk.devfridge.cool" target="_blank" rel="noopener">SDK</a>
           {" · "}
           <a href="https://docs.devfridge.cool" target="_blank" rel="noopener">Docs</a>
+          {" · "}
+          <a href="https://connect.devfridge.cool" target="_blank" rel="noopener">Connect</a>
         </p>
         <p style={{ marginTop: "6px" }}>
           Verified on Solana · Powered by $PASTA timelocks
