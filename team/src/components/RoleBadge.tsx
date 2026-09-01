@@ -7,12 +7,16 @@ type Props = {
 
 export function RoleBadge({ tier, role }: Props) {
   const tierDef = TIERS[tier];
+  const displayRole = tier === 5 && role.trim().toLowerCase() === "verified investor"
+    ? tierDef.label
+    : role || tierDef.label;
+
   return (
     <span
       className="role-badge"
       style={{ background: tierDef.bgColor, color: tierDef.color }}
     >
-      {role || tierDef.label}
+      {displayRole}
     </span>
   );
 }
