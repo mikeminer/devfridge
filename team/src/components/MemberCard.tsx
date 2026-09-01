@@ -40,7 +40,7 @@ export function MemberCard({ member }: Props) {
         status={status}
         href={
           status === "verified" && v?.bestLock?.address
-            ? `https://solscan.io/account/${v.bestLock.address}`
+            ? `https://osint.devfridge.cool/?q=${encodeURIComponent(v.bestLock.address)}`
             : undefined
         }
       />
