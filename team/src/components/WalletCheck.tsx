@@ -12,6 +12,7 @@ type CheckResponse = {
   activeLocks: Lock[];
   bestLock: Lock | null;
   daysRemaining: number;
+  ts: number;
   error?: string;
 };
 
@@ -32,6 +33,23 @@ function totalActiveAmount(locks: Lock[]): bigint {
       return total;
     }
   }, 0n);
+}
+
+function weightedAverageDaysRemaining(locks: Lock[], now: number): number {
+  const totalAmount = totalActiveAmount(locks);
+  if (totalAmount === 0n) return 0;
+
+  const weightedSeconds = locks.reduce((total, lock) => {
+    try {
+      const amount = BigInt(lock.amount);
+      const remainingSeconds = BigInt(Math.max(0, Math.floor(lock.unlockAt - now)));
+      return total + amount * remainingSeconds;
+    } catch {
+      return total;
+    }
+  }, 0n);
+
+  return Number(weightedSeconds / totalAmount / 86_400n);
 }
 
 export function WalletCheck() {
@@ -72,6 +90,9 @@ export function WalletCheck() {
   }
 
   const activeAmount = result ? totalActiveAmount(result.activeLocks) : 0n;
+  const averageDaysRemaining = result
+    ? weightedAverageDaysRemaining(result.activeLocks, result.ts)
+    : 0;
   const status = result
     ? result.activeLocks.length > 0
       ? "FRIDGED"
@@ -119,8 +140,8 @@ export function WalletCheck() {
             <strong>{formatAmount(activeAmount)} PASTA</strong>
           </div>
           <div>
-            <span className="wallet-check-label">Days remaining</span>
-            <strong>{result.daysRemaining}</strong>
+            <span className="wallet-check-label">Weighted days remaining</span>
+            <strong>{averageDaysRemaining}</strong>
           </div>
         </div>
       )}
