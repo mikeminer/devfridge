@@ -40,7 +40,7 @@ export function App() {
             target="_blank"
             rel="noopener"
           >
-            Apply to join DevFridge
+            Apply to the DevFridge Team
           </a>
         </div>
         <ul className="visitor-proof" aria-label="Trust guarantees">
