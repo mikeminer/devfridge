@@ -26,7 +26,7 @@ export function Header({ publicKey, connected, onConnect, onDisconnect }: Props)
         </button>
       ) : (
         <button className="btn btn-primary" onClick={onConnect}>
-          Connect Wallet
+          Admin wallet
         </button>
       )}
     </header>
