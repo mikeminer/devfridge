@@ -26,6 +26,62 @@ type PhantomProvider = {
   ) => Promise<{ signature: string }>;
 };
 
+type SimulationResponse = {
+  error?: { message?: string };
+  result?: { value?: { err?: unknown; logs?: string[] | null } };
+};
+
+function bytesToBase64(bytes: Uint8Array): string {
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
+async function simulateBeforeSigning(
+  connection: Connection,
+  tx: Transaction | VersionedTransaction
+): Promise<void> {
+  const wire =
+    tx instanceof Transaction
+      ? tx.serialize({ requireAllSignatures: false, verifySignatures: false })
+      : tx.serialize();
+  const response = await fetch(connection.rpcEndpoint, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: "devfridge-preflight",
+      method: "simulateTransaction",
+      params: [
+        bytesToBase64(wire),
+        {
+          encoding: "base64",
+          commitment: "confirmed",
+          sigVerify: false,
+          replaceRecentBlockhash: false,
+        },
+      ],
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`Transaction simulation request failed (${response.status})`);
+  }
+  const body = (await response.json()) as SimulationResponse;
+  if (body.error) {
+    throw new Error(body.error.message || "Transaction simulation failed");
+  }
+  const simulationError = body.result?.value?.err;
+  if (simulationError) {
+    const logs = body.result?.value?.logs?.slice(-3).join(" | ");
+    throw new Error(
+      `Transaction would fail on-chain: ${JSON.stringify(simulationError)}${logs ? ` (${logs})` : ""}`
+    );
+  }
+}
+
 function getProvider(): PhantomProvider | null {
   const w = window as Window & {
     phantom?: { solana?: PhantomProvider };
@@ -80,8 +136,11 @@ export function usePhantom(cluster: ClusterName, fallbackEndpoint?: string) {
         tx.recentBlockhash = latest.blockhash;
         tx.lastValidBlockHeight = latest.lastValidBlockHeight;
       }
-      if (extraSigners.length) tx.partialSign(...extraSigners);
     }
+
+    // Phantom recommends simulating with sigVerify=false before requesting a
+    // signature. This catches deterministic failures before the wallet dialog.
+    await simulateBeforeSigning(connection, tx);
 
     // Always submit on DevFridge's selected cluster RPC. Phantom's
     // signAndSendTransaction uses the wallet's network, which is often
@@ -89,16 +148,20 @@ export function usePhantom(cluster: ClusterName, fallbackEndpoint?: string) {
     if (p.signTransaction) {
       const signed = await p.signTransaction(tx);
       if (signed instanceof Transaction) {
-        const out = Transaction.from(
-          signed.serialize({ requireAllSignatures: false, verifySignatures: false })
-        );
-        if (extraSigners.length) out.partialSign(...extraSigners);
-        return connection.sendRawTransaction(out.serialize(), sendOpts);
+        // Phantom signs first; any local co-signers are added afterwards.
+        // This ordering follows Phantom's transaction-warning guidance.
+        if (extraSigners.length) signed.partialSign(...extraSigners);
+        return connection.sendRawTransaction(signed.serialize(), sendOpts);
       }
+      if (extraSigners.length) signed.sign(extraSigners);
       return connection.sendRawTransaction(
         (signed as VersionedTransaction).serialize(),
         sendOpts
       );
+    }
+
+    if (extraSigners.length) {
+      throw new Error("This transaction requires a wallet that supports signTransaction");
     }
 
     const { signature } = await p.signAndSendTransaction(tx);
