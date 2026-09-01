@@ -47,7 +47,7 @@ export const TIERS: Record<TierNumber, TierDef> = {
     bgColor: "rgba(16, 185, 129, 0.15)",
   },
   5: {
-    label: "Verified Investor",
+    label: "Investor",
     minAmount: 0n,
     minAmountDisplay: "Any",
     minDays: 1,

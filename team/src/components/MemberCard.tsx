@@ -36,7 +36,14 @@ export function MemberCard({ member }: Props) {
         <RoleBadge tier={member.tier as TierNumber} role={member.role} />
       </div>
 
-      <LockStatus status={status} />
+      <LockStatus
+        status={status}
+        href={
+          status === "verified" && v?.bestLock?.address
+            ? `https://solscan.io/account/${v.bestLock.address}`
+            : undefined
+        }
+      />
 
       {v && !member.loading && (
         <div className="member-stats">

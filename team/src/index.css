@@ -372,6 +372,16 @@ button { cursor: pointer; }
 .lock-status.verified .dot { background: var(--ok); }
 .lock-status.verified { color: var(--ok); }
 
+.lock-status-link {
+  width: fit-content;
+  text-decoration: none;
+}
+
+.lock-status-link:hover,
+.lock-status-link:focus-visible {
+  text-decoration: underline;
+}
+
 .lock-status.expired .dot { background: var(--warn); }
 .lock-status.expired { color: var(--warn); }
 
