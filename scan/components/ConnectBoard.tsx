@@ -62,9 +62,35 @@ export default function ConnectBoard() {
       <Group title="Official Telegram bot" items={OFFICIAL_BOT} />
       <Group title="Official sites" items={OFFICIAL_SITES} />
       <Group title="Talk & listings" items={OFFICIAL_SOCIAL} />
-      <Group title="CICCIA SQUAD" items={OFFICIAL_CICCIA} copyable />
+      <CicciaGroup />
       <Group title="On-chain" items={OFFICIAL_CHAIN} copyable />
     </div>
+  );
+}
+
+function CicciaGroup() {
+  return (
+    <section className="ice-card p-5">
+      <div className="flex items-center gap-4">
+        <img
+          src="/brand/ciccia-squad-logo.jpg"
+          alt="CICCIA Salsiccia — official CICCIA SQUAD mascot"
+          className="h-16 w-16 shrink-0 rounded-full border border-caution/60 object-cover"
+          width={64}
+          height={64}
+        />
+        <div>
+          <p className="text-[10px] font-bold tracking-[0.2em] text-caution">CICCIA SQUAD</p>
+          <p className="mt-1 text-sm font-semibold">Powered by CICCIA Salsiccia.</p>
+          <p className="mt-1 text-xs text-mute">Official Pump.fun squad and mascot.</p>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-2">
+        {OFFICIAL_CICCIA.map((item) => (
+          <Row key={item.href} item={item} copyable />
+        ))}
+      </div>
+    </section>
   );
 }
 

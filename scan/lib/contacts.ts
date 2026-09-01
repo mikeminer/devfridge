@@ -101,7 +101,7 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
 export const OFFICIAL_CICCIA: OfficialLink[] = [
   {
     label: "Join the CICCIA SQUAD",
-    href: "https://join.pump.fun/HSag/gmczlf4v",
+    href: "https://join.pump.fun/HSag/g3f6x393",
     hint: "Official CICCIA SQUAD community on Pump.fun",
   },
   {
