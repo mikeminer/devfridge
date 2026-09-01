@@ -39,8 +39,8 @@ export function MemberCard({ member }: Props) {
       <LockStatus
         status={status}
         href={
-          status === "verified" && v?.bestLock?.address
-            ? `https://osint.devfridge.cool/?q=${encodeURIComponent(v.bestLock.address)}`
+          status === "verified"
+            ? `https://osint.devfridge.cool/?q=${encodeURIComponent(member.wallet)}`
             : undefined
         }
       />

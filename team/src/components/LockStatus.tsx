@@ -28,8 +28,8 @@ export function LockStatus({ status, href }: Props) {
         href={href}
         target="_blank"
         rel="noopener"
-        aria-label="Verified — scan timelock with DevFridge OSINT"
-        title="Scan timelock with DevFridge OSINT"
+        aria-label="Verified — scan member wallet with DevFridge OSINT"
+        title="Scan member wallet with DevFridge OSINT"
       >
         {content}
       </a>
