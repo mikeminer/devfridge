@@ -35,20 +35,12 @@ export function App() {
         <WalletCheck />
         <div className="visitor-actions visitor-secondary-actions">
           <a
-            className="btn"
-            href="https://devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=verified-team"
+            className="btn btn-primary"
+            href="https://forms.gle/HSaJ2F5Xy6zRXNcL8"
             target="_blank"
             rel="noopener"
           >
-            Open the vault
-          </a>
-          <a
-            className="visitor-link"
-            href="https://connect.devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=verified-team"
-            target="_blank"
-            rel="noopener"
-          >
-            Join or partner with us →
+            Apply to join DevFridge
           </a>
         </div>
         <ul className="visitor-proof" aria-label="Trust guarantees">

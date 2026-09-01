@@ -262,18 +262,6 @@ button { cursor: pointer; }
   color: var(--muted);
 }
 
-.visitor-link {
-  padding: 8px 4px;
-  color: var(--ice);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.visitor-link:hover {
-  text-decoration: underline;
-}
-
 .visitor-proof {
   display: flex;
   flex-wrap: wrap;
@@ -819,11 +807,6 @@ button { cursor: pointer; }
 
   .wallet-check-result {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .visitor-link {
-    width: 100%;
-    text-align: center;
   }
 
   .team-value-grid {

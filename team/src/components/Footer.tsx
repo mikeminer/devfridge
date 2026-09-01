@@ -71,11 +71,11 @@ export function Footer() {
           </div>
           <a
             className="btn btn-primary"
-            href="https://connect.devfridge.cool/?utm_source=team&utm_medium=website&utm_campaign=team-application"
+            href="https://forms.gle/HSaJ2F5Xy6zRXNcL8"
             target="_blank"
             rel="noopener"
           >
-            Contact the team
+            Apply through Google Form
           </a>
         </div>
         <p className="membership-note">
