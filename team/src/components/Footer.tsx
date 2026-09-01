@@ -19,7 +19,7 @@ const PRODUCTS = [
   {
     name: "DevFridge OSINT",
     href: "https://osint.devfridge.cool",
-    description: "Investigate Solana token identity, related launches and observable risk signals.",
+    description: "Scan a Solana token or wallet and discover every related DevFridge timelock.",
   },
   {
     name: "DevFridge Agent",
