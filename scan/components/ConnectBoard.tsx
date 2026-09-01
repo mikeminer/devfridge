@@ -9,6 +9,7 @@ import {
   OFFICIAL_SOCIAL,
   type OfficialLink,
 } from "@/lib/contacts";
+import { PASTA_MINT } from "@/lib/constants";
 
 const X_COMMUNITY_URL =
   process.env.NEXT_PUBLIC_X_COMMUNITY_URL?.trim() ||
@@ -32,6 +33,8 @@ export default function ConnectBoard() {
         </ul>
         <p className="mt-4 font-mono text-xs text-ice">{CONNECT_ORIGIN}</p>
       </section>
+
+      <PastaCa />
 
       <section className="ice-card border-ice/50 p-6">
         <p className="text-[10px] font-bold tracking-[0.22em] text-ice">$PASTA X COMMUNITY</p>
@@ -60,6 +63,41 @@ export default function ConnectBoard() {
       <Group title="Talk & listings" items={OFFICIAL_SOCIAL} />
       <Group title="On-chain" items={OFFICIAL_CHAIN} copyable />
     </div>
+  );
+}
+
+function PastaCa() {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <section className="ice-card border-caution/50 p-6">
+      <p className="text-[10px] font-bold tracking-[0.22em] text-caution">
+        OFFICIAL $PASTA CONTRACT ADDRESS
+      </p>
+      <p className="mt-3 break-all font-mono text-sm text-ink">{PASTA_MINT}</p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        <button
+          type="button"
+          className="fridge-key fridge-key-primary"
+          onClick={() => {
+            void navigator.clipboard.writeText(PASTA_MINT).then(() => {
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 1400);
+            });
+          }}
+        >
+          {copied ? "CA copied" : "Copy CA"}
+        </button>
+        <a
+          className="fridge-key"
+          href={`https://solscan.io/token/${PASTA_MINT}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Verify on Solscan
+        </a>
+      </div>
+    </section>
   );
 }
 
