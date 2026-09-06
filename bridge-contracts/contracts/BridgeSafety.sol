@@ -6,7 +6,8 @@ import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 /**
  * @notice Fail-closed, per-path flow controls shared by the adapter and wrapper.
  * @dev The LayerZero owner/delegate remains the governor. A guardian may pause,
- *      but only the multisig governor may unpause or change limits.
+ *      but only the governor may unpause or change limits. The governor can be
+ *      an EOA or a multisig contract; deployments must publish which model is used.
  */
 abstract contract BridgeSafety is Pausable {
     struct FlowLimit {
@@ -91,8 +92,8 @@ abstract contract BridgeSafety is Pausable {
         (, available) = _capacity(config);
     }
 
-    function _requireMultisigGovernor(address governor) internal view {
-        if (governor == address(0) || governor.code.length == 0) revert InvalidGovernor();
+    function _requireGovernor(address governor) internal pure {
+        if (governor == address(0)) revert InvalidGovernor();
     }
 
     function _consumeFlow(uint32 eid, bool inbound, uint256 amount) internal whenNotPaused {

@@ -13,15 +13,15 @@ contract CanonicalOFTAdapter is OFTAdapter, BridgeSafety {
     constructor(
         address token_,
         address endpoint_,
-        address multisig_,
+        address governor_,
         address emergencyGuardian_,
         FlowLimitConfig[] memory limits_
     )
-        OFTAdapter(token_, endpoint_, multisig_)
-        Ownable(multisig_)
+        OFTAdapter(token_, endpoint_, governor_)
+        Ownable(governor_)
         BridgeSafety(emergencyGuardian_, limits_)
     {
-        _requireMultisigGovernor(multisig_);
+        _requireGovernor(governor_);
     }
 
     function bridgeGovernor() public view override returns (address) {
@@ -29,7 +29,7 @@ contract CanonicalOFTAdapter is OFTAdapter, BridgeSafety {
     }
 
     function transferOwnership(address newOwner) public override onlyOwner {
-        _requireMultisigGovernor(newOwner);
+        _requireGovernor(newOwner);
         super.transferOwnership(newOwner);
     }
 

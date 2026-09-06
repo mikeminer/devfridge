@@ -11,15 +11,15 @@ contract WrappedOFT is OFT, BridgeSafety {
         string memory name_,
         string memory symbol_,
         address endpoint_,
-        address multisig_,
+        address governor_,
         address emergencyGuardian_,
         FlowLimitConfig[] memory limits_
     )
-        OFT(name_, symbol_, endpoint_, multisig_)
-        Ownable(multisig_)
+        OFT(name_, symbol_, endpoint_, governor_)
+        Ownable(governor_)
         BridgeSafety(emergencyGuardian_, limits_)
     {
-        _requireMultisigGovernor(multisig_);
+        _requireGovernor(governor_);
     }
 
     function bridgeGovernor() public view override returns (address) {
@@ -27,7 +27,7 @@ contract WrappedOFT is OFT, BridgeSafety {
     }
 
     function transferOwnership(address newOwner) public override onlyOwner {
-        _requireMultisigGovernor(newOwner);
+        _requireGovernor(newOwner);
         super.transferOwnership(newOwner);
     }
 
