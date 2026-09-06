@@ -95,7 +95,7 @@ export default function BridgeBoard({ route }: { route: BridgeRoute }) {
               <div className="mt-5 grid gap-3">
                 <SafetyRow name="Canonical supply" value="Robinhood Chain" state="on" />
                 <SafetyRow name="Rate limiter" value={route.dailyLimit ? "Configured" : "Awaiting limit"} state={route.dailyLimit ? "on" : "wait"} />
-                <SafetyRow name="Multisig control" value="Required" state="on" />
+                <SafetyRow name="Governor control" value="Mono-address" state="on" />
                 <SafetyRow name="Emergency pause" value="Contract level" state="on" />
                 <SafetyRow name="LayerZero peers" value={route.solanaOftStore ? "Bound" : "Not bound"} state={route.solanaOftStore ? "on" : "wait"} />
               </div>
@@ -105,6 +105,8 @@ export default function BridgeBoard({ route }: { route: BridgeRoute }) {
               <p className="text-[10px] font-bold tracking-[0.2em] text-ice">ROUTE REGISTRY</p>
               <dl className="mt-4 grid gap-4 text-sm">
                 <RegistryRow label="Robinhood token" value={short(route.robinhoodToken)} href={`https://explorer.robinhood.com/address/${route.robinhoodToken}`} />
+                <RegistryRow label="Robinhood governor" value={short(route.robinhoodGovernor)} />
+                <RegistryRow label="Solana governor" value={short(route.solanaGovernor)} />
                 <RegistryRow label="EVM OFT Adapter" value={short(route.evmAdapter)} />
                 <RegistryRow label="Solana mint" value={short(route.solanaMint)} />
                 <RegistryRow label="Solana OFT Store" value={short(route.solanaOftStore)} />
@@ -116,13 +118,19 @@ export default function BridgeBoard({ route }: { route: BridgeRoute }) {
                 </div>
               )}
             </section>
+            <section className="ice-card p-5 sm:p-6">
+              <p className="text-[10px] font-bold tracking-[0.2em] text-caution">LEGACY SOLANA TOKEN</p>
+              <p className="mt-3 text-sm leading-relaxed text-mute">
+                <span className="font-mono text-ink">{short(route.solanaLegacyMint)}</span> has revoked mint authority and an independent fixed supply. It is not the OFT wrapper and cannot enter the canonical route.
+              </p>
+            </section>
           </aside>
         </div>
 
         <section className="mt-6 grid gap-4 md:grid-cols-3">
           <ProtocolCard number="01" title="Canonical first" text="The original supply stays on its declared home chain. The adapter escrows it before the remote wrapper can be minted." />
           <ProtocolCard number="02" title="Bounded exposure" text="Per-route limits cap how much value can move during each window, reducing the blast radius of an incident." />
-          <ProtocolCard number="03" title="Human circuit breaker" text="A multisig controls peer changes and limits, while an emergency pause can stop cross-chain debit and credit." />
+          <ProtocolCard number="03" title="Human circuit breaker" text="The published governor controls peer changes and limits, while an emergency pause can stop cross-chain debit and credit." />
         </section>
 
         <footer className="mt-10 flex flex-col gap-3 border-t border-line py-7 text-xs text-mute sm:flex-row sm:items-center sm:justify-between">

@@ -18,7 +18,8 @@ async function main() {
 
   const token = required("CANONICAL_TOKEN");
   const endpoint = required("LZ_ENDPOINT_V2");
-  const multisig = required("BRIDGE_MULTISIG");
+  const governor = process.env.BRIDGE_GOVERNOR?.trim() || process.env.BRIDGE_MULTISIG?.trim();
+  if (!governor) throw new Error("Missing BRIDGE_GOVERNOR");
   const guardian = required("EMERGENCY_GUARDIAN");
   const remoteEid = Number(required("REMOTE_LZ_EID"));
   const limit = BigInt(required("FLOW_LIMIT_BASE_UNITS"));
@@ -26,7 +27,9 @@ async function main() {
 
   await assertContract(token, "CANONICAL_TOKEN");
   await assertContract(endpoint, "LZ_ENDPOINT_V2");
-  await assertContract(multisig, "BRIDGE_MULTISIG");
+  if (!ethers.isAddress(governor) || governor === ethers.ZeroAddress) {
+    throw new Error("BRIDGE_GOVERNOR is not a valid address");
+  }
   if (!ethers.isAddress(guardian)) throw new Error("EMERGENCY_GUARDIAN is not a valid address");
   if (!Number.isInteger(remoteEid) || remoteEid <= 0) throw new Error("REMOTE_LZ_EID is invalid");
   if (!Number.isInteger(window) || window < 60) throw new Error("FLOW_WINDOW_SECONDS must be >= 60");
@@ -36,9 +39,9 @@ async function main() {
     { eid: remoteEid, inbound: true, limit, window },
   ];
   const Factory = await ethers.getContractFactory("CanonicalOFTAdapter");
-  const adapter = await Factory.deploy(token, endpoint, multisig, guardian, limits);
+  const adapter = await Factory.deploy(token, endpoint, governor, guardian, limits);
   await adapter.waitForDeployment();
-  console.log(JSON.stringify({ network: network.name, adapter: await adapter.getAddress(), token, multisig, guardian, remoteEid, limit: limit.toString(), window }, null, 2));
+  console.log(JSON.stringify({ network: network.name, adapter: await adapter.getAddress(), token, governor, guardian, remoteEid, limit: limit.toString(), window }, null, 2));
 }
 
 main().catch((error) => {
