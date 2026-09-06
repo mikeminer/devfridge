@@ -4,6 +4,7 @@ import { AdminGuard } from "./components/AdminGuard";
 import { AdminPanel } from "./components/AdminPanel";
 import { Footer } from "./components/Footer";
 import { WalletCheck } from "./components/WalletCheck";
+import { ContributorBriefing } from "./components/ContributorBriefing";
 import { usePhantom } from "./hooks/usePhantom";
 import { useTeamMembers } from "./hooks/useTeamMembers";
 import { useAdmin } from "./hooks/useAdmin";
@@ -15,6 +16,7 @@ export function App() {
 
   return (
     <div className="shell">
+      <ContributorBriefing />
       <Header
         publicKey={publicKey}
         connected={connected}
