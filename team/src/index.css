@@ -526,6 +526,209 @@ button { cursor: pointer; }
   justify-content: flex-end;
 }
 
+/* Contributor onboarding */
+.contributor-briefing-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 4, 7, 0.86);
+  backdrop-filter: blur(18px);
+}
+
+.contributor-briefing {
+  width: min(760px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: clamp(24px, 5vw, 44px);
+  border: 1px solid rgba(243, 197, 107, 0.28);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(243, 197, 107, 0.11), transparent 32%),
+    radial-gradient(circle at 5% 95%, rgba(155, 231, 255, 0.09), transparent 34%),
+    #101117;
+  box-shadow: 0 32px 120px rgba(0, 0, 0, 0.62);
+}
+
+.contributor-briefing-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contributor-briefing-topline p {
+  margin: 0;
+  color: var(--warn);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.contributor-briefing-close {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 25px;
+  line-height: 1;
+}
+
+.contributor-briefing-close:hover,
+.contributor-briefing-close:focus-visible {
+  border-color: rgba(243, 197, 107, 0.55);
+  color: var(--ink);
+  outline: none;
+}
+
+.contributor-briefing h2 {
+  max-width: 620px;
+  margin: 18px 0 0;
+  font-size: clamp(30px, 6vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.contributor-briefing-lead {
+  max-width: 640px;
+  margin: 20px 0 0;
+  color: var(--cream);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.contributor-briefing-copy {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.contributor-briefing-copy p,
+.contributor-briefing-question {
+  margin: 0;
+}
+
+.contributor-briefing-copy strong {
+  color: var(--ink);
+}
+
+.contributor-briefing-reading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.contributor-briefing-reading > p {
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  color: var(--warn);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contributor-briefing-reading a {
+  display: grid;
+  gap: 5px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.contributor-briefing-reading a:hover {
+  border-color: rgba(155, 231, 255, 0.4);
+}
+
+.contributor-briefing-reading span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.contributor-briefing-reading small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.contributor-briefing-question {
+  margin-top: 24px;
+  padding-left: 16px;
+  border-left: 2px solid var(--warn);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.contributor-briefing-market {
+  display: grid;
+  gap: 7px;
+  margin-top: 24px;
+  padding: 15px 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.contributor-briefing-market span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.contributor-briefing-market a {
+  width: fit-content;
+  max-width: 100%;
+  color: var(--ice);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.contributor-briefing-market a:hover {
+  text-decoration: underline;
+}
+
+.contributor-briefing-accept {
+  justify-content: center;
+  width: 100%;
+  margin-top: 22px;
+  padding: 13px 18px;
+}
+
+@media (max-width: 600px) {
+  .contributor-briefing-overlay {
+    align-items: end;
+    padding: 10px;
+  }
+
+  .contributor-briefing {
+    max-height: calc(100vh - 20px);
+    border-radius: 24px;
+  }
+
+  .contributor-briefing-reading {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Empty state */
 .empty-state {
   text-align: center;
