@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import WorldApp from "./WorldApp";
 
-const TARGET = new Date("2026-08-31T22:00:00.000Z").getTime();
+const TARGET = new Date("2026-09-30T22:00:00.000Z").getTime();
 
 function parts(ms: number) {
   const s = Math.max(0, Math.floor(ms / 1000));
@@ -16,20 +16,25 @@ function parts(ms: number) {
 }
 
 export default function ComingSoon() {
-  const [left, setLeft] = useState(() => parts(TARGET - Date.now()));
-  const [open, setOpen] = useState(() => Date.now() < TARGET);
+  const [left, setLeft] = useState({ d: 0, h: 0, m: 0, sec: 0 });
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     document.body.classList.add("world-soon");
-    const id = window.setInterval(() => {
+    const updateCountdown = () => {
       const ms = TARGET - Date.now();
       if (ms <= 0) {
         setOpen(false);
         setLeft({ d: 0, h: 0, m: 0, sec: 0 });
-        window.clearInterval(id);
-        return;
+        return false;
       }
       setLeft(parts(ms));
+      return true;
+    };
+
+    updateCountdown();
+    const id = window.setInterval(() => {
+      if (!updateCountdown()) window.clearInterval(id);
     }, 1000);
     return () => {
       document.body.classList.remove("world-soon");
@@ -48,30 +53,47 @@ export default function ComingSoon() {
   const cells = [
     { n: left.d, l: "Days" },
     { n: left.h, l: "Hours" },
-    { n: left.m, l: "Min" },
-    { n: left.sec, l: "Sec" },
+    { n: left.m, l: "Minutes" },
+    { n: left.sec, l: "Seconds" },
   ];
 
   return (
-    <div className="fixed inset-0 z-[200] grid place-items-center bg-[#070b14] px-4">
-      <div className="mx-auto max-w-xl text-center">
+    <main className="fixed inset-0 z-[200] isolate grid place-items-center overflow-hidden bg-[#05070d] px-4 py-8">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(158,240,255,0.16),transparent_36%),radial-gradient(circle_at_15%_85%,rgba(255,82,176,0.12),transparent_32%),radial-gradient(circle_at_88%_78%,rgba(246,196,92,0.12),transparent_34%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]"
+      />
+      <section className="relative mx-auto w-full max-w-2xl rounded-[2rem] border border-white/10 bg-[#090d18]/80 px-5 py-8 text-center shadow-[0_30px_100px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:px-10 sm:py-12">
         <img
           src="https://devfridge.cool/brand/logo-mark.jpg"
-          alt=""
+          alt="DevFridge"
           className="mx-auto h-16 w-16 rounded-2xl object-cover ring-1 ring-ice/30"
         />
         <p className="mt-6 text-[10px] font-bold tracking-[0.22em] text-ice">WORLD.DEVFRIDGE.COOL</p>
-        <h1 className="mt-3 text-4xl font-bold sm:text-6xl">Coming soon</h1>
-        <p className="mt-4 text-sm text-mute">
-          Pastalovers vs The Shelf. The Fridge metaverse opens 31 August 2026.
+        <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">The Meme World</h1>
+        <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-mute sm:text-base">
+          Nine characters. Nine memecoins. One world. The gates open on{" "}
+          <time dateTime="2026-10-01T00:00:00+02:00" className="font-semibold text-white">
+            1 October 2026
+          </time>
+          .
+        </p>
+        <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.2em] text-ice/80">
+          Countdown to launch
         </p>
         <div className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
           {cells.map((c) => (
-            <div key={c.l} className="ice-card px-2 py-4">
-              <p className="font-mono text-3xl font-bold text-ice sm:text-4xl">
+            <div key={c.l} className="rounded-2xl border border-ice/15 bg-white/[0.035] px-1 py-4 sm:px-2 sm:py-5">
+              <p className="font-mono text-2xl font-bold text-ice sm:text-4xl">
                 {String(c.n).padStart(2, "0")}
               </p>
-              <p className="mt-1 text-[10px] font-bold tracking-[0.16em] text-mute">{c.l}</p>
+              <p className="mt-1 truncate text-[8px] font-bold uppercase tracking-[0.08em] text-mute sm:text-[10px] sm:tracking-[0.14em]">
+                {c.l}
+              </p>
             </div>
           ))}
         </div>
@@ -86,7 +108,7 @@ export default function ComingSoon() {
             Docs
           </a>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

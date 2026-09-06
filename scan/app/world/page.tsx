@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ComingSoon from "@/components/world/ComingSoon";
 
 export const metadata: Metadata = {
-  title: "world.devfridge.cool — Coming soon",
+  title: "The Meme World — Opening 1 October 2026",
   description:
-    "The Fridge metaverse opens 31 August 2026. Pastalovers vs The Shelf.",
+    "Nine original Italian Brainrot characters enter the DevFridge universe on 1 October 2026.",
 };
 
 export default function WorldPage() {
