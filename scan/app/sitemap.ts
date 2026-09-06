@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SCAN_URL}/health`, changeFrequency: "daily", priority: 0.4 },
     { url: `${SCAN_URL}/stats`, changeFrequency: "hourly", priority: 0.8 },
     { url: `${SCAN_URL}/docs`, changeFrequency: "weekly", priority: 0.7 },
+    { url: "https://bridge.devfridge.cool", changeFrequency: "daily", priority: 0.8 },
   ];
   const docs: MetadataRoute.Sitemap = DOC_PAGES.map((p) => ({
     url: `${DOCS_ORIGIN}${p.href === "/" ? "" : p.href}`,

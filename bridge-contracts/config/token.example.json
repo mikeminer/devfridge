@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "token": {
+    "name": "Trust Me Capital",
+    "symbol": "TMC",
+    "canonicalChain": "robinhood",
+    "robinhood": {
+      "chainId": 4663,
+      "token": "0x5c845330b41D9Bef68B46DC254353A770f44dee8",
+      "oftAdapter": "DEPLOY_AFTER_AUDIT",
+      "multisig": "REQUIRED_SAFE_ADDRESS"
+    },
+    "solana": {
+      "mint": "REQUIRED_SOLANA_MINT",
+      "oftStore": "DEPLOY_AFTER_AUDIT",
+      "multisig": "REQUIRED_SQUADS_VAULT"
+    }
+  },
+  "policy": {
+    "windowSeconds": 86400,
+    "outboundLimitBaseUnits": "REQUIRED",
+    "inboundLimitBaseUnits": "REQUIRED",
+    "emergencyGuardian": "REQUIRED",
+    "minimumDvns": 2
+  }
+}

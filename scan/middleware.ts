@@ -77,6 +77,21 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (host.startsWith("bridge.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/bridge";
+    else if (
+      !path.startsWith("/bridge") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next") &&
+      path !== "/sitemap.xml" &&
+      path !== "/robots.txt"
+    ) {
+      url.pathname = `/bridge${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
     if (path === "/" || path === "") {

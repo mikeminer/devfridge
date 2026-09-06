@@ -1,0 +1,29 @@
+name: Bridge contracts
+
+on:
+  pull_request:
+    paths:
+      - "bridge-contracts/**"
+      - ".github/workflows/bridge-contracts.yml"
+  push:
+    branches: [master]
+    paths:
+      - "bridge-contracts/**"
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bridge-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --ignore-scripts
+      - run: npm run compile
+      - run: npm test
