@@ -32,6 +32,11 @@ const PRODUCTS = [
     description: "Follow the official $PASTA mint, market links and live DexScreener chart.",
   },
   {
+    name: "Trust Me Capital",
+    href: "https://capital.devfridge.cool",
+    description: "Explore public vault analytics, TMC on Robinhood Chain and the Trust Rewards membership program.",
+  },
+  {
     name: "DevFridge Meme",
     href: "https://meme.devfridge.cool",
     description: "Open the DevFridge meme product and community creative experience.",

@@ -16,6 +16,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Lock Token-2022 supply on-chain",
   },
   {
+    label: "Trust Me Capital",
+    href: "https://capital.devfridge.cool",
+    hint: "TMC analytics and Trust Rewards on Robinhood Chain",
+  },
+  {
     label: "Scanner",
     href: "https://scan.devfridge.cool",
     hint: "Trust report and Fridge badge",
@@ -80,6 +85,11 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     label: "Telegram group",
     href: "https://t.me/+RbLG3dqqM5tiZmRk",
     hint: "Public kitchen — invite only from this page",
+  },
+  {
+    label: "Trust Me Capital Telegram",
+    href: "https://t.me/trustmecapitalTG",
+    hint: "@trustmecapitalTG — official TMC and Trust Rewards group",
   },
   {
     label: "$PASTA on pump.fun",
