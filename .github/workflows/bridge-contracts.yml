@@ -24,6 +24,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --ignore-scripts
+      # LayerZero currently exposes an optional Optimism peer pinned to ethers v5.
+      # Hardhat's supported plugin uses ethers v6, so resolve legacy optional peers
+      # without changing the runtime dependency selected by this package.
+      - run: npm install --legacy-peer-deps --ignore-scripts
       - run: npm run compile
       - run: npm test
