@@ -2,6 +2,10 @@
 
 import { useEffect, useState } from "react";
 import WorldApp from "./WorldApp";
+import dynamic from "next/dynamic";
+import styles from "./runway.module.css";
+
+const MemeRunway = dynamic(() => import("./MemeRunway"), { ssr: false });
 
 const TARGET = new Date("2026-09-30T22:00:00.000Z").getTime();
 
@@ -58,56 +62,54 @@ export default function ComingSoon() {
   ];
 
   return (
-    <main className="fixed inset-0 z-[200] isolate grid place-items-center overflow-hidden bg-[#05070d] px-4 py-8">
+    <main className={styles.page}>
+      <MemeRunway />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(158,240,255,0.16),transparent_36%),radial-gradient(circle_at_15%_85%,rgba(255,82,176,0.12),transparent_32%),radial-gradient(circle_at_88%_78%,rgba(246,196,92,0.12),transparent_34%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(158,240,255,0.16),transparent_36%),radial-gradient(circle_at_15%_85%,rgba(255,82,176,0.12),transparent_32%),radial-gradient(circle_at_88%_78%,rgba(246,196,92,0.12),transparent_34%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]"
+        className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]"
       />
-      <section className="relative mx-auto w-full max-w-2xl rounded-[2rem] border border-white/10 bg-[#090d18]/80 px-5 py-8 text-center shadow-[0_30px_100px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:px-10 sm:py-12">
+      <section className={styles.panel}>
         <img
           src="https://devfridge.cool/brand/logo-mark.jpg"
           alt="DevFridge"
-          className="mx-auto h-16 w-16 rounded-2xl object-cover ring-1 ring-ice/30"
+          className="h-12 w-12 rounded-2xl object-cover ring-1 ring-ice/30"
         />
-        <p className="mt-6 text-[10px] font-bold tracking-[0.22em] text-ice">WORLD.DEVFRIDGE.COOL</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">The Meme World</h1>
-        <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-mute sm:text-base">
+        <p className="mt-5 text-xs font-bold tracking-[0.15em] text-ice">WORLD.DEVFRIDGE.COOL</p>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight">The Meme World</h1>
+        <p className="mt-4 text-base leading-6 text-mute">
           Nine characters. Nine memecoins. One world. The gates open on{" "}
           <time dateTime="2026-10-01T00:00:00+02:00" className="font-semibold text-white">
             1 October 2026
           </time>
           .
         </p>
-        <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.2em] text-ice/80">
+        <p className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-ice/80">
           Countdown to launch
         </p>
-        <div className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
+        <div className="mt-3 grid grid-cols-4 gap-2">
           {cells.map((c) => (
-            <div key={c.l} className="rounded-2xl border border-ice/15 bg-white/[0.035] px-1 py-4 sm:px-2 sm:py-5">
-              <p className="font-mono text-2xl font-bold text-ice sm:text-4xl">
+            <div key={c.l} className="rounded-xl border border-ice/15 bg-white/[0.035] px-1 py-3 text-center">
+              <p className="font-mono text-2xl font-bold text-ice">
                 {String(c.n).padStart(2, "0")}
               </p>
-              <p className="mt-1 truncate text-[8px] font-bold uppercase tracking-[0.08em] text-mute sm:text-[10px] sm:tracking-[0.14em]">
+              <p className="mt-1 text-xs text-mute">
                 {c.l}
               </p>
             </div>
           ))}
         </div>
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
-          <a className="fridge-key" href="https://devfridge.cool">
-            Fridge
+        <nav className="mt-6 flex flex-wrap gap-2" aria-label="DevFridge links">
+          <a className="fridge-key" href="https://team.devfridge.cool">
+            Team
           </a>
-          <a className="fridge-key" href="https://scan.devfridge.cool">
-            Scan
+          <a className="fridge-key" href="https://capital.devfridge.cool">
+            Capital
           </a>
-          <a className="fridge-key" href="https://docs.devfridge.cool/world">
-            Docs
-          </a>
-        </div>
+        </nav>
       </section>
     </main>
   );
