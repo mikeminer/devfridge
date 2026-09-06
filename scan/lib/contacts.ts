@@ -21,6 +21,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "TMC analytics and Trust Rewards on Robinhood Chain",
   },
   {
+    label: "DevFridge Bridge",
+    href: "https://bridge.devfridge.cool",
+    hint: "Rate-limited LayerZero OFT bridge for verified token routes",
+  },
+  {
     label: "Scanner",
     href: "https://scan.devfridge.cool",
     hint: "Trust report and Fridge badge",

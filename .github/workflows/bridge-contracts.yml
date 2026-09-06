@@ -1,0 +1,32 @@
+name: Bridge contracts
+
+on:
+  pull_request:
+    paths:
+      - "bridge-contracts/**"
+      - ".github/workflows/bridge-contracts.yml"
+  push:
+    branches: [master]
+    paths:
+      - "bridge-contracts/**"
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bridge-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # LayerZero currently exposes an optional Optimism peer pinned to ethers v5.
+      # Hardhat's supported plugin uses ethers v6, so resolve legacy optional peers
+      # without changing the runtime dependency selected by this package.
+      - run: npm install --legacy-peer-deps --ignore-scripts
+      - run: npm run compile
+      - run: npm test

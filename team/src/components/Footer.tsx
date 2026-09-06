@@ -37,6 +37,11 @@ const PRODUCTS = [
     description: "Explore public vault analytics, TMC on Robinhood Chain and the Trust Rewards membership program.",
   },
   {
+    name: "DevFridge Bridge",
+    href: "https://bridge.devfridge.cool",
+    description: "Move supported tokens through canonical, rate-limited LayerZero OFT routes with emergency controls.",
+  },
+  {
     name: "DevFridge Meme",
     href: "https://meme.devfridge.cool",
     description: "Open the DevFridge meme product and community creative experience.",
