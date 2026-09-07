@@ -5,163 +5,214 @@ import type { BridgeRoute } from "@/lib/bridge";
 import { routeReadiness } from "@/lib/bridge";
 
 type Direction = "robinhood-solana" | "solana-robinhood";
+type CopyField = "token" | "governor" | "adapter" | "mint" | "store" | null;
 
 const short = (address?: string) =>
-  address ? `${address.slice(0, 7)}…${address.slice(-5)}` : "Not configured";
+  address ? `${address.slice(0, 7)}…${address.slice(-5)}` : "Not deployed";
+
+const addressUrl = (chain: "robinhood" | "solana", address?: string) => {
+  if (!address) return undefined;
+  return chain === "robinhood"
+    ? `https://explorer.robinhood.com/address/${address}`
+    : `https://solscan.io/account/${address}`;
+};
+
+const normalizeAmount = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const [whole = "", ...decimalParts] = cleaned.split(".");
+  return decimalParts.length ? `${whole}.${decimalParts.join("").slice(0, 9)}` : whole;
+};
 
 export default function BridgeBoard({ route }: { route: BridgeRoute }) {
   const [direction, setDirection] = useState<Direction>("robinhood-solana");
   const [amount, setAmount] = useState("");
+  const [copied, setCopied] = useState<CopyField>(null);
   const readiness = useMemo(() => routeReadiness(route), [route]);
-  const from = direction === "robinhood-solana" ? "Robinhood Chain" : "Solana";
-  const to = direction === "robinhood-solana" ? "Solana" : "Robinhood Chain";
+  const isForward = direction === "robinhood-solana";
+  const from = isForward ? "Robinhood Chain" : "Solana";
+  const to = isForward ? "Solana" : "Robinhood Chain";
+  const amountNumber = Number(amount);
+  const amountIsValid = amount !== "" && Number.isFinite(amountNumber) && amountNumber > 0;
+  const actionDisabled = !readiness.ready || !amountIsValid;
+
+  const copyAddress = async (field: Exclude<CopyField, null>, value?: string) => {
+    if (!value) return;
+    await navigator.clipboard.writeText(value);
+    setCopied(field);
+    window.setTimeout(() => setCopied(null), 1600);
+  };
 
   return (
-    <main className="bridge-shell min-h-screen px-4 py-8 sm:py-12">
+    <main className="bridge-shell min-h-screen px-4 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto max-w-6xl">
-        <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <header className="bridge-header">
           <div>
-            <a className="text-[10px] font-bold tracking-[0.24em] text-ice" href="https://devfridge.cool">
+            <a className="bridge-brand" href="https://devfridge.cool" aria-label="DevFridge home">
+              <span aria-hidden="true">DF</span>
               DEVFRIDGE / BRIDGE
             </a>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">Cross the cold chain.</h1>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute sm:text-base">
-              Canonical token routes secured by LayerZero OFT, bounded flow and explicit on-chain controls.
-              No synthetic liquidity pool and no hidden custodian.
+            <h1>Move value. Keep the supply honest.</h1>
+            <p>
+              A canonical LayerZero OFT route between Robinhood Chain and Solana. Every transfer is
+              constrained by published peers, rate limits and an emergency circuit breaker.
             </p>
           </div>
-          <span className={`bridge-status ${readiness.ready ? "is-live" : "is-locked"}`}>
-            {readiness.ready ? "Route live" : "Mainnet locked"}
-          </span>
+          <div className={`bridge-status ${readiness.ready ? "is-live" : "is-locked"}`} role="status">
+            <span>{readiness.ready ? "Route live" : "Pre-launch"}</span>
+            <small>{readiness.ready ? "Transfers enabled" : `${readiness.missing.length} gates remaining`}</small>
+          </div>
         </header>
 
-        <div className="mt-9 grid gap-6 lg:grid-cols-[1.12fr_.88fr]">
-          <section className="ice-card overflow-hidden p-5 sm:p-7">
-            <div className="flex items-center justify-between gap-3 border-b border-line pb-5">
+        <div className="bridge-network-strip" aria-label="Bridge route">
+          <span>Robinhood Chain <b>4663</b></span>
+          <div aria-hidden="true"><i />LayerZero V2<i /></div>
+          <span>Solana <b>Mainnet</b></span>
+        </div>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.12fr)_minmax(330px,.88fr)]">
+          <section className="ice-card bridge-transfer-card">
+            <div className="bridge-card-heading">
               <div>
-                <p className="text-[10px] font-bold tracking-[0.2em] text-ice">CANONICAL ROUTE</p>
-                <h2 className="mt-1 text-xl font-bold">{route.name}</h2>
+                <p className="bridge-eyebrow">CANONICAL ROUTE</p>
+                <h2>{route.name}</h2>
               </div>
-              <div className="rounded-full border border-ice/30 bg-ice/10 px-4 py-2 font-mono text-sm text-ice">
-                {route.symbol}
-              </div>
+              <div className="bridge-token-pill"><span>{route.symbol}</span>1:1 canonical supply</div>
             </div>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-end">
-              <ChainCard label="From" name={from} canonical={from === "Robinhood Chain"} />
+            <div className="bridge-direction">
+              <ChainCard label="You send from" name={from} detail={isForward ? "Canonical token" : "OFT representation"} tone={isForward ? "canonical" : "wrapped"} />
               <button
                 type="button"
-                aria-label="Reverse bridge direction"
+                aria-label={`Reverse direction. Currently ${from} to ${to}`}
                 className="bridge-swap"
-                onClick={() => setDirection((d) => d === "robinhood-solana" ? "solana-robinhood" : "robinhood-solana")}
+                onClick={() => setDirection((current) => current === "robinhood-solana" ? "solana-robinhood" : "robinhood-solana")}
               >
-                ⇄
+                <SwapIcon />
               </button>
-              <ChainCard label="To" name={to} canonical={to === "Robinhood Chain"} />
+              <ChainCard label="You receive on" name={to} detail={isForward ? "OFT representation" : "Canonical token"} tone={isForward ? "wrapped" : "canonical"} />
             </div>
 
-            <label className="mt-6 block text-xs font-bold uppercase tracking-[0.15em] text-mute" htmlFor="bridge-amount">
-              Amount
-            </label>
-            <div className="bridge-amount mt-2">
-              <input
-                id="bridge-amount"
-                inputMode="decimal"
-                placeholder="0.00"
-                value={amount}
-                onChange={(event) => setAmount(event.target.value.replace(/[^0-9.]/g, ""))}
-              />
+            <div className="bridge-input-heading">
+              <label htmlFor="bridge-amount">Amount</label>
+              <span>Conversion 1 {route.symbol} = 1 {route.symbol}</span>
+            </div>
+            <div className={`bridge-amount ${amount && !amountIsValid ? "is-invalid" : ""}`}>
+              <input id="bridge-amount" inputMode="decimal" autoComplete="off" placeholder="0.00" value={amount} aria-invalid={amount !== "" && !amountIsValid} onChange={(event) => setAmount(normalizeAmount(event.target.value))} />
               <span>{route.symbol}</span>
             </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-mute">
-              <Metric label="Bridge model" value="Lock / mint" />
-              <Metric label="Daily capacity" value={route.dailyLimit ? `${route.dailyLimit} ${route.symbol}` : "Pending"} />
+            <div className="bridge-receive-row">
+              <span>Expected on {to}</span>
+              <strong>{amountIsValid ? amount : "0.00"} {route.symbol}</strong>
             </div>
 
-            <button className="bridge-action mt-6" type="button" disabled={!readiness.ready || !amount}>
-              {readiness.ready ? (amount ? `Connect ${from} wallet` : "Enter amount") : "Route not activated"}
+            <div className="bridge-metrics">
+              <Metric label="Mechanism" value={isForward ? "Lock → mint" : "Burn → unlock"} />
+              <Metric label="Route capacity" value={route.dailyLimit ? `${route.dailyLimit} ${route.symbol} / day` : "Not published"} />
+              <Metric label="Protocol" value="LayerZero V2 OFT" />
+            </div>
+
+            <button className="bridge-action" type="button" disabled={actionDisabled}>
+              {readiness.ready ? amountIsValid ? `Connect ${from} wallet` : "Enter an amount" : "Transfers open after verification"}
             </button>
-            {!readiness.ready && (
-              <p className="mt-3 text-center text-xs leading-relaxed text-caution">
-                Transfers are intentionally disabled until every deployment and safety parameter is verified.
-              </p>
-            )}
+            <p className={`bridge-action-note ${readiness.ready ? "" : "is-caution"}`}>
+              {readiness.ready ? "Network gas and LayerZero messaging fees are quoted before you sign." : "No transaction can be created until all contracts, peers and safety limits are published."}
+            </p>
           </section>
 
-          <aside className="grid gap-5">
-            <section className="ice-card p-5 sm:p-6">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-ice">SAFETY CONSOLE</p>
-              <div className="mt-5 grid gap-3">
-                <SafetyRow name="Canonical supply" value="Robinhood Chain" state="on" />
-                <SafetyRow name="Rate limiter" value={route.dailyLimit ? "Configured" : "Awaiting limit"} state={route.dailyLimit ? "on" : "wait"} />
-                <SafetyRow name="Governor control" value="Mono-address" state="on" />
-                <SafetyRow name="Emergency pause" value="Contract level" state="on" />
-                <SafetyRow name="LayerZero peers" value={route.solanaOftStore ? "Bound" : "Not bound"} state={route.solanaOftStore ? "on" : "wait"} />
+          <aside className="grid content-start gap-5">
+            <section className="ice-card bridge-safety-card">
+              <div className="bridge-card-heading compact">
+                <div><p className="bridge-eyebrow">VERIFICATION</p><h2>Safety gates</h2></div>
+                <span className="bridge-score">{5 - readiness.missing.length}/5</span>
               </div>
-            </section>
-
-            <section className="ice-card p-5 sm:p-6">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-ice">ROUTE REGISTRY</p>
-              <dl className="mt-4 grid gap-4 text-sm">
-                <RegistryRow label="Robinhood token" value={short(route.robinhoodToken)} href={`https://explorer.robinhood.com/address/${route.robinhoodToken}`} />
-                <RegistryRow label="Robinhood governor" value={short(route.robinhoodGovernor)} />
-                <RegistryRow label="Solana governor" value={short(route.solanaGovernor)} />
-                <RegistryRow label="EVM OFT Adapter" value={short(route.evmAdapter)} />
-                <RegistryRow label="Solana mint" value={short(route.solanaMint)} />
-                <RegistryRow label="Solana OFT Store" value={short(route.solanaOftStore)} />
-              </dl>
+              <div className="bridge-gate-progress" aria-hidden="true"><span style={{ width: `${Math.max(0, 5 - readiness.missing.length) * 20}%` }} /></div>
+              <div className="bridge-safety-list">
+                <SafetyRow name="EVM OFT Adapter" value={route.evmAdapter ? "Published" : "Pending"} state={route.evmAdapter ? "on" : "wait"} />
+                <SafetyRow name="Solana OFT mint" value={route.solanaMint ? "Published" : "Pending"} state={route.solanaMint ? "on" : "wait"} />
+                <SafetyRow name="Solana OFT Store" value={route.solanaOftStore ? "Published" : "Pending"} state={route.solanaOftStore ? "on" : "wait"} />
+                <SafetyRow name="Daily rate limit" value={route.dailyLimit ? "Published" : "Pending"} state={route.dailyLimit ? "on" : "wait"} />
+                <SafetyRow name="Mainnet approval" value={route.enabled ? "Approved" : "Pending"} state={route.enabled ? "on" : "wait"} />
+              </div>
               {!readiness.ready && (
-                <div className="mt-5 rounded-2xl border border-caution/25 bg-caution/5 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-caution">Activation checklist</p>
-                  <p className="mt-2 text-xs leading-relaxed text-mute">{readiness.missing.join(" · ")}</p>
-                </div>
+                <div className="bridge-gates"><p>Required before activation</p><ul>{readiness.missing.map((item) => <li key={item}>{item}</li>)}</ul></div>
               )}
             </section>
-            <section className="ice-card p-5 sm:p-6">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-caution">LEGACY SOLANA TOKEN</p>
-              <p className="mt-3 text-sm leading-relaxed text-mute">
-                <span className="font-mono text-ink">{short(route.solanaLegacyMint)}</span> has revoked mint authority and an independent fixed supply. It is not the OFT wrapper and cannot enter the canonical route.
-              </p>
+
+            <section className="ice-card bridge-journey-card">
+              <p className="bridge-eyebrow">WHAT HAPPENS ON-CHAIN</p>
+              <ol>
+                <JourneyStep number="1" title="Verify" text="Contracts, chain and destination are shown before connection." />
+                <JourneyStep number="2" title={isForward ? "Lock" : "Burn"} text={isForward ? "Canonical TMC enters the adapter escrow." : "The Solana OFT representation is burned."} />
+                <JourneyStep number="3" title="Attest" text="Independent DVNs verify the LayerZero message." />
+                <JourneyStep number="4" title={isForward ? "Mint" : "Unlock"} text={`${route.symbol} is delivered on ${to}.`} />
+              </ol>
             </section>
           </aside>
         </div>
 
-        <section className="mt-6 grid gap-4 md:grid-cols-3">
-          <ProtocolCard number="01" title="Canonical first" text="The original supply stays on its declared home chain. The adapter escrows it before the remote wrapper can be minted." />
-          <ProtocolCard number="02" title="Bounded exposure" text="Per-route limits cap how much value can move during each window, reducing the blast radius of an incident." />
-          <ProtocolCard number="03" title="Human circuit breaker" text="The published governor controls peer changes and limits, while an emergency pause can stop cross-chain debit and credit." />
+        <section className="ice-card bridge-registry-card">
+          <div className="bridge-registry-intro">
+            <p className="bridge-eyebrow">PUBLIC ROUTE REGISTRY</p>
+            <h2>Trust addresses, not labels.</h2>
+            <p>Compare every address here with the wallet prompt before signing. Missing deployment fields remain visibly unavailable.</p>
+          </div>
+          <dl className="bridge-registry-grid">
+            <RegistryRow label="Robinhood token" value={route.robinhoodToken} href={addressUrl("robinhood", route.robinhoodToken)} copied={copied === "token"} onCopy={() => copyAddress("token", route.robinhoodToken)} />
+            <RegistryRow label="Robinhood governor" value={route.robinhoodGovernor} href={addressUrl("robinhood", route.robinhoodGovernor)} copied={copied === "governor"} onCopy={() => copyAddress("governor", route.robinhoodGovernor)} />
+            <RegistryRow label="EVM OFT Adapter" value={route.evmAdapter} href={addressUrl("robinhood", route.evmAdapter)} copied={copied === "adapter"} onCopy={() => copyAddress("adapter", route.evmAdapter)} />
+            <RegistryRow label="Solana OFT mint" value={route.solanaMint} href={addressUrl("solana", route.solanaMint)} copied={copied === "mint"} onCopy={() => copyAddress("mint", route.solanaMint)} />
+            <RegistryRow label="Solana OFT Store" value={route.solanaOftStore} href={addressUrl("solana", route.solanaOftStore)} copied={copied === "store"} onCopy={() => copyAddress("store", route.solanaOftStore)} />
+            <RegistryRow label="LayerZero endpoint IDs" value="30416 ↔ 30168" />
+          </dl>
         </section>
 
-        <footer className="mt-10 flex flex-col gap-3 border-t border-line py-7 text-xs text-mute sm:flex-row sm:items-center sm:justify-between">
-          <span>Never share a seed phrase. Verify every contract before signing.</span>
-          <div className="flex gap-4">
-            <a className="text-ice hover:underline" href="https://docs.layerzero.network/v2/developers/solana/oft/overview" target="_blank" rel="noreferrer">LayerZero OFT docs ↗</a>
-            <a className="text-ice hover:underline" href="https://connect.devfridge.cool" target="_blank" rel="noreferrer">Official links ↗</a>
-          </div>
+        <section className="bridge-legacy-note">
+          <div aria-hidden="true">!</div>
+          <p><strong>The legacy Solana token is not bridgeable.</strong> <span className="font-mono">{short(route.solanaLegacyMint)}</span> has revoked mint authority and an independent fixed supply. It must never be used as the OFT mint.</p>
+          <a href={addressUrl("solana", route.solanaLegacyMint)} target="_blank" rel="noreferrer">Inspect legacy mint ↗</a>
+        </section>
+
+        <footer className="bridge-footer">
+          <p>Never share a seed phrase. DevFridge will never ask you to transfer funds for “verification”.</p>
+          <nav aria-label="Bridge resources">
+            <a href="https://docs.layerzero.network/v2/developers/solana/oft/overview" target="_blank" rel="noreferrer">OFT documentation ↗</a>
+            <a href="https://connect.devfridge.cool" target="_blank" rel="noreferrer">Verified DevFridge links ↗</a>
+          </nav>
         </footer>
       </div>
     </main>
   );
 }
 
-function ChainCard({ label, name, canonical }: { label: string; name: string; canonical: boolean }) {
-  return <div className="bridge-chain"><span>{label}</span><strong>{name}</strong><small>{canonical ? "Canonical" : "OFT wrapper"}</small></div>;
+function SwapIcon() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M7 7h11m0 0-3-3m3 3-3 3M17 17H6m0 0 3 3m-3-3 3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+function ChainCard({ label, name, detail, tone }: { label: string; name: string; detail: string; tone: "canonical" | "wrapped" }) {
+  return <div className={`bridge-chain ${tone}`}><span>{label}</span><strong>{name}</strong><small>{detail}</small></div>;
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-xl border border-line bg-navy/50 p-3"><span>{label}</span><strong className="mt-1 block text-ink">{value}</strong></div>;
+  return <div><span>{label}</span><strong>{value}</strong></div>;
 }
 
 function SafetyRow({ name, value, state }: { name: string; value: string; state: "on" | "wait" }) {
-  return <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-navy/40 px-4 py-3 text-sm"><span className="font-semibold">{name}</span><span className={state === "on" ? "text-safe" : "text-caution"}>{value}</span></div>;
+  return <div><span className={`bridge-gate-icon ${state}`} aria-hidden="true">{state === "on" ? "✓" : "·"}</span><span>{name}</span><strong className={state}>{value}</strong></div>;
 }
 
-function RegistryRow({ label, value, href }: { label: string; value: string; href?: string }) {
-  const rendered = <dd className="font-mono text-xs text-ink">{value}</dd>;
-  return <div className="flex items-center justify-between gap-4 border-b border-line pb-3"><dt className="text-mute">{label}</dt>{href ? <a href={href} target="_blank" rel="noreferrer" className="hover:text-ice">{rendered}</a> : rendered}</div>;
+function JourneyStep({ number, title, text }: { number: string; title: string; text: string }) {
+  return <li><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></li>;
 }
 
-function ProtocolCard({ number, title, text }: { number: string; title: string; text: string }) {
-  return <article className="ice-card p-5"><span className="font-mono text-xs text-ice">{number}</span><h3 className="mt-3 text-lg font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-mute">{text}</p></article>;
+function RegistryRow({ label, value, href, copied, onCopy }: { label: string; value?: string; href?: string; copied?: boolean; onCopy?: () => void }) {
+  return (
+    <div className={!value ? "is-missing" : ""}>
+      <dt>{label}</dt>
+      <dd title={value}>{short(value)}</dd>
+      <span className="bridge-registry-actions">
+        {value && onCopy && <button type="button" onClick={onCopy} aria-label={`Copy ${label}`}>{copied ? "Copied" : "Copy"}</button>}
+        {value && href && <a href={href} target="_blank" rel="noreferrer" aria-label={`Open ${label} in explorer`}>↗</a>}
+      </span>
+    </div>
+  );
 }
