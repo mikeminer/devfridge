@@ -81,7 +81,7 @@ export default function ComingSoon() {
         <p className="mt-5 text-xs font-bold tracking-[0.15em] text-ice">WORLD.DEVFRIDGE.COOL</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight">The Meme World</h1>
         <p className="mt-4 text-base leading-6 text-mute">
-          Nine characters. Nine memecoins. One world. The gates open on{" "}
+          Ten characters. Ten memecoins. One world. The gates open on{" "}
           <time dateTime="2026-10-01T00:00:00+02:00" className="font-semibold text-white">
             1 October 2026
           </time>

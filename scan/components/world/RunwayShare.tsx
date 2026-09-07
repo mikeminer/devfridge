@@ -5,10 +5,12 @@ import styles from "./runway.module.css";
 
 const TAGS = ["Solana", "Memecoins", "ItalianBrainrot", "Pons", "PumpFun", "Robinhood", "RobinhoodChain"];
 
-export default function RunwayShare({ id, name, address }: { id: string; name: string; address: string }) {
+export default function RunwayShare({ id, name, address, solanaAddress }: { id: string; name: string; address: string; solanaAddress?: string }) {
   const [status, setStatus] = useState("");
   const url = `https://world.devfridge.cool/?character=${encodeURIComponent(id)}`;
-  const text = `${name} on the brainrot runway!\nCA: ${address}\nPons: https://www.ponsfamily.com/launchpad/${address}\npump.fun: https://pump.fun/coin/${address}\n${TAGS.map(tag => `#${tag}`).join(" ")}`;
+  const text = solanaAddress
+    ? `${name} on the brainrot runway!\nRobinhood / Pons: https://www.ponsfamily.com/launchpad/${address}\nSolana / pump.fun: https://pump.fun/coin/${solanaAddress}\n${TAGS.map(tag => `#${tag}`).join(" ")}`
+    : `${name} on the brainrot runway!\nCA: ${address}\nPons: https://www.ponsfamily.com/launchpad/${address}\npump.fun: https://pump.fun/coin/${address}\n${TAGS.map(tag => `#${tag}`).join(" ")}`;
   const fullPost = `${text}\n${url}`;
   const links = [
     ["X", `https://twitter.com/intent/tweet?${new URLSearchParams({ text, url })}`],
