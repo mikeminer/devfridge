@@ -17,7 +17,8 @@ function TokenRow({ token, network }: { token: OfficialToken; network: "robinhoo
         catch { setStatus("Copy unavailable. Select the address above to copy it."); }
       }}>Copy CA</button>
       <a className="fridge-key" href={explorer + token.address} target="_blank" rel="noopener noreferrer">Explorer ↗</a>
-      <a className="fridge-key fridge-key-primary" href={market + token.address} target="_blank" rel="noopener noreferrer">{network === "robinhood" ? "Pons" : "pump.fun"} ↗</a>
+      <a className="fridge-key fridge-key-primary" href={token.marketUrl ?? market + token.address} target="_blank" rel="noopener noreferrer">{token.market ?? (network === "robinhood" ? "Pons" : "pump.fun")} ↗</a>
+      {token.market === "Raydium" && <a className="fridge-key" href={`https://pump.fun/coin/${token.address}`} target="_blank" rel="noopener noreferrer">pump.fun ↗</a>}
       <span role="status" className="text-xs text-mute">{status}</span>
     </div>
   </li>;
