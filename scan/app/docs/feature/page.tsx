@@ -13,7 +13,7 @@ const jsonLd = {
       name: "How do I feature a Solana memecoin on DevFridge?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Lock Token-2022 supply on devfridge.cool, open the mint on scan.devfridge.cool, connect Phantom, and pay 0.1, 0.18, or 0.5 SOL. The token is featured immediately. The program later buys $PASTA and burns it.",
+        text: "Lock Token-2022 supply on devfridge.cool, open the mint on scan.devfridge.cool, connect Phantom, and choose 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees. The token is featured immediately. The program later buys $PASTA and burns it.",
       },
     },
     {
@@ -75,6 +75,7 @@ export default function FeatureDoc() {
           </tr>
         </tbody>
       </table>
+      <p>Package prices are plus network fees. Review the full transaction cost in your wallet.</p>
 
       <h2>What happens in the wallet</h2>
       <p>

@@ -44,6 +44,10 @@ export default function BotDoc() {
       </p>
 
       <h2>Commands — $PASTA</h2>
+      <p>
+        <code>/pasta</code> and <code>/buy</code> print the full Solana mint in the first line
+        so copied messages and screenshots identify the token. A ticker alone is not an identity.
+      </p>
       <table>
         <thead>
           <tr><th>Command</th><th>What it does</th></tr>
@@ -73,7 +77,7 @@ export default function BotDoc() {
           <tr><td><code>/boosted</code></td><td>Currently boosted tokens with tier and time remaining.</td></tr>
           <tr><td><code>/boost</code></td><td>Boost tiers and pricing — how to feature a token on the scanner.</td></tr>
           <tr><td><code>/lock</code></td><td>Step-by-step guide to locking tokens in the Fridge.</td></tr>
-          <tr><td><code>/register &lt;pda&gt;</code></td><td>Register a Fridge lock PDA for expiry DM alerts. The bot will DM you before the lock expires.</td></tr>
+          <tr><td><code>/register &lt;pda&gt;</code></td><td>Register the Fridge lock account PDA, not the token mint, for expiry DM alerts.</td></tr>
         </tbody>
       </table>
 
@@ -101,7 +105,8 @@ export default function BotDoc() {
       <p>
         Token devs who have locked supply in the Fridge can register for expiry
         alerts. Send <code>/register</code> followed by the vault PDA (the
-        on-chain lock account address). The bot verifies it on-chain and stores
+        on-chain lock account address), <strong>not your token mint</strong>. Copy the full lock
+        PDA from your scan report. The bot verifies it on-chain and stores
         your Telegram ID. You will receive DMs as the unlock date approaches.
       </p>
       <p>

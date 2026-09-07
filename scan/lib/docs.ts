@@ -23,7 +23,7 @@ export const DOC_PAGES: DocLink[] = [
     title: "Fridge world",
     nav: "World",
     description:
-      "Two teams: Pastalovers ($PASTA lock) vs The Shelf (any other live lock). Teammates cannot kill each other.",
+      "The Meme World is scheduled to open 1 October 2026. View the countdown and planned wallet-lock access rules; gameplay is not yet public.",
   },
   {
     href: "/feature",
@@ -31,7 +31,7 @@ export const DOC_PAGES: DocLink[] = [
     title: "Feature a Solana memecoin",
     nav: "Get featured",
     description:
-      "Pay 0.1, 0.18, or 0.5 SOL to feature a fridged Solana memecoin on scan.devfridge.cool. The program buys $PASTA and burns it.",
+      "Feature a fridged token: 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees. Payments fund $PASTA buy-and-burn.",
   },
   {
     href: "/fridge",

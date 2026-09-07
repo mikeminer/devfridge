@@ -6,10 +6,16 @@ export const metadata: Metadata = docMeta("world");
 
 export default function WorldDoc() {
   return (
-    <DocsShell kicker="WORLD" title="Fridge metaverse">
+    <DocsShell kicker="WORLD" title="The Meme World — opening 1 October 2026">
       <p>
-        <a href="https://world.devfridge.cool">world.devfridge.cool</a> is a shooter inside the
-        Fridge. Two teams only:
+        <a href="https://world.devfridge.cool">world.devfridge.cool</a> is scheduled to open on{" "}
+        <strong>1 October 2026</strong>. The public site currently shows the launch countdown;
+        gameplay is not yet publicly available.
+      </p>
+      <h2>Planned lock-based gameplay</h2>
+      <p>
+        The Fridge shooter design uses two teams. These rules describe planned gameplay,
+        not an access benefit available before launch:
       </p>
       <ul>
         <li>
@@ -20,8 +26,10 @@ export default function WorldDoc() {
         </li>
       </ul>
       <p>
-        If you locked both $PASTA and another mint, the lock with the larger USD value picks the
-        team. No live lock → you cannot fight. Teammates cannot kill each other.
+        Under this design, if a wallet has live locks for both $PASTA and another mint, the
+        lock with the larger USD value picks its team. Each participating wallet needs its own
+        live lock; a developer locking supply does not grant every holder access. Teammates
+        cannot kill each other. Check the launch site for confirmed availability and final rules.
       </p>
       <p>
         Characters are Mixamo rigs from the official{" "}
@@ -30,7 +38,7 @@ export default function WorldDoc() {
       </p>
       <p>
         <a className="fridge-key fridge-key-primary" href="https://world.devfridge.cool">
-          Enter the Fridge
+          View launch countdown
         </a>
       </p>
     </DocsShell>

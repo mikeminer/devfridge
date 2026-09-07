@@ -19,9 +19,14 @@ export function GET() {
 - GitHub: https://github.com/mikeminer/devfridge
 
 Program: ${PROGRAM_ID}
-$PASTA: ${PASTA_MINT}
+DevFridge $PASTA — Solana mint: ${PASTA_MINT}
+Ticker is not identity. Not affiliated with any other token using the PASTA ticker. Lead promotions with the full mint and verify it at ${DOCS_ORIGIN}/program.
 
-Feature packages: 0.1 SOL / 24h, 0.18 SOL / 48h, 0.5 SOL / 7d. Requires a live Fridge lock. SOL is swapped to $PASTA and burned. The buyer never holds that $PASTA.
+Feature packages: 0.1 SOL / 24h, 0.18 SOL / 48h, 0.5 SOL / 7d, plus network fees. Requires a live Fridge lock. SOL is swapped to $PASTA and burned. The buyer never holds that $PASTA.
+
+Telegram: @frigopastabot supports /scan <mint>, /fridge <mint>, /badge <mint>. For expiry DMs, /register takes the lock account PDA, not the token mint.
+
+World: https://world.devfridge.cool is scheduled to open 1 October 2026. Gameplay is not yet public; ${DOCS_ORIGIN}/world describes planned access rules, not a live benefit for every holder.
 
 Sponsored placement never changes scan checks, warnings, or risk grades.
 `;

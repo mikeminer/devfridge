@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import DocsShell from "@/components/DocsShell";
 import { docMeta } from "@/lib/docs";
-import { PROGRAM_ID } from "@/lib/constants";
+import { PASTA_MINT, PROGRAM_ID } from "@/lib/constants";
 
 export const metadata: Metadata = docMeta("listing-kit");
 
@@ -45,8 +45,24 @@ export default function ListingKitDoc() {
         <li><a href="https://sdk.devfridge.cool">SDK</a></li>
       </ul>
 
-      <h2>On-chain identifier</h2>
-      <p><code>{PROGRAM_ID}</code></p>
+      <h2>On-chain identifiers</h2>
+      <p>Fridge program: <code className="break-all">{PROGRAM_ID}</code></p>
+      <p>DevFridge $PASTA · Solana mint: <code className="break-all">{PASTA_MINT}</code></p>
+      <p><strong>Not affiliated with any other token using the PASTA ticker.</strong></p>
+      <p>
+        Lead token listings, promotions, and screenshots with the full mint, not the ticker alone.
+        Verify the mint and burn authority using the <a href="https://docs.devfridge.cool/program">program guide</a>.
+      </p>
+      <h2>Integration message</h2>
+      <p>
+        DevFridge $PASTA (Solana mint: {PASTA_MINT}). Lock Token-2022 supply at devfridge.cool,
+        then scan the mint to verify a live Fridge vault. Get Featured costs 0.1 SOL / 24h,
+        0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees; paid placement never changes risk grades.
+        Add @frigopastabot for /scan, /fridge, and /badge. Use /register with the lock account PDA,
+        not the token mint, for expiry DMs. Embed a live badge from scan.devfridge.cool/badge.
+        Feature payments and the 2% claim fee fund $PASTA burns. World is scheduled to open
+        1 October 2026; gameplay is not yet public. Official contacts only at connect.devfridge.cool.
+      </p>
 
       <h2>Assets</h2>
       <ul>

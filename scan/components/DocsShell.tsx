@@ -1,4 +1,5 @@
 import { DOC_PAGES, DOCS_ORIGIN } from "@/lib/docs";
+import { PASTA_MINT } from "@/lib/constants";
 
 export default function DocsShell({
   kicker,
@@ -30,6 +31,13 @@ export default function DocsShell({
             <p className="text-[10px] font-bold tracking-[0.2em] text-ice">{kicker}</p>
           )}
           <h1 className="mt-1 text-3xl font-bold sm:text-4xl">{title}</h1>
+          <p className="mt-4 break-words text-xs text-mute">
+            DevFridge $PASTA · Solana mint:{" "}
+            <a className="break-all text-ice hover:underline" href={`${DOCS_ORIGIN}/program`}>
+              <code>{PASTA_MINT}</code>
+            </a>
+            {" · Ticker ≠ identity."}
+          </p>
           <div className="docs-prose mt-6">{children}</div>
         </article>
       </div>

@@ -93,20 +93,21 @@ export function registerCommands(bot: Bot) {
 
   bot.command("pasta", async (ctx) => {
     const l = langOf(ctx);
-    await ctx.reply(say.cooking(l));
+    const identity = `Solana mint: <code>${PASTA_MINT}</code>`;
+    await ctx.reply(`${identity}\n${say.cooking(l)}`, { parse_mode: "HTML" });
     try {
       const [pasta, market, holders] = await Promise.all([apiPasta(), dex(PASTA_MINT), pastaHolders()]);
       const price = pasta.price ?? market?.price ?? null;
       const mcap = market?.mcap ?? (price != null ? price * (holders.supply || 1e9) : null);
       const text =
-        `🍝 <b>$PASTA</b> — Al dente on-chain.\n\n` +
+        `${identity}\n🍝 <b>DevFridge $PASTA</b> — Al dente on-chain.\n\n` +
         `💰 Price:      ${money(price)}\n` +
         `📊 Market Cap: ${money(mcap)}\n` +
         `📈 24h Vol:    ${money(market?.vol ?? null)}\n` +
         `🔥 Burned:     ${pasta.burned ?? "—"} PASTA\n` +
         `👥 Holders:    ${holders.holders?.toLocaleString() ?? "—"}\n` +
         `🏦 Supply:     ${(holders.supply || 0).toLocaleString()}\n\n` +
-        `📍 Mint: <code>${PASTA_MINT}</code>`;
+        `Not affiliated with any other token using the PASTA ticker.`;
       await ctx.reply(text, {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
@@ -116,13 +117,13 @@ export function registerCommands(bot: Bot) {
         link_preview_options: { is_disabled: true },
       });
     } catch {
-      await ctx.reply(say.offline(l));
+      await ctx.reply(`${identity}\n${say.offline(l)}`, { parse_mode: "HTML" });
     }
   });
 
   bot.command("buy", async (ctx) => {
     await ctx.reply(
-      `🍝 Buy $PASTA — al dente, always.\n\nMint: <code>${PASTA_MINT}</code>\n\nMint and freeze authority are revoked.\nDYOR. Not financial advice.\n\nOfficial contacts: ${CONNECT_URL}`,
+      `Solana mint: <code>${PASTA_MINT}</code>\n🍝 Buy DevFridge $PASTA — al dente, always.\n\nNot affiliated with any other token using the PASTA ticker.\n\nMint and freeze authority are revoked.\nDYOR. Not financial advice.\n\nOfficial contacts: ${CONNECT_URL}`,
       {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
@@ -253,7 +254,7 @@ export function registerCommands(bot: Bot) {
 
   bot.command("boost", async (ctx) => {
     await ctx.reply(
-      `🔥 Boost Your Token\n\nGet featured on scan.devfridge.cool\nBoost fees → $PASTA buyback + burn 🔥\n\nTiers:\n  🔥   24h — 0.1 SOL\n  🔥🔥  48h — 0.18 SOL\n  🔥🔥🔥 7d  — 0.5 SOL\n\nConnect wallet and boost →`,
+      `🔥 Boost Your Token\n\nGet featured on scan.devfridge.cool\nBoost fees → $PASTA buyback + burn 🔥\nSolana mint: ${PASTA_MINT}\n\nTiers:\n  🔥   24h — 0.1 SOL\n  🔥🔥  48h — 0.18 SOL\n  🔥🔥🔥 7d  — 0.5 SOL\nPlus network fees. A live Fridge lock is required.\n\nConnect wallet and boost →`,
       {
         reply_markup: new InlineKeyboard().url("Boost on scanner", `${SCANNER_URL}/#feature`),
         link_preview_options: { is_disabled: true },
@@ -488,8 +489,8 @@ export function registerCommands(bot: Bot) {
     if (!pda) {
       await ctx.reply(
         l === "it"
-          ? "Uso: /register &lt;vault_pda&gt; — la PDA del lock Fridge."
-          : "Usage: /register &lt;vault_pda&gt; — the Fridge lock PDA.",
+          ? "Uso: /register &lt;vault_pda&gt; — l'indirizzo completo dell'account del lock Fridge, non il mint del token."
+          : "Usage: /register &lt;vault_pda&gt; — the full Fridge lock account address, not your token mint.",
         { parse_mode: "HTML" }
       );
       return;

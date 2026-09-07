@@ -4,6 +4,9 @@ Too many tokens? Fridge them.
 
 Solana Anchor dApp for time-locking **Token-2022** balances.
 
+DevFridge $PASTA · Solana mint: `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`.
+Not affiliated with any other token using the PASTA ticker. Verify the mint and buyback burn authority at [docs.devfridge.cool/program](https://docs.devfridge.cool/program).
+
 License: [Business Source License 1.1](LICENSE) (converts to GPL-2.0-or-later on 2030-08-18).
 
 ## Live products
