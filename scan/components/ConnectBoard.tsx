@@ -11,6 +11,7 @@ import {
   type OfficialLink,
 } from "@/lib/contacts";
 import { PASTA_MINT } from "@/lib/constants";
+import OfficialTokens from "./OfficialTokens";
 
 const X_COMMUNITY_URL =
   process.env.NEXT_PUBLIC_X_COMMUNITY_URL?.trim() ||
@@ -36,6 +37,7 @@ export default function ConnectBoard() {
       </section>
 
       <PastaCa />
+      <OfficialTokens />
 
       <section className="ice-card border-ice/50 p-6">
         <p className="text-[10px] font-bold tracking-[0.22em] text-ice">$PASTA X COMMUNITY</p>
