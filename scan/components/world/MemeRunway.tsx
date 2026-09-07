@@ -13,8 +13,10 @@ const CAST = [
   ["lambocello", "Lambocello", "LAMBOCELLO"], ["gmgnocco", "GmGnocco", "GMGN"],
   ["sersugo", "SerSugo", "SESU"], ["moonzarella", "MoonZarella", "MOONZARELLA"],
   ["bonkatino", "Bonkatino", "BONKATINO"],
+  ["ciccia", "Ciccia Salsiccia", "CICCIA"],
 ] as const;
 const SLOT = 24;
+const CICCIA_SOLANA = "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump";
 const asset = (id: string, extension: string) => `/world/runway/${id}.${extension}`;
 
 export default function MemeRunway() {
@@ -80,10 +82,10 @@ export default function MemeRunway() {
     box(.07, .03, 10, -2.78, -.08, 1.2, 0x6aeaff, true);
     box(.07, .03, 10, 2.78, -.08, 1.2, 0xff70cc, true);
     box(17, .03, .08, 0, -.08, -1.15, 0x89dfff, true);
-    for (let i = 0; i < 9; i++) {
-      box(.12, 5 + (i % 3) * .4, .12, (i - 4) * 2, 2.5, -6, i % 2 ? 0xff5bbc : 0x7adcff, true);
+    for (let i = 0; i < CAST.length; i++) {
+      box(.12, 5 + (i % 3) * .4, .12, (i - (CAST.length - 1) / 2) * 1.7, 2.5, -6, i % 2 ? 0xff5bbc : 0x7adcff, true);
       const spot = new T.Mesh(new T.CylinderGeometry(.7, .7, .025, 32), new T.MeshBasicMaterial({ color: i % 2 ? 0xff59bf : 0x69dbff, transparent: true, opacity: .16 }));
-      spot.position.set((i - 4) * 1.8, -.08, -3.5); scene.add(spot);
+      spot.position.set((i - (CAST.length - 1) / 2) * 1.6, -.08, -3.5); scene.add(spot);
     }
     const flashCanvas = document.createElement("canvas");
     flashCanvas.width = flashCanvas.height = 128;
@@ -181,7 +183,7 @@ export default function MemeRunway() {
             actor[field] = next;
           }
         }
-        const homeX = (actor.index - 4) * 1.8;
+        const homeX = (actor.index - (CAST.length - 1) / 2) * 1.6;
         const progress = lead ? (t < 7 ? t / 7 : t < 17 ? 1 : 1 - (t - 17) / 7) : 0;
         const p = T.MathUtils.smoothstep(progress, 0, 1);
         actor.root.position.set(homeX * (1 - p), 0, -3.5 + p * 7.2);
@@ -257,7 +259,7 @@ export default function MemeRunway() {
   };
 
   return <div className={styles.runway}>
-    <div ref={mount} className={styles.canvas} role="img" aria-label="Nine original Italian brainrot characters parade on an illuminated runway" />
+    <div ref={mount} className={styles.canvas} role="img" aria-label="Ten original Italian brainrot characters parade on an illuminated runway" />
     <div ref={contractLabel} className={styles.contract}>
     <a className={styles.contractDestination} href={`https://www.ponsfamily.com/launchpad/${contracts[CAST[current][0]]}`} target="_blank" rel="noopener noreferrer" aria-label={`${CAST[current][1]} contract ${contracts[CAST[current][0]]}. Open profile on Pons in a new tab`}>
       <span className={styles.contractIdentity}>
@@ -265,21 +267,22 @@ export default function MemeRunway() {
         <span>{CAST[current][1]} · Contract ↗</span>
       </span>
       <code>{contracts[CAST[current][0]]}</code>
-      <small className={styles.marketBrand}><img src="/world/brands/pons.png" width={24} height={24} alt="" />View on Pons</small>
+      <small className={styles.marketBrand}><img src="/world/brands/pons.png" width={24} height={24} alt="" />Robinhood · View on Pons</small>
     </a>
-    <a className={styles.pumpLink} href={`https://pump.fun/coin/${contracts[CAST[current][0]]}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${CAST[current][1]} on pump.fun in a new tab`}><img src="/world/brands/pump.svg" width={24} height={24} alt="" />View on pump.fun ↗</a>
+    <a className={styles.pumpLink} href={`https://pump.fun/coin/${CAST[current][0] === "ciccia" ? CICCIA_SOLANA : contracts[CAST[current][0]]}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${CAST[current][1]} on pump.fun in a new tab`}><img src="/world/brands/pump.svg" width={24} height={24} alt="" />{CAST[current][0] === "ciccia" ? "Solana · pump.fun ↗" : "View on pump.fun ↗"}</a>
+    {CAST[current][0] === "ciccia" && <a href={`https://pump.fun/coin/${CICCIA_SOLANA}`} target="_blank" rel="noopener noreferrer" aria-label="CICCIA Solana contract"><code>{CICCIA_SOLANA}</code></a>}
     </div>
     <div className={styles.caption}>
       <p className={styles.eyebrow}>PASTA / CAST · LIVE RUNWAY</p>
       <h2>{CAST[current][1]} <span>${CAST[current][2]}</span></h2>
-      <p className={styles.track}>{String(current + 1).padStart(2, "0")} / 09 · {sound ? "Original character theme" : "The cast is on stage"}</p>
+      <p className={styles.track}>{String(current + 1).padStart(2, "0")} / {CAST.length} · {sound ? "Original character theme" : "The cast is on stage"}</p>
       <div className={styles.controls}>
         <button type="button" onClick={toggleMusic} aria-pressed={sound}>{sound ? "Mute music" : "Enable music"}</button>
         <button type="button" onClick={togglePause} aria-pressed={paused}>{paused ? "Resume show" : "Pause show"}</button>
       </div>
-      <RunwayShare key={CAST[current][0]} id={CAST[current][0]} name={CAST[current][1]} address={contracts[CAST[current][0]]} />
+      <RunwayShare key={CAST[current][0]} id={CAST[current][0]} name={CAST[current][1]} address={contracts[CAST[current][0]]} solanaAddress={CAST[current][0] === "ciccia" ? CICCIA_SOLANA : undefined} />
       {autoplayBlocked && <p className={styles.status}>Tap anywhere to start the music.</p>}
-      {loaded < 9 && !error && <p className={styles.status}>Setting the stage · {loaded}/9 performers</p>}
+      {loaded < CAST.length && !error && <p className={styles.status}>Setting the stage · {loaded}/{CAST.length} performers</p>}
       {error && <p className={styles.status} role="status">{error}</p>}
     </div>
     <audio ref={audio} preload="auto" onPlaying={() => setSound(true)} onPause={() => setSound(false)} onEnded={() => setSound(false)} onLoadedMetadata={() => { if (audio.current) audio.current.currentTime = elapsed.current % SLOT; }} onError={() => { setSound(false); setError("This theme could not load. The show continues; try enabling music again."); }} />
