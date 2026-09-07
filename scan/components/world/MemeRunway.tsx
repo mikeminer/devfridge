@@ -5,6 +5,7 @@ import * as T from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import styles from "./runway.module.css";
 import contracts from "./runway-contracts.json";
+import solana from "@/lib/brainrot-solana.json";
 import RunwayShare from "./RunwayShare";
 
 const CAST = [
@@ -16,7 +17,6 @@ const CAST = [
   ["ciccia", "Ciccia Salsiccia", "CICCIA"],
 ] as const;
 const SLOT = 24;
-const CICCIA_SOLANA = "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump";
 const asset = (id: string, extension: string) => `/world/runway/${id}.${extension}`;
 
 export default function MemeRunway() {
@@ -269,8 +269,12 @@ export default function MemeRunway() {
       <code>{contracts[CAST[current][0]]}</code>
       <small className={styles.marketBrand}><img src="/world/brands/pons.png" width={24} height={24} alt="" />Robinhood · View on Pons</small>
     </a>
-    <a className={styles.pumpLink} href={`https://pump.fun/coin/${CAST[current][0] === "ciccia" ? CICCIA_SOLANA : contracts[CAST[current][0]]}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${CAST[current][1]} on pump.fun in a new tab`}><img src="/world/brands/pump.svg" width={24} height={24} alt="" />{CAST[current][0] === "ciccia" ? "Solana · pump.fun ↗" : "View on pump.fun ↗"}</a>
-    {CAST[current][0] === "ciccia" && <a href={`https://pump.fun/coin/${CICCIA_SOLANA}`} target="_blank" rel="noopener noreferrer" aria-label="CICCIA Solana contract"><code>{CICCIA_SOLANA}</code></a>}
+    <a className={styles.contractDestination} href={solana[CAST[current][0]].marketUrl} target="_blank" rel="noopener noreferrer" aria-label={`${CAST[current][1]} Solana contract`}>
+      <small>Solana · ${solana[CAST[current][0]].symbol}</small>
+      <code>{solana[CAST[current][0]].address}</code>
+    </a>
+    {solana[CAST[current][0]].market === "Raydium" && <a className={styles.pumpLink} href={solana[CAST[current][0]].marketUrl} target="_blank" rel="noopener noreferrer">Solana · Raydium ↗</a>}
+    <a className={styles.pumpLink} href={`https://pump.fun/coin/${solana[CAST[current][0]].address}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${CAST[current][1]} on Solana, pump.fun`}><img src="/world/brands/pump.svg" width={24} height={24} alt="" />Solana · pump.fun ↗</a>
     </div>
     <div className={styles.caption}>
       <p className={styles.eyebrow}>PASTA / CAST · LIVE RUNWAY</p>
@@ -280,7 +284,7 @@ export default function MemeRunway() {
         <button type="button" onClick={toggleMusic} aria-pressed={sound}>{sound ? "Mute music" : "Enable music"}</button>
         <button type="button" onClick={togglePause} aria-pressed={paused}>{paused ? "Resume show" : "Pause show"}</button>
       </div>
-      <RunwayShare key={CAST[current][0]} id={CAST[current][0]} name={CAST[current][1]} address={contracts[CAST[current][0]]} solanaAddress={CAST[current][0] === "ciccia" ? CICCIA_SOLANA : undefined} />
+      <RunwayShare key={CAST[current][0]} id={CAST[current][0]} name={CAST[current][1]} address={contracts[CAST[current][0]]} solanaAddress={solana[CAST[current][0]].address} />
       {autoplayBlocked && <p className={styles.status}>Tap anywhere to start the music.</p>}
       {loaded < CAST.length && !error && <p className={styles.status}>Setting the stage · {loaded}/{CAST.length} performers</p>}
       {error && <p className={styles.status} role="status">{error}</p>}

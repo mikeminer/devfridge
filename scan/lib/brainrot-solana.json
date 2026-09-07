@@ -1,0 +1,72 @@
+{
+  "rugarugo": {
+    "name": "Rugarugo",
+    "symbol": "RUGARUGO",
+    "address": "Ewn3zayVdTp8eGu3Kk4VR7D9pABC6MLKFnqVQ2Hw7ray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=Ewn3zayVdTp8eGu3Kk4VR7D9pABC6MLKFnqVQ2Hw7ray"
+  },
+  "aperitivo": {
+    "name": "Aperitivo",
+    "symbol": "APE",
+    "address": "AgYV8QrdeAjDVqLyR3RK1YSD7yT6bwUVL8Yt8PpiCray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=AgYV8QrdeAjDVqLyR3RK1YSD7yT6bwUVL8Yt8PpiCray"
+  },
+  "friedfomo": {
+    "name": "FriedFomo",
+    "symbol": "FIFO",
+    "address": "4cnQdp6kTeuzuZy4UQVcTSkpGeX9A7WiUf8BbgWmeray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=4cnQdp6kTeuzuZy4UQVcTSkpGeX9A7WiUf8BbgWmeray"
+  },
+  "fudfusilli": {
+    "name": "FudFusilli",
+    "symbol": "FUSILLI",
+    "address": "vAgFFeiZ97ocBBnyhUyKa7bDysdTuE6eanCsEnoVray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=vAgFFeiZ97ocBBnyhUyKa7bDysdTuE6eanCsEnoVray"
+  },
+  "lambocello": {
+    "name": "Lambocello",
+    "symbol": "LAMBOCELLO",
+    "address": "7qzQJibxtz2MARyVxWffbMCuSLqzkX7j5MQ9DHCC4ray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=7qzQJibxtz2MARyVxWffbMCuSLqzkX7j5MQ9DHCC4ray"
+  },
+  "gmgnocco": {
+    "name": "GmGnocco",
+    "symbol": "GMGN",
+    "address": "5bKVDM4uFt3saxBAH2Mz15higqbfsUhVZYcBSQUsuray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=5bKVDM4uFt3saxBAH2Mz15higqbfsUhVZYcBSQUsuray"
+  },
+  "sersugo": {
+    "name": "SerSugo",
+    "symbol": "SESU",
+    "address": "CAX4tPsh8bNoREmjFEMduXXYfeUsJcW4Gup3wm4Jwray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=CAX4tPsh8bNoREmjFEMduXXYfeUsJcW4Gup3wm4Jwray"
+  },
+  "moonzarella": {
+    "name": "MoonZarella",
+    "symbol": "MOONZARELL",
+    "address": "Ec3f9Yqr5wc7FWXnMfNiBs2qAnmddifo2udQ2n5Furay",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=Ec3f9Yqr5wc7FWXnMfNiBs2qAnmddifo2udQ2n5Furay"
+  },
+  "bonkatino": {
+    "name": "Bonkatino",
+    "symbol": "BONKATINO",
+    "address": "82DXHRq7kGD12umsjDoAtyTwFHuy22FW2rCkKgKqCray",
+    "market": "Raydium",
+    "marketUrl": "https://raydium.io/launchpad/token/?mint=82DXHRq7kGD12umsjDoAtyTwFHuy22FW2rCkKgKqCray"
+  },
+  "ciccia": {
+    "name": "Ciccia Salsiccia",
+    "symbol": "CICCIA",
+    "address": "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump"
+  }
+}

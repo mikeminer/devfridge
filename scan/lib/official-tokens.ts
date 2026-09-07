@@ -1,8 +1,9 @@
 import contracts from "@/components/world/runway-contracts.json";
+import solana from "./brainrot-solana.json";
 import { PASTA_MINT } from "./constants";
 import { TMC_ROBINHOOD_ADDRESS, TMC_SOLANA_LEGACY_MINT } from "./bridge";
 
-export type OfficialToken = { name: string; symbol: string; address: string; note?: string };
+export type OfficialToken = { name: string; symbol: string; address: string; note?: string; market?: string; marketUrl?: string };
 
 // DevFridge's published collection, not a chain-wide approval or wallet allowance.
 export const ROBINHOOD_TOKENS: OfficialToken[] = [
@@ -21,6 +22,6 @@ export const ROBINHOOD_TOKENS: OfficialToken[] = [
 
 export const SOLANA_TOKENS: OfficialToken[] = [
   { name: "PASTA", symbol: "PASTA", address: PASTA_MINT },
-  { name: "Ciccia Salsiccia", symbol: "CICCIA", address: "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump" },
+  ...Object.values(solana),
   { name: "Trust Me Capital", symbol: "TMC", address: TMC_SOLANA_LEGACY_MINT, note: "Legacy Solana mint · independent supply · not bridgeable" },
 ];
