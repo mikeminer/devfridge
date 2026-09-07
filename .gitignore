@@ -3,6 +3,8 @@
 target
 **/*.rs.bk
 node_modules
+bridge-contracts/artifacts
+bridge-contracts/cache
 test-ledger
 .yarn
 dist

@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "preflight:robinhood": "hardhat run scripts/preflight.js --network robinhood",
     "deploy:robinhood": "hardhat run scripts/deploy-adapter.js --network robinhood"
   },
   "dependencies": {

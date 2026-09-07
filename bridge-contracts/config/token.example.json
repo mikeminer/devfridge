@@ -23,8 +23,9 @@
   },
   "policy": {
     "windowSeconds": 86400,
-    "outboundLimitBaseUnits": "REQUIRED",
-    "inboundLimitBaseUnits": "REQUIRED",
+    "dailyLimitTokens": "1000000",
+    "outboundLimitBaseUnits": "1000000000000000000000000",
+    "inboundLimitBaseUnits": "1000000000000000000000000",
     "emergencyGuardian": "0x5D69C42A3a481d0CCFd88CFA8a2a08e2BF456134",
     "minimumDvns": 2
   }

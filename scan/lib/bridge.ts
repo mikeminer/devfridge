@@ -3,6 +3,7 @@ export const TMC_ROBINHOOD_ADDRESS = "0x5c845330b41D9Bef68B46DC254353A770f44dee8
 export const TMC_ROBINHOOD_GOVERNOR = "0x5D69C42A3a481d0CCFd88CFA8a2a08e2BF456134";
 export const TMC_SOLANA_GOVERNOR = "GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";
 export const TMC_SOLANA_LEGACY_MINT = "EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump";
+export const TMC_DAILY_LIMIT = "1,000,000";
 
 export type BridgeRoute = {
   symbol: string;
@@ -32,7 +33,7 @@ export const TMC_ROUTE: BridgeRoute = {
   solanaMint: value("NEXT_PUBLIC_TMC_SOLANA_MINT"),
   evmAdapter: value("NEXT_PUBLIC_TMC_OFT_ADAPTER"),
   solanaOftStore: value("NEXT_PUBLIC_TMC_SOLANA_OFT_STORE"),
-  dailyLimit: value("NEXT_PUBLIC_TMC_BRIDGE_DAILY_LIMIT"),
+  dailyLimit: value("NEXT_PUBLIC_TMC_BRIDGE_DAILY_LIMIT") || TMC_DAILY_LIMIT,
   enabled: process.env.NEXT_PUBLIC_TMC_BRIDGE_ENABLED === "true",
 };
 
