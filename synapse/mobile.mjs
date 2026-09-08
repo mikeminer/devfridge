@@ -1,6 +1,6 @@
 export const compactQuery = '(max-width: 760px), (max-height: 600px) and (pointer: coarse)';
 export function initialNoteId(compact, hash, selected) {
-  return hash || selected || (compact ? null : '/investor/index.md');
+  return hash || selected || null;
 }
 export function fittedDistance(radius, aspect, verticalFov) {
   const halfVertical = verticalFov * Math.PI / 360;
