@@ -1,7 +1,16 @@
 {
   "framework": null,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build -- --vercel",
   "outputDirectory": "dist",
+  "functions": {
+    "api/brief.mjs": { "maxDuration": 10, "includeFiles": "snapshot.json" }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/brief?format=html" },
+    { "source": "/brief.md", "destination": "/api/brief?format=md" },
+    { "source": "/brief.json", "destination": "/api/brief?format=json" },
+    { "source": "/llms.txt", "destination": "/api/brief?format=llms" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
