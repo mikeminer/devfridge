@@ -1,0 +1,22 @@
+name: Synapse viewer
+on:
+  pull_request:
+    paths: ['synapse/**', '.github/workflows/synapse.yml', 'scripts/knowledge/**']
+  push:
+    branches: [master]
+    paths: ['synapse/**', '.github/workflows/synapse.yml', 'scripts/knowledge/**']
+permissions:
+  contents: read
+jobs:
+  viewer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: synapse/package-lock.json
+      - run: npm ci --prefix synapse
+      - run: npm test --prefix synapse
+      - run: npm run build --prefix synapse
