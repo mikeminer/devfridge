@@ -4,7 +4,7 @@ title: "FriedFomo (solana)"
 description: "DevFridge investor knowledge: FriedFomo (solana)"
 resource: "https://solscan.io/token/3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:39:29Z"
+timestamp: "2026-09-08T22:45:52Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump`
 
-Registry status: ok · last successful observation: 2026-09-08T18:55:47Z · last attempt: 2026-09-08T18:55:47Z.
+Registry status: ok · last successful observation: 2026-09-08T22:45:52Z · last attempt: 2026-09-08T22:45:52Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-08T18:55:47Z · last attempt: 2026-09-08T18:55:47Z.
+ok · last successful observation: 2026-09-08T22:45:52Z · last attempt: 2026-09-08T22:45:52Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 445411688 |
+| Finalized slot | 445455204 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-08T18:55:47Z · last attempt: 2026-09-08T18:55:47Z.
+ok · last successful observation: 2026-09-08T22:45:52Z · last attempt: 2026-09-08T22:45:52Z.
 
 ```json
 {
@@ -91,7 +91,7 @@ ok · last successful observation: 2026-09-08T18:55:47Z · last attempt: 2026-09
       "volume": {
         "h1": 0,
         "h24": 1.45,
-        "h6": 1.45,
+        "h6": 0,
         "m5": 0
       }
     }

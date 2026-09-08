@@ -4,7 +4,7 @@ title: "Team, CEO and leadership contacts"
 description: "DevFridge investor knowledge: Team, CEO and leadership contacts"
 resource: "https://team.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:39:29Z"
+timestamp: "2026-09-08T22:45:52Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Team roles are roster labels, not independent identity or lock verification. Check the canonical source and observation date before contacting anyone.
 
-[Team site](https://team.devfridge.cool/) · [Public roster API](https://scan.devfridge.cool/api/team) · ok · last successful observation: 2026-09-08T22:39:29Z · last attempt: 2026-09-08T22:39:29Z.
+[Team site](https://team.devfridge.cool/) · [Public roster API](https://scan.devfridge.cool/api/team) · ok · last successful observation: 2026-09-08T22:45:52Z · last attempt: 2026-09-08T22:45:52Z.
 
 ## pappardelle.sol — CEO
 

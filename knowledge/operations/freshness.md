@@ -4,13 +4,13 @@ title: "Freshness and source discrepancies"
 description: "DevFridge investor knowledge: Freshness and source discrepancies"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:39:29Z"
+timestamp: "2026-09-08T22:45:52Z"
 generated: true
 ---
 
 # Freshness and source discrepancies
 
-Refresh attempted: **2026-09-08T22:39:29Z**. 65/65 source observations succeeded.
+Refresh attempted: **2026-09-08T22:45:52Z**. 65/65 source observations succeeded.
 
 A daily snapshot is not real time. Data older than 36 hours should be treated as stale even if its last refresh succeeded. Read each record's last-success timestamp.
 
