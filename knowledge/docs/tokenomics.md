@@ -4,7 +4,7 @@ title: "Tokenomics (on-chain, live)"
 description: "DevFridge investor knowledge: Tokenomics (on-chain, live)"
 resource: "https://docs.devfridge.cool/tokenomics"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

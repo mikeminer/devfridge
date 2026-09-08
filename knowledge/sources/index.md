@@ -4,7 +4,7 @@ title: "Sources and evidence hierarchy"
 description: "DevFridge investor knowledge: Sources and evidence hierarchy"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 
@@ -18,6 +18,7 @@ generated: true
 
 ## Additional references
 
+- [Official contacts and team](../contacts/index.md)
 - [Solana RPC](https://solana.com/docs/rpc)
 - [Robinhood network configuration](https://docs.robinhood.com/chain/connecting/)
 - [Pons v2](https://docs.ponsfamily.com/v2)

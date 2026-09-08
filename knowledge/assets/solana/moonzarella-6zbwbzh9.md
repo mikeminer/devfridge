@@ -4,7 +4,7 @@ title: "MoonZarella (solana)"
 description: "DevFridge investor knowledge: MoonZarella (solana)"
 resource: "https://solscan.io/token/6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

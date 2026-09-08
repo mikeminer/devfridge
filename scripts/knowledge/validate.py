@@ -30,6 +30,10 @@ def validate(root=KNOWLEDGE):
             errors.append(f"Missing docs reference: {slug}")
     records = [snapshot["registry"], snapshot["doc_catalog"], *snapshot["documents"].values()]
     records += [r for state in snapshot["assets"].values() for r in state.values()]
+    for name in config.get("contact_sources", {}):
+        if name not in snapshot.get("contacts", {}):
+            errors.append(f"Missing contact observation: {name}")
+    records += list(snapshot.get("contacts", {}).values())
     for record in records:
         if record.get("status") not in {"ok", "stale", "unavailable"}:
             errors.append("Invalid observation status")

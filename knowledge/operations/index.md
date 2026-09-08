@@ -37,6 +37,8 @@ python scripts/knowledge/refresh.py --offline
 
 Online refresh reads the published Connect registry, discovers documentation pages, observes Solana mint state, reads Robinhood ERC-20 state at a common block, and obtains indexed market evidence. Offline mode regenerates identical Markdown from the saved snapshot.
 
+It also refreshes [official contacts and team](../contacts/index.md): the published Connect directory supplies leader, community, bot, site and publication links; the public API used by team.devfridge.cool supplies names, published roles, public wallets and social handles. Each source has its own observation timestamp. Successful refreshes replace removed directory entries and profiles; failed requests retain the last successful data marked stale. Team labels do not independently verify identity or token-lock status.
+
 ## Failure policy
 
 Each source stores status, last successful observation, latest attempt and observed values. On failure, prior data and its success timestamp are preserved and marked stale. A first failure produces unavailable data. The report never replaces unavailable measurements with zero.

@@ -4,7 +4,7 @@ title: "GmGnocco (solana)"
 description: "DevFridge investor knowledge: GmGnocco (solana)"
 resource: "https://solscan.io/token/8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

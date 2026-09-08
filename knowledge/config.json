@@ -1,5 +1,9 @@
 {
   "docs_origin": "https://docs.devfridge.cool",
+  "contact_sources": {
+    "connect": "https://connect.devfridge.cool/",
+    "team": "https://scan.devfridge.cool/api/team"
+  },
   "required_asset_ids": [
     "solana:39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
     "solana:EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump",
