@@ -31,3 +31,11 @@ test('other configuration changes require a build', t => {
 test('missing history defaults to building', t => {
   const f = fixture(t); assert.equal(shouldSkip(f.root), false);
 });
+test('Services guard installation skips but runtime changes build', t => {
+  const f = fixture(t);
+  f.write('vercel.json', JSON.stringify({ services: { bot: { root: 'bot', entrypoint: 'src/index.ts' } } })); f.commit();
+  const config = { services: { bot: { root: 'bot', entrypoint: 'src/index.ts', ignoreCommand: 'node ../scripts/knowledge/skip-site-build.mjs' } } };
+  f.write('vercel.json', JSON.stringify(config)); f.commit(); assert.equal(shouldSkip(f.root), true);
+  config.services.bot.entrypoint = 'src/other.ts';
+  f.write('vercel.json', JSON.stringify(config)); f.commit(); assert.equal(shouldSkip(f.root), false);
+});

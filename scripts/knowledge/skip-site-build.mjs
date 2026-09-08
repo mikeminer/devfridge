@@ -17,8 +17,11 @@ export function shouldSkip(repo) {
       let previous;
       try { previous = JSON.parse(git('show', `HEAD^:${path}`)); }
       catch { previous = {}; }
-      const command = `node ${path === 'vercel.json' ? '' : '../'}scripts/knowledge/skip-site-build.mjs`;
-      if (current.ignoreCommand !== command) return false;
+      if (path === 'vercel.json' && current.services) {
+        if (current.services.bot?.ignoreCommand !== 'node ../scripts/knowledge/skip-site-build.mjs') return false;
+        delete current.services.bot.ignoreCommand;
+        if (previous.services?.bot) delete previous.services.bot.ignoreCommand;
+      } else if (current.ignoreCommand !== 'node ../scripts/knowledge/skip-site-build.mjs') return false;
       delete current.ignoreCommand;
       delete previous.ignoreCommand;
       return isDeepStrictEqual(previous, current);
