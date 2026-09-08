@@ -4,19 +4,19 @@ title: "Freshness and source discrepancies"
 description: "DevFridge investor knowledge: Freshness and source discrepancies"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:29:43Z"
+timestamp: "2026-09-08T18:54:35Z"
 generated: true
 ---
 
 # Freshness and source discrepancies
 
-Refresh attempted: **2026-09-08T18:29:43Z**. 62/63 source observations succeeded.
+Refresh attempted: **2026-09-08T18:54:35Z**. 62/63 source observations succeeded.
 
 A daily snapshot is not real time. Data older than 36 hours should be treated as stale even if its last refresh succeeded. Read each record's last-success timestamp.
 
 ## Source failures
 
-- `robinhood:0x2a4e9362ab5fdcab06a4a56b76dcbb286ea7d0fe / market`: stale · last successful observation: 2026-09-08T18:20:38Z · last attempt: 2026-09-08T18:29:43Z; HTTPError HTTP 502
+- `robinhood:0x12b8cba33606a4f7b85ee30620784c5a1015e816 / market`: stale · last successful observation: 2026-09-08T18:29:43Z · last attempt: 2026-09-08T18:54:35Z; HTTPError HTTP 502
 
 ## Published registry versus repository
 

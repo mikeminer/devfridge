@@ -4,7 +4,7 @@ title: "DevFridge listing kit"
 description: "DevFridge investor knowledge: DevFridge listing kit"
 resource: "https://docs.devfridge.cool/listing-kit"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:29:43Z"
+timestamp: "2026-09-08T18:54:35Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-09-08T18:29:43Z · last attempt: 2026-09-08T18:29:43Z.
+[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-09-08T18:54:35Z · last attempt: 2026-09-08T18:54:35Z.
 
 PARTNERS
 
