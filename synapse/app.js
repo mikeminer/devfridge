@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { compactQuery, initialNoteId, fittedDistance, nearestTap, isTap } from './mobile.mjs';
+import { neuronGeometry, writeAxon, AXON_STEPS } from './neurons.mjs';
 
 const compactViewport = matchMedia(compactQuery);
 let mobileView = 'graph';
@@ -676,13 +677,15 @@ function buildSceneGraph(graph) {
 
   for (const node of graph.nodes) {
     ensurePosition(node);
-    const geometry = new THREE.SphereGeometry(nodeRadius(node), 24, 18);
+    const geometry = node.kind === 'note'
+      ? neuronGeometry(nodeRadius(node), hashCode(node.id), compactViewport.matches)
+      : new THREE.SphereGeometry(nodeRadius(node), 12, 10);
     const material = new THREE.MeshStandardMaterial({
       color: new THREE.Color(colorForNode(node)),
       emissive: new THREE.Color(colorForNode(node)),
-      emissiveIntensity: node.kind === "note" ? 0.18 : 0.08,
-      roughness: 0.58,
-      metalness: 0.18,
+      emissiveIntensity: node.kind === "note" ? 0.3 : 0.08,
+      roughness: 0.72,
+      metalness: 0.08,
     });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(node.x, node.y, node.z);
@@ -726,8 +729,8 @@ function colorForNode(node) {
 }
 
 function createLines(graph) {
-  linePositions = new Float32Array(graph.links.length * 2 * 3);
-  lineColors = new Float32Array(graph.links.length * 2 * 3);
+  linePositions = new Float32Array(graph.links.length * AXON_STEPS * 2 * 3);
+  lineColors = new Float32Array(graph.links.length * AXON_STEPS * 2 * 3);
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
   geometry.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
@@ -738,7 +741,9 @@ function createLines(graph) {
     opacity: 0.42,
   });
   lineSegments = new THREE.LineSegments(geometry, material);
-  lineSegments.userData.links = graph.links;
+  lineSegments.userData.links = graph.links.map(link => ({ ...link, curveSeed: hashCode(link.id) }));
+  // Node positions change during settling; avoid stale bounds hiding long fibres.
+  lineSegments.frustumCulled = false;
   graphRoot.add(lineSegments);
   updateLines();
 }
@@ -756,12 +761,7 @@ function updateLines() {
     const target = nodeObjects.get(link.target);
     if (!source || !target) continue;
 
-    linePositions[offset] = source.position.x;
-    linePositions[offset + 1] = source.position.y;
-    linePositions[offset + 2] = source.position.z;
-    linePositions[offset + 3] = target.position.x;
-    linePositions[offset + 4] = target.position.y;
-    linePositions[offset + 5] = target.position.z;
+    writeAxon(linePositions, offset, source.position, target.position, link.curveSeed);
 
     const touchesSelected = selectedId && (link.source === selectedId || link.target === selectedId);
     const touchesSearchMatch = hasSearch && (matching.has(link.source) || matching.has(link.target));
@@ -775,13 +775,13 @@ function updateLines() {
     if (hasSearch && !touchesSearchMatch) {
       tone.lerp(new THREE.Color("#151719"), 0.88);
     }
-    lineColors[offset] = tone.r;
-    lineColors[offset + 1] = tone.g;
-    lineColors[offset + 2] = tone.b;
-    lineColors[offset + 3] = tone.r;
-    lineColors[offset + 4] = tone.g;
-    lineColors[offset + 5] = tone.b;
-    offset += 6;
+    for (let vertex = 0; vertex < AXON_STEPS * 2; vertex++) {
+      const index = offset + vertex * 3;
+      lineColors[index] = tone.r;
+      lineColors[index + 1] = tone.g;
+      lineColors[index + 2] = tone.b;
+    }
+    offset += AXON_STEPS * 6;
   }
   lineSegments.geometry.attributes.position.needsUpdate = true;
   lineSegments.geometry.attributes.color.needsUpdate = true;
@@ -900,7 +900,7 @@ function updateMaterials() {
     object.scale.setScalar(scale);
     material.opacity = visible ? 1 : hasSearch ? 0.08 : 0.22;
     material.transparent = !visible;
-    material.emissiveIntensity = isSelected ? 0.62 : isHovered ? 0.42 : isSearchMatch ? 0.76 : node.kind === "note" ? 0.18 : 0.08;
+    material.emissiveIntensity = isSelected ? 0.85 : isHovered ? 0.6 : isSearchMatch ? 0.85 : node.kind === "note" ? 0.3 : 0.08;
   }
   updateLabels();
 }
@@ -1390,7 +1390,7 @@ function fitMobileGraph() {
   const center = new THREE.Vector3();
   for (const object of objects) center.add(object.position);
   if (objects.length) center.divideScalar(objects.length);
-  const radius = Math.max(45, ...objects.map(object => object.position.distanceTo(center) + 7));
+  const radius = Math.max(45, ...objects.map(object => object.position.distanceTo(center) + (object.geometry.boundingSphere?.radius ?? 7) * object.scale.x + 15));
   controls.target.copy(center);
   camera.position.copy(center).add(new THREE.Vector3(0, 0, fittedDistance(radius, camera.aspect, camera.fov)));
   controls.update();

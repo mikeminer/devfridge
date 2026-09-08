@@ -4,6 +4,8 @@ Public investor brief: https://synapse.devfridge.cool
 
 Mobile knowledge graph: https://synapse.devfridge.cool/graph.html
 
+The Three.js graph renders notes as neuron-shaped cells with tapered, forked dendrites and curved fibres for the existing knowledge links. Each note is one merged mesh; phone meshes use fewer branches and vertices. Selection and search brighten the cells, and the phone camera includes the full dendrite extent when fitting the graph. The appearance does not add or infer new relationships in the knowledge data.
+
 The homepage is a readable research brief for Pump.fun buyers: full mint identities, dated indexed liquidity and volume, supply controls, missing lock/holder evidence, and all official documentation references. It contains the complete content in the first HTML response, with Open Graph metadata, Schema.org metadata, robots.txt, sitemap.xml and alternate links to /brief.md and /brief.json. /llms.txt provides a short reading guide. AI services may apply their own fetching policies and latency; these formats do not guarantee indexing or an answer time.
 
 Synapse adapts the Magistra vault viewer for DevFridge's investor knowledge. Rotate the 3D graph, search full token addresses or note text, filter Solana/Robinhood assets, follow links and backlinks, and read complete Markdown notes. Each note has a shareable URL hash. The note list works with a keyboard and remains available if WebGL cannot initialize.

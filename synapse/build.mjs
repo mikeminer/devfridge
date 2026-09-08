@@ -5,7 +5,7 @@ import { buildBrief, renderHTML, renderMarkdown, llmsText, ORIGIN } from './brie
 await mkdir('dist/vendor', { recursive: true });
 const feed = JSON.parse(await readFile('vault.json', 'utf8'));
 if (feed.repo !== 'mikeminer/devfridge' || feed.files.length < 52) throw new Error('Incomplete DevFridge knowledge fallback');
-for (const file of ['app.js', 'mobile.mjs', 'styles.css', 'vault.json', 'brief.css', 'brief-ui.js', 'LICENSE', 'NOTICE.md']) await copyFile(file, join('dist', file));
+for (const file of ['app.js', 'mobile.mjs', 'neurons.mjs', 'styles.css', 'vault.json', 'brief.css', 'brief-ui.js', 'LICENSE', 'NOTICE.md']) await copyFile(file, join('dist', file));
 await copyFile('index.html', 'dist/graph.html');
 const snapshot = JSON.parse(await readFile('snapshot.json', 'utf8'));
 const brief = buildBrief(snapshot, { fallback: true });
@@ -23,6 +23,7 @@ await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urls
 for (const [source, target] of [
   ['three/build/three.module.js', 'three.module.js'],
   ['three/examples/jsm/controls/OrbitControls.js', 'OrbitControls.js'],
+  ['three/examples/jsm/utils/BufferGeometryUtils.js', 'BufferGeometryUtils.js'],
   ['three/LICENSE', 'three-LICENSE'],
   ['lucide/dist/umd/lucide.min.js', 'lucide.min.js'],
   ['lucide/LICENSE', 'lucide-LICENSE'],
