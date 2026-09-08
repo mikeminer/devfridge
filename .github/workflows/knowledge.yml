@@ -1,0 +1,81 @@
+name: Investor knowledge
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'knowledge/config.json'
+      - 'knowledge/investor/**'
+      - 'knowledge/glossary/**'
+      - 'knowledge/operations/index.md'
+      - 'scripts/knowledge/**'
+      - 'scan/lib/**'
+      - 'scan/app/docs/**'
+      - 'scan/components/OfficialTokens.tsx'
+      - 'scan/components/world/runway-contracts.json'
+      - 'programs/**'
+      - 'bridge-contracts/**'
+      - '.github/workflows/knowledge.yml'
+  pull_request:
+    paths:
+      - 'knowledge/**'
+      - 'scripts/knowledge/**'
+      - '.github/workflows/knowledge.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: investor-knowledge-${{ github.event_name == 'pull_request' && github.ref || 'refresh' }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s scripts/knowledge -p 'test_*.py'
+      - run: python scripts/knowledge/validate.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/knowledge/skip-site-build.test.mjs
+      - name: Check deterministic generation
+        run: |
+          python scripts/knowledge/refresh.py --offline
+          git diff --exit-code -- knowledge
+
+  refresh:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/knowledge/refresh.py
+      - run: python scripts/knowledge/validate.py
+      - name: Publish refresh status
+        if: always()
+        run: cat knowledge/operations/freshness.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit changed knowledge only
+        run: |
+          git add -- knowledge
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: refresh investor knowledge [skip ci]'
+          git push origin HEAD:master

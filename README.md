@@ -9,6 +9,15 @@ Not affiliated with any other token using the PASTA ticker. Verify the mint and 
 
 License: [Business Source License 1.1](LICENSE) (converts to GPL-2.0-or-later on 2030-08-18).
 
+## Investor knowledge
+
+Start with the [investor knowledge folder](knowledge/index.md): every officially listed Solana
+and Robinhood asset, full addresses, observed supply and controls, market evidence, investor
+guides, and all documentation references. [Source status](knowledge/operations/freshness.md)
+shows the observation dates, unavailable data and discrepancies. The
+[Investor knowledge workflow](.github/workflows/knowledge.yml) refreshes it daily, on relevant
+source changes and on demand. Token identity, evidence and holder rights are kept separate.
+
 ## Live products
 
 - Scanner: https://scan.devfridge.cool

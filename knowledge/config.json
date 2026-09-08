@@ -1,0 +1,38 @@
+{
+  "docs_origin": "https://docs.devfridge.cool",
+  "required_asset_ids": [
+    "solana:39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+    "solana:EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump",
+    "robinhood:0x5c845330b41d9bef68b46dc254353a770f44dee8",
+    "solana:An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump",
+    "solana:B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump",
+    "solana:3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump",
+    "solana:4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump",
+    "solana:HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump",
+    "solana:8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump",
+    "solana:AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump",
+    "solana:6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump",
+    "solana:HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump",
+    "solana:CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+    "robinhood:0x12b8cba33606a4f7b85ee30620784c5a1015e816",
+    "robinhood:0x6af70b8487cd47def373c4a9eb58f990a3edba37",
+    "robinhood:0x2aaa6d9e59734bb37ebc123fe5df797853f43aac",
+    "robinhood:0xf7aca11cdb86115eedce7da43c5326a12408201e",
+    "robinhood:0x8cff8a877ec7f5a63840143e9a1af2c024a7e87e",
+    "robinhood:0x0713636aae9dc16921f3f862fba52af6db5d1db3",
+    "robinhood:0x2a4e9362ab5fdcab06a4a56b76dcbb286ea7d0fe",
+    "robinhood:0x29a13f8219d1d54424f1f9f1f90e85448488b2de",
+    "robinhood:0xc1c1ecb7596f8bc364e397aaf987e4f11f88557c",
+    "robinhood:0x575634d01aeeb4421c5ec4e06d861dfb0da6df7a"
+  ],
+  "robinhood_rpc": "https://rpc.mainnet.chain.robinhood.com",
+  "schema_version": 1,
+  "publications": [
+    "https://devfridge.medium.com/",
+    "https://app.paragraph.com/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134"
+  ],
+  "robinhood_chain_id": 4663,
+  "solana_rpc": "https://api.mainnet-beta.solana.com",
+  "registry_url": "https://connect.devfridge.cool/",
+  "stale_after_hours": 36
+}

@@ -1,6 +1,7 @@
 {
   "services": {
     "bot": {
+      "ignoreCommand": "node ../scripts/knowledge/skip-site-build.mjs",
       "root": "bot",
       "entrypoint": "src/index.ts"
     }
