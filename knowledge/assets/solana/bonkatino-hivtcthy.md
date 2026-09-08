@@ -4,7 +4,7 @@ title: "Bonkatino (solana)"
 description: "DevFridge investor knowledge: Bonkatino (solana)"
 resource: "https://solscan.io/token/HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

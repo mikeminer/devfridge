@@ -28,6 +28,15 @@ test('full token address search finds the exact PASTA asset', () => {
   const pasta = graph.nodes.find(n => n.type === 'Asset' && n.title.includes('PASTA'));
   assert.ok(context.nodeMatches(pasta, '39kmex4hvrw9qbbihspbrq9xexuf18grnp6gl61ppump'));
 });
+
+test('leader and CEO searches find linked contact notes', () => {
+  const connect = graph.nodes.find(n => n.id === '/contacts/connect.md');
+  const team = graph.nodes.find(n => n.id === '/contacts/team.md');
+  assert.ok(context.nodeMatches(connect, 'anonimocommando'));
+  assert.ok(context.nodeMatches(team, 'ceo'));
+  assert.ok(context.nodeMatches(team, 'pappardelle.sol'));
+  assert.ok(graph.links.some(l => l.source === '/contacts/connect.md' && l.target === '/contacts/team.md'));
+});
 test('script content and unsafe link schemes cannot execute in notes', () => {
   const html = context.renderMarkdown('<script>alert(1)</script>\n\n[bad](javascript:alert) [bad2](data:text/html,test) [good](https://docs.devfridge.cool)');
   assert.ok(!html.includes('<script>'));

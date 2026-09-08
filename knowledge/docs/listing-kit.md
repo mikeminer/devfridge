@@ -4,7 +4,7 @@ title: "DevFridge listing kit"
 description: "DevFridge investor knowledge: DevFridge listing kit"
 resource: "https://docs.devfridge.cool/listing-kit"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

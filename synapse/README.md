@@ -12,6 +12,8 @@ Synapse adapts the Magistra vault viewer for DevFridge's investor knowledge. Rot
 
 ## Data updates
 
+The daily knowledge refresh also indexes the published Connect directory and the public `/api/team` roster used by team.devfridge.cool. Search the graph for contacts, CEO, a name, handle or public wallet. Contact notes preserve source dates and link back to the directory and roster. The same contacts appear in the initial HTML, Markdown and JSON brief. Failed requests retain prior observations marked stale; a successful roster refresh replaces removed profiles. Roles are project-published labels, and the contact index does not claim independent identity or token-lock verification.
+
 The brief's Vercel function reads knowledge/data/snapshot.json from GitHub and renders HTML, Markdown and JSON from the same observations. It uses a 2.5-second upstream timeout and a five-minute CDN cache. If GitHub is unavailable or returns invalid data, it serves the bundled snapshot.json with a prominent fallback label and a 30-second cache. Each source retains its last-success timestamp; observations older than 36 hours are marked stale. If both sources fail, it returns HTTP 503. These endpoints require no wallet, credentials or client-side JavaScript. /llms.txt is a discovery guide, not an AI indexing guarantee.
 
 On phones, Graph opens without covering panels. Use Explore & search to browse notes, or tap a graph node to open Read note. The bottom navigation returns to the unobstructed graph. Pinch zoom and drag rotation do not select notes. The graph fits the available viewport on rotation, uses larger tap targets, and limits overlapping labels.

@@ -4,7 +4,7 @@ title: "Lambocello (solana)"
 description: "DevFridge investor knowledge: Lambocello (solana)"
 resource: "https://solscan.io/token/HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

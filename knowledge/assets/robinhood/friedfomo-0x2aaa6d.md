@@ -4,7 +4,7 @@ title: "FriedFomo (robinhood)"
 description: "DevFridge investor knowledge: FriedFomo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x2AAa6d9e59734bb37EBc123Fe5dF797853F43AaC"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

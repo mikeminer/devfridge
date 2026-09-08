@@ -4,7 +4,7 @@ title: "Embed the Fridge badge"
 description: "DevFridge investor knowledge: Embed the Fridge badge"
 resource: "https://docs.devfridge.cool/badge"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

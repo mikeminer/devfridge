@@ -4,7 +4,7 @@ title: "Lambocello (robinhood)"
 description: "DevFridge investor knowledge: Lambocello (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x8CfF8a877Ec7f5A63840143e9a1AF2c024A7e87E"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

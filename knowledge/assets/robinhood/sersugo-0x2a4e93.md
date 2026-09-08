@@ -4,7 +4,7 @@ title: "SerSugo (robinhood)"
 description: "DevFridge investor knowledge: SerSugo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x2A4e9362AB5fDcAb06A4A56B76dcBb286ea7D0FE"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

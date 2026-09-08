@@ -4,7 +4,7 @@ title: "Trust Me Capital (solana)"
 description: "DevFridge investor knowledge: Trust Me Capital (solana)"
 resource: "https://solscan.io/token/EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

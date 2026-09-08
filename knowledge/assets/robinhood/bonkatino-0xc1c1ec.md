@@ -4,7 +4,7 @@ title: "Bonkatino (robinhood)"
 description: "DevFridge investor knowledge: Bonkatino (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0xC1c1ecB7596f8bc364E397Aaf987e4F11f88557c"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

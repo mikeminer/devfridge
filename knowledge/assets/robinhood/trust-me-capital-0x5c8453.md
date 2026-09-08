@@ -4,7 +4,7 @@ title: "Trust Me Capital (robinhood)"
 description: "DevFridge investor knowledge: Trust Me Capital (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x5c845330b41D9Bef68B46DC254353A770f44dee8"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

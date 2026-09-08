@@ -74,6 +74,35 @@ test('source text is escaped and unsafe URLs cannot become executable links', ()
   assert.ok(html.includes('&lt;script&gt;'));
 });
 
+test('Connect and CEO contacts appear in the initial HTML, Markdown and JSON with source dates', () => {
+  const brief = make(snapshot), html = renderHTML(brief), markdown = renderMarkdown(brief);
+  for (const text of [html, markdown, JSON.stringify(brief)]) {
+    assert.ok(text.includes('anonimocommando'));
+    assert.ok(text.includes('pappardelle.sol'));
+    assert.ok(text.includes('CEO'));
+    assert.ok(text.includes('https://t.me/anonimocommando'));
+    assert.ok(text.includes(snapshot.contacts.connect.fetched_at));
+  }
+  const old = structuredClone(snapshot);
+  old.contacts.connect.status = 'stale';
+  old.contacts.team.fetched_at = '2020-01-01T00:00:00Z';
+  assert.equal(make(old).contacts.connect.status, 'stale');
+  assert.equal(make(old).contacts.team.status, 'stale');
+  delete old.contacts;
+  assert.equal(make(old).contacts.team.status, 'unavailable');
+  assert.ok(!renderHTML(make(old)).includes('pappardelle.sol'));
+});
+
+test('contact labels cannot inject HTML or executable links', () => {
+  const copy = structuredClone(snapshot);
+  copy.contacts.connect.data.entries[0] = {label:'<script>bad()</script>', group:'test', url:'javascript:bad()'};
+  copy.contacts.team.data.members[0].name = '<img src=x onerror=bad()>';
+  const html = renderHTML(make(copy));
+  assert.ok(!html.includes('<script>bad()'));
+  assert.ok(!html.includes('<img src=x'));
+  assert.ok(!html.includes('href="javascript:'));
+});
+
 test('HTML, Markdown and JSON endpoints serve the same dated evidence without JavaScript', async () => {
   for (const [format, type] of [['html', 'text/html'], ['md', 'text/markdown'], ['json', 'application/json']]) {
     const response = await briefResponse(new Request(`https://synapse.devfridge.cool/api/brief?format=${format}`), dependencies);

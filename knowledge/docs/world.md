@@ -4,7 +4,7 @@ title: "DevFridge World — the game guide"
 description: "DevFridge investor knowledge: DevFridge World — the game guide"
 resource: "https://docs.devfridge.cool/world"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 

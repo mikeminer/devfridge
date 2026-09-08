@@ -4,7 +4,7 @@ title: "DevFridge PASTA (solana)"
 description: "DevFridge investor knowledge: DevFridge PASTA (solana)"
 resource: "https://solscan.io/token/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:55:47Z"
+timestamp: "2026-09-08T22:39:29Z"
 generated: true
 ---
 
