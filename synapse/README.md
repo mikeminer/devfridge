@@ -16,9 +16,11 @@ The included vault.json is a dated fallback for the initial visit when the live 
 
 Run npm ci, npm test, npm run build, then npm run dev. The local viewer listens at http://127.0.0.1:4178. The build bundles pinned Three.js and Lucide files locally, with their licenses; it does not depend on CDN scripts.
 
-Before publishing a new viewer version, replace the fallback vault.json with the latest knowledge/data/vault.json, test and build, then publish the exact source to the Sites project recorded in .openai/hosting.json. Source changes need a new Sites version; daily knowledge updates do not.
+Before publishing a new viewer version, replace the fallback vault.json with the latest knowledge/data/vault.json, then test and build. From this directory, run `vercel link --project synapse-devfridge-cool`, then `vercel --prod`. The included vercel.json builds the static dist directory. Viewer code changes require a deployment; daily knowledge updates do not.
 
-This directory is the public corresponding source of the standalone Sites checkout. Do not add Sites source credentials or other secrets to it. The three existing Vercel websites ignore Synapse-only changes.
+The primary domain is hosted by the Vercel project synapse-devfridge-cool. Hosting moved to Vercel after a Sites publishing conflict blocked the mobile update. The original Sites project recorded in .openai/hosting.json remains a separate, older fallback; publishing there does not update the primary domain.
+
+This directory is the public corresponding source of the deployed viewer. Do not add hosting credentials or other secrets to it. The three other Vercel websites ignore Synapse-only changes.
 
 ## License and attribution
 
