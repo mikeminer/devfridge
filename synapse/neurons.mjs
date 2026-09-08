@@ -1,45 +1,81 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-export const AXON_STEPS = 10;
+export const AXON_STEPS = 14;
 
 // A single mesh per note keeps picking, colour changes and disposal inexpensive.
 export function neuronGeometry(radius, seed = 0, compact = false) {
-  const parts = [];
-  const soma = new THREE.SphereGeometry(radius, compact ? 12 : 16, 10);
-  soma.scale(1.1, .88, 1);
-  parts.push(soma);
-  const phase = (seed >>> 0) / 4294967296 * Math.PI * 2;
-  const count = compact ? 5 : 6;
-  const up = new THREE.Vector3(0, 1, 0);
-  const segment = (from, to, startRadius, endRadius) => {
-    const delta = to.clone().sub(from);
-    const geometry = new THREE.CylinderGeometry(endRadius, startRadius, delta.length(), 5, 1, false);
-    geometry.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(up, delta.normalize()));
-    geometry.translate((from.x + to.x) / 2, (from.y + to.y) / 2, (from.z + to.z) / 2);
-    parts.push(geometry);
-  };
+  const random = seededRandom(seed), parts = [], synapses = [];
+  const soma = new THREE.SphereGeometry(radius, compact ? 12 : 18, 12);
+  const positions = soma.attributes.position;
+  for (let i = 0; i < positions.count; i++) {
+    const p = new THREE.Vector3().fromBufferAttribute(positions, i);
+    const organic = 1 + .12 * Math.sin(p.x / radius * 3 + seed) * Math.cos(p.y / radius * 2);
+    positions.setXYZ(i, p.x * organic, p.y * organic * 1.28, p.z * organic * .85);
+  }
+  soma.computeVertexNormals(); parts.push(soma);
+  const count = compact ? 4 : 5;
   for (let i = 0; i < count; i++) {
-    const y = 1 - 2 * (i + .5) / count;
-    const angle = i * 2.399963 + phase;
+    const y = 1 - 2 * (i + .5) / count, angle = i * 2.399963 + random() * .8;
     const direction = new THREE.Vector3(Math.sqrt(1 - y * y) * Math.cos(angle), y, Math.sqrt(1 - y * y) * Math.sin(angle));
-    const sideways = new THREE.Vector3().crossVectors(direction, Math.abs(y) > .8 ? new THREE.Vector3(1, 0, 0) : up).normalize();
-    const root = direction.clone().multiplyScalar(radius * .65);
-    const joint = direction.clone().multiplyScalar(radius * 1.75).addScaledVector(sideways, radius * .18 * Math.sin(i + phase));
-    const tip = direction.clone().multiplyScalar(radius * (2.6 + .3 * Math.sin(i + phase))).addScaledVector(sideways, radius * .45);
-    segment(root, joint, radius * .32, radius * .17);
-    segment(joint, tip, radius * .17, radius * .075);
-    for (const side of [-1, 1]) {
-      const fork = tip.clone().addScaledVector(direction, radius * .55).addScaledVector(sideways, side * radius * .55);
-      const end = fork.clone().addScaledVector(direction, radius * .5).addScaledVector(sideways, side * radius * .35);
-      segment(tip, fork, radius * .075, radius * .04);
-      segment(fork, end, radius * .04, radius * .012);
+    const side = new THREE.Vector3().crossVectors(direction, new THREE.Vector3(0, 1, 0)).normalize();
+    const root = direction.clone().multiplyScalar(radius * .55);
+    const joint = direction.clone().multiplyScalar(radius * (2.1 + random())).addScaledVector(side, radius * (random() - .5));
+    const tip = direction.clone().multiplyScalar(radius * (3.7 + random())).addScaledVector(side, radius * (random() - .5));
+    parts.push(taperedBranch([root, joint, tip], radius * .38, radius * .10, compact ? 7 : 10));
+    for (const sign of [-1, 1]) {
+      const fork = tip.clone().addScaledVector(direction, radius * 1.1).addScaledVector(side, sign * radius * (.9 + random()));
+      const end = fork.clone().addScaledVector(direction, radius * (1 + random())).addScaledVector(side, sign * radius * .65);
+      parts.push(taperedBranch([tip, fork, end], radius * .11, radius * .025, compact ? 5 : 8));
+      synapses.push(end.toArray());
+      if (!compact) {
+        const twig = fork.clone().addScaledVector(side, -sign * radius * 1.2).addScaledVector(direction, radius * .7);
+        parts.push(taperedBranch([fork, fork.clone().lerp(twig, .5).addScaledVector(direction, radius * .2), twig], radius * .05, radius * .012, 4));
+      }
     }
   }
   const geometry = mergeGeometries(parts);
   for (const part of parts) part.dispose();
+  geometry.userData.synapses = synapses;
   geometry.computeBoundingSphere();
   return geometry;
+}
+
+export function seededRandom(seed) {
+  let value = seed >>> 0;
+  return () => { value = (Math.imul(value, 1664525) + 1013904223) >>> 0; return value / 4294967296; };
+}
+
+function taperedBranch(points, start, end, segments) {
+  const curve = new THREE.CatmullRomCurve3(points);
+  const geometry = new THREE.TubeGeometry(curve, segments, start, 5, false);
+  const position = geometry.attributes.position;
+  for (let ring = 0; ring <= segments; ring++) {
+    const t = ring / segments, center = curve.getPointAt(t), scale = (start + (end - start) * t) / start;
+    for (let side = 0; side <= 5; side++) {
+      const index = ring * 6 + side;
+      const p = new THREE.Vector3().fromBufferAttribute(position, index).sub(center).multiplyScalar(scale).add(center);
+      position.setXYZ(index, p.x, p.y, p.z);
+    }
+  }
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+export function tissuePosition(seed) {
+  const random = seededRandom(seed);
+  return new THREE.Vector3((random() - .5) * 270, (random() - .5) * 160, (random() - .5) * 210);
+}
+
+export function synapseTerminal(object, toward) {
+  const direction = toward.clone().sub(object.position).normalize();
+  let best = null, score = -Infinity;
+  for (const terminal of object.geometry.userData.synapses ?? []) {
+    const local = new THREE.Vector3(...terminal);
+    const dot = local.clone().normalize().dot(direction);
+    if (dot > score) { score = dot; best = local; }
+  }
+  return best ? best.multiplyScalar(object.scale.x).add(object.position) : object.position.clone();
 }
 
 // Write into an existing line buffer; no geometry allocation during simulation.

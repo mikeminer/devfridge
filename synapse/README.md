@@ -4,7 +4,7 @@ Public investor brief: https://synapse.devfridge.cool
 
 Mobile knowledge graph: https://synapse.devfridge.cool/graph.html
 
-The Three.js graph renders notes as neuron-shaped cells with tapered, forked dendrites and curved fibres for the existing knowledge links. Each note is one merged mesh; phone meshes use fewer branches and vertices. Selection and search brighten the cells, and the phone camera includes the full dendrite extent when fitting the graph. The appearance does not add or infer new relationships in the knowledge data.
+The Three.js graph distributes neurons through a 3D volume. Notes have organic cell bodies, tapered branching dendrites and a soft membrane glow. Existing knowledge links become curved, volumetric axons attached to actual dendrite terminals. Each neuron is one merged mesh plus its glow; axons use instanced cylinders, and phone meshes use fewer branches and vertices. Selection and search brighten cells and their connections. The camera includes the full dendrite extent, and desktop and phone views open with panels closed so the network fills the canvas. The appearance does not add or infer new relationships in the knowledge data.
 
 The homepage is a readable research brief for Pump.fun buyers: full mint identities, dated indexed liquidity and volume, supply controls, missing lock/holder evidence, and all official documentation references. It contains the complete content in the first HTML response, with Open Graph metadata, Schema.org metadata, robots.txt, sitemap.xml and alternate links to /brief.md and /brief.json. /llms.txt provides a short reading guide. AI services may apply their own fetching policies and latency; these formats do not guarantee indexing or an answer time.
 

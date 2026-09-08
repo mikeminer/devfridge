@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { compactQuery, initialNoteId, fittedDistance, nearestTap, isTap } from './mobile.mjs';
-import { neuronGeometry, writeAxon, AXON_STEPS } from './neurons.mjs';
+import { neuronGeometry, writeAxon, AXON_STEPS, tissuePosition, synapseTerminal } from './neurons.mjs';
 
 const compactViewport = matchMedia(compactQuery);
 let mobileView = 'graph';
@@ -57,6 +57,7 @@ const state = {
 };
 
 const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x090f14, .0018);
 
 const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 2200);
 camera.position.set(0, 38, 178);
@@ -98,6 +99,9 @@ let lineSegments = null;
 let linePositions = null;
 let lineColors = null;
 let animationFrame = 0;
+const axonTransform = new THREE.Object3D();
+const axonStart = new THREE.Vector3(), axonEnd = new THREE.Vector3();
+const axonUp = new THREE.Vector3(0, 1, 0);
 
 init();
 
@@ -173,7 +177,7 @@ function init() {
   window.addEventListener("hashchange", () => { const id = readSelectedHash(); if (state.graph.nodes.some(n => n.id === id)) selectNode(id); });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") { state.selectedId = null; state.localFocusId = null; refreshView(); }
-    if ((event.ctrlKey || event.metaKey) && event.key === "k") { event.preventDefault(); if (compactViewport.matches) setMobileView('explore'); searchInput.focus(); }
+    if ((event.ctrlKey || event.metaKey) && event.key === "k") { event.preventDefault(); setMobileView('explore'); searchInput.focus(); }
   });
   updateDetail(); loadVault(); if (renderer) animate();
   setInterval(() => { if (!document.hidden) loadVault(true); }, 300000);
@@ -217,7 +221,7 @@ async function loadVault(background = false) {
   state.selectedId = state.graph.nodes.some(n => n.id === selected) ? selected : null;
   if (!background) state.localFocusId = null;
   populateGroupFilter(state.graph.groups); refreshView();
-  if (!background && compactViewport.matches && selected) setMobileView('read');
+  if (!background && selected) setMobileView('read');
   const age = Date.now() - Date.parse(vault.fetchedAt);
   const stale = !Number.isFinite(age) || age > 36 * 3600000;
   freshnessLabel.textContent = `${fallbackMode ? "Saved copy" : stale ? "Older snapshot" : "Daily snapshot"} · ${new Date(vault.fetchedAt).toLocaleString(undefined, {dateStyle:"medium",timeStyle:"short"})}`;
@@ -581,7 +585,7 @@ function refreshView() {
   updateDetail();
   state.simulationSteps = 360;
   updateNoteList();
-  if (compactViewport.matches && !graphInteracted) fitMobileGraph();
+  if (!graphInteracted) fitMobileGraph();
 }
 
 function makeViewGraph() {
@@ -662,10 +666,7 @@ function nodeAllowedInView(node, includeTags, includeUnresolved) {
 
 function buildSceneGraph(graph) {
   if (!renderer) return;
-  for (const object of graphRoot.children) {
-    object.geometry?.dispose?.();
-    object.material?.dispose?.();
-  }
+  graphRoot.traverse(object => { object.geometry?.dispose?.(); object.material?.dispose?.(); });
   graphRoot.clear();
   nodeObjects.clear();
   nodeLabels.clear();
@@ -684,12 +685,22 @@ function buildSceneGraph(graph) {
       color: new THREE.Color(colorForNode(node)),
       emissive: new THREE.Color(colorForNode(node)),
       emissiveIntensity: node.kind === "note" ? 0.3 : 0.08,
-      roughness: 0.72,
+      roughness: 0.45,
       metalness: 0.08,
     });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(node.x, node.y, node.z);
     mesh.userData.nodeId = node.id;
+    if (node.kind === 'note') {
+      const halo = new THREE.Mesh(new THREE.SphereGeometry(nodeRadius(node) * 1.6, 12, 10), new THREE.ShaderMaterial({
+        uniforms: { tone: { value: new THREE.Color(colorForNode(node)) }, strength: { value: .22 } },
+        vertexShader: 'varying vec3 n; varying vec3 v; void main(){vec4 p=modelViewMatrix*vec4(position,1.0);n=normalize(normalMatrix*normal);v=normalize(-p.xyz);gl_Position=projectionMatrix*p;}',
+        fragmentShader: 'uniform vec3 tone;uniform float strength;varying vec3 n;varying vec3 v;void main(){float a=pow(1.0-abs(dot(normalize(n),normalize(v))),2.0);gl_FragColor=vec4(tone,strength*a);}',
+        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      }));
+      halo.raycast = () => {};
+      mesh.add(halo);
+    }
     graphRoot.add(mesh);
     nodeObjects.set(node.id, mesh);
     nodeMaterials.set(node.id, material);
@@ -709,13 +720,8 @@ function buildSceneGraph(graph) {
 
 function ensurePosition(node) {
   if (Number.isFinite(node.x)) return;
-  const index = hashCode(node.id);
-  const radius = 70 + (Math.abs(index) % 36);
-  const theta = (index % 360) * (Math.PI / 180);
-  const phi = Math.acos(2 * ((Math.abs(index) % 997) / 997) - 1);
-  node.x = radius * Math.sin(phi) * Math.cos(theta);
-  node.y = radius * Math.sin(phi) * Math.sin(theta);
-  node.z = radius * Math.cos(phi);
+  const position = tissuePosition(hashCode(node.id));
+  node.x = position.x; node.y = position.y; node.z = position.z;
 }
 
 function nodeRadius(node) {
@@ -730,17 +736,10 @@ function colorForNode(node) {
 
 function createLines(graph) {
   linePositions = new Float32Array(graph.links.length * AXON_STEPS * 2 * 3);
-  lineColors = new Float32Array(graph.links.length * AXON_STEPS * 2 * 3);
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
-
-  const material = new THREE.LineBasicMaterial({
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.42,
-  });
-  lineSegments = new THREE.LineSegments(geometry, material);
+  const geometry = new THREE.CylinderGeometry(1, 1, 1, compactViewport.matches ? 5 : 7, 1, false);
+  const material = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x22545f, emissiveIntensity: .55, roughness: .5, transparent: true, opacity: .76, depthWrite: false });
+  lineSegments = new THREE.InstancedMesh(geometry, material, graph.links.length * AXON_STEPS);
+  lineSegments.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   lineSegments.userData.links = graph.links.map(link => ({ ...link, curveSeed: hashCode(link.id) }));
   // Node positions change during settling; avoid stale bounds hiding long fibres.
   lineSegments.frustumCulled = false;
@@ -749,19 +748,21 @@ function createLines(graph) {
 }
 
 function updateLines() {
-  if (!lineSegments || !linePositions || !lineColors) return;
+  if (!lineSegments || !linePositions) return;
   const links = lineSegments.userData.links || [];
   const selectedId = state.selectedId;
   const matching = getMatchingNodeIds();
   const hasSearch = Boolean(state.search);
-  lineSegments.material.opacity = hasSearch ? 0.54 : 0.42;
+  lineSegments.material.opacity = hasSearch ? .86 : .76;
   let offset = 0;
   for (const link of links) {
     const source = nodeObjects.get(link.source);
     const target = nodeObjects.get(link.target);
     if (!source || !target) continue;
 
-    writeAxon(linePositions, offset, source.position, target.position, link.curveSeed);
+    const sourceTerminal = synapseTerminal(source, target.position);
+    const targetTerminal = synapseTerminal(target, source.position);
+    writeAxon(linePositions, offset, sourceTerminal, targetTerminal, link.curveSeed);
 
     const touchesSelected = selectedId && (link.source === selectedId || link.target === selectedId);
     const touchesSearchMatch = hasSearch && (matching.has(link.source) || matching.has(link.target));
@@ -775,16 +776,22 @@ function updateLines() {
     if (hasSearch && !touchesSearchMatch) {
       tone.lerp(new THREE.Color("#151719"), 0.88);
     }
-    for (let vertex = 0; vertex < AXON_STEPS * 2; vertex++) {
-      const index = offset + vertex * 3;
-      lineColors[index] = tone.r;
-      lineColors[index + 1] = tone.g;
-      lineColors[index + 2] = tone.b;
+    for (let step = 0; step < AXON_STEPS; step++) {
+      const index = offset + step * 6, instance = index / 6;
+      axonStart.fromArray(linePositions, index); axonEnd.fromArray(linePositions, index + 3);
+      axonTransform.position.copy(axonStart).lerp(axonEnd, .5);
+      const length = axonEnd.sub(axonStart).length();
+      axonTransform.quaternion.setFromUnitVectors(axonUp, length > .0001 ? axonEnd.divideScalar(length) : axonUp);
+      const width = (touchesSelected || touchesSearchMatch ? .55 : .28) * (1 + .2 * Math.cos(step / AXON_STEPS * Math.PI * 2));
+      axonTransform.scale.set(width, Math.max(length, .001), width);
+      axonTransform.updateMatrix();
+      lineSegments.setMatrixAt(instance, axonTransform.matrix);
+      lineSegments.setColorAt(instance, tone);
     }
     offset += AXON_STEPS * 6;
   }
-  lineSegments.geometry.attributes.position.needsUpdate = true;
-  lineSegments.geometry.attributes.color.needsUpdate = true;
+  lineSegments.instanceMatrix.needsUpdate = true;
+  if (lineSegments.instanceColor) lineSegments.instanceColor.needsUpdate = true;
 }
 
 function colorForLink(link) {
@@ -813,7 +820,7 @@ function simulateLayout() {
   const objects = nodeObjects;
   const repulsion = 14;
   const spring = 0.0028;
-  const centering = 0.0009;
+  const centering = 0.002;
 
   for (let i = 0; i < nodes.length; i += 1) {
     const a = objects.get(nodes[i].id);
@@ -865,9 +872,10 @@ function simulateLayout() {
     const object = objects.get(node.id);
     const velocity = velocities.get(node.id);
     if (!object || !velocity) continue;
-    velocity.x += -object.position.x * centering;
-    velocity.y += -object.position.y * centering;
-    velocity.z += -object.position.z * centering;
+    const anchor = tissuePosition(hashCode(node.id));
+    velocity.x += (anchor.x - object.position.x) * centering;
+    velocity.y += (anchor.y - object.position.y) * centering;
+    velocity.z += (anchor.z - object.position.z) * centering;
     velocity.x *= 0.88;
     velocity.y *= 0.88;
     velocity.z *= 0.88;
@@ -901,6 +909,7 @@ function updateMaterials() {
     material.opacity = visible ? 1 : hasSearch ? 0.08 : 0.22;
     material.transparent = !visible;
     material.emissiveIntensity = isSelected ? 0.85 : isHovered ? 0.6 : isSearchMatch ? 0.85 : node.kind === "note" ? 0.3 : 0.08;
+    for (const child of object.children) if (child.material.uniforms?.strength) child.material.uniforms.strength.value = visible ? (isSelected ? .45 : .22) : .025;
   }
   updateLabels();
 }
@@ -939,8 +948,8 @@ function updateLabels() {
       continue;
     }
 
-    label.hidden = !isVisible;
-    if (!isVisible) continue;
+    label.hidden = !isVisible || !labelIds.has(node.id);
+    if (label.hidden) continue;
 
     label.style.transform = `translate(${Math.round(x + rect.left + 10)}px, ${Math.round(y + rect.top - 10)}px)`;
     label.dataset.selected = node.id === state.selectedId ? "true" : "false";
@@ -1014,7 +1023,7 @@ function selectNode(id, options = {}) {
   state.selectedId = id;
   state.localFocusId = local ? id : null;
   refreshView();
-  if (compactViewport.matches) setMobileView('read');
+  setMobileView('read');
   detailPanel.scrollTop = 0;
   if (focus) {
     focusNode(id);
@@ -1364,10 +1373,7 @@ function focusNode(id) {
 }
 
 function resetCameraView() {
-  if (compactViewport.matches) { fitMobileGraph(); return; }
-  controls.target.set(0, 0, 0);
-  camera.position.set(0, 38, 178);
-  controls.update();
+  fitMobileGraph();
 }
 
 function resize() {

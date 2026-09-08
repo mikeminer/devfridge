@@ -37,3 +37,18 @@
  .no-webgl #graph-canvas{display:none}.no-webgl .control-panel{width:auto}
 }
 @media(max-width:360px){.brand-copy>span{max-width:118px}.brand-mark{display:none}.graph-hint{right:170px}}
+
+/* Let the neural tissue occupy the full desktop canvas as it does on phones. */
+@media(min-width:761px) and (pointer:fine),(min-width:761px) and (min-height:601px){
+ .control-panel,.detail-panel,.detail-panel[data-active=true]{display:none}
+ body[data-mobile-view=explore] .control-panel{display:flex;width:340px;bottom:82px}
+ body[data-mobile-view=read] .detail-panel[data-active=true]{display:block;width:min(440px,40vw);bottom:82px}
+ .mobile-navigation{display:flex;position:absolute;z-index:30;left:50%;transform:translateX(-50%);bottom:16px;gap:6px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#101e28}
+ .mobile-navigation button{min-width:88px;min-height:44px;padding:8px 16px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--muted);font-size:14px;font-weight:600;line-height:1.3}
+ .mobile-navigation button[aria-pressed=true]{background:#294b5b;border-color:#558495;color:#effbff}
+ .mobile-navigation button:disabled{opacity:.4;cursor:default}
+ .status-box{top:92px;bottom:auto;left:20px;max-width:480px;background:transparent;box-shadow:none;backdrop-filter:none;border:0}
+ body[data-mobile-view=explore] .status-box{display:none}
+ .graph-hint{display:block;left:24px;right:auto;bottom:28px;text-align:left}
+ .graph-label{background:#0a1720c9;border-color:#314955;border-radius:8px;font-size:13px}
+}

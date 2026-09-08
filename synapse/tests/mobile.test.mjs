@@ -2,9 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { initialNoteId, fittedDistance, nearestTap, isTap } from '../mobile.mjs';
 
-test('phones open the graph, while explicit note links and desktop reading still work', () => {
+test('phones and desktop open the whole network, while explicit note links still work', () => {
   assert.equal(initialNoteId(true, '', null), null);
-  assert.equal(initialNoteId(false, '', null), '/investor/index.md');
+  assert.equal(initialNoteId(false, '', null), null);
   assert.equal(initialNoteId(true, '/docs/world.md', null), '/docs/world.md');
   assert.equal(initialNoteId(true, '', '/docs/program.md'), '/docs/program.md');
 });
