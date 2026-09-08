@@ -51,4 +51,10 @@ Investor guides and glossary pages are reviewed editorial content. Asset pages, 
 
 The generator maintains frontmatter and relative links. The validator checks page metadata, every required asset identity, observation states, all local docs routes, index coverage and local links. Tests exercise source failures, address identity, malformed data and filtering.
 
-Magistra provided the structural example: one concept per Markdown file, metadata, indices and links. No Magistra code or domain-specific content was copied.
+Magistra provided the structural example for this knowledge folder: one concept per Markdown file, metadata, indices and links. The knowledge generator is original. The separate [Synapse viewer](https://synapse.devfridge.cool) adapts Magistra's viewer under its AGPL-3.0 license, with attribution and corresponding source in the repository's synapse directory.
+
+## Synapse viewer
+
+[Synapse](https://synapse.devfridge.cool) displays this vault as a 3D graph and searchable reading surface. Every refresh exports all Markdown notes into [the public viewer feed](../data/vault.json). Synapse reads that feed on load and checks it every five minutes while visible; it does not need a website redeployment for daily knowledge changes. GitHub caching can add a short delay.
+
+If the live feed fails on the first visit, the viewer labels its bundled dated copy as a saved copy. During a later refresh failure it keeps the current readable notes and shows an error. Snapshot freshness and individual source-success timestamps remain separate: a recent export does not imply that every source succeeded.

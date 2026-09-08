@@ -429,3 +429,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    from export_vault import export_vault
+    export_vault()

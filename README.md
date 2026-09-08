@@ -11,6 +11,8 @@ License: [Business Source License 1.1](LICENSE) (converts to GPL-2.0-or-later on
 
 ## Investor knowledge
 
+Explore the vault visually at **[synapse.devfridge.cool](https://synapse.devfridge.cool)**: 3D graph, full-address search, network filters, and linked notes. Viewer source and licensing are in [synapse](synapse/README.md).
+
 Start with the [investor knowledge folder](knowledge/index.md): every officially listed Solana
 and Robinhood asset, full addresses, observed supply and controls, market evidence, investor
 guides, and all documentation references. [Source status](knowledge/operations/freshness.md)
