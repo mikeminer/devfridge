@@ -22,7 +22,7 @@ The repository's **Investor knowledge** GitHub Actions workflow runs daily at 06
 
 The refresh job has contents-write permission solely to commit the knowledge folder using the repository's short-lived GITHUB_TOKEN. PR validation has read-only permission and makes no network calls. The workflow does not change app code, execute trades, sign transactions or modify cloud settings.
 
-The four Vercel project configurations use [a build guard](../../scripts/knowledge/skip-site-build.mjs) to skip knowledge-only commits. Application changes and unrelated configuration changes continue to build; missing Git history defaults to building. This prevents daily data commits from unnecessarily redeploying websites.
+The three Vercel website projects use [a build guard](../../scripts/knowledge/skip-site-build.mjs) to skip knowledge-only commits. Application changes and unrelated configuration changes continue to build; missing Git history defaults to building. The bot service has the same guard in its service configuration, but Vercel Services still built that service during verification. Website skips were verified separately; do not assume service deployment suppression.
 
 GitHub may delay scheduled jobs, and public repositories can have scheduled workflows disabled after inactivity. Check the [Actions page](https://github.com/mikeminer/devfridge/actions/workflows/knowledge.yml) and the per-source timestamps. If branch protections later prevent bot commits, updates will fail visibly until maintainers configure an approved PR-based publishing path; do not bypass protections.
 
