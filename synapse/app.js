@@ -1,5 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { compactQuery, initialNoteId, fittedDistance, nearestTap, isTap } from './mobile.mjs';
+
+const compactViewport = matchMedia(compactQuery);
+let mobileView = 'graph';
+let graphInteracted = false;
+const activePointers = new Map();
+let wasMultitouch = false;
 
 const DEFAULT_SOURCE = {
   repo: "mikeminer/devfridge",
@@ -98,6 +105,11 @@ function init() {
   applySourceToInputs();
   resize();
   window.addEventListener("resize", resize);
+  compactViewport.addEventListener('change', () => { setMobileView('graph'); resize(); });
+  for (const button of document.querySelectorAll('[data-mobile-view]')) {
+    button.addEventListener('click', () => setMobileView(button.dataset.mobileView));
+  }
+  setMobileView(renderer ? (readSelectedHash() ? 'read' : 'graph') : 'explore');
 
   sourceForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -137,16 +149,30 @@ function init() {
 
   canvas.addEventListener("pointermove", onPointerMove);
   canvas.addEventListener("pointerleave", () => setHovered(null));
-  canvas.addEventListener("click", () => {
-    if (state.hoveredId) {
-      selectNode(state.hoveredId);
-    }
+  canvas.addEventListener('pointerdown', event => {
+    graphInteracted = true;
+    if (!activePointers.size) wasMultitouch = false;
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (activePointers.size > 1) wasMultitouch = true;
   });
+  canvas.addEventListener('pointerup', event => {
+    const start = activePointers.get(event.pointerId);
+    activePointers.delete(event.pointerId);
+    if (!isTap(start, { x: event.clientX, y: event.clientY }, wasMultitouch)) return;
+    const rect = canvas.getBoundingClientRect();
+    const points = state.view.nodes.map(node => {
+      const position = nodeObjects.get(node.id)?.position.clone().project(camera);
+      return position && { id: node.id, x: (position.x * .5 + .5) * rect.width + rect.left, y: (-position.y * .5 + .5) * rect.height + rect.top, z: position.z };
+    }).filter(Boolean);
+    const id = nearestTap(points, event.clientX, event.clientY, compactViewport.matches ? 24 : 12);
+    if (id) selectNode(id);
+  });
+  canvas.addEventListener('pointercancel', event => { activePointers.delete(event.pointerId); wasMultitouch = true; });
 
   window.addEventListener("hashchange", () => { const id = readSelectedHash(); if (state.graph.nodes.some(n => n.id === id)) selectNode(id); });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") { state.selectedId = null; state.localFocusId = null; refreshView(); }
-    if ((event.ctrlKey || event.metaKey) && event.key === "k") { event.preventDefault(); searchInput.focus(); }
+    if ((event.ctrlKey || event.metaKey) && event.key === "k") { event.preventDefault(); if (compactViewport.matches) setMobileView('explore'); searchInput.focus(); }
   });
   updateDetail(); loadVault(); if (renderer) animate();
   setInterval(() => { if (!document.hidden) loadVault(true); }, 300000);
@@ -185,11 +211,12 @@ async function loadVault(background = false) {
   applySourceToInputs();
   const vault = await loadVaultFiles();
   if (version !== loadVersion) return;
-  const selected = background ? state.selectedId : readSelectedHash() || state.selectedId || "/investor/index.md";
+  const selected = background ? state.selectedId : initialNoteId(compactViewport.matches, readSelectedHash(), state.selectedId);
   state.graph = buildObsidianGraph(vault.files, { ...state.source, truncated: false });
   state.selectedId = state.graph.nodes.some(n => n.id === selected) ? selected : null;
   if (!background) state.localFocusId = null;
   populateGroupFilter(state.graph.groups); refreshView();
+  if (!background && compactViewport.matches && selected) setMobileView('read');
   const age = Date.now() - Date.parse(vault.fetchedAt);
   const stale = !Number.isFinite(age) || age > 36 * 3600000;
   freshnessLabel.textContent = `${fallbackMode ? "Saved copy" : stale ? "Older snapshot" : "Daily snapshot"} · ${new Date(vault.fetchedAt).toLocaleString(undefined, {dateStyle:"medium",timeStyle:"short"})}`;
@@ -553,6 +580,7 @@ function refreshView() {
   updateDetail();
   state.simulationSteps = 360;
   updateNoteList();
+  if (compactViewport.matches && !graphInteracted) fitMobileGraph();
 }
 
 function makeViewGraph() {
@@ -771,6 +799,7 @@ function animate() {
   if (state.simulationSteps > 0) {
     simulateLayout();
     state.simulationSteps -= 1;
+    if (!state.simulationSteps && compactViewport.matches && !graphInteracted) fitMobileGraph();
   }
   controls.update();
   updateLines();
@@ -881,6 +910,11 @@ function updateLabels() {
   const term = state.search;
   const matching = getMatchingNodeIds(term);
   const neighborhood = state.selectedId ? getNeighborhoodIds(state.selectedId, state.view) : null;
+  const compact = compactViewport.matches;
+  const priority = [...state.view.nodes].filter(node => !term || matching.has(node.id)).sort((a, b) => b.degree - a.degree).slice(0, term ? 8 : 6);
+  const labelIds = new Set(priority.map(node => node.id));
+  labelIds.add(state.selectedId); labelIds.add(state.hoveredId);
+  const occupied = [];
 
   for (const node of state.view.nodes) {
     const object = nodeObjects.get(node.id);
@@ -891,6 +925,19 @@ function updateLabels() {
     const x = (vector.x * 0.5 + 0.5) * rect.width;
     const y = (-vector.y * 0.5 + 0.5) * rect.height;
     const isVisible = vector.z >= -1 && vector.z <= 1 && x > -90 && x < rect.width + 90 && y > -28 && y < rect.height + 28;
+
+    if (compact) {
+      const lx = Math.min(rect.width - 154, Math.max(4, x + 10));
+      const ly = Math.max(4, Math.min(rect.height - 32, y - 10));
+      const important = node.id === state.selectedId || node.id === state.hoveredId;
+      const overlaps = occupied.some(box => Math.abs(box.x - lx) < 154 && Math.abs(box.y - ly) < 32);
+      label.hidden = !isVisible || !labelIds.has(node.id) || (!important && overlaps);
+      if (!label.hidden) { occupied.push({ x: lx, y: ly }); label.style.transform = `translate(${Math.round(lx + rect.left)}px, ${Math.round(ly + rect.top)}px)`; }
+      label.dataset.selected = node.id === state.selectedId ? 'true' : 'false';
+      label.dataset.match = !term || matching.has(node.id) ? 'true' : 'false';
+      label.dataset.connected = 'true';
+      continue;
+    }
 
     label.hidden = !isVisible;
     if (!isVisible) continue;
@@ -967,6 +1014,7 @@ function selectNode(id, options = {}) {
   state.selectedId = id;
   state.localFocusId = local ? id : null;
   refreshView();
+  if (compactViewport.matches) setMobileView('read');
   detailPanel.scrollTop = 0;
   if (focus) {
     focusNode(id);
@@ -976,6 +1024,9 @@ function selectNode(id, options = {}) {
 function updateDetail() {
   const node = state.view.nodes.find((item) => item.id === state.selectedId);
   detailPanel.dataset.active = node ? "true" : "false";
+  const readButton = document.querySelector('[data-mobile-view="read"]');
+  if (readButton) readButton.disabled = !node;
+  if (!node && mobileView === 'read') setMobileView('graph');
   if (!node) {
     detailPanel.innerHTML = `
       <h2>Explore the evidence</h2><p>Select a note in the graph or Explore list. Search by topic, name, or full token address.</p><p>Each connection leads to the source, asset, or concept behind a claim.</p>
@@ -1313,17 +1364,36 @@ function focusNode(id) {
 }
 
 function resetCameraView() {
+  if (compactViewport.matches) { fitMobileGraph(); return; }
   controls.target.set(0, 0, 0);
   camera.position.set(0, 38, 178);
   controls.update();
 }
 
 function resize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const { width, height } = canvas.getBoundingClientRect();
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer?.setSize(width, height, false);
+  if (compactViewport.matches) fitMobileGraph();
+}
+
+function setMobileView(view) {
+  mobileView = view;
+  document.body.dataset.mobileView = view;
+  for (const button of document.querySelectorAll('[data-mobile-view]')) button.setAttribute('aria-pressed', String(button.dataset.mobileView === view));
+  if (view === 'graph') { document.activeElement?.blur?.(); if (compactViewport.matches) fitMobileGraph(); }
+}
+
+function fitMobileGraph() {
+  const objects = [...nodeObjects.values()];
+  const center = new THREE.Vector3();
+  for (const object of objects) center.add(object.position);
+  if (objects.length) center.divideScalar(objects.length);
+  const radius = Math.max(45, ...objects.map(object => object.position.distanceTo(center) + 7));
+  controls.target.copy(center);
+  camera.position.copy(center).add(new THREE.Vector3(0, 0, fittedDistance(radius, camera.aspect, camera.fov)));
+  controls.update();
 }
 
 function setStatus(message, tone = "normal") {

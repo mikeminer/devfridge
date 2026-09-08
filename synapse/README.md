@@ -6,6 +6,8 @@ Synapse adapts the Magistra vault viewer for DevFridge's investor knowledge. Rot
 
 ## Data updates
 
+On phones, Graph opens without covering panels. Use Explore & search to browse notes, or tap a graph node to open Read note. The bottom navigation returns to the unobstructed graph. Pinch zoom and drag rotation do not select notes. The graph fits the available viewport on rotation, uses larger tap targets, and limits overlapping labels.
+
 The viewer reads https://raw.githubusercontent.com/mikeminer/devfridge/master/knowledge/data/vault.json on load, manual refresh, and every five minutes while visible. The DevFridge daily knowledge workflow produces this complete feed, so data updates do not require redeploying Synapse. No GitHub token is exposed or required.
 
 The included vault.json is a dated fallback for the initial visit when the live source is unavailable. The UI labels this saved copy and its timestamp. Subsequent fetch errors preserve the current notes. A snapshot older than 36 hours is labelled older; individual observations may be stale even in a recent snapshot. Read the freshness report before interpreting data.
