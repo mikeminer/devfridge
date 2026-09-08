@@ -4,7 +4,7 @@ title: "MoonZarella (robinhood)"
 description: "DevFridge investor knowledge: MoonZarella (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x29A13F8219d1D54424F1F9f1F90E85448488b2DE"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T18:20:38Z"
+timestamp: "2026-09-08T18:29:43Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x29a13f8219d1d54424f1f9f1f90e85448488b2de`
 
-Registry status: ok · last successful observation: 2026-09-08T18:20:38Z · last attempt: 2026-09-08T18:20:38Z.
+Registry status: ok · last successful observation: 2026-09-08T18:29:43Z · last attempt: 2026-09-08T18:29:43Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-08T18:20:38Z · last attempt: 2026-09-08T18:20:38Z.
+ok · last successful observation: 2026-09-08T18:29:43Z · last attempt: 2026-09-08T18:29:43Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 57899866 |
+| Block | 57905273 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-08T18:20:38Z · last attempt: 2026-09-08T18:20:38Z.
+ok · last successful observation: 2026-09-08T18:29:43Z · last attempt: 2026-09-08T18:29:43Z.
 
 ```json
 {
