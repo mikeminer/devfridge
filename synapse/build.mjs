@@ -4,7 +4,7 @@ import { join } from 'node:path';
 await mkdir('dist/vendor', { recursive: true });
 const feed = JSON.parse(await readFile('vault.json', 'utf8'));
 if (feed.repo !== 'mikeminer/devfridge' || feed.files.length < 52) throw new Error('Incomplete DevFridge knowledge fallback');
-for (const file of ['index.html', 'app.js', 'styles.css', 'vault.json', 'LICENSE', 'NOTICE.md']) await copyFile(file, join('dist', file));
+for (const file of ['index.html', 'app.js', 'mobile.mjs', 'styles.css', 'vault.json', 'LICENSE', 'NOTICE.md']) await copyFile(file, join('dist', file));
 for (const [source, target] of [
   ['three/build/three.module.js', 'three.module.js'],
   ['three/examples/jsm/controls/OrbitControls.js', 'OrbitControls.js'],
