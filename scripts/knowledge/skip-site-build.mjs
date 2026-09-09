@@ -10,7 +10,7 @@ export function shouldSkip(repo) {
     const paths = git('diff', '--name-only', '-z', 'HEAD^', 'HEAD').split('\0').filter(Boolean);
     if (!paths.length) return false;
     return paths.every(path => {
-      if (/^(knowledge\/|scripts\/knowledge\/|synapse\/)/.test(path) || ['README.md', '.github/workflows/knowledge.yml', '.github/workflows/synapse.yml'].includes(path)) return true;
+      if (/^(knowledge\/|scripts\/knowledge\/|synapse\/|ir\/)/.test(path) || ['README.md', '.github/workflows/knowledge.yml', '.github/workflows/synapse.yml', '.github/workflows/ir.yml'].includes(path)) return true;
       if (!['vercel.json', 'app/vercel.json', 'scan/vercel.json', 'team/vercel.json'].includes(path)) return false;
       // Permit the one-time installation of this guard, never other configuration edits.
       const current = JSON.parse(git('show', `HEAD:${path}`));
