@@ -41,7 +41,7 @@ def connect_contacts(html):
     # These links sit outside the directory cards, with descriptive visible labels.
     for link in root.find("a"):
         href, label = link.attrs.get("href", ""), clean(link.text())
-        if https_url(href) and label and (urlparse(href).hostname in {"devfridge.medium.com", "app.paragraph.com"} or href.startswith("https://x.com/i/chat/group_join/")):
+        if https_url(href) and label and (urlparse(href).hostname in {"devfridge.medium.com", "app.paragraph.com", "paragraph.com"} or href.startswith("https://x.com/i/chat/group_join/")):
             entries.append({"group": "NEWS & COMMUNITY", "label": label, "url": href})
     if found != groups or not any(e["group"] == "TALK & LISTINGS" for e in entries):
         raise ValueError("Connect contact sections missing or empty")

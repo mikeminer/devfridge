@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-09T11:22:41Z · last attempt: 2026-09-09T11:22:41Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-09T14:13:55Z · last attempt: 2026-09-09T14:13:55Z.
 
 ## OFFICIAL TELEGRAM BOT
 
@@ -33,6 +33,8 @@ Project-published contact observations. Only team members with verified PASTA co
 
 ## TALK & LISTINGS
 
+- [Zealy quests Official Solana PASTA questboard](https://zealy.io/cw/solanapasta/questboard/f46e9c1e-3e22-4443-8157-210cbee1d19a/94837c1a-f43f-47f3-a16c-b1f99d225c89)
+- [DeBank Official DeBank profile](https://debank.com/profile/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134)
 - [Project leader — Telegram @anonimocommando](https://t.me/anonimocommando)
 - [X @anonimocommando](https://x.com/anonimocommando)
 - [Discord Official DevFridge Discord server](https://discord.com/invite/9RSrhuUtu)
@@ -44,7 +46,7 @@ Project-published contact observations. Only team members with verified PASTA co
 
 ## NEWS & COMMUNITY
 
-- [Subscribe on Paragraph](https://app.paragraph.com/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134)
+- [Subscribe on Paragraph](https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/)
 - [Follow on Medium](https://devfridge.medium.com/)
 - [Join the $PASTA Community](https://x.com/i/chat/group_join/g2094869082621227268/1ZTG1n781l)
 

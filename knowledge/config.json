@@ -33,7 +33,7 @@
   "schema_version": 1,
   "publications": [
     "https://devfridge.medium.com/",
-    "https://app.paragraph.com/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134"
+    "https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/"
   ],
   "robinhood_chain_id": 4663,
   "solana_rpc": "https://api.mainnet-beta.solana.com",
