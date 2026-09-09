@@ -5,7 +5,7 @@ const cache=new Map();
 export async function readSource(url,{fetcher=fetch,now=Date.now()}={}){
  const cached=cache.get(url);if(fetcher===fetch&&cached&&now-cached.at<300000)return cached.value;
  const response=await fetcher(url,{signal:AbortSignal.timeout(6500),redirect:'error',headers:{Accept:'text/html,text/plain,application/json','User-Agent':'DevFridge-IR/1.0'}});
- if(!response.ok)throw new Error('Source unavailable');
+ if(!response.ok)throw Object.assign(new Error('Source unavailable'),{statusCode:response.status});
  const html=await response.text();if(html.length>800000)throw new Error('Source too large');
  let text=html;
  if(response.headers.get('content-type')?.includes('text/html')){const $=load(html);$('script,style,nav,header,footer').remove();const main=$('main');text=(main.length?main:$('body')).text().replace(/\s+/g,' ').trim();}
@@ -17,7 +17,7 @@ export async function getContext(options){
  const urls=['https://synapse.devfridge.cool/brief.md','https://docs.devfridge.cool/program','https://docs.devfridge.cool/sdk'];
  const results=await Promise.allSettled(urls.map(url=>readSource(url,options)));
  const sources=results.flatMap((result,index)=>result.status==='fulfilled'?[result.value]:[{url:urls[index],unavailable:true}]);
- if(sources[0].unavailable)throw new Error('Synapse evidence unavailable');
+ if(sources[0].unavailable)throw Object.assign(new Error('Synapse evidence unavailable'),{cause:results[0].reason,statusCode:results[0].reason?.statusCode});
  return {sources,retrievedAt:new Date().toISOString(),text:sources.map(source=>`SOURCE ${source.url}\nRetrieved ${source.retrievedAt??'unavailable'}\n${source.text??'Unavailable. Do not infer its contents.'}`).join('\n\n')};
 }
 export function instructions(context){return `You are DevFridge Investor Relations, an AI information assistant powered by Grok. You are not the CEO. Reply in the language of the user's latest question, even when it differs from earlier messages. Be concise, welcoming and helpful. Prefer a direct answer, a few useful facts and clickable source links. Do not promise returns or give personalized buy/sell advice.

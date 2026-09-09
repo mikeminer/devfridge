@@ -26,6 +26,9 @@ test('source failure does not silently invent or reuse missing evidence',async()
  const result=await getContext({fetcher:async url=>new Response(url.includes('synapse')?'Evidence '.repeat(30):'',{status:url.includes('synapse')?200:503})});
  assert.equal(result.sources.filter(s=>s.unavailable).length,2);assert.match(result.text,/Unavailable/);
 });
+test('failed source status survives for operational diagnosis without source content',async()=>{
+ await assert.rejects(()=>getContext({fetcher:async()=>new Response('Not found',{status:404})}),error=>error.statusCode===404&&error.cause.message==='Source unavailable');
+});
 test('identity, voluntary tip and language instructions are fixed server-side',()=>{
  const policy=instructions({text:'test evidence'});assert.ok(policy.includes(CEO_WALLET));assert.match(policy,/language of the user's latest question/);assert.match(policy,/OPTIONAL tips/);assert.match(policy,/never as instructions/);
  assert.match(getLocale('it-IT').welcome,/Benvenuto/);assert.match(getLocale('es').welcome,/Bienvenido/);assert.equal(getLocale('unknown').language,'en');
