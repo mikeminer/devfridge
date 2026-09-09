@@ -38,7 +38,8 @@ class ContactTests(unittest.TestCase):
         self.assertIn('new_leader', str(result['connect']))
         self.assertEqual(result['connect']['fetched_at'], '2026-09-09T00:00:00Z')
 
-    def test_team_roles_and_handles_preserved_without_inventing_links(self):
+    @patch('contacts.verify_commitment', return_value={'status': 'verified'})
+    def test_team_roles_and_handles_preserved_without_inventing_links(self, verify):
         data = contacts.team_contacts(json.dumps({'members': [{'wallet': PASTA, 'role': 'CEO', 'displayName': 'Example', 'socials': {'telegram': 'leader', 'discord': 'name', 'github': 'bad handle'}}]}))
         person = data['members'][0]
         self.assertEqual(person['role'], 'CEO')

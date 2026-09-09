@@ -4,7 +4,7 @@ title: "Program IDs and fees"
 description: "DevFridge investor knowledge: Program IDs and fees"
 resource: "https://docs.devfridge.cool/program"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 

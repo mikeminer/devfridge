@@ -4,7 +4,7 @@ title: "Scanner, Feature, and Fridge questions"
 description: "DevFridge investor knowledge: Scanner, Feature, and Fridge questions"
 resource: "https://docs.devfridge.cool/faq"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 

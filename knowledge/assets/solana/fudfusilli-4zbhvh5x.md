@@ -4,7 +4,7 @@ title: "FudFusilli (solana)"
 description: "DevFridge investor knowledge: FudFusilli (solana)"
 resource: "https://solscan.io/token/4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 

@@ -3,7 +3,8 @@ import json
 import re
 from urllib.parse import urlparse
 
-from refresh import Document, Element, observed, page, request, status_line
+from refresh import Document, Element, observed, page, request, status_line, now
+from commitment import verify_commitment, verified_at
 
 
 def clean(value):
@@ -47,17 +48,27 @@ def connect_contacts(html):
     return {"title": "Official Connect contacts", "entries": list({e['url']: e for e in entries}.values())}
 
 
-def team_contacts(payload):
+def team_contacts(payload, stamp=None):
+    stamp = stamp or now()
     data = json.loads(payload)
     if not isinstance(data.get("members"), list):
         raise ValueError("Team roster missing")
     members, wallets = [], set()
+    excluded, failures = 0, 0
     prefixes = {"x": "https://x.com/", "github": "https://github.com/", "telegram": "https://t.me/", "farcaster": "https://warpcast.com/", "pumpfun": "https://pump.fun/profile/"}
     for member in data["members"]:
         wallet = member.get("wallet", "")
         if not re.fullmatch(r"[1-9A-HJ-NP-Za-km-z]{32,44}", wallet) or wallet in wallets or not isinstance(member.get("role"), str):
             raise ValueError("Invalid team identity")
         wallets.add(wallet)
+        try:
+            proof = verify_commitment(wallet, member.get('tier'), stamp)
+        except Exception:
+            proof = None
+            failures += 1
+        if proof is None:
+            excluded += 1
+            continue
         socials = member.get("socials") or {}
         if not isinstance(socials, dict):
             raise ValueError("Invalid team socials")
@@ -68,14 +79,16 @@ def team_contacts(payload):
                 # Discord usernames and malformed handles remain text, never invented invite links.
                 url = prefixes[platform] + handle if platform in prefixes and re.fullmatch(r"[A-Za-z0-9_.-]+", handle) else None
                 contacts.append({"platform": platform, "handle": handle, "url": url})
-        members.append({"wallet": wallet, "name": clean(member.get("displayName")) or wallet, "role": clean(member["role"]), "contacts": contacts})
-    return {"title": "Team and leadership", "page": "https://team.devfridge.cool/", "members": members}
+        members.append({"wallet": wallet, "name": clean(member.get("displayName")) or wallet, "role": clean(member["role"]), "contacts": contacts, "commitment": proof})
+    return {"title": "Team with verified commitment", "page": "https://team.devfridge.cool/", "members": members,
+            "excluded_count": excluded, "verification_failures": failures}
 
 
 def refresh_contacts(config, old, stamp):
     sources = config["contact_sources"]
-    return {key: observed(old.get(key), sources[key], lambda key=key: (connect_contacts if key == "connect" else team_contacts)(request(sources[key])), stamp)
-            for key in ("connect", "team")}
+    # Team verification fails closed: never republish old profiles after a failed check.
+    return {"connect": observed(old.get('connect'), sources['connect'], lambda: connect_contacts(request(sources['connect'])), stamp),
+            "team": observed(None, sources['team'], lambda: team_contacts(request(sources['team']), stamp), stamp)}
 
 
 def md(value):
@@ -84,7 +97,7 @@ def md(value):
 
 def render_contacts(snapshot, stamp):
     records = snapshot.get("contacts", {})
-    intro = "Project-published contact observations. Team roles are roster labels, not independent identity or lock verification. Check the canonical source and observation date before contacting anyone."
+    intro = "Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates."
     connect, team = records.get("connect", {}), records.get("team", {})
     body = f"{intro}\n\n[Connect](https://connect.devfridge.cool/) · {status_line(connect)}.\n\n"
     entries = connect.get("data", {}).get("entries", [])
@@ -95,15 +108,18 @@ def render_contacts(snapshot, stamp):
     body += "\n[Team and leadership](./team.md) · [Contact index](./index.md)\n"
     page("contacts/connect.md", "Official contacts, project leader and community", body, stamp, "Documentation", "https://connect.devfridge.cool/")
     body = f"{intro}\n\n[Team site](https://team.devfridge.cool/) · [Public roster API](https://scan.devfridge.cool/api/team) · {status_line(team)}.\n\n"
-    members = team.get("data", {}).get("members", [])
+    members = [m for m in team.get("data", {}).get("members", []) if team.get('status') == 'ok' and verified_at(m, stamp)]
     for member in members:
         body += f"## {md(member['name'])} — {md(member['role'])}\n\nPublic wallet: `{member['wallet']}`\n\n"
+        proof = member['commitment']
+        body += f"**Verified commitment** · checked {proof['checked_at']} · tier {proof['tier']} · qualifying PASTA base units: `{proof['qualifying_amount_base_units']}`. [Lock evidence]({proof['source']}).\n\n"
         for contact in member["contacts"]:
             label = md(contact["platform"] + ": " + contact["handle"])
             body += (f"- [{label}]({contact['url']})" if contact["url"] else f"- {label} (published handle; no validated link)") + "\n"
         body += "\n"
     if not members:
-        body += "No team profiles in the available observation.\n"
+        body += "No members with a current verified commitment in the available observation.\n"
+    body += f"\nExcluded profiles: {team.get('data', {}).get('excluded_count', 'unknown')}; verification request failures: {team.get('data', {}).get('verification_failures', 'unknown')}. Failed verification never retains an old profile.\n"
     body += "\n[Official Connect contacts](./connect.md) · [Contact index](./index.md)\n"
     page("contacts/team.md", "Team, CEO and leadership contacts", body, stamp, "Documentation", "https://team.devfridge.cool/")
     page("contacts/index.md", "Official contacts and team", f"{intro}\n\n- [Project leader, communities and publications](./connect.md)\n- [Team, CEO and leadership](./team.md)\n\n[Investor overview](../investor/index.md) · [Source freshness](../operations/freshness.md)", stamp, "Index")

@@ -37,7 +37,7 @@ python scripts/knowledge/refresh.py --offline
 
 Online refresh reads the published Connect registry, discovers documentation pages, observes Solana mint state, reads Robinhood ERC-20 state at a common block, and obtains indexed market evidence. Offline mode regenerates identical Markdown from the saved snapshot.
 
-It also refreshes [official contacts and team](../contacts/index.md): the published Connect directory supplies leader, community, bot, site and publication links; the public API used by team.devfridge.cool supplies names, published roles, public wallets and social handles. Each source has its own observation timestamp. Successful refreshes replace removed directory entries and profiles; failed requests retain the last successful data marked stale. Team labels do not independently verify identity or token-lock status.
+It also refreshes [official contacts and team](../contacts/index.md): the published Connect directory supplies leader, community, bot, site and publication links; the public API used by team.devfridge.cool supplies names, published roles, public wallets and social handles. Each source has its own observation timestamp. Only members meeting the Team tier commitment criteria are indexed: fresh SDK lock evidence must show enough active PASTA with the required original lock duration, including the Team one-day tolerance. Profiles with failed, insufficient or expired checks are excluded. A failed roster request removes published profiles instead of retaining old membership. Connect directory failures still retain dated contacts marked stale. Commitment proves the observed lock criteria, not real-world identity.
 
 ## Failure policy
 

@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from refresh import KNOWLEDGE, ROOT, asset_path, read_json, validate_assets
+from commitment import verified_at
 
 
 def validate(root=KNOWLEDGE):
@@ -34,6 +35,9 @@ def validate(root=KNOWLEDGE):
         if name not in snapshot.get("contacts", {}):
             errors.append(f"Missing contact observation: {name}")
     records += list(snapshot.get("contacts", {}).values())
+    for member in snapshot.get('contacts', {}).get('team', {}).get('data', {}).get('members', []):
+        if not verified_at(member, snapshot['attempted_at']):
+            errors.append('Team profile without current verified commitment')
     for record in records:
         if record.get("status") not in {"ok", "stale", "unavailable"}:
             errors.append("Invalid observation status")

@@ -4,7 +4,7 @@ title: "FriedFomo (solana)"
 description: "DevFridge investor knowledge: FriedFomo (solana)"
 resource: "https://solscan.io/token/3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 
