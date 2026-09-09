@@ -5,14 +5,30 @@ const GATEWAYS = [
   "https://ipfs.io/ipfs/",
 ];
 
+function ipfsResource(uri: string): { cid: string; path: string } | null {
+  try {
+    const url = new URL(uri);
+    let cid: string | undefined, path = "";
+    if (url.protocol === "ipfs:") {
+      const pieces = `${url.hostname}${url.pathname}`.replace(/^ipfs\//, "").split("/");
+      cid = pieces.shift(); path = pieces.length ? `/${pieces.join("/")}` : "";
+    } else if (["https:", "http:"].includes(url.protocol)) {
+      const match = url.pathname.match(/^\/ipfs\/([a-zA-Z0-9]+)(\/.*)?$/);
+      const subdomain = url.hostname.match(/^([a-zA-Z0-9]+)\.ipfs\./);
+      if (match) { cid = match[1]; path = match[2] ?? ""; }
+      else if (subdomain) { cid = subdomain[1]; path = url.pathname === "/" ? "" : url.pathname; }
+    }
+    return cid && /^[a-zA-Z0-9]{46,90}$/.test(cid) ? { cid, path } : null;
+  } catch { return null; }
+}
+
 export function ipfsCid(uri: string): string | null {
-  const match = uri.match(/(?:ipfs:\/\/|\/ipfs\/)([a-zA-Z0-9]+)/i);
-  return match?.[1] ?? null;
+  return ipfsResource(uri)?.cid ?? null;
 }
 
 export function rewriteUri(uri: string): string {
-  const cid = ipfsCid(uri);
-  if (cid) return `${GATEWAYS[0]}${cid}`;
+  const resource = ipfsResource(uri);
+  if (resource) return `${GATEWAYS[0]}${resource.cid}${resource.path}`;
   if (uri.startsWith("ar://")) return `https://arweave.net/${uri.slice("ar://".length)}`;
   return uri;
 }
@@ -22,27 +38,34 @@ export function publicLogoUrl(uri: string | null | undefined): string | null {
   const trimmed = uri.trim();
   if (!trimmed) return null;
   if (trimmed.startsWith("data:image/")) return trimmed;
-  const cid = ipfsCid(trimmed);
-  if (cid) return `/api/logo?cid=${encodeURIComponent(cid)}`;
+  // Normalize stored feed entries as well as newly fetched metadata; invalidate old failed responses.
+  if (trimmed.startsWith("/api/logo?")) {
+    const url = new URL(trimmed, "https://scan.devfridge.cool");
+    url.searchParams.set("v", "2");
+    return url.pathname + url.search;
+  }
+  const resource = ipfsResource(trimmed);
+  if (resource) return `/api/logo?cid=${encodeURIComponent(resource.cid)}${resource.path ? `&path=${encodeURIComponent(resource.path)}` : ""}&v=2`;
   const abs = rewriteUri(trimmed);
   if (abs.startsWith("https://") || abs.startsWith("http://")) {
-    return `/api/logo?url=${encodeURIComponent(abs)}`;
+    return `/api/logo?url=${encodeURIComponent(abs)}&v=2`;
   }
   return null;
 }
 
-export function logoFetchList(cid?: string, rawUrl?: string): string[] {
+export function logoFetchList(cid?: string, rawUrl?: string, path = ""): string[] {
   const urls: string[] = [];
+  if (path && (!path.startsWith("/") || path.startsWith("//") || /[?#\\\r\n]/.test(path) || path.length > 2048)) return [];
   if (cid && /^[a-zA-Z0-9]{46,90}$/.test(cid)) {
-    for (const g of GATEWAYS) urls.push(`${g}${cid}`);
+    for (const g of GATEWAYS) urls.push(`${g}${cid}${path}`);
   }
   if (rawUrl) {
     const abs = rewriteUri(rawUrl);
     if (abs.startsWith("https://")) urls.push(abs);
-    const fromAbs = ipfsCid(abs);
-    if (fromAbs) {
+    const resource = ipfsResource(abs);
+    if (resource) {
       for (const g of GATEWAYS) {
-        const u = `${g}${fromAbs}`;
+        const u = `${g}${resource.cid}${resource.path}`;
         if (!urls.includes(u)) urls.push(u);
       }
     }
