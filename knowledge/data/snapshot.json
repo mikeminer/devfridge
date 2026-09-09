@@ -1237,7 +1237,7 @@
   "attempted_at": "2026-09-09T11:22:41Z",
   "contacts": {
     "connect": {
-      "attempted_at": "2026-09-09T11:22:41Z",
+      "attempted_at": "2026-09-09T14:13:55Z",
       "data": {
         "entries": [
           {
@@ -1297,6 +1297,16 @@
           },
           {
             "group": "TALK & LISTINGS",
+            "label": "Zealy quests Official Solana PASTA questboard",
+            "url": "https://zealy.io/cw/solanapasta/questboard/f46e9c1e-3e22-4443-8157-210cbee1d19a/94837c1a-f43f-47f3-a16c-b1f99d225c89"
+          },
+          {
+            "group": "TALK & LISTINGS",
+            "label": "DeBank Official DeBank profile",
+            "url": "https://debank.com/profile/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134"
+          },
+          {
+            "group": "TALK & LISTINGS",
             "label": "Project leader — Telegram @anonimocommando",
             "url": "https://t.me/anonimocommando"
           },
@@ -1338,7 +1348,7 @@
           {
             "group": "NEWS & COMMUNITY",
             "label": "Subscribe on Paragraph",
-            "url": "https://app.paragraph.com/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134"
+            "url": "https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/"
           },
           {
             "group": "NEWS & COMMUNITY",
@@ -1353,7 +1363,7 @@
         ],
         "title": "Official Connect contacts"
       },
-      "fetched_at": "2026-09-09T11:22:41Z",
+      "fetched_at": "2026-09-09T14:13:55Z",
       "source": "https://connect.devfridge.cool/",
       "status": "ok"
     },
