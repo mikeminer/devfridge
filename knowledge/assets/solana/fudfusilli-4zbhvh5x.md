@@ -4,7 +4,7 @@ title: "FudFusilli (solana)"
 description: "DevFridge investor knowledge: FudFusilli (solana)"
 resource: "https://solscan.io/token/4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T06:59:27Z"
+timestamp: "2026-09-09T07:11:36Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump`
 
-Registry status: ok · last successful observation: 2026-09-09T06:59:27Z · last attempt: 2026-09-09T06:59:27Z.
+Registry status: ok · last successful observation: 2026-09-09T07:11:36Z · last attempt: 2026-09-09T07:11:36Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-09T06:59:27Z · last attempt: 2026-09-09T06:59:27Z.
+ok · last successful observation: 2026-09-09T07:11:36Z · last attempt: 2026-09-09T07:11:36Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 445548591 |
+| Finalized slot | 445550895 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-09T06:59:27Z · last attempt: 2026-09-09T06:59:27Z.
+ok · last successful observation: 2026-09-09T07:11:36Z · last attempt: 2026-09-09T07:11:36Z.
 
 ```json
 {
