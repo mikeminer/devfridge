@@ -2,20 +2,20 @@ import { PublicKey } from "@solana/web3.js";
 import {
   TOKEN_2022_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
-  getAssociatedTokenAddressSync,
   getMint,
   getExtensionTypes,
   ExtensionType,
   unpackMint,
 } from "@solana/spl-token";
-import { PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM } from "./constants";
+import { PUMPFUN_PROGRAM, TOKEN_METADATA_PROGRAM, PROGRAM_ID } from "./constants";
 import { parseMint } from "./format";
 import { publicLogoUrl } from "./logo";
 import { usdPrice } from "./price";
-import { connection, rpc } from "./rpc";
-import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
+import { connection, rpc, rpcRace } from "./rpc";
+import { fridgeForMint, type FridgeStatus } from "./fridge";
 import { collectCanonicalPool, token2022Metadata } from "./solana-evidence";
 import { decodeMetaplexMetadata, liquidityCheck } from "./scan-evidence-checks";
+import { collectHolderDistribution, holderConcentrationCheck, type HolderDistribution } from "./holder-concentration";
 
 export type CheckLevel = "safe" | "caution" | "danger" | "unknown";
 
@@ -72,6 +72,7 @@ export type TrustReport = {
     note?: string;
   };
   security: SecurityCheck[];
+  holderDistribution: HolderDistribution;
   fridge: FridgeStatus;
   links: { jupiter: string; birdeye: string; dexscreener: string; fridge: string; solscan: string };
   warnings: string[];
@@ -302,57 +303,9 @@ async function holderCountHelius(mint: string): Promise<number | null> {
   }
 }
 
-function fridgeVaultAddresses(
-  mint: string,
-  locks: FridgeLock[],
-  tokenProgram: TrustReport["identity"]["tokenProgram"]
-): Set<string> {
-  const mintKey = new PublicKey(mint);
-  const programs =
-    tokenProgram === "token"
-      ? [TOKEN_PROGRAM_ID]
-      : tokenProgram === "token-2022"
-        ? [TOKEN_2022_PROGRAM_ID]
-        : [TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID];
-  const vaults = new Set<string>();
-  for (const lock of locks) {
-    const owner = new PublicKey(lock.address);
-    for (const program of programs) {
-      vaults.add(
-        getAssociatedTokenAddressSync(mintKey, owner, true, program).toBase58()
-      );
-    }
-  }
-  return vaults;
-}
-
-async function top10Concentration(
-  mint: string,
-  supply: bigint,
-  locks: FridgeLock[],
-  tokenProgram: TrustReport["identity"]["tokenProgram"]
-): Promise<number | null> {
-  if (supply <= 0n) return null;
-  try {
-    const result = await rpc<{
-      value?: Array<{ address?: string; amount?: string }>;
-    }>("getTokenLargestAccounts", [mint]);
-    const vaults = fridgeVaultAddresses(mint, locks, tokenProgram);
-    const amounts = (result?.value ?? [])
-      .filter((a) => a.address && !vaults.has(a.address))
-      .map((a) => BigInt(a.amount || "0"))
-      .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0))
-      .slice(0, 10);
-    if (amounts.length === 0) return null;
-    const top = amounts.reduce((s, n) => s + n, 0n);
-    return Number((top * 10000n) / supply) / 100;
-  } catch {
-    return null;
-  }
-}
-
 export async function scanMint(mintStr: string): Promise<TrustReport> {
   const warnings: string[] = [];
+  let poolAvailable = true;
   const parsed = parseMint(mintStr);
   if (!parsed) {
     throw new Error("Invalid Solana address — paste the mint or a pump.fun / Dexscreener link");
@@ -372,6 +325,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       firstTxPrograms(mintKey),
       metaplexMeta(mintKey),
       collectCanonicalPool(rpc, mintKey).catch(() => {
+        poolAvailable = false;
         warnings.push("Canonical PumpSwap pool verification unavailable.");
         return null;
       }),
@@ -418,9 +372,13 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   }
 
   const json = mpl?.uri ? await metadataJson(mpl.uri) : null;
-  const [holderCount, top10Pct] = await Promise.all([
+  const [holderCount, holderDistribution] = await Promise.all([
     holderCountHelius(mintKey),
-    top10Concentration(mintKey, supply, fridge.locks, tokenProgram),
+    collectHolderDistribution(rpcRace, {
+      mint: mintKey, supply, fridge, pool, poolAvailable, fridgeProgram: PROGRAM_ID,
+      tokenProgram: (tokenProgram === "token" ? TOKEN_PROGRAM_ID : TOKEN_2022_PROGRAM_ID).toBase58(),
+      now: Math.floor(Date.now() / 1000),
+    }),
   ]);
 
   const name =
@@ -513,23 +471,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     });
   }
 
-  if (top10Pct != null) {
-    security.push({
-      id: "top10",
-      label: "Top 10 holders %",
-      level: top10Pct > 70 ? "danger" : top10Pct > 40 ? "caution" : "safe",
-      detail: `Top 10 accounts hold ${top10Pct.toFixed(1)}% of supply (Fridge vaults excluded).`,
-      amount: `${top10Pct.toFixed(1)}%`,
-    });
-  } else {
-    security.push({
-      id: "top10",
-      label: "Top 10 holders %",
-      level: "unknown",
-      detail: "Could not read largest token accounts from RPC.",
-      amount: "n/a",
-    });
-  }
+  security.push(holderConcentrationCheck(holderDistribution));
 
   security.push(liquidityCheck(pool, dexData?.status ?? "unavailable", (dexData?.pairs ?? []).map(p => p.dexId || ""), pump?.complete === false));
 
@@ -641,10 +583,11 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       volume24h,
       supply: supply.toString(),
       circulating: supply.toString(),
-      holders: holderCount,
+      holders: holderDistribution.status === "complete" ? holderDistribution.ownerCount : holderCount,
       note: priceUsd == null ? "Price data unavailable; liquidity depth cannot be inferred from missing price data." : undefined,
     },
     security,
+    holderDistribution,
     fridge,
     links: {
       jupiter: `https://jup.ag/swap/SOL-${mintKey}`,

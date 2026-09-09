@@ -28,7 +28,7 @@ export default function MethodologyDoc() {
       <ul>
         <li>Whether mint authority is revoked.</li>
         <li>Whether freeze authority is revoked.</li>
-        <li>Top-10 holder concentration, excluding identified Fridge vaults when data is available.</li>
+        <li>Top-10 on-chain owner concentration, excluding verified canonical PumpSwap reserves and attributing Fridge vault balances to depositors.</li>
         <li>Whether DEX liquidity is present and whether LP status can be verified.</li>
         <li>Whether a live DevFridge lock exists.</li>
         <li>Whether Metaplex metadata is mutable or unavailable.</li>
@@ -47,6 +47,26 @@ export default function MethodologyDoc() {
       <p>
         Unknown data is never treated as safe. Concentration is caution above 40% and danger above
         70%. These thresholds are product heuristics for triage, not universal standards.
+      </p>
+
+      <h2>Holder concentration</h2>
+      <p>
+        Scan reads the complete mint-filtered token account set, checks that balances sum to mint
+        supply, and groups accounts by their on-chain owner. It does not estimate ownership from
+        the largest 20 token accounts. Missing or inconsistent data produces an unknown check.
+      </p>
+      <p>
+        Only the verified canonical PumpSwap reserve is excluded. Fridge balances remain assigned
+        to each depositant: a timelock changes when tokens can be claimed, not who owns the claim.
+        The report separately shows concentration outside Fridge, all Fridge balances, active
+        time-locks and excluded pool reserves. Expired but unclaimed vaults still belong to the
+        depositant. Every percentage uses total mint supply, including pool and locked balances,
+        as its denominator; the grade uses the combined owner balance, including Fridge.
+      </p>
+      <p>
+        On-chain owners are not necessarily separate people. Other protocol reserves and custodial
+        accounts may remain included, and one person can control several wallets. Transfer-fee
+        withholding or concurrent supply changes can prevent reconciliation and yield unknown.
       </p>
 
       <h2>Data and freshness</h2>
