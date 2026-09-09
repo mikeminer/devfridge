@@ -4,7 +4,7 @@ title: "Ciccia Salsiccia (solana)"
 description: "DevFridge investor knowledge: Ciccia Salsiccia (solana)"
 resource: "https://solscan.io/token/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T00:51:18Z"
+timestamp: "2026-09-09T06:16:42Z"
 generated: true
 ---
 

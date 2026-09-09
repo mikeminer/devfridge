@@ -35,6 +35,10 @@ def validate(root=KNOWLEDGE):
         if name not in snapshot.get("contacts", {}):
             errors.append(f"Missing contact observation: {name}")
     records += list(snapshot.get("contacts", {}).values())
+    for name in ('activity', 'lp', 'reported_stats'):
+        if name not in snapshot.get('protocol', {}):
+            errors.append(f'Missing protocol observation: {name}')
+    records += list(snapshot.get('protocol', {}).values())
     for member in snapshot.get('contacts', {}).get('team', {}).get('data', {}).get('members', []):
         if not verified_at(member, snapshot['attempted_at']):
             errors.append('Team profile without current verified commitment')

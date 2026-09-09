@@ -4,7 +4,7 @@ title: "Aperitivo (robinhood)"
 description: "DevFridge investor knowledge: Aperitivo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x6AF70B8487CD47dEf373c4A9eB58F990A3eDba37"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T00:51:18Z"
+timestamp: "2026-09-09T06:16:42Z"
 generated: true
 ---
 
