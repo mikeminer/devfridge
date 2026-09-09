@@ -4,6 +4,7 @@ import { addRecent } from "@/lib/store";
 import { parseMint } from "@/lib/format";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {

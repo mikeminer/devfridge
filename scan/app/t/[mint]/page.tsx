@@ -9,6 +9,7 @@ import { addRecent } from "@/lib/store";
 import { parseMint } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
 

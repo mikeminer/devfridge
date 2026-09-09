@@ -28,7 +28,7 @@ export default function MethodologyDoc() {
       <ul>
         <li>Whether mint authority is revoked.</li>
         <li>Whether freeze authority is revoked.</li>
-        <li>Top-10 on-chain owner concentration, excluding verified canonical PumpSwap reserves and attributing Fridge vault balances to depositors.</li>
+        <li>Top-10 on-chain owner concentration, excluding verified bonding-curve and supported AMM reserves and attributing Fridge vault balances to depositors.</li>
         <li>Whether DEX liquidity is present and whether LP status can be verified.</li>
         <li>Whether a live DevFridge lock exists.</li>
         <li>Whether Metaplex metadata is mutable or unavailable.</li>
@@ -56,12 +56,23 @@ export default function MethodologyDoc() {
         the largest 20 token accounts. Missing or inconsistent data produces an unknown check.
       </p>
       <p>
-        Only the verified canonical PumpSwap reserve is excluded. Fridge balances remain assigned
+        Pump.fun bonding-curve vaults, PumpSwap pools (including secondary pools and either side of
+        arbitrary quote pairs), and Raydium AMM V4/CPMM/CLMM, Orca Whirlpool and Meteora DLMM vaults are verified against their
+        program-owned state and token authority before exclusion. Both SPL Token and Token-2022
+        accounts are supported. Actual vault balances are used, never virtual reserves. Fridge balances remain assigned
         to each depositant: a timelock changes when tokens can be claimed, not who owns the claim.
         The report separately shows concentration outside Fridge, all Fridge balances, active
         time-locks and excluded pool reserves. Expired but unclaimed vaults still belong to the
         depositant. Every percentage uses total mint supply, including pool and locked balances,
         as its denominator; the grade uses the combined owner balance, including Fridge.
+      </p>
+      <p>
+        Account enumeration has no fixed 100,000-account cutoff; full reads get up to 30 seconds.
+        If a provider times out, truncates the result or supply cannot be reconciled, the check is
+        unknown. Balances and reserve classifications have separate RPC slots in the API.
+        Reserve classification does not prove LP tokens are burned or locked. Unmapped shared Raydium
+        custody remains included and is disclosed; if including or excluding it changes the grade,
+        the grade is unknown.
       </p>
       <p>
         On-chain owners are not necessarily separate people. Other protocol reserves and custodial
