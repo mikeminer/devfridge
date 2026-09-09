@@ -9,7 +9,9 @@ generated: false
 
 # KOL product pitch and SDK pilot
 
-DevFridge turns a Solana Token-2022 lock into reusable proof of commitment. A community can show its lock in Scan, embed a badge, inspect it through the bot, or use the SDK to gate access with its own supported mint. PASTA holding is not required to create a lock. A lock is not a payment to an app, and SDK availability does not establish paying customers.
+DevFridge helps Solana Token-2022 communities, including compatible Pump.fun communities, turn developer and holder commitment into time-locked membership. Instead of relying only on a promise to hold, developers and community members lock tokens for a publicly verifiable period. Projects can offer access to services in exchange for a qualifying lock, using the SDK to verify membership. The dApp makes locking easy; Scan verifies the lock; badges, the bot and other products build on the same DevFridge vault.
+
+The locked tokens cannot be sold from the vault before the unlock time under the program rules. This constrains the availability of that locked balance for the stated period; it does not freeze or guarantee price, market capitalization, all circulating supply or DEX liquidity. Access depends on the service’s configured membership rules, and Token-2022 mint/extension compatibility must be checked. Membership is not cost-free: applicable network, claim and token fees still apply. PASTA holding is not required to create a lock. SDK availability does not establish paying customers.
 
 ## Show the product in three minutes
 

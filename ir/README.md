@@ -6,6 +6,10 @@ The product is positioned for advisors and introducers connecting corporate clie
 
 The fixed tip address `GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W` was checked against the published pappardelle.sol CEO profile, associated with the same X handle, in Synapse's verified Team evidence on 9 September 2026. It is a wallet, not the PASTA mint or a lock PDA. Tips do not affect answers.
 
+## Product explanation
+
+DevFridge helps Solana Token-2022 communities, including compatible Pump.fun communities, turn developer and holder commitment into time-locked membership. Instead of relying only on a promise to hold, developers and community members lock tokens for a publicly verifiable period. Projects can offer access to services in exchange for a qualifying lock, using the SDK to verify membership. The dApp makes locking easy; Scan verifies the lock; badges, the bot and other products build on the same DevFridge vault. Basic introductions lead with this membership model and the dApp → Scan → SDK flow. Detailed adoption and security answers remain evidence-based; a timelock never guarantees price or market capitalization.
+
 ## Sources and privacy
 
 The server retrieves Synapse's Markdown brief plus the program and SDK docs, cached for five minutes per runtime instance. Grok can request any of the 15 explicitly allowed documentation pages; it cannot fetch arbitrary URLs. If Synapse is unavailable the request fails visibly. Missing documentation is labelled unavailable. X search is invoked when relevant, with exact post citations and a visible indicator of whether the tool was used. Searches may not find every post. Source data is treated as untrusted, separate from server instructions.

@@ -11,6 +11,10 @@ generated: false
 
 ## DevFridge
 
+DevFridge helps Solana Token-2022 communities, including compatible Pump.fun communities, turn developer and holder commitment into time-locked membership. Instead of relying only on a promise to hold, developers and community members lock tokens for a publicly verifiable period. Projects can offer access to services in exchange for a qualifying lock, using the SDK to verify membership. The dApp makes locking easy; Scan verifies the lock; badges, the bot and other products build on the same DevFridge vault.
+
+The locked tokens cannot be sold from the vault before the unlock time under the program rules. This constrains the availability of that locked balance for the stated period; it does not freeze or guarantee price, market capitalization, all circulating supply or DEX liquidity. Access depends on the service’s configured membership rules, and Token-2022 mint/extension compatibility must be checked. Membership is not cost-free: applicable network, claim and token fees still apply.
+
 [Fridge](../docs/fridge.md) is a Solana Token-2022 time-lock. A lock is an individual depositor/mint/lock-id account with a token vault controlled by the program. The original depositor can claim after the unlock time under the program's rules. A timelock reduces access to the locked balance until expiry; it does not lock every holder's supply or a DEX liquidity pool.
 
 The [scanner](../docs/scan.md) and [methodology](../docs/methodology.md) report observable signals. A Fridged badge evidences a lock and its parameters. It is not a guarantee about the project, other wallets or market price. [Get Featured](../docs/feature.md) buys sponsored visibility; it must be evaluated separately from the scanner's findings.
