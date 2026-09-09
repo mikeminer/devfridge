@@ -9,6 +9,8 @@ generated: false
 
 # Investor starting point
 
+[Ask Investor Relations](https://ir.devfridge.cool) — multilingual Grok chat with official sources and CEO updates. [How the chat works](./ir.md).
+
 This bundle helps an investor distinguish the product, the asset being evaluated, and the evidence supporting each claim.
 
 ## Read in this order

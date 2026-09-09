@@ -1,0 +1,1 @@
+{"name":"devfridge-ir","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node build.mjs","dev":"node server.mjs","test":"node --test tests/*.test.mjs"},"dependencies":{"@ai-sdk/xai":"^4.0.55","ai":"^7.0.94","cheerio":"^1.2.0"}}

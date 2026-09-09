@@ -19,6 +19,10 @@ function fixture(t) {
 test('daily knowledge updates skip websites', t => {
   const f = fixture(t); f.write('knowledge/index.md', 'updated'); f.commit(); assert.equal(shouldSkip(f.root), true);
 });
+test('standalone IR changes skip unrelated sites but mixed app changes still build', t => {
+  const f = fixture(t); f.write('ir/api/chat.mjs', 'chat'); f.write('.github/workflows/ir.yml', 'checks'); f.commit(); assert.equal(shouldSkip(f.root), true);
+  f.write('ir/api/chat.mjs', 'changed'); f.write('scan/app/page.tsx', 'changed'); f.commit(); assert.equal(shouldSkip(f.root), false);
+});
 test('application changes still build alongside knowledge', t => {
   const f = fixture(t); f.write('knowledge/index.md', 'updated'); f.write('scan/app/page.tsx', 'changed'); f.commit(); assert.equal(shouldSkip(f.root), false);
 });
