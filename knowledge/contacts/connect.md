@@ -4,7 +4,7 @@ title: "Official contacts, project leader and community"
 description: "DevFridge investor knowledge: Official contacts, project leader and community"
 resource: "https://connect.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T14:18:13Z"
+timestamp: "2026-09-09T20:37:04Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-09T14:18:13Z · last attempt: 2026-09-09T14:18:13Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-09T20:37:04Z · last attempt: 2026-09-09T20:37:04Z.
 
 ## OFFICIAL TELEGRAM BOT
 
@@ -20,6 +20,9 @@ Project-published contact observations. Only team members with verified PASTA co
 
 ## OFFICIAL SITES
 
+- [AI Investor Relations Ask about DevFridge in your language, with official sources and founder updates](https://ir.devfridge.cool)
+- [Synapse Explore the DevFridge knowledge graph and investor research](https://synapse.devfridge.cool)
+- [Marketing DevFridge marketing hub](https://marketing.devfridge.cool)
 - [Fridge Lock Token-2022 supply on-chain](https://devfridge.cool)
 - [Trust Me Capital TMC analytics and Trust Rewards on Robinhood Chain](https://capital.devfridge.cool)
 - [DevFridge Bridge Rate-limited LayerZero OFT bridge for verified token routes](https://bridge.devfridge.cool)

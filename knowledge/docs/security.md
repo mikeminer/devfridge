@@ -4,7 +4,7 @@ title: "Security and responsible disclosure"
 description: "DevFridge investor knowledge: Security and responsible disclosure"
 resource: "https://docs.devfridge.cool/security"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T14:18:13Z"
+timestamp: "2026-09-09T20:37:04Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/security) · ok · last successful observation: 2026-09-09T14:18:13Z · last attempt: 2026-09-09T14:18:13Z.
+[Canonical page](https://docs.devfridge.cool/security) · ok · last successful observation: 2026-09-09T20:37:04Z · last attempt: 2026-09-09T20:37:04Z.
 
 SECURITY
 
