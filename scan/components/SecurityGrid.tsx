@@ -81,7 +81,7 @@ export default function SecurityGrid({ checks }: { checks: SecurityCheck[] }) {
         <p className="nutri-legal">
           * The grade uses only the checks displayed above. Sponsored placements never change it.
           This automated report is not an audit, endorsement, or guarantee of safety. Verified
-          canonical PumpSwap reserves are excluded from owner concentration; Fridge balances
+          bonding-curve and supported AMM reserves are excluded from owner concentration; Fridge balances
           remain attributed to depositors. All percentages use total mint supply.
         </p>
       </footer>

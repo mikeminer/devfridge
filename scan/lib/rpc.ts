@@ -66,20 +66,21 @@ export async function rpc<T = unknown>(
 }
 
 /** First healthy provider wins — used for slow GPAs so a hung RPC does not block the UI. */
-export async function rpcRace<T = unknown>(method: string, params: unknown[]): Promise<T> {
+export async function rpcRace<T = unknown>(method: string, params: unknown[], timeoutMs = 6000): Promise<T> {
   const urls = rpcUrls();
   if (urls.length === 0) throw new Error("RPC failed");
   const errors: string[] = [];
+  const controllers = urls.map(() => new AbortController());
   return await new Promise<T>((resolve, reject) => {
     let pending = urls.length;
     let done = false;
-    for (const url of urls) {
+    for (const [index, url] of urls.entries()) {
       fetch(url, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
         cache: "no-store",
-        signal: AbortSignal.timeout(6000),
+        signal: AbortSignal.any([AbortSignal.timeout(timeoutMs), controllers[index].signal]),
       })
         .then(async (res) => {
           const json = (await res.json()) as { result?: T; error?: { message?: string } };
@@ -91,6 +92,7 @@ export async function rpcRace<T = unknown>(method: string, params: unknown[]): P
         .then((result) => {
           if (!done) {
             done = true;
+            controllers.forEach((controller, other) => { if (other !== index) controller.abort(); });
             resolve(result);
           }
         })

@@ -305,7 +305,6 @@ async function holderCountHelius(mint: string): Promise<number | null> {
 
 export async function scanMint(mintStr: string): Promise<TrustReport> {
   const warnings: string[] = [];
-  let poolAvailable = true;
   const parsed = parseMint(mintStr);
   if (!parsed) {
     throw new Error("Invalid Solana address — paste the mint or a pump.fun / Dexscreener link");
@@ -325,7 +324,6 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       firstTxPrograms(mintKey),
       metaplexMeta(mintKey),
       collectCanonicalPool(rpc, mintKey).catch(() => {
-        poolAvailable = false;
         warnings.push("Canonical PumpSwap pool verification unavailable.");
         return null;
       }),
@@ -374,8 +372,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   const json = mpl?.uri ? await metadataJson(mpl.uri) : null;
   const [holderCount, holderDistribution] = await Promise.all([
     holderCountHelius(mintKey),
-    collectHolderDistribution(rpcRace, {
-      mint: mintKey, supply, fridge, pool, poolAvailable, fridgeProgram: PROGRAM_ID,
+    collectHolderDistribution((method, params) => rpcRace(method, params, method === "getProgramAccounts" ? 30000 : 6000), {
+      mint: mintKey, supply, fridge, fridgeProgram: PROGRAM_ID,
       tokenProgram: (tokenProgram === "token" ? TOKEN_PROGRAM_ID : TOKEN_2022_PROGRAM_ID).toBase58(),
       now: Math.floor(Date.now() / 1000),
     }),
@@ -581,8 +579,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       priceUsd,
       marketCap,
       volume24h,
-      supply: supply.toString(),
-      circulating: supply.toString(),
+      supply: holderDistribution.status === "complete" ? holderDistribution.supplyRaw : supply.toString(),
+      circulating: holderDistribution.status === "complete" ? holderDistribution.supplyRaw : supply.toString(),
       holders: holderDistribution.status === "complete" ? holderDistribution.ownerCount : holderCount,
       note: priceUsd == null ? "Price data unavailable; liquidity depth cannot be inferred from missing price data." : undefined,
     },
