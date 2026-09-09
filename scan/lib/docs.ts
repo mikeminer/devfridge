@@ -20,10 +20,10 @@ export const DOC_PAGES: DocLink[] = [
   {
     href: "/world",
     slug: "world",
-    title: "Fridge world",
+    title: "DevFridge World — Cold Storage game guide",
     nav: "World",
     description:
-      "The Meme World is scheduled to open 1 October 2026. View the countdown and planned wallet-lock access rules; gameplay is not yet public.",
+      "Cold Storage game guide: unlock a meme with 500,000 actively timelocked character tokens, merge in the fridge, explore the kitchen and share your score photo.",
   },
   {
     href: "/feature",

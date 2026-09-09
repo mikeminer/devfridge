@@ -2,65 +2,65 @@
   "rugarugo": {
     "name": "Rugarugo",
     "symbol": "RUGARUGO",
-    "address": "Ewn3zayVdTp8eGu3Kk4VR7D9pABC6MLKFnqVQ2Hw7ray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=Ewn3zayVdTp8eGu3Kk4VR7D9pABC6MLKFnqVQ2Hw7ray"
+    "address": "An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump"
   },
   "aperitivo": {
     "name": "Aperitivo",
     "symbol": "APE",
-    "address": "AgYV8QrdeAjDVqLyR3RK1YSD7yT6bwUVL8Yt8PpiCray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=AgYV8QrdeAjDVqLyR3RK1YSD7yT6bwUVL8Yt8PpiCray"
+    "address": "B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump"
   },
   "friedfomo": {
     "name": "FriedFomo",
     "symbol": "FIFO",
-    "address": "4cnQdp6kTeuzuZy4UQVcTSkpGeX9A7WiUf8BbgWmeray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=4cnQdp6kTeuzuZy4UQVcTSkpGeX9A7WiUf8BbgWmeray"
+    "address": "3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump"
   },
   "fudfusilli": {
     "name": "FudFusilli",
     "symbol": "FUSILLI",
-    "address": "vAgFFeiZ97ocBBnyhUyKa7bDysdTuE6eanCsEnoVray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=vAgFFeiZ97ocBBnyhUyKa7bDysdTuE6eanCsEnoVray"
+    "address": "4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump"
   },
   "lambocello": {
     "name": "Lambocello",
     "symbol": "LAMBOCELLO",
-    "address": "7qzQJibxtz2MARyVxWffbMCuSLqzkX7j5MQ9DHCC4ray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=7qzQJibxtz2MARyVxWffbMCuSLqzkX7j5MQ9DHCC4ray"
+    "address": "HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump"
   },
   "gmgnocco": {
     "name": "GmGnocco",
     "symbol": "GMGN",
-    "address": "5bKVDM4uFt3saxBAH2Mz15higqbfsUhVZYcBSQUsuray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=5bKVDM4uFt3saxBAH2Mz15higqbfsUhVZYcBSQUsuray"
+    "address": "8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump"
   },
   "sersugo": {
     "name": "SerSugo",
     "symbol": "SESU",
-    "address": "CAX4tPsh8bNoREmjFEMduXXYfeUsJcW4Gup3wm4Jwray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=CAX4tPsh8bNoREmjFEMduXXYfeUsJcW4Gup3wm4Jwray"
+    "address": "AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump"
   },
   "moonzarella": {
     "name": "MoonZarella",
     "symbol": "MOONZARELL",
-    "address": "Ec3f9Yqr5wc7FWXnMfNiBs2qAnmddifo2udQ2n5Furay",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=Ec3f9Yqr5wc7FWXnMfNiBs2qAnmddifo2udQ2n5Furay"
+    "address": "6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump"
   },
   "bonkatino": {
     "name": "Bonkatino",
     "symbol": "BONKATINO",
-    "address": "82DXHRq7kGD12umsjDoAtyTwFHuy22FW2rCkKgKqCray",
-    "market": "Raydium",
-    "marketUrl": "https://raydium.io/launchpad/token/?mint=82DXHRq7kGD12umsjDoAtyTwFHuy22FW2rCkKgKqCray"
+    "address": "HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump",
+    "market": "pump.fun",
+    "marketUrl": "https://pump.fun/coin/HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump"
   },
   "ciccia": {
     "name": "Ciccia Salsiccia",

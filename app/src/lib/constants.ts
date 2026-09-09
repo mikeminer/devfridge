@@ -18,7 +18,6 @@ export const DEV_X_URL = "https://x.com/anonimocommando";
 export const DEV_PUMP_URL =
   "https://pump.fun/profile/GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W";
 export const PASTA_TG_URL = "https://t.me/pastamemelovers";
-export const PASTA_TG_GROUP_URL = "https://t.me/+RbLG3dqqM5tiZmRk";
 export const CONNECT_URL = "https://connect.devfridge.cool";
 export const TRUST_ME_VAULT = "0xf8815770e046d32f606385700f3bc96ffbb4e879";
 export const TRUST_ME_VAULT_URL =

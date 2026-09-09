@@ -1,0 +1,2245 @@
+{
+  "description": "Source parity with the live deployments before PR #41 merge. Text line endings are normalized. Only the existing knowledge-only Vercel build guards differ.",
+  "files": [
+    {
+      "path": "scan/app/.well-known/security.txt/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "978221dee11b687665babef78ca107d5ecb92b8d",
+      "verification": "utf8-lf",
+      "sha256": "8a750ff2fac5301db09544d38d1f9ec19b148a6a90e790d106294678a1328759"
+    },
+    {
+      "path": "scan/app/api/badge/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "de7d55adb0e637eb227466724a6d8ac33dc8484b",
+      "verification": "utf8-lf",
+      "sha256": "4820981d6d4d8da2bb03cf55908816ef9559d7791f2fe7a59fc0ac6aa36a5db2"
+    },
+    {
+      "path": "scan/app/api/boost/build/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d90b06e2b4062c8774dec64c7f4a151ce08a11d9",
+      "verification": "utf8-lf",
+      "sha256": "d99cec5e08765278a634718d543ac49b2df31ee05f3346e698bb155b3eac07a7"
+    },
+    {
+      "path": "scan/app/api/boost/crank/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0809b63324ffd9c1c9f3eef973460cfd6f4a72eb",
+      "verification": "utf8-lf",
+      "sha256": "94b39eb6005cf0269cffdc89474d58cf3b89de1f900b2df28ac40b7a9d179575"
+    },
+    {
+      "path": "scan/app/api/boost/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "df3094c1708f0c8f37b1a542791bca2f84e3fc44",
+      "verification": "utf8-lf",
+      "sha256": "fd33c64303436fbb3f39352f9d89662952979a6dfa8f94b5e35a824af1156761"
+    },
+    {
+      "path": "scan/app/api/boost/send/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3b79ec1e95d63bf40e755eb4f0b8645f1574bd04",
+      "verification": "utf8-lf",
+      "sha256": "6fa4257c0ccd486b7f2170fe465f808d9dde304c28da3df9c327ca25d5253fc5"
+    },
+    {
+      "path": "scan/app/api/feed/boosted/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3b6e1b46e92dc7ef2d380f24691496e5e09612d4",
+      "verification": "utf8-lf",
+      "sha256": "cc42e5aeb3833d8e84e2fafa0845ffc9af68ca2dcb0da6b8ff5e8d8af0f2c0cb"
+    },
+    {
+      "path": "scan/app/api/feed/recent/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3665932d3c650ae550b17f933b4c15eee86d7100",
+      "verification": "utf8-lf",
+      "sha256": "c2e03a1a6d87127a954509abb16892b5a703b35af7da78281c7f1266638a2846"
+    },
+    {
+      "path": "scan/app/api/fridge/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d695feabba151b5b630c088b17cec0b4ae620752",
+      "verification": "utf8-lf",
+      "sha256": "0c73c29d18bd1ad842fc5edf6512a9dc951e67fa74656d8926d9862451bc7327"
+    },
+    {
+      "path": "scan/app/api/health/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5564c063ab68d9883450a4a420f29f8d99833205",
+      "verification": "utf8-lf",
+      "sha256": "9f7475b7d57f1a72c1a2079f8dcce56d108ad4b1fefa4dc9adb7e3836cffe448"
+    },
+    {
+      "path": "scan/app/api/logo/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "98da5f089a2d3282c98ab3639ba0f734f1f129a5",
+      "verification": "utf8-lf",
+      "sha256": "fa43fc80917966208ba0d2bbe67ab9f559effbd047c78a80e97b99df61b40ded"
+    },
+    {
+      "path": "scan/app/api/pasta/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4b204fe30d74ebc30f031f51c1377645787081fc",
+      "verification": "utf8-lf",
+      "sha256": "9c2e1d18cb3604095ff38aae6632e77e7f06d5a4e0a3b032445837bdbee11434"
+    },
+    {
+      "path": "scan/app/api/rpc/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9935efba42d371d87ba7a583ed49cf9853a83169",
+      "verification": "utf8-lf",
+      "sha256": "14a93d48b1245699738b41b209b4a2d4ba33a9f8b860384103b6f5ae017b428e"
+    },
+    {
+      "path": "scan/app/api/solana/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9935efba42d371d87ba7a583ed49cf9853a83169",
+      "verification": "utf8-lf",
+      "sha256": "14a93d48b1245699738b41b209b4a2d4ba33a9f8b860384103b6f5ae017b428e"
+    },
+    {
+      "path": "scan/app/api/scan/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ed12cdaee815b581bb1d32fb7f11e2ac4508eadc",
+      "verification": "utf8-lf",
+      "sha256": "abb635aaab9e981f25fd758ce8234a1460b1479c788b5e2a8986caae8cb5570f"
+    },
+    {
+      "path": "scan/app/api/sdk/check/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e9c0c3f573a0223b15933994aa12426d834d46ee",
+      "verification": "utf8-lf",
+      "sha256": "0e6cb650ae1ad95665178a5f2b52900bcc4279efa29cd7d48af867b17359b087"
+    },
+    {
+      "path": "scan/app/api/stats/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "cb08ef6a6a5f7875a54e66da9fdae3026625ebcc",
+      "verification": "utf8-lf",
+      "sha256": "42f376ca0e41fc42668fc1de605100745cab711d9b4034c67d0988fb03ca5d0c"
+    },
+    {
+      "path": "scan/app/api/team/[wallet]/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "57e8a5f76591efb8b26b4b63c9370ec6390806d4",
+      "verification": "utf8-lf",
+      "sha256": "9b9aa0aa7b9fb31437ecda88615460d3c77d25186a0bad1b87cd63647ad92e05"
+    },
+    {
+      "path": "scan/app/api/team/config/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "45ff6eb1e3879d38a854e6a158dbfcdbda98258c",
+      "verification": "utf8-lf",
+      "sha256": "ddf263027b0772d4ec0d2d5fd3e16026c01f254af977a721aca2c4f89d12cd47"
+    },
+    {
+      "path": "scan/app/api/team/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d8b682682b7c65a42f12fbd5ec70a462d59ba32b",
+      "verification": "utf8-lf",
+      "sha256": "a078201b876d3c554bd0b982539a01ecc3749d8605ecd860a404a62c5bf6d6d1"
+    },
+    {
+      "path": "scan/app/api/ticker/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "21547f537156d65f10e1ac0a96c5280f2b68eea2",
+      "verification": "utf8-lf",
+      "sha256": "a1b90f7a2ac34041bb0815d68711842ee0c5d1bedf55cb0ae9bb66716ba451a7"
+    },
+    {
+      "path": "scan/app/api/world/faction/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ad79b96a7713a1a3411130c090cb7f5550a8d477",
+      "verification": "utf8-lf",
+      "sha256": "3b020c83e1791be980df2ad389b2ccc93fec45e31f0b2cceffab45be99ebb561"
+    },
+    {
+      "path": "scan/app/api/world/subscribe/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "df2e81a5235003f78cbbe2d9d79def6778d57ea2",
+      "verification": "utf8-lf",
+      "sha256": "b8510e144e745ebfa5bd88d34e02e1cf7d70407dab996fa492200fc76786bb7d"
+    },
+    {
+      "path": "scan/app/api/zealy/log/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "cf3ab1b70d5ea1c68481bd4143e8ceb6e822b0cd",
+      "verification": "utf8-lf",
+      "sha256": "179c67ed8c0957a4a18bec0b2ca72543de1f6babe302492d0b94d0d0a86191fa"
+    },
+    {
+      "path": "scan/app/api/zealy/verify/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5131afe82814fab328a944201b554f55bcabe4a6",
+      "verification": "utf8-lf",
+      "sha256": "517bd8b3a20ee2a89b90efa33693b6a20021c7f3974acc7afcfd2e10e5de7b16"
+    },
+    {
+      "path": "scan/app/badge/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c376eed245382fba0551d7eddf26239163369bbf",
+      "verification": "utf8-lf",
+      "sha256": "3c2f11c43f3cf34e1e1f6085c253a92afa5c260e5b60890eafcad842abd69238"
+    },
+    {
+      "path": "scan/app/bot/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c0f18d58aece3352021c10dea922c4374c588f7e",
+      "verification": "utf8-lf",
+      "sha256": "cf6dab7525104bbf80c278aca5442f6610809215d7bddfdeefb0c651016d99c1"
+    },
+    {
+      "path": "scan/app/bridge/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0348488a3565a96cdae10920da365c5276e6f1d9",
+      "verification": "utf8-lf",
+      "sha256": "759048fd57fd0036c135a594d9edf16a30a50555f737734c52402812575ec822"
+    },
+    {
+      "path": "scan/app/connect/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5c8d021b46bdc3606a8f9ac646e30e08ced22d10",
+      "verification": "utf8-lf",
+      "sha256": "b9c1e7b422dbdbcde92e336bfede10777d235391d790f6b414f2bc1739d2bd7b"
+    },
+    {
+      "path": "scan/app/docs/badge/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1580ad8b99af047864b219ad7a3b3745db366c62",
+      "verification": "utf8-lf",
+      "sha256": "1336e562e23632dc0ccc222db80f3caa34a5bf90ce18b647352f7baa23ed21bc"
+    },
+    {
+      "path": "scan/app/docs/boost/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9b713a78ffe710d4a8f3c7ce4adb0cc060fcfeb2",
+      "verification": "utf8-lf",
+      "sha256": "3df6147185a9109144cb1fe5f39c69e79392256c30fae15916cb67eeb9c1c130"
+    },
+    {
+      "path": "scan/app/docs/bot/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b773342cf476ad34fa828621f37b6835b4cd341d",
+      "verification": "utf8-lf",
+      "sha256": "7f7409d14610a8b391d409509ec3aee0fafa3b84feb32ddc73f94dc2fbe2ee25"
+    },
+    {
+      "path": "scan/app/docs/faq/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d0c992f02fcec123a14c939b2b69a8155ec833a6",
+      "verification": "utf8-lf",
+      "sha256": "4c17f127fd2d18585754759ddaf27169bca51f4f3c28115db3d925777452a8e1"
+    },
+    {
+      "path": "scan/app/docs/feature/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5a690b989725879cc67349b05d868a4418b97500",
+      "verification": "utf8-lf",
+      "sha256": "7ce41308da3c1b460e9ff0b9e51ea0fdce2eadc24b88d4e6f41bcf38219a1d66"
+    },
+    {
+      "path": "scan/app/docs/fridge/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "238e76eba5aa1aef5fdb709dd52b81d4bd772c80",
+      "verification": "utf8-lf",
+      "sha256": "bb1cc27260502454e29a6aca21b5ee238678d519a1071a60dea648c49558e8f1"
+    },
+    {
+      "path": "scan/app/docs/layout.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "515366db08ed6f14cf98db88f2d615ce7c4ac85c",
+      "verification": "utf8-lf",
+      "sha256": "477349881fa2ea46b1a409e5cd8d7b0672af50e85cca5a0068c0d4bdcde97bb8"
+    },
+    {
+      "path": "scan/app/docs/listing-kit/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0a4796411e41f12915a0cfd527a90db5bb14676b",
+      "verification": "utf8-lf",
+      "sha256": "41d3d103228e09d91045579520183529d141899276b8f8ea6acdac93b695f3f7"
+    },
+    {
+      "path": "scan/app/docs/methodology/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8ec66397d964a6fa591cb582735c24f49d300128",
+      "verification": "utf8-lf",
+      "sha256": "7aed3fa7edebf8414c4e1a7440465209cab2d3e9ad00161db5bce4b32240d5c5"
+    },
+    {
+      "path": "scan/app/docs/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b0aee7db836bd8e56f7b84f91402c861f4c4c1c5",
+      "verification": "utf8-lf",
+      "sha256": "a671d4f4312755b9d737b4a49e69aeb11b569ed267c6ef740a0a1343056d7f43"
+    },
+    {
+      "path": "scan/app/docs/program/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "efd16027ee6814748a8a3057524ca82854907293",
+      "verification": "utf8-lf",
+      "sha256": "6e86534b7072d09fd81eb19e3b3ebee4a6a73eba04e3278cc519eaf11aa0995a"
+    },
+    {
+      "path": "scan/app/docs/scan/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e1c2b5df4b4d2ff78ea9f08b1d1b4cf2e439323b",
+      "verification": "utf8-lf",
+      "sha256": "ceace3ae6f174ff627224153e26c6e81901c7db11e324274a3cd561fe58fcfcf"
+    },
+    {
+      "path": "scan/app/docs/sdk/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9df084f78cb0088482eec8ed48a2132f8747f9b4",
+      "verification": "utf8-lf",
+      "sha256": "96189d9e78dce871dbe4b268e612bdc875af58dcc21bf80525e9050e62dac4a4"
+    },
+    {
+      "path": "scan/app/docs/security/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f8149f64ec99aff9a7fc2ec097249ae967e4287f",
+      "verification": "utf8-lf",
+      "sha256": "0d5cbd5a5d6e8c5e71fbd879679d65fc38663775c1b52830e55407152b7295e3"
+    },
+    {
+      "path": "scan/app/docs/tokenomics/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "cdc1c0472c9798acc1ceb311e48bc66ae164e472",
+      "verification": "utf8-lf",
+      "sha256": "1475b2b8e0f202e92a33b8bd9621ee02d66a07a0b8c528fb0fe895fd5e42f533"
+    },
+    {
+      "path": "scan/app/docs/world/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b6734577473b3a7136b61489e3c2fc611e14e15c",
+      "verification": "utf8-lf",
+      "sha256": "393ad11092831acef1108d69a41edd6a1ddbf880ed2698551f8bd43987fc4142"
+    },
+    {
+      "path": "scan/app/globals.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f42a5a4f56f7a226908761bd9ad12c6937084791",
+      "verification": "utf8-lf",
+      "sha256": "6f0db266b1f8d0c94b1bf824475d7cd13b9dc0dfc92f4cdddffa89ce4e5ac6c2"
+    },
+    {
+      "path": "scan/app/health/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0b5c54a811b80ae7b3f5545256caa4f40ed882c4",
+      "verification": "utf8-lf",
+      "sha256": "b9fbed89e0d7f8c0229db88a60f61fcefeea5c4823adfb2e8b54bf5ced78e829"
+    },
+    {
+      "path": "scan/app/layout.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "652aeee23da4be8af81f394a6dacaa8f245ff16d",
+      "verification": "utf8-lf",
+      "sha256": "b934d3f82f6d807961e93589f059f5f38736c34820fbc6bcc09ff32ed8df25ee"
+    },
+    {
+      "path": "scan/app/llms.txt/route.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c5a5ec82061718b5159d7fd6802d202685ebc16f",
+      "verification": "utf8-lf",
+      "sha256": "3ab0e445ef6f9e08cb52b3bc5b433145f9fbb1bc78bcb40f3c6f3fec25150135"
+    },
+    {
+      "path": "scan/app/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b7e6b3a5c7b5384ae9c34d4f9489f4890d449304",
+      "verification": "utf8-lf",
+      "sha256": "79c6932c62af90f3a94ef44fe0f57bdabc90aed9ac1f37ec610a2077cad816db"
+    },
+    {
+      "path": "scan/app/robots.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4d8caa33298a66e0d5a4810f7fbed64e703828b4",
+      "verification": "utf8-lf",
+      "sha256": "86c5c9fca2d69a1fb6d3460e748722bb8a7f9de568c97aed2d0a1b283bab1f7c"
+    },
+    {
+      "path": "scan/app/sdk/layout.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "41c3f33803635d6369396b65f40b437bfc46dc9e",
+      "verification": "utf8-lf",
+      "sha256": "154c9e7a8b610f71ec7dd150ab80709ccf4335b4dad1369d5da50e61b44ba3d2"
+    },
+    {
+      "path": "scan/app/sdk/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1ae6c4ca368c5a5768c0b646838a1a102597ff75",
+      "verification": "utf8-lf",
+      "sha256": "d9e8d02efabb87d89fa90abdd6c91e1dd84885bcdc657bf59f573e3fb7176d23"
+    },
+    {
+      "path": "scan/app/sitemap.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "adb8b79ed393ff31c6af9cd9a7c2dc05962cd945",
+      "verification": "utf8-lf",
+      "sha256": "56c485dad4e0502cb9a9c272c45ea33a9aacdb4c345d6bd0cf6adb39e0e1a713"
+    },
+    {
+      "path": "scan/app/stats/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a3f17f7218d1b97865a6d7ff5763b39b4149101f",
+      "verification": "utf8-lf",
+      "sha256": "b076bb16537b5f786165c047a25583221bb887dbb1fcbe3e3e89cebbca7f70af"
+    },
+    {
+      "path": "scan/app/stats/stats.module.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c376cf3a00d6d400b7eb68f31c4687b32f0e9e04",
+      "verification": "utf8-lf",
+      "sha256": "3a13bae7aedd29a59637e351fcb170f2c965c768801e190610deb69855ca20a6"
+    },
+    {
+      "path": "scan/app/t/[mint]/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "dec2a7207c0d73c96f42d7f88a0567e8dad553e5",
+      "verification": "utf8-lf",
+      "sha256": "bb2db2c640611ec5c98eabffab1ce9cb095c54101f4557462803e01cc562ff0d"
+    },
+    {
+      "path": "scan/app/world/page.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "90f4c32ca7cdb70afe23a01fe5680c9a125d3817",
+      "verification": "utf8-lf",
+      "sha256": "38eeb2dbde418a637a063e2e16dc59b1d5da632e5ce24b60975fee2dc846ae00"
+    },
+    {
+      "path": "scan/bridge.env.example",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ca7636e5b32776d7b8825886dd72b8cbddbd3cad",
+      "verification": "binary",
+      "sha256": "4e2eff48e73231478b87ecd700ff78f060dafddadfe2b16eb63a8227f0596b99"
+    },
+    {
+      "path": "scan/components/BadgeGenerator.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f318cb9df97af40e733c5905ff7d331c2971874d",
+      "verification": "utf8-lf",
+      "sha256": "8c4398074fff6b01346247bea2abf6115ec264ccca7f2cc532f4ecd1f09fecac"
+    },
+    {
+      "path": "scan/components/BoostModal.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a2f60b3ce58b3cc8e51ef1ad4281e90067eaf3f1",
+      "verification": "utf8-lf",
+      "sha256": "fa6544186faf90b4be2803333780908e55f58592a4dc605da7837815d6d73dbb"
+    },
+    {
+      "path": "scan/components/BoostSubscribe.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b2bda4005e2e9d4c361bdffee13307205f26fc14",
+      "verification": "utf8-lf",
+      "sha256": "a82408edbae32dad9dfa0e564a4aa247720ae780a0bf15e36c69b62b52c22341"
+    },
+    {
+      "path": "scan/components/BridgeBoard.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "831a016f54e8af4ddf3cff959001e4f11102d8e4",
+      "verification": "utf8-lf",
+      "sha256": "1ced90ee05d3ec0abd62d1c9a32b0f5b9730f6908f08952a20b19f28058a57e5"
+    },
+    {
+      "path": "scan/components/ConnectBoard.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d93a00a66d52a784dfd738b843ac5528f62cd12d",
+      "verification": "utf8-lf",
+      "sha256": "049c2c74f160e828cf2d6f8c4c3323111695b186285a330a82ddd46f48a56512"
+    },
+    {
+      "path": "scan/components/DocsShell.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a0398fe31323b913800cb737fabe65214f9a63f0",
+      "verification": "utf8-lf",
+      "sha256": "cf20086d5016d4fdf2d1c840b6de1df7064a0327068dd5aeda3569e8027c451c"
+    },
+    {
+      "path": "scan/components/Feeds.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ffd16c2b61bf1367e4ee62c869bd488d6c3e7186",
+      "verification": "utf8-lf",
+      "sha256": "bed4aa3f079e74f150603ed4ae9d81834f63e9e2a4903d946f676144b65c6345"
+    },
+    {
+      "path": "scan/components/FridgeBadge.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "452c33f95f86f66cd7e7883906c0a83c9f9c62b5",
+      "verification": "utf8-lf",
+      "sha256": "69520cbf1745e77d9d6c1c4b7bef75504b831c5814a33dca1ca3a28a83e41512"
+    },
+    {
+      "path": "scan/components/HealthBoard.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "565b80ba61681e72af88f8449728873366276eab",
+      "verification": "utf8-lf",
+      "sha256": "26ce8013c552ff3ce3c62d875b6abc39633ebb13059ccd66f1c1a901fc90a67a"
+    },
+    {
+      "path": "scan/components/OfficialTokens.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f7cb0ae4fd9269697746a29a0cd9ccdb6ffb3555",
+      "verification": "utf8-lf",
+      "sha256": "f2310dbe33175c48a9f34f6f934ae83bcbab77e3fc51f32f9e5401be470beadf"
+    },
+    {
+      "path": "scan/components/PastaWidget.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ece7ddd86cc6b7f6bc231a70d12cfc706b823015",
+      "verification": "utf8-lf",
+      "sha256": "3e71c8cafe9a46b19aecb6e5d7ba123a5150e16e33afd09e87ff0f38f505bd1f"
+    },
+    {
+      "path": "scan/components/RememberScan.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "2e5efbc90c280abfa7ccf62e7532d4d29c0d8410",
+      "verification": "utf8-lf",
+      "sha256": "72ca218e8a2dab12574b42546e98eab36c35835c8a0067b3a8bc3742f65cf6c2"
+    },
+    {
+      "path": "scan/components/SdkShell.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "31772225cd7854e2097675ee88d034712680927f",
+      "verification": "utf8-lf",
+      "sha256": "7352708a16d2bd9bf11890d2bd27df9e8dbd19bf7bac1a2b16f8c35ee64615ec"
+    },
+    {
+      "path": "scan/components/SearchBar.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c3ae7ebd9daefa5bfa469573ea4fa5743504eb7c",
+      "verification": "utf8-lf",
+      "sha256": "6ecc998691dc90f516d6081ef4129d0cf8ec9875c2e5fbb1b20ddcce63ef1a07"
+    },
+    {
+      "path": "scan/components/SecurityGrid.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "bdc7b04fdc3d3883d18082b6deba010e5c777719",
+      "verification": "utf8-lf",
+      "sha256": "0a6d33d34d692011c55f5729bb82a968ba7d740aff6e6054a911f9dab83084cf"
+    },
+    {
+      "path": "scan/components/SiteNav.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1a130578e1133c94c6f7ce2af2e54977a8fc4905",
+      "verification": "utf8-lf",
+      "sha256": "af20ba285cba3b594bb75d4b024ecd25dc1dbd2420473ca545be7d01ebb0cd5a"
+    },
+    {
+      "path": "scan/components/TokenLogo.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "645e3b42ce692ef7a20d1bc8875d319014297fd1",
+      "verification": "utf8-lf",
+      "sha256": "45d92578b10a90514501ab68db66925667bdc0a092f9673450d6845ffae3e034"
+    },
+    {
+      "path": "scan/components/TrustReport.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "18ecfd3df29f7358d92a340c872f659679e3c53b",
+      "verification": "utf8-lf",
+      "sha256": "d61087f01a6a1b5447dd0281165b620503b3f294009119f64f68927d4db2c7ce"
+    },
+    {
+      "path": "scan/components/UnlockHeatmap.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f09ce224ce5c50be57ffa74ccafc82cff3d21078",
+      "verification": "utf8-lf",
+      "sha256": "fd1e7acf91c10b6767d367d1e908683789d87f67cd3821911b46c20c3cffe99b"
+    },
+    {
+      "path": "scan/components/WalletProviders.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9d82a30ac042de378ec283dc73219e17ea24cd58",
+      "verification": "utf8-lf",
+      "sha256": "f52d916b85503dace5bb5ec2d6dabeb38eea03e7f1e53e3af893f718cc3f902d"
+    },
+    {
+      "path": "scan/components/ZealyVerify.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "68aa66322f00d624126d61691275bda951dff082",
+      "verification": "utf8-lf",
+      "sha256": "794f121bec5c814e245bec6263bef80a7584d5ea7b20492df1a1f8ad9532c754"
+    },
+    {
+      "path": "scan/components/world/ComingSoon.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "de52a7d87b633dbe4e18455e1dce4b11f9c3db21",
+      "verification": "utf8-lf",
+      "sha256": "79332fb99ab1b831de80bd1759e1806b7766b2580905f03dad117091c5f471f3"
+    },
+    {
+      "path": "scan/components/world/FridgeCanvas.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fcd167a971dcbc61741f3b339917ffa67474f6e9",
+      "verification": "utf8-lf",
+      "sha256": "07e5e3b08cfc66b3ffa9d58baeafa9da1679753c8a078224b421608ee2a75950"
+    },
+    {
+      "path": "scan/components/world/MemeRunway.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fb14bd48dd376cd63f1cebfef14ebb4b91a6593a",
+      "verification": "utf8-lf",
+      "sha256": "4f78d20c9a4e2ec05d82caa5c335215566166ebbfdd91ad620d9cf5b88c1d27c"
+    },
+    {
+      "path": "scan/components/world/NewsletterSignup.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "35b485e90b52c9d5ee536c13586118cd03936526",
+      "verification": "utf8-lf",
+      "sha256": "322e0e0e29f047e22e7fe6726808d1b03e76b67b284a941cbdb883ea18477c5a"
+    },
+    {
+      "path": "scan/components/world/RunwayShare.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5da931eefd0eaf6985de5ff994b50736b5e561f1",
+      "verification": "utf8-lf",
+      "sha256": "a811c7ced78a18de0c24aa19bbbf8b1a8a07e5cf6cbf607b5ed9b4f5a50e12a1"
+    },
+    {
+      "path": "scan/components/world/WorldApp.tsx",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a40173b54788937aafcc406f4ac4d310aab5517c",
+      "verification": "utf8-lf",
+      "sha256": "3a9e7ff987fa1f670466f273d460e66e07d9d047219f92c2807375d55d7c103a"
+    },
+    {
+      "path": "scan/components/world/runway-contracts.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3b35d749079691169e9db7d64ad0c3da0ddf6cfb",
+      "verification": "utf8-lf",
+      "sha256": "d8bbe8084b1627752819f411e851f397828647d6cfc3a82956ea021e1fa93bf5"
+    },
+    {
+      "path": "scan/components/world/runway.module.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ab677108490e552758c49515aebc1b68c4156ef3",
+      "verification": "utf8-lf",
+      "sha256": "01962d7f44f8db53feb74e7c4bef700669a177eaf78bd7d2f14bae35a4a4358c"
+    },
+    {
+      "path": "scan/lib/auth.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "2dcf7321b86273d4bdb67e7f3ddff4d190fdeb2e",
+      "verification": "utf8-lf",
+      "sha256": "5019973e684c9535142914c7dec037509a7aa6630d56738c0a4f2f6b815ef22b"
+    },
+    {
+      "path": "scan/lib/badge.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c463d184b967b009a08779e069f429a28ec4421d",
+      "verification": "utf8-lf",
+      "sha256": "360a4b335c43a908ca63163774cc70e5e1e4f28f76b8b093e1f2e4a68e99e52c"
+    },
+    {
+      "path": "scan/lib/boost.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fc5874600aac36812e62fda802e5c8fb7650da94",
+      "verification": "utf8-lf",
+      "sha256": "a37e1f068bcc2421d5eddf8377043a72b21520a1b7785dc84e03417ad52c13e7"
+    },
+    {
+      "path": "scan/lib/brainrot-solana.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "189a7fc0c3ec02b802f915c006e0308978bbeccc",
+      "verification": "utf8-lf",
+      "sha256": "f2b823d8542ecda11e858aaed1385c38a836d70b8f554520ab46072e2acc9ce7"
+    },
+    {
+      "path": "scan/lib/bridge.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4d130a948fb7944dc262ad76743b0781acb67dbb",
+      "verification": "utf8-lf",
+      "sha256": "fc93c6cd8e65673cb0474c4effc3c60dc6ebd01c9045fd6541239a9f9299e3e2"
+    },
+    {
+      "path": "scan/lib/constants.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "2d70a266fc3f4d02b56a3363db901bf06b1565bd",
+      "verification": "utf8-lf",
+      "sha256": "c7893a2202cda5702ffd0f1f35cb4fcad6c1746c1b0358956dbdbe0ff80fd516"
+    },
+    {
+      "path": "scan/lib/contacts.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7112a7a3863137a5c72da567714f98494fb3f0e7",
+      "verification": "utf8-lf",
+      "sha256": "435474e56a158c64a48de36f0ede96f0735e76f8c948d3fc44db40f6e248cbf1"
+    },
+    {
+      "path": "scan/lib/docs.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "adfbca4c06f4ed7cf802837b396a4843aa7deb43",
+      "verification": "utf8-lf",
+      "sha256": "3929ef38b6f87ac272ed1afd559ba32725754ee554ea81c05c5a6ec8a16277b9"
+    },
+    {
+      "path": "scan/lib/format.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9cd95319d7c78ca594f456ca1156cecb6a88433a",
+      "verification": "utf8-lf",
+      "sha256": "334185eeff260f17af52fbe02fb3fdb18a31cac4236cef72a972612deb40dc71"
+    },
+    {
+      "path": "scan/lib/fridge.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "6ebf942843757cac94b03dc8b4df9ca864b81a2a",
+      "verification": "utf8-lf",
+      "sha256": "4c60c3e21f2d8399ae23a116add69bebb64dbb30ba5da0e3ab00cb7e09e41ee1"
+    },
+    {
+      "path": "scan/lib/health.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "719bee99f2893afbc25a3a4a8584f17b9c31aa3e",
+      "verification": "utf8-lf",
+      "sha256": "fd57e565bf24fc020df8ec3840f443bc80fe0d7bd0e7fe874acf782d6e200c64"
+    },
+    {
+      "path": "scan/lib/heatmap.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1da7fafd57a29e1abe6412f73268798bb534f43a",
+      "verification": "utf8-lf",
+      "sha256": "004065c4f15a2aa5d2a5eb3bfbd6ec0b7f7b5bd8487b7b1ec9b3a184e57ea86b"
+    },
+    {
+      "path": "scan/lib/identity.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fbd833c9350b0dc2dbd4b2d3e001336d989691ed",
+      "verification": "utf8-lf",
+      "sha256": "9a4d0cdb14a4ae87e9bd4d4655dd6e5c182b8ca19067e81fcb2bde6e96dd6ff1"
+    },
+    {
+      "path": "scan/lib/jupiter.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "6221e3c194c2e351c55aae99389951edfbc4f3f8",
+      "verification": "utf8-lf",
+      "sha256": "c35ed55d459f1f7b3446ce29dca28d9bc72aa27f4b5a6534420e8ac3540c6977"
+    },
+    {
+      "path": "scan/lib/logo.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "04cb8a1d52d17e5c6526cdd7bfc6594200c82e50",
+      "verification": "utf8-lf",
+      "sha256": "b5cb7083501e4108850916f68b79bb02a3b9c3b429639244899015a0857ed21a"
+    },
+    {
+      "path": "scan/lib/official-tokens.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a16895e413d01021a78576195e4848fda1e7e53b",
+      "verification": "utf8-lf",
+      "sha256": "e31d6b312657b2a1bc9e6a471cb2320c6a11b002dd64ced7c361f78b64479110"
+    },
+    {
+      "path": "scan/lib/pasta.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4e66015c230f3ba8e41ee9b51dc6d932315c1de9",
+      "verification": "utf8-lf",
+      "sha256": "6ce86ff6fb8e422825b94cf02facf117aee22049b8a27dc89f77230f91c31785"
+    },
+    {
+      "path": "scan/lib/price.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8fc066d957b80e9140bc9ec76b9c5493e125d8d1",
+      "verification": "utf8-lf",
+      "sha256": "2faf0e2d437422ac91045032c1b47b1300b91ec916489fc9470bdbdc22dde026"
+    },
+    {
+      "path": "scan/lib/rpc-proxy.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1e13c35cf98b29656fb7f18968e93c87b736bb23",
+      "verification": "utf8-lf",
+      "sha256": "5a4747415c796242941badbced8942df80a16abcbe8fa7c891e0426ffd35f25e"
+    },
+    {
+      "path": "scan/lib/rpc.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4a5a27f71f826c7900b25c0712e16060614b8f5b",
+      "verification": "utf8-lf",
+      "sha256": "e72ecc76e4b3fc8fd927c4363cddeaa96f63e6cbbb3756f904330fd5b123b702"
+    },
+    {
+      "path": "scan/lib/scan-evidence-checks.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a1bdd4db3f120358f2b49d6c8cf21553ce56b796",
+      "verification": "utf8-lf",
+      "sha256": "3b4ac3e976db3e7af05de01eda955fcaaf6263f828fdb2668f7cb82631172d7f"
+    },
+    {
+      "path": "scan/lib/scan.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "6efd591d719c3b7f8178035723d5048749c0ba5b",
+      "verification": "utf8-lf",
+      "sha256": "2b542cda7e0bab00db8c283ac808a1fe9c26f428c40ec1a59824d623024f7612"
+    },
+    {
+      "path": "scan/lib/sdk.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c03a2165922bb734c9db1a7c8cbd2e50ca6d2d26",
+      "verification": "utf8-lf",
+      "sha256": "3f618271b7b28a406743fd439fe11a91f55237a419c633fd3876f37eafd0d528"
+    },
+    {
+      "path": "scan/lib/solana-evidence.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e9ca4c4d97afe873e1e7f425014fc58f64f3dc51",
+      "verification": "utf8-lf",
+      "sha256": "a99d6f1fbf71c2824cabfc584d56b8b184b2ffbe17127df1dfdaeaafebec76cb"
+    },
+    {
+      "path": "scan/lib/stats.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "16b3903274844ea6dc08f961c5aa17e523931241",
+      "verification": "utf8-lf",
+      "sha256": "fe52753ddd71c7914eee3cfee1273b633276262ef73d4885ebb5be5ef7d54eb2"
+    },
+    {
+      "path": "scan/lib/store.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "225f0b8da5dc8d5285944981906aafbdfe9f1c8e",
+      "verification": "utf8-lf",
+      "sha256": "692249d20723bac1f6abd1bafb11cc10699ccf3ecb3e282788726de616970347"
+    },
+    {
+      "path": "scan/lib/team.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a16e2d4af4e48494baaace7d43238cbe701ae799",
+      "verification": "utf8-lf",
+      "sha256": "c103af098e272ee9e41b6ced850f0c8baefd406c319a47130a389d2fa935eedd"
+    },
+    {
+      "path": "scan/lib/ticker.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "805e0ba5538070b45535812781cb9553d86fa03d",
+      "verification": "utf8-lf",
+      "sha256": "fc3b5d0a5f003ce808ebb722ec1f2f9fb092b42e3de6b97e2e9f040237ba40bf"
+    },
+    {
+      "path": "scan/lib/world-faction.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "328bd1799002baa79eacf3cbca28d0c6a0ce888f",
+      "verification": "utf8-lf",
+      "sha256": "da4a37f127a77db26b53caa2bd70999a3b6c10565df139634bba59c96b47e948"
+    },
+    {
+      "path": "scan/lib/world-share.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "959833796eb1c6aad4f8ac03c3fa57a0cd718161",
+      "verification": "utf8-lf",
+      "sha256": "f116aa8a2e73aefc488c8aec774ceed7c06f92babe46941b1ea8f4b0dce3bdc8"
+    },
+    {
+      "path": "scan/lib/zealy.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8c7ee09481c8efbd7f33f496331f37385e13cd43",
+      "verification": "utf8-lf",
+      "sha256": "f9a1486ca23420b8437bef4b7e0bac4957d0e7d3655ba1deb4183bc05a94e1d7"
+    },
+    {
+      "path": "scan/middleware.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e3b6cbf581e7e5f0ce34a78beee2cbe108ff6509",
+      "verification": "utf8-lf",
+      "sha256": "40d2d4b4562efdb447915a01a064f58fee8d34c25534eb1a161b949295848045"
+    },
+    {
+      "path": "scan/next-env.d.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "950b66f914b7326f00e20617679825d53b72da2b",
+      "verification": "utf8-lf",
+      "sha256": "9dd9d642cdb87d4d5b3173217e0c45429b3e47a6f5cf5fb0ead6c644ec5fed01"
+    },
+    {
+      "path": "scan/next.config.mjs",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f64a583f0ebc174bef360e894d1c3b1a6dabbd08",
+      "verification": "utf8-lf",
+      "sha256": "7338058dcb9d591a0772326df97245d9287d7d2d2c4b8d6c2cd43884e948685b"
+    },
+    {
+      "path": "scan/package-lock.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "154709275ced7e2577aad608bfca8aff7a9182fd",
+      "verification": "utf8-lf",
+      "sha256": "557a54c06c56a0c6ad6e91298f9e6f8e65fd336691391ecbb47b684890ef54c4"
+    },
+    {
+      "path": "scan/package.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "eb14f06b4239a900991b593677c820feffd6b117",
+      "verification": "utf8-lf",
+      "sha256": "a0fd71abca5cc421c9915321758c4149e0a49f912bcdaacd0f1096e7816862c9"
+    },
+    {
+      "path": "scan/postcss.config.mjs",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "de66770d4f8dd7125309f8c2d2331dd9db6c27d8",
+      "verification": "utf8-lf",
+      "sha256": "8c4071497479b4bb346d0ebb53b1bdeb555beb659512aaa0d6988d0d83ddeed5"
+    },
+    {
+      "path": "scan/public/.well-known/security.txt",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a02cf5802ab9835874f5f2e2c298ee865bcb2478",
+      "verification": "utf8-lf",
+      "sha256": "5bb4ec550caca1c61cb9d2e1932a5f7c899c57b8d754743806039692877aa8f5"
+    },
+    {
+      "path": "scan/public/brand/ciccia-squad-logo.jpg",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b357b6ec056ecce1e795570996d2c2a4534a8d78",
+      "verification": "binary",
+      "sha256": "7c4684ce66b4dae3937904816f14c1f12c1ee995f3b735f7a5318600882fc66b"
+    },
+    {
+      "path": "scan/public/sdk/devfridge-sdk.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3867f51c9da4944644e9f9dc9d4b4796c54b8793",
+      "verification": "utf8-lf",
+      "sha256": "cad31b18ff0a9adc32241d341d37f9920f492ab63a321fea266d01b26966dc07"
+    },
+    {
+      "path": "scan/public/world/ATTRIBUTION.txt",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "44c7d6bc08fb842bccdaf4ee6a293b1800b9e658",
+      "verification": "utf8-lf",
+      "sha256": "a03d0d502b95e6c8ac91f0ffa324f27b97e2ff306194fa7292be6e2f50e87cc4"
+    },
+    {
+      "path": "scan/public/world/Duck.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "78170efd55f69ea61bda4ab184ba0776c78c5b5c",
+      "verification": "binary",
+      "sha256": "65bf938f54d6073e619e76e007820bbf980cdc3dc0daec0d94830ffc4ae54ab5"
+    },
+    {
+      "path": "scan/public/world/Soldier.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3b2df6d248975f411897fc2b024d1e7e74b53825",
+      "verification": "binary",
+      "sha256": "dfb230fc1f942f259dd00281a1186953ad602fc5d69067ce63e24b2aa439736b"
+    },
+    {
+      "path": "scan/public/world/Xbot.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c7198793486e9e3de0e3d3038c1e2e08919b43a4",
+      "verification": "binary",
+      "sha256": "002f8d269de68e5dce3d25195caf390d1aa359bbfaae3fcf4c8dc78ec36c3ba5"
+    },
+    {
+      "path": "scan/public/world/brainrot-pose-banner-v1.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0a26d3e8a0efc9b183ca052fd01057c142cf450d",
+      "verification": "binary",
+      "sha256": "f0d9806c59af582d5533e3fd3c310bacead81ff5b4cd0ece0a40908badfde404"
+    },
+    {
+      "path": "scan/public/world/brands/pons.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a0652466decbfab4da16f1243685b34ca7035d69",
+      "verification": "binary",
+      "sha256": "05c06e534994f0c51b84348cb1962ba7a7d04f6c04b8a9253d101db220f8868a"
+    },
+    {
+      "path": "scan/public/world/brands/pump.svg",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b37951e967df5b53bd4446b1a3e48c1bd56d9a42",
+      "verification": "utf8-lf",
+      "sha256": "2c72b8e06bbd7be8823c2cce4bbe652ba7a36e35074b8a1b27fd668304816379"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-B2OQaIkp.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "255ad34229740fbd7349ea05b1bb7410367d9b38",
+      "verification": "utf8-lf",
+      "sha256": "b95b0a90c8043201877bae5374c23d80657b5ba3e6fb24abcdb1005aa0028dbc"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-B6OApKlI.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b062ef7efaeccfe12d2c64d91afd42beff1585d0",
+      "verification": "utf8-lf",
+      "sha256": "a0289f9d9490ee7e20087041547405ad754277dc12315cff2a8eeabde7b1c080"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-BZQfDg_G.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0de35fc9dd760e309339c31f91237a6e9943ef16",
+      "verification": "utf8-lf",
+      "sha256": "200b786403f8ecc03575d92ddfacfdd0e454e26e62741ac61c95da68d6743c3c"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-C6V9l1kf.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8632738157235fb1d3fbab29db6b752f695441e2",
+      "verification": "utf8-lf",
+      "sha256": "d209dace239c4529cb0434772bf06289f161280bf79cd7855b032e4ef74f756d"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-CB-T6tZ3.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "04ca6cd64b4ff429f20916af3840c32d95028b98",
+      "verification": "utf8-lf",
+      "sha256": "1c4539849c9de99d7244d03b43649196e82f34ee7d1c0ddd8210fac22a9c4ca3"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-CkZWMrOD.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "37f0fc1d329dbe8f14354805fe6d190a1173c513",
+      "verification": "utf8-lf",
+      "sha256": "8473beb5c15a7640280160e6bda0233c238b4f1aaccca13c72a22bb05f9e44ee"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-CpNIiCKM.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5af4b02e310542e96c671b8642479c709552ae99",
+      "verification": "utf8-lf",
+      "sha256": "1555207e0f9f589ddc4976b2a6df96c4677750770902a6389d964f1c570d6c18"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-CqleSmIC.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e56986633516fd63b84acadfee9bedc2877e7437",
+      "verification": "utf8-lf",
+      "sha256": "9285f16968cbbbd3c4541270f380a63465d38fa9ef749e14682b0d53da84b702"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-CwRrCfg6.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7730f7272db715c73f44c3218b2a7ea9ef8d242b",
+      "verification": "utf8-lf",
+      "sha256": "bef18339610c4d8881de32932b0248bf804c02bdf0cfaf165ed100a1c328c1ae"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-DbIUYR3g.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b43a7e5f7e863fefdefbedc065a96d99c6958c2a",
+      "verification": "utf8-lf",
+      "sha256": "d03dda5947ffcd91b577cb5177a43c9e319ba831442b4f38424f4511f66ec52e"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-DhT1UOWR.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a4396064084cdc361d543054854f21649fee0751",
+      "verification": "utf8-lf",
+      "sha256": "389fdfaa609e91efc605b0cf795b6338b58103ad5ee07eefee2442bc8b20d0cc"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-DjKAZ9gL.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "eae216287f4a13f47eff9fc6b40d26c740751da2",
+      "verification": "utf8-lf",
+      "sha256": "de4242e5853fae6403e128252448d91bbe47eb608be55bcc17a2a8e2d5182b4a"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-Dkf74L_6.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "869545b7a5632881c43850013287eddf57dd061b",
+      "verification": "utf8-lf",
+      "sha256": "0b042abb0720bbd32aa3939b8d82d57348598f461814203ca8efaef868735d39"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-DqLak6p1.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "488295bbedfc48c1be94fb7850d070116a4ddf61",
+      "verification": "utf8-lf",
+      "sha256": "434a2faadb7c1f50b77a68aa1ee6d19ef915de2d1f093e8301104bd83d7a3243"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-DspFxqlv.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b5e8026aa99efff151804ff3f671a4b4c463ff40",
+      "verification": "utf8-lf",
+      "sha256": "17551b2d1bda675a822515d2aec2ce89303574a317aa70c3747d86e4912db0fc"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-O7P4yLFi.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f219aaa266556855d3a22c4e667877fd205f2afd",
+      "verification": "utf8-lf",
+      "sha256": "6520e2682928a939b3af60ad652541ba92f71b061a02df84b35fd79da63c2fec"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-QG5N8d4u.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "feb031ff6346617586639e68d0f2d44bffcdbb4f",
+      "verification": "utf8-lf",
+      "sha256": "8a32bb495cd0310ade3dde428ca809bc9ab59985b77db96372938f9ebe755a88"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-Z4Aa-LTC.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "14bd963ea3c485e0828474d9d14be28dd948750d",
+      "verification": "utf8-lf",
+      "sha256": "8aac4438c3b621c72eec023f1ecaee3a00804e5202ac59c73362397a6274b05e"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-dlOlDYc0.css",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b7ae37d4d6b9a32e88d621da0c15c77b6591786b",
+      "verification": "utf8-lf",
+      "sha256": "d9d940b3a89838a7fe13261befdf990baab31f6cfe69cb48518131c66b99b6ae"
+    },
+    {
+      "path": "scan/public/world/game/assets/index-qSliNLbb.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "87f79444e215518051976dc40e5da904292775cb",
+      "verification": "utf8-lf",
+      "sha256": "e799d7fee389402150e5da29ded5d567df3876fb8a0232c84651d2c30d5bb830"
+    },
+    {
+      "path": "scan/public/world/game/audio/aperitivo-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a41865b6d55b2018961c2f2d527fa1ea67b4d283",
+      "verification": "binary",
+      "sha256": "9bb14fa55ab25f03c87964292a34182c3b0198d5fe9c52e0696e0b668166b0cd"
+    },
+    {
+      "path": "scan/public/world/game/audio/aperitivo-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "96463681bb489c04ca1849fd3d79e2f1b8c26fea",
+      "verification": "binary",
+      "sha256": "ee6d4090d9ddc94af527382b60dd130e263d91e24ad8788e93f1036920ba19de"
+    },
+    {
+      "path": "scan/public/world/game/audio/aperitivo-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "05355f92c6df4fc3b2519f4ae4399722a6508eba",
+      "verification": "binary",
+      "sha256": "b6d9aefd431aa2f1e7706c6af43b38cdf704f8d28d6b223bd210c137de1e9d4e"
+    },
+    {
+      "path": "scan/public/world/game/audio/bonkatino-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8c04df4ce9541429bc5693bdaf69e3d45a2ca490",
+      "verification": "binary",
+      "sha256": "64252245d55af7d3de07abeed15d55b26f59c14b1c445e54a91103f7bdec3034"
+    },
+    {
+      "path": "scan/public/world/game/audio/bonkatino-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "918f6c3ef0150371bda849308ace1cf65378c983",
+      "verification": "binary",
+      "sha256": "34850d9c718f580b6dfd55fbfbf3f1541a72de1a0852414b85f67dae78c8b8c6"
+    },
+    {
+      "path": "scan/public/world/game/audio/bonkatino-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fba22bcb418acdb0b69d37e3edb6df78bab077f1",
+      "verification": "binary",
+      "sha256": "ccda05c6c9e822e2b0213cb3850abffea25cb8b88c8cd337666e55ccf543ae2f"
+    },
+    {
+      "path": "scan/public/world/game/audio/browser-validation.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7073abf40be6a79e1ff38cabf096f0f93aa68fab",
+      "verification": "utf8-lf",
+      "sha256": "cecb20c6c1204a45e13a0917c7a7f3c45ec410d8502234a4b4f1e4624d1863c4"
+    },
+    {
+      "path": "scan/public/world/game/audio/ciccia-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5f6298215dbfb87b0402e9f471408a7578da6dda",
+      "verification": "binary",
+      "sha256": "3e10afa5ad4e1c1659f6a85cb7b1109d77998a1f193560b035985e70c894f6d6"
+    },
+    {
+      "path": "scan/public/world/game/audio/ciccia-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3e1d03415d84e77b0bee55240799db1060e15db7",
+      "verification": "binary",
+      "sha256": "1129643822fb41f0b505585a58178945cb9e57ce5a2bf7beefee51c0fe622b41"
+    },
+    {
+      "path": "scan/public/world/game/audio/ciccia-theme.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b1348cbdf3a17360a301b43765eab61f5ee8ae0d",
+      "verification": "utf8-lf",
+      "sha256": "db52e8b4ec6efc8cb1bd928c8712612e13834d2f994fe5d27ccefb094dfb7392"
+    },
+    {
+      "path": "scan/public/world/game/audio/ciccia-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "eec79d53768fbdaca653a49bb6159f5a036f7d52",
+      "verification": "binary",
+      "sha256": "8781534b2e09205fc808e00ab3221203aab1fa52369fe85becdc8aff02bbe505"
+    },
+    {
+      "path": "scan/public/world/game/audio/ciccia-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f90a4dbe897890901f747af44cf56101f5af4db9",
+      "verification": "binary",
+      "sha256": "9b5e48face6de96cdb6613be0bf0840f7c13bc980ff23171c098926044e05f8e"
+    },
+    {
+      "path": "scan/public/world/game/audio/friedfomo-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "65d9acc125744a4ace200dcb3149c9154ebea3c7",
+      "verification": "binary",
+      "sha256": "105af78fd765aa115b8db3b16b0e91e275ce40164fb6350c0c5bd0e6f6a0fc47"
+    },
+    {
+      "path": "scan/public/world/game/audio/friedfomo-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "762a44abc8793cc7570dbcfdb64ce36d921328f5",
+      "verification": "binary",
+      "sha256": "fb66cd09ac1bdf575479eb7ada6a17ed363a4ff65305e7c2d341f4fc53cc625c"
+    },
+    {
+      "path": "scan/public/world/game/audio/friedfomo-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "679a0124083c47674c4e8d3181700fafc1f32206",
+      "verification": "binary",
+      "sha256": "de393fa3a1a2a366226f17289a15f1ea4770c2655a916171991f5fd8ddcecfa7"
+    },
+    {
+      "path": "scan/public/world/game/audio/fudfusilli-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8250f18a4e01116816eea73d26a7d18e9693441e",
+      "verification": "binary",
+      "sha256": "5192f75c0aa96ba0343cb83153253258c2e48862e3c4f60e32ad420aac0f36b6"
+    },
+    {
+      "path": "scan/public/world/game/audio/fudfusilli-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "91f26a9eb7ce50a665bbb82d3e00c8003abdf2db",
+      "verification": "binary",
+      "sha256": "e42957096bb88137c976b61f126261baee440e59a00cf2a9d85311df36ceb57f"
+    },
+    {
+      "path": "scan/public/world/game/audio/fudfusilli-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b2c55f3bdf11607401ba138abc266e8f81d14018",
+      "verification": "binary",
+      "sha256": "e44ea18b981616b06ff001ee04ebc4e6ae98579290ac42fac57633da1c89d3c2"
+    },
+    {
+      "path": "scan/public/world/game/audio/full-cast-sampler.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4a1ca445e5ed992861f883ac86d84f6f43ae470e",
+      "verification": "binary",
+      "sha256": "2e573a2d15bfea242c6f9f8c55a19950ee4ed48a15195f70aff9315cb8ddd217"
+    },
+    {
+      "path": "scan/public/world/game/audio/gmgnocco-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "07c9b0c30d083ecaddab83948f68c7aff3ad8bcb",
+      "verification": "binary",
+      "sha256": "37f9b10b716913360fb924ed3f067d1539ab399d954f622020f82b819ea39fec"
+    },
+    {
+      "path": "scan/public/world/game/audio/gmgnocco-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "caa60d05cce66842e0ef9839bfba9cc3a3ea5e6d",
+      "verification": "binary",
+      "sha256": "eb5e0a9f882f8450c7ffbd36e1425936f02380c615ad03cb5439a3828deea512"
+    },
+    {
+      "path": "scan/public/world/game/audio/gmgnocco-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "13c2bb23cf60dfbd6a29f2d62d2a8928fcfb6e8a",
+      "verification": "binary",
+      "sha256": "7396d2960755f44256def481a3ca55e9b4fb18dead6c77562ba034cc0f6b9dcf"
+    },
+    {
+      "path": "scan/public/world/game/audio/lambocello-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "26d4dbdc0a7df39d8648345da8e253925a66061f",
+      "verification": "binary",
+      "sha256": "e9742ed07a89b47e58b3e0bddaf165434b671d8d026e7b8844f31a7f63889eee"
+    },
+    {
+      "path": "scan/public/world/game/audio/lambocello-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "59ab162cf61b2c576888e748c25fbc7a561e0ffd",
+      "verification": "binary",
+      "sha256": "79f762e09658e186dfc244ab5ae3e8756d56f2f507c21f9dabb95b7e612ed98c"
+    },
+    {
+      "path": "scan/public/world/game/audio/lambocello-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "2f7b278ccae03ea5f8b48e1c3e58f9944e2749e7",
+      "verification": "binary",
+      "sha256": "d234929a525b2b1485f47d93dde4c3dbe7ed37f62081ca4f6a615f4cb5cde4b0"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/aperitivo-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "933d3ead6be06179539865b7cc376ab1f8628617",
+      "verification": "binary",
+      "sha256": "b311210a4a6833940ae44ab5f831e2c99cd1485c35189894a28b8bd3162dff38"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/aperitivo-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1bbdaae51c9c553237637b31c30d755df5ec0ade",
+      "verification": "binary",
+      "sha256": "9a31602f0c50fbd0cae3bd08d62539e3498bed15ee268eb2e058da96d53f829b"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/bonkatino-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "67dea1ca0991f6c7ea036a3592d1f9fbe985ac7b",
+      "verification": "binary",
+      "sha256": "70614a019cb403970e004dc7d35245fd80731cd7f85079ab74965a852d575d4d"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/bonkatino-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "70875a76df29205220d5d538f825bdbc8a803ce3",
+      "verification": "binary",
+      "sha256": "dba741fa204bf391ebd10118192648e0e8252c3e0d9dd6c4cb20278595350e0e"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/ciccia-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c867f02f2f8092175d803347448e73ecf1255192",
+      "verification": "binary",
+      "sha256": "7a4bbef74a0f2fae92a3022cf717fb3cd480605d3046baee2ab4e4d135ac6679"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/ciccia-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a798f824944c1198ffebca1b1cf29b196309dbc7",
+      "verification": "binary",
+      "sha256": "eae1297b5b14d15b22cfb009a21b4e061fdfc62ef39d49cae688d72e883fc9ab"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/friedfomo-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c46a856897e1870840d928b34863d0d38fc2376d",
+      "verification": "binary",
+      "sha256": "5f6ee11eda6ca3ba82ef354d925eb400797bace7141deb50fdc61ef5833917a8"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/friedfomo-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ee3e98489b57baa980992acac1bcd0d4a34f8942",
+      "verification": "binary",
+      "sha256": "8474f97733691cc30c9ac9a21d8a3cc4c5cd4159f71dfe6b430499d202ef6ef4"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/fudfusilli-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a2fff8ce50f720dd0f15576b07ca77f44cc7bcbb",
+      "verification": "binary",
+      "sha256": "a676555486443dbd56fe3bbc4641e7defc919d5160b0abece746e075bc956a9c"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/fudfusilli-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ac3d0b201d3c5a4ee18df722721d39c56cb78595",
+      "verification": "binary",
+      "sha256": "6a9cc0a5d0c365e16a00a7d14b361fa4ef42c99521dfe846af70649c2ff751e6"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/gmgnocco-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "385e13a71c729687bcd75d2f5e155503b6674ed0",
+      "verification": "binary",
+      "sha256": "444dbd93bf5dba45e8678203e094213be3094ea792b693b994707bb7a1d974f7"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/gmgnocco-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9bc479da4bb87f2a3e0c8edaa6df40fd512f93d4",
+      "verification": "binary",
+      "sha256": "f364520857dc7e15b8e15ea07cb651c8af0a109145bd43bcbf8b89ad4fb45a84"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/http-validation.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "96e85bf2105ab970d9dd9f4b0b22d176d740367a",
+      "verification": "utf8-lf",
+      "sha256": "292fb3bcda20f6593bad7705b4d53438252d1b1258d32718db193bbf3c05a1ea"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/lambocello-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "560bf58aa209b8a635c5e59b4b0341ef80a0247e",
+      "verification": "binary",
+      "sha256": "270ade7d2b04c190b970b98389377dd2a9da813d6653037617b1579eba999907"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/lambocello-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8b11e180a1d47de7c42bfc960934822eb07fb7cf",
+      "verification": "binary",
+      "sha256": "ee1ad175c11468aa552cad920b6cb46c0618cdfc54f66e829a896fdfa5bd1782"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/manifest.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3176552f5432b251f93d32093adeeae4dadb9e06",
+      "verification": "utf8-lf",
+      "sha256": "025d79dc9e8801b6adeab7872a409985f7d6f81a17572dfbaefefe2dbaa43c0f"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/moonzarella-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7706a3320cb39a272a032a5a4840782f275a2788",
+      "verification": "binary",
+      "sha256": "ef598dfc4e465dc3a3d24039773d1114cbb2d6d4f64d0e72e0da1b6b16a257b7"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/moonzarella-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "6a7163a894d0ad368dad48777e59c67708c98e01",
+      "verification": "binary",
+      "sha256": "4533ba398d0a343e4f53e4134554f7460986b1d010b479f17abae6b081c51589"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/rugarugo-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b99306a0f743dc4b3d0c0ff0a5b8b90905c1e9bb",
+      "verification": "binary",
+      "sha256": "38ec2204864085fa0052024d318663788e217f250ee13e4ead737cbf166b5dc7"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/rugarugo-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d7c2ac51b7102d2bc3b2f2b69b838d4c62caace4",
+      "verification": "binary",
+      "sha256": "f28ea7b75538555a6824e5a5b2cabf23f5c128af72271846e590a8baab29453d"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/sersugo-full.mp3",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "002d11fbd06acd3b7ba8099b58502a7706087075",
+      "verification": "binary",
+      "sha256": "54e8cc268e140a96b272a0aa071f06d028f8a710927b130bf8d6be6765bd890e"
+    },
+    {
+      "path": "scan/public/world/game/audio/lyria/sersugo-theme.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d984f17dfe73d74b2da3df773d853d8bd6bc43b6",
+      "verification": "binary",
+      "sha256": "4b9dbb47251c9409455ee8bc886620b0c81f074c068f39aef2b4c6754b40fbd9"
+    },
+    {
+      "path": "scan/public/world/game/audio/manifest.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "30d6ae5b8d395172acbfef1fb3eb03a2c47b25fa",
+      "verification": "utf8-lf",
+      "sha256": "6bb81428dfcd74aae2c90bb583e3d1a832bec41a1d564eed1712e27c1988b878"
+    },
+    {
+      "path": "scan/public/world/game/audio/moonzarella-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "2bf56114d48790a17a116e0c3b5d136cb41d83ea",
+      "verification": "binary",
+      "sha256": "07639f6d7cfee5d7c095b61bfc09ae6796d8ddd6102326228dc82b746df25451"
+    },
+    {
+      "path": "scan/public/world/game/audio/moonzarella-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7001b0a3b233efb69af25a7652cc19a00066244e",
+      "verification": "binary",
+      "sha256": "ad8a5c3a0da38584ea7eccb830906469125eea7e16d3f12695d2256178734424"
+    },
+    {
+      "path": "scan/public/world/game/audio/moonzarella-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ce7471cacb06dc2c49b40cbc0fcb76427f1fb8df",
+      "verification": "binary",
+      "sha256": "d946f4215e05a3a089c540b16301f9e2917b004457637608022d9e13bcc9d576"
+    },
+    {
+      "path": "scan/public/world/game/audio/rugarugo-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1fd1361d80a6c951f4fd7d27ff43f15a789ebfaa",
+      "verification": "binary",
+      "sha256": "6de4626b3bae96ed681cf2d54f471e9de9ecf34ac73e274360b28cb0e4d02dcc"
+    },
+    {
+      "path": "scan/public/world/game/audio/rugarugo-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ac39c2be661194c88ce4fac35f61d270f734f1e1",
+      "verification": "binary",
+      "sha256": "e735b59167d415ee097dde9bcf5f190c5bd63445ecca916a019a68cdfd3cb861"
+    },
+    {
+      "path": "scan/public/world/game/audio/rugarugo-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "0dfb19fe319bc0d2c377219a1afa4e6590349340",
+      "verification": "binary",
+      "sha256": "e0ad9144c0f7dc6777965024afd42db93d3bee5770db8ceebb581d44e708b278"
+    },
+    {
+      "path": "scan/public/world/game/audio/sersugo-sfx.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3cea62fe13f973b4c34dab464caa974395d4a1ad",
+      "verification": "binary",
+      "sha256": "b36ed34f9abfb8674c539fa4f413ac2035799fc8e903dde2e5c59536ffb91f85"
+    },
+    {
+      "path": "scan/public/world/game/audio/sersugo-signature.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "505a6ba37a6963cd2fc6739102de6ca2e2aa71df",
+      "verification": "binary",
+      "sha256": "30224a14a00ae2fd580fe9a1e42b645839d4467ebea09b7c9bf7b0ba3af1786a"
+    },
+    {
+      "path": "scan/public/world/game/audio/sersugo-voice.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "3e122d97f58dabd5670b85c5b491a9915bcaca74",
+      "verification": "binary",
+      "sha256": "9f93c4af420fe22e057f829f0a3b4a672ee81f316415260f75dfefa4a03f6d3f"
+    },
+    {
+      "path": "scan/public/world/game/audio/validation.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "75716e0203e47bce696e575e85e95a4f18490085",
+      "verification": "utf8-lf",
+      "sha256": "fcf95fcb41d6b0194dc2463a528cc024d971882cacae7b97e028ab11705a3e76"
+    },
+    {
+      "path": "scan/public/world/game/cast.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "968a50e9da0fb24bf52fbf33e7475a5e4bce1d8f",
+      "verification": "utf8-lf",
+      "sha256": "018cb63ca9d0b5e6d72114e525be9ec885c5e26d71147f786ac20aee6630c39a"
+    },
+    {
+      "path": "scan/public/world/game/economy.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c1004a5a8888571701da7fce4a343b1461f37188",
+      "verification": "utf8-lf",
+      "sha256": "cbad0f5a956144d17fecff8f4ef4c0af31b664069052dc06d3a176e91140c5d7"
+    },
+    {
+      "path": "scan/public/world/game/favicon.svg",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c91b9936e686bcf860798e63fe863b859e601cbc",
+      "verification": "utf8-lf",
+      "sha256": "fc731ed39751e9ac060b5c56db9497b61f508c59681fa715e8a7bf568c9b7c52"
+    },
+    {
+      "path": "scan/public/world/game/index.html",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "57ea986333d873f921681daa8f7bbb7c35b0b0d7",
+      "verification": "utf8-lf",
+      "sha256": "f1109191c8feccf3ed73c3b1e710a34e348b39ebc84aa0469674f180331f98f1"
+    },
+    {
+      "path": "scan/public/world/game/models/aperitivo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a681837b903dfc6a57da5cbee876deefcba2b776",
+      "verification": "binary",
+      "sha256": "a3de3460164b71d3f0d5f850a4f65fc50624a7e2d4d9e62429982a544a27dd37"
+    },
+    {
+      "path": "scan/public/world/game/models/bonkatino.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b7fea7eb4711451465738f8ba6f54cafc3b84256",
+      "verification": "binary",
+      "sha256": "f6a07b9e8fd9f68f9ff8bf0b342d91f6f654d658f9f643e13a9e449c897d3bbe"
+    },
+    {
+      "path": "scan/public/world/game/models/ciccia.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e3f39efc672232779e525b28b2d12062c6610f73",
+      "verification": "binary",
+      "sha256": "b37b54826a0aeb3721eab09c5ea63d05f778e934e6fa9fba25d5d9ec28098951"
+    },
+    {
+      "path": "scan/public/world/game/models/controller-validation.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "011cfed90634ee4e509e41d1bf9addb74fe2ade5",
+      "verification": "utf8-lf",
+      "sha256": "1ae5fd3032dfa621c8c008ab9519aa5653746b780e8e93e68ac16bf74a03f57a"
+    },
+    {
+      "path": "scan/public/world/game/models/friedfomo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "97119306b54c530832caee179db222697e2d4410",
+      "verification": "binary",
+      "sha256": "0d63a77067330fba434c5abecc99bfbfbedb5435ceddb3744a8f565269260c85"
+    },
+    {
+      "path": "scan/public/world/game/models/fudfusilli.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c2ef925b4ba9ee7d5d92ba44fe6abaa5261940bf",
+      "verification": "binary",
+      "sha256": "ed002ac0777e29e7e6967acc9165e7229c10f9fd1d73b72975039d330d12323b"
+    },
+    {
+      "path": "scan/public/world/game/models/gmgnocco.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8bde0cd809e55bcee7bf5713495e744bbdc1bdd3",
+      "verification": "binary",
+      "sha256": "28c07e8a450387a204afe95cdaccdee9c91231f020045626e67f324559c95cec"
+    },
+    {
+      "path": "scan/public/world/game/models/lambocello.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9245fdac55df325a8dada4677f00f3581c8f27ac",
+      "verification": "binary",
+      "sha256": "8bce8bd3bacfb394400e61c80ac65e443677765b12e8375241660a8e4068116c"
+    },
+    {
+      "path": "scan/public/world/game/models/manifest.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f189a14640b58d50fc0c85d04e53205382e2d5d3",
+      "verification": "utf8-lf",
+      "sha256": "adb2f3b61a305a4e42c2acecf688a871ba3d7c039147cf0fe97727b9381bdf1c"
+    },
+    {
+      "path": "scan/public/world/game/models/moonzarella.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5f5a5516fedf68d5eb5e891a72a387a9596e55cd",
+      "verification": "binary",
+      "sha256": "7f3d235fb9daae8cdb99f3c2bacc54799e7ba70263efd65e1fb4c11c43b55bdb"
+    },
+    {
+      "path": "scan/public/world/game/models/rugarugo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "329bf6e4663140515c13e90a55d2029fae85a6c7",
+      "verification": "binary",
+      "sha256": "d45afd7fcc1a89b1e070930180a7b79466ab28789a0c40362ec046e19d07c859"
+    },
+    {
+      "path": "scan/public/world/game/models/sersugo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ac0613ad2c1266fee08096a07a2ef530cdd8dfab",
+      "verification": "binary",
+      "sha256": "1ccf7ab5236aa7e1de54a88ebf54367ef5cc8ef29faecab7fce60515246a17ce"
+    },
+    {
+      "path": "scan/public/world/game/models/validation.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "fe7feb288137f520bf61e57a185dd294a85a61d9",
+      "verification": "utf8-lf",
+      "sha256": "31b788c15ed395ada71b2ae25f91dc62c2daf07760aba727d0eb236f63d9bb84"
+    },
+    {
+      "path": "scan/public/world/game/portraits/aperitivo.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1dbe87f34c9ea78f00c707d7247c5f6a34c5ddca",
+      "verification": "binary",
+      "sha256": "2a2c2cafc50c958440a2b3d52416811c94d68eb1e9b287cae099fc7859b0523b"
+    },
+    {
+      "path": "scan/public/world/game/portraits/bonkatino.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "84918f5070ae6b965395cc191c42e318eabe4c62",
+      "verification": "binary",
+      "sha256": "cba4a65209f9fd1a0080f387b6a4a554b78eefd93c71b8f94d509f45ebd89d18"
+    },
+    {
+      "path": "scan/public/world/game/portraits/ciccia.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "58017790e95b69989061fc26ff2e9e74a2de69c7",
+      "verification": "binary",
+      "sha256": "ef119be228ad9bd9c183f57e944838fc2049e7f43d7a1db1b68352224fba7733"
+    },
+    {
+      "path": "scan/public/world/game/portraits/friedfomo.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e037f34420b81662e13fae72f4c47b901cfe38c4",
+      "verification": "binary",
+      "sha256": "8912a2b2a3d1bddeeb1d8b29320e6b4c599c3b89b3aa18636977b7a520a6f927"
+    },
+    {
+      "path": "scan/public/world/game/portraits/fudfusilli.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b9a5b7b6d14ca44ceaa06a75f39854a6562da1a0",
+      "verification": "binary",
+      "sha256": "7aa2bf87386cee527eb8205c3bfec8d198c9f1ead5f99eac357fdc76147fd2c9"
+    },
+    {
+      "path": "scan/public/world/game/portraits/gmgnocco.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "30804a5e054cd86b82073c2a846d240051a684a5",
+      "verification": "binary",
+      "sha256": "47e6f4c9f77948d1d586ce1af66e5bf5e54e5cfe9a1f3e56de49b439fb364857"
+    },
+    {
+      "path": "scan/public/world/game/portraits/lambocello.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "266bbbf808f5f395df99c255347ff2d4a8a61833",
+      "verification": "binary",
+      "sha256": "d0cb89ec924a897243f9117822db5ae530ac906452f20ceda92a91e9f64a34e1"
+    },
+    {
+      "path": "scan/public/world/game/portraits/moonzarella.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a87ff47ce4683da3ff053423a551cfec77fdef7c",
+      "verification": "binary",
+      "sha256": "5f4d88d6bbe8fa8420ab89df8862d0962a0cbad5b22a14a02ee805792489f91d"
+    },
+    {
+      "path": "scan/public/world/game/portraits/rugarugo.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "4daebf1cad9c6486e90d7c77b11198dc927d32c5",
+      "verification": "binary",
+      "sha256": "be47fb04ab2f632119905f750c34157be73da5a64fa50f14f681810acfc29400"
+    },
+    {
+      "path": "scan/public/world/game/portraits/sersugo.png",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f031d862943c031fe0aafe1b818b337beffba39c",
+      "verification": "binary",
+      "sha256": "92bd885b74533f92bb814c55d12d2b31d37089dc955a5cc3409d1433ce1a4771"
+    },
+    {
+      "path": "scan/public/world/game/vendor/devfridge-sdk.js",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7d14a038d3e6599d6f97f9511819fbaf5187bbfa",
+      "verification": "utf8-lf",
+      "sha256": "0b719a95ac6d269f7c5801d912f20af3db6b24e8568ce1ddda615396c7535419"
+    },
+    {
+      "path": "scan/public/world/game/vendor/devfridge-sdk.source.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5b492f82f3158296f3ed6819309d90a35720a1c2",
+      "verification": "utf8-lf",
+      "sha256": "fc765eb97c2566aaa2b5c4e6e0cda5bcdcad404a630e9a43c4d55ee396bad545"
+    },
+    {
+      "path": "scan/public/world/runway/aperitivo.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "1bbdaae51c9c553237637b31c30d755df5ec0ade",
+      "verification": "binary",
+      "sha256": "9a31602f0c50fbd0cae3bd08d62539e3498bed15ee268eb2e058da96d53f829b"
+    },
+    {
+      "path": "scan/public/world/runway/bonkatino.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "70875a76df29205220d5d538f825bdbc8a803ce3",
+      "verification": "binary",
+      "sha256": "dba741fa204bf391ebd10118192648e0e8252c3e0d9dd6c4cb20278595350e0e"
+    },
+    {
+      "path": "scan/public/world/runway/ciccia.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a798f824944c1198ffebca1b1cf29b196309dbc7",
+      "verification": "binary",
+      "sha256": "eae1297b5b14d15b22cfb009a21b4e061fdfc62ef39d49cae688d72e883fc9ab"
+    },
+    {
+      "path": "scan/public/world/runway/friedfomo.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ee3e98489b57baa980992acac1bcd0d4a34f8942",
+      "verification": "binary",
+      "sha256": "8474f97733691cc30c9ac9a21d8a3cc4c5cd4159f71dfe6b430499d202ef6ef4"
+    },
+    {
+      "path": "scan/public/world/runway/fudfusilli.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "ac3d0b201d3c5a4ee18df722721d39c56cb78595",
+      "verification": "binary",
+      "sha256": "6a9cc0a5d0c365e16a00a7d14b361fa4ef42c99521dfe846af70649c2ff751e6"
+    },
+    {
+      "path": "scan/public/world/runway/gmgnocco.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "9bc479da4bb87f2a3e0c8edaa6df40fd512f93d4",
+      "verification": "binary",
+      "sha256": "f364520857dc7e15b8e15ea07cb651c8af0a109145bd43bcbf8b89ad4fb45a84"
+    },
+    {
+      "path": "scan/public/world/runway/lambocello.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8b11e180a1d47de7c42bfc960934822eb07fb7cf",
+      "verification": "binary",
+      "sha256": "ee1ad175c11468aa552cad920b6cb46c0618cdfc54f66e829a896fdfa5bd1782"
+    },
+    {
+      "path": "scan/public/world/runway/moonzarella.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "6a7163a894d0ad368dad48777e59c67708c98e01",
+      "verification": "binary",
+      "sha256": "4533ba398d0a343e4f53e4134554f7460986b1d010b479f17abae6b081c51589"
+    },
+    {
+      "path": "scan/public/world/runway/rugarugo.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d7c2ac51b7102d2bc3b2f2b69b838d4c62caace4",
+      "verification": "binary",
+      "sha256": "f28ea7b75538555a6824e5a5b2cabf23f5c128af72271846e590a8baab29453d"
+    },
+    {
+      "path": "scan/public/world/runway/sersugo.wav",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d984f17dfe73d74b2da3df773d853d8bd6bc43b6",
+      "verification": "binary",
+      "sha256": "4b9dbb47251c9409455ee8bc886620b0c81f074c068f39aef2b4c6754b40fbd9"
+    },
+    {
+      "path": "scan/public/world/runway/aperitivo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "a681837b903dfc6a57da5cbee876deefcba2b776",
+      "verification": "binary",
+      "sha256": "a3de3460164b71d3f0d5f850a4f65fc50624a7e2d4d9e62429982a544a27dd37"
+    },
+    {
+      "path": "scan/public/world/runway/ciccia.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e3f39efc672232779e525b28b2d12062c6610f73",
+      "verification": "binary",
+      "sha256": "b37b54826a0aeb3721eab09c5ea63d05f778e934e6fa9fba25d5d9ec28098951"
+    },
+    {
+      "path": "scan/public/world/runway/friedfomo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "97119306b54c530832caee179db222697e2d4410",
+      "verification": "binary",
+      "sha256": "0d63a77067330fba434c5abecc99bfbfbedb5435ceddb3744a8f565269260c85"
+    },
+    {
+      "path": "scan/public/world/runway/bonkatino.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "717927614e70659bd01aafff6a61a4dc4635b570",
+      "verification": "binary",
+      "sha256": "f88ad3696164e60d470eee57514da32d3292eb4e1db9ef5c8577b3f96768d2a3"
+    },
+    {
+      "path": "scan/public/world/runway/fudfusilli.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "d438836ac65d81f13afcbbb445f41e6533b5f8b6",
+      "verification": "binary",
+      "sha256": "67246eb1d1429dfaf0c7daa0970fe5aa701449120a0858f24b73478a576b6ed1"
+    },
+    {
+      "path": "scan/public/world/runway/gmgnocco.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5c7b15f64dc0cab28e098010fcc210d5ffb61b29",
+      "verification": "binary",
+      "sha256": "226315c956b0b4e6ed9b83fbd5addd374e705fe8042afd4b5223667ecb2a2615"
+    },
+    {
+      "path": "scan/public/world/runway/lambocello.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "bc4245397746b710a23eb57a32b5e37c6fef2c3e",
+      "verification": "binary",
+      "sha256": "9f272c84337f8a4a1770bdedf78f56b17ecb6574f88705f745ca77717144482d"
+    },
+    {
+      "path": "scan/public/world/runway/moonzarella.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5996737cff27b20531ff7ae1955d7954305d8e5c",
+      "verification": "binary",
+      "sha256": "25881caa1f4a98b5f63a03507f378a48b9c01c416f7b3afc668cad9af80548cf"
+    },
+    {
+      "path": "scan/public/world/runway/rugarugo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "b13c7591aa5707b03fa0ca7b44f13694a6c5e6d6",
+      "verification": "binary",
+      "sha256": "dee2ceef48c0bf58b1241f34d4075659b1b01ef0efee0dbe2cca3fad2fffc426"
+    },
+    {
+      "path": "scan/public/world/runway/sersugo.glb",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "e42613e0f332eb4141e865c882b2ee4e06d6e696",
+      "verification": "binary",
+      "sha256": "a95864174246c9384ca409611be7bbf92c28efe3c951067569420a11903cce26"
+    },
+    {
+      "path": "scan/public/world/memes/aperitivo.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "39a94f5ceaddc7f045e69bac6b11adb9109062e5",
+      "verification": "binary",
+      "sha256": "6665034257b84590369df7041ec8165d4fc5aa5c6ffba225247255fe8b011435"
+    },
+    {
+      "path": "scan/public/world/memes/bonkatino.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "7bb2111d525036c9cacf8c7159e49f61e1c14220",
+      "verification": "binary",
+      "sha256": "8f683237ff899de741396f1282ffbcd415610b835c36cb4c0302af74485569ee"
+    },
+    {
+      "path": "scan/public/world/memes/ciccia.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8e8e17a05ae676d420a93ebc1c2a563e6696dee6",
+      "verification": "binary",
+      "sha256": "ceb8a3cd067b3a4aad94b064460afc2fff16fbb1e5fe8d337a1d112db5baba67"
+    },
+    {
+      "path": "scan/public/world/memes/friedfomo.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "95258d6a32577be64ca6297fb7dacead6651c4af",
+      "verification": "binary",
+      "sha256": "3f4d6e62f12fdab9a378e493e290eb7428762f999cdda2a02b2cb3fee23cdaaf"
+    },
+    {
+      "path": "scan/public/world/memes/fudfusilli.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "5732037f4b34c6aa9ec18470ca3be91a06c00dcf",
+      "verification": "binary",
+      "sha256": "cec50bcd7aeb4a2750cf7222c697df60f6314fd9408f3f8e7c8ea490e0f76e4c"
+    },
+    {
+      "path": "scan/public/world/memes/gmgnocco.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "457cbf2cbdac023d84aba9dca0aaaac73998b7fa",
+      "verification": "binary",
+      "sha256": "fee5efb35436b90621943e1eb6ab9e43bbc1011f2cad64bd58d0dc351d1f0a14"
+    },
+    {
+      "path": "scan/public/world/memes/lambocello.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "df83c75ada5e800fa98164a0d6be2cd27ebbf7d3",
+      "verification": "binary",
+      "sha256": "b5581b4af1f1fc085bcd8a17a707f076944e61dab6907d34f09505dc96f4b912"
+    },
+    {
+      "path": "scan/public/world/memes/moonzarella.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "54955480f7b515951217800267e8a856a2d26810",
+      "verification": "binary",
+      "sha256": "761c441e8bd7afcc8fe147d82a6320f169d27fbfbdd4d6ff26ef68de93a7f683"
+    },
+    {
+      "path": "scan/public/world/memes/rugarugo.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "c7038a507b4e03d801ca10be3deeefc4186923af",
+      "verification": "binary",
+      "sha256": "5a617e85a1d9bdc0e3fe2d0a5ad58153d50aafad5b6a3712b6621203054a9408"
+    },
+    {
+      "path": "scan/public/world/memes/sersugo.webp",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "dac7af37bb9ac4f941e80631e26054718c78c4a5",
+      "verification": "binary",
+      "sha256": "cedbf97294c622941c9e9bf86b1e88976acf9077a9c26b2597099d5ca7cd0e7f"
+    },
+    {
+      "path": "scan/tailwind.config.ts",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "dd43d9c3b4a69a7642fdfaf4f441ee7377ad5295",
+      "verification": "utf8-lf",
+      "sha256": "cb30105e34d47a3c3611783e8d3f8e5ee9cbedfb75af7ec2ffe4d55ac2dd3a89"
+    },
+    {
+      "path": "scan/tsconfig.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "f93fc1db5fba64992b82f2424f1ae57f396d7e92",
+      "verification": "utf8-lf",
+      "sha256": "2a095d2fa19c8f20cd6d35eaa6293e575796d684c932da45aa11b73b06fd17b1"
+    },
+    {
+      "path": "scan/vercel.json",
+      "sourceDeployment": "dpl_3zAycYtNmSCx9V8SUEFyXSRrRE42",
+      "sourceSha1": "8e0b007606ab1c01ffe8d53e3940d3a824671f37",
+      "verification": "vercel-knowledge-guard",
+      "sha256": "d99140c4ae4a53df1c5d6cea4744b603d31637532453a7118fbb442bc967c667"
+    },
+    {
+      "path": "app/api/locks.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "5fd7817e4a6a6aca9159c2fb11f5e6309cc4dede",
+      "verification": "utf8-lf",
+      "sha256": "ba7b897092a66ca7cfeace5ce6aa7f4c8286f8ad8fede61fe4d6a52c66273650"
+    },
+    {
+      "path": "app/api/pump-price.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "b9be27021d4710528ad6462ba9313052fe4e4a6d",
+      "verification": "utf8-lf",
+      "sha256": "27b5ec0d7a5599d72fec6c83cd606ed5b1c5507ddc0a7b99743322cb06803698"
+    },
+    {
+      "path": "app/api/rpc.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "e555e6432190ef0347a742001a0a60ddadf25851",
+      "verification": "utf8-lf",
+      "sha256": "bb525dca71a35f7290ba5ed8ecb3abe3512bb31c79fa0c481a9f1e39bc4b64b6"
+    },
+    {
+      "path": "app/api/supply.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "1597cdd8c6c943276046d2a3ca0e39510b448e2e",
+      "verification": "utf8-lf",
+      "sha256": "f9dc5fb154444fc2c20c507bdea35f0c58816e8d3788d9a9ad4b66bcacccbd42"
+    },
+    {
+      "path": "app/api/token-logo.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "9df4a7c3a98ba39f9b55cfc1cd8db262a2c3eaa6",
+      "verification": "utf8-lf",
+      "sha256": "505d50919bf0b926ac0864d74642a3c68320a73cf8df1b0a9e0b8542dbf2e3b1"
+    },
+    {
+      "path": "app/index.html",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "b85957467a7d4950310d4d5000b630d26bbf5f2f",
+      "verification": "utf8-lf",
+      "sha256": "4dc0b5a9211fce83414390c6efd5fd400d372bfa28b9b44061e28dfcfad366f0"
+    },
+    {
+      "path": "app/package-lock.json",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "e549daec4404123182faceba0f4e6c1e73fb0b32",
+      "verification": "utf8-lf",
+      "sha256": "158790a845b41d0446f3a070bea4a8afa654d54ab2c79093b3079a28130268b0"
+    },
+    {
+      "path": "app/package.json",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "2bbb2860c5cb426400c174ce7c47611d665d9f8a",
+      "verification": "utf8-lf",
+      "sha256": "8cbacfea4434962c338e7b250a817d41fa301a59c6b64b4bd6816d45170c8e65"
+    },
+    {
+      "path": "app/public/.well-known/security.txt",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "b8070cf103c9df8e5fa777a42f3b4da5d3af84ba",
+      "verification": "utf8-lf",
+      "sha256": "08826f6e540cc03b47891a6bee522555d42c0611fb12afd000a14a2533cc64fd"
+    },
+    {
+      "path": "app/public/brand/logo-lockup.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "63c5903114431626c8e1eafc5faff57d60b1aa8a",
+      "verification": "binary",
+      "sha256": "9f4ef2e88c4f2cec61f9b3474a2141324f125748d3baab22f9be2b40e8872830"
+    },
+    {
+      "path": "app/public/brand/logo-mark.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "7622e95a19e2c861fdf587089b6a1e572eb3212f",
+      "verification": "binary",
+      "sha256": "80ea8264beb26bde507ff9a9e34e96adf29dbe4f7833d1868c827f8cbd07e9bb"
+    },
+    {
+      "path": "app/public/favicon.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "7622e95a19e2c861fdf587089b6a1e572eb3212f",
+      "verification": "binary",
+      "sha256": "80ea8264beb26bde507ff9a9e34e96adf29dbe4f7833d1868c827f8cbd07e9bb"
+    },
+    {
+      "path": "app/public/fund.html",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "459c3d8b281b5b79a9aa88b12eb6f52082acc882",
+      "verification": "utf8-lf",
+      "sha256": "ab77639d7df7751b15eba42161556cdd3e5669deaf4acfd9a882db19fc5e7a7e"
+    },
+    {
+      "path": "app/public/robots.txt",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "c87003668ea52a5fa648d3d4f74f7c122ab33c21",
+      "verification": "utf8-lf",
+      "sha256": "16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95"
+    },
+    {
+      "path": "app/src/assets/logo-lockup.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "63c5903114431626c8e1eafc5faff57d60b1aa8a",
+      "verification": "binary",
+      "sha256": "9f4ef2e88c4f2cec61f9b3474a2141324f125748d3baab22f9be2b40e8872830"
+    },
+    {
+      "path": "app/src/assets/logo-mark.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "7622e95a19e2c861fdf587089b6a1e572eb3212f",
+      "verification": "binary",
+      "sha256": "80ea8264beb26bde507ff9a9e34e96adf29dbe4f7833d1868c827f8cbd07e9bb"
+    },
+    {
+      "path": "app/src/assets/logo-wordmark.jpg",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "e45695011e650c488bc3d40ced40ff05bf922234",
+      "verification": "binary",
+      "sha256": "a67028b9d407ad412b688d6cb4c3a788790241f017b56e22c02cf8a1f7223939"
+    },
+    {
+      "path": "app/src/App.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "b89853e788968775f0cce815a1886a4f80f3abaa",
+      "verification": "utf8-lf",
+      "sha256": "3593ec92c58f13a229b09b4ababb699e8e50692441d9c3cfabe5f55d0553f72a"
+    },
+    {
+      "path": "app/src/components/Cooker.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "c603aaf10712f8cc1e759ba798dd63db50998b91",
+      "verification": "utf8-lf",
+      "sha256": "17d8e0ea384f62bbb43de9a7ecfa56b209acdb63548eb9101898cbabe1514877"
+    },
+    {
+      "path": "app/src/components/ErrorBoundary.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "411cf796edd4db7028cb562c77047a67bd008c7f",
+      "verification": "utf8-lf",
+      "sha256": "ef4cb2a1d3a8eca477aa6e7f0ee2540cb2ef12cf65f782f13b8ec0976e9cee0a"
+    },
+    {
+      "path": "app/src/components/Fridge.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "60e074f73daa59b7a1d1f486c48494cc56452e7c",
+      "verification": "utf8-lf",
+      "sha256": "ce99a797f490a65d73d82d3e7673f16a1d56482e5870cc0a8b9dd29b41e39d4b"
+    },
+    {
+      "path": "app/src/components/FundDeploy.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "2d5bfa5fcbe890dbf6a1ba8ab63646eb64cbcb1c",
+      "verification": "utf8-lf",
+      "sha256": "52bc5644bb76afd2e9218c9bc1bc58bff58dc7bf02931a655621304997930e21"
+    },
+    {
+      "path": "app/src/components/StockPanel.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "a81b82b53a2af8582bd5b0297fee73b1519923aa",
+      "verification": "utf8-lf",
+      "sha256": "bfda588311f24d10c98aa4ab68c4762d7125c45e3d9e8c6cc0ed65855ed6f8c6"
+    },
+    {
+      "path": "app/src/components/TokenLogo.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "6c9d6f9e7066ba52164fc5ec7e2dc473491aafc0",
+      "verification": "utf8-lf",
+      "sha256": "12d4927225db5e4dd9a176d661b3a290be9d131495edaea6ba81a2e428896bee"
+    },
+    {
+      "path": "app/src/hooks/usePhantom.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "77264bdb2ae9f6f9d684da94081d9f5cff3ab1a2",
+      "verification": "utf8-lf",
+      "sha256": "e3521e67ad5ac53728da24220f4449a1b46f83b56db3b74bd029e2d2d079942f"
+    },
+    {
+      "path": "app/src/index.css",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "342dc67e4be1d3d3d2756f8da580230e60854494",
+      "verification": "utf8-lf",
+      "sha256": "ad2c04406596db942378c6686f2ce79e1414e5ff0938b2ab55089f1570fc0b83"
+    },
+    {
+      "path": "app/src/lib/constants.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "6a7f272d808a344364466dba468a3da77a3b8f3d",
+      "verification": "utf8-lf",
+      "sha256": "425d2a7410ec3ff857cf3b823c4f9c763e421fcd59f645699bd7c2b0a0b12daf"
+    },
+    {
+      "path": "app/src/lib/cooker.test.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "a1106f158a301c1e17ded320c8b8e4d59d0daa3a",
+      "verification": "utf8-lf",
+      "sha256": "2b03632969fade78ae85b4e8dd710030b645a03310179aacfd4166ad39098a5f"
+    },
+    {
+      "path": "app/src/lib/cooker.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "a5e207d87c7a5ab457d120e7e0ae43ad0a00715c",
+      "verification": "utf8-lf",
+      "sha256": "5bc59b0be9e664a4fcd1c3692d72c5c8081bb98697d016cdd6e482373c3f7248"
+    },
+    {
+      "path": "app/src/lib/fridge.test.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "044cd77e8c4481811562c7e602372ac2be46b30f",
+      "verification": "utf8-lf",
+      "sha256": "39acb1ab38e78111bc64e5611554ed32a143530342d731b9eacca965d46cb307"
+    },
+    {
+      "path": "app/src/lib/fridge.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "58c6476ae8f1991e3b89343559c2fd89fa9bcafb",
+      "verification": "utf8-lf",
+      "sha256": "8f1bd2ae3f856165bd574265c4c7c3c945b945e0c55c824df730355b77643f36"
+    },
+    {
+      "path": "app/src/lib/jupiter.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "b317a3fa9a0dab152827ed035919407fd4e142bc",
+      "verification": "utf8-lf",
+      "sha256": "6583ad63d037b846ba6493844d44490f63dbc4316ebfeed412d2dfc4b789d6b8"
+    },
+    {
+      "path": "app/src/lib/lockIndex.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "9ea426179d4a653fe0285c708a9a2721e21b42c6",
+      "verification": "utf8-lf",
+      "sha256": "739e8f393fed4387cd7f2071eb4051c11b34fb414073c7d5b3ad3c0cdbfff115"
+    },
+    {
+      "path": "app/src/lib/tokenMeta.test.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "4e6793f9efa76692a3d393c3f23dcd36a00d515d",
+      "verification": "utf8-lf",
+      "sha256": "8396bf77c887bf95fb0cbb69d6cc34156b877b010c1cc1617e43b3faf4d26179"
+    },
+    {
+      "path": "app/src/lib/tokenMeta.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "72a3270ef64816d61721c7a0fb22fe923c05a736",
+      "verification": "utf8-lf",
+      "sha256": "294b20ed38bc92f450e5d07e5f2287b8897dc77182001a7f4ab90ffdbb6d0a9a"
+    },
+    {
+      "path": "app/src/lib/tvl.test.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "9666fb527a84b09ab470532f07a6989ef1e3a4c5",
+      "verification": "utf8-lf",
+      "sha256": "a6e9a463c023738058825a83c41d4a8e06f144d57cfb92edde7308fa2074a797"
+    },
+    {
+      "path": "app/src/lib/tvl.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "ea21a769e4c419ad56b6155033de92e600df4963",
+      "verification": "utf8-lf",
+      "sha256": "3d1c712bcffdb57134eac28e751fded0d69a004a72dc816267ea9d05e0527773"
+    },
+    {
+      "path": "app/src/main.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "a6f4e126ef5444cda8a79a0947fe3cc7fd57295f",
+      "verification": "utf8-lf",
+      "sha256": "edc208582dfccecaf4fc311a5aadcf3217331eb1f57e67899eb0cbda51c0aa98"
+    },
+    {
+      "path": "app/src/polyfill.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "ca58347d5ce880f6b2c443d0503bc8d37db8fe10",
+      "verification": "utf8-lf",
+      "sha256": "67dbda4397101b657378e3553e4debef88a9d7268cffa55d162027cf4abe5f34"
+    },
+    {
+      "path": "app/src/state.tsx",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "0330a76c3c0b39434a20574600c5f62b38d2ffec",
+      "verification": "utf8-lf",
+      "sha256": "c335d60f8eb14057adb9587861beb41ae69031915a5d4298a14f6f3407f7f920"
+    },
+    {
+      "path": "app/src/vite-env.d.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "91cb7178db716668e7dcf7cafbfad288e329e78a",
+      "verification": "utf8-lf",
+      "sha256": "db34dcb373fa47d6efb8f6cb354e5611aaa76f3b4aeb2525789fb7bb15f656ab"
+    },
+    {
+      "path": "app/tsconfig.json",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "666879dd43536db94e37421943503cd236faffb6",
+      "verification": "utf8-lf",
+      "sha256": "fa1424f2aa1dad6197a591bfd6f0c463f7fe09b269ab56b68cb91d4d7faafd66"
+    },
+    {
+      "path": "app/tsconfig.node.json",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "3374d01eaf3d9379625fcb2bc39d2d9d23b02c07",
+      "verification": "utf8-lf",
+      "sha256": "b96c2bc99283695ad8e071981239cdbeecde872dee6338ce4423c770926a42f6"
+    },
+    {
+      "path": "app/vercel.json",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "01f6d4854a7120bdc07e3eb3d1868767d61f18f6",
+      "verification": "vercel-knowledge-guard",
+      "sha256": "ee51ec4b274b582cfc6f7b6a924cbd4c41c570ff8f96a623f26745fb096ff1b5"
+    },
+    {
+      "path": "app/vite.config.ts",
+      "sourceDeployment": "dpl_EVuLFJhgbAnumKp6RvMYGxjzXDn8",
+      "sourceSha1": "002de06f277606ea5613346b14b5cfdbc076be0e",
+      "verification": "utf8-lf",
+      "sha256": "1d442182cc90a5ad06f0b93badee864116c4ea559ce32a6b89e6d88781dc1e64"
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 import { PASTA_MINT, PROGRAM_ID, TREASURY } from "./constants";
+import contracts from "@/components/world/runway-contracts.json";
+import solana from "./brainrot-solana.json";
 
 export type OfficialLink = {
   label: string;
@@ -10,6 +12,21 @@ export type OfficialLink = {
 export const CONNECT_ORIGIN = "https://connect.devfridge.cool";
 
 export const OFFICIAL_SITES: OfficialLink[] = [
+  {
+    label: "AI Investor Relations",
+    href: "https://ir.devfridge.cool",
+    hint: "Ask about DevFridge in your language, with official sources and founder updates",
+  },
+  {
+    label: "Synapse",
+    href: "https://synapse.devfridge.cool",
+    hint: "Explore the DevFridge knowledge graph and investor research",
+  },
+  {
+    label: "Marketing",
+    href: "https://marketing.devfridge.cool",
+    hint: "DevFridge marketing hub",
+  },
   {
     label: "Fridge",
     href: "https://devfridge.cool",
@@ -72,6 +89,21 @@ export const OFFICIAL_BOT: OfficialLink[] = [
 
 export const OFFICIAL_SOCIAL: OfficialLink[] = [
   {
+    label: "Zealy quests",
+    href: "https://zealy.io/cw/solanapasta/questboard/f46e9c1e-3e22-4443-8157-210cbee1d19a/94837c1a-f43f-47f3-a16c-b1f99d225c89",
+    hint: "Official Solana PASTA questboard",
+  },
+  {
+    label: "DeBank",
+    href: "https://debank.com/profile/0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134",
+    hint: "Official DeBank profile",
+  },
+  {
+    label: "Project leader — Telegram",
+    href: "https://t.me/anonimocommando",
+    hint: "@anonimocommando",
+  },
+  {
     label: "X",
     href: "https://x.com/anonimocommando",
     hint: "@anonimocommando",
@@ -85,11 +117,6 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     label: "Telegram channel",
     href: "https://t.me/pastamemelovers",
     hint: "@pastamemelovers",
-  },
-  {
-    label: "Telegram group",
-    href: "https://t.me/+RbLG3dqqM5tiZmRk",
-    hint: "Public kitchen — invite only from this page",
   },
   {
     label: "Trust Me Capital Telegram",
@@ -115,15 +142,21 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
 
 export const OFFICIAL_CICCIA: OfficialLink[] = [
   {
+    label: "CICCIA Salsiccia — Solana / pump.fun",
+    href: solana.ciccia.marketUrl,
+    hint: `Solana Token-2022 · ${solana.ciccia.address}`,
+    copy: solana.ciccia.address,
+  },
+  {
     label: "Join the CICCIA SQUAD",
     href: "https://join.pump.fun/HSag/g3f6x393",
     hint: "Official CICCIA SQUAD community on Pump.fun",
   },
   {
     label: "CICCIA Salsiccia — official mascot",
-    href: "https://pump.fun/coin/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
-    hint: "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
-    copy: "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+    href: `https://www.ponsfamily.com/launchpad/${contracts.ciccia}`,
+    hint: `Robinhood · ${contracts.ciccia}`,
+    copy: contracts.ciccia,
   },
 ];
 

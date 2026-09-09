@@ -5,72 +5,46 @@ type TvlResult = {
   byMint: Map<string, { amount: number; usd: number }>;
 };
 
-let cache: { result: TvlResult; ts: number } | null = null;
+const prices = new Map<string, { price: number; ts: number }>();
 const CACHE_TTL = 60_000;
 
-export async function fetchTvl(locks: LockAccount[]): Promise<TvlResult> {
-  if (cache && Date.now() - cache.ts < CACHE_TTL) return cache.result;
-
-  const now = Math.floor(Date.now() / 1000);
-  const active = locks.filter((l) => l.unlockAt > now);
-  if (active.length === 0) {
-    const empty: TvlResult = { totalUsd: 0, byMint: new Map() };
-    cache = { result: empty, ts: Date.now() };
-    return empty;
+async function pumpPrice(mint: string): Promise<number> {
+  const cached = prices.get(mint);
+  if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.price;
+  const res = await fetch(`/api/pump-price?mint=${encodeURIComponent(mint)}`, {
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!res.ok) throw new Error("Pump.fun price unavailable");
+  const data = await res.json() as { priceUsd?: number };
+  const price = data.priceUsd;
+  if (typeof price !== "number" || !Number.isFinite(price) || price <= 0) {
+    throw new Error("Pump.fun price unavailable");
   }
+  prices.set(mint, { price, ts: Date.now() });
+  return price;
+}
 
-  // Aggregate raw amounts per mint (all pump.fun Token-2022 = 6 decimals)
+export async function fetchTvl(locks: LockAccount[]): Promise<TvlResult> {
+  const now = Math.floor(Date.now() / 1000);
   const mintTotals = new Map<string, bigint>();
-  for (const lock of active) {
+  for (const lock of locks) {
+    if (lock.unlockAt <= now) continue;
     const mint = lock.mint.toBase58();
     mintTotals.set(mint, (mintTotals.get(mint) ?? 0n) + lock.amount);
   }
 
-  // Fetch prices from DexScreener (batch, comma-separated)
-  const mintList = [...mintTotals.keys()];
-  const prices = new Map<string, number>();
-  try {
-    const res = await fetch(
-      `https://api.dexscreener.com/latest/dex/tokens/${mintList.join(",")}`,
-      { signal: AbortSignal.timeout(10_000) }
-    );
-    if (res.ok) {
-      const data = (await res.json()) as {
-        pairs?: Array<{
-          baseToken?: { address?: string };
-          priceUsd?: string;
-          liquidity?: { usd?: number };
-        }>;
-      };
-      for (const pair of data.pairs ?? []) {
-        const addr = pair.baseToken?.address;
-        if (!addr) continue;
-        const price = Number(pair.priceUsd ?? 0);
-        const liq = pair.liquidity?.usd ?? 0;
-        const prev = prices.get(addr);
-        // Keep highest-liquidity pair price
-        if (prev === undefined || liq > (prices.get(`${addr}:liq`) ?? 0)) {
-          prices.set(addr, price);
-          prices.set(`${addr}:liq`, liq);
-        }
-      }
-    }
-  } catch {
-    // price fetch failed — TVL will be $0
-  }
-
   const byMint = new Map<string, { amount: number; usd: number }>();
+  // Cache prices only: new, redeemed, or expired locks must change TVL immediately.
+  // Pump.fun tokens use six decimals. Missing prices must not become zero dollars.
+  const values = await Promise.all([...mintTotals].map(async ([mint, rawAmount]) => {
+    const price = await pumpPrice(mint);
+    const amount = Number(rawAmount) / 1e6;
+    return { mint, amount, usd: amount * price };
+  }));
   let totalUsd = 0;
-
-  for (const [mint, rawAmount] of mintTotals) {
-    const tokens = Number(rawAmount) / 1e6;
-    const price = prices.get(mint) ?? 0;
-    const usd = tokens * price;
-    byMint.set(mint, { amount: tokens, usd });
+  for (const { mint, amount, usd } of values) {
+    byMint.set(mint, { amount, usd });
     totalUsd += usd;
   }
-
-  const result: TvlResult = { totalUsd, byMint };
-  cache = { result, ts: Date.now() };
-  return result;
+  return { totalUsd, byMint };
 }

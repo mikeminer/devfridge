@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import WorldApp from "./WorldApp";
 import dynamic from "next/dynamic";
 import styles from "./runway.module.css";
+import { LAUNCH_X_URL } from "@/lib/world-share";
+import NewsletterSignup from "./NewsletterSignup";
 
 const MemeRunway = dynamic(() => import("./MemeRunway"), { ssr: false });
 
@@ -51,7 +52,17 @@ export default function ComingSoon() {
   }, [open]);
 
   if (!open) {
-    return <WorldApp />;
+    return (
+      <main className={styles.page}>
+        <iframe
+          title="Cold Storage — DevFridge game"
+          src={`/world/game/index.html${window.location.search}${window.location.hash}`}
+          allow="clipboard-write; fullscreen"
+          allowFullScreen
+          className="h-full w-full border-0"
+        />
+      </main>
+    );
   }
 
   const cells = [
@@ -62,7 +73,7 @@ export default function ComingSoon() {
   ];
 
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} ${styles.countdownPage}`}>
       <MemeRunway />
       <div
         aria-hidden="true"
@@ -78,19 +89,20 @@ export default function ComingSoon() {
           alt="DevFridge"
           className="h-12 w-12 rounded-2xl object-cover ring-1 ring-ice/30"
         />
-        <p className="mt-5 text-xs font-bold tracking-[0.15em] text-ice">WORLD.DEVFRIDGE.COOL</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight">The Meme World</h1>
-        <p className="mt-4 text-base leading-6 text-mute">
-          Ten characters. Ten memecoins. One world. The gates open on{" "}
+        <p className={`${styles.siteLabel} mt-5 text-xs font-bold tracking-[0.15em] text-ice`}>WORLD.DEVFRIDGE.COOL</p>
+        <h1 className={`${styles.launchTitle} mt-3 text-4xl font-bold tracking-tight`}>Pick your brainrot.<br />Start the chaos.</h1>
+        <p className={`${styles.launchDescription} mt-4 text-base leading-6 text-mute`}>
+          Ten Italian brainrots. One chaotic kitchen. DevFridge World opens on{" "}
           <time dateTime="2026-10-01T00:00:00+02:00" className="font-semibold text-white">
             1 October 2026
           </time>
           .
         </p>
-        <p className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-ice/80">
+        <p className={`${styles.launchNetworks} mt-3 text-sm text-ice`}>Tokens currently deployed on Robinhood / Pons and Solana / pump.fun.</p>
+        <p className={`${styles.countdownLabel} mt-5 text-xs font-bold uppercase tracking-[0.15em] text-ice/80`}>
           Countdown to launch
         </p>
-        <div className="mt-3 grid grid-cols-4 gap-2">
+        <div className={`${styles.countdownGrid} mt-3 grid grid-cols-4 gap-2`}>
           {cells.map((c) => (
             <div key={c.l} className="rounded-xl border border-ice/15 bg-white/[0.035] px-1 py-3 text-center">
               <p className="font-mono text-2xl font-bold text-ice">
@@ -102,13 +114,20 @@ export default function ComingSoon() {
             </div>
           ))}
         </div>
-        <nav className="mt-6 flex flex-wrap gap-2" aria-label="DevFridge links">
+        <NewsletterSignup />
+        <div className={styles.launchShare}>
+          <a className={styles.xPrimary} href={LAUNCH_X_URL} target="_blank" rel="noopener noreferrer">Share the countdown on X ↗</a>
+          <a className={styles.pickJump} href="#pick-your-brainrot">Pick your character ↓</a>
+          <p>Give your friends a head start on choosing their meme.</p>
+        </div>
+        <nav className={`${styles.launchLinks} mt-6 flex flex-wrap gap-2`} aria-label="DevFridge links">
           <a className="fridge-key" href="https://team.devfridge.cool">
             Team
           </a>
           <a className="fridge-key" href="https://capital.devfridge.cool">
             Capital
           </a>
+          <a className="fridge-key" href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">Game guide ↗</a>
         </nav>
       </section>
     </main>

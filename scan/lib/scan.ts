@@ -14,6 +14,8 @@ import { publicLogoUrl } from "./logo";
 import { usdPrice } from "./price";
 import { connection, rpc } from "./rpc";
 import { fridgeForMint, type FridgeLock, type FridgeStatus } from "./fridge";
+import { collectCanonicalPool, token2022Metadata } from "./solana-evidence";
+import { decodeMetaplexMetadata, liquidityCheck } from "./scan-evidence-checks";
 
 export type CheckLevel = "safe" | "caution" | "danger" | "unknown";
 
@@ -113,7 +115,7 @@ async function dex(mint: string) {
       `https://api.dexscreener.com/latest/dex/tokens/${mint}`,
       { cache: "no-store", signal: AbortSignal.timeout(8000) }
     );
-    if (!res.ok) return null;
+    if (!res.ok) throw new Error(`DEX provider HTTP ${res.status}`);
     const json = (await res.json()) as {
       pairs?: Array<{
         dexId?: string;
@@ -123,15 +125,16 @@ async function dex(mint: string) {
         fdv?: number;
         liquidity?: { usd?: number };
         info?: { imageUrl?: string };
-        baseToken?: { name?: string; symbol?: string };
+        chainId?: string;
+        baseToken?: { address?: string; name?: string; symbol?: string };
       }>;
     };
-    const pairs = json.pairs ?? [];
-    if (pairs.length === 0) return null;
+    if (json.pairs !== null && !Array.isArray(json.pairs)) throw new Error("Invalid DEX provider response");
+    const pairs = (json.pairs ?? []).filter(p => p.chainId === "solana" && p.baseToken?.address === mint);
     const best = [...pairs].sort(
       (a, b) => (b.liquidity?.usd ?? 0) - (a.liquidity?.usd ?? 0)
     )[0];
-    return { pairs, best };
+    return { pairs, best, status: "ok" as const };
   } catch {
     return null;
   }
@@ -207,20 +210,13 @@ async function metaplexMeta(mint: string) {
       ],
       new PublicKey(TOKEN_METADATA_PROGRAM)
     );
-    const acc = await rpc<{ value?: { data?: [string, string] } }>("getAccountInfo", [
+    const acc = await rpc<{ value?: { owner?: string; data?: [string, string] } }>("getAccountInfo", [
       pda.toBase58(),
       { encoding: "base64" },
     ]);
-    if (!acc?.value?.data?.[0]) return null;
+    if (!acc?.value?.data?.[0] || acc.value.owner !== TOKEN_METADATA_PROGRAM) return null;
     const buf = Buffer.from(acc.value.data[0], "base64");
-    const isMutable = buf[1] === 1;
-    let o = 1 + 32 + 32;
-    const name = readBorshString(buf, o);
-    o += 4 + 32;
-    const symbol = readBorshString(buf, o);
-    o += 4 + 10;
-    const uri = readBorshString(buf, o);
-    return { name: name.trim(), symbol: symbol.trim(), uri: uri.trim(), isMutable };
+    return decodeMetaplexMetadata(buf, mint, bytes => new PublicKey(bytes).toBase58());
   } catch {
     return null;
   }
@@ -365,7 +361,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   const mintKey = mint.toBase58();
 
   const conn = connection();
-  const [fridge, jupTok, price, dexData, pump, isStonk, programs, mpl] =
+  const [fridge, jupTok, price, dexData, pump, isStonk, programs, mpl, pool] =
     await Promise.all([
       fridgeForMint(mintKey),
       jupiterToken(mintKey),
@@ -375,6 +371,10 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       stonkCoin(mintKey),
       firstTxPrograms(mintKey),
       metaplexMeta(mintKey),
+      collectCanonicalPool(rpc, mintKey).catch(() => {
+        warnings.push("Canonical PumpSwap pool verification unavailable.");
+        return null;
+      }),
     ]);
 
   let tokenProgram: TrustReport["identity"]["tokenProgram"] = "unknown";
@@ -383,6 +383,9 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
   let freezeAuthority: string | null | undefined;
   let extensions: string[] = [];
   let supply = 0n;
+  let t22Metadata: ReturnType<typeof token2022Metadata> | null = null;
+  let extensionsRead = false;
+  if (!dexData) warnings.push("DexScreener data unavailable; missing market data is not proof of missing liquidity.");
 
   try {
     const acc = await conn.getAccountInfo(mint);
@@ -395,8 +398,10 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       freezeAuthority = unpacked.freezeAuthority?.toBase58() ?? null;
       supply = unpacked.supply;
       try {
-        const types = getExtensionTypes(acc.data);
+        const types = getExtensionTypes(unpacked.tlvData);
         extensions = listExtensions(types as unknown as number[]);
+        extensionsRead = true;
+        t22Metadata = token2022Metadata(unpacked);
       } catch {
         /* */
       }
@@ -526,43 +531,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     });
   }
 
-  const onCurve = (dexData?.pairs ?? []).every(
-    (p) => (p.dexId || "").toLowerCase() === "pumpfun"
-  );
-  const hasDex = (dexData?.pairs?.length ?? 0) > 0;
-  if (pump && !pump.complete) {
-    security.push({
-      id: "lp",
-      label: "LP locked",
-      level: "caution",
-      detail: "Still on the pump.fun bonding curve (not graduated).",
-      amount: "Curve",
-    });
-  } else if (hasDex && !onCurve) {
-    security.push({
-      id: "lp",
-      label: "LP locked",
-      level: "caution",
-      detail: "Pool exists on a DEX. Manual LP lock/burn not fully verified.",
-      amount: "Unverified",
-    });
-  } else if (!hasDex) {
-    security.push({
-      id: "lp",
-      label: "LP locked",
-      level: "danger",
-      detail: "No DEX liquidity found.",
-      amount: "None",
-    });
-  } else {
-    security.push({
-      id: "lp",
-      label: "LP locked",
-      level: "caution",
-      detail: "Only pump.fun curve liquidity detected.",
-      amount: "Curve",
-    });
-  }
+  security.push(liquidityCheck(pool, dexData?.status ?? "unavailable", (dexData?.pairs ?? []).map(p => p.dexId || ""), pump?.complete === false));
 
   security.push({
     id: "dev",
@@ -575,7 +544,15 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     amount: fridge.status === "fridged" ? "Fridged" : fridge.status === "expired" ? "Expired" : "None",
   });
 
-  if (mpl) {
+  if (tokenProgram === "token-2022") {
+    const state = t22Metadata?.state ?? "unknown";
+    security.push({
+      id: "mutable", label: "Metadata mutable",
+      level: state === "immutable" ? "safe" : state === "mutable" ? "caution" : "unknown",
+      detail: t22Metadata?.detail ?? "Could not verify Token-2022 metadata authorities.",
+      amount: state === "immutable" ? "Immutable" : state === "mutable" ? "Mutable" : "Unknown",
+    });
+  } else if (mpl) {
     security.push({
       id: "mutable",
       label: "Metadata mutable",
@@ -589,12 +566,9 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     security.push({
       id: "mutable",
       label: "Metadata mutable",
-      level: tokenProgram === "token-2022" ? "caution" : "unknown",
-      detail:
-        tokenProgram === "token-2022"
-          ? "Token-2022 metadata pointer — treat as mutable unless frozen on-chain."
-          : "No Metaplex metadata account.",
-      amount: tokenProgram === "token-2022" ? "Pointer" : "None",
+      level: "unknown",
+      detail: "No verified Metaplex metadata account.",
+      amount: "Unknown",
     });
   }
 
@@ -602,8 +576,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
     security.push({
       id: "t22",
       label: "Token-2022 extensions",
-      level: extensions.some((e) => RISKY_EXT.test(e)) ? "caution" : "safe",
-      detail: extensions.length
+      level: !extensionsRead ? "unknown" : extensions.some((e) => RISKY_EXT.test(e)) ? "caution" : "safe",
+      detail: !extensionsRead ? "Could not decode Token-2022 extensions." : extensions.length
         ? extensions.join(", ")
         : "Token-2022 with no exotic extensions listed.",
       amount: extensions.length ? extensions.join(" · ") : "None",
@@ -668,7 +642,7 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       supply: supply.toString(),
       circulating: supply.toString(),
       holders: holderCount,
-      note: priceUsd == null ? "No price data — low liquidity token" : undefined,
+      note: priceUsd == null ? "Price data unavailable; liquidity depth cannot be inferred from missing price data." : undefined,
     },
     security,
     fridge,

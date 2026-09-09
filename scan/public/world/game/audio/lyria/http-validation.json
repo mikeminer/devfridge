@@ -1,0 +1,128 @@
+[
+  {
+    "id": "rugarugo",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "rugarugo",
+    "mode": "full",
+    "status": 200,
+    "seconds": 61.648979591836735,
+    "bytes": 1485651
+  },
+  {
+    "id": "aperitivo",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "aperitivo",
+    "mode": "full",
+    "status": 200,
+    "seconds": 178.72979591836736,
+    "bytes": 4295591
+  },
+  {
+    "id": "friedfomo",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "friedfomo",
+    "mode": "full",
+    "status": 200,
+    "seconds": 137.0122448979592,
+    "bytes": 3294369
+  },
+  {
+    "id": "fudfusilli",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "fudfusilli",
+    "mode": "full",
+    "status": 200,
+    "seconds": 32.522448979591836,
+    "bytes": 786614
+  },
+  {
+    "id": "lambocello",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "lambocello",
+    "mode": "full",
+    "status": 200,
+    "seconds": 37.799183673469386,
+    "bytes": 913256
+  },
+  {
+    "id": "gmgnocco",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "gmgnocco",
+    "mode": "full",
+    "status": 200,
+    "seconds": 60.839183673469385,
+    "bytes": 1466216
+  },
+  {
+    "id": "sersugo",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "sersugo",
+    "mode": "full",
+    "status": 200,
+    "seconds": 66.66448979591837,
+    "bytes": 1606023
+  },
+  {
+    "id": "moonzarella",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "moonzarella",
+    "mode": "full",
+    "status": 200,
+    "seconds": 179.56571428571428,
+    "bytes": 4315653
+  },
+  {
+    "id": "bonkatino",
+    "mode": "theme",
+    "status": 200,
+    "seconds": 24.0,
+    "bytes": 4233644
+  },
+  {
+    "id": "bonkatino",
+    "mode": "full",
+    "status": 200,
+    "seconds": 64.80979591836734,
+    "bytes": 1561511
+  }
+]
