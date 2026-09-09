@@ -2,6 +2,8 @@
 
 Public chat: https://ir.devfridge.cool . Grok answers in the language of each question using Synapse, current official documentation and X search restricted to `anonimocommando`. The interface offers an initial welcome, suggested questions, streamed answers, source links and an optional Solana tip address.
 
+The product is positioned for advisors and introducers connecting corporate clients and major investors with the founder. It helps prepare investor briefs and diligence questions. The visible referral section is explicitly a proposal: submitted wallet-signed conversation → verified eligible investment → percentage of attributable trading fees. The rate, actual fee source, beneficiary and attribution window are not defined. Signing/submission, attribution, fee accounting and payouts are not implemented or advertised as live. Grok's instructions preserve this status; the chat cannot create a reward entitlement or send a conversation to anyone.
+
 The fixed tip address `GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W` was checked against the published pappardelle.sol CEO profile, associated with the same X handle, in Synapse's verified Team evidence on 9 September 2026. It is a wallet, not the PASTA mint or a lock PDA. Tips do not affect answers.
 
 ## Sources and privacy
