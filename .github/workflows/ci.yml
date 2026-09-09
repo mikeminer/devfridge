@@ -23,6 +23,8 @@ jobs:
             bot/package-lock.json
       - name: Install scanner dependencies
         run: npm ci --prefix scan
+      - name: Test Solana account evidence and scanner classifications
+        run: node --test scan/tests/solana-evidence.test.cjs
       - name: Build scanner
         run: npm run build --prefix scan
       - name: Install app dependencies
