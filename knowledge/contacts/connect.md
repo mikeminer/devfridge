@@ -4,15 +4,15 @@ title: "Official contacts, project leader and community"
 description: "DevFridge investor knowledge: Official contacts, project leader and community"
 resource: "https://connect.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 
 # Official contacts, project leader and community
 
-Project-published contact observations. Team roles are roster labels, not independent identity or lock verification. Check the canonical source and observation date before contacting anyone.
+Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-08T22:45:52Z · last attempt: 2026-09-08T22:45:52Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-09T00:45:44Z · last attempt: 2026-09-09T00:45:44Z.
 
 ## OFFICIAL TELEGRAM BOT
 

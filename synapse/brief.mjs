@@ -37,7 +37,7 @@ export function buildBrief(snapshot, { now = Date.now(), fallback = false } = {}
   const documents = Object.entries(snapshot.documents ?? {}).filter(([url]) => /^https:\/\/docs\.devfridge\.cool(?:\/[a-z0-9-]*)?$/.test(url)).map(([url, record]) => ({ url, title: record.data?.title ?? url, ...observation({ status: record.status, fetched_at: record.fetched_at, data: record.data ? { available: true } : null }, now) }));
   return { schema_version: 1, title: 'DevFridge Synapse — Pump.fun investor brief', canonical_url: ORIGIN + '/', canonical_pasta_mint: PASTA, solana_program: PROGRAM,
     snapshot_attempted_at: snapshot.attempted_at, fallback, registry: observation(snapshot.registry, now), assets, documents,
-    contacts: { connect: observation(snapshot.contacts?.connect, now), team: observation(snapshot.contacts?.team, now) },
+    contacts: { connect: observation(snapshot.contacts?.connect, now), team: verifiedTeam(snapshot.contacts?.team, now) },
     scope: 'Official DevFridge ecosystem assets on Solana and Robinhood Chain. Address and network identify each asset; ticker alone does not.',
     economics: 'DevFridge documents route Get Featured payments and claim fees into PASTA buy/burn paths. These are product mechanics, not measured revenue, holder distributions or a price floor.',
     limits: ['Daily observations, not real-time quotes. Pool liquidity is a provider estimate, not executable depth or LP-lock evidence.', 'Pump.fun bonding-curve progress, executable slippage, Solana holder clusters, LP ownership and upcoming unlocks are not collected here.', 'A token lock does not prove liquidity is locked. No cross-network redemption relationship is assumed.', 'Not affiliated with any other token using the PASTA ticker.'],
@@ -47,9 +47,18 @@ export function buildBrief(snapshot, { now = Date.now(), fallback = false } = {}
 const statusText = record => `${record.status === 'ok' ? 'Observed' : record.status === 'stale' ? 'STALE' : 'Unavailable'} · ${record.fetched_at ?? 'no successful observation'}`;
 const authority = (data, key) => !data || !(key in data) ? 'Not observed' : data[key] === null ? 'None at observation' : data[key];
 
+function verifiedTeam(record, now) {
+  const result = observation(record, now);
+  if (!result.data) return result;
+  return { ...result, data: { ...result.data, members: (result.data.members ?? []).filter(member => {
+    const proof = member.commitment, age = now - Date.parse(proof?.checked_at);
+    return result.status === 'ok' && proof?.status === 'verified' && proof.mint === PASTA && Number.isFinite(age) && age >= 0 && age <= 36*3600000 && proof.valid_until * 1000 > now;
+  }) } };
+}
+
 function contactSection(brief) {
   const { connect, team } = brief.contacts;
-  return `<section id="contacts"><div class="section-heading"><h2>Official contacts & team</h2><a href="/graph.html#/contacts/index.md">Explore contact notes ↗</a></div><p>Published by Connect and the Team roster. Roles are project labels; this index does not independently verify identities or token locks.</p><h3>Project leader, communities & updates</h3><p class="timestamp">Connect: ${escape(statusText(connect))}</p><div class="doc-links">${(connect.data?.entries ?? []).map(c => `<a href="${escape(safeURL(c.url))}">${escape(c.label)}<small>${escape(c.group)}</small></a>`).join('') || '<p>Contact details unavailable. Check Connect.</p>'}</div><h3>Team & leadership</h3><p class="timestamp">Team roster: ${escape(statusText(team))} · <a href="https://team.devfridge.cool/">Team site</a></p><div class="assets">${(team.data?.members ?? []).map(m => `<article class="asset"><h3>${escape(m.name)}</h3><p>${escape(m.role)}</p><code class="mint">${escape(m.wallet)}</code><ul>${m.contacts.map(c => `<li>${c.url ? `<a href="${escape(safeURL(c.url))}">${escape(c.platform)}: ${escape(c.handle)}</a>` : `${escape(c.platform)}: ${escape(c.handle)}`}</li>`).join('')}</ul></article>`).join('') || '<p>Team details unavailable. Check the team site.</p>'}</div></section>`;
+  return `<section id="contacts"><div class="section-heading"><h2>Official contacts & team</h2><a href="/graph.html#/contacts/index.md">Explore contact notes ↗</a></div><p>Published by Connect and the Team roster. Only team members with verified PASTA commitment are included. Verification uses the Team tier amounts and lock durations; it does not verify real-world identity.</p><h3>Project leader, communities & updates</h3><p class="timestamp">Connect: ${escape(statusText(connect))}</p><div class="doc-links">${(connect.data?.entries ?? []).map(c => `<a href="${escape(safeURL(c.url))}">${escape(c.label)}<small>${escape(c.group)}</small></a>`).join('') || '<p>Contact details unavailable. Check Connect.</p>'}</div><h3>Team with verified commitment</h3><p class="timestamp">Team roster: ${escape(statusText(team))} · <a href="https://team.devfridge.cool/">Team site</a></p><div class="assets">${(team.data?.members ?? []).map(m => `<article class="asset"><h3>${escape(m.name)}</h3><p>${escape(m.role)} · Verified commitment</p><p class="timestamp">Checked: ${escape(m.commitment.checked_at)}</p><code class="mint">${escape(m.wallet)}</code><ul>${m.contacts.map(c => `<li>${c.url ? `<a href="${escape(safeURL(c.url))}">${escape(c.platform)}: ${escape(c.handle)}</a>` : `${escape(c.platform)}: ${escape(c.handle)}`}</li>`).join('')}</ul></article>`).join('') || '<p>Team details unavailable. Check the team site.</p>'}</div></section>`;
 }
 
 function assetCard(asset) {
@@ -81,10 +90,10 @@ ${contactSection(brief)}
 export function renderMarkdown(brief) {
   const lines = [`# ${brief.title}`, '', `Canonical URL: ${ORIGIN}/`, `Canonical PASTA mint (Solana): ${PASTA}`, `Solana program: ${PROGRAM}`, `Snapshot attempt: ${brief.snapshot_attempted_at}`, `Delivery: ${brief.fallback ? 'saved fallback; live feed unavailable' : 'latest fetched GitHub snapshot'}`, `Registry: ${statusText(brief.registry)}`, '', brief.scope, '', brief.economics, '', '## Interpretation limits', ...brief.limits.map(s => '- ' + s), '', '## Assets'];
   const { connect, team } = brief.contacts;
-  lines.splice(lines.length - 1, 0, '## Official contacts & team', 'Project-published identities and roles; not independent identity or lock verification.', `Connect: https://connect.devfridge.cool/ — ${statusText(connect)}`,
+  lines.splice(lines.length - 1, 0, '## Official contacts & team', 'Only team members with verified PASTA commitment are included. Roles are project labels; commitment does not verify real-world identity.', `Connect: https://connect.devfridge.cool/ — ${statusText(connect)}`,
     ...(connect.data?.entries ?? []).map(c => `- ${c.group} — ${c.label}: ${safeURL(c.url)}`),
     `Team: https://team.devfridge.cool/ — ${statusText(team)}`, 'Roster source: https://scan.devfridge.cool/api/team',
-    ...(team.data?.members ?? []).flatMap(m => [`- ${m.name} — ${m.role}; public wallet: ${m.wallet}`, ...m.contacts.map(c => `  - ${c.platform}: ${c.handle}${c.url ? ' — ' + safeURL(c.url) : ''}`)]), '');
+    ...(team.data?.members ?? []).flatMap(m => [`- ${m.name} — ${m.role}; public wallet: ${m.wallet}; verified commitment checked ${m.commitment.checked_at}; evidence: ${safeURL(m.commitment.source)}`, ...m.contacts.map(c => `  - ${c.platform}: ${c.handle}${c.url ? ' — ' + safeURL(c.url) : ''}`)]), '');
   for (const a of brief.assets) {
     const p = a.largest_indexed_pool, c = a.chain_observation;
     lines.push('', `### ${a.name} ($${a.symbol}) — ${a.chain}`, `Address: ${a.address}`, `Chain evidence: ${statusText(c)}`, `Total supply: ${a.total_supply ?? 'not observed'}`, `Market evidence: ${statusText(a.market_observation)}`);

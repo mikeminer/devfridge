@@ -4,7 +4,7 @@ title: "Aperitivo (solana)"
 description: "DevFridge investor knowledge: Aperitivo (solana)"
 resource: "https://solscan.io/token/B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 

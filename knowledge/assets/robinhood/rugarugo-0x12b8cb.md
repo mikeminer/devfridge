@@ -4,7 +4,7 @@ title: "Rugarugo (robinhood)"
 description: "DevFridge investor knowledge: Rugarugo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x12B8Cba33606a4F7B85ee30620784c5a1015E816"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 

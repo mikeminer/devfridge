@@ -2,21 +2,21 @@
   "assets": {
     "robinhood:0x0713636aae9dc16921f3f862fba52af6db5d1db3": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -44,28 +44,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x0713636AAe9DC16921F3f862fba52AF6DB5d1db3/holders",
         "status": "ok"
       }
     },
     "robinhood:0x12b8cba33606a4f7b85ee30620784c5a1015e816": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -93,28 +93,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x12B8Cba33606a4F7B85ee30620784c5a1015E816/holders",
         "status": "ok"
       }
     },
     "robinhood:0x29a13f8219d1d54424f1f9f1f90e85448488b2de": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -142,28 +142,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x29A13F8219d1D54424F1F9f1F90E85448488b2DE/holders",
         "status": "ok"
       }
     },
     "robinhood:0x2a4e9362ab5fdcab06a4a56b76dcbb286ea7d0fe": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -191,28 +191,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x2A4e9362AB5fDcAb06A4A56B76dcBb286ea7D0FE/holders",
         "status": "ok"
       }
     },
     "robinhood:0x2aaa6d9e59734bb37ebc123fe5df797853f43aac": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -240,28 +240,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x2AAa6d9e59734bb37EBc123Fe5dF797853F43AaC/holders",
         "status": "ok"
       }
     },
     "robinhood:0x575634d01aeeb4421c5ec4e06d861dfb0da6df7a": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 2,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -279,28 +279,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x575634d01aEeb4421c5EC4E06d861DFb0Da6df7a/holders",
         "status": "ok"
       }
     },
     "robinhood:0x5c845330b41d9bef68b46dc254353a770f44dee8": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 16,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -358,28 +358,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x5c845330b41D9Bef68B46DC254353A770f44dee8/holders",
         "status": "ok"
       }
     },
     "robinhood:0x6af70b8487cd47def373c4a9eb58f990a3edba37": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -407,28 +407,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x6AF70B8487CD47dEf373c4A9eB58F990A3eDba37/holders",
         "status": "ok"
       }
     },
     "robinhood:0x8cff8a877ec7f5a63840143e9a1af2c024a7e87e": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -456,28 +456,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0x8CfF8a877Ec7f5A63840143e9a1AF2c024A7e87E/holders",
         "status": "ok"
       }
     },
     "robinhood:0xc1c1ecb7596f8bc364e397aaf987e4f11f88557c": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 5,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -510,28 +510,28 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0xC1c1ecB7596f8bc364E397Aaf987e4F11f88557c/holders",
         "status": "ok"
       }
     },
     "robinhood:0xf7aca11cdb86115eedce7da43c5326a12408201e": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "admin_controls": "Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.",
-          "block": 57920781,
+          "block": 58057651,
           "chain_id": 4663,
           "contract_code_bytes": 3248,
           "decimals": 18,
           "supply_base_units": "1000000000000000000000000000"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://rpc.mainnet.chain.robinhood.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "holders_count": 4,
           "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
@@ -559,14 +559,14 @@
             }
           ]
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://www.ponsfamily.com/api/pons-v2-market/0xF7aca11cDB86115eEDce7da43C5326A12408201e/holders",
         "status": "ok"
       }
     },
     "solana:39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -592,16 +592,16 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411686,
+          "slot": 445455204,
           "supply_base_units": "963341299999043",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [
@@ -624,7 +624,7 @@
               },
               "url": "https://dexscreener.com/solana/5o5jbdwzd3zke3jc8tb81d3bph7bwxftvwllroz1eql5",
               "volume": {
-                "h1": 4.87,
+                "h1": 0,
                 "h24": 4.87,
                 "h6": 4.87,
                 "m5": 0
@@ -633,14 +633,14 @@
           ],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
         "status": "ok"
       }
     },
     "solana:3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -666,16 +666,16 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411688,
+          "slot": 445455204,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [
@@ -696,21 +696,21 @@
               "volume": {
                 "h1": 0,
                 "h24": 1.45,
-                "h6": 1.45,
+                "h6": 0,
                 "m5": 0
               }
             }
           ],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump",
         "status": "ok"
       }
     },
     "solana:4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -736,29 +736,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411690,
+          "slot": 445455206,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump",
         "status": "ok"
       }
     },
     "solana:6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -784,29 +784,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411695,
+          "slot": 445455210,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump",
         "status": "ok"
       }
     },
     "solana:8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -832,29 +832,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411692,
+          "slot": 445455206,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump",
         "status": "ok"
       }
     },
     "solana:AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -880,29 +880,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411699,
+          "slot": 445455212,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump",
         "status": "ok"
       }
     },
     "solana:An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -928,29 +928,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411697,
+          "slot": 445455211,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump",
         "status": "ok"
       }
     },
     "solana:B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -976,16 +976,16 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411680,
+          "slot": 445455199,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [
@@ -1013,14 +1013,14 @@
           ],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump",
         "status": "ok"
       }
     },
     "solana:CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -1046,16 +1046,16 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411684,
+          "slot": 445455203,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [
@@ -1076,21 +1076,21 @@
               "volume": {
                 "h1": 0,
                 "h24": 120.3,
-                "h6": 120.3,
+                "h6": 0,
                 "m5": 0
               }
             }
           ],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
         "status": "ok"
       }
     },
     "solana:EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -1116,29 +1116,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411702,
+          "slot": 445455213,
           "supply_base_units": "999999999999995",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump",
         "status": "ok"
       }
     },
     "solana:HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -1164,29 +1164,29 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411694,
+          "slot": 445455208,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump",
         "status": "ok"
       }
     },
     "solana:HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump": {
       "chain": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "decimals": 6,
           "extensions": [
@@ -1212,31 +1212,31 @@
           "freeze_authority": null,
           "mint_authority": null,
           "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
-          "slot": 445411683,
+          "slot": 445455202,
           "supply_base_units": "1000000000000000",
           "token_2022": true
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.mainnet-beta.solana.com",
         "status": "ok"
       },
       "market": {
-        "attempted_at": "2026-09-08T18:55:47Z",
+        "attempted_at": "2026-09-08T22:45:52Z",
         "data": {
           "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
           "pairs": [],
           "provider": "DexScreener"
         },
-        "fetched_at": "2026-09-08T18:55:47Z",
+        "fetched_at": "2026-09-08T22:45:52Z",
         "source": "https://api.dexscreener.com/token-pairs/v1/solana/HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump",
         "status": "ok"
       }
     }
   },
-  "attempted_at": "2026-09-08T22:39:29Z",
+  "attempted_at": "2026-09-09T00:45:44Z",
   "contacts": {
     "connect": {
-      "attempted_at": "2026-09-08T22:39:29Z",
+      "attempted_at": "2026-09-09T00:45:44Z",
       "data": {
         "entries": [
           {
@@ -1352,15 +1352,116 @@
         ],
         "title": "Official Connect contacts"
       },
-      "fetched_at": "2026-09-08T22:39:29Z",
+      "fetched_at": "2026-09-09T00:45:44Z",
       "source": "https://connect.devfridge.cool/",
       "status": "ok"
     },
     "team": {
-      "attempted_at": "2026-09-08T22:39:29Z",
+      "attempted_at": "2026-09-09T00:45:44Z",
       "data": {
+        "excluded_count": 6,
         "members": [
           {
+            "commitment": {
+              "checked_at": "2026-09-09T00:45:44Z",
+              "minimum_amount_base_units": "100000000000000",
+              "minimum_duration_seconds": 31449600,
+              "mint": "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+              "policy_sha256": "981ff68fe2c7e07aae7eed2d0922f42eeb850d630f49253894ec429352ef87ce",
+              "policy_source": "https://github.com/mikeminer/devfridge/blob/master/team/src/lib/verify.ts",
+              "qualifying_amount_base_units": "105937269340957",
+              "qualifying_locks": [
+                {
+                  "address": "KjdFruFx1VgcYmaANa3yP2xahjEYLncAcJeQtPDUeZn",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391284,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "ugLHJV4vKX1gCeiMcJdZf4wH1mVZ896rWF5pGvtvY8y",
+                  "amount_base_units": "81400106594",
+                  "created_at": 1787391386,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "5DSqPzU39P67yYSyn98aiomH13nzbS6FJJKBMBcg5RFt",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391322,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "63JcEqHndLP2U9DiNR2eWshXbYj4NkG2Zsi31fGnyVoQ",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391231,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "8wzzm9FFvgSTRdU9HSpP8skNUMULGiDKowx7SryLG1M8",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391340,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "8zEMjVqB7cokioQ4XutYtjwpoMpbc4EKKVURqndvUTR8",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391255,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "Bn29P3QKDdPhg14tMRLyG11MqCqCbD8sjY1LP8fTCSus",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391216,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "FpBjK4RvsoZQKuYLa3SdVsXpTL7ZHmSaKzCH91ofqz2R",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391270,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "GNxX8q5kTACzLtYnisb9SvSUhMs9rcyhq9gAcHHH3hMB",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391356,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "J2kWoiwMLRxT6GQzn5eoBWvRdUiCUjLik2tTcSS5zBP5",
+                  "amount_base_units": "100000000000",
+                  "created_at": 1787391296,
+                  "unlock_at": 4122610380
+                },
+                {
+                  "address": "GUScuiwiaHMhfzEe1BkQfA6wL15w5GGaS5ZzrosjctF5",
+                  "amount_base_units": "1000000000",
+                  "created_at": 1787041461,
+                  "unlock_at": 1881735780
+                },
+                {
+                  "address": "6GsGMKTSVskVbaTqwGFpFpPZqEsJe33qSM3icY5W56oN",
+                  "amount_base_units": "1454869234363",
+                  "created_at": 1787387955,
+                  "unlock_at": 1818923940
+                },
+                {
+                  "address": "BiYiPVevNJfdJoMewoaSTzPF7bmdtLi4JH4JrGNxS3KC",
+                  "amount_base_units": "100000000000000",
+                  "created_at": 1787090579,
+                  "unlock_at": 1818626520
+                },
+                {
+                  "address": "3qzp1yaQV9vDyvzbJ1NMv4fQj4fzP9wC2zCLQteZ22Qu",
+                  "amount_base_units": "3500000000000",
+                  "created_at": 1787042297,
+                  "unlock_at": 1818578280
+                }
+              ],
+              "response_ts": 1788914687,
+              "source": "https://scan.devfridge.cool/api/sdk/check?wallet=GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+              "status": "verified",
+              "tier": 1,
+              "valid_until": 1818578280
+            },
             "contacts": [
               {
                 "handle": "anonimocommando",
@@ -1398,75 +1499,28 @@
             "wallet": "GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W"
           },
           {
-            "contacts": [
-              {
-                "handle": "ihatefavor",
-                "platform": "x",
-                "url": "https://x.com/ihatefavor"
-              },
-              {
-                "handle": "unfavorble-del",
-                "platform": "github",
-                "url": "https://github.com/unfavorble-del"
-              },
-              {
-                "handle": "favorrrrr",
-                "platform": "telegram",
-                "url": "https://t.me/favorrrrr"
-              },
-              {
-                "handle": "off",
-                "platform": "pumpfun",
-                "url": "https://pump.fun/profile/off"
-              },
-              {
-                "handle": "unfavorable_",
-                "platform": "discord",
-                "url": null
-              }
-            ],
-            "name": "favor",
-            "role": "favor",
-            "wallet": "8zk1ipqhoJUXyF8AEzuc5zwAVPrUsff8JJVM3LFVrxyN"
-          },
-          {
-            "contacts": [
-              {
-                "handle": "GSnake66006",
-                "platform": "x",
-                "url": "https://x.com/GSnake66006"
-              },
-              {
-                "handle": "GSnake66006",
-                "platform": "github",
-                "url": "https://github.com/GSnake66006"
-              },
-              {
-                "handle": "GSnake66006",
-                "platform": "telegram",
-                "url": "https://t.me/GSnake66006"
-              },
-              {
-                "handle": "GSnake66006",
-                "platform": "farcaster",
-                "url": "https://warpcast.com/GSnake66006"
-              },
-              {
-                "handle": "GSnake66006",
-                "platform": "pumpfun",
-                "url": "https://pump.fun/profile/GSnake66006"
-              },
-              {
-                "handle": "GSnake66006",
-                "platform": "discord",
-                "url": null
-              }
-            ],
-            "name": "CryptoDegen",
-            "role": "Community Manager",
-            "wallet": "EuDcsPVvWqJSihiCtgwgG8jk2pgZsG3L5pm4qxJjr1e9"
-          },
-          {
+            "commitment": {
+              "checked_at": "2026-09-09T00:45:44Z",
+              "minimum_amount_base_units": "0",
+              "minimum_duration_seconds": 0,
+              "mint": "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+              "policy_sha256": "981ff68fe2c7e07aae7eed2d0922f42eeb850d630f49253894ec429352ef87ce",
+              "policy_source": "https://github.com/mikeminer/devfridge/blob/master/team/src/lib/verify.ts",
+              "qualifying_amount_base_units": "209235534261",
+              "qualifying_locks": [
+                {
+                  "address": "5mkViJvMLVvCdHbLNWctihwknAjdCtpxfXiNRjj27VLu",
+                  "amount_base_units": "209235534261",
+                  "created_at": 1788052502,
+                  "unlock_at": 1790644440
+                }
+              ],
+              "response_ts": 1788914687,
+              "source": "https://scan.devfridge.cool/api/sdk/check?wallet=CY3X6gx1sexmXc2H5RmJoN5VhKpbsm4AYRA2nQKnUQ3a&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+              "status": "verified",
+              "tier": 5,
+              "valid_until": 1790644440
+            },
             "contacts": [
               {
                 "handle": "oxSouluna",
@@ -1492,115 +1546,19 @@
             "name": "oxSouluna",
             "role": "Verified Investor",
             "wallet": "CY3X6gx1sexmXc2H5RmJoN5VhKpbsm4AYRA2nQKnUQ3a"
-          },
-          {
-            "contacts": [
-              {
-                "handle": "NHIEMNGUYEN9002",
-                "platform": "x",
-                "url": "https://x.com/NHIEMNGUYEN9002"
-              },
-              {
-                "handle": "Nguyen Khoi",
-                "platform": "telegram",
-                "url": null
-              },
-              {
-                "handle": "Frizzyhair",
-                "platform": "pumpfun",
-                "url": "https://pump.fun/profile/Frizzyhair"
-              },
-              {
-                "handle": "nhan",
-                "platform": "discord",
-                "url": null
-              }
-            ],
-            "name": "Frizzyhair",
-            "role": "Verified Investor",
-            "wallet": "FvNHGXXZPYMqwHoTtWVVuwedor4MdB1yCQFMRVFUhLsb"
-          },
-          {
-            "contacts": [
-              {
-                "handle": "trynamakeitmk",
-                "platform": "x",
-                "url": "https://x.com/trynamakeitmk"
-              },
-              {
-                "handle": "KroniikKhan1",
-                "platform": "github",
-                "url": "https://github.com/KroniikKhan1"
-              },
-              {
-                "handle": "Kroniikiq",
-                "platform": "pumpfun",
-                "url": "https://pump.fun/profile/Kroniikiq"
-              },
-              {
-                "handle": "linkablepro",
-                "platform": "discord",
-                "url": null
-              }
-            ],
-            "name": "Kroniik",
-            "role": "Investor",
-            "wallet": "hFL8n47vQnaYTykJ9t5Kssg9gUauDN2WmeVUL8Lox8T"
-          },
-          {
-            "contacts": [],
-            "name": "lordlamport.sol",
-            "role": "Chairman",
-            "wallet": "DmkJWVRmwNJqjrJRxyPsfcCdVDGCswr1EZpBYmtPwPJn"
-          },
-          {
-            "contacts": [
-              {
-                "handle": "Emmanuelhudsh0n",
-                "platform": "x",
-                "url": "https://x.com/Emmanuelhudsh0n"
-              },
-              {
-                "handle": "Emmanuelhudshon",
-                "platform": "github",
-                "url": "https://github.com/Emmanuelhudshon"
-              },
-              {
-                "handle": "Emmanuelhudshon",
-                "platform": "telegram",
-                "url": "https://t.me/Emmanuelhudshon"
-              },
-              {
-                "handle": "Emmanuelhudshon",
-                "platform": "farcaster",
-                "url": "https://warpcast.com/Emmanuelhudshon"
-              },
-              {
-                "handle": "Emmanuelhudshon",
-                "platform": "pumpfun",
-                "url": "https://pump.fun/profile/Emmanuelhudshon"
-              },
-              {
-                "handle": "Emmanuelhudshon",
-                "platform": "discord",
-                "url": null
-              }
-            ],
-            "name": "Emmanuelhudshon Guru",
-            "role": "Community moderator",
-            "wallet": "aJYc7Ji6XvYpk1vMR1p8HB3qwbADMw6w6Yypvo35sZY"
           }
         ],
         "page": "https://team.devfridge.cool/",
-        "title": "Team and leadership"
+        "title": "Team with verified commitment",
+        "verification_failures": 0
       },
-      "fetched_at": "2026-09-08T22:39:29Z",
+      "fetched_at": "2026-09-09T00:45:44Z",
       "source": "https://scan.devfridge.cool/api/team",
       "status": "ok"
     }
   },
   "doc_catalog": {
-    "attempted_at": "2026-09-08T18:55:47Z",
+    "attempted_at": "2026-09-08T22:45:52Z",
     "data": [
       "https://docs.devfridge.cool",
       "https://docs.devfridge.cool/badge",
@@ -1618,179 +1576,179 @@
       "https://docs.devfridge.cool/tokenomics",
       "https://docs.devfridge.cool/world"
     ],
-    "fetched_at": "2026-09-08T18:55:47Z",
+    "fetched_at": "2026-09-08T22:45:52Z",
     "source": "https://docs.devfridge.cool",
     "status": "ok"
   },
   "documents": {
     "https://docs.devfridge.cool": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "DOCS\n\n## Too many tokens? Fridge them.\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nDevFridge is an on-chain Token-2022 time-lock on Solana. The scanner at [scan.devfridge.cool](https://scan.devfridge.cool) combines authority, holder, market, and live Fridge vault signals in a shareable report. Token devs can then Get Featured: one Phantom signature pays SOL, the listing starts immediately, and the Fridge program buys [$PASTA](https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump) and burns it.\n\nScanner results are independent from sponsorship. Paid placements are labeled and never change checks, warnings, or risk grades. A scan is not an audit or guarantee of safety.\n\n### Who this is for\n\nPump.fun-style Solana memecoin creators who want a verifiable lock and a featured slot that is not a DexScreener ad and not a volume bot. Official contacts live only on [connect.devfridge.cool](https://connect.devfridge.cool).\n\n### Market context (cited)\n\nThese figures are from named public reports. They describe the audience, not a Google ranking guarantee.\n\n- Pump.fun held about 75–80% of graduated Solana launchpad tokens in 2025 upswings ([Cointelegraph / TradingView, Oct 2025](https://www.tradingview.com/news/cointelegraph:9c3a24b10094b:0-how-pump-fun-captured-80-of-solana-memecoins-and-can-it-last/)).\n\n- An academic snapshot of Q4 2024 found Pump.fun at up to 71.1% of Solana token mints and 40–67% of DEX transactions ([arXiv 2512.11850](https://arxiv.org/html/2512.11850v3)).\n\n- Solana memecoin market cap moved from about $5.1B to $6.7B in early 2026; Pump.fun DEX volume printed a $2B daily ATH ([Yahoo Finance, Jan 2026](https://finance.yahoo.com/news/pump-fun-dex-volume-hits-132415661.html)).\n\n- Galaxy Research (Oct 2025): memecoins were ~30% of Solana DEX volume (down from ~60% in January); Pump.fun tokens were >85% of launchpad FDMC ([Galaxy](https://www.galaxy.com/insights/research/memecoins-pump-fun-solana-kols)).\n\n### What people actually search\n\nWe do not have Keyword Planner volumes. Public threads and product docs show the same jobs to be done:\n\n- “How do I market / promote a pump.fun coin?” — Reddit r/solana; answers cluster on KOLs, Telegram ads, and DexScreener boosts.\n\n- “How to trend / boost on DexScreener” — DexScreener’s own [boosting docs](https://docs.dexscreener.com/boosting) plus a large YouTube tutorial market.\n\n- “How to list on DexScreener” — DexScreener lists automatically once a pool trades; the search is really “how do I get seen.”\n\nDevFridge Feature sits next to that demand, not inside DexScreener’s product: a live Fridge lock is required, the listing is on scan.devfridge.cool, and the SOL buys and burns $PASTA.\n\n### Guides\n\n- [World](https://docs.devfridge.cool/world) — Cold Storage game guide: unlock a meme with 500,000 actively timelocked character tokens, merge in the fridge, explore the kitchen and share your score photo.\n\n- [Get featured](https://docs.devfridge.cool/feature) — Feature a fridged token: 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees. Payments fund $PASTA buy-and-burn.\n\n- [Fridge lock](https://docs.devfridge.cool/fridge) — How DevFridge time-locks Token-2022 supply on Solana so a scan can prove the vault is live.\n\n- [Buy & burn](https://docs.devfridge.cool/boost) — Feature payments go to a program vault. A crank wraps SOL, Jupiter-buys $PASTA on PumpSwap, and burns it.\n\n- [Scanner](https://docs.devfridge.cool/scan) — scan.devfridge.cool checks authorities, holder concentration, market signals, and live DevFridge locks.\n\n- [Methodology](https://docs.devfridge.cool/methodology) — How DevFridge derives risk grades from visible checks, handles missing data, and separates sponsorship from results.\n\n- [Security](https://docs.devfridge.cool/security) — Program verification details, security scope, disclosure process, and current independent-audit status.\n\n- [Listing kit](https://docs.devfridge.cool/listing-kit) — Verified links, project descriptions, categories, and assets for ecosystem directories and partners.\n\n- [Telegram bot](https://docs.devfridge.cool/bot) — Free Telegram bot for trust reports, $PASTA stats, Fridge lock checks, badge generation, and expiry alerts.\n\n- [Badge](https://docs.devfridge.cool/badge) — Embed a live Fridge badge that links to the token scan page.\n\n- [SDK](https://docs.devfridge.cool/sdk) — Gate site access using on-chain Fridge timelocks instead of a recurring subscription.\n\n- [Tokenomics](https://docs.devfridge.cool/tokenomics) — On-chain $PASTA burns: 2% Fridge claim fee and Get Featured SOL packages that buy and burn $PASTA.\n\n- [On-chain](https://docs.devfridge.cool/program) — Fridge program ID, $PASTA mint, boost tiers, and official contacts.\n\n- [FAQ](https://docs.devfridge.cool/faq) — Answers for token devs who want to lock supply or feature a Solana memecoin.\n\n[Feature a fridged token](https://scan.devfridge.cool/#feature)",
         "sha256": "b47b67471a7fbb0eb81fcda5b9bf96385bd0270a044cf777672241c109d500bb",
         "title": "Too many tokens? Fridge them."
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool",
       "status": "ok"
     },
     "https://docs.devfridge.cool/badge": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "BADGE\n\n## Embed the Fridge badge\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nThe badge shows ticker plus a live scan link. Generate one at [scan.devfridge.cool/badge](https://scan.devfridge.cool/badge).\n\nPreview does not wait for a full scan. The image route is `/api/badge`. Click-through always opens `https://scan.devfridge.cool/t/<mint>` in a new tab.",
         "sha256": "8a96c78720614256156c274e71774b8afbf1115b510d97ed5b92b0dfda2c0757",
         "title": "Embed the Fridge badge"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/badge",
       "status": "ok"
     },
     "https://docs.devfridge.cool/boost": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "BUY & BURN\n\n## How Feature SOL becomes a $PASTA burn\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nFeature is two on-chain steps so Phantom only signs a small payment. The swap never lands in the buyer’s wallet.\n\n### 1. Boost instruction\n\n`boost(tier)` transfers 0.1 / 0.18 / 0.5 SOL into the program vault PDA `boost_vault` and writes a Boost account seeded `[\"boost\", mint]`. The listing timer starts in that transaction.\n\n### 2. Crank buyback\n\n`crank_buyback` is permissionless. It wraps vault SOL to WSOL owned by the burn PDA, Jupiter-swaps to $PASTA on PumpSwap, and Token-2022-burns the output.\n\n- $PASTA mint: `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`\n\n- Pool (DexScreener): [5o5JB…EqL5](https://dexscreener.com/solana/5o5jbdwzd3zke3jc8tb81d3bph7bwxftvwllroz1eql5)\n\n- Burn PDA seed: `[\"burn\"]`\n\nIf the listing is live and the vault still holds SOL, the burn may lag the Feature signature by a short crank. The featured timer does not wait on the swap.",
         "sha256": "3971510ae124e7e53e2140f935c04e73913bd30eb7e7809579afb81e1df8fc79",
         "title": "How Feature SOL becomes a $PASTA burn"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/boost",
       "status": "ok"
     },
     "https://docs.devfridge.cool/bot": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "TELEGRAM BOT\n\n## @frigopastabot\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\n[bot.devfridge.cool](https://bot.devfridge.cool) is the landing page. [t.me/frigopastabot](https://t.me/frigopastabot) opens the bot directly in Telegram.\n\nFrigoPasta is the official DevFridge Telegram bot. It is completely free — no premium tiers, no token gates, no hidden fees. It works in private chats, groups, and channels.\n\n### Add to your group\n\n- Open [t.me/frigopastabot?startgroup=true](https://t.me/frigopastabot?startgroup=true) — Telegram will ask which group to add it to.\n\n- Select your group and confirm. The bot does not need admin rights. It only reads messages that start with `/`.\n\n- Type `/help` in the group. Every member can now use all commands.\n\nTo use it in a channel, add @frigopastabot as a channel admin. This enables broadcast alerts for boosts, burns, and $PASTA price moves.\n\n### Commands — $PASTA\n\n`/pasta` and `/buy` print the full Solana mint in the first line so copied messages and screenshots identify the token. A ticker alone is not an identity.\n\n| Command | What it does |\n| --- | --- |\n| /pasta | Live price, market cap, 24h volume, burned supply, holder count. |\n| /burn | Total $PASTA burned and recent burn history (requires Helius for history). |\n| /buy | Direct swap links on Jupiter, DexScreener, and Birdeye. |\n| /holders | Top 10 holder distribution with concentration grade (safe / caution / danger). |\n| /vault | TRUST ME CAPITAL vault on Hyperliquid — leader address, APR, deposit link. |\n| /roadmap | Current ecosystem roadmap. |\n| /about | What is DevFridge and $PASTA — quick explainer. |\n\n### Commands — Fridge and Scanner\n\n| Command | What it does |\n| --- | --- |\n| /scan <mint> | Full trust report: authorities, holder concentration, market data, and Fridge lock status. Same data as scan.devfridge.cool. |\n| /fridge <mint> | Quick fridge check — fridged, expired, or not fridged. Shows locked amount and unlock date. |\n| /badge <mint> | Returns an HTML embed snippet for a live Fridge badge. Copy-paste into any website. |\n| /aiprompt <mint> | Copy-paste prompt to integrate the badge using ChatGPT, Claude, Grok, or Cursor. |\n| /recent | Last 10 tokens scanned on the platform. |\n| /boosted | Currently boosted tokens with tier and time remaining. |\n| /boost | Boost tiers and pricing — how to feature a token on the scanner. |\n| /lock | Step-by-step guide to locking tokens in the Fridge. |\n| /register <pda> | Register the Fridge lock account PDA, not the token mint, for expiry DM alerts. |\n\n### How /scan works\n\nWhen a user sends `/scan` followed by a Solana mint address, the bot calls the same API that powers scan.devfridge.cool. The response includes:\n\n- Fridge status — fridged (with locked amount, unlock date, depositor, PDA), expired, or not fridged.\n\n- Security checks — mint authority, freeze authority, top holder concentration, and other risk signals with safe / caution / danger grades.\n\n- Market data — price, market cap, 24h volume, holder count, token age, and platform.\n\nThe report is posted inline so the entire group can see it. Two buttons link to the full web report and a direct \"Fridge it\" action.\n\nYou can also reply to a message containing a mint address and type `/scan` — the bot extracts the mint from the replied message.\n\n### How /register works\n\nToken devs who have locked supply in the Fridge can register for expiry alerts. Send `/register` followed by the vault PDA (the on-chain lock account address), not your token mint. Copy the full lock PDA from your scan report. The bot verifies it on-chain and stores your Telegram ID. You will receive DMs as the unlock date approaches.\n\nAlerts are sent daily and then hourly in the final 24 hours before unlock. This ensures devs never miss a claim window or forget to re-lock.\n\n### Language support\n\nThe bot detects Italian and English automatically from the message text and Telegram language setting. Status messages, error replies, and flavor text adapt to the detected language.\n\n### Rate limiting\n\nTo prevent spam and protect the Solana RPC, each user is limited to one `/scan` or `/fridge` call every 10 seconds. Other commands have no cooldown. This keeps the bot responsive in large groups.\n\n### Privacy and permissions\n\n- The bot does not need admin rights in groups.\n\n- It only processes messages that start with `/` — it never reads regular chat.\n\n- No wallet connection is required. The bot is read-only and cannot execute transactions.\n\n- No data is sold or shared. Registered alert PDAs and Telegram IDs are stored locally on the bot server.\n\n### Pros\n\n- Instant trust reports without leaving Telegram.\n\n- Same scanner data as scan.devfridge.cool — live on-chain.\n\n- Works in any group, channel, or private chat.\n\n- Bilingual — responds in English and Italian.\n\n- Expiry DM alerts so devs never miss an unlock.\n\n- No sign-up, no wallet connection, no permissions needed.\n\n- Badge and AI prompt generation in one command.\n\n- 10-second cooldown prevents spam in public groups.\n\n### Limitations\n\n- Token pricing depends on Jupiter and DexScreener — very new tokens may show no price yet.\n\n- Burn history requires Helius RPC — without it only the total burned amount is shown.\n\n- Rate-limited to one scan per 10 seconds per user to protect the RPC.\n\n- Cannot execute on-chain transactions — it is read-only and informational.\n\n- Telegram-only — no Discord or Slack version at this time.\n\n### Links\n\n- [t.me/frigopastabot](https://t.me/frigopastabot) — open the bot\n\n- [Add to your group](https://t.me/frigopastabot?startgroup=true)\n\n- [bot.devfridge.cool](https://bot.devfridge.cool) — landing page\n\n- [connect.devfridge.cool](https://connect.devfridge.cool) — all official contacts",
         "sha256": "9953bd9a13eb2b30593dcdb4645cc6db65c6ffe49851cbeadc5e73a8b17747c5",
         "title": "@frigopastabot"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/bot",
       "status": "ok"
     },
     "https://docs.devfridge.cool/faq": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "FAQ\n\n## Scanner, Feature, and Fridge questions\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\n### Does a paid Feature placement improve a token's risk grade?\n\nNo. Sponsorship changes only labeled placement and duration. It never changes checks, source data, warnings, or the risk grade.\n\n### Does a high grade mean a token is safe?\n\nNo. The grade summarizes only the checks displayed in the report at scan time. It is not an audit, endorsement, or guarantee against loss.\n\n### Can I feature a token that is not fridged?\n\nNo. Get Featured requires a live Fridge lock that has not reached unlock_at.\n\n### Does Feature pay DexScreener or pump.fun?\n\nNo. SOL goes to the Fridge program vault, then buys and burns $PASTA. The listing is on scan.devfridge.cool.\n\n### Why did the UI say the boost account was missing after I paid?\n\nThe on-chain payment can confirm before the scanner RPC sees the Boost account. If Solscan shows the tx succeeded, the listing is live. Refresh the homepage Boosted tab.\n\n### Do I ever hold the bought $PASTA?\n\nNo. Jupiter buys into the burn PDA and the program burns it in the crank.\n\n### Where are official links?\n\nOnly connect.devfridge.cool. Do not trust DMs that are not listed there.\n\nMore detail: [feature a memecoin](https://docs.devfridge.cool/feature), [buy & burn](https://docs.devfridge.cool/boost).",
         "sha256": "b0d874890ad178826e3dd2b2af425fd733b88aee83311549f6d1efb5a473ffa9",
         "title": "Scanner, Feature, and Fridge questions"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/faq",
       "status": "ok"
     },
     "https://docs.devfridge.cool/feature": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "GET FEATURED\n\n## Feature a Solana memecoin\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nUse this when you launched on pump.fun (or any Token-2022 mint) and want a verifiable featured slot instead of a DexScreener ad or a volume bot.\n\n### Requirements\n\n- A live Fridge lock on [devfridge.cool](https://devfridge.cool) — unlock time still in the future.\n\n- Phantom or Solflare with the package SOL plus a small fee cushion (~0.02 SOL).\n\n- The mint page on [scan.devfridge.cool](https://scan.devfridge.cool).\n\n### Packages\n\n| Slot | SOL | Duration |\n| --- | --- | --- |\n| 24h Boost | 0.1 | 24 hours |\n| 48h Boost | 0.18 | 48 hours |\n| 7d Boost | 0.5 | 7 days |\n\nPackage prices are plus network fees. Review the full transaction cost in your wallet.\n\n### What happens in the wallet\n\nOne signature. You pay the package SOL into the Fridge program vault and the on-chain Boost account starts the timer. You never receive the bought $PASTA, so you cannot sell it.\n\nAfter the listing is live, the program wraps that SOL, Jupiter-swaps it to $PASTA on the PumpSwap pool, and burns it. Details: [buy & burn](https://docs.devfridge.cool/boost).\n\n### Not the same as DexScreener Boost\n\nDexScreener [Boost packs](https://docs.dexscreener.com/boosting) raise a trending score on their site. They do not lock your supply and they do not burn $PASTA. DevFridge Feature is only for mints with a live Fridge vault and only lists on scan.devfridge.cool.\n\n[Open Get Featured](https://scan.devfridge.cool/#feature)",
         "sha256": "dc3f7f6ab613860e2678c26ae8cc77cdccdc0f0446abc4e43d3eaa565ee9c4e3",
         "title": "Feature a Solana memecoin"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/feature",
       "status": "ok"
     },
     "https://docs.devfridge.cool/fridge": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "FRIDGE\n\n## Lock Token-2022 supply on Solana\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nA Fridge lock is a program-owned Token-2022 vault. The depositor chooses an unlock time. Nobody can withdraw before `unlock_at`, including the original wallet.\n\n### How to lock\n\n- Open [devfridge.cool](https://devfridge.cool) and connect Phantom.\n\n- Paste the mint (pump.fun and DexScreener URLs work).\n\n- Pick amount and unlock date, then confirm the lock transaction.\n\n### What the scanner shows\n\n[scan.devfridge.cool](https://scan.devfridge.cool) reads Fridge program accounts for that mint. If at least one vault still has `unlock_at` in the future, the report is Fridged. That is the only way to unlock Get Featured.\n\n### Claim\n\nAfter unlock, the depositor claims. A 2% redemption fee Jupiter-buys $PASTA and burns it (or burns $PASTA directly if the locked mint is $PASTA).\n\n[Fridge a mint](https://devfridge.cool)",
         "sha256": "fc862d9abdab4bb7589b3adf0477e1ef809ea701e4194ba5c59bd1eba8c5e1b3",
         "title": "Lock Token-2022 supply on Solana"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/fridge",
       "status": "ok"
     },
     "https://docs.devfridge.cool/listing-kit": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "PARTNERS\n\n## DevFridge listing kit\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nUse the facts and links below for ecosystem directories, integrations, partner reviews, podcasts, and community demos. A directory listing does not imply endorsement by Solana or the directory operator.\n\n### Project name and categories\n\nDevFridge Scan\n\nSecurity · Analytics · Developer Tools · Solana · Token-2022\n\n### Short description\n\nSolana token risk scanner that checks authorities, holder concentration, market signals, and live on-chain DevFridge Token-2022 timelocks.\n\n### Full description\n\nDevFridge Scan analyzes Solana token mints, mint and freeze authorities, holder concentration, market signals, Token-2022 extensions, and live DevFridge timelocks. Every scan has a shareable URL, and projects can embed a free badge linked to fresh on-chain data. Paid placements are labeled and never modify checks, warnings, or risk grades.\n\n### Verified links\n\n- [Product](https://scan.devfridge.cool)\n\n- [Documentation](https://docs.devfridge.cool)\n\n- [Methodology](https://docs.devfridge.cool/methodology)\n\n- [Security status](https://docs.devfridge.cool/security)\n\n- [Source repository](https://github.com/mikeminer/devfridge)\n\n- [Operational status](https://health.devfridge.cool)\n\n- [Official contacts](https://connect.devfridge.cool)\n\n- [Badge generator](https://scan.devfridge.cool/badge)\n\n- [SDK](https://sdk.devfridge.cool)\n\n### On-chain identifiers\n\nFridge program: `9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6`\n\nDevFridge $PASTA · Solana mint: `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`\n\nNot affiliated with any other token using the PASTA ticker.\n\nLead token listings, promotions, and screenshots with the full mint, not the ticker alone. Verify the mint and burn authority using the [program guide](https://docs.devfridge.cool/program).\n\n### Integration message\n\nDevFridge $PASTA (Solana mint: 39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump). Lock Token-2022 supply at devfridge.cool, then scan the mint to verify a live Fridge vault. Get Featured costs 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees; paid placement never changes risk grades. Add @frigopastabot for /scan, /fridge, and /badge. Use /register with the lock account PDA, not the token mint, for expiry DMs. Embed a live badge from scan.devfridge.cool/badge. Feature payments and the 2% claim fee fund $PASTA burns. DevFridge World’s Cold Storage merge game is deployed as a pre-launch build; the public countdown runs until 1 October 2026. A meme requires at least 500,000 of its supported character token in active DevFridge locks. There are no per-run payments or prizes. See the [World game guide](https://docs.devfridge.cool/world). Official contacts only at connect.devfridge.cool.\n\n### Assets\n\n- [Square logo](https://devfridge.cool/brand/logo-mark.jpg)\n\n- [Landscape logo](https://devfridge.cool/brand/logo-lockup.jpg)\n\n### Review note\n\nThe source is public, but no independent security audit is currently claimed. Scanner output is informational and does not certify a token as safe.",
         "sha256": "38afa5fa2fd4eaa16bc7fbe7ca18e8e6f5bf97dc3bf281f40399976dcc6ebbe5",
         "title": "DevFridge listing kit"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/listing-kit",
       "status": "ok"
     },
     "https://docs.devfridge.cool/methodology": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "METHODOLOGY\n\n## How the risk grade works\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nDevFridge turns the visible checks in each report into an A–E risk grade. The grade is a compact summary of the current snapshot, not a prediction, audit, endorsement, or guarantee.\n\n### Checks included\n\n- Whether mint authority is revoked.\n\n- Whether freeze authority is revoked.\n\n- Top-10 holder concentration, excluding identified Fridge vaults when data is available.\n\n- Whether DEX liquidity is present and whether LP status can be verified.\n\n- Whether a live DevFridge lock exists.\n\n- Whether Metaplex metadata is mutable or unavailable.\n\n- Whether Token-2022 extensions require additional review.\n\n### Grade calculation\n\nEach displayed check contributes points: safe 0, unknown 1, caution 2, and danger 4.\n\n- A: 0 points\n\n- B: 1–2 points\n\n- C: 3–4 points\n\n- D: 5–7 points\n\n- E: 8 or more points\n\nUnknown data is never treated as safe. Concentration is caution above 40% and danger above 70%. These thresholds are product heuristics for triage, not universal standards.\n\n### Data and freshness\n\nReports combine Solana RPC data with available Pump.fun, DexScreener, Jupiter, Metaplex, and DevFridge program data. Providers can be delayed, incomplete, rate-limited, or wrong. Re-scan before relying on a result and verify critical facts directly on-chain.\n\n### Sponsorship independence\n\nFeature payments affect only a labeled sponsored placement and its expiry. They do not change source data, checks, warnings, thresholds, or the risk grade. Recent scans are not ordered by payment.\n\n### Known limitations\n\n- A revoked authority does not prove that a team or website is trustworthy.\n\n- A lock covers only the amount and expiry shown; it may not cover the entire supply.\n\n- LP lock or burn status is not fully verified for every DEX or liquidity design.\n\n- Holder accounts can be related even when the relationship is not visible on-chain.\n\n- Contract, frontend, governance, oracle, and off-chain risks may exist outside these checks.",
         "sha256": "38f0b222213e71d65bd72bfcd341bdcfdd5f493194e5aca9fdc0ef0f02d435dc",
         "title": "How the risk grade works"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/methodology",
       "status": "ok"
     },
     "https://docs.devfridge.cool/program": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "ON-CHAIN\n\n## Program IDs and fees\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nNot affiliated with any other token using the PASTA ticker.\n\nThe Solana mint above identifies the $PASTA tied to DevFridge. Match the full address before using a swap link; token names, tickers, and logos can be reused.\n\n| Item | Value |\n| --- | --- |\n| Fridge program | 9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6 |\n| $PASTA mint | 39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump |\n| Treasury / dev | GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W |\n| Claim fee | 2% buyback-and-burn $PASTA |\n| Feature | 0.1 SOL / 24h · 0.18 SOL / 48h · 0.5 SOL / 7d, plus network fees → $PASTA burn |\n\n### Verify the buyback burn identity\n\nBurn authority PDA: [`6PQhfXQNnqrau7EKjFxrH6xwX3uv97RMsx62LmKBmT9m`](https://solscan.io/account/6PQhfXQNnqrau7EKjFxrH6xwX3uv97RMsx62LmKBmT9m). Derive it from the UTF-8 seed `burn` and the Fridge program ID above. This authority is distinct from a user's lock PDA and the incinerator address.\n\nIn the published [program source](https://github.com/mikeminer/devfridge/blob/master/programs/fridge/src/lib.rs), `PASTA_MINT` is fixed to `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`. Both `crank_buyback` and `buyback_and_burn_pasta` check this mint and the token account's burn authority before invoking Token-2022 Burn.\n\nTo verify an actual burn, inspect a successful transaction from this program: its inner Token-2022 Burn instruction must name that mint and the derived authority. The PDA alone does not prove which mint was burned. Source checks describe this version; verify the deployed program and its upgrade authority before assuming future behavior.\n\n[Example verified mainnet burn](https://solscan.io/tx/8ed3v9zmo2G9hZwVrQrUmpaiXFFcoopr18X4XVu9cmYRttYW2eEmCn6W4iKAoB7r5fCbw3U6sUMZtTAgTW8rBnv): slot `441452166`, successful transaction, with an inner Token-2022 Burn naming this mint and burn authority. It burned `801223464986` base units (801,223.464986 PASTA at 6 decimals).\n\nSource: [github.com/mikeminer/devfridge](https://github.com/mikeminer/devfridge). Official socials and the bot: [connect.devfridge.cool](https://connect.devfridge.cool).",
         "sha256": "53db7ba8d32e46a667c3b4a9ff31978f6e9c8acceaea59f1c0fdfb77d72e9241",
         "title": "Program IDs and fees"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/program",
       "status": "ok"
     },
     "https://docs.devfridge.cool/scan": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "SCANNER\n\n## Solana token risk scanner\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nPaste a mint, pump.fun URL, or DexScreener URL at [scan.devfridge.cool](https://scan.devfridge.cool). The report covers:\n\n- Identity (name, ticker, logo from Pump / DexScreener / Jupiter)\n\n- Mint and freeze authority\n\n- Live Fridge locks (amount, unlock time, depositor)\n\n- Market snapshot when a pool exists\n\nEach mint has a stable URL: `https://scan.devfridge.cool/t/<mint>`. That is the link the Fridge badge uses.\n\n### What the report does not claim\n\nA scan is an automated snapshot of observable data. It does not prove that a token, team, market, website, or future transaction is safe. Missing data is shown as unknown rather than treated as safe.\n\nSponsored placement never changes a check or risk grade. Read the [full methodology](https://docs.devfridge.cool/methodology).",
         "sha256": "6ae41c09e4b3682fcd68f7e46f5eba8b54972c80578e3b1b979304a9ee961760",
         "title": "Solana token risk scanner"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/scan",
       "status": "ok"
     },
     "https://docs.devfridge.cool/sdk": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "SDK\n\n## Gate access with Fridge timelocks\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\n[sdk.devfridge.cool](https://sdk.devfridge.cool) contains the complete API reference, code samples, React examples, server-side examples, and AI integration prompts.\n\nThe DevFridge SDK lets a site use on-chain Fridge timelocks as a subscription gate instead of recurring payments. A user locks tokens to subscribe; longer locks mean fewer renewal transactions.\n\nIt is for any project that wants gated access without building billing infrastructure. Plans can use any token mint, not just [$PASTA](https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump).\n\n### How it works\n\n- The developer configures plans with `minLockDays`, `renewalThresholdDays`, and `minLockAmount`.\n\n- The user locks tokens on [devfridge.cool](https://devfridge.cool).\n\n- The SDK checks qualifying locks through `scan.devfridge.cool/api/sdk/check`.\n\n- The response returns `active`, `needsRenewal`, and `daysRemaining` so your app can grant access, prompt a renewal, or show the gate.\n\n### Quick start\n\n`<script src=\"https://sdk.devfridge.cool/sdk/devfridge-sdk.js\"></script>`\n\n`const fridge = new DevFridgeSDK({ tokenMint: \"YOUR_TOKEN_MINT_ADDRESS\", plans: { pro: { minLockDays: 60, renewalThresholdDays: 29, minLockAmount: 10_000_000_000_000, }, }, }); async function checkSubscription(walletAddress) { const status = await fridge.checkSubscription(walletAddress); if (status.active && !status.needsRenewal) { showContent(); return; } if (status.active && status.needsRenewal) { showContent(); showRenewalBanner(status.daysRemaining); return; } showSubscriptionGate(); }`\n\n### Related pages\n\n- [Fridge lock](https://docs.devfridge.cool/fridge) — the on-chain timelock program reused by SDK subscriptions.\n\n- [Badge](https://docs.devfridge.cool/badge) — the same live Fridge badge used across the ecosystem.",
         "sha256": "0d3957f9e033d450e5e1fd94c54efd44a6da7061d615804f915f9a67c0ba17e3",
         "title": "Gate access with Fridge timelocks"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/sdk",
       "status": "ok"
     },
     "https://docs.devfridge.cool/security": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "SECURITY\n\n## Security and responsible disclosure\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nDevFridge is non-custodial software built around a public Solana program. Users should verify addresses, transaction instructions, and current program state before signing.\n\n### Canonical program and source\n\n- Program ID: `9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6`\n\n- Source: [github.com/mikeminer/devfridge](https://github.com/mikeminer/devfridge)\n\n- Explorer: [view the program on Solscan](https://solscan.io/account/9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6)\n\n- Live status: [health.devfridge.cool](https://health.devfridge.cool)\n\n### Independent audit status\n\nNo independent security audit is claimed or published at this time. Public source, tests, scanner checks, and an operational status page improve transparency but are not substitutes for an independent audit. This page will link the report if one is completed.\n\n### Report a vulnerability\n\nUse only the contacts listed at [connect.devfridge.cool](https://connect.devfridge.cool). Do not disclose an exploitable issue publicly before a fix is available, and never send private keys or seed phrases.\n\nPlease include affected component, reproduction steps, expected impact, and a safe proof of concept.\n\n### Security boundaries\n\n- Scanner results are automated signals, not token certification.\n\n- Wallets remain responsible for showing and approving transaction instructions.\n\n- Third-party RPC, market, metadata, wallet, and DEX providers have separate failure modes.\n\n- Sponsored placements never alter scanner results or risk grades.",
         "sha256": "5b14ef795a3e90716a16b2a1a57e7a097667b685aa3e242bb00d65bafb37deef",
         "title": "Security and responsible disclosure"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/security",
       "status": "ok"
     },
     "https://docs.devfridge.cool/tokenomics": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "$PASTA\n\n## Tokenomics (on-chain, live)\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\n$PASTA (`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`) is the Fridge burn token. You do not need $PASTA to lock. Usage of the Fridge is what buys and burns it.\n\n### What is on the Fridge program today\n\n| Source | Trigger | Effect |\n| --- | --- | --- |\n| Claim fee | Take tokens out after unlock | 2% of the vault: burn $PASTA, or Jupiter-buy $PASTA then burn |\n| Get Featured | 0.1 / 0.18 / 0.5 SOL, live lock required | SOL to program vault → Jupiter-buy $PASTA → burn |\n\n### Access rules\n\n- Any wallet can lock a Token-2022 mint (including $PASTA) into its own vault PDA.\n\n- Locks are not mixed in one pot. Each depositor + mint + lock id has a separate vault.\n\n- A live timelock is required for the TRUST badge and to buy a featured slot.\n\n- Not every mint can Get Featured — only mints with an active Fridge lock.\n\n### What is not Fridge-program tokenomics\n\nTrust Me Capital (Hyperliquid vault) and any extra buybacks from trading P&L are separate from the Fridge program. They are not the 2% claim fee and not Feature SOL.",
         "sha256": "5c8c2f9a6e0b460d95f955cf97eec5cb1f705bcc67b1e2f59ea10b606cfbc195",
         "title": "Tokenomics (on-chain, live)"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/tokenomics",
       "status": "ok"
     },
     "https://docs.devfridge.cool/world": {
-      "attempted_at": "2026-09-08T18:55:47Z",
+      "attempted_at": "2026-09-08T22:45:52Z",
       "data": {
         "markdown": "WORLD / COLD STORAGE\n\n## DevFridge World — the game guide\n\nDevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.\n\nUpdated 8 September 2026 · Current pre-launch build\n\n### What is DevFridge World?\n\nDevFridge World is a browser game featuring ten Italian brainrot characters, a walkable 3D kitchen and Cold Storage, a single-player physics merge puzzle. Drop matching memes into a fridge, combine them into higher tiers and beat your personal best while hearing the characters’ own voices and sounds. Solana Token-2022 timelocks unlock your playable meme, and fridge snapshots and score photos let you share the result with friends.\n\nIn this guide\n\n- [How the game works](https://docs.devfridge.cool/world#how-it-works)\n\n- [What makes it unique](https://docs.devfridge.cool/world#what-makes-world-unique)\n\n- [Availability and game facts](https://docs.devfridge.cool/world#availability)\n\n- [Wallet access and the 500,000-token minimum](https://docs.devfridge.cool/world#wallet-access)\n\n- [Why ten tokens? More choice for game access](https://docs.devfridge.cool/world#why-ten-tokens)\n\n- [The ten characters and their token addresses](https://docs.devfridge.cool/world#characters)\n\n- [Gameplay overview](https://docs.devfridge.cool/world#gameplay-overview)\n\n- [Phone and desktop controls](https://docs.devfridge.cool/world#controls)\n\n- [Sharing and fridge visits](https://docs.devfridge.cool/world#sharing)\n\n- [Earnings and access costs](https://docs.devfridge.cool/world#earnings)\n\n- [Frequently asked questions](https://docs.devfridge.cool/world#faq)\n\n### How does DevFridge World work?\n\nConnect a Solana wallet, sign in and unlock a character by keeping at least 500,000 tokens of its supported mint in active DevFridge timelocks. Choose an unlocked meme, enter the kitchen and play Cold Storage by aiming and dropping pieces so matching characters touch and merge without overflowing the fridge. Your score, collection and saved progress stay in the browser, while the game uses the DevFridge SDK to recheck the wallet’s on-chain locks.\n\n### What makes the gameplay unique?\n\nWorld brings the Italian brainrot cast into a physics puzzle where positioning, growing pieces and quick chain merges determine how much you can fit inside one fridge. The meme you unlock becomes your kitchen avatar and normally your first puzzle piece, with character voices, signature sounds and themes giving the cast its personality. Fridge invitations and score photos turn a finished layout into something friends can open or share, while existing DevFridge timelocks provide character access.\n\n### Availability and game facts\n\nThe game is deployed as a pre-launch build. The public entrance at [world.devfridge.cool](https://world.devfridge.cool/) still shows the countdown and character runway until 1 October 2026, 00:00 Europe/Rome. This guide describes the current game behind that launch screen.\n\n| Genre | Casual physics merge puzzle, with a 3D kitchen to explore |\n| --- | --- |\n| Players | Single-player; shareable saved fridge snapshots |\n| Platform | Desktop and mobile web browsers |\n| Blockchain integration | Solana wallet sign-in and Token-2022 timelock access |\n| Entry requirement | 500,000 of one supported character token in active locks |\n| NFT requirement | None |\n| Game rewards | Score, personal best and discovered collection; no token payouts |\n\n### Connect your wallet and unlock your meme\n\n- Connect your Solana wallet and sign the game’s sign-in message. Signing in does not authorize a transaction.\n\n- The game checks your active DevFridge timelocks using the [DevFridge SDK](https://sdk.devfridge.cool/).\n\n- Keep at least 500,000 tokens of one supported character mint actively locked in [DevFridge](https://devfridge.cool/).\n\n- Choose any character you have unlocked and enter the game with that meme.\n\nActive locks of the same token in the connected wallet add together. For example, 300,000 CICCIA plus 200,000 CICCIA in two active locks meets the minimum. 300,000 CICCIA plus 200,000 APE does not: different mints are checked separately. Expired locks and tokens held outside a timelock do not count.\n\nThere is no market-value ranking or biggest-lock winner. If several tokens meet the minimum, each unlocks its corresponding character. The game imposes no extra minimum remaining duration beyond the lock still being active. The current gate checks the ten Solana Token-2022 character mints below; Robinhood locks and unrelated tokens, including $PASTA, do not unlock a character in this build.\n\nIf you need a qualifying lock, the entry screen shows Buy, the full contract address with Copy CA, and Lock in DevFridge. Already own the tokens? Go straight to DevFridge to lock them. If your wallet is not detected on a phone, open World in your wallet’s browser.\n\nAccess is rechecked every minute and when you return to the tab. A changed wallet, expired or insufficient lock, or an unsuccessful or stale verification pauses play and asks you to reconnect and recheck.\n\n### Why ten different Pump.fun tokens?\n\nTen memes, ten ways into the same game. Each character has its own official Solana token on Pump.fun. Keeping at least 500,000 of any one supported token in active DevFridge timelocks unlocks that character and gives you access to World. You only need to qualify with one token, not all ten.\n\nThe aim is to keep access flexible and more accessible as the community grows. If one character’s token becomes expensive, a new player can compare the ten options and choose a more affordable token to buy and lock. Every character has the same 500,000-token requirement, but the cost of meeting it depends on that token’s market price.\n\nGiving every meme a role in game access can spread participation and demand across the cast, helping more of the ten communities grow alongside World. Players gain a choice of entry routes, and each meme has a reason to be used. Prices can still rise or fall: this design does not fix the entry cost or guarantee that any or all of the tokens will increase in value.\n\n### The ten playable memes\n\nUse the full Solana mint address to identify a token. Each link below opens its Pump.fun page.\n\n| Character | Token | Solana mint |\n| --- | --- | --- |\n| Rugarugo | RUGARUGO | An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump |\n| Aperitivo | APE | B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump |\n| FriedFomo | FIFO | 3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump |\n| FudFusilli | FUSILLI | 4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump |\n| Lambocello | LAMBOCELLO | HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump |\n| GmGnocco | GMGN | 8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump |\n| SerSugo | SESU | AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump |\n| MoonZarella | MOONZARELL | 6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump |\n| Bonkatino | BONKATINO | HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump |\n| Ciccia Salsiccia | CICCIA | CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump |\n\n### What is the gameplay overview?\n\nA run is about managing a small space as the pieces get larger. Aim for matching characters, leave room for their merged form and use quick successive merges to build a combo. The board’s physics means a new drop can move nearby pieces, so plan for where they will settle as well as where they first land.\n\n#### Cold Storage: the run\n\n- Aim left or right and drop a meme into the fridge. Two matching characters that touch merge into the next tier.\n\n- Higher-tier merges earn more points. Merges within 1.5 seconds increase your combo multiplier.\n\n- Keep the stack below the door line. A settled piece remaining above it for 1.4 seconds ends the run.\n\n- Make tier 9, Bonkatino, to win and bring in the secret guest, CICCIA.\n\n- Your chosen meme is your kitchen avatar and normally your first piece. Choosing CICCIA starts the merge run at tier 1, so winning still requires progression.\n\nThe daily piece sequence refreshes at midnight in Europe/Rome; the chosen first piece can differ between players. Your personal best and discovered collection stay in this browser, under the connected wallet. They do not automatically sync to another device.\n\n#### The kitchen and fridge visits\n\nWalk around as your meme, run, jump, shout its line and enter the fridge to play. Browse the collection to hear character voices, signature sounds and themes. The kitchen is single-player: the current game has no team shooter, PvP combat or live multiplayer avatars.\n\nFridge visits let you share a saved fridge, open an invitation and react to a visited snapshot. The directory and reactions are stored locally in your browser; invitations carry a snapshot that can be opened in another browser. A visit shows the saved layout, not a live stream of the owner’s game. There is no global neighbourhood or online leaderboard.\n\nAn invitation contains the shared fridge layout, display name, public wallet address, favourite character, scores and collection. Removing a directory entry does not revoke invitation links already shared.\n\n### Phone and desktop controls\n\n- Phone, fridge: drag left or right and release to drop, or use the drop button.\n\n- Phone, kitchen: use the direction buttons, Run, Jump and Shout. Movement supports multiple fingers.\n\n- Desktop, fridge: drag and release, or use Left/Right arrows and Space. R restarts; P pauses.\n\n- Desktop, kitchen: WASD or arrows to move, Shift to run, Space to jump, Q to shout and E to enter the fridge.\n\nOn mobile, controls and notices sit outside the play canvas. Portrait uses controls below the board; landscape places controls beside it. Open Menu for your meme, collection, visits, wallet access and sound. Open dialogs pause the game.\n\nSound activates on interaction. Use Menu → Enable sound to hear a voice confirmation. When you return after locking the screen, the game rebuilds its audio output; tap the game if the browser requires another interaction. The mute setting is respected.\n\n### Share your score and fridge photo\n\nAt the end of a run, choose Share photo & score to preview your fridge with the score and world.devfridge.cool written into the image. Choose X, WhatsApp, Telegram, Facebook, Instagram or More apps.\n\nWhere photo sharing is supported, your device opens its share menu with the prepared image and caption; choose the destination app and finish the post there. Otherwise, use Save photo and Copy caption, then attach the saved image in your social app. Posting a World homepage link uses the group banner of the ten brainrot characters; it does not display your personal score photo automatically.\n\nYou can also save a replay file from the result screen. Scores and replays are local records, not verified competitive rankings.\n\n#### Share your pick before launch\n\nOn the countdown page, pick a character and choose Post my pick on Xto preview the group banner and your caption. The caption includes the selected token’s full Solana contract address, its Pump.fun link and the World link, with #SolanaGems, #SolanaCommunity and #solanamemes among the hashtags. Use Share banner + post on supported devices, or save the banner and copy the caption to attach them in X. You review and publish the post in your social app; choosing a meme does not post automatically or unlock game access.\n\n### How do you earn money in DevFridge World?\n\nThe current game has no money-earning mechanic. Merges award gameplay points, and runs contribute to your personal best and discovered collection; these are local game records, not redeemable tokens or cash. There is no reward token, NFT sale or rental system, staking yield, scholarship payout or cash tournament implemented in World.\n\n#### Playing is free once your meme is unlocked\n\nPlay as many runs as you like while your qualifying timelock remains active. There is no per-run payment, game escrow, play-to-earn reward or daily token prize. Buying tokens and creating a DevFridge lock are separate actions; see the [Fridge guide](https://docs.devfridge.cool/fridge) for the locking process and its rules.\n\nWorld is best described as a game with crypto required for access: the qualifying tokens must already be owned and actively locked. A timelock is an access condition, not a deposit into a game prize pool, and a high score does not change the lock’s release time or grant a token payout.\n\n### Frequently asked questions\n\n#### What type of gameplay is World?\n\nCold Storage is a casual, single-player physics merge puzzle. The kitchen adds exploration and character actions, and fridge visits let you view shared snapshots. The current build has no PvP combat, team matches or live multiplayer room.\n\n#### Which blockchain is the game on?\n\nThe current access gate checks Solana Token-2022 character tokens locked in DevFridge. Wallet sign-in and lock verification use Solana; the physics simulation, scores and saved progress run in your browser. Robinhood locks do not qualify for this game’s current access gate.\n\n#### Which devices can I use?\n\nPlay in a desktop or mobile browser. World does not currently offer a native App Store or Google Play release. On a phone, use your wallet’s browser if the regular browser cannot detect the wallet, and tap to enable sound when prompted.\n\n#### How do I start, and is the game open yet?\n\nVisit [World](https://world.devfridge.cool/) for the current countdown and character runway. The scheduled opening is 1 October 2026, 00:00 Europe/Rome. Once entering the game, follow the [wallet and timelock steps](https://docs.devfridge.cool/world#wallet-access), choose an unlocked meme and enter the fridge from the kitchen.\n\n#### Do I need 500,000 tokens in a single lock?\n\nNo. Active locks of the same supported mint in the connected wallet add together: 300,000 CICCIA plus 200,000 CICCIA qualifies. Amounts in different wallets, different character tokens, expired locks or an ordinary wallet balance do not combine toward that character’s minimum. The threshold uses token quantity, not market value.\n\n#### What if I qualify with more than one character token?\n\nEvery supported mint that meets the minimum unlocks its corresponding meme, and you choose which unlocked character to use. More CICCIA locks can help CICCIA meet the threshold, but they do not prevent you from selecting another eligible meme.\n\n#### Why is my connected wallet still unable to enter?\n\nA connected wallet must also pass sign-in and lock verification. Check the full mint address against the [character table](https://docs.devfridge.cool/world#characters), make sure the locks are active and total at least 500,000 of that token in this wallet, then recheck access. If verification fails or becomes stale, play pauses until a successful check.\n\n#### Can I withdraw the locked tokens by leaving the game?\n\nLeaving World does not end a DevFridge timelock. Its release rules belong to DevFridge and the lock you created; follow the [Fridge guide](https://docs.devfridge.cool/fridge) for the locking and release process. Once a lock expires, it stops counting toward game access even if the tokens have not yet been withdrawn.\n\n#### Do I pay for every run or win tokens for a high score?\n\nNo. You can start further runs while your meme remains unlocked, without a game entry payment. Scores, combos and wins have no token payout or cash redemption. Buying tokens and creating locks are separate from playing.\n\n#### Are scores and fridge visits shared live between players?\n\nNo. Progress, personal bests, the visit directory and reactions are stored in the browser. A fridge invitation carries a saved snapshot that another browser can open; it is not a live session. Clearing browser storage can remove local progress, and it does not automatically follow you to another device.\n\n#### Which guilds partner with World, and who invested in it?\n\nNo confirmed World-specific guild partnership or investor list is published in this guide. The character tokens and directory submission requests are not evidence of such partnerships. Check [official DevFridge contacts](https://connect.devfridge.cool/) for verified announcements.\n\n#### Where can I find the official game links and artwork?\n\nUse [world.devfridge.cool](https://world.devfridge.cool/) as the game entrance, this page for the guide and character mint addresses, and [connect.devfridge.cool](https://connect.devfridge.cool/) for official community links. The [cast banner](https://world.devfridge.cool/world/brainrot-pose-banner-v1.png) is promotional artwork; your own fridge photo is created from the result screen after a run.\n\n[Visit DevFridge World](https://world.devfridge.cool/)",
         "sha256": "4c47ecf0349fc483305dc7e497dd02fb8c602b7dc46a9b8021075b903ff1e856",
         "title": "DevFridge World — the game guide"
       },
-      "fetched_at": "2026-09-08T18:55:47Z",
+      "fetched_at": "2026-09-08T22:45:52Z",
       "source": "https://docs.devfridge.cool/world",
       "status": "ok"
     }
   },
   "registry": {
-    "attempted_at": "2026-09-08T18:55:47Z",
+    "attempted_at": "2026-09-08T22:45:52Z",
     "data": [
       {
         "address": "0x6AF70B8487CD47dEf373c4A9eB58F990A3eDba37",
@@ -1954,7 +1912,7 @@
         "symbol": "TMC"
       }
     ],
-    "fetched_at": "2026-09-08T18:55:47Z",
+    "fetched_at": "2026-09-08T22:45:52Z",
     "source": "https://connect.devfridge.cool/",
     "status": "ok"
   },

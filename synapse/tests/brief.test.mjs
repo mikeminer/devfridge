@@ -103,6 +103,18 @@ test('contact labels cannot inject HTML or executable links', () => {
   assert.ok(!html.includes('href="javascript:'));
 });
 
+test('brief excludes unverified, expired and stale commitment profiles from all formats', () => {
+  const original=structuredClone(snapshot.contacts.team.data.members[0]);
+  for (const change of [m => delete m.commitment, m => m.commitment.status='insufficient', m => m.commitment.valid_until=now/1000, m => m.commitment.checked_at='2020-01-01T00:00:00Z']) {
+    const member=structuredClone(original); member.name='EXCLUDED_PROFILE'; change(member);
+    const copy=structuredClone(snapshot); copy.contacts.team.data.members.push(member);
+    const brief=make(copy);
+    for (const text of [JSON.stringify(brief),renderHTML(brief),renderMarkdown(brief)]) assert.ok(!text.includes('EXCLUDED_PROFILE'));
+  }
+  const stale=structuredClone(snapshot); stale.contacts.team.status='stale';
+  assert.equal(make(stale).contacts.team.data.members.length,0);
+});
+
 test('HTML, Markdown and JSON endpoints serve the same dated evidence without JavaScript', async () => {
   for (const [format, type] of [['html', 'text/html'], ['md', 'text/markdown'], ['json', 'application/json']]) {
     const response = await briefResponse(new Request(`https://synapse.devfridge.cool/api/brief?format=${format}`), dependencies);

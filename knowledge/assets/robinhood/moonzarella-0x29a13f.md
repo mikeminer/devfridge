@@ -4,7 +4,7 @@ title: "MoonZarella (robinhood)"
 description: "DevFridge investor knowledge: MoonZarella (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x29A13F8219d1D54424F1F9f1F90E85448488b2DE"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-08T22:45:52Z"
+timestamp: "2026-09-09T00:45:44Z"
 generated: true
 ---
 
