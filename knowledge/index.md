@@ -4,7 +4,7 @@ title: "DevFridge investor knowledge"
 description: "DevFridge investor knowledge: DevFridge investor knowledge"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T11:22:41Z"
+timestamp: "2026-09-09T14:18:13Z"
 generated: true
 ---
 
@@ -24,6 +24,6 @@ A source-linked knowledge folder for evaluating DevFridge, its products and **23
 
 Updated automatically each day at 06:17 UTC, on relevant master-branch pushes, and by manual GitHub Actions dispatch. Schedules can be delayed by GitHub.
 
-**Last refresh attempt:** 2026-09-09T11:22:41Z. See [source status](./operations/freshness.md) before using any figure.
+**Last refresh attempt:** 2026-09-09T14:18:13Z. See [source status](./operations/freshness.md) before using any figure.
 
 Readable as ordinary GitHub Markdown or in Obsidian. Each asset, concept and source page has YAML metadata and relative links. No model/API key or wallet is required to update the bundle.
