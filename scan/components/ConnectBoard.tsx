@@ -36,6 +36,33 @@ export default function ConnectBoard() {
         <p className="mt-4 font-mono text-xs text-ice">{CONNECT_ORIGIN}</p>
       </section>
 
+      <section className="ice-card border-ice/50 p-6" aria-labelledby="updates-heading">
+        <p className="text-[10px] font-bold tracking-[0.22em] text-ice">DEVFRIDGE UPDATES</p>
+        <h2 id="updates-heading" className="mt-2 text-2xl font-bold">Get the latest news.</h2>
+        <p className="mt-3 text-sm leading-relaxed text-mute">
+          Subscribe on Paragraph or follow us on Medium for DevFridge updates, announcements,
+          and stories from the ecosystem. Be among the first to hear what is new.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a
+            className="fridge-key fridge-key-primary"
+            href="https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Subscribe on Paragraph
+          </a>
+          <a
+            className="fridge-key"
+            href="https://devfridge.medium.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Follow on Medium
+          </a>
+        </div>
+      </section>
+
       <PastaCa />
       <OfficialTokens />
 
@@ -84,7 +111,7 @@ function CicciaGroup() {
         <div>
           <p className="text-[10px] font-bold tracking-[0.2em] text-caution">CICCIA SQUAD</p>
           <p className="mt-1 text-sm font-semibold">Powered by CICCIA Salsiccia.</p>
-          <p className="mt-1 text-xs text-mute">Official Pump.fun squad and mascot.</p>
+          <p className="mt-1 text-xs text-mute">Official community and mascot. CICCIA on Robinhood / Pons and Solana / pump.fun.</p>
         </div>
       </div>
       <div className="mt-4 grid gap-2">

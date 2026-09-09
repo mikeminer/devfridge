@@ -257,6 +257,13 @@ export default function MemeRunway() {
     if (pausedRef.current) audio.current?.pause();
     else playMusic();
   };
+  const pickCharacter = (id: string) => {
+    const index = CAST.findIndex(character => character[0] === id);
+    if (index < 0) return;
+    elapsed.current = index * SLOT + 7;
+    pausedRef.current = true; setPaused(true); setCurrent(index);
+    audio.current?.pause();
+  };
 
   return <div className={styles.runway}>
     <div ref={mount} className={styles.canvas} role="img" aria-label="Ten original Italian brainrot characters parade on an illuminated runway" />
@@ -269,12 +276,10 @@ export default function MemeRunway() {
       <code>{contracts[CAST[current][0]]}</code>
       <small className={styles.marketBrand}><img src="/world/brands/pons.png" width={24} height={24} alt="" />Robinhood · View on Pons</small>
     </a>
-    <a className={styles.contractDestination} href={solana[CAST[current][0]].marketUrl} target="_blank" rel="noopener noreferrer" aria-label={`${CAST[current][1]} Solana contract`}>
-      <small>Solana · ${solana[CAST[current][0]].symbol}</small>
+    <a className={styles.contractDestination} href={solana[CAST[current][0]].marketUrl} target="_blank" rel="noopener noreferrer" aria-label={`${CAST[current][1]} Solana Token-2022 contract. Open pump.fun in a new tab`}>
+      <small>Solana · Token-2022 · pump.fun ↗</small>
       <code>{solana[CAST[current][0]].address}</code>
     </a>
-    {solana[CAST[current][0]].market === "Raydium" && <a className={styles.pumpLink} href={solana[CAST[current][0]].marketUrl} target="_blank" rel="noopener noreferrer">Solana · Raydium ↗</a>}
-    <a className={styles.pumpLink} href={`https://pump.fun/coin/${solana[CAST[current][0]].address}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${CAST[current][1]} on Solana, pump.fun`}><img src="/world/brands/pump.svg" width={24} height={24} alt="" />Solana · pump.fun ↗</a>
     </div>
     <div className={styles.caption}>
       <p className={styles.eyebrow}>PASTA / CAST · LIVE RUNWAY</p>
@@ -284,7 +289,7 @@ export default function MemeRunway() {
         <button type="button" onClick={toggleMusic} aria-pressed={sound}>{sound ? "Mute music" : "Enable music"}</button>
         <button type="button" onClick={togglePause} aria-pressed={paused}>{paused ? "Resume show" : "Pause show"}</button>
       </div>
-      <RunwayShare key={CAST[current][0]} id={CAST[current][0]} name={CAST[current][1]} address={contracts[CAST[current][0]]} solanaAddress={solana[CAST[current][0]].address} />
+      <RunwayShare id={CAST[current][0]} onPick={pickCharacter} />
       {autoplayBlocked && <p className={styles.status}>Tap anywhere to start the music.</p>}
       {loaded < CAST.length && !error && <p className={styles.status}>Setting the stage · {loaded}/{CAST.length} performers</p>}
       {error && <p className={styles.status} role="status">{error}</p>}

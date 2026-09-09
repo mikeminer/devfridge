@@ -1,0 +1,347 @@
+{
+  "format": "PCM WAV, 24 kHz, 16-bit stereo",
+  "generation": "Local Windows synthetic speech with original procedural sound design; no voice cloning or stock effects",
+  "characters": [
+    {
+      "id": "rugarugo",
+      "name": "Rugarugo",
+      "timbre": "Bubbling bass",
+      "description": "Low, warm and grainy. A bubbling sauce-pot entrance.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": 0,
+      "pitch": -6,
+      "line": "Ruga Rugo! Ruga, ruga! The sauce has escaped!",
+      "effect": "bubble",
+      "variants": {
+        "voice": {
+          "file": "rugarugo-voice.wav",
+          "seconds": 8.122,
+          "peak": 0.6789,
+          "rms": 0.13,
+          "sha256": "e0ad9144c0f7dc6777965024afd42db93d3bee5770db8ceebb581d44e708b278"
+        },
+        "sfx": {
+          "file": "rugarugo-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.6428,
+          "rms": 0.13,
+          "sha256": "6de4626b3bae96ed681cf2d54f471e9de9ecf34ac73e274360b28cb0e4d02dcc"
+        },
+        "signature": {
+          "file": "rugarugo-signature.wav",
+          "seconds": 10.372,
+          "peak": 0.7736,
+          "rms": 0.13,
+          "sha256": "e735b59167d415ee097dde9bcf5f190c5bd63445ecca916a019a68cdfd3cb861"
+        }
+      }
+    },
+    {
+      "id": "aperitivo",
+      "name": "Aperitivo",
+      "timbre": "Raspy lounge voice",
+      "description": "Laid-back low mids, a little rasp, fizz and a glass clink.",
+      "voice": "Microsoft Zira Desktop",
+      "rate": 1,
+      "pitch": -4,
+      "line": "Aperitivo! Sip. Scream. Spritz. Repeat!",
+      "effect": "spritz",
+      "variants": {
+        "voice": {
+          "file": "aperitivo-voice.wav",
+          "seconds": 8.016,
+          "peak": 0.87,
+          "rms": 0.0851,
+          "sha256": "b6d9aefd431aa2f1e7706c6af43b38cdf704f8d28d6b223bd210c137de1e9d4e"
+        },
+        "sfx": {
+          "file": "aperitivo-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.87,
+          "rms": 0.1239,
+          "sha256": "9bb14fa55ab25f03c87964292a34182c3b0198d5fe9c52e0696e0b668166b0cd"
+        },
+        "signature": {
+          "file": "aperitivo-signature.wav",
+          "seconds": 10.266,
+          "peak": 0.87,
+          "rms": 0.0772,
+          "sha256": "ee6d4090d9ddc94af527382b60dd130e263d91e24ad8788e93f1036920ba19de"
+        }
+      }
+    },
+    {
+      "id": "friedfomo",
+      "name": "FriedFomo",
+      "timbre": "Hyperactive treble",
+      "description": "Fast, bright and twitchy, with crunchy fryer crackles.",
+      "voice": "Microsoft Zira Desktop",
+      "rate": 3,
+      "pitch": 6,
+      "line": "Fried Fomo! Fi fi! Fo fo! Your brain is fritto!",
+      "effect": "fry",
+      "variants": {
+        "voice": {
+          "file": "friedfomo-voice.wav",
+          "seconds": 3.36,
+          "peak": 0.87,
+          "rms": 0.0843,
+          "sha256": "de393fa3a1a2a366226f17289a15f1ea4770c2655a916171991f5fd8ddcecfa7"
+        },
+        "sfx": {
+          "file": "friedfomo-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.87,
+          "rms": 0.05,
+          "sha256": "105af78fd765aa115b8db3b16b0e91e275ce40164fb6350c0c5bd0e6f6a0fc47"
+        },
+        "signature": {
+          "file": "friedfomo-signature.wav",
+          "seconds": 5.61,
+          "peak": 0.87,
+          "rms": 0.0688,
+          "sha256": "fb66cd09ac1bdf575479eb7ada6a17ed363a4ff65305e7c2d341f4fc53cc625c"
+        }
+      }
+    },
+    {
+      "id": "fudfusilli",
+      "name": "FudFusilli",
+      "timbre": "Rubbery nasal wobble",
+      "description": "Nasal mids, elastic pitch and a corkscrew boing.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": 1,
+      "pitch": 2,
+      "line": "Fud Fusilli! Twist the pasta! Confuse reality!",
+      "effect": "boing",
+      "variants": {
+        "voice": {
+          "file": "fudfusilli-voice.wav",
+          "seconds": 4.894,
+          "peak": 0.87,
+          "rms": 0.0815,
+          "sha256": "e44ea18b981616b06ff001ee04ebc4e6ae98579290ac42fac57633da1c89d3c2"
+        },
+        "sfx": {
+          "file": "fudfusilli-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.7077,
+          "rms": 0.1291,
+          "sha256": "5192f75c0aa96ba0343cb83153253258c2e48862e3c4f60e32ad420aac0f36b6"
+        },
+        "signature": {
+          "file": "fudfusilli-signature.wav",
+          "seconds": 7.144,
+          "peak": 0.87,
+          "rms": 0.0864,
+          "sha256": "e42957096bb88137c976b61f126261baee440e59a00cf2a9d85311df36ceb57f"
+        }
+      }
+    },
+    {
+      "id": "lambocello",
+      "name": "Lambocello",
+      "timbre": "Citrus growl",
+      "description": "A low, buzzy voice with an exaggerated engine rev.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": 2,
+      "pitch": -5,
+      "line": "Lambocello! When Lambo? After limoncello! Vroom, vroom!",
+      "effect": "engine",
+      "variants": {
+        "voice": {
+          "file": "lambocello-voice.wav",
+          "seconds": 7.481,
+          "peak": 0.7064,
+          "rms": 0.13,
+          "sha256": "d234929a525b2b1485f47d93dde4c3dbe7ed37f62081ca4f6a615f4cb5cde4b0"
+        },
+        "sfx": {
+          "file": "lambocello-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.4293,
+          "rms": 0.13,
+          "sha256": "e9742ed07a89b47e58b3e0bddaf165434b671d8d026e7b8844f31a7f63889eee"
+        },
+        "signature": {
+          "file": "lambocello-signature.wav",
+          "seconds": 9.731,
+          "peak": 0.8102,
+          "rms": 0.13,
+          "sha256": "79f762e09658e186dfc244ab5ae3e8756d56f2f507c21f9dabb95b7e612ed98c"
+        }
+      }
+    },
+    {
+      "id": "gmgnocco",
+      "name": "GmGnocco",
+      "timbre": "Sleepy velvet",
+      "description": "Slow, soft and breathy, with a tiny espresso-cup chime.",
+      "voice": "Microsoft Zira Desktop",
+      "rate": -3,
+      "pitch": -2,
+      "line": "G M Gnocco. Good morning. Good night. Send espresso.",
+      "effect": "sleep",
+      "variants": {
+        "voice": {
+          "file": "gmgnocco-voice.wav",
+          "seconds": 9.372,
+          "peak": 0.87,
+          "rms": 0.1196,
+          "sha256": "7396d2960755f44256def481a3ca55e9b4fb18dead6c77562ba034cc0f6b9dcf"
+        },
+        "sfx": {
+          "file": "gmgnocco-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.5788,
+          "rms": 0.13,
+          "sha256": "37f9b10b716913360fb924ed3f067d1539ab399d954f622020f82b819ea39fec"
+        },
+        "signature": {
+          "file": "gmgnocco-signature.wav",
+          "seconds": 11.622,
+          "peak": 0.87,
+          "rms": 0.109,
+          "sha256": "eb5e0a9f882f8450c7ffbd36e1425936f02380c615ad03cb5439a3828deea512"
+        }
+      }
+    },
+    {
+      "id": "sersugo",
+      "name": "SerSugo",
+      "timbre": "Armored bass",
+      "description": "Deep, resonant and ceremonial, with a spoon-on-helmet clang.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": -1,
+      "pitch": -8,
+      "line": "Ser Sugo! Yes, sir. The sauce has chosen you!",
+      "effect": "metal",
+      "variants": {
+        "voice": {
+          "file": "sersugo-voice.wav",
+          "seconds": 10.47,
+          "peak": 0.87,
+          "rms": 0.0958,
+          "sha256": "9f93c4af420fe22e057f829f0a3b4a672ee81f316415260f75dfefa4a03f6d3f"
+        },
+        "sfx": {
+          "file": "sersugo-sfx.wav",
+          "seconds": 2.55,
+          "peak": 0.87,
+          "rms": 0.0473,
+          "sha256": "b36ed34f9abfb8674c539fa4f413ac2035799fc8e903dde2e5c59536ffb91f85"
+        },
+        "signature": {
+          "file": "sersugo-signature.wav",
+          "seconds": 12.72,
+          "peak": 0.87,
+          "rms": 0.0896,
+          "sha256": "30224a14a00ae2fd580fe9a1e42b645839d4467ebea09b7c9bf7b0ba3af1786a"
+        }
+      }
+    },
+    {
+      "id": "moonzarella",
+      "name": "MoonZarella",
+      "timbre": "Airy lunar shimmer",
+      "description": "A light, floating voice with stereo echoes and orbital bells.",
+      "voice": "Microsoft Zira Desktop",
+      "rate": -1,
+      "pitch": 3,
+      "line": "Moonzarella! Houston, we have mozzarella!",
+      "effect": "space",
+      "variants": {
+        "voice": {
+          "file": "moonzarella-voice.wav",
+          "seconds": 4.325,
+          "peak": 0.87,
+          "rms": 0.0969,
+          "sha256": "d946f4215e05a3a089c540b16301f9e2917b004457637608022d9e13bcc9d576"
+        },
+        "sfx": {
+          "file": "moonzarella-sfx.wav",
+          "seconds": 2.55,
+          "peak": 0.7487,
+          "rms": 0.1298,
+          "sha256": "07639f6d7cfee5d7c095b61bfc09ae6796d8ddd6102326228dc82b746df25451"
+        },
+        "signature": {
+          "file": "moonzarella-signature.wav",
+          "seconds": 6.575,
+          "peak": 0.87,
+          "rms": 0.0852,
+          "sha256": "ad8a5c3a0da38584ea7eccb830906469125eea7e16d3f12695d2256178734424"
+        }
+      }
+    },
+    {
+      "id": "bonkatino",
+      "name": "Bonkatino",
+      "timbre": "Hollow staccato",
+      "description": "Short, woody and hollow, punctuated by a double bonk.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": 2,
+      "pitch": 4,
+      "line": "Bonkatino! Bonka, bonka! Brain al dente! BONK!",
+      "effect": "bonk",
+      "variants": {
+        "voice": {
+          "file": "bonkatino-voice.wav",
+          "seconds": 4.633,
+          "peak": 0.87,
+          "rms": 0.0774,
+          "sha256": "ccda05c6c9e822e2b0213cb3850abffea25cb8b88c8cd337666e55ccf543ae2f"
+        },
+        "sfx": {
+          "file": "bonkatino-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.87,
+          "rms": 0.0753,
+          "sha256": "64252245d55af7d3de07abeed15d55b26f59c14b1c445e54a91103f7bdec3034"
+        },
+        "signature": {
+          "file": "bonkatino-signature.wav",
+          "seconds": 6.883,
+          "peak": 0.87,
+          "rms": 0.0718,
+          "sha256": "34850d9c718f580b6dfd55fbfbf3f1541a72de1a0852414b85f67dae78c8b8c6"
+        }
+      }
+    },
+    {
+      "id": "ciccia",
+      "name": "Ciccia Salsiccia",
+      "timbre": "Smoky baritone",
+      "description": "Low and gravelly, with sizzling percussion and a lazy funk bass. Original synthesized audio.",
+      "voice": "Microsoft Hazel Desktop",
+      "rate": -1,
+      "pitch": -7,
+      "line": "Ciccia Salsiccia! Ciccia, Ciccia. Ma che caldo! Stay smoked.",
+      "effect": "sizzle",
+      "themeFile": "ciccia-theme.wav",
+      "variants": {
+        "voice": {
+          "file": "ciccia-voice.wav",
+          "seconds": 13.242,
+          "peak": 0.8145,
+          "rms": 0.13,
+          "sha256": "9b5e48face6de96cdb6613be0bf0840f7c13bc980ff23171c098926044e05f8e"
+        },
+        "sfx": {
+          "file": "ciccia-sfx.wav",
+          "seconds": 2.0,
+          "peak": 0.7537,
+          "rms": 0.13,
+          "sha256": "3e10afa5ad4e1c1659f6a85cb7b1109d77998a1f193560b035985e70c894f6d6"
+        },
+        "signature": {
+          "file": "ciccia-signature.wav",
+          "seconds": 15.492,
+          "peak": 0.8599,
+          "rms": 0.13,
+          "sha256": "1129643822fb41f0b505585a58178945cb9e57ce5a2bf7beefee51c0fe622b41"
+        }
+      }
+    }
+  ]
+}

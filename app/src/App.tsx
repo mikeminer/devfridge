@@ -5,7 +5,6 @@ import {
   DEV_PUMP_URL,
   DEV_X_URL,
   CONNECT_URL,
-  PASTA_TG_GROUP_URL,
   PASTA_TG_URL,
   GITHUB_REPO,
   LICENSE_URL,
@@ -214,7 +213,9 @@ export default function App() {
       if (net === "mainnet") {
         fetchTvl(withSigs).then((r) => {
           if (clusterRef.current === net) setTvlUsd(r.totalUsd);
-        }).catch(() => {});
+        }).catch(() => {
+          if (clusterRef.current === net) setTvlUsd(null);
+        });
       } else {
         setTvlUsd(null);
       }
@@ -437,9 +438,6 @@ export default function App() {
           </a>
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Channel
-          </a>
-          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
-            Group
           </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
             Follow on pump.fun
@@ -800,9 +798,6 @@ export default function App() {
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
             Telegram channel · @pastamemelovers
           </a>
-          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
-            Telegram group
-          </a>
           <a href={CONNECT_URL}>
             Official contacts
           </a>
@@ -1013,9 +1008,6 @@ export default function App() {
           <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
             Telegram channel · @pastamemelovers
           </a>
-          <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
-            Telegram group
-          </a>
           <a href={DEV_PUMP_URL} target="_blank" rel="noreferrer">
             Follow on pump.fun
           </a>
@@ -1079,16 +1071,6 @@ export default function App() {
               releases.{" "}
               <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
                 @pastamemelovers
-              </a>
-            </p>
-          </li>
-          <li className="is-done">
-            <p className="tl-badge">Done</p>
-            <h3>Telegram group</h3>
-            <p>
-              Public kitchen for builders and communities already in the Fridge.{" "}
-              <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
-                Join the group
               </a>
             </p>
           </li>
@@ -1180,9 +1162,6 @@ export default function App() {
         </a>
         <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
           Telegram channel · @pastamemelovers
-        </a>
-        <a href={PASTA_TG_GROUP_URL} target="_blank" rel="noreferrer">
-          Telegram group
         </a>
         <a href={CONNECT_URL}>
           Official contacts · connect.devfridge.cool

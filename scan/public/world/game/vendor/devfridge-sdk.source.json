@@ -1,0 +1,10 @@
+{
+  "source": "https://sdk.devfridge.cool/sdk/devfridge-sdk.js",
+  "retrieved": "2026-09-07",
+  "declaredVersion": "1.0",
+  "localFile": "/vendor/devfridge-sdk.js",
+  "localSha256": "33D284C0967D00A284831382DAEC5851BCFD7761E8EEBAFFC1183F8D1DBA6B5B",
+  "scanner": "https://scan.devfridge.cool",
+  "protocol": "https://devfridge.cool",
+  "notes": "Retrieved from the published SDK. Saved as UTF-8; integrity hash refers to the vendored bytes. checkSubscription is called per configured mint. activeLocks are valued separately; bestLock is not a market-value ranking."
+}

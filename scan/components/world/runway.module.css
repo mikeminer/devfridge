@@ -48,3 +48,114 @@
   .panel nav { margin-top: 12px; }
 }
 @media (max-height: 700px) and (min-width: 761px) { .panel { margin-top: 20px; padding: 18px; } .panel img { display: none; } }
+
+/* Each mobile section owns its space: neither the countdown nor the contract floats over the cast. */
+@media (max-width: 900px), (max-height: 600px) and (pointer: coarse) {
+  .countdownPage { display: flex; flex-direction: column; align-items: stretch; padding: env(safe-area-inset-top) env(safe-area-inset-right) max(24px, env(safe-area-inset-bottom)) env(safe-area-inset-left); scroll-padding-top: 12px; }
+  .countdownPage .panel { display: contents; }
+  .panel > img, .panel .siteLabel { display: none; }
+  .panel > :not(img) { position: relative; z-index: 2; margin-left: 16px; margin-right: 16px; }
+  .panel .launchTitle { order: 0; margin-top: 16px; margin-bottom: 0; text-align: center; font-size: clamp(26px, 6vw, 34px); }
+  .panel .countdownLabel { order: 1; margin-top: 8px; margin-bottom: 0; font-size: 12px; text-align: center; }
+  .panel .countdownGrid { order: 2; width: min(440px, calc(100% - 32px)); align-self: center; margin: 8px 16px 0; gap: 8px; }
+  .countdownGrid > div { padding: 8px 4px; }
+  .countdownGrid p { margin-top: 0; }
+  .countdownGrid p:first-child { font-size: 24px; }
+  .countdownGrid p:last-child { font-size: 12px; }
+  .runway { order: 3; position: relative; inset: auto; z-index: 1; display: flex; flex-direction: column; flex: none; min-height: 0; width: 100%; overflow: visible; margin-top: 8px; }
+  .canvas { order: 0; position: relative; inset: auto; flex: none; width: 100%; height: clamp(300px, 50svh, 520px); min-height: 300px; overflow: hidden; }
+  .caption { order: 1; position: relative; inset: auto; flex: none; padding: 8px 16px 16px; width: 100%; text-shadow: none; }
+  .caption h2 { font-size: clamp(24px, 6vw, 32px); overflow-wrap: anywhere; }
+  .caption .track { font-size: 14px; }
+  .controls { flex-wrap: wrap; margin-top: 12px; gap: 8px; }
+  .controls button { flex: 1; max-width: 200px; min-height: 44px; padding: 10px 12px; font-size: 14px; }
+  .contract { order: 2; position: static; visibility: visible !important; transform: none; flex: none; width: calc(100% - 32px); max-width: 520px; margin: 0 auto 12px; padding: 16px; background: #0b1423; box-shadow: none; }
+  .contract .contractIdentity { margin-bottom: 10px; }
+  .contract .memeLogo { width: 48px; height: 48px; }
+  .contractDestination { padding: 8px 0; min-height: 44px; }
+  .contractDestination + .contractDestination { border-top: 1px solid #98eaff33; margin-top: 8px; }
+  .contract code { font-size: 13px; word-break: break-all; }
+  .contract span, .contract small { font-size: 14px; }
+  .sharing { margin-top: 14px; }
+  .shareButtons { gap: 8px; }
+  .shareButtons > a, .shareButtons > button, .shareDetails summary { min-height: 44px; padding: 11px 12px; font-size: 14px; }
+  .shareDetails { width: 100%; max-width: 520px; }
+  .shareDetails summary { width: fit-content; margin: 0 auto; }
+  .sharePreview { position: static; transform: none; width: 100%; max-height: none; margin-top: 10px; padding: 14px; box-shadow: none; }
+  .sharePreview textarea { font-size: 16px; }
+  .status { font-size: 14px; }
+  .panel .launchDescription { order: 4; margin-top: 16px; margin-bottom: 0; padding-top: 16px; border-top: 1px solid #b9e8ff22; font-size: 16px; line-height: 1.6; text-align: center; }
+  .panel .launchNetworks { order: 5; margin-top: 10px; margin-bottom: 0; font-size: 14px; line-height: 1.6; text-align: center; }
+  .panel .launchLinks { order: 6; justify-content: center; margin-top: 16px; }
+  .launchLinks a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 10px 18px; font-size: 14px; }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  .countdownPage .canvas { height: max(300px, 78svh); }
+}
+
+/* Sharing stays in document flow, so the cast remains fully visible. */
+.launchShare { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; text-align: center; }
+.launchShare > p { margin: 0; font-size: 12px; line-height: 1.6; color: #b9c7d8; }
+.xPrimary, .shareButtons > .xPrimary { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 18px; border: 1px solid #d2ff74; border-radius: 12px; background: #d2ff74; color: #142008; font-size: 14px; line-height: 1.4; font-weight: 800; text-decoration: none; text-shadow: none; }
+.xPrimary:hover, .shareButtons > .xPrimary:hover { background: #e4ffa9; border-color: #e4ffa9; }
+.shareButtons > button:disabled { opacity: .55; cursor: not-allowed; }
+.xPrimary:focus-visible, .pickJump:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
+.pickJump { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; color: #a4edff; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+.sharing { max-width: 740px; margin: 28px auto 0; padding-top: 24px; border-top: 1px solid #b9e8ff22; scroll-margin-top: 24px; text-shadow: none; }
+.pickHeading { margin: 8px 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.2; font-weight: 800; }
+.pickGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 20px 0 16px; }
+.pickGrid button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 112px; padding: 12px 5px; border: 1px solid #abcaff33; border-radius: 14px; background: #10172a; color: #d1dbee; cursor: pointer; }
+.pickGrid button:hover { border-color: #a4edff; background: #18253c; }
+.pickGrid button[aria-pressed="true"] { border-color: #d2ff74; background: #25341d; color: #e4ffa9; box-shadow: inset 0 0 0 1px #d2ff74; }
+.pickGrid button:focus-visible { outline: 3px solid #ff91d9; outline-offset: 3px; }
+.pickGrid img { width: 56px; height: 56px; object-fit: contain; }
+.pickGrid span { font-size: 12px; line-height: 1.3; font-weight: 700; overflow-wrap: anywhere; }
+.pickLabel { margin: 14px 0; color: #b9c7d8; font-size: 15px; }
+.pickLabel strong { color: #d2ff74; }
+.shareButtons > a, .shareButtons > button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
+.shareDetails { width: 100%; max-width: none; margin-top: 14px; }
+.shareDetails summary { width: fit-content; margin: 0 auto; min-height: 44px; }
+.sharePreview { position: static; transform: none; width: 100%; max-height: none; margin-top: 12px; box-shadow: none; }
+.postBanner { display: block; width: 100%; height: auto; border-radius: 8px; }
+@media (min-width: 901px) and (min-height: 601px), (min-width: 901px) and (pointer: fine) {
+  .countdownPage { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 24px; align-items: start; padding: 24px; }
+  .countdownPage .panel { grid-column: 1; grid-row: 1; position: sticky; top: 0; width: auto; margin: 0; padding: 24px; }
+  .countdownPage .runway { grid-column: 2; grid-row: 1; position: relative; inset: auto; display: flex; flex-direction: column; min-width: 0; overflow: visible; }
+  .countdownPage .canvas { order: 0; position: relative; inset: auto; flex: none; height: clamp(420px, 68vh, 760px); overflow: hidden; }
+  .countdownPage .caption { order: 1; position: relative; inset: auto; padding: 16px 12px 24px; text-shadow: none; }
+  .countdownPage .contract { order: 2; position: static; visibility: visible !important; transform: none; width: calc(100% - 24px); max-width: 600px; margin: 0 auto 24px; box-shadow: none; }
+}
+@media (max-width: 900px), (max-height: 600px) and (pointer: coarse) {
+  .panel .launchShare { order: 4; align-self: center; width: min(520px, calc(100% - 32px)); margin-top: 20px; }
+  .panel .launchDescription { order: 5; }
+  .panel .launchNetworks { order: 6; }
+  .panel .launchLinks { order: 7; }
+  .sharing { margin-top: 24px; }
+  .shareButtons > .xPrimary { flex-basis: 100%; }
+}
+@media (max-width: 600px) {
+  .pickGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pickGrid button:last-child { grid-column: 2; }
+}
+
+.launchNewsletter { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; padding: 16px; border: 1px solid #a4edff55; border-radius: 14px; background: #122239; text-align: center; }
+.launchNewsletter > p { margin: 0; color: #e6f5ff; font-size: 14px; line-height: 1.6; }
+.launchNewsletter > a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px; border-radius: 10px; background: #a4edff; color: #071624; font-size: 14px; font-weight: 700; line-height: 1.4; text-decoration: none; }
+.launchNewsletter > a:hover { background: #d0f6ff; }
+.launchNewsletter > a:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
+@media (max-width: 900px), (max-height: 600px) and (pointer: coarse) {
+  .panel .launchNewsletter { order: 2; align-self: center; width: min(440px, calc(100% - 32px)); margin-top: 16px; }
+  .launchNewsletter > p { margin-top: 0; }
+}
+
+.launchNewsletter > button, .newsletterForm > button { display: flex; align-items: center; justify-content: center; min-height: 48px; width: 100%; padding: 12px; border: 0; border-radius: 10px; background: #a4edff; color: #071624; font-size: 14px; font-weight: 700; line-height: 1.4; cursor: pointer; }
+.launchNewsletter > button:hover, .newsletterForm > button:hover { background: #d0f6ff; }
+.launchNewsletter button:focus-visible, .newsletterForm input:focus-visible, .newsletterForm a:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
+.newsletterForm { display: flex; flex-direction: column; gap: 12px; min-width: 0; text-align: left; }
+.newsletterForm > label { font-size: 14px; line-height: 1.5; color: #e6f5ff; }
+.newsletterForm > input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid #a4edff88; border-radius: 10px; padding: 12px; background: #080b18; color: #f3f8ff; font-size: 16px; }
+.newsletterForm .newsletterConsent { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; }
+.newsletterConsent input { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: #a4edff; }
+.newsletterForm > a { color: #a4edff; font-size: 12px; line-height: 1.5; text-decoration: underline; }
+.newsletterForm > p { font-size: 13px; color: #ffccd9; line-height: 1.6; margin: 0; }
+.newsletterForm button:disabled { opacity: .6; cursor: wait; }
