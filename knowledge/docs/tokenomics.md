@@ -4,7 +4,7 @@ title: "Tokenomics (on-chain, live)"
 description: "DevFridge investor knowledge: Tokenomics (on-chain, live)"
 resource: "https://docs.devfridge.cool/tokenomics"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T07:24:09Z"
+timestamp: "2026-09-09T07:28:58Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/tokenomics) · ok · last successful observation: 2026-09-09T07:24:09Z · last attempt: 2026-09-09T07:24:09Z.
+[Canonical page](https://docs.devfridge.cool/tokenomics) · ok · last successful observation: 2026-09-09T07:28:58Z · last attempt: 2026-09-09T07:28:58Z.
 
 $PASTA
 
