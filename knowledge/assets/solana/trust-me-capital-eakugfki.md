@@ -4,7 +4,7 @@ title: "Trust Me Capital (solana)"
 description: "DevFridge investor knowledge: Trust Me Capital (solana)"
 resource: "https://solscan.io/token/EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T20:37:04Z"
+timestamp: "2026-09-09T21:12:21Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump`
 
-Registry status: ok · last successful observation: 2026-09-09T20:37:04Z · last attempt: 2026-09-09T20:37:04Z.
+Registry status: ok · last successful observation: 2026-09-09T21:12:21Z · last attempt: 2026-09-09T21:12:21Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Trust Me Capital token. The Hyperliquid vault and the token are separate product
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-09T20:37:04Z · last attempt: 2026-09-09T20:37:04Z.
+ok · last successful observation: 2026-09-09T21:12:21Z · last attempt: 2026-09-09T21:12:21Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 999999999.999995 |
 | Supply in base units | `999999999999995` |
 | Decimals | 6 |
-| Finalized slot | 445703425 |
+| Finalized slot | 445710045 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-09T20:37:04Z · last attempt: 2026-09-09T20:37:04Z.
+ok · last successful observation: 2026-09-09T21:12:21Z · last attempt: 2026-09-09T21:12:21Z.
 
 ```json
 {
