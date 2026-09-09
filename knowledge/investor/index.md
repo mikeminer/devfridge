@@ -40,3 +40,6 @@ It does not establish investment suitability, price targets, audited security, l
 | How old is the evidence? | Source success timestamp and block/slot |
 
 The investor pages are reviewed explanations; automated snapshots do not silently rewrite them. If the live source changes, follow its current terms and review the explanation.
+
+- [KOL product pitch and SDK pilot](./kol.md)
+- [Protocol adoption and LP evidence](./protocol.md)

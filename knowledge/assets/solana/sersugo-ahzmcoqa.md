@@ -4,7 +4,7 @@ title: "SerSugo (solana)"
 description: "DevFridge investor knowledge: SerSugo (solana)"
 resource: "https://solscan.io/token/AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T00:51:18Z"
+timestamp: "2026-09-09T06:16:42Z"
 generated: true
 ---
 

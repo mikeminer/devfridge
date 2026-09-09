@@ -4,7 +4,7 @@ title: "@frigopastabot"
 description: "DevFridge investor knowledge: @frigopastabot"
 resource: "https://docs.devfridge.cool/bot"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T00:51:18Z"
+timestamp: "2026-09-09T06:16:42Z"
 generated: true
 ---
 

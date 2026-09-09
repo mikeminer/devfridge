@@ -4,7 +4,7 @@ title: "Rugarugo (solana)"
 description: "DevFridge investor knowledge: Rugarugo (solana)"
 resource: "https://solscan.io/token/An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T00:51:18Z"
+timestamp: "2026-09-09T06:16:42Z"
 generated: true
 ---
 

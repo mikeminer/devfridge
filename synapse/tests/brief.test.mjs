@@ -40,7 +40,7 @@ test('missing market data is unknown; missing authorities never become renounced
   assert.equal(pasta.largest_indexed_pool, null);
   assert.equal(pasta.total_supply, null);
   assert.equal(pasta.chain_observation.status, 'unavailable');
-  const md = renderMarkdown(brief).split('### ')[1];
+  const md = renderMarkdown(brief).split('## Assets')[1].split('### ')[1];
   assert.ok(md.includes('Mint authority: Not observed'));
   assert.ok(md.includes('Largest indexed pool liquidity: Not observed'));
 });
@@ -101,6 +101,26 @@ test('contact labels cannot inject HTML or executable links', () => {
   assert.ok(!html.includes('<script>bad()'));
   assert.ok(!html.includes('<img src=x'));
   assert.ok(!html.includes('href="javascript:'));
+});
+
+test('product pitch preserves dated evidence and keeps pilot targets distinct from adoption', () => {
+  const brief=make(snapshot), html=renderHTML(brief), md=renderMarkdown(brief);
+  assert.equal(brief.pitch.pilot.status,'proposed');
+  assert.equal(brief.protocol.activity.data.external_depositors,null);
+  for(const text of [html,md]) {
+    assert.ok(text.includes('SDK')); assert.ok(text.includes('Three') || text.includes('three'));
+    assert.ok(text.includes('not achieved or guaranteed'));
+    assert.ok(text.includes(snapshot.protocol.activity.fetched_at));
+    assert.ok(text.includes(snapshot.protocol.lp.fetched_at));
+  }
+  assert.ok(html.indexOf('id="products"') < html.indexOf('id="solana"'));
+  assert.ok(html.includes('Copy KOL introduction'));
+  const missing=structuredClone(snapshot); delete missing.protocol;
+  assert.equal(make(missing).protocol.lp.status,'unavailable');
+  assert.ok(!renderHTML(make(missing)).includes('0 outstanding LP units'));
+  const stale=structuredClone(snapshot); stale.protocol.activity.status='stale';
+  assert.equal(make(stale).protocol.activity.status,'stale');
+  assert.ok(renderHTML(make(stale)).includes('STALE'));
 });
 
 test('brief excludes unverified, expired and stale commitment profiles from all formats', () => {

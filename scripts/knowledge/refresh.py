@@ -263,10 +263,12 @@ def market_state(asset):
 
 def refresh(config, old):
     from contacts import refresh_contacts
+    from protocol import refresh_protocol
     stamp = now()
     snapshot = copy.deepcopy(old)
     snapshot.update(schema_version=1, attempted_at=stamp)
     snapshot["contacts"] = refresh_contacts(config, old.get("contacts", {}), stamp)
+    snapshot["protocol"] = refresh_protocol(config, old.get("protocol", {}), stamp)
     registry_url = config["registry_url"]
     snapshot["registry"] = observed(old.get("registry"), registry_url, lambda: registry(request(registry_url), config["required_asset_ids"]), stamp)
     if "data" not in snapshot["registry"]:
@@ -328,8 +330,10 @@ def page(path, title, body, stamp, kind="Concept", resource="https://connect.dev
 
 def render(config, snapshot):
     from contacts import render_contacts
+    from protocol import render_protocol
     stamp = snapshot["attempted_at"]
     render_contacts(snapshot, stamp)
+    render_protocol(snapshot, stamp)
     assets = snapshot["registry"]["data"]
     validate_assets(assets, config["required_asset_ids"])
     asset_links = {a["id"]: asset_path(a) for a in assets}
@@ -391,6 +395,7 @@ def render(config, snapshot):
     records = [("Registry", snapshot["registry"]), ("Docs catalog", snapshot["doc_catalog"])] + [(url, r) for url, r in snapshot["documents"].items()]
     records += [(f"{id} / {kind}", r) for id, state in snapshot["assets"].items() for kind, r in state.items()]
     records += [(f"Contacts / {name}", r) for name, r in snapshot.get("contacts", {}).items()]
+    records += [(f"Protocol / {name}", r) for name, r in snapshot.get("protocol", {}).items()]
     unavailable = sorted((name, r) for name, r in records if r["status"] != "ok")
     body = f"Refresh attempted: **{stamp}**. {len(records) - len(unavailable)}/{len(records)} source observations succeeded.\n\nA daily snapshot is not real time. Data older than {config['stale_after_hours']} hours should be treated as stale even if its last refresh succeeded. Read each record's last-success timestamp.\n\n## Source failures\n\n" + ("\n".join(f"- `{name}`: {status_line(r)}; {r.get('error', 'unknown')}" for name, r in unavailable) or "No source failures in this refresh.")
     body += "\n\n## Published registry versus repository\n\n" + ("\n".join(drift) or "No address disagreement detected in the character registry.")
