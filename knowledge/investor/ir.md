@@ -16,13 +16,13 @@ AI Investor Relations helps people who connect corporate clients and major inves
 
 ## Proposed wallet-attributed referral program
 
-The founder proposes linking a submitted, wallet-signed conversation to a verified investment in at least one eligible ecosystem asset, then rewarding the eligible beneficiary with a percentage of attributable trading fees. This is a proposed product model, not an active reward or an existing financial entitlement.
+The founder proposes linking a submitted conversation signed by the client’s wallet to a verified investment in at least one eligible ecosystem asset. The intermediary who introduced that client is the beneficiary. The reward is funded by creator fees actually received and attributable to the actual verified trading volume of that client wallet in the purchased eligible asset. This is a proposed product model, not an active reward or an existing financial entitlement.
 
-Before activation, the program needs an agreed percentage, fee source, beneficiary, attribution window, eligible asset/venue rules and payment terms. The live chat currently has no wallet submission, referral registry, investment attribution ledger or payout system. A signature proves wallet control and assent to a message; it does not establish real-world identity or prove a purchase.
+The intermediary beneficiary and creator-fee funding source are defined. Before activation, the program still needs confirmation of the reward share (100% or a smaller percentage of attributable creator fees), attribution window, eligible asset/venue rules and payment terms. The live chat currently has no wallet submission, referral registry, investment attribution ledger or payout system. A signature proves wallet control and assent to a message; it does not establish real-world identity or prove a purchase.
 
-Only fees actually received, verified and available for distribution could fund a reward under the future terms. Existing Fridge claim and Get Featured buy-and-burn flows are not an automatic referral funding source. An asset purchase is not equity in DevFridge. The client's knowledge of the intermediary's financial incentive and consent to any shared conversation must be explicit.
+For each eligible asset, the attributable fee base is the sum of creator fees actually received on that client wallet’s verified eligible trades, using the venue and fee applicable to each transaction. The intermediary’s reward is the agreed share of that base. Do not use other wallets’ volume, wallet balances, transfers or unrealized gains, or apply an invented flat fee to volume. Protocol and LP fees are excluded. An ecosystem listing alone does not establish that an asset or venue generates creator fees payable to the founder. Only creator fees actually received, verified and available for distribution could fund a reward under the future terms. Existing Fridge claim and Get Featured buy-and-burn flows are not an automatic referral funding source. An asset purchase is not equity in DevFridge. The client's knowledge of the intermediary's financial incentive and consent to any shared conversation must be explicit.
 
-[Discuss the proposed program with the founder](https://t.me/anonimocommando). No percentage or recipient should be assumed until the terms are set.
+[Discuss the proposed program with the founder](https://t.me/anonimocommando). The intermediary is the recipient; the reward share and remaining terms must be confirmed before activation.
 
 ## Available now
 
