@@ -4,7 +4,7 @@ title: "How the risk grade works"
 description: "DevFridge investor knowledge: How the risk grade works"
 resource: "https://docs.devfridge.cool/methodology"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-09T22:03:38Z"
+timestamp: "2026-09-09T22:49:49Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/methodology) · ok · last successful observation: 2026-09-09T22:03:38Z · last attempt: 2026-09-09T22:03:38Z.
+[Canonical page](https://docs.devfridge.cool/methodology) · ok · last successful observation: 2026-09-09T22:49:49Z · last attempt: 2026-09-09T22:49:49Z.
 
 METHODOLOGY
 
@@ -28,7 +28,7 @@ DevFridge turns the visible checks in each report into an A–E risk grade. The 
 
 - Whether freeze authority is revoked.
 
-- Top-10 on-chain owner concentration, excluding verified canonical PumpSwap reserves and attributing Fridge vault balances to depositors.
+- Top-10 on-chain owner concentration, excluding verified bonding-curve and supported AMM reserves and attributing Fridge vault balances to depositors.
 
 - Whether DEX liquidity is present and whether LP status can be verified.
 
@@ -58,7 +58,9 @@ Unknown data is never treated as safe. Concentration is caution above 40% and da
 
 Scan reads the complete mint-filtered token account set, checks that balances sum to mint supply, and groups accounts by their on-chain owner. It does not estimate ownership from the largest 20 token accounts. Missing or inconsistent data produces an unknown check.
 
-Only the verified canonical PumpSwap reserve is excluded. Fridge balances remain assigned to each depositant: a timelock changes when tokens can be claimed, not who owns the claim. The report separately shows concentration outside Fridge, all Fridge balances, active time-locks and excluded pool reserves. Expired but unclaimed vaults still belong to the depositant. Every percentage uses total mint supply, including pool and locked balances, as its denominator; the grade uses the combined owner balance, including Fridge.
+Pump.fun bonding-curve vaults, PumpSwap pools (including secondary pools and either side of arbitrary quote pairs), and Raydium AMM V4/CPMM/CLMM, Orca Whirlpool and Meteora DLMM vaults are verified against their program-owned state and token authority before exclusion. Both SPL Token and Token-2022 accounts are supported. Actual vault balances are used, never virtual reserves. Fridge balances remain assigned to each depositant: a timelock changes when tokens can be claimed, not who owns the claim. The report separately shows concentration outside Fridge, all Fridge balances, active time-locks and excluded pool reserves. Expired but unclaimed vaults still belong to the depositant. Every percentage uses total mint supply, including pool and locked balances, as its denominator; the grade uses the combined owner balance, including Fridge.
+
+Account enumeration has no fixed 100,000-account cutoff; full reads get up to 30 seconds. If a provider times out, truncates the result or supply cannot be reconciled, the check is unknown. Balances and reserve classifications have separate RPC slots in the API. Reserve classification does not prove LP tokens are burned or locked. Unmapped shared Raydium custody remains included and is disclosed; if including or excluding it changes the grade, the grade is unknown.
 
 On-chain owners are not necessarily separate people. Other protocol reserves and custodial accounts may remain included, and one person can control several wallets. Transfer-fee withholding or concurrent supply changes can prevent reconciliation and yield unknown.
 
