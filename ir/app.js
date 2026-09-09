@@ -1,7 +1,7 @@
 import {getLocale} from './i18n.mjs';
 const t=getLocale(navigator.language), $=id=>document.getElementById(id);
 document.documentElement.lang=t.language;
-for(const [id,key] of Object.entries({title:'title',reset:'reset',send:'send','sources-title':'sourceTitle','source-note':'sourceNote','tip-title':'tipTitle','tip-description':'tipDescription','wallet-label':'walletLabel','verify-wallet':'verify','team-link':'team',privacy:'privacy','footer-note':'footer',copy:'copy','audience-label':'audienceLabel','position-title':'positionTitle','position-description':'positionDescription','founder-link':'founderLink','referral-title':'referralTitle','referral-description':'referralDescription','referral-status':'referralStatus'})) $(id).textContent=t[key];
+for(const [id,key] of Object.entries({title:'title',reset:'reset',send:'send','sources-title':'sourceTitle','source-note':'sourceNote','tip-title':'tipTitle','tip-description':'tipDescription','wallet-label':'walletLabel','verify-wallet':'verify','team-link':'team',privacy:'privacy','footer-note':'footer',copy:'copy','audience-label':'audienceLabel','position-title':'positionTitle','position-description':'positionDescription','founder-link':'founderLink'})) $(id).textContent=t[key];
 $('question').placeholder=t.placeholder;
 let history=[], busy=false;
 function safeLink(value){try{const u=new URL(value);return u.protocol==='https:'?u.href:null}catch{return null}}
