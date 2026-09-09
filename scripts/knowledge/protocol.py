@@ -72,6 +72,6 @@ def render_protocol(snapshot, stamp):
     for name in ('activity', 'lp', 'reported_stats'):
         record = records.get(name, {})
         body += f"## {name.replace('_', ' ').title()}\n\n{status_line(record)}.\n\n"
-        body += '```json\n' + json.dumps(record.get('data', {'status': 'unavailable'}), indent=2, ensure_ascii=False) + '\n```\n\n'
+        body += '```json\n' + json.dumps(record.get('data', {'status': 'unavailable'}), indent=2, ensure_ascii=False, sort_keys=True) + '\n```\n\n'
     body += '[Product pitch and pilot](./kol.md) · [Investor index](./index.md) · [Program source](https://github.com/mikeminer/devfridge/blob/master/programs/fridge/src/lib.rs) · [Stats implementation](https://github.com/mikeminer/devfridge/blob/master/scan/lib/stats.ts)\n'
     page('investor/protocol.md', 'Protocol adoption and PASTA LP evidence', body, stamp, 'Report')

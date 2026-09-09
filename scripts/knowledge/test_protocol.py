@@ -1,4 +1,5 @@
 import base64
+import json
 import struct
 import unittest
 from unittest.mock import patch
@@ -14,6 +15,14 @@ def row(address, depositor, mint, unlock):
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_note_is_stable_after_snapshot_json_round_trip(self):
+        snapshot = {'protocol': {'activity': {'status': 'ok', 'fetched_at': '2026-09-09T00:00:00Z', 'attempted_at': '2026-09-09T00:00:00Z', 'data': {'slot': 42, 'active_locks': 3}}}}
+        with patch.object(protocol, 'page') as page:
+            protocol.render_protocol(snapshot, '2026-09-09T00:00:00Z')
+            before = page.call_args
+            protocol.render_protocol(json.loads(json.dumps(snapshot, sort_keys=True)), '2026-09-09T00:00:00Z')
+            self.assertEqual(before, page.call_args)
+
     def test_counts_open_accounts_not_lifetime_or_external_users(self):
         payload={'context':{'slot':42},'value':[row('one',1,1,200),row('two',1,2,50),row('three',2,1,300)]}
         with patch.object(protocol,'rpc',return_value=payload): result=protocol.activity('https://example.test','1970-01-01T00:01:40Z')
