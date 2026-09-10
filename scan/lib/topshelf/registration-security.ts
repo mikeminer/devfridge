@@ -1,5 +1,5 @@
 import {createHmac, timingSafeEqual} from 'node:crypto';
-export class RegistrationError extends Error { constructor(message:string,public status=400){super(message);} }
+export class RegistrationError extends Error { constructor(message:string,public status=400,public retryAfter?:number){super(message);} }
 export function seal(payload:object, secret:string) {
   const data=Buffer.from(JSON.stringify(payload)).toString('base64url');
   return `${data}.${createHmac('sha256',secret).update(data).digest('base64url')}`;
@@ -22,7 +22,8 @@ export async function scoreStore(command:(string|number)[]) {
 }
 export async function scoreRateLimit(identity:string,limit:number,seconds=60) {
   const key=createHmac('sha256',process.env.TOPSHELF_RUN_SECRET!).update(identity).digest('hex');
-  const count=await scoreStore(['EVAL',"local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]); end; return n",1,`topshelf:rate:${key}`,seconds]);
+  const result=await scoreStore(['EVAL',"local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]); end; return {n,redis.call('TTL',KEYS[1])}",1,`topshelf:rate:${key}`,seconds]);
+  const count=Number(Array.isArray(result)?result[0]:result),ttl=Math.max(1,Number(Array.isArray(result)?result[1]:seconds)||seconds);
   if(!Number.isInteger(count)||count<1)throw new RegistrationError('Verification unavailable.',503);
-  if(count>limit)throw new RegistrationError('Too many requests. Please wait a minute.',429);
+  if(count>limit)throw new RegistrationError(`Too many requests. Retry in ${ttl} seconds.`,429,ttl);
 }

@@ -1,5 +1,5 @@
 import {Contract, FetchRequest, JsonRpcProvider, isAddress, ZeroAddress, getAddress} from 'ethers';
-import {TOPSHELF_ABI, TOPSHELF_CHAIN, TOPSHELF_OWNER, ERC20_ABI, type ShelfData, type ShelfToken} from './config';
+import {TOPSHELF_ABI, TOPSHELF_CHAIN, TOPSHELF_OWNER, ERC20_ABI, type FeeMenu, type FeeToken, type ShelfData, type ShelfToken} from './config';
 import {ROBINHOOD_TOKENS} from '../official-tokens';
 export function shelfConnection() {
  const address=process.env.TOPSHELF_CONTRACT_ADDRESS;
@@ -8,6 +8,30 @@ export function shelfConnection() {
  const request=new FetchRequest(process.env.ROBINHOOD_RPC_URL||'https://rpc.mainnet.chain.robinhood.com');request.timeout=12000;
  const provider=new JsonRpcProvider(request,TOPSHELF_CHAIN,{staticNetwork:true});
  return {address:getAddress(address),provider,contract:new Contract(address,TOPSHELF_ABI,provider)};
+}
+let feeCache:{value:FeeMenu;expires:number;staleUntil:number}|null=null;
+let feeRequest:Promise<FeeMenu>|null=null;
+async function fetchFeeMenu():Promise<FeeMenu> {
+ const connection=shelfConnection();
+ if(!connection)return {configured:false,address:null,tokens:[],block:null};
+ const {contract,provider,address}=connection;
+ try {
+  const block=await provider.getBlockNumber(),opts={blockTag:block},tokenAddresses=Array.from(await contract.getTokens(opts) as string[]);
+  const tokens=await Promise.all(tokenAddresses.map(async token=>{
+   const known=ROBINHOOD_TOKENS.find(item=>item.address.toLowerCase()===token.toLowerCase()),erc20=new Contract(token,ERC20_ABI,provider);
+   const [symbol,decimals,fee,enabled]=await Promise.all([known?.symbol??erc20.symbol(opts),known?18:erc20.decimals(opts),contract.feeAmount(token,opts),contract.acceptedToken(token,opts)]);
+   return {address:getAddress(token),symbol:String(symbol),decimals:Number(decimals),fee:String(fee),enabled:Boolean(enabled)} satisfies FeeToken;
+  }));
+  return {configured:true,address,tokens,block};
+ } finally {provider.destroy();}
+}
+export async function readFeeMenu():Promise<FeeMenu> {
+ const now=Date.now();if(feeCache&&feeCache.expires>now)return feeCache.value;
+ if(feeRequest)return feeRequest;
+ feeRequest=fetchFeeMenu().then(value=>{feeCache={value,expires:Date.now()+30000,staleUntil:Date.now()+15*60000};return value;}).catch(error=>{
+  if(feeCache&&feeCache.staleUntil>Date.now())return {...feeCache.value,stale:true};throw error;
+ }).finally(()=>{feeRequest=null;});
+ return feeRequest;
 }
 export async function readShelf(seasonInput:number|null,cursor:string,wallet:string|null,claimSeasonInput:number|null):Promise<ShelfData> {
  const connection=shelfConnection();
