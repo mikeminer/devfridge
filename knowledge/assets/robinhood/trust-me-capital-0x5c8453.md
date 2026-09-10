@@ -4,7 +4,7 @@ title: "Trust Me Capital (robinhood)"
 description: "DevFridge investor knowledge: Trust Me Capital (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x5c845330b41D9Bef68B46DC254353A770f44dee8"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T15:18:04Z"
+timestamp: "2026-09-10T15:36:14Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x5c845330b41d9bef68b46dc254353a770f44dee8`
 
-Registry status: ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
+Registry status: ok · last successful observation: 2026-09-10T15:36:14Z · last attempt: 2026-09-10T15:36:14Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Trust Me Capital token. The Hyperliquid vault and the token are separate product
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
+ok · last successful observation: 2026-09-10T15:36:14Z · last attempt: 2026-09-10T15:36:14Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 59504258 |
+| Block | 59515078 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,11 +42,11 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
+ok · last successful observation: 2026-09-10T15:36:14Z · last attempt: 2026-09-10T15:36:14Z.
 
 ```json
 {
-  "holders_count": 15,
+  "holders_count": 16,
   "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
   "provider": "Pons",
   "top_accounts": [
@@ -57,8 +57,8 @@ ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09
     },
     {
       "address": "0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134",
-      "balance": "48034535995993836503793249",
-      "percentage": 4.8034
+      "balance": "47934535995993836503793249",
+      "percentage": 4.7934
     },
     {
       "address": "0x78abb89ba802f0b3794298339d668b4f2c280455",
@@ -96,9 +96,9 @@ ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09
       "percentage": 0.025
     },
     {
-      "address": "0x465677cada89ed5b786769edf335f42a042abba2",
-      "balance": "33567744556658131091778",
-      "percentage": 0.0033
+      "address": "0xc1db49694e0db50778c333350c8a553fde221989",
+      "balance": "100000000000000000000000",
+      "percentage": 0.01
     }
   ]
 }
