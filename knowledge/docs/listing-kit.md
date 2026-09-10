@@ -4,7 +4,7 @@ title: "DevFridge listing kit"
 description: "DevFridge investor knowledge: DevFridge listing kit"
 resource: "https://docs.devfridge.cool/listing-kit"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T18:45:06Z"
+timestamp: "2026-09-10T18:55:21Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-09-10T18:45:06Z · last attempt: 2026-09-10T18:45:06Z.
+[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
 
 PARTNERS
 
@@ -39,6 +39,8 @@ DevFridge Scan analyzes Solana token mints, mint and freeze authorities, holder 
 ### Verified links
 
 - [Product](https://scan.devfridge.cool)
+
+- [Ecosystem kitchen map](https://ecosystem.devfridge.cool)
 
 - [Documentation](https://docs.devfridge.cool)
 

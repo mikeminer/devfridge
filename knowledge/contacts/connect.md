@@ -4,7 +4,7 @@ title: "Official contacts, project leader and community"
 description: "DevFridge investor knowledge: Official contacts, project leader and community"
 resource: "https://connect.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T18:45:06Z"
+timestamp: "2026-09-10T18:55:21Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-10T18:45:06Z · last attempt: 2026-09-10T18:45:06Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
 
 ## OFFICIAL TELEGRAM BOT
 
@@ -27,11 +27,13 @@ Project-published contact observations. Only team members with verified PASTA co
 - [Trust Me Capital TMC analytics and Trust Rewards on Robinhood Chain](https://capital.devfridge.cool)
 - [DevFridge Bridge Rate-limited LayerZero OFT bridge for verified token routes](https://bridge.devfridge.cool)
 - [Scanner Trust report and Fridge badge](https://scan.devfridge.cool)
+- [Ecosystem Kitchen map of products, identities, and live evidence](https://ecosystem.devfridge.cool)
 - [World Pastalovers vs The Shelf — lock decides your team](https://world.devfridge.cool)
 - [Docs How to fridge, scan, and feature a memecoin](https://docs.devfridge.cool)
 - [Health Live status of Fridge, RPC, and $PASTA](https://health.devfridge.cool)
 - [Bot Telegram bot landing page — add @frigopastabot to your group](https://bot.devfridge.cool)
 - [Team Team dashboard and applications](https://team.devfridge.cool)
+- [Buyback HyperEVM USDC → $PASTA on Solana](https://buyback.devfridge.cool)
 - [Connect This page — the only official meeting point](https://connect.devfridge.cool)
 
 ## TALK & LISTINGS
