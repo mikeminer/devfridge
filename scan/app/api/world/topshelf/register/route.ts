@@ -20,5 +20,5 @@ export async function POST(request:NextRequest) {
   // Vercel overwrites this header; never trust a body-supplied client identity.
   const ip=request.headers.get('x-vercel-forwarded-for')?.split(',')[0].trim()||'local';
   return NextResponse.json(await registerAction(body,ip),{headers});
- }catch(e){return NextResponse.json({error:e instanceof RegistrationError?e.message:'Score verification is temporarily unavailable. No payment was requested.'},{status:e instanceof RegistrationError?e.status:503,headers});}
+ }catch(e){const error=e instanceof RegistrationError?e:null;return NextResponse.json({error:error?.message||'Score verification is temporarily unavailable. No payment was requested.',retryAfter:error?.retryAfter},{status:error?.status||503,headers:{...headers,...(error?.retryAfter?{'Retry-After':String(error.retryAfter)}:{})}});}
 }
