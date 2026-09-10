@@ -4,7 +4,7 @@ title: "Ciccia Salsiccia (robinhood)"
 description: "DevFridge investor knowledge: Ciccia Salsiccia (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x575634d01aEeb4421c5EC4E06d861DFb0Da6df7a"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T11:19:21Z"
+timestamp: "2026-09-10T15:18:04Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x575634d01aeeb4421c5ec4e06d861dfb0da6df7a`
 
-Registry status: ok · last successful observation: 2026-09-10T11:19:21Z · last attempt: 2026-09-10T11:19:21Z.
+Registry status: ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-10T11:19:21Z · last attempt: 2026-09-10T11:19:21Z.
+ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 59362205 |
+| Block | 59504258 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,11 +42,11 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-10T11:19:21Z · last attempt: 2026-09-10T11:19:21Z.
+ok · last successful observation: 2026-09-10T15:18:04Z · last attempt: 2026-09-10T15:18:04Z.
 
 ```json
 {
-  "holders_count": 2,
+  "holders_count": 3,
   "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
   "provider": "Pons",
   "top_accounts": [
@@ -57,8 +57,13 @@ ok · last successful observation: 2026-09-10T11:19:21Z · last attempt: 2026-09
     },
     {
       "address": "0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134",
-      "balance": "6310660420369525577094419",
-      "percentage": 0.631
+      "balance": "6260660420369525577094419",
+      "percentage": 0.626
+    },
+    {
+      "address": "0xc1db49694e0db50778c333350c8a553fde221989",
+      "balance": "50000000000000000000000",
+      "percentage": 0.005
     }
   ]
 }
