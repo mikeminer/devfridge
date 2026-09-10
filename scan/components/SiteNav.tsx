@@ -1,4 +1,15 @@
+import { headers } from "next/headers";
+import EcosystemNav from "./ecosystem/EcosystemNav";
+
 export default function SiteNav() {
+  const headerList = headers();
+  const host = headerList.get("host") || "";
+  const embed = headerList.get("x-ecosystem-embed") === "1";
+  if (embed) return null;
+  if (host.startsWith("ecosystem.") || headerList.get("x-ecosystem") === "1") {
+    return <EcosystemNav host={host} />;
+  }
+
   return (
     <header className="fridge-topbar">
       <nav className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
@@ -22,6 +33,9 @@ export default function SiteNav() {
           </a>
           <a className="fridge-key justify-center" href="https://world.devfridge.cool">
             World
+          </a>
+          <a className="fridge-key justify-center" href="https://ecosystem.devfridge.cool">
+            Ecosystem
           </a>
           <a className="fridge-key justify-center" href="https://docs.devfridge.cool">
             Docs

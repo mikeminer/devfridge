@@ -48,6 +48,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Trust report and Fridge badge",
   },
   {
+    label: "Ecosystem",
+    href: "https://ecosystem.devfridge.cool",
+    hint: "Kitchen map of products, identities, and live evidence",
+  },
+  {
     label: "World",
     href: "https://world.devfridge.cool",
     hint: "Pastalovers vs The Shelf — lock decides your team",
@@ -71,6 +76,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     label: "Team",
     href: "https://team.devfridge.cool",
     hint: "Team dashboard and applications",
+  },
+  {
+    label: "Buyback",
+    href: "https://buyback.devfridge.cool",
+    hint: "HyperEVM USDC → $PASTA on Solana",
   },
   {
     label: "Connect",

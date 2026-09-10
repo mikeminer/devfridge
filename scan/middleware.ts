@@ -15,6 +15,32 @@ function ipOf(req: NextRequest): string {
 export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
   const path = req.nextUrl.pathname;
+
+  if (host.startsWith("ecosystem.") || path.startsWith("/ecosystem")) {
+    const url = req.nextUrl.clone();
+    if (host.startsWith("ecosystem.")) {
+      if (path === "/" || path === "") url.pathname = "/ecosystem";
+      else if (
+        !path.startsWith("/ecosystem") &&
+        !path.startsWith("/api") &&
+        !path.startsWith("/_next") &&
+        path !== "/sitemap.xml" &&
+        path !== "/robots.txt"
+      ) {
+        url.pathname = `/ecosystem${path}`;
+      }
+    }
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-ecosystem", "1");
+    if (url.pathname.startsWith("/ecosystem/embed")) {
+      requestHeaders.set("x-ecosystem-embed", "1");
+    }
+    if (host.startsWith("ecosystem.")) {
+      return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+    }
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
   if (/\.(glb|gltf|png|jpg|jpeg|webp|svg|ico|txt|xml)$/i.test(path)) {
     return NextResponse.next();
   }

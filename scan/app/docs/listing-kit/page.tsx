@@ -35,6 +35,7 @@ export default function ListingKitDoc() {
       <h2>Verified links</h2>
       <ul>
         <li><a href="https://scan.devfridge.cool">Product</a></li>
+        <li><a href="https://ecosystem.devfridge.cool">Ecosystem kitchen map</a></li>
         <li><a href="https://docs.devfridge.cool">Documentation</a></li>
         <li><a href="https://docs.devfridge.cool/methodology">Methodology</a></li>
         <li><a href="https://docs.devfridge.cool/security">Security status</a></li>

@@ -10,6 +10,7 @@ export function GET() {
 
 - Fridge: https://devfridge.cool
 - Scanner: https://scan.devfridge.cool
+- Ecosystem kitchen map: https://ecosystem.devfridge.cool
 - Docs: ${DOCS_ORIGIN}
 - Risk methodology: ${DOCS_ORIGIN}/methodology
 - Security and disclosure: ${DOCS_ORIGIN}/security

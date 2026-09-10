@@ -5,6 +5,6 @@ import { DOCS_ORIGIN } from "@/lib/docs";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: [`${SCAN_URL}/sitemap.xml`, `${DOCS_ORIGIN}/sitemap.xml`],
+    sitemap: [`${SCAN_URL}/sitemap.xml`, `${DOCS_ORIGIN}/sitemap.xml`, "https://ecosystem.devfridge.cool/sitemap.xml"],
   };
 }
