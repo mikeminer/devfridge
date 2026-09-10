@@ -7,7 +7,7 @@ import {
   type EcoNode,
   type EcoRoom,
   ecoHref,
-  logoForMint,
+  logoForAsset,
 } from "@/lib/ecosystem";
 import styles from "./ecosystem.module.css";
 
@@ -109,9 +109,9 @@ export default function KitchenMap({
               title={`${c.name} · ${c.chant}`}
             >
               <img
-                src={logoForMint(c.solana)}
+                src={logoForAsset(c)}
                 alt=""
-                className="mr-1 h-4 w-4 rounded-full object-cover"
+                className="mr-1 h-5 w-5 rounded-full object-cover"
               />
               {c.name}
             </a>

@@ -522,8 +522,16 @@ export function nodesInRoom(room: EcoRoom): EcoNode[] {
   return NODES.filter((n) => n.room === room);
 }
 
-export function logoForMint(mint: string): string {
-  return `https://scan.devfridge.cool/api/logo?mint=${mint}`;
+export function logoForAsset(asset: EcoAsset): string {
+  if (asset.kind === "character") {
+    return `https://capital.devfridge.cool/brainrot/${asset.id}.webp`;
+  }
+  return "https://devfridge.cool/brand/logo-mark.jpg";
+}
+
+export function portraitForAsset(asset: EcoAsset): string | null {
+  if (asset.kind !== "character") return null;
+  return `https://world.devfridge.cool/world/game/portraits/${asset.id}.png`;
 }
 
 export function pumpUrl(mint: string): string {

@@ -3,13 +3,13 @@
 import {
   ASSETS,
   blockscoutToken,
-  logoForMint,
   ponsUrl,
   pumpUrl,
   solscanToken,
   type EcoAsset,
 } from "@/lib/ecosystem";
 import CopyButton from "./CopyButton";
+import MagnetImage from "./MagnetImage";
 import styles from "./ecosystem.module.css";
 
 export default function RegistryWall({
@@ -30,11 +30,7 @@ export default function RegistryWall({
       {rows.map((asset) => (
         <article key={asset.id} id={asset.id} className={styles.magnet}>
           <div className={styles.magnetHead}>
-            {asset.solana ? (
-              <img src={logoForMint(asset.solana)} alt="" />
-            ) : (
-              <div className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-ice">$</div>
-            )}
+            <MagnetImage asset={asset} size={72} />
             <div>
               <h3 className="font-bold">{asset.name}</h3>
               <p className="text-sm text-mute">{asset.chant}</p>
