@@ -4,7 +4,7 @@ title: "SerSugo (robinhood)"
 description: "DevFridge investor knowledge: SerSugo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x2A4e9362AB5fDcAb06A4A56B76dcBb286ea7D0FE"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-11T00:41:24Z"
+timestamp: "2026-09-11T11:20:39Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x2a4e9362ab5fdcab06a4a56b76dcbb286ea7d0fe`
 
-Registry status: ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+Registry status: ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 59839769 |
+| Block | 60217209 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 ```json
 {

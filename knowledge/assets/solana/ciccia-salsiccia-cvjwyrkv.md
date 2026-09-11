@@ -4,7 +4,7 @@ title: "Ciccia Salsiccia (solana)"
 description: "DevFridge investor knowledge: Ciccia Salsiccia (solana)"
 resource: "https://solscan.io/token/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-11T00:41:24Z"
+timestamp: "2026-09-11T11:20:39Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump`
 
-Registry status: ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+Registry status: ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 446023008 |
+| Finalized slot | 446144280 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
+ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
 
 ```json
 {
