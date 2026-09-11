@@ -61,7 +61,8 @@ export async function GET(req: NextRequest) {
   const cid = (req.nextUrl.searchParams.get("cid") ?? "").trim();
   const raw = (req.nextUrl.searchParams.get("url") ?? "").trim();
   const path = req.nextUrl.searchParams.get("path") ?? "";
-  const urls = logoFetchList(cid || undefined, raw || undefined, path);
+  const mint = (req.nextUrl.searchParams.get("mint") ?? "").trim();
+  const urls = logoFetchList(cid || undefined, raw || undefined, path, mint || undefined);
   if (urls.length === 0) {
     return new NextResponse("missing", { status: 400 });
   }
