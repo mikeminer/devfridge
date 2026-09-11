@@ -4,7 +4,7 @@ title: "Bonkatino (robinhood)"
 description: "DevFridge investor knowledge: Bonkatino (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0xC1c1ecB7596f8bc364E397Aaf987e4F11f88557c"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T18:55:21Z"
+timestamp: "2026-09-11T00:41:24Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0xc1c1ecb7596f8bc364e397aaf987e4f11f88557c`
 
-Registry status: ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+Registry status: ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 59633674 |
+| Block | 59839769 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ```json
 {

@@ -4,7 +4,7 @@ title: "FudFusilli (solana)"
 description: "DevFridge investor knowledge: FudFusilli (solana)"
 resource: "https://solscan.io/token/4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T18:55:21Z"
+timestamp: "2026-09-11T00:41:24Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump`
 
-Registry status: ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+Registry status: ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ## Role and holder rights
 
@@ -26,7 +26,7 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+stale · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-11T00:41:24Z.
 
 | Field | Observation |
 | --- | --- |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ```json
 {

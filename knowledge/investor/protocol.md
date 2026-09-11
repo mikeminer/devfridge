@@ -4,7 +4,7 @@ title: "Protocol adoption and PASTA LP evidence"
 description: "DevFridge investor knowledge: Protocol adoption and PASTA LP evidence"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-10T18:55:21Z"
+timestamp: "2026-09-11T00:41:24Z"
 generated: true
 ---
 
@@ -14,7 +14,7 @@ Evidence for community leaders evaluating a DevFridge integration. Counts are ob
 
 ## Activity
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+stale · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-11T00:41:24Z.
 
 ```json
 {
@@ -32,7 +32,7 @@ ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09
 
 ## Lp
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ```json
 {
@@ -43,7 +43,7 @@ ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09
   "mint_authority": "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5",
   "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
   "pool": "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5",
-  "slot": 445957277,
+  "slot": 446022960,
   "supply_base_units": "0",
   "zero_supply": true
 }
@@ -51,14 +51,14 @@ ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09
 
 ## Reported Stats
 
-ok · last successful observation: 2026-09-10T18:55:21Z · last attempt: 2026-09-10T18:55:21Z.
+ok · last successful observation: 2026-09-11T00:41:24Z · last attempt: 2026-09-11T00:41:24Z.
 
 ```json
 {
   "boost_vault_lamports": 890880,
   "interpretation": "The published stats implementation reads an incinerator token balance for pastaBurned. It is not a complete ledger of SPL Burn instructions. Vault balance and burn-token value do not establish cumulative fee revenue.",
   "reported_pasta_burned": "876026.010648",
-  "source_timestamp_ms": 1789066526099
+  "source_timestamp_ms": 1789087309914
 }
 ```
 
