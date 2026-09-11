@@ -397,7 +397,8 @@ export async function scanMint(mintStr: string): Promise<TrustReport> {
       pump?.image_uri ||
       dexData?.best?.info?.imageUrl ||
       json?.image ||
-      null
+      null,
+    mintKey
   );
   const description = (pump?.description || json?.description || "").slice(0, 600);
 

@@ -5,6 +5,13 @@ const GATEWAYS = [
   "https://ipfs.io/ipfs/",
 ];
 
+const SOLANA_MINT = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+
+function validMint(mint: string | null | undefined): string | null {
+  const value = (mint ?? "").trim();
+  return SOLANA_MINT.test(value) ? value : null;
+}
+
 function ipfsResource(uri: string): { cid: string; path: string } | null {
   try {
     const url = new URL(uri);
@@ -33,7 +40,7 @@ export function rewriteUri(uri: string): string {
   return uri;
 }
 
-export function publicLogoUrl(uri: string | null | undefined): string | null {
+export function publicLogoUrl(uri: string | null | undefined, mint?: string): string | null {
   if (!uri) return null;
   const trimmed = uri.trim();
   if (!trimmed) return null;
@@ -41,22 +48,31 @@ export function publicLogoUrl(uri: string | null | undefined): string | null {
   // Normalize stored feed entries as well as newly fetched metadata; invalidate old failed responses.
   if (trimmed.startsWith("/api/logo?")) {
     const url = new URL(trimmed, "https://scan.devfridge.cool");
-    url.searchParams.set("v", "2");
+    const safeMint = validMint(mint);
+    if (safeMint) url.searchParams.set("mint", safeMint);
+    url.searchParams.set("v", "3");
     return url.pathname + url.search;
   }
   const resource = ipfsResource(trimmed);
-  if (resource) return `/api/logo?cid=${encodeURIComponent(resource.cid)}${resource.path ? `&path=${encodeURIComponent(resource.path)}` : ""}&v=2`;
+  if (resource) {
+    const safeMint = validMint(mint);
+    return `/api/logo?cid=${encodeURIComponent(resource.cid)}${resource.path ? `&path=${encodeURIComponent(resource.path)}` : ""}${safeMint ? `&mint=${encodeURIComponent(safeMint)}` : ""}&v=3`;
+  }
   const abs = rewriteUri(trimmed);
   if (abs.startsWith("https://") || abs.startsWith("http://")) {
-    return `/api/logo?url=${encodeURIComponent(abs)}&v=2`;
+    return `/api/logo?url=${encodeURIComponent(abs)}&v=3`;
   }
   return null;
 }
 
-export function logoFetchList(cid?: string, rawUrl?: string, path = ""): string[] {
+export function logoFetchList(cid?: string, rawUrl?: string, path = "", mint?: string): string[] {
   const urls: string[] = [];
   if (path && (!path.startsWith("/") || path.startsWith("//") || /[?#\\\r\n]/.test(path) || path.length > 2048)) return [];
   if (cid && /^[a-zA-Z0-9]{46,90}$/.test(cid)) {
+    const safeMint = validMint(mint);
+    if (safeMint && !path) {
+      urls.push(`https://images.pump.fun/coin-image/${safeMint}?variant=256x256&ipfs=${encodeURIComponent(cid)}`);
+    }
     for (const g of GATEWAYS) urls.push(`${g}${cid}${path}`);
   }
   if (rawUrl) {

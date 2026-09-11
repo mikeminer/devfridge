@@ -14,8 +14,8 @@ function loadFile(file, extra = {}) {
 const logo = loadFile('../lib/logo.ts');
 test('stored proxy URLs remain idempotent and invalidate old failures', () => {
   const source = `/api/logo?cid=${cid}`;
-  assert.equal(logo.publicLogoUrl(source), `${source}&v=2`);
-  assert.equal(logo.publicLogoUrl(logo.publicLogoUrl(source)), `${source}&v=2`);
+  assert.equal(logo.publicLogoUrl(source), `${source}&v=3`);
+  assert.equal(logo.publicLogoUrl(logo.publicLogoUrl(source)), `${source}&v=3`);
 });
 test('IPFS paths survive metadata rewriting and every gateway fallback', () => {
   for (const source of [`ipfs://${cid}/images/logo.png`, `ipfs://ipfs/${cid}/images/logo.png`, `https://ipfs.io/ipfs/${cid}/images/logo.png`, `https://${cid}.ipfs.dweb.link/images/logo.png`]) {
@@ -34,6 +34,14 @@ test('legacy CID requests work and paths cannot replace the gateway host', () =>
   assert.equal(logo.publicLogoUrl('javascript:alert(1)'), null);
   assert.equal(logo.publicLogoUrl('data:image/png;base64,abc'), 'data:image/png;base64,abc');
   assert.ok(logo.publicLogoUrl('https://example.com/logo.png').startsWith('/api/logo?url='));
+});
+test('a valid mint adds the Pump image cache as an IPFS fallback', () => {
+  const mint = '39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump';
+  const publicUrl = new URL(logo.publicLogoUrl(`ipfs://${cid}`, mint), 'https://scan.devfridge.cool');
+  assert.equal(publicUrl.searchParams.get('mint'), mint);
+  assert.equal(publicUrl.searchParams.get('v'), '3');
+  assert.match(logo.logoFetchList(cid, undefined, '', mint)[0], new RegExp(`images\\.pump\\.fun/coin-image/${mint}`));
+  assert.equal(logo.logoFetchList(cid, undefined, '', 'not-a-mint').length, 4);
 });
 function route(fetcher) {
   return loadFile('../app/api/logo/route.ts', { fetch: fetcher, require: name => name === '@/lib/logo' ? logo : require(name) }).GET;

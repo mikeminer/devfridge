@@ -38,7 +38,7 @@ async function fromPump(mint: string): Promise<Partial<TokenIdentity>> {
   return {
     name: cleanName(json.name) || undefined,
     symbol: cleanSymbol(json.symbol) || undefined,
-    image: publicLogoUrl(json.image_uri),
+    image: publicLogoUrl(json.image_uri, mint),
   };
 }
 
@@ -59,7 +59,7 @@ async function fromDex(mint: string): Promise<Partial<TokenIdentity>> {
   return {
     name: cleanName(match?.baseToken?.name) || undefined,
     symbol: cleanSymbol(match?.baseToken?.symbol) || undefined,
-    image: publicLogoUrl(match?.info?.imageUrl),
+    image: publicLogoUrl(match?.info?.imageUrl, mint),
   };
 }
 
@@ -76,7 +76,7 @@ async function fromJupiter(mint: string): Promise<Partial<TokenIdentity>> {
   return {
     name: cleanName(row?.name) || undefined,
     symbol: cleanSymbol(row?.symbol) || undefined,
-    image: publicLogoUrl(row?.icon),
+    image: publicLogoUrl(row?.icon, mint),
   };
 }
 
