@@ -25,6 +25,24 @@ const newRenderer = `this.renderer=new eh({canvas:e,antialias:!matchMedia(\`(poi
 if (!js.includes(oldRenderer)) throw new Error("renderer pattern not found");
 js = js.replace(oldRenderer, newRenderer);
 
+const oldDrop = `async function TA(){if(!zA()||rA||iA||wA||$(\`dialog\`).open||Qk.mode!==\`fridge\`)return;SA();let e=Q;if(!e.inputs.length){wA=!0;try{await kk(e)}finally{wA=!1}}Q!==e||!zA()||rA||iA||$(\`dialog\`).open||Qk.mode!==\`fridge\`||await Nk(Q,Qk.aim)}`;
+const newDrop = `async function TA(){if(!zA()||rA||iA||wA||$(\`dialog\`).open||Qk.mode!==\`fridge\`)return;SA();Q.drop(Qk.aim)}`;
+if (!js.includes(oldDrop)) throw new Error("TA() drop wait not found");
+js = js.replace(oldDrop, newDrop);
+
+js = js.replace("this.tick-this.lastDrop>=28", "this.tick-this.lastDrop>=6");
+js = js.replace("setLinearDamping(.38)", "setLinearDamping(.08)");
+
+const oldPiece = `o||(o=this.avatar(a.tier),this.visuals.set(a.id,o),this.fridge.add(o.root))`;
+const newPiece = `o||(o=new wg(a.tier,gr[a.tier-1],void 0,this.cast[a.tier-1],this.portraits.get(a.tier)),this.visuals.set(a.id,o),this.fridge.add(o.root))`;
+if (!js.includes(oldPiece)) throw new Error("piece avatar spawn not found");
+js = js.replace(oldPiece, newPiece);
+
+const oldPreview = `this.preview=this.avatar(e),this.preview.root.position.set(this.aim,mr,.82)`;
+const newPreview = `this.preview=new wg(e,gr[e-1],void 0,this.cast[e-1],this.portraits.get(e)),this.preview.root.position.set(this.aim,mr,.82)`;
+if (!js.includes(oldPreview)) throw new Error("setPreview avatar not found");
+js = js.replace(oldPreview, newPreview);
+
 await writeFile(join(v2, "assets/cold-storage.js"), js);
 await writeFile(
   join(v2, "index.html"),
