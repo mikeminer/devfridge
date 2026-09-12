@@ -11,8 +11,8 @@ gate.innerHTML = `
   <div class="panel">
     <p class="tag">WORLD V2 / PLAYER PROTECTION</p>
     <h1>18+ only</h1>
-    <p>Cold Storage v2 is for adults. Official run outcomes are recorded on the server. This is <strong>not</strong> an ADM/AAMS licensed game and there are no cash prizes.</p>
-    <p>Responsible play: <a href="https://www.adm.gov.it/portale/giochi" target="_blank" rel="noopener">ADM Giochi</a> · <a href="https://www.adm.gov.it/portale/-/autoesclusione-dal-gioco-a-distan-2" target="_blank" rel="noopener">Autoesclusione ADM</a></p>
+    <p>Cold Storage v2 is for adults. Official scores are recorded on the server. There are no cash prizes, and this is not licensed Italian gambling.</p>
+    <p>If play stops being fun, use <strong>Self-exclusion</strong> after you enter: it blocks this game on your wallet for the time you choose.</p>
     <label>Date of birth
       <div class="row">
         <input id="g-y" type="number" min="1900" max="${new Date().getFullYear()}" placeholder="YYYY" />
