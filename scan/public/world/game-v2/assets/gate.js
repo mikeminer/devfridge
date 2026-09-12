@@ -167,6 +167,9 @@ async function status(wallet) {
 async function loadGame() {
   gate.hidden = true;
   app.hidden = false;
+  const { MeshoptDecoder } = await import("/world/game-v2/vendor/meshopt_decoder.module.js");
+  if (MeshoptDecoder.ready) await MeshoptDecoder.ready;
+  self.__dfMeshopt = MeshoptDecoder;
   await import("/world/game-v2/assets/cold-storage.js");
   const btn = document.createElement("div");
   btn.id = "world-exclude";
