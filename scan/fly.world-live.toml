@@ -2,7 +2,7 @@ app = "devfridge-world-live"
 primary_region = "iad"
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = "world-live/Dockerfile"
 
 [http_service]
   internal_port = 8787

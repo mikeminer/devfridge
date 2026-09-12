@@ -1,0 +1,14 @@
+{
+  "name": "devfridge-world-live",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx server.ts"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.19.3",
+    "@solana/web3.js": "^1.98.4",
+    "ethers": "^6.15.0",
+    "tsx": "^4.19.2"
+  }
+}
