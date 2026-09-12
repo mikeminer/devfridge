@@ -28,15 +28,24 @@ type PhantomProvider = {
 
 type SimulationResponse = {
   error?: { message?: string };
-  result?: { value?: { err?: unknown; logs?: string[] | null } };
+  result?: {
+    value?: {
+      err?: unknown;
+      logs?: string[] | null;
+    };
+  };
 };
 
 function bytesToBase64(bytes: Uint8Array): string {
   let binary = "";
   const chunkSize = 0x8000;
+
   for (let i = 0; i < bytes.length; i += chunkSize) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+    binary += String.fromCharCode(
+      ...bytes.subarray(i, i + chunkSize)
+    );
   }
+
   return btoa(binary);
 }
 
@@ -46,11 +55,17 @@ async function simulateBeforeSigning(
 ): Promise<void> {
   const wire =
     tx instanceof Transaction
-      ? tx.serialize({ requireAllSignatures: false, verifySignatures: false })
+      ? tx.serialize({
+          requireAllSignatures: false,
+          verifySignatures: false,
+        })
       : tx.serialize();
+
   const response = await fetch(connection.rpcEndpoint, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+    },
     body: JSON.stringify({
       jsonrpc: "2.0",
       id: "devfridge-preflight",
@@ -66,107 +81,197 @@ async function simulateBeforeSigning(
       ],
     }),
   });
+
   if (!response.ok) {
-    throw new Error(`Transaction simulation request failed (${response.status})`);
-  }
-  const body = (await response.json()) as SimulationResponse;
-  if (body.error) {
-    throw new Error(body.error.message || "Transaction simulation failed");
-  }
-  const simulationError = body.result?.value?.err;
-  if (simulationError) {
-    const logs = body.result?.value?.logs?.slice(-3).join(" | ");
     throw new Error(
-      `Transaction would fail on-chain: ${JSON.stringify(simulationError)}${logs ? ` (${logs})` : ""}`
+      `Transaction simulation request failed (${response.status})`
+    );
+  }
+
+  const body = (await response.json()) as SimulationResponse;
+
+  if (body.error) {
+    throw new Error(
+      body.error.message || "Transaction simulation failed"
+    );
+  }
+
+  const simulationError = body.result?.value?.err;
+
+  if (simulationError) {
+    const logs = body.result?.value?.logs
+      ?.slice(-3)
+      .join(" | ");
+
+    throw new Error(
+      `Transaction would fail on-chain: ${JSON.stringify(
+        simulationError
+      )}${logs ? ` (${logs})` : ""}`
     );
   }
 }
 
 function getProvider(): PhantomProvider | null {
   const w = window as Window & {
-    phantom?: { solana?: PhantomProvider };
+    phantom?: {
+      solana?: PhantomProvider;
+    };
     solana?: PhantomProvider;
   };
-  if (w.phantom?.solana?.isPhantom) return w.phantom.solana;
-  if (w.solana?.isPhantom) return w.solana;
+
+  if (w.phantom?.solana?.isPhantom) {
+    return w.phantom.solana;
+  }
+
+  if (w.solana?.isPhantom) {
+    return w.solana;
+  }
+
   return null;
 }
 
-export function usePhantom(cluster: ClusterName, fallbackEndpoint?: string) {
-  const [publicKey, setPublicKey] = useState<PublicKey | null>(null);
+export function usePhantom(
+  cluster: ClusterName,
+  fallbackEndpoint?: string
+) {
+  const [publicKey, setPublicKey] =
+    useState<PublicKey | null>(null);
+
   const [error, setError] = useState("");
+
   const connection = useMemo(() => {
     const fallback = isHttpEndpoint(fallbackEndpoint ?? "")
       ? (fallbackEndpoint as string).replace(/\/+$/, "")
       : resolveRpcEndpoint("", cluster);
-    return new Connection(browserRpcUrl(cluster, fallback), "confirmed");
+
+    return new Connection(
+      browserRpcUrl(cluster, fallback),
+      "confirmed"
+    );
   }, [cluster, fallbackEndpoint]);
 
   const connect = useCallback(async () => {
     setError("");
-    const p = getProvider();
-    if (!p) {
+
+    const provider = getProvider();
+
+    if (!provider) {
       setError("Apri Phantom in Chrome e ricarica.");
       return;
     }
+
     try {
-      const res = await p.connect();
-      setPublicKey(new PublicKey(res.publicKey.toString()));
+      const result = await provider.connect();
+
+      if (!result?.publicKey) {
+        throw new Error(
+          "Phantom did not return a public key"
+        );
+      }
+
+      setPublicKey(
+        new PublicKey(result.publicKey.toString())
+      );
     } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      setError(
+        err instanceof Error
+          ? err.message
+          : String(err)
+      );
     }
   }, []);
 
-  const sendTransaction = useCallback(async (
-    tx: Transaction | VersionedTransaction,
-    extraSigners: Keypair[] = []
-  ) => {
-    const p = getProvider();
-    if (!p || !publicKey) throw new Error("Connect Phantom first");
-    const sendOpts = {
-      skipPreflight: false,
-      maxRetries: 8,
-      preflightCommitment: "confirmed" as const,
-    };
+  const sendTransaction = useCallback(
+    async (
+      tx: Transaction | VersionedTransaction,
+      extraSigners: Keypair[] = []
+    ): Promise<string> => {
+      const provider = getProvider();
 
-    if (tx instanceof Transaction) {
-      tx.feePayer = publicKey;
-      if (!tx.recentBlockhash) {
-        const latest = await connection.getLatestBlockhash("confirmed");
-        tx.recentBlockhash = latest.blockhash;
-        tx.lastValidBlockHeight = latest.lastValidBlockHeight;
+      if (!provider || !publicKey) {
+        throw new Error("Connect Phantom first");
       }
-    }
 
-// Add local signatures before simulation and before Phantom signs.
-if (tx instanceof Transaction && extraSigners.length) {
-  tx.partialSign(...extraSigners);
-} else if (tx instanceof VersionedTransaction && extraSigners.length) {
-  tx.sign(extraSigners);
-}
+      const sendOptions = {
+        skipPreflight: false,
+        maxRetries: 8,
+        preflightCommitment: "confirmed" as const,
+      };
 
-// Simulate after adding local signers.
-await simulateBeforeSigning(connection, tx);
+      if (tx instanceof Transaction) {
+        tx.feePayer = publicKey;
 
-// Sign with Phantom, then submit through DevFridge's selected RPC.
-if (p.signTransaction) {
-  const signed = await p.signTransaction(tx);
+        if (!tx.recentBlockhash) {
+          const latest =
+            await connection.getLatestBlockhash(
+              "confirmed"
+            );
 
-  if (!signed) {
-    throw new Error("Wallet did not return a signed transaction");
-  }
+          tx.recentBlockhash = latest.blockhash;
+          tx.lastValidBlockHeight =
+            latest.lastValidBlockHeight;
+        }
 
-  return connection.sendRawTransaction(signed.serialize(), sendOpts);
-}
-    }
+        /*
+         * The generated mint and any other local accounts
+         * must sign before the transaction is sent to Phantom.
+         */
+        if (extraSigners.length > 0) {
+          tx.partialSign(...extraSigners);
+        }
+      } else if (extraSigners.length > 0) {
+        tx.sign(extraSigners);
+      }
 
-    if (extraSigners.length) {
-      throw new Error("This transaction requires a wallet that supports signTransaction");
-    }
+      /*
+       * Simulate the complete transaction before opening
+       * Phantom's approval window.
+       */
+      await simulateBeforeSigning(connection, tx);
 
-    const { signature } = await p.signAndSendTransaction(tx);
-    return signature;
-  }, [connection, publicKey]);
+      /*
+       * Phantom signs the wallet signature. DevFridge then
+       * broadcasts through the RPC for the selected cluster.
+       */
+      if (provider.signTransaction) {
+        const signed =
+          await provider.signTransaction(tx);
+
+        if (!signed) {
+          throw new Error(
+            "Wallet did not return a signed transaction"
+          );
+        }
+
+        return connection.sendRawTransaction(
+          signed.serialize(),
+          sendOptions
+        );
+      }
+
+      /*
+       * The fallback cannot be used when the transaction
+       * requires locally generated signers, such as a new mint.
+       */
+      if (extraSigners.length > 0) {
+        throw new Error(
+          "This transaction requires a wallet that supports signTransaction"
+        );
+      }
+
+      const result =
+        await provider.signAndSendTransaction(tx);
+
+      if (!result?.signature) {
+        throw new Error(
+          "Wallet did not return a transaction signature"
+        );
+      }
+
+      return result.signature;
+    },
+    [connection, publicKey]
+  );
 
   return {
     publicKey,
