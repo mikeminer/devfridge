@@ -14,7 +14,7 @@
       "png": "/portraits/rugarugo.webp",
       "wav": "/audio/rugarugo-signature.mp3",
       "voice": "/audio/rugarugo-voice.mp3",
-      "theme": "/audio/rugarugo-theme.mp3",
+      "theme": "/audio/lyria/rugarugo-full.mp3",
       "line": "Ruga Rugo! Ruga, ruga! The sauce has escaped!",
       "token": {
         "chain": "solana",
@@ -54,7 +54,7 @@
       "png": "/portraits/aperitivo.webp",
       "wav": "/audio/aperitivo-signature.mp3",
       "voice": "/audio/aperitivo-voice.mp3",
-      "theme": "/audio/aperitivo-theme.mp3",
+      "theme": "/audio/lyria/aperitivo-full.mp3",
       "line": "Aperitivo! Sip. Scream. Spritz. Repeat!",
       "token": {
         "chain": "solana",
@@ -94,7 +94,7 @@
       "png": "/portraits/friedfomo.webp",
       "wav": "/audio/friedfomo-signature.mp3",
       "voice": "/audio/friedfomo-voice.mp3",
-      "theme": "/audio/friedfomo-theme.mp3",
+      "theme": "/audio/lyria/friedfomo-full.mp3",
       "line": "Fried Fomo! Fi fi! Fo fo! Your brain is fritto!",
       "token": {
         "chain": "solana",
@@ -134,7 +134,7 @@
       "png": "/portraits/fudfusilli.webp",
       "wav": "/audio/fudfusilli-signature.mp3",
       "voice": "/audio/fudfusilli-voice.mp3",
-      "theme": "/audio/fudfusilli-theme.mp3",
+      "theme": "/audio/lyria/fudfusilli-full.mp3",
       "line": "Fud Fusilli! Twist the pasta! Confuse reality!",
       "token": {
         "chain": "solana",
@@ -174,7 +174,7 @@
       "png": "/portraits/lambocello.webp",
       "wav": "/audio/lambocello-signature.mp3",
       "voice": "/audio/lambocello-voice.mp3",
-      "theme": "/audio/lambocello-theme.mp3",
+      "theme": "/audio/lyria/lambocello-full.mp3",
       "line": "Lambocello! When Lambo? After limoncello! Vroom, vroom!",
       "token": {
         "chain": "solana",
@@ -214,7 +214,7 @@
       "png": "/portraits/gmgnocco.webp",
       "wav": "/audio/gmgnocco-signature.mp3",
       "voice": "/audio/gmgnocco-voice.mp3",
-      "theme": "/audio/gmgnocco-theme.mp3",
+      "theme": "/audio/lyria/gmgnocco-full.mp3",
       "line": "G M Gnocco. Good morning. Good night. Send espresso.",
       "token": {
         "chain": "solana",
@@ -254,7 +254,7 @@
       "png": "/portraits/sersugo.webp",
       "wav": "/audio/sersugo-signature.mp3",
       "voice": "/audio/sersugo-voice.mp3",
-      "theme": "/audio/sersugo-theme.mp3",
+      "theme": "/audio/lyria/sersugo-full.mp3",
       "line": "Ser Sugo! Yes, sir. The sauce has chosen you!",
       "token": {
         "chain": "solana",
@@ -294,7 +294,7 @@
       "png": "/portraits/moonzarella.webp",
       "wav": "/audio/moonzarella-signature.mp3",
       "voice": "/audio/moonzarella-voice.mp3",
-      "theme": "/audio/moonzarella-theme.mp3",
+      "theme": "/audio/lyria/moonzarella-full.mp3",
       "line": "Moonzarella! Houston, we have mozzarella!",
       "token": {
         "chain": "solana",
@@ -334,7 +334,7 @@
       "png": "/portraits/bonkatino.webp",
       "wav": "/audio/bonkatino-signature.mp3",
       "voice": "/audio/bonkatino-voice.mp3",
-      "theme": "/audio/bonkatino-theme.mp3",
+      "theme": "/audio/lyria/bonkatino-full.mp3",
       "line": "Bonkatino! Bonka, bonka! Brain al dente! BONK!",
       "token": {
         "chain": "solana",
@@ -374,7 +374,7 @@
       "png": "/portraits/ciccia.webp",
       "wav": "/audio/ciccia-signature.mp3",
       "voice": "/audio/ciccia-voice.mp3",
-      "theme": "/audio/ciccia-theme.mp3",
+      "theme": "/audio/lyria/ciccia-full.mp3",
       "line": "Ciccia Salsiccia! Ciccia, Ciccia. Ma che caldo! Stay smoked.",
       "token": {
         "chain": "solana",
