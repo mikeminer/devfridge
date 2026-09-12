@@ -12,8 +12,9 @@ root.innerHTML = `
       <p class="v2-tag">PASTA / WORLD</p>
       <h1>Cold Storage <span>v2</span></h1>
       <p class="muted">One GLB, billboard pieces, split bundles. Same 500,000-token lock to play.</p>
-      <p class="muted" id="wallet-line">Connect a Solana wallet to unlock a meme.</p>
+      <p class="muted" id="wallet-line">Connect a Solana wallet to unlock a meme, or practice without a lock.</p>
       <button class="primary" id="connect">Connect wallet</button>
+      <button class="ghost" id="practice" type="button">Play practice</button>
     </aside>
     <section class="game-panel">
       <div class="scoreboard">
@@ -30,7 +31,7 @@ root.innerHTML = `
             <p class="v2-tag">UNLOCKED MEMES</p>
             <h2>Pick your drop</h2>
             <div class="char-grid" id="chars"></div>
-            <p class="muted" id="access-note">Need 500,000 of that mint locked in DevFridge.</p>
+            <p class="muted" id="access-note">Need 500,000 of that mint locked in DevFridge, or use practice.</p>
           </div>
         </div>
         <div class="pause-overlay" id="pause-overlay" hidden>
@@ -86,6 +87,23 @@ function paintChars() {
 }
 paintChars();
 
+async function begin(tier, addr) {
+  document.getElementById("access").hidden = true;
+  document.getElementById("boot-load").hidden = false;
+  document.getElementById("boot-load").querySelector("strong").textContent = "Starting fridge…";
+  try {
+    const { startGame } = await import("./game.js");
+    document.getElementById("boot-load").hidden = true;
+    await startGame({ root, cast, favourite: tier, address: addr });
+  } catch (err) {
+    document.getElementById("boot-load").hidden = true;
+    document.getElementById("access").hidden = false;
+    document.getElementById("access-note").textContent = err.message || String(err);
+  }
+}
+
+document.getElementById("practice").onclick = () => begin(1, "practice");
+
 document.getElementById("connect").onclick = async () => {
   const btn = document.getElementById("connect");
   btn.disabled = true;
@@ -108,18 +126,14 @@ document.getElementById("connect").onclick = async () => {
 
 async function pick(tier) {
   if (!address) {
-    document.getElementById("connect").click();
+    document.getElementById("access-note").textContent = "Connect a wallet, or hit Play practice.";
     return;
   }
   if (!unlocked.has(tier)) {
-    document.getElementById("access-note").textContent = "That meme is locked. Fridge 500,000 of its mint first.";
+    document.getElementById("access-note").textContent = "That meme is locked. Fridge 500,000 of its mint, or play practice.";
     return;
   }
-  document.getElementById("access").hidden = true;
-  document.getElementById("boot-load").hidden = false;
-  const { startGame } = await import("./game.js");
-  document.getElementById("boot-load").hidden = true;
-  await startGame({ root, cast, favourite: tier, address });
+  await begin(tier, address);
 }
 }
 

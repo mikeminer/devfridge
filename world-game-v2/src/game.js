@@ -11,7 +11,11 @@ export async function startGame({ root, cast, favourite, address }) {
     import("three/examples/jsm/loaders/DRACOLoader.js"),
     import("./physics.js"),
   ]);
-  await physics.initPhysics();
+  try {
+    await physics.initPhysics();
+  } catch (err) {
+    throw new Error(`Physics failed to start: ${err.message || err}`);
+  }
   const loaders = { GLTFLoader, DRACOLoader };
   const audio = new AudioBus();
   const portraits = [];
