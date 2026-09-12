@@ -4,7 +4,7 @@ title: "Lambocello (solana)"
 description: "DevFridge investor knowledge: Lambocello (solana)"
 resource: "https://solscan.io/token/HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-12T12:30:36Z"
+timestamp: "2026-09-12T12:40:17Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump`
 
-Registry status: ok · last successful observation: 2026-09-12T12:30:36Z · last attempt: 2026-09-12T12:30:36Z.
+Registry status: ok · last successful observation: 2026-09-12T12:40:17Z · last attempt: 2026-09-12T12:40:17Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-12T12:30:36Z · last attempt: 2026-09-12T12:30:36Z.
+ok · last successful observation: 2026-09-12T12:40:17Z · last attempt: 2026-09-12T12:40:17Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 446429948 |
+| Finalized slot | 446431767 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-12T12:30:36Z · last attempt: 2026-09-12T12:30:36Z.
+ok · last successful observation: 2026-09-12T12:40:17Z · last attempt: 2026-09-12T12:40:17Z.
 
 ```json
 {
