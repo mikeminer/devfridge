@@ -11,7 +11,7 @@ gate.innerHTML = `
   <div class="panel">
     <p class="tag">WORLD V2 / TUTELA</p>
     <h1>Solo 18+</h1>
-    <p>Gioco per maggiorenni, gratis, senza premi in denaro. Il punteggio ufficiale sta sul server. Non è gioco d’azzardo italiano.</p>
+    <p>Gioco per maggiorenni, gratis, senza premi in denaro. Il punteggio ufficiale sta sul server.</p>
     <p>Se vuoi smettere, dopo l’ingresso usa <strong>Autoesclusione</strong>: blocca questo gioco sul tuo wallet per il tempo che scegli.</p>
     <label>Data di nascita
       <div class="row">

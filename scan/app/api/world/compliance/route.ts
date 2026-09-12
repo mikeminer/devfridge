@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
         options: EXCLUDE_OPTIONS.map(({ id, label }) => ({ id, label })),
         licensed: false,
         notice:
-          "Player-protection controls on World v2. This is not an ADM/AAMS licensed game and offers no cash prizes.",
+          "Player-protection controls on World v2. No cash prizes.",
       },
       { headers },
     );
