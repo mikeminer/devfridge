@@ -4,7 +4,7 @@ title: "DevFridge World — the game guide"
 description: "DevFridge investor knowledge: DevFridge World — the game guide"
 resource: "https://docs.devfridge.cool/world"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-12T12:40:17Z"
+timestamp: "2026-09-12T14:21:17Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-12T12:40:17Z · last attempt: 2026-09-12T12:40:17Z.
+[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-12T14:21:17Z · last attempt: 2026-09-12T14:21:17Z.
 
 WORLD / COLD STORAGE
 
@@ -130,7 +130,7 @@ A run is about managing a small space as the pieces get larger. Aim for matching
 
 - Your chosen meme is your kitchen avatar and normally your first piece. Choosing CICCIA starts the merge run at tier 1, so winning still requires progression.
 
-The daily piece sequence refreshes at midnight in Europe/Rome; the chosen first piece can differ between players. Your personal best and discovered collection stay in this browser, under the connected wallet. They do not automatically sync to another device.
+The daily piece sequence refreshes at midnight in Europe/Rome; the chosen first piece can differ between players. Local best and the discovered collection stay in this browser, under the connected wallet. On-chain best is the TopShelf score registered for the linked Robinhood player; it is not written from local play alone.
 
 #### The kitchen and fridge visits
 
@@ -216,7 +216,7 @@ No. You can start further runs while your meme remains unlocked, without a game 
 
 #### Are scores and fridge visits shared live between players?
 
-No. Progress, personal bests, the visit directory and reactions are stored in the browser. A fridge invitation carries a saved snapshot that another browser can open; it is not a live session. Clearing browser storage can remove local progress, and it does not automatically follow you to another device.
+No. Local best, the visit directory and reactions are stored in the browser. On-chain best is the registered TopShelf score for the linked Robinhood player after a paid seasonal registration. A fridge invitation carries a saved snapshot that another browser can open; it is not a live session. Clearing browser storage can remove local progress, and it does not automatically follow you to another device.
 
 #### Which guilds partner with World, and who invested in it?
 
