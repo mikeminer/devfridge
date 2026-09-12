@@ -23,6 +23,14 @@ const nextConfig = {
         source: "/world/game-v2/assets/gate-2.js",
         headers: [{ key: "Cache-Control", value: "no-store" }],
       },
+      {
+        source: "/world/game-v2/assets/cold-storage.js",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
+      {
+        source: "/world/game-v2/assets/cold-storage.css",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
     ];
   },
 };

@@ -170,7 +170,7 @@ async function loadGame() {
   const { MeshoptDecoder } = await import("/world/game-v2/vendor/meshopt_decoder.module.js");
   if (MeshoptDecoder.ready) await MeshoptDecoder.ready;
   self.__dfMeshopt = MeshoptDecoder;
-  await import("/world/game-v2/assets/cold-storage.js");
+  await import("/world/game-v2/assets/cold-storage.js?v=3d1");
   const btn = document.createElement("div");
   btn.id = "world-exclude";
   btn.innerHTML = `<button type="button" id="g-self">${t.exclude}</button>`;

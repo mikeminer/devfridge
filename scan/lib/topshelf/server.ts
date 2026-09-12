@@ -1,4 +1,5 @@
-import {Contract, FetchRequest, JsonRpcProvider, isAddress, ZeroAddress, getAddress} from 'ethers';
+import {Contract, FetchRequest, JsonRpcProvider, isAddress, ZeroAddress, getAddress, hexlify} from 'ethers';
+import {PublicKey} from '@solana/web3.js';
 import {TOPSHELF_ABI, TOPSHELF_CHAIN, TOPSHELF_OWNER, ERC20_ABI, type FeeMenu, type FeeToken, type ShelfData, type ShelfToken} from './config';
 import {ROBINHOOD_TOKENS} from '../official-tokens';
 export function shelfConnection() {
@@ -53,5 +54,32 @@ export async function readShelf(seasonInput:number|null,cursor:string,wallet:str
   let claimTokens:ShelfToken[]=[],claimPhase=0;
   if(claimSeason){const [claimState,addresses]=await Promise.all([contract.seasons(claimSeason,opts),contract.getDistributionTokens(claimSeason,opts)]);claimPhase=Number(claimState.phase);claimTokens=await Promise.all(Array.from(addresses as string[]).map(t=>readToken(t,claimSeason)));}
   return {configured:true,address,owner,currentSeason:Number(current),season,activeDistribution:Number(active),winnerCount:Number(winners),phase:Number(state.phase),players:Number(state.playerCount),registrations:Number(state.registrations),captured:Number(state.captured),selectedWinners:Number(state.winnerCount),totalScore:String(state.totalScore),rows:board[0].map((account:string,i:number)=>({address:account,score:String(board[1][i]),rank:i+1})),next:board[2],tokens,block,claimSeason,claimPhase,claimTokens};
+ } finally {provider.destroy();}
+}
+export type PlayerBest = {
+ configured:boolean;
+ linked:boolean;
+ season:number|null;
+ player:string|null;
+ bestScore:number;
+ runs:number;
+};
+export async function readPlayerBest(solanaWallet:string):Promise<PlayerBest> {
+ const empty:PlayerBest={configured:false,linked:false,season:null,player:null,bestScore:0,runs:0};
+ const connection=shelfConnection();
+ if(!connection)return empty;
+ const {contract,provider}=connection;
+ try {
+  if(Number(BigInt(await provider.send('eth_chainId',[])))!==TOPSHELF_CHAIN)throw Error('Wrong RPC network');
+  const key=new PublicKey(solanaWallet);
+  if(!PublicKey.isOnCurve(key.toBytes()))throw Error('Invalid Solana wallet');
+  const solana=hexlify(key.toBytes());
+  const block=await provider.getBlockNumber(),opts={blockTag:block};
+  const season=Number(await contract.currentSeason(opts));
+  const player=getAddress(await contract.solanaPlayer(solana,opts));
+  if(player===ZeroAddress)return {configured:true,linked:false,season,player:null,bestScore:0,runs:0};
+  const own=await contract.players(season,player,opts);
+  const bestScore=Number(own.bestScore),runs=Number(own.runs);
+  return {configured:true,linked:true,season,player,bestScore:Number.isFinite(bestScore)?bestScore:0,runs:Number.isFinite(runs)?runs:0};
  } finally {provider.destroy();}
 }

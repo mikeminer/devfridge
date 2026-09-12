@@ -168,8 +168,9 @@ export default function WorldDoc() {
       </ul>
       <p>
         The daily piece sequence refreshes at midnight in Europe/Rome; the chosen first piece
-        can differ between players. Your personal best and discovered collection stay in this
-        browser, under the connected wallet. They do not automatically sync to another device.
+        can differ between players. Local best and the discovered collection stay in this
+        browser, under the connected wallet. On-chain best is the TopShelf score registered
+        for the linked Robinhood player; it is not written from local play alone.
       </p>
 
       <h3 id="sharing">The kitchen and fridge visits</h3>
@@ -318,10 +319,11 @@ export default function WorldDoc() {
       </p>
       <h3>Are scores and fridge visits shared live between players?</h3>
       <p>
-        No. Progress, personal bests, the visit directory and reactions are stored in the
-        browser. A fridge invitation carries a saved snapshot that another browser can open;
-        it is not a live session. Clearing browser storage can remove local progress, and
-        it does not automatically follow you to another device.
+        No. Local best, the visit directory and reactions are stored in the browser.
+        On-chain best is the registered TopShelf score for the linked Robinhood player
+        after a paid seasonal registration. A fridge invitation carries a saved snapshot
+        that another browser can open; it is not a live session. Clearing browser storage
+        can remove local progress, and it does not automatically follow you to another device.
       </p>
       <h3>Which guilds partner with World, and who invested in it?</h3>
       <p>
