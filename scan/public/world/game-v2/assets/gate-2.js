@@ -9,20 +9,20 @@ function yearsAgo(n) {
 
 gate.innerHTML = `
   <div class="panel">
-    <p class="tag">WORLD V2 / PLAYER PROTECTION</p>
-    <h1>18+ only</h1>
-    <p>Cold Storage v2 is for adults. Official scores are recorded on the server. There are no cash prizes, and this is not licensed Italian gambling.</p>
-    <p>If play stops being fun, use <strong>Self-exclusion</strong> after you enter: it blocks this game on your wallet for the time you choose.</p>
-    <label>Date of birth
+    <p class="tag">WORLD V2 / TUTELA</p>
+    <h1>Solo 18+</h1>
+    <p>Gioco per maggiorenni, gratis, senza premi in denaro. Il punteggio ufficiale sta sul server. Non è gioco d’azzardo italiano.</p>
+    <p>Se vuoi smettere, dopo l’ingresso usa <strong>Autoesclusione</strong>: blocca questo gioco sul tuo wallet per il tempo che scegli.</p>
+    <label>Data di nascita
       <div class="row">
         <input id="g-y" type="number" min="1900" max="${new Date().getFullYear()}" placeholder="YYYY" />
         <input id="g-m" type="number" min="1" max="12" placeholder="MM" />
         <input id="g-d" type="number" min="1" max="31" placeholder="DD" />
       </div>
     </label>
-    <label><input id="g-ok" type="checkbox" /> I am 18 or older and I understand this is not licensed Italian gambling.</label>
+    <label><input id="g-ok" type="checkbox" /> Ho almeno 18 anni. Capisco che non ci sono vincite in denaro.</label>
     <p class="warn" id="g-err" hidden></p>
-    <button class="go" id="g-enter" type="button">Enter World v2</button>
+    <button class="go" id="g-enter" type="button">Entra in World v2</button>
   </div>
 `;
 
@@ -44,15 +44,15 @@ async function loadGame() {
   await import("/world/game-v2/assets/cold-storage.js");
   const btn = document.createElement("div");
   btn.id = "world-exclude";
-  btn.innerHTML = `<button type="button" id="g-self">Self-exclusion</button>`;
+  btn.innerHTML = `<button type="button" id="g-self">Autoesclusione</button>`;
   document.body.appendChild(btn);
   document.getElementById("g-self").onclick = excludeFlow;
 }
 
 async function excludeFlow() {
-  const option = window.prompt("Self-exclude for: 24h, 7d, 6m, or perm?", "24h");
+  const option = window.prompt("Autoesclusione per: 24h, 7d, 6m o perm?", "24h");
   if (!option) return;
-  const wallet = window.prompt("Solana wallet to exclude (the one you play with)");
+  const wallet = window.prompt("Wallet Solana da escludere (quello con cui giochi)");
   if (!wallet) return;
   const res = await fetch("/api/world/compliance", {
     method: "POST",
@@ -61,10 +61,10 @@ async function excludeFlow() {
   });
   const body = await res.json();
   if (!res.ok) {
-    alert(body.error || "Could not set exclusion");
+    alert(body.error || "Impossibile attivare l'autoesclusione");
     return;
   }
-  document.body.innerHTML = `<main id="world-blocked"><div><p class="tag">SELF-EXCLUDED</p><h1>Play is blocked</h1><p>Until ${new Date(body.exclusion.until).toISOString()}</p></div></main>`;
+  document.body.innerHTML = `<main id="world-blocked"><div><p class="tag">AUTOESCLUSIONE</p><h1>Gioco bloccato</h1><p>Fino al ${new Date(body.exclusion.until).toISOString()}</p></div></main>`;
 }
 
 let already = {};
@@ -74,25 +74,25 @@ try {
   already = {};
 }
 if (already.exclusion) {
-  document.body.innerHTML = `<main id="world-blocked"><div><p class="tag">SELF-EXCLUDED</p><h1>Play is blocked</h1><p>Until ${new Date(already.exclusion.until).toISOString()}</p></div></main>`;
+  document.body.innerHTML = `<main id="world-blocked"><div><p class="tag">AUTOESCLUSIONE</p><h1>Gioco bloccato</h1><p>Fino al ${new Date(already.exclusion.until).toISOString()}</p></div></main>`;
 } else if (already.adult || sessionStorage.getItem("world_v2_adult") === "1") {
   await loadGame();
 } else {
   document.getElementById("g-enter").onclick = async () => {
-    if (!document.getElementById("g-ok").checked) return fail("Confirm you are 18 or older.");
+    if (!document.getElementById("g-ok").checked) return fail("Conferma di avere almeno 18 anni.");
     const year = Number(document.getElementById("g-y").value);
     const month = Number(document.getElementById("g-m").value);
     const day = Number(document.getElementById("g-d").value);
     const cutoff = yearsAgo(18);
     const dob = new Date(year, month - 1, day);
-    if (Number.isNaN(dob.getTime()) || dob > cutoff) return fail("You must be 18 or older.");
+    if (Number.isNaN(dob.getTime()) || dob > cutoff) return fail("Devi avere almeno 18 anni.");
     const res = await fetch("/api/world/compliance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "adult", year, month, day }),
     });
     const body = await res.json().catch(() => ({}));
-    if (!res.ok && res.status !== 503) return fail(body.error || "Could not record age check.");
+    if (!res.ok && res.status !== 503) return fail(body.error || "Impossibile registrare il controllo età.");
     if (res.status === 503) sessionStorage.setItem("world_v2_adult", "1");
     await loadGame();
   };
