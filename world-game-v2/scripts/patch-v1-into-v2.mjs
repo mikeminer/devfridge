@@ -30,8 +30,8 @@ const loadInsert = "await Qk.load((e,t)=>{$(`load-progress`).textContent=`${e} /
 if (!js.includes(loadNeedle)) throw new Error("load() site not found");
 js = js.replace(loadNeedle, loadInsert);
 
-js = js.replace("this.tick-this.lastDrop>=28", "this.tick-this.lastDrop>=6");
-js = js.replace("setLinearDamping(.38)", "setLinearDamping(.08)");
+// Keep lastDrop>=28 and linearDamping(.38) matching scan/lib/topshelf/engine/core.ts
+// or live verification rejects the drop as illegal.
 
 const oldPiece = `o||(o=this.avatar(a.tier),this.visuals.set(a.id,o),this.fridge.add(o.root))`;
 const newPiece = `o||(o=new wg(a.tier,gr[a.tier-1],void 0,this.cast[a.tier-1],this.portraits.get(a.tier)),this.visuals.set(a.id,o),this.fridge.add(o.root))`;
