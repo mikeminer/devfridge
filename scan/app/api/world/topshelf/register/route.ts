@@ -4,6 +4,7 @@ import {RegistrationError} from '@/lib/topshelf/registration-security';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 export const maxDuration=120;
+export const preferredRegion=['iad1','fra1'];
 const headers={'Cache-Control':'no-store'};
 export async function GET(){return NextResponse.json(await registrationStatus(),{headers});}
 export async function POST(request:NextRequest) {

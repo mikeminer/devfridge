@@ -7,8 +7,16 @@ export type PhysicsState={world:string;pieces:PieceState[];tick:number;score:num
 export function capturePhysics(g:MergeGame):PhysicsState {
  return {world:Buffer.from(g.world.takeSnapshot()).toString('base64'),pieces:[...g.pieces.values()].map(({body,...p})=>({...p,handle:body.handle})),tick:g.tick,score:g.score,combo:g.combo,merges:g.merges,nextId:g.nextId,lastDrop:g.lastDrop,lastMerge:g.lastMerge,status:g.status,discovered:[...g.discovered]};
 }
-export async function advancePhysics(t:RunTicket,snapshot:PhysicsState|undefined,moves:{tick:number;x:number}[],tick:number) {
- await initPhysics();const g=new MergeGame(t.seed,t.character);
+export async function advancePhysics(t:RunTicket,snapshot:PhysicsState|undefined,moves:{tick:number;x:number}[],tick:number,cached?:MergeGame|null) {
+ await initPhysics();
+ if(cached){
+  if(tick<cached.tick){cached.dispose();throw new RegistrationError('Live moves cannot go backwards.',409);}
+  const started=performance.now();
+  while(cached.tick<tick&&cached.status==='playing'){cached.step();cached.events.length=0;if(cached.tick%600===0&&performance.now()-started>15000)throw new RegistrationError('Live verification is busy. Retry this move.',503);}
+  if(cached.tick!==tick){cached.dispose();throw new RegistrationError('The live game ended before this move.',422);}
+  return cached;
+ }
+ const g=new MergeGame(t.seed,t.character);
  try {
   if(snapshot){
    const restored=RAPIER.World.restoreSnapshot(Uint8Array.from(Buffer.from(snapshot.world,'base64')));if(!restored)throw Error('Invalid physics snapshot');g.world.free();g.world=restored;

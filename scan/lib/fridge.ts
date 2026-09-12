@@ -123,8 +123,13 @@ export async function fridgeForMint(mint: string): Promise<FridgeStatus> {
   }
 }
 
+const depositorMemo = new Map<string, { at: number; locks: FridgeLock[] }>();
+const DEPOSITOR_TTL_MS = 15_000;
+
 export async function locksForDepositor(wallet: string): Promise<FridgeLock[]> {
   new PublicKey(wallet);
+  const hit = depositorMemo.get(wallet);
+  if (hit && Date.now() - hit.at < DEPOSITOR_TTL_MS) return hit.locks;
   const rows = await rpcRace<Array<{ pubkey: string; account: { data: [string, string] } }>>(
     "getProgramAccounts",
     [
@@ -136,7 +141,9 @@ export async function locksForDepositor(wallet: string): Promise<FridgeLock[]> {
       },
     ]
   ).catch(() => [] as Array<{ pubkey: string; account: { data: [string, string] } }>);
-  return (rows || [])
+  const locks = (rows || [])
     .map((row) => decodeLock(row.pubkey, Uint8Array.from(Buffer.from(row.account.data[0], "base64"))))
     .filter((x): x is FridgeLock => x != null && x.depositor === wallet);
+  depositorMemo.set(wallet, { at: Date.now(), locks });
+  return locks;
 }

@@ -19,18 +19,26 @@ function credentials() {
  return {signer:new Wallet(key),secret};
 }
 type Connection=NonNullable<ReturnType<typeof shelfConnection>>;
+let readyCache:{season:number;expires:number}|null=null;
 async function ready(c:Connection,signer:Wallet) {
+ if(readyCache&&readyCache.expires>Date.now())return readyCache.season;
  const [chain,verifier,season,paused]=await Promise.all([c.provider.send('eth_chainId',[]),c.contract.verifier(),c.contract.currentSeason(),c.contract.paused()]);
  if(Number(BigInt(chain))!==TOPSHELF_CHAIN)throw new RegistrationError('Score network unavailable.',503);
  if(getAddress(verifier)!==signer.address)throw new RegistrationError('Score registration is awaiting owner activation. Playing is free.',503);
  if(paused||Number((await c.contract.seasons(season)).phase)!==0)throw new RegistrationError('Score registration is paused for this season.',409);
- return Number(season);
+ readyCache={season:Number(season),expires:Date.now()+10_000};
+ return readyCache.season;
 }
+const lockOk=new Map<string,{expires:number}>();
 async function timelock(wallet:string,character:number) {
  const token=tokens.find(t=>t.tier===character);if(!token)throw new RegistrationError('Invalid character');
+ const cacheKey=`${wallet}:${token.mint}`;
+ const cached=lockOk.get(cacheKey);
+ if(cached&&cached.expires>Date.now())return;
  const locks=await locksForDepositor(wallet),seen=new Set<string>();let amount=0n;
  for(const lock of locks)if(lock.depositor===wallet&&lock.mint===token.mint&&lock.unlockAt>Date.now()/1000&&!seen.has(lock.address)) {seen.add(lock.address);amount+=BigInt(lock.amount);}
  if(amount<500000n*10n**BigInt(token.decimals))throw new RegistrationError('Could not verify 500,000 active timelocked tokens of this character in DevFridge.',403);
+ lockOk.set(cacheKey,{expires:Date.now()+15_000});
 }
 function walletAddress(value:unknown) {
  try {if(typeof value!=='string')throw Error();const key=new PublicKey(value);if(!PublicKey.isOnCurve(key.toBytes()))throw Error();return key.toBase58();}catch{throw new RegistrationError('Invalid Solana wallet');}

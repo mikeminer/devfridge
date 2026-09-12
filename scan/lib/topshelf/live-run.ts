@@ -5,6 +5,7 @@ import type {RunTicket} from './score-protocol';
 import {initPhysics,MergeGame,checkpointPhysics} from './engine/core';
 import {MAX_RUN_TICKS} from './engine/verify-replay';
 import {advancePhysics,capturePhysics,type PhysicsState} from './live-physics';
+import {forgetWorld,rememberWorld,takeCachedWorld} from './live-cache';
 
 export type LiveMove={tick:number;x:number;tier:number};
 export type LiveState={version:2;revision:number;nonce:string;nextTier:number;previewTier:number;issued:number;lastAt:number;moves:LiveMove[];snapshot?:PhysicsState;lastRequest:string;final?:{ticks:number;score:number;hash:string}};
@@ -32,19 +33,20 @@ export async function replayLive(t:RunTicket,moves:LiveMove[],tick:number,finish
   return g;
  }catch(e){g.dispose();throw e;}
 }
-export async function transitionLive(t:RunTicket,s:LiveState,body:Record<string,unknown>,now=Date.now(),entropy=nextTier):Promise<LiveState> {
+export async function transitionLive(t:RunTicket,s:LiveState,body:Record<string,unknown>,now=Date.now(),entropy=nextTier):Promise<{state:LiveState;game?:MergeGame}> {
  if(s.version!==2)throw new RegistrationError('This run needs a new live session.',409);
  if(body.sequence!==s.revision||body.nonce!==s.nonce)throw new RegistrationError('Stale or branched live input.',409);
  if(s.final)throw new RegistrationError('This run is already closed.',409);
  const tick=Number(body.tick);liveTiming(s,tick,now);
  if(body.action==='move') {
   if(s.moves.length>=8000||!Number.isFinite(body.x)||Math.abs(Number(body.x))>3)throw new RegistrationError('Invalid live move');
-  const g=await advancePhysics(t,s.snapshot,s.moves,tick);
+  const g=await advancePhysics(t,s.snapshot,s.moves,tick,takeCachedWorld(t,s.revision));
   try {
    g.queue[0]=s.nextTier;const x=Math.round(g.clampX(Number(body.x))*1000)/1000;
    if(x!==body.x||!g.drop(x))throw new RegistrationError('This drop is not legal at this time.',422);
-   return {...s,revision:s.revision+1,nonce:randomNonce(),nextTier:s.previewTier,previewTier:entropy(),lastAt:now,moves:[...s.moves,{tick,x,tier:s.nextTier}],snapshot:capturePhysics(g)};
-  }finally{g.dispose();}
+   const state={...s,revision:s.revision+1,nonce:randomNonce(),nextTier:s.previewTier,previewTier:entropy(),lastAt:now,moves:[...s.moves,{tick,x,tier:s.nextTier}],snapshot:capturePhysics(g)};
+   return {state,game:g};
+  }catch(e){g.dispose();throw e;}
  }
  if(body.action!=='finish')throw new RegistrationError('Invalid live action');
  if(!s.moves.length)throw new RegistrationError('No live moves were recorded.',422);
@@ -52,7 +54,8 @@ export async function transitionLive(t:RunTicket,s:LiveState,body:Record<string,
  try {
   if(body.score!==g.score)throw new RegistrationError('Score does not match the live game.',422);
   const hash=keccak256(toUtf8Bytes(JSON.stringify({version:2,runId:t.runId,rules:t.rules,seed:t.seed,character:t.character,moves:s.moves,ticks:g.tick})));
-  return {...s,revision:s.revision+1,nonce:randomNonce(),final:{ticks:g.tick,score:g.score,hash}};
+  forgetWorld(t);
+  return {state:{...s,revision:s.revision+1,nonce:randomNonce(),final:{ticks:g.tick,score:g.score,hash}}};
  }finally{g.dispose();}
 }
 export async function advanceLiveRun(t:RunTicket,body:Record<string,unknown>) {
@@ -62,9 +65,10 @@ export async function advanceLiveRun(t:RunTicket,body:Record<string,unknown>) {
  const fingerprint=keccak256(toUtf8Bytes(JSON.stringify({action:body.action,sequence:body.sequence,nonce:body.nonce,tick:body.tick,x:body.x,score:body.score})));
  // A lost response may be retried verbatim. It can never reveal an additional piece or branch the run.
  if(s.lastRequest===fingerprint)return ack(s);
- const updated=await transitionLive(t,s,body);updated.lastRequest=fingerprint;
+ const {state:updated,game}=await transitionLive(t,s,body);updated.lastRequest=fingerprint;
  const result=await scoreStore(['EVAL',"if redis.call('GET',KEYS[1])==ARGV[1] then redis.call('SET',KEYS[1],ARGV[2],'KEEPTTL'); return 1 else return 0 end",1,runKey,raw,JSON.stringify(updated)]);
- if(result!==1)throw new RegistrationError('Another input already advanced this run. Retry the same move.',409);
+ if(result!==1){game?.dispose();throw new RegistrationError('Another input already advanced this run. Retry the same move.',409);}
+ if(game)rememberWorld(t,updated.revision,game);
  return ack(updated);
 }
 export async function finishedLiveRun(t:RunTicket,body:Record<string,unknown>) {
