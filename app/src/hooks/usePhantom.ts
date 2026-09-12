@@ -138,26 +138,26 @@ export function usePhantom(cluster: ClusterName, fallbackEndpoint?: string) {
       }
     }
 
-    // Phantom recommends simulating with sigVerify=false before requesting a
-    // signature. This catches deterministic failures before the wallet dialog.
-    await simulateBeforeSigning(connection, tx);
+// Add local signatures before simulation and before Phantom signs.
+if (tx instanceof Transaction && extraSigners.length) {
+  tx.partialSign(...extraSigners);
+} else if (tx instanceof VersionedTransaction && extraSigners.length) {
+  tx.sign(extraSigners);
+}
 
-    // Always submit on DevFridge's selected cluster RPC. Phantom's
-    // signAndSendTransaction uses the wallet's network, which is often
-    // still Mainnet when the site is on Devnet/Testnet.
-    if (p.signTransaction) {
-      const signed = await p.signTransaction(tx);
-      if (signed instanceof Transaction) {
-        // Phantom signs first; any local co-signers are added afterwards.
-        // This ordering follows Phantom's transaction-warning guidance.
-        if (extraSigners.length) signed.partialSign(...extraSigners);
-        return connection.sendRawTransaction(signed.serialize(), sendOpts);
-      }
-      if (extraSigners.length) signed.sign(extraSigners);
-      return connection.sendRawTransaction(
-        (signed as VersionedTransaction).serialize(),
-        sendOpts
-      );
+// Simulate after adding local signers.
+await simulateBeforeSigning(connection, tx);
+
+// Sign with Phantom, then submit through DevFridge's selected RPC.
+if (p.signTransaction) {
+  const signed = await p.signTransaction(tx);
+
+  if (!signed) {
+    throw new Error("Wallet did not return a signed transaction");
+  }
+
+  return connection.sendRawTransaction(signed.serialize(), sendOpts);
+}
     }
 
     if (extraSigners.length) {
