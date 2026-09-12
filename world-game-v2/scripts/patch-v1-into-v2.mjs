@@ -25,10 +25,10 @@ const newRenderer = `this.renderer=new eh({canvas:e,antialias:!matchMedia(\`(poi
 if (!js.includes(oldRenderer)) throw new Error("renderer pattern not found");
 js = js.replace(oldRenderer, newRenderer);
 
-const oldDrop = `async function TA(){if(!zA()||rA||iA||wA||$(\`dialog\`).open||Qk.mode!==\`fridge\`)return;SA();let e=Q;if(!e.inputs.length){wA=!0;try{await kk(e)}finally{wA=!1}}Q!==e||!zA()||rA||iA||$(\`dialog\`).open||Qk.mode!==\`fridge\`||await Nk(Q,Qk.aim)}`;
-const newDrop = `async function TA(){if(!zA()||rA||iA||wA||$(\`dialog\`).open||Qk.mode!==\`fridge\`)return;SA();Q.drop(Qk.aim)}`;
-if (!js.includes(oldDrop)) throw new Error("TA() drop wait not found");
-js = js.replace(oldDrop, newDrop);
+const loadNeedle = "await Qk.load((e,t)=>{$(`load-progress`).textContent=`${e} / ${t}`,$(`load-bar`).style.width=`${e/t*100}%`}),Qk.preview?.dispose()";
+const loadInsert = "await Qk.load((e,t)=>{$(`load-progress`).textContent=`${e} / ${t}`,$(`load-bar`).style.width=`${e/t*100}%`}),await kk(Q),Qk.preview?.dispose()";
+if (!js.includes(loadNeedle)) throw new Error("load() site not found");
+js = js.replace(loadNeedle, loadInsert);
 
 js = js.replace("this.tick-this.lastDrop>=28", "this.tick-this.lastDrop>=6");
 js = js.replace("setLinearDamping(.38)", "setLinearDamping(.08)");
@@ -44,23 +44,4 @@ if (!js.includes(oldPreview)) throw new Error("setPreview avatar not found");
 js = js.replace(oldPreview, newPreview);
 
 await writeFile(join(v2, "assets/cold-storage.js"), js);
-await writeFile(
-  join(v2, "index.html"),
-  `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#171b18" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="Cold Storage v2 — same game as v1, faster assets." />
-    <title>Cold Storage v2 · DevFridge</title>
-    <link rel="icon" type="image/svg+xml" href="/world/game-v2/favicon.svg" />
-    <script type="module" crossorigin src="/world/game-v2/assets/cold-storage.js"></script>
-    <link rel="stylesheet" crossorigin href="/world/game-v2/assets/cold-storage.css">
-  </head>
-  <body><div id="app"></div></body>
-</html>
-`,
-);
-console.log("patched v1 into v2");
+console.log("patched v1 into v2 (index.html/gate left in place)");

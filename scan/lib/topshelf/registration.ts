@@ -11,6 +11,7 @@ import rules from './engine/rules.json';
 import tokens from './engine/tokens.json';
 import {dailySeed} from './engine/core';
 import {createLiveRun,advanceLiveRun,finishedLiveRun} from './live-run';
+import {assertNotExcluded,appendLog} from '../world-compliance';
 
 function credentials() {
  const key=process.env.TOPSHELF_VERIFIER_PRIVATE_KEY,secret=process.env.TOPSHELF_RUN_SECRET;
@@ -82,6 +83,7 @@ export async function registerAction(body:Record<string,unknown>,ip:string) {
    const wallet=walletAddress(body.wallet),character=Number(body.character);
    if(body.liveVersion!==2||!Number.isInteger(character)||character<1||character>10||body.rules!==rules.id||body.seed!==dailySeed())throw new RegistrationError('The game has updated. Reload before starting a live run.',409);
    await scoreRateLimit(`start:${wallet}`,20);
+   await assertNotExcluded(wallet);
    const season=await ready(c,signer);await timelock(wallet,character);
    const issued=Date.now();
    const ticket:RunTicket={kind:'run',liveVersion:2,runId:hexlify(randomBytes(32)),wallet,character,seed:Number(body.seed),season,rules:rules.id,issued,expires:issued+6*3600000,contract:c.address};
@@ -91,7 +93,13 @@ export async function registerAction(body:Record<string,unknown>,ip:string) {
   if(!live&&body.action!=='challenge'&&body.action!=='authorize')throw new RegistrationError('Unknown registration action');
   const t=unseal<RunTicket>(body.ticket,secret,'run');
   if(t.liveVersion!==2||t.rules!==rules.id||t.contract!==c.address)throw new RegistrationError('This run predates live verification. Start a new run.',409);
-  if(live){await scoreRateLimit(`live:${t.runId}`,240);return await advanceLiveRun(t,body);}
+  if(live){
+    await scoreRateLimit(`live:${t.runId}`,240);
+    await assertNotExcluded(t.wallet);
+    const ack=await advanceLiveRun(t,body);
+    try { await appendLog(t.runId,{action:body.action,tick:body.tick,x:body.x,score:body.score,sequence:body.sequence}); } catch {}
+    return ack;
+  }
   const input=await finishedLiveRun(t,body);
   if(body.action==='challenge') {
    const player=evmAddress(body.player),token=evmAddress(body.token);
