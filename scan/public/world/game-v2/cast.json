@@ -1,0 +1,409 @@
+{
+  "base": "/world/game-v2/",
+  "mode": "timelock-access",
+  "volume": 1,
+  "notes": "At least 500,000 tokens of the same character must be actively locked in DevFridge to unlock that meme. Active locks of the same mint add together. Free play; no payments or rewards.",
+  "cast": [
+    {
+      "tier": 1,
+      "id": "rugarugo",
+      "name": "Rugarugo",
+      "color": "#ed4a35",
+      "emoji": "🍝",
+      "glb": "/models/rugarugo.glb",
+      "png": "/portraits/rugarugo.webp",
+      "wav": "/audio/rugarugo-signature.mp3",
+      "voice": "/audio/rugarugo-voice.mp3",
+      "theme": "/audio/rugarugo-theme.mp3",
+      "line": "Ruga Rugo! Ruga, ruga! The sauce has escaped!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump",
+        "symbol": "RUGARUGO",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/rugarugo-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/rugarugo.webp"
+    },
+    {
+      "tier": 2,
+      "id": "aperitivo",
+      "name": "Aperitivo",
+      "color": "#ff8b28",
+      "emoji": "🍹",
+      "glb": "/models/aperitivo.glb",
+      "png": "/portraits/aperitivo.webp",
+      "wav": "/audio/aperitivo-signature.mp3",
+      "voice": "/audio/aperitivo-voice.mp3",
+      "theme": "/audio/aperitivo-theme.mp3",
+      "line": "Aperitivo! Sip. Scream. Spritz. Repeat!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump",
+        "symbol": "APE",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/aperitivo-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/aperitivo.webp"
+    },
+    {
+      "tier": 3,
+      "id": "friedfomo",
+      "name": "FriedFomo",
+      "color": "#f9bb31",
+      "emoji": "🍟",
+      "glb": "/models/friedfomo.glb",
+      "png": "/portraits/friedfomo.webp",
+      "wav": "/audio/friedfomo-signature.mp3",
+      "voice": "/audio/friedfomo-voice.mp3",
+      "theme": "/audio/friedfomo-theme.mp3",
+      "line": "Fried Fomo! Fi fi! Fo fo! Your brain is fritto!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump",
+        "symbol": "FIFO",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/friedfomo-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/friedfomo.webp"
+    },
+    {
+      "tier": 4,
+      "id": "fudfusilli",
+      "name": "FudFusilli",
+      "color": "#8bc94b",
+      "emoji": "🌀",
+      "glb": "/models/fudfusilli.glb",
+      "png": "/portraits/fudfusilli.webp",
+      "wav": "/audio/fudfusilli-signature.mp3",
+      "voice": "/audio/fudfusilli-voice.mp3",
+      "theme": "/audio/fudfusilli-theme.mp3",
+      "line": "Fud Fusilli! Twist the pasta! Confuse reality!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump",
+        "symbol": "FUSILLI",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/fudfusilli-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/fudfusilli.webp"
+    },
+    {
+      "tier": 5,
+      "id": "lambocello",
+      "name": "Lambocello",
+      "color": "#e9d535",
+      "emoji": "🍋",
+      "glb": "/models/lambocello.glb",
+      "png": "/portraits/lambocello.webp",
+      "wav": "/audio/lambocello-signature.mp3",
+      "voice": "/audio/lambocello-voice.mp3",
+      "theme": "/audio/lambocello-theme.mp3",
+      "line": "Lambocello! When Lambo? After limoncello! Vroom, vroom!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump",
+        "symbol": "LAMBOCELLO",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/lambocello-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/lambocello.webp"
+    },
+    {
+      "tier": 6,
+      "id": "gmgnocco",
+      "name": "GmGnocco",
+      "color": "#a78bdf",
+      "emoji": "☕",
+      "glb": "/models/gmgnocco.glb",
+      "png": "/portraits/gmgnocco.webp",
+      "wav": "/audio/gmgnocco-signature.mp3",
+      "voice": "/audio/gmgnocco-voice.mp3",
+      "theme": "/audio/gmgnocco-theme.mp3",
+      "line": "G M Gnocco. Good morning. Good night. Send espresso.",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump",
+        "symbol": "GMGN",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/gmgnocco-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/gmgnocco.webp"
+    },
+    {
+      "tier": 7,
+      "id": "sersugo",
+      "name": "SerSugo",
+      "color": "#c94c45",
+      "emoji": "🍅",
+      "glb": "/models/sersugo.glb",
+      "png": "/portraits/sersugo.webp",
+      "wav": "/audio/sersugo-signature.mp3",
+      "voice": "/audio/sersugo-voice.mp3",
+      "theme": "/audio/sersugo-theme.mp3",
+      "line": "Ser Sugo! Yes, sir. The sauce has chosen you!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump",
+        "symbol": "SESU",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/sersugo-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/sersugo.webp"
+    },
+    {
+      "tier": 8,
+      "id": "moonzarella",
+      "name": "MoonZarella",
+      "color": "#77bfe9",
+      "emoji": "🧀",
+      "glb": "/models/moonzarella.glb",
+      "png": "/portraits/moonzarella.webp",
+      "wav": "/audio/moonzarella-signature.mp3",
+      "voice": "/audio/moonzarella-voice.mp3",
+      "theme": "/audio/moonzarella-theme.mp3",
+      "line": "Moonzarella! Houston, we have mozzarella!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump",
+        "symbol": "MOONZARELL",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/moonzarella-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/moonzarella.webp"
+    },
+    {
+      "tier": 9,
+      "id": "bonkatino",
+      "name": "Bonkatino",
+      "color": "#e56ab6",
+      "emoji": "🔨",
+      "glb": "/models/bonkatino.glb",
+      "png": "/portraits/bonkatino.webp",
+      "wav": "/audio/bonkatino-signature.mp3",
+      "voice": "/audio/bonkatino-voice.mp3",
+      "theme": "/audio/bonkatino-theme.mp3",
+      "line": "Bonkatino! Bonka, bonka! Brain al dente! BONK!",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump",
+        "symbol": "BONKATINO",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/bonkatino-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/bonkatino.webp"
+    },
+    {
+      "tier": 10,
+      "id": "ciccia",
+      "name": "Ciccia Salsiccia",
+      "color": "#b86a38",
+      "emoji": "🌭",
+      "glb": "/models/ciccia.glb",
+      "png": "/portraits/ciccia.webp",
+      "wav": "/audio/ciccia-signature.mp3",
+      "voice": "/audio/ciccia-voice.mp3",
+      "theme": "/audio/ciccia-theme.mp3",
+      "line": "Ciccia Salsiccia! Ciccia, Ciccia. Ma che caldo! Stay smoked.",
+      "token": {
+        "chain": "solana",
+        "cluster": "mainnet-beta",
+        "mint": "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+        "symbol": "CICCIA",
+        "decimals": 6,
+        "program": "token-2022",
+        "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+      },
+      "clips": {
+        "land": "Land",
+        "idle": "Idle",
+        "run": "Run",
+        "signature": "Signature",
+        "jump": "Jump",
+        "walk": "Walk"
+      },
+      "expressions": [
+        "Neutral",
+        "Happy",
+        "Angry",
+        "Surprised",
+        "Talk"
+      ],
+      "sfx": "/audio/ciccia-sfx.mp3",
+      "paymentTokenStatus": "verified-token-2022",
+      "webp": "/portraits/ciccia.webp"
+    }
+  ],
+  "tokenSource": "https://capital.devfridge.cool/#brainrot-title"
+}
