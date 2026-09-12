@@ -46,3 +46,7 @@ export function forgetWorld(t: RunTicket) {
   prev?.game.dispose();
   worlds.delete(key);
 }
+
+export function cachedWorldCount() {
+  return worlds.size;
+}

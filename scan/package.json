@@ -6,7 +6,8 @@
     "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start -p 3010",
-    "lint": "next lint"
+    "lint": "next lint",
+    "live-worker": "tsx world-live/server.ts"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.19.3",
@@ -25,6 +26,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "three": "^0.170.0",
+    "tsx": "^4.23.13",
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {

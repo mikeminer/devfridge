@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+public
+app
+components
+tests
+*.md
+.env*

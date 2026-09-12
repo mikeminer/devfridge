@@ -12,6 +12,7 @@ import tokens from './engine/tokens.json';
 import {dailySeed} from './engine/core';
 import {createLiveRun,advanceLiveRun,finishedLiveRun} from './live-run';
 import {assertNotExcluded,appendLog} from '../world-compliance';
+import {liveWorkerConfigured,proxyLive} from './live-proxy';
 
 function credentials() {
  const key=process.env.TOPSHELF_VERIFIER_PRIVATE_KEY,secret=process.env.TOPSHELF_RUN_SECRET;
@@ -104,6 +105,7 @@ export async function registerAction(body:Record<string,unknown>,ip:string) {
   if(live){
     await scoreRateLimit(`live:${t.runId}`,240);
     await assertNotExcluded(t.wallet);
+    if(liveWorkerConfigured())return await proxyLive(body,ip);
     const ack=await advanceLiveRun(t,body);
     try { await appendLog(t.runId,{action:body.action,tick:body.tick,x:body.x,score:body.score,sequence:body.sequence}); } catch {}
     return ack;
