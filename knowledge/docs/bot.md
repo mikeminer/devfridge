@@ -4,7 +4,7 @@ title: "@frigopastabot"
 description: "DevFridge investor knowledge: @frigopastabot"
 resource: "https://docs.devfridge.cool/bot"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-11T11:20:39Z"
+timestamp: "2026-09-12T10:45:37Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/bot) · ok · last successful observation: 2026-09-11T11:20:39Z · last attempt: 2026-09-11T11:20:39Z.
+[Canonical page](https://docs.devfridge.cool/bot) · ok · last successful observation: 2026-09-12T10:45:37Z · last attempt: 2026-09-12T10:45:37Z.
 
 TELEGRAM BOT
 
