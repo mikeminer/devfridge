@@ -4,7 +4,7 @@ title: "Ciccia Salsiccia (solana)"
 description: "DevFridge investor knowledge: Ciccia Salsiccia (solana)"
 resource: "https://solscan.io/token/CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-12T14:21:17Z"
+timestamp: "2026-09-13T11:50:56Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump`
 
-Registry status: ok · last successful observation: 2026-09-12T14:21:17Z · last attempt: 2026-09-12T14:21:17Z.
+Registry status: ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-12T14:21:17Z · last attempt: 2026-09-12T14:21:17Z.
+ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 446450938 |
+| Finalized slot | 446695852 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,12 +68,34 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-12T14:21:17Z · last attempt: 2026-09-12T14:21:17Z.
+ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
 
 ```json
 {
   "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
-  "pairs": [],
+  "pairs": [
+    {
+      "dexId": "pumpfun",
+      "fdv": 2925.92,
+      "liquidity": null,
+      "marketCap": 2925.92,
+      "pairAddress": "QZxkVYmo4WQzrZ7ZVaBnzdj3wXbbR9PT9gU2k7t89WF",
+      "pairCreatedAt": 1787123732000,
+      "priceUsd": "0.000002925",
+      "quoteToken": {
+        "address": "So11111111111111111111111111111111111111112",
+        "name": "Wrapped SOL",
+        "symbol": "SOL"
+      },
+      "url": "https://dexscreener.com/solana/qzxkvymo4wqzrz7zvabnzdj3wxbbr9pt9gu2k7t89wf",
+      "volume": {
+        "h1": 0,
+        "h24": 205.22,
+        "h6": 28.99,
+        "m5": 0
+      }
+    }
+  ],
   "provider": "DexScreener"
 }
 ```
