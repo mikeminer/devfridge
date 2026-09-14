@@ -4,7 +4,7 @@ title: "MoonZarella (solana)"
 description: "DevFridge investor knowledge: MoonZarella (solana)"
 resource: "https://solscan.io/token/6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-13T11:50:56Z"
+timestamp: "2026-09-14T12:03:26Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump`
 
-Registry status: ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
+Registry status: ok · last successful observation: 2026-09-14T12:03:26Z · last attempt: 2026-09-14T12:03:26Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
+ok · last successful observation: 2026-09-14T12:03:26Z · last attempt: 2026-09-14T12:03:26Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 446695855 |
+| Finalized slot | 446971888 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-13T11:50:56Z · last attempt: 2026-09-13T11:50:56Z.
+ok · last successful observation: 2026-09-14T12:03:26Z · last attempt: 2026-09-14T12:03:26Z.
 
 ```json
 {
