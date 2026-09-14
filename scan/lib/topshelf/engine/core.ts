@@ -47,7 +47,9 @@ export interface Piece {
 export type GameEvent = { type: 'drop' | 'merge' | 'over' | 'win'; id?: number; tier?: number; x?: number; y?: number; combo?: number };
 export interface Replay { version: 1; seed: number; favourite: number; inputs: { tick: number; x: number }[] }
 let initialized: Promise<void> | undefined;
-export function initPhysics() { return initialized ??= RAPIER.init(); }
+export function initPhysics() {
+  return initialized ??= typeof RAPIER.init === 'function' ? RAPIER.init() : Promise.resolve();
+}
 
 /** Ranked client and verifier cross the same serialization boundary after every accepted drop. */
 export function checkpointPhysics(game: MergeGame) {
