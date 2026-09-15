@@ -4,7 +4,7 @@ title: "DevFridge World — the game guide"
 description: "DevFridge investor knowledge: DevFridge World — the game guide"
 resource: "https://docs.devfridge.cool/world"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-14T12:45:39Z"
+timestamp: "2026-09-15T11:43:55Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-14T12:45:39Z · last attempt: 2026-09-14T12:45:39Z.
+[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-15T11:43:55Z · last attempt: 2026-09-15T11:43:55Z.
 
 WORLD / COLD STORAGE
 
