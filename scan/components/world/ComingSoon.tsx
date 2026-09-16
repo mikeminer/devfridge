@@ -129,6 +129,22 @@ export default function ComingSoon() {
           </a>
           <a className="fridge-key" href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">Game guide ↗</a>
         </nav>
+        <a
+          className={styles.playToEarnBadge}
+          href="https://playtoearn.com/blockchaingame/devfridge-world"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View DevFridge World on PlayToEarn"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://business.playtoearn.com/badge/6314.png"
+            alt="View DevFridge World on PlayToEarn"
+            width="120"
+            height="120"
+            loading="lazy"
+          />
+        </a>
       </section>
     </main>
   );
