@@ -4,7 +4,7 @@ title: "How Feature SOL becomes a $PASTA burn"
 description: "DevFridge investor knowledge: How Feature SOL becomes a $PASTA burn"
 resource: "https://docs.devfridge.cool/boost"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-17T11:40:51Z"
+timestamp: "2026-09-18T11:13:30Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/boost) · ok · last successful observation: 2026-09-17T11:40:51Z · last attempt: 2026-09-17T11:40:51Z.
+[Canonical page](https://docs.devfridge.cool/boost) · ok · last successful observation: 2026-09-18T11:13:30Z · last attempt: 2026-09-18T11:13:30Z.
 
 BUY & BURN
 
