@@ -1,0 +1,5 @@
+{
+  "source": "cold-storage/src/score-registration.ts",
+  "sha256": "7cb9582999f38bcc647d02d704932e1eb6827cb14d1e60008694eeba6b20a584",
+  "note": "Reuses the existing fee, signature, allowance, payment and duplicate-run checks. Only the page bootstrap and Phantom provider preference differ."
+}
