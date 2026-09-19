@@ -1,3 +1,5 @@
+import { regions as androidRegions } from './scripts/android-locales/regions.mjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -8,7 +10,10 @@ const nextConfig = {
     return [
       { source: "/world/game-v2", destination: "/world/game-v2/index.html" },
       { source: "/world/android", destination: "/world/android/index.html" },
-      { source: "/world/android/it", destination: "/world/android/it.html" },
+      ...androidRegions.map(({ id }) => ({
+        source: `/world/android/${id}`,
+        destination: `/world/android/${id}.html`,
+      })),
       { source: "/world/android/privacy", destination: "/world/android/privacy.html" },
       { source: "/world/android/privacy-it", destination: "/world/android/privacy-it.html" },
       { source: "/world/android/rules", destination: "/world/android/rules.html" },
