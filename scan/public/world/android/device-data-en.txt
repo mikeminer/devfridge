@@ -1,0 +1,20 @@
+DATA ON THIS DEVICE
+Updated 19 September 2026
+
+The app stores your collection, preferences and completed verified-score references on this device. Android backup for this app is disabled. Clearing app storage or uninstalling removes local data and can remove registration references you still need. An unfinished run is not restored after Android kills the app.
+
+The app does not request contacts, location, microphone or camera permission. The native wallet connection asks your wallet app to authorize connections and sign messages; recovery phrases and private keys stay in the wallet. The wallet may retain its own connection authorization. Disconnect or revoke it through the wallet as needed.
+
+The age form sends the entered birth date to the DevFridge compliance service. Wallet addresses, timelock eligibility, self-exclusion choices, recorded moves and verified results are processed by online services. Clearing local storage does not erase those server records or cancel a self-exclusion.
+
+Optional registration sends a short-lived handoff to the dedicated page in Phantom. On-chain score records, wallet links, token transfers and claims are public and cannot be erased by clearing this app. Other apps or services you choose have their own privacy practices.
+
+For original-wallet approval, including Seed Vault, the service temporarily stores the exact score authorization and its Solana signature until the original challenge expires (at most five minutes). Phantom's browser also keeps the expiring challenge locally so it can resume after switching apps or tabs; it does not store private keys or signatures there. Clear Phantom's website data to remove that browser copy. Changing the payment account or fee token requires a new approval.
+
+Sharing is initiated by you through Android's share chooser. A generated PNG is placed in app cache and temporarily granted to the app you select. Old share images more than 24 hours old are cleaned up when another image is shared, or when Android clears cache; cleanup is not a scheduled deletion service.
+
+To manage device data, open Android Settings → Apps → DevFridge World → Storage. Clearing cache affects temporary files; clearing storage removes local history and settings. These are device controls, not a server-account deletion request.
+
+Publisher and intended controller: Michele Forlani, individual, Italy. Support and data-request contact: welcome@devfridge.cool.
+
+This is a technical notice for the preview. The full publisher privacy policy is being prepared for release.

@@ -1,0 +1,14 @@
+{
+  "version": "0.3.1-beta.1",
+  "versionCode": 7,
+  "package": "cool.devfridge.world",
+  "minAndroid": "9",
+  "file": "DevFridge-World-0.3.1-beta.1.apk",
+  "bytes": 64697917,
+  "sha256": "52ad7fda09f64eba455ba398ec1d1e60d458889711b91abfd78fd59bb0bcfd23",
+  "certificateSha256": "2acabfed1ae887ed90e650a4446e5ef747de096f0fd6ea75a8948b75b06071ca",
+  "releaseUrl": "https://github.com/mikeminer/devfridge/releases/tag/android-v0.3.1-beta.1",
+  "downloadUrl": "https://github.com/mikeminer/devfridge/releases/download/android-v0.3.1-beta.1/DevFridge-World-0.3.1-beta.1.apk",
+  "status": "tester-beta",
+  "storeStatus": "not-submitted"
+}
