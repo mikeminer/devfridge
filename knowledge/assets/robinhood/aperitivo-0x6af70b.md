@@ -4,7 +4,7 @@ title: "Aperitivo (robinhood)"
 description: "DevFridge investor knowledge: Aperitivo (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x6AF70B8487CD47dEf373c4A9eB58F990A3eDba37"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-19T03:46:12Z"
+timestamp: "2026-09-19T10:58:02Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x6af70b8487cd47def373c4a9eb58f990a3edba37`
 
-Registry status: ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
+Registry status: ok · last successful observation: 2026-09-19T10:58:02Z · last attempt: 2026-09-19T10:58:02Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
+ok · last successful observation: 2026-09-19T10:58:02Z · last attempt: 2026-09-19T10:58:02Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 66771690 |
+| Block | 67028651 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
+ok · last successful observation: 2026-09-19T10:58:02Z · last attempt: 2026-09-19T10:58:02Z.
 
 ```json
 {

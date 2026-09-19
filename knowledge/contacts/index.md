@@ -4,7 +4,7 @@ title: "Official contacts and team"
 description: "DevFridge investor knowledge: Official contacts and team"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-19T03:46:12Z"
+timestamp: "2026-09-19T10:58:02Z"
 generated: true
 ---
 
