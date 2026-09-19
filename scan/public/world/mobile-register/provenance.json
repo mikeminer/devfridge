@@ -1,5 +1,6 @@
 {
   "source": "cold-storage/src/score-registration.ts",
   "sha256": "7cb9582999f38bcc647d02d704932e1eb6827cb14d1e60008694eeba6b20a584",
-  "note": "Reuses the existing fee, signature, allowance, payment and duplicate-run checks. Only the page bootstrap and Phantom provider preference differ."
+  "note": "Reuses existing fee, authorization, allowance, payment and duplicate-run checks. Adds optional native Solana signature relay; original Phantom Solana path remains available.",
+  "nativeSigningSha256": "f9ce7fa2073a67459afe23e513cc88f1af98db1a21b39ed3072c41630c07616d"
 }
