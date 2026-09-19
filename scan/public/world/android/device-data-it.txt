@@ -1,0 +1,20 @@
+DATI SU QUESTO DISPOSITIVO
+Aggiornato il 19 settembre 2026
+
+L'app conserva sul dispositivo collezione, preferenze e riferimenti ai punteggi verificati completati. Il backup Android dell'app è disabilitato. Cancellare i dati dell'app o disinstallarla elimina i dati locali e può rimuovere riferimenti ancora necessari alla registrazione. Una partita in corso non viene ripristinata se Android termina l'app.
+
+L'app non richiede accesso a contatti, posizione, microfono o fotocamera. La connessione nativa chiede al wallet di autorizzare il collegamento e firmare messaggi; chiavi private e frasi di recupero restano nel wallet. Il wallet può conservare le proprie autorizzazioni: disconnettile o revocale dal wallet quando necessario.
+
+Il modulo età invia la data di nascita inserita al servizio di conformità DevFridge. I servizi online elaborano indirizzi wallet, idoneità dei timelock, scelte di autoesclusione, mosse registrate e risultati verificati. La cancellazione locale non elimina questi dati dal server e non annulla l'autoesclusione.
+
+La registrazione facoltativa passa un riferimento temporaneo alla pagina dedicata in Phantom. Punteggi on-chain, collegamenti dei wallet, trasferimenti e claim sono pubblici e non vengono cancellati eliminando i dati dell'app. Le app e i servizi esterni scelti hanno proprie informative privacy.
+
+Per l'approvazione con il wallet originale, incluso Seed Vault, il servizio conserva temporaneamente l'esatta autorizzazione del punteggio e la firma Solana fino alla scadenza originale della richiesta (massimo cinque minuti). Il browser di Phantom conserva anche la richiesta a scadenza in locale per riprendere dopo il cambio di app o scheda; non vi salva chiavi private o firme. Per eliminare questa copia, cancella i dati del sito nel browser di Phantom. Cambiare account di pagamento o token della commissione richiede una nuova approvazione.
+
+La condivisione parte da una tua azione tramite il selettore Android. L'immagine PNG viene salvata nella cache dell'app e resa temporaneamente accessibile all'app scelta. Le immagini condivise più vecchie di 24 ore vengono eliminate quando condividi una nuova immagine o quando Android cancella la cache; non c'è un servizio di cancellazione programmata.
+
+Per gestire i dati locali: Impostazioni Android → App → DevFridge World → Archiviazione. Svuotare la cache riguarda i file temporanei; cancellare i dati elimina cronologia locale e preferenze. Queste operazioni non sono richieste di cancellazione dei dati sul server.
+
+Publisher e titolare previsto: Michele Forlani, persona fisica, Italia. Contatto per assistenza e richieste sui dati: welcome@devfridge.cool.
+
+Questa è una nota tecnica dell'anteprima. L'informativa completa del publisher è in preparazione per la release.

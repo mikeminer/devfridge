@@ -1,0 +1,33 @@
+TOPSHELF — REGISTRAZIONE E PREMI
+Aggiornato il 19 settembre 2026
+
+Publisher: Michele Forlani, persona fisica, Italia.
+Contatto: welcome@devfridge.cool
+
+Accesso e registrazione facoltativa
+Il gioco è riservato ai maggiorenni. L'accesso a un personaggio richiede almeno 500.000 token di quel personaggio attivamente bloccati in DevFridge. Non si paga una quota TopShelf per iniziare ogni partita. Dopo una partita verificata, puoi scegliere se pagare per registrare su Robinhood Chain il punteggio già ottenuto. Il pagamento è necessario per includere quella partita nella classifica on-chain con premi.
+
+Pagamento e wallet
+L'owner stabilisce l'importo per ciascun token ERC-20 abilitato. Controlla token, importo, stagione e rete prima di confermare. Il gas di rete è distinto dalla quota di registrazione. La sola approvazione del token non registra il punteggio. La registrazione collega permanentemente wallet Solana e Robinhood, uno a uno. Il collegamento deve essere autorizzato dall'account Solana originale: può firmare nell'app Android tramite MWA, incluso Seed Vault, mentre Phantom gestisce il pagamento Robinhood separato. In alternativa, lo stesso account Solana può firmare all'interno di Phantom.
+
+Punteggi
+Ogni partita può essere registrata una sola volta. Ogni ulteriore registrazione paga una quota; per la stagione conta soltanto il tuo punteggio registrato più alto. A parità di punteggio decide l'ordine degli indirizzi wallet. Le partite verificate comprendono pezzi casuali generati dal server e scelte di posizionamento del giocatore. La verifica della partita non dimostra che abbia giocato una persona.
+
+Premi stagionali in token
+Le quote finanziano le distribuzioni stagionali previste dal modello. L'owner sceglie il numero di vincitori e approva una distribuzione. I migliori punteggi vengono acquisiti in uno snapshot; completata l'acquisizione, si aprono i claim e inizia una nuova stagione. Per ogni token, la quota del vincitore è il pool moltiplicato per il suo miglior punteggio, diviso per la somma dei punteggi vincenti e arrotondato per difetto all'unità minima del token. Il pool disponibile può comprendere residui non riscossi di distribuzioni precedenti.
+
+Poteri di sicurezza dell'owner
+L'owner può prelevare i fondi non riservati, comprese le quote prima dell'approvazione di una distribuzione. È una misura di sicurezza prevista dal design. Finché restano riservati a una distribuzione aperta, i fondi non possono essere prelevati dall'owner. Il contratto non garantisce la redistribuzione di ogni quota né l'apertura della distribuzione a una data fissa. L'owner può inoltre cambiare le quote future, i token accettati, il numero di vincitori e il verificatore, oppure sospendere le registrazioni.
+
+Claim e chiusura
+L'owner decide quando chiudere i claim; il contratto non impone una durata minima. Alla chiusura scadono le assegnazioni non riscosse. I residui tornano disponibili per distribuzioni successive o prelievi dell'owner. Controlla nella classifica lo stato della stagione, della distribuzione e gli importi riscattabili. Registrare un punteggio non garantisce un premio né un rimborso; restano salvi i diritti inderogabili previsti dalla legge.
+
+Prima di pagare
+Controlla lo stato attuale del contratto e gli eventuali avvisi della stagione. Il valore dei token e il gas possono cambiare. L'inclusione on-chain dipende dalla conferma della transazione di registrazione. Il ritorno all'app non prova il pagamento. Non ripetere un pagamento mentre la prima transazione è ancora in attesa.
+
+Contratto
+Robinhood Chain, chain ID 4663
+0xc1DB49694E0DB50778c333350C8A553fDE221989
+Classifica e claim: https://world.devfridge.cool/leaderboard
+
+Questa anteprima descrive l'implementazione attuale. La revisione dello store e l'ammissibilità territoriale sono ancora in valutazione; queste note non autorizzano l'offerta della competizione in qualsiasi paese.
