@@ -1,0 +1,287 @@
+{
+  "source": "https://superteam.fun/",
+  "checked": "2026-09-19",
+  "purpose": "Display language only; not a country eligibility list.",
+  "pages": [
+    {
+      "id": "index",
+      "country": null,
+      "lang": "en",
+      "path": "/android",
+      "language": "English"
+    },
+    {
+      "id": "ae",
+      "country": "AE",
+      "lang": "ar",
+      "path": "/android/ae",
+      "language": "العربية"
+    },
+    {
+      "id": "es",
+      "country": "ES",
+      "lang": "es",
+      "path": "/android/es",
+      "language": "Español"
+    },
+    {
+      "id": "pl",
+      "country": "PL",
+      "lang": "pl",
+      "path": "/android/pl",
+      "language": "Polski"
+    },
+    {
+      "id": "br",
+      "country": "BR",
+      "lang": "pt-BR",
+      "path": "/android/br",
+      "language": "Português"
+    },
+    {
+      "id": "ua",
+      "country": "UA",
+      "lang": "uk",
+      "path": "/android/ua",
+      "language": "Українська"
+    },
+    {
+      "id": "nl",
+      "country": "NL",
+      "lang": "nl",
+      "path": "/android/nl",
+      "language": "Nederlands"
+    },
+    {
+      "id": "kz",
+      "country": "KZ",
+      "lang": "kk",
+      "path": "/android/kz",
+      "language": "Қазақша"
+    },
+    {
+      "id": "ar",
+      "country": "AR",
+      "lang": "es",
+      "path": "/android/ar",
+      "language": "Español"
+    },
+    {
+      "id": "th",
+      "country": "TH",
+      "lang": "th",
+      "path": "/android/th",
+      "language": "ไทย"
+    },
+    {
+      "id": "vn",
+      "country": "VN",
+      "lang": "vi",
+      "path": "/android/vn",
+      "language": "Tiếng Việt"
+    },
+    {
+      "id": "jp",
+      "country": "JP",
+      "lang": "ja",
+      "path": "/android/jp",
+      "language": "日本語"
+    },
+    {
+      "id": "sg",
+      "country": "SG",
+      "lang": "en",
+      "path": "/android/sg",
+      "language": "English"
+    },
+    {
+      "id": "kr",
+      "country": "KR",
+      "lang": "ko",
+      "path": "/android/kr",
+      "language": "한국어"
+    },
+    {
+      "id": "de",
+      "country": "DE",
+      "lang": "de",
+      "path": "/android/de",
+      "language": "Deutsch"
+    },
+    {
+      "id": "us",
+      "country": "US",
+      "lang": "en",
+      "path": "/android/us",
+      "language": "English"
+    },
+    {
+      "id": "ie",
+      "country": "IE",
+      "lang": "en",
+      "path": "/android/ie",
+      "language": "English"
+    },
+    {
+      "id": "ge",
+      "country": "GE",
+      "lang": "ka",
+      "path": "/android/ge",
+      "language": "ქართული"
+    },
+    {
+      "id": "gb",
+      "country": "GB",
+      "lang": "en",
+      "path": "/android/gb",
+      "language": "English"
+    },
+    {
+      "id": "my",
+      "country": "MY",
+      "lang": "ms",
+      "path": "/android/my",
+      "language": "Bahasa Melayu"
+    },
+    {
+      "id": "tr",
+      "country": "TR",
+      "lang": "tr",
+      "path": "/android/tr",
+      "language": "Türkçe"
+    },
+    {
+      "id": "ca",
+      "country": "CA",
+      "lang": "en",
+      "path": "/android/ca",
+      "language": "English"
+    },
+    {
+      "id": "ca-fr",
+      "country": "CA",
+      "lang": "fr",
+      "path": "/android/ca-fr",
+      "language": "Français"
+    },
+    {
+      "id": "in",
+      "country": "IN",
+      "lang": "hi",
+      "path": "/android/in",
+      "language": "हिन्दी"
+    },
+    {
+      "id": "in-en",
+      "country": "IN",
+      "lang": "en",
+      "path": "/android/in-en",
+      "language": "English"
+    },
+    {
+      "id": "au",
+      "country": "AU",
+      "lang": "en",
+      "path": "/android/au",
+      "language": "English"
+    },
+    {
+      "id": "ng",
+      "country": "NG",
+      "lang": "en",
+      "path": "/android/ng",
+      "language": "English"
+    },
+    {
+      "id": "it",
+      "country": "IT",
+      "lang": "it",
+      "path": "/android/it",
+      "language": "Italiano"
+    },
+    {
+      "id": "al",
+      "country": "AL",
+      "lang": "sq",
+      "path": "/android/al",
+      "language": "Shqip"
+    },
+    {
+      "id": "ba",
+      "country": "BA",
+      "lang": "bs",
+      "path": "/android/ba",
+      "language": "Bosanski"
+    },
+    {
+      "id": "bg",
+      "country": "BG",
+      "lang": "bg",
+      "path": "/android/bg",
+      "language": "Български"
+    },
+    {
+      "id": "hr",
+      "country": "HR",
+      "lang": "hr",
+      "path": "/android/hr",
+      "language": "Hrvatski"
+    },
+    {
+      "id": "gr",
+      "country": "GR",
+      "lang": "el",
+      "path": "/android/gr",
+      "language": "Ελληνικά"
+    },
+    {
+      "id": "hu",
+      "country": "HU",
+      "lang": "hu",
+      "path": "/android/hu",
+      "language": "Magyar"
+    },
+    {
+      "id": "xk",
+      "country": "XK",
+      "lang": "sq",
+      "path": "/android/xk",
+      "language": "Shqip"
+    },
+    {
+      "id": "me",
+      "country": "ME",
+      "lang": "sr-Latn",
+      "path": "/android/me",
+      "language": "Srpski (latinica)"
+    },
+    {
+      "id": "mk",
+      "country": "MK",
+      "lang": "mk",
+      "path": "/android/mk",
+      "language": "Македонски"
+    },
+    {
+      "id": "ro",
+      "country": "RO",
+      "lang": "ro",
+      "path": "/android/ro",
+      "language": "Română"
+    },
+    {
+      "id": "rs",
+      "country": "RS",
+      "lang": "sr-Latn",
+      "path": "/android/rs",
+      "language": "Srpski (latinica)"
+    },
+    {
+      "id": "si",
+      "country": "SI",
+      "lang": "sl",
+      "path": "/android/si",
+      "language": "Slovenščina"
+    }
+  ]
+}

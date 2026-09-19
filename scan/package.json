@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3010",
+    "prebuild": "node scripts/build-android-page.mjs",
+    "build:android": "node scripts/build-android-page.mjs",
     "build": "next build",
     "start": "next start -p 3010",
     "lint": "next lint",

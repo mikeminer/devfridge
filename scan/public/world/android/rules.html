@@ -1,1 +1,101 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'"><title>TopShelf rules · DevFridge World</title><meta name="description" content="The DevFridge kitchen, on Android. Merge the characters, fill the fridge and share your best run. Release-signed APK · Android 9 or later · 18+"><link rel="canonical" href="https://world.devfridge.cool/android/rules"><meta property="og:title" content="TopShelf rules · DevFridge World"><meta property="og:description" content="The DevFridge kitchen, on Android. Merge the characters, fill the fridge and share your best run."><meta property="og:image" content="https://world.devfridge.cool/world/android/artwork.png"><link rel="icon" href="/world/android/artwork.png"><link rel="stylesheet" href="/world/android/android.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="wrap nav"><a class="wordmark" href="https://world.devfridge.cool">DEVFRIDGE<span>WORLD</span></a><nav><a href="/android#install">Get started</a><a href="mailto:welcome@devfridge.cool">Support</a><a class="language" href="/android/it" lang="it">Italiano ↗</a></nav></header><main class="wrap document" id="main"><a href="/android">← Back to Android</a><p class="eyebrow">Updated 19 September 2026</p><h1>TopShelf rules</h1><p class="doc-note">Beta documentation. Store submission, legal eligibility and complete device validation remain open.</p><p>Access and optional registration<br>This game is for adults aged 18 or over. Character access requires at least 500,000 tokens of that character actively timelocked through DevFridge. There is no TopShelf charge for starting each run. After a verified run ends, you can choose whether to pay to register its known score on Robinhood Chain. Payment is required to include that run in the on-chain prize leaderboard.</p><p>Payment and wallets<br>The owner sets the amount for each enabled ERC-20 token. Review the selected token, amount, season and network before confirming. Network gas is separate from the registration fee. A token allowance approval alone does not register a score. Registration links your Solana and Robinhood wallets permanently, one-to-one. The original Solana account must authorize the link: it can sign in the Android game through MWA, including Seed Vault, while Phantom handles the separate Robinhood payment. Alternatively, the same Solana account can sign inside Phantom.</p><p>Scores<br>Each run can be registered once. Each additional run registration pays a fee; only your highest registered score counts for the season. Equal scores are ordered by wallet address. Ranked play includes server-generated random pieces and player placement decisions. The server validates the recorded run; this does not prove a human played.</p><p>Seasonal token prizes<br>Registration fees fund the intended seasonal prize distributions. The owner sets the number of winners and approves a distribution. The top scores are captured in a snapshot; once capture is complete, winners can claim and a new season starts. For each pool token, a winner&#39;s allocation is the pool multiplied by that winner&#39;s best score, divided by the sum of all winning scores, rounded down to whole token base units. The available pool may also include unclaimed funds carried over from an earlier distribution.</p><p>Owner safety controls<br>The owner can withdraw unreserved funds, including entry fees before a distribution is approved. This is an intentional safety control. Funds reserved for an open distribution cannot be withdrawn by the owner while reserved. The contract does not guarantee that every fee will be redistributed or that a distribution will open on a fixed date. The owner can also change future token fees, accepted tokens, winner count and verifier, or pause registrations.</p><p>Claims and closure<br>The owner decides when to close claims; the contract does not enforce a minimum claim period. When claims close, unclaimed allocations expire. Remaining funds become available for a later distribution or owner withdrawal. Check the live leaderboard for the season, distribution status and your claimable amounts. A score registration does not guarantee a prize or a refund; mandatory legal rights are unaffected.</p><p>Before paying<br>Review the current contract state and any published season notices. Token values and network fees can change. Only confirmed registration transactions establish on-chain inclusion. The app&#39;s return link is not proof of payment. Do not repeat a payment while the original transaction is still pending.</p><p>Contract<br>Robinhood Chain, chain ID 4663<br>0xc1DB49694E0DB50778c333350C8A553fDE221989<br>Leaderboard and claims: https://world.devfridge.cool/leaderboard</p><p>This preview explains the current implementation. Store review and territorial eligibility are still being evaluated; these notes do not establish permission to offer the competition in every country.<br></p></main><footer class="wrap footer"><a class="wordmark" href="https://world.devfridge.cool">DEVFRIDGE<span>WORLD</span></a><div><p>Published by Michele Forlani · Italy</p><a href="/android/privacy">Privacy & device data</a> · <a href="/android/rules">TopShelf rules</a><p><a href="mailto:welcome@devfridge.cool">welcome@devfridge.cool</a></p></div><small>© 2026 DevFridge<br>Android 0.3.1-beta.1</small></footer></body></html>
+<!doctype html>
+<html lang="en" dir="ltr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<title>TopShelf rules · DevFridge World</title><meta name="description" content="The DevFridge kitchen, on Android. Merge the characters, fill the fridge and share your best run. Release-signed APK · Android 9 or later · 18+">
+<link rel="canonical" href="https://world.devfridge.cool/android/rules">
+<meta property="og:title" content="TopShelf rules · DevFridge World"><meta property="og:description" content="The DevFridge kitchen, on Android. Merge the characters, fill the fridge and share your best run.">
+<meta property="og:image" content="https://world.devfridge.cool/world/android/artwork.png">
+<link rel="icon" href="/world/android/artwork.png"><link rel="stylesheet" href="/world/android/android.css">
+</head><body><a class="skip" href="#main">Skip to content</a>
+<header class="wrap nav"><a class="wordmark" href="https://world.devfridge.cool" dir="ltr">DEVFRIDGE<span>WORLD</span></a>
+<nav aria-label="Country &amp; language"><a href="/android#install">Get started</a><a href="mailto:welcome@devfridge.cool">Support</a><details class="country-picker"><summary><span class="globe" aria-hidden="true">🌐</span><span>Country &amp; language<small>English</small></span></summary>
+    <div class="country-panel"><p class="picker-title">Country &amp; language</p>
+      <div class="country-grid"><a class="country-option" href="/android" aria-current="page">
+        <span class="globe" aria-hidden="true">🌐</span><span>International<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/al">
+        <img class="flag" src="/world/android/flags/al.svg" width="28" height="21" alt=""><span>Albania<small lang="sq" dir="auto">Shqip</small></span>
+      </a><a class="country-option" href="/android/ar">
+        <img class="flag" src="/world/android/flags/ar.svg" width="28" height="21" alt=""><span>Argentina<small lang="es" dir="auto">Español</small></span>
+      </a><a class="country-option" href="/android/au">
+        <img class="flag" src="/world/android/flags/au.svg" width="28" height="21" alt=""><span>Australia<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/ba">
+        <img class="flag" src="/world/android/flags/ba.svg" width="28" height="21" alt=""><span>Bosnia &amp; Herzegovina<small lang="bs" dir="auto">Bosanski</small></span>
+      </a><a class="country-option" href="/android/br">
+        <img class="flag" src="/world/android/flags/br.svg" width="28" height="21" alt=""><span>Brazil<small lang="pt-BR" dir="auto">Português</small></span>
+      </a><a class="country-option" href="/android/bg">
+        <img class="flag" src="/world/android/flags/bg.svg" width="28" height="21" alt=""><span>Bulgaria<small lang="bg" dir="auto">Български</small></span>
+      </a><a class="country-option" href="/android/ca">
+        <img class="flag" src="/world/android/flags/ca.svg" width="28" height="21" alt=""><span>Canada<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/ca-fr">
+        <img class="flag" src="/world/android/flags/ca.svg" width="28" height="21" alt=""><span>Canada<small lang="fr" dir="auto">Français</small></span>
+      </a><a class="country-option" href="/android/hr">
+        <img class="flag" src="/world/android/flags/hr.svg" width="28" height="21" alt=""><span>Croatia<small lang="hr" dir="auto">Hrvatski</small></span>
+      </a><a class="country-option" href="/android/ge">
+        <img class="flag" src="/world/android/flags/ge.svg" width="28" height="21" alt=""><span>Georgia<small lang="ka" dir="auto">ქართული</small></span>
+      </a><a class="country-option" href="/android/de">
+        <img class="flag" src="/world/android/flags/de.svg" width="28" height="21" alt=""><span>Germany<small lang="de" dir="auto">Deutsch</small></span>
+      </a><a class="country-option" href="/android/gr">
+        <img class="flag" src="/world/android/flags/gr.svg" width="28" height="21" alt=""><span>Greece<small lang="el" dir="auto">Ελληνικά</small></span>
+      </a><a class="country-option" href="/android/hu">
+        <img class="flag" src="/world/android/flags/hu.svg" width="28" height="21" alt=""><span>Hungary<small lang="hu" dir="auto">Magyar</small></span>
+      </a><a class="country-option" href="/android/in">
+        <img class="flag" src="/world/android/flags/in.svg" width="28" height="21" alt=""><span>India<small lang="hi" dir="auto">हिन्दी</small></span>
+      </a><a class="country-option" href="/android/in-en">
+        <img class="flag" src="/world/android/flags/in.svg" width="28" height="21" alt=""><span>India<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/ie">
+        <img class="flag" src="/world/android/flags/ie.svg" width="28" height="21" alt=""><span>Ireland<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/it">
+        <img class="flag" src="/world/android/flags/it.svg" width="28" height="21" alt=""><span>Italy<small lang="it" dir="auto">Italiano</small></span>
+      </a><a class="country-option" href="/android/jp">
+        <img class="flag" src="/world/android/flags/jp.svg" width="28" height="21" alt=""><span>Japan<small lang="ja" dir="auto">日本語</small></span>
+      </a><a class="country-option" href="/android/kz">
+        <img class="flag" src="/world/android/flags/kz.svg" width="28" height="21" alt=""><span>Kazakhstan<small lang="kk" dir="auto">Қазақша</small></span>
+      </a><a class="country-option" href="/android/xk">
+        <img class="flag" src="/world/android/flags/xk.svg" width="28" height="21" alt=""><span>Kosovo<small lang="sq" dir="auto">Shqip</small></span>
+      </a><a class="country-option" href="/android/my">
+        <img class="flag" src="/world/android/flags/my.svg" width="28" height="21" alt=""><span>Malaysia<small lang="ms" dir="auto">Bahasa Melayu</small></span>
+      </a><a class="country-option" href="/android/me">
+        <img class="flag" src="/world/android/flags/me.svg" width="28" height="21" alt=""><span>Montenegro<small lang="sr-Latn" dir="auto">Srpski (latinica)</small></span>
+      </a><a class="country-option" href="/android/nl">
+        <img class="flag" src="/world/android/flags/nl.svg" width="28" height="21" alt=""><span>Netherlands<small lang="nl" dir="auto">Nederlands</small></span>
+      </a><a class="country-option" href="/android/ng">
+        <img class="flag" src="/world/android/flags/ng.svg" width="28" height="21" alt=""><span>Nigeria<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/mk">
+        <img class="flag" src="/world/android/flags/mk.svg" width="28" height="21" alt=""><span>North Macedonia<small lang="mk" dir="auto">Македонски</small></span>
+      </a><a class="country-option" href="/android/pl">
+        <img class="flag" src="/world/android/flags/pl.svg" width="28" height="21" alt=""><span>Poland<small lang="pl" dir="auto">Polski</small></span>
+      </a><a class="country-option" href="/android/ro">
+        <img class="flag" src="/world/android/flags/ro.svg" width="28" height="21" alt=""><span>Romania<small lang="ro" dir="auto">Română</small></span>
+      </a><a class="country-option" href="/android/rs">
+        <img class="flag" src="/world/android/flags/rs.svg" width="28" height="21" alt=""><span>Serbia<small lang="sr-Latn" dir="auto">Srpski (latinica)</small></span>
+      </a><a class="country-option" href="/android/sg">
+        <img class="flag" src="/world/android/flags/sg.svg" width="28" height="21" alt=""><span>Singapore<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/si">
+        <img class="flag" src="/world/android/flags/si.svg" width="28" height="21" alt=""><span>Slovenia<small lang="sl" dir="auto">Slovenščina</small></span>
+      </a><a class="country-option" href="/android/kr">
+        <img class="flag" src="/world/android/flags/kr.svg" width="28" height="21" alt=""><span>South Korea<small lang="ko" dir="auto">한국어</small></span>
+      </a><a class="country-option" href="/android/es">
+        <img class="flag" src="/world/android/flags/es.svg" width="28" height="21" alt=""><span>Spain<small lang="es" dir="auto">Español</small></span>
+      </a><a class="country-option" href="/android/th">
+        <img class="flag" src="/world/android/flags/th.svg" width="28" height="21" alt=""><span>Thailand<small lang="th" dir="auto">ไทย</small></span>
+      </a><a class="country-option" href="/android/tr">
+        <img class="flag" src="/world/android/flags/tr.svg" width="28" height="21" alt=""><span>Türkiye<small lang="tr" dir="auto">Türkçe</small></span>
+      </a><a class="country-option" href="/android/ua">
+        <img class="flag" src="/world/android/flags/ua.svg" width="28" height="21" alt=""><span>Ukraine<small lang="uk" dir="auto">Українська</small></span>
+      </a><a class="country-option" href="/android/ae">
+        <img class="flag" src="/world/android/flags/ae.svg" width="28" height="21" alt=""><span>United Arab Emirates<small lang="ar" dir="auto">العربية</small></span>
+      </a><a class="country-option" href="/android/gb">
+        <img class="flag" src="/world/android/flags/gb.svg" width="28" height="21" alt=""><span>United Kingdom<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/us">
+        <img class="flag" src="/world/android/flags/us.svg" width="28" height="21" alt=""><span>United States<small lang="en" dir="auto">English</small></span>
+      </a><a class="country-option" href="/android/vn">
+        <img class="flag" src="/world/android/flags/vn.svg" width="28" height="21" alt=""><span>Vietnam<small lang="vi" dir="auto">Tiếng Việt</small></span>
+      </a></div><p class="picker-note">Choosing a country changes the language, not TopShelf eligibility.</p>
+    </div></details></nav></header>
+<main class="wrap document" id="main"><a href="/android">← Back to Android</a><p class="eyebrow">Updated 19 September 2026</p><h1>TopShelf rules</h1><p class="doc-note">Beta documentation. Store submission, legal eligibility and complete device validation remain open.</p><p>Access and optional registration<br>This game is for adults aged 18 or over. Character access requires at least 500,000 tokens of that character actively timelocked through DevFridge. There is no TopShelf charge for starting each run. After a verified run ends, you can choose whether to pay to register its known score on Robinhood Chain. Payment is required to include that run in the on-chain prize leaderboard.</p><p>Payment and wallets<br>The owner sets the amount for each enabled ERC-20 token. Review the selected token, amount, season and network before confirming. Network gas is separate from the registration fee. A token allowance approval alone does not register a score. Registration links your Solana and Robinhood wallets permanently, one-to-one. The original Solana account must authorize the link: it can sign in the Android game through MWA, including Seed Vault, while Phantom handles the separate Robinhood payment. Alternatively, the same Solana account can sign inside Phantom.</p><p>Scores<br>Each run can be registered once. Each additional run registration pays a fee; only your highest registered score counts for the season. Equal scores are ordered by wallet address. Ranked play includes server-generated random pieces and player placement decisions. The server validates the recorded run; this does not prove a human played.</p><p>Seasonal token prizes<br>Registration fees fund the intended seasonal prize distributions. The owner sets the number of winners and approves a distribution. The top scores are captured in a snapshot; once capture is complete, winners can claim and a new season starts. For each pool token, a winner&#39;s allocation is the pool multiplied by that winner&#39;s best score, divided by the sum of all winning scores, rounded down to whole token base units. The available pool may also include unclaimed funds carried over from an earlier distribution.</p><p>Owner safety controls<br>The owner can withdraw unreserved funds, including entry fees before a distribution is approved. This is an intentional safety control. Funds reserved for an open distribution cannot be withdrawn by the owner while reserved. The contract does not guarantee that every fee will be redistributed or that a distribution will open on a fixed date. The owner can also change future token fees, accepted tokens, winner count and verifier, or pause registrations.</p><p>Claims and closure<br>The owner decides when to close claims; the contract does not enforce a minimum claim period. When claims close, unclaimed allocations expire. Remaining funds become available for a later distribution or owner withdrawal. Check the live leaderboard for the season, distribution status and your claimable amounts. A score registration does not guarantee a prize or a refund; mandatory legal rights are unaffected.</p><p>Before paying<br>Review the current contract state and any published season notices. Token values and network fees can change. Only confirmed registration transactions establish on-chain inclusion. The app&#39;s return link is not proof of payment. Do not repeat a payment while the original transaction is still pending.</p><p>Contract<br>Robinhood Chain, chain ID 4663<br>0xc1DB49694E0DB50778c333350C8A553fDE221989<br>Leaderboard and claims: https://world.devfridge.cool/leaderboard</p><p>This preview explains the current implementation. Store review and territorial eligibility are still being evaluated; these notes do not establish permission to offer the competition in every country.<br></p></main>
+<footer class="wrap footer"><a class="wordmark" href="https://world.devfridge.cool" dir="ltr">DEVFRIDGE<span>WORLD</span></a>
+<div><p dir="ltr">Published by <a href="https://x.com/AnonimoCommando" rel="me">pastaman</a></p>
+<a href="/android/privacy" lang="en">Privacy &amp; device data</a> · <a href="/android/rules" lang="en">TopShelf rules</a>
+<p><a href="mailto:welcome@devfridge.cool" dir="ltr">welcome@devfridge.cool</a></p></div>
+<small dir="ltr">© 2026 DevFridge<br>Android 0.3.1-beta.1</small></footer></body></html>
