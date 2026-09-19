@@ -4,7 +4,7 @@ title: "Aperitivo (solana)"
 description: "DevFridge investor knowledge: Aperitivo (solana)"
 resource: "https://solscan.io/token/B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-18T11:13:30Z"
+timestamp: "2026-09-19T03:46:12Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump`
 
-Registry status: ok · last successful observation: 2026-09-18T11:13:30Z · last attempt: 2026-09-18T11:13:30Z.
+Registry status: ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-18T11:13:30Z · last attempt: 2026-09-18T11:13:30Z.
+ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 448066718 |
+| Finalized slot | 448289814 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-18T11:13:30Z · last attempt: 2026-09-18T11:13:30Z.
+ok · last successful observation: 2026-09-19T03:46:12Z · last attempt: 2026-09-19T03:46:12Z.
 
 ```json
 {
