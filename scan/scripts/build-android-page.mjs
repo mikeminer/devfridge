@@ -116,7 +116,7 @@ function document(lang, kind) {
     const policy = privacy[lang];
     const path = `/android/privacy${lang==='it'?'-it':''}`;
     const otherPath = `/android/privacy${lang==='it'?'':'-it'}`;
-    const toc = policy.sections.map(([id,title])=>`<li><a href="#${id}">${esc(title)}</a></li>`).join('');
+    const toc = policy.sections.map(([id,title])=>`<li><a href="#${id}">${esc(title.replace(/^\d+\.\s*/,''))}</a></li>`).join('');
     const sections = policy.sections.map(([id,title,paragraphs])=>`<section aria-labelledby="${id}"><h2 id="${id}">${esc(title)}</h2>${paragraphs.map(p=>`<p>${esc(p).replaceAll('welcome@devfridge.cool','<a href="mailto:welcome@devfridge.cool">welcome@devfridge.cool</a>')}</p>`).join('')}</section>`).join('');
     const providerLinks = privacyLinks.map(([label,href])=>`<li><a href="${href}" rel="external">${esc(label)}</a></li>`).join('');
     return shell(region,policy.title,path,`<main class="wrap document privacy-policy" id="main"><a href="${region.path}">← ${esc(copy[lang].back)}</a><p class="eyebrow">${esc(policy.updated)}</p><h1>${esc(policy.title)}</h1><p><a href="${otherPath}" lang="${lang==='it'?'en':'it'}">${lang==='it'?'Read in English':'Leggi in italiano'}</a> · <a href="/world/android/device-data-${lang}.txt">${lang==='it'?'Versione testo':'Plain text version'}</a></p><p class="doc-note">${esc(policy.intro)}</p><nav aria-label="${lang==='it'?'Indice privacy':'Privacy contents'}"><ol>${toc}</ol></nav>${sections}<section aria-labelledby="provider-links"><h2 id="provider-links">${esc(policy.linksTitle)}</h2><ul>${providerLinks}</ul></section></main>`,{legal:true});
