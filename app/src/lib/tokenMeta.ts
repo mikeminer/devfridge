@@ -38,17 +38,20 @@ export function rewriteUri(uri: string): string {
   return uri;
 }
 
-export function imageCandidates(uri: string | null | undefined): string[] {
-  if (!uri) return [];
+export function imageCandidates(uri: string | null | undefined, mint?: string): string[] {
+  const safeMint = mint && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(mint) ? mint : null;
+  const mintQuery = safeMint ? `&mint=${encodeURIComponent(safeMint)}` : "";
+  const pump = safeMint ? `https://images.pump.fun/coin-image/${safeMint}?variant=256x256` : null;
+  if (!uri) return pump ? [`/api/token-logo?mint=${safeMint}&v=2`, pump] : [];
   if (uri.startsWith("/") || uri.startsWith("data:")) return [uri];
   const cid = ipfsCid(uri);
   if (cid) {
-    const proxied = `/api/token-logo?cid=${encodeURIComponent(cid)}`;
+    const proxied = `/api/token-logo?cid=${encodeURIComponent(cid)}${mintQuery}&v=2`;
     const weserv = `https://wsrv.nl/?url=${encodeURIComponent(`https://w3s.link/ipfs/${cid}`)}&output=webp&n=-1`;
-    return [proxied, weserv, ...IPFS_GATEWAYS.map((g) => `${g}${cid}`)];
+    return [proxied, ...(pump ? [`${pump}&ipfs=${encodeURIComponent(cid)}`] : []), weserv, ...IPFS_GATEWAYS.map((g) => `${g}${cid}`)];
   }
   const abs = rewriteUri(uri);
-  return [`/api/token-logo?url=${encodeURIComponent(abs)}`, abs];
+  return [`/api/token-logo?url=${encodeURIComponent(abs)}${mintQuery}&v=2`, abs, ...(pump ? [pump] : [])];
 }
 
 export function fallbackGlyph(symbol: string): string {

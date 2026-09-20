@@ -71,7 +71,7 @@ export default function StockPanel(props: Props) {
       {mintInfo && (
         <div className="mint-card">
           <div className="mint-logo" style={{ background: "#163039" }}>
-            <TokenLogo src={mintInfo.image} symbol={mintInfo.symbol} />
+            <TokenLogo src={mintInfo.image} mint={mintInfo.mint.toBase58()} symbol={mintInfo.symbol} />
           </div>
           <div>
             <div className="symbol">
