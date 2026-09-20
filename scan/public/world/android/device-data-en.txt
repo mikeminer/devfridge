@@ -6,7 +6,7 @@ This policy explains how DevFridge World processes personal data in the Android 
 
 1. Controller and contact
 
-The controller is Michele Angelo Forlani, an individual based in Italy, publishing as pastaman. For privacy questions and requests, contact welcome@devfridge.cool. This address also handles support. You do not need to connect a wallet or make a payment to contact us.
+The controller operates under the public pseudonym pastaman, an individual publisher based in Italy. For privacy questions and requests, contact welcome@devfridge.cool. This address also handles support. You do not need to connect a wallet or make a payment to contact us.
 
 This notice covers our processing. Wallet providers, blockchains, app stores and external services you choose also have their own responsibilities and privacy policies.
 
