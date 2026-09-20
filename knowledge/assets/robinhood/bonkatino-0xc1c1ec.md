@@ -4,7 +4,7 @@ title: "Bonkatino (robinhood)"
 description: "DevFridge investor knowledge: Bonkatino (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0xC1c1ecB7596f8bc364E397Aaf987e4F11f88557c"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-19T18:16:05Z"
+timestamp: "2026-09-20T09:33:03Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0xc1c1ecb7596f8bc364e397aaf987e4f11f88557c`
 
-Registry status: ok · last successful observation: 2026-09-19T18:16:05Z · last attempt: 2026-09-19T18:16:05Z.
+Registry status: ok · last successful observation: 2026-09-20T09:33:03Z · last attempt: 2026-09-20T09:33:03Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-19T18:16:05Z · last attempt: 2026-09-19T18:16:05Z.
+ok · last successful observation: 2026-09-20T09:33:03Z · last attempt: 2026-09-20T09:33:03Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 67289630 |
+| Block | 67834442 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-19T18:16:05Z · last attempt: 2026-09-19T18:16:05Z.
+ok · last successful observation: 2026-09-20T09:33:03Z · last attempt: 2026-09-20T09:33:03Z.
 
 ```json
 {
@@ -57,8 +57,8 @@ ok · last successful observation: 2026-09-19T18:16:05Z · last attempt: 2026-09
     },
     {
       "address": "0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134",
-      "balance": "14034507042253521126760563",
-      "percentage": 1.4034
+      "balance": "13984507042253521126760563",
+      "percentage": 1.3984
     },
     {
       "address": "0x0f163e7e331091b55a14dc324afc2dbdfde3a7c6",
@@ -72,8 +72,8 @@ ok · last successful observation: 2026-09-19T18:16:05Z · last attempt: 2026-09
     },
     {
       "address": "0xc1db49694e0db50778c333350c8a553fde221989",
-      "balance": "50000000000000000000000",
-      "percentage": 0.005
+      "balance": "100000000000000000000000",
+      "percentage": 0.01
     },
     {
       "address": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
