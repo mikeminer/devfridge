@@ -7,11 +7,13 @@
     "prepare-assets": "node scripts/prepare-assets.mjs",
     "dev": "vite",
     "build": "vite build",
+    "build:kitchen-shelf": "node scripts/build-kitchen-shelf.mjs",
+    "test:kitchen-shelf": "node tests/run-kitchen-pool.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.19.3",
-    "three": "^0.170.0"
+    "three": "0.185.1"
   },
   "devDependencies": {
     "@gltf-transform/cli": "^4.2.1",
