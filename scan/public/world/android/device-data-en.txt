@@ -1,20 +1,123 @@
-DATA ON THIS DEVICE
-Updated 19 September 2026
+Privacy policy
 
-The app stores your collection, preferences and completed verified-score references on this device. Android backup for this app is disabled. Clearing app storage or uninstalling removes local data and can remove registration references you still need. An unfinished run is not restored after Android kills the app.
+Effective 20 September 2026
 
-The app does not request contacts, location, microphone or camera permission. The native wallet connection asks your wallet app to authorize connections and sign messages; recovery phrases and private keys stay in the wallet. The wallet may retain its own connection authorization. Disconnect or revoke it through the wallet as needed.
+This policy explains how DevFridge World processes personal data in the Android app (cool.devfridge.world), the game, TopShelf, and the associated pages at world.devfridge.cool. Wallet addresses and linked activity can be personal data even when no real name is provided.
 
-The age form sends the entered birth date to the DevFridge compliance service. Wallet addresses, timelock eligibility, self-exclusion choices, recorded moves and verified results are processed by online services. Clearing local storage does not erase those server records or cancel a self-exclusion.
+1. Controller and contact
 
-Optional registration sends a short-lived handoff to the dedicated page in Phantom. On-chain score records, wallet links, token transfers and claims are public and cannot be erased by clearing this app. Other apps or services you choose have their own privacy practices.
+The controller is Michele Angelo Forlani, an individual based in Italy, publishing as pastaman. For privacy questions and requests, contact welcome@devfridge.cool. This address also handles support. You do not need to connect a wallet or make a payment to contact us.
 
-For original-wallet approval, including Seed Vault, the service temporarily stores the exact score authorization and its Solana signature until the original challenge expires (at most five minutes). Phantom's browser also keeps the expiring challenge locally so it can resume after switching apps or tabs; it does not store private keys or signatures there. Clear Phantom's website data to remove that browser copy. Changing the payment account or fee token requires a new approval.
+This notice covers our processing. Wallet providers, blockchains, app stores and external services you choose also have their own responsibilities and privacy policies.
 
-Sharing is initiated by you through Android's share chooser. A generated PNG is placed in app cache and temporarily granted to the app you select. Old share images more than 24 hours old are cleaned up when another image is shared, or when Android clears cache; cleanup is not a scheduled deletion service.
+2. Data we process and where it comes from
 
-To manage device data, open Android Settings → Apps → DevFridge World → Storage. Clearing cache affects temporary files; clearing storage removes local history and settings. These are device controls, not a server-account deletion request.
+From your device and requests: IP address, browser or WebView information, requested URL, timestamps, response and error information. Infrastructure providers receive these technical data when delivering the site, APIs, game assets or APK. Abuse controls use keyed hashes of IP addresses or wallet identifiers; a hash is not a guarantee of anonymity.
 
-Publisher and intended controller: Michele Forlani, individual, Italy. Support and data-request contact: welcome@devfridge.cool.
+From you and your wallet: Solana and, for optional TopShelf registration, EVM public addresses; wallet-connection authorizations; signed messages; selected character, network and payment token; optional display name; and messages or attachments you send to support. We do not ask for recovery phrases or private keys. Wallets perform signing and retain their own keys.
 
-This is a technical notice for the preview. The full publisher privacy policy is being prepared for release.
+For age checks, the date of birth you enter is sent to the compliance endpoint to check whether you are at least 18. That handler does not save the date of birth; it sets a signed cookie containing the issue time and an adult-status authorization. Self-exclusion records contain the wallet, selected period and start/end times.
+
+For play and score verification: run identifier, selected character, game seed, moves and their timing/sequence, game state, score, replay hash, verification results, temporary signing challenges and signatures. Local history can contain verified scores and the references needed to resume registration.
+
+From public networks: token balances/locks and expiry times, transactions, wallet links, registered scores, seasons, rankings, fees and claims. We query blockchain infrastructure to check access and display or verify TopShelf results.
+
+If you subscribe to the optional newsletter, we process the email address you enter and your subscription choice through Paragraph. Browsing or connecting a wallet does not itself subscribe you. We do not request contacts, camera, microphone or precise device location permissions in the Android app.
+
+3. Purposes and legal bases
+
+Providing the features you request — wallet connection, token-lock access checks, gameplay, verified scores, optional display names, sharing and TopShelf registration — relies on performance of the service relationship or steps you request before it (GDPR Article 6(1)(b)). The necessary wallet and gameplay data are required for those features; without them, access or registration may not work.
+
+Protecting the service, enforcing the adult-only access rule, detecting replayed or invalid scores, limiting abuse and troubleshooting relies on our legitimate interests in security, fair play and reliable operation (Article 6(1)(f)). Self-exclusion implements your request and our legitimate interest in maintaining that restriction. You may object to processing based on legitimate interests.
+
+Optional newsletter delivery relies on consent (Article 6(1)(a)). You can withdraw consent using the unsubscribe link in the email or by writing to us, without affecting earlier lawful processing or your access to the game. Support uses the service basis for service requests and legitimate interests for general enquiries. Handling statutory privacy requests and legally required disclosures relies on applicable legal obligations (Article 6(1)(c)); retaining evidence for an actual dispute relies on the legitimate interest in establishing or defending claims.
+
+We do not sell player data or use the app or Android download pages for targeted advertising. These pages do not add advertising pixels or analytics scripts. Necessary game-state, authorization and security storage is explained below; external sites and the optional newsletter provider have their own practices.
+
+4. Public scores, wallet links and sharing
+
+TopShelf is optional. When you authorize an on-chain registration, the score, relevant wallet addresses and their link, season, transaction and token-transfer information become public on Robinhood Chain. Solana token-lock transactions are also public. Anyone, including explorers and independent indexers, can copy and analyse public chain data. A public display name can be associated with your wallet in the leaderboard.
+
+Public blockchain records are not private or anonymous. The publisher cannot erase a blockchain transaction or unlink addresses already recorded by the contract. Removing a display name or other off-chain record under our control does not remove the chain record or independently retained copies. Do not use a display name containing sensitive information.
+
+Sharing a score is initiated by you in Android’s share chooser. Only the app or recipient you choose receives the shared image/text through that action; their subsequent use is governed by their own practices. We do not publish a score image to a social account automatically.
+
+5. Recipients and services
+
+Hosting and storage providers process data needed to deliver the service: Vercel hosts the website and APIs, and the Redis-compatible KV database stores the temporary game, proof, display-name and protection records described here. The game verification deployment also supports a Fly.io worker; when that worker is enabled, it receives the game request and forwarded IP for verification and abuse prevention.
+
+Blockchain access uses Alchemy and public Solana RPC endpoints (including PublicNode and Solana public endpoints), with Helius supported when configured. The Robinhood Chain RPC service and the wallet you choose handle EVM queries and transactions. A server-side RPC query sends the relevant public addresses/query and the server’s network information; a direct query from your browser or wallet also exposes that client’s network information to the provider.
+
+GitHub distributes the downloadable APK. A browser game can request the Draco model decoder from Google’s gstatic service. These download providers receive ordinary request metadata. Phantom or another wallet you select receives connection/signing requests. The Solana dApp Store or other installation channel processes its own download and review data.
+
+Paragraph handles the optional email subscription. Support and privacy email to welcome@devfridge.cool passes through ImprovMX forwarding and a Google Gmail inbox. These providers receive the email content, addresses, attachments and delivery metadata. Do not send recovery phrases, private keys or unnecessary identity documents.
+
+We may disclose relevant data to competent authorities when legally required, or to advisers where necessary for an actual legal or security matter. The public receives data you deliberately register on-chain or make public in the leaderboard. Optional external links, wallets and sharing destinations are governed by their respective policies.
+
+6. How long data are kept
+
+Adult-status cookie: up to one year, or until you clear the relevant browser/WebView data. The birth date is processed for the check and is not saved by the age-check handler.
+
+Server game sessions and mobile registration handoffs: up to six hours from the original run issue time. Signing challenges and temporarily retained native signatures: up to five minutes, never beyond the associated run expiry. Request-limiting counters normally expire after one minute; display-name limits after five minutes; newsletter IP-hash counters after ten minutes. Verification locks expire after two minutes if not released sooner.
+
+Verified score/replay proofs: 90 days from creation. Game activity logs: 90 days after the latest write to that run’s log. In-memory game caches are bounded by capacity and cleared by eviction or process restart; they are not a permanent archive.
+
+Self-exclusion: the selected 24 hours, 7 days or 180 days; the option currently labelled “Permanent” is implemented as ten years. Deleting local data does not cancel it. A request to erase a protection record is assessed individually, including whether a limited record remains necessary to honour the exclusion.
+
+Optional display names have no automatic database expiry. They remain associated with the wallet until replaced, removed following a verified request, or the service is discontinued. Local collection, best scores, saved runs, preferences and wallet authorization persist until cleared, replaced or removed with the app; expiring registration references cease to authorize registration when they expire. A wallet may retain its own connection permission until you revoke it there.
+
+Score-sharing PNGs are stored in app cache. Files older than 24 hours are removed when another image is shared, or when Android clears the cache; there is no daily scheduled cleanup. The last shared file can therefore remain until a later cleanup or manual deletion.
+
+Hosting, delivery, RPC and email providers retain operational/security data under their applicable service settings and policies. Vercel’s published runtime-log windows for Pro are one day, or up to 30 days with extended observability; these windows do not describe every provider’s security logs or backups. We do not promise that clearing app data deletes provider logs. Any copies kept to investigate an incident or dispute are limited to what is necessary for that purpose and applicable obligations.
+
+Newsletter data are kept while subscribed; after unsubscribing, delivery stops and limited suppression/consent records may remain to respect that choice. Support correspondence is kept as needed to resolve and follow up the enquiry and to document its outcome or an applicable legal obligation/dispute; you may request earlier deletion. Public chain records and independently copied data can remain indefinitely.
+
+7. International processing
+
+The controller is in Italy, but hosting, database, RPC, download, newsletter and email services can process data outside the European Economic Area, including in the United States. Blockchain nodes and public readers are distributed globally. This service does not promise that all data stay in Italy or the EU.
+
+For provider transfers subject to GDPR, the relevant service arrangement must provide a lawful transfer mechanism, such as an applicable adequacy decision or Standard Contractual Clauses and any necessary supplementary measures. Vercel’s Pro data-processing addendum includes the EU Standard Contractual Clauses; Google describes its applicable transfer frameworks in the link below. Those arrangements do not make a public blockchain private or cover every independent recipient. Contact us for information about the provider and safeguards applicable to your data, or a copy where available.
+
+8. Your rights and how to request deletion
+
+Subject to applicable conditions, you can request access, correction, erasure, restriction and data portability; object to processing based on legitimate interests; and withdraw newsletter consent. You may complain to the Italian Garante per la protezione dei dati personali or the competent supervisory authority where you live or work. Using the service does not waive these rights.
+
+Email welcome@devfridge.cool with the subject “Privacy request” or “Delete my DevFridge data”. Specify the request, the public wallet address(es) or newsletter email concerned, and any run identifiers you know. No payment or token purchase is required. We will request only proportionate evidence of control when necessary, such as a fresh non-transaction wallet signature or verification through the subscribed email. Never send your recovery phrase or private key.
+
+A deletion request can cover your off-chain display name, support records and other identifiable service records under our control, subject to justified retention exceptions. We explain any data we must retain, why and for how long or by what criterion. Blockchain records cannot be erased by us. We respond without undue delay, normally within one month; if a lawful extension is necessary because of complexity or volume, we explain it within that first month.
+
+To clear device data, use Android Settings → Apps → DevFridge World → Storage: clear cache for temporary files or clear storage for local settings/history and WebView data. Uninstalling removes app-local data. Revoke wallet permissions in the wallet, and clear Phantom’s website data for browser-side registration copies. These actions do not submit a server deletion request or cancel a self-exclusion. A wallet-connected profile can be closed by requesting deletion of the associated off-chain data by email.
+
+9. Age restrictions, security and automated checks
+
+The game is intended for people aged 18 or over. If you believe a minor has supplied personal data, contact us so we can investigate and address it, including deletion where appropriate. Do not submit another person’s information unnecessarily.
+
+We use HTTPS, wallet signatures, expiring authorizations and access controls to protect the service. The Android app requests internet access and vibration, does not take custody of wallet keys and disables its own Android backup. No system can guarantee absolute security.
+
+Automated rules check age status, token locks, exclusions, signatures, timing and score consistency. A failed check can block access or score registration. You can request an explanation and human review through the support address. We do not use these records to build advertising profiles.
+
+10. Changes to this notice
+
+We update the effective date when this notice changes and provide an appropriate notice of material changes; where a new use requires consent, we request it separately. This online policy supersedes earlier preliminary Android privacy notices for the processing described here. Older installed APKs can still contain an earlier offline technical notice; this page is the current policy.
+
+Provider information and privacy rights
+
+Vercel: https://vercel.com/legal/privacy-notice
+
+Vercel DPA: https://vercel.com/legal/dpa
+
+Vercel runtime logs: https://vercel.com/docs/logs/runtime
+
+Fly.io: https://www.fly.io/legal/privacy-policy/
+
+GitHub: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+
+Google: https://policies.google.com/privacy
+
+Google — transfers: https://policies.google.com/privacy/frameworks
+
+Paragraph: https://paragraph.com/privacy
+
+ImprovMX: https://improvmx.com/transparency/privacy-policy/
+
+Garante per la protezione dei dati personali: https://www.garanteprivacy.it/

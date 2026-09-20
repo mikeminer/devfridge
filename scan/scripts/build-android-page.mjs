@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {copy} from './android-locales/base.mjs';
 import {fields, translations} from './android-locales/translations.mjs';
 import {regions, languages} from './android-locales/regions.mjs';
+import {privacy, privacyLinks} from './android-locales/privacy.mjs';
 
 const out = fileURLToPath(new URL('../public/world/android/', import.meta.url));
 const r = JSON.parse(readFileSync(join(out, 'release.json'), 'utf8'));
@@ -111,13 +112,25 @@ ${c.changes?`<details><summary>${esc(c.changes)}</summary><p>${esc(c.changeText)
 
 function document(lang, kind) {
   const region = lang==='it' ? regions.find(p=>p.id==='it') : international;
-  const c = copy[lang], file = kind==='privacy' ? 'device-data' : 'topshelf';
+  if (kind === 'privacy') {
+    const policy = privacy[lang];
+    const path = `/android/privacy${lang==='it'?'-it':''}`;
+    const otherPath = `/android/privacy${lang==='it'?'':'-it'}`;
+    const toc = policy.sections.map(([id,title])=>`<li><a href="#${id}">${esc(title.replace(/^\d+\.\s*/,''))}</a></li>`).join('');
+    const sections = policy.sections.map(([id,title,paragraphs])=>`<section aria-labelledby="${id}"><h2 id="${id}">${esc(title)}</h2>${paragraphs.map(p=>`<p>${esc(p).replaceAll('welcome@devfridge.cool','<a href="mailto:welcome@devfridge.cool">welcome@devfridge.cool</a>')}</p>`).join('')}</section>`).join('');
+    const providerLinks = privacyLinks.map(([label,href])=>`<li><a href="${href}" rel="external">${esc(label)}</a></li>`).join('');
+    return shell(region,policy.title,path,`<main class="wrap document privacy-policy" id="main"><a href="${region.path}">← ${esc(copy[lang].back)}</a><p class="eyebrow">${esc(policy.updated)}</p><h1>${esc(policy.title)}</h1><p><a href="${otherPath}" lang="${lang==='it'?'en':'it'}">${lang==='it'?'Read in English':'Leggi in italiano'}</a> · <a href="/world/android/device-data-${lang}.txt">${lang==='it'?'Versione testo':'Plain text version'}</a></p><p class="doc-note">${esc(policy.intro)}</p><nav aria-label="${lang==='it'?'Indice privacy':'Privacy contents'}"><ol>${toc}</ol></nav>${sections}<section aria-labelledby="provider-links"><h2 id="provider-links">${esc(policy.linksTitle)}</h2><ul>${providerLinks}</ul></section></main>`,{legal:true});
+  }
+  const c = copy[lang], file = 'topshelf';
   const paragraphs = readFileSync(join(out,`${file}-${lang}.txt`),'utf8').split(/\r?\n\s*\r?\n/).filter(Boolean);
-  const extra = kind==='privacy' ? c.privacyExtra.map(([t,p])=>`<h2>${esc(t)}</h2><p>${esc(p)}</p>`).join('') : '';
-  return shell(region,kind==='privacy'?c.privacyTitle:c.rulesTitle,`/android/${kind}${lang==='it'?'-it':''}`,`<main class="wrap document" id="main"><a href="${region.path}">← ${esc(c.back)}</a><p class="eyebrow">${esc(c.updated)}</p><h1>${esc(kind==='privacy'?c.privacyTitle:c.rulesTitle)}</h1><p class="doc-note">${esc(c.docNote)}</p>${paragraphs.slice(2).map(p=>`<p>${esc(p).replaceAll('\n','<br>')}</p>`).join('')}${extra}</main>`,{legal:true});
+  return shell(region,c.rulesTitle,`/android/${kind}${lang==='it'?'-it':''}`,`<main class="wrap document" id="main"><a href="${region.path}">← ${esc(c.back)}</a><p class="eyebrow">${esc(c.updated)}</p><h1>${esc(c.rulesTitle)}</h1><p class="doc-note">${esc(c.docNote)}</p>${paragraphs.slice(2).map(p=>`<p>${esc(p).replaceAll('\n','<br>')}</p>`).join('')}</main>`,{legal:true});
 }
 
 mkdirSync(out,{recursive:true});
+for (const [lang, policy] of Object.entries(privacy)) {
+  const text = [policy.title, policy.updated, policy.intro, ...policy.sections.flatMap(([,title,paragraphs])=>[title,...paragraphs]), policy.linksTitle, ...privacyLinks.map(([label,url])=>`${label}: ${url}`)].join('\n\n')+'\n';
+  writeFileSync(join(out,`device-data-${lang}.txt`),text);
+}
 for (const region of pages) writeFileSync(join(out,`${region.id}.html`),landing(region));
 for (const lang of ['en','it']) for (const kind of ['privacy','rules']) writeFileSync(join(out,`${kind}${lang==='it'?'-it':''}.html`),document(lang,kind));
 writeFileSync(join(out,'countries.json'), JSON.stringify({source:'https://superteam.fun/',checked:'2026-09-19',purpose:'Display language only; not a country eligibility list.',pages:pages.map(p=>({...p,language:languages[p.lang]}))},null,2)+'\n');
