@@ -221,7 +221,7 @@ function TokenJar({
       }}
     >
       <span className="jar-glass">
-        <TokenLogo src={lock.image} symbol={lock.symbol} />
+        <TokenLogo src={lock.image} mint={lock.mint.toBase58()} symbol={lock.symbol} />
         <span className="jar-frost" />
       </span>
       <span className="jar-meta">

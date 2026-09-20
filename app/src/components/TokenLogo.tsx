@@ -3,17 +3,18 @@ import { fallbackGlyph, imageCandidates } from "../lib/tokenMeta";
 
 type Props = {
   src?: string | null;
+  mint?: string;
   symbol: string;
   className?: string;
 };
 
-export default function TokenLogo({ src, symbol, className }: Props) {
-  const candidates = imageCandidates(src);
+export default function TokenLogo({ src, mint, symbol, className }: Props) {
+  const candidates = imageCandidates(src, mint);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     setIndex(0);
-  }, [src]);
+  }, [src, mint]);
 
   const url = candidates[index];
   const failed = !url || index >= candidates.length;
