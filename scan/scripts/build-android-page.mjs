@@ -5,12 +5,19 @@ import {copy} from './android-locales/base.mjs';
 import {fields, translations} from './android-locales/translations.mjs';
 import {regions, languages} from './android-locales/regions.mjs';
 import {privacy, privacyLinks} from './android-locales/privacy.mjs';
+import {storeCopy} from './android-locales/store.mjs';
 
 const out = fileURLToPath(new URL('../public/world/android/', import.meta.url));
 const r = JSON.parse(readFileSync(join(out, 'release.json'), 'utf8'));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const international = {id:'index', country:null, lang:'en', path:'/android'};
 const pages = [international, ...regions];
+const storeLive = r.storeStatus === 'live';
+if (storeLive && r.storeUrl !== `solanadappstore://details?id=${r.package}`) throw Error('Invalid dApp Store listing URL');
+for (const {lang} of pages) {
+  if (!storeCopy[lang] || storeCopy[lang].length !== 3 || storeCopy[lang].some(value => !value.trim())) throw Error(`Incomplete store translation: ${lang}`);
+}
+if (storeLive && !existsSync(join(out,'solana-dapp-store-badge.svg'))) throw Error('Missing official dApp Store badge');
 
 // Fail the build rather than silently showing English in an incomplete locale.
 for (const [lang, values] of Object.entries(translations)) {
@@ -87,15 +94,18 @@ ${body}
 
 function landing(region) {
   const c = copy[region.lang];
+  const [storeOpen,storeAvailable,storeHelp] = storeCopy[region.lang];
+  const storeBadge = storeLive ? `<a class="store-badge" href="${esc(r.storeUrl)}" aria-label="${esc(storeOpen)} · DevFridge World" aria-describedby="store-help"><img src="/world/android/solana-dapp-store-badge.svg" alt="Solana dApp Store" width="232" height="91"></a>` : '';
   const docSuffix = ['en','it'].includes(region.lang) ? '' : ' (English)';
   return shell(region, c.download, region.path, `<main id="main">
 <section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span class="dot"></span>${esc(c.badge)}</p>
 <h1>${c.title.split('\n').map(esc).join('<br>')}</h1><p class="lead">${esc(c.lead)}</p>
-<a class="cta" href="${esc(r.downloadUrl)}" aria-describedby="beta-note">${esc(c.download)}<span aria-hidden="true">↗</span></a>
+<div class="download-actions">${storeBadge}<a class="cta" href="${esc(r.downloadUrl)}" aria-describedby="beta-note">${esc(c.download)}<span aria-hidden="true">↗</span></a></div>
+${storeLive?`<p class="store-help" id="store-help">${esc(storeHelp)}</p>`:''}
 <p class="micro"><bdi>${esc(r.version)} · ${(r.bytes/1048576).toFixed(1)} MiB</bdi><br>${esc(c.small)}</p></div>
 <div class="poster"><img src="/world/android/artwork.png" alt="DevFridge World" width="1254" height="1254" fetchpriority="high"><span class="sticker" dir="ltr">BETA<br>01</span></div></section>
 <div class="ticker" aria-hidden="true"><span>${esc(c.tagline)}</span><span>DEVFRIDGE WORLD ✳ ANDROID</span><span>${esc(c.tagline)}</span></div>
-<section class="wrap beta-note" id="beta-note"><span class="tag">BETA</span><div><h2>${esc(c.beta)}</h2><p>${esc(c.betaText)}</p></div></section>
+<section class="wrap beta-note" id="beta-note"><span class="tag">BETA</span><div><h2>${esc(c.beta)}</h2><p>${esc(storeLive?`${storeAvailable} ${c.small}`:c.betaText)}</p></div></section>
 <section class="wrap section"><p class="eyebrow">${esc(c.gameLabel)}</p><h2>${esc(c.nativeTitle)}</h2><div class="features">${c.features.map(([n,t,d])=>`<article><span class="number">${n}</span><h3>${esc(t)}</h3><p>${esc(d)}</p></article>`).join('')}</div></section>
 <section class="dark-section" id="install"><div class="wrap section"><p class="eyebrow" dir="ltr">ANDROID 9+</p><h2>${esc(c.installTitle)}</h2>
 <ol class="steps">${c.install.map(([t,d],i)=>`<li><span class="step">0${i+1}</span><div><h3>${esc(t)}</h3><p>${esc(d)}</p></div></li>`).join('')}</ol>
@@ -104,7 +114,7 @@ function landing(region) {
 <article><span class="wallet-label" dir="ltr">01 / SOLANA</span><h3 dir="ltr">${esc(c.walletSol)}</h3><p>${esc(c.walletSolText)}</p></article>
 <article><span class="wallet-label" dir="ltr">02 / EVM</span><h3 dir="ltr">${esc(c.walletEvm)}</h3><p>${esc(c.walletEvmText)}</p></article></div>
 <aside class="rules-note"><h3>${esc(c.before)}</h3><p>${esc(c.beforeText)}</p><a href="${c.rulesPath}">${esc(c.rules+docSuffix)} ↗</a><p class="docs-language">${esc(c.docsNote)}</p></aside></section>
-<section class="wrap bottom-grid"><article class="store"><p class="eyebrow">DAPP STORE</p><h2>${esc(c.store)}</h2><p>${esc(c.storeText)}</p></article>
+<section class="wrap bottom-grid"><article class="store"><p class="eyebrow">DAPP STORE</p><h2>${esc(c.store)}</h2><p>${esc(storeLive?storeAvailable:c.storeText)}</p>${storeLive?`<p>${esc(storeHelp)}</p><a href="${esc(r.storeUrl)}">${esc(storeOpen)} ↗</a>`:''}</article>
 <article class="support"><p class="eyebrow">${esc(c.improveLabel)}</p><h2>${esc(c.support)}</h2><p>${esc(c.supportText)}</p><a href="mailto:welcome@devfridge.cool" dir="ltr">welcome@devfridge.cool ↗</a></article></section>
 <section class="wrap integrity"><details><summary>${esc(c.verify)}</summary><dl><dt>${esc(c.file)}</dt><dd dir="ltr">${esc(r.file)}</dd><dt>${esc(c.size)}</dt><dd><bdi>${new Intl.NumberFormat(region.lang).format(r.bytes)} B</bdi></dd><dt>APK SHA-256</dt><dd dir="ltr"><code>${esc(r.sha256)}</code></dd><dt>${esc(c.cert)}</dt><dd dir="ltr"><code>${esc(r.certificateSha256)}</code></dd></dl><a href="/world/android/release.json">JSON</a> · <a href="${esc(r.releaseUrl)}">GitHub</a></details>
 ${c.changes?`<details><summary>${esc(c.changes)}</summary><p>${esc(c.changeText)}</p></details>`:''}</section></main>`);

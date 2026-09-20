@@ -10,5 +10,7 @@
   "releaseUrl": "https://github.com/mikeminer/devfridge/releases/tag/android-v0.3.1-beta.1",
   "downloadUrl": "https://github.com/mikeminer/devfridge/releases/download/android-v0.3.1-beta.1/DevFridge-World-0.3.1-beta.1.apk",
   "status": "tester-beta",
-  "storeStatus": "not-submitted"
+  "storeStatus": "live",
+  "storeLiveSince": "2026-09-20",
+  "storeUrl": "solanadappstore://details?id=cool.devfridge.world"
 }
