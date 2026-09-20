@@ -1,6 +1,6 @@
 'use client';
-import {Canvas,useFrame} from '@react-three/fiber';
-import {useMemo,useRef} from 'react';
+import {Canvas,useFrame,useLoader} from '@react-three/fiber';
+import {Suspense,useMemo,useRef} from 'react';
 import {formatUnits} from 'ethers';
 import * as THREE from 'three';
 import type {ShelfData} from '@/lib/topshelf/config';
@@ -8,6 +8,23 @@ import styles from './analytics.module.css';
 
 const COLORS=['#c8ff5c','#63f5cb','#ff8d6b','#9e8cff','#ffe16b','#67b7ff','#ff75bb','#7ef06b','#ffb86b','#7de4ff','#dba2ff','#f3ff9b'];
 const fmt=(value:number)=>value.toLocaleString('en-US',{maximumFractionDigits:1});
+
+function PreserveJar({address,color,height}:{address:string;color:string;height:number}){
+ const label=useLoader(THREE.TextureLoader,`/api/world/topshelf/logo?token=${address}`);
+ label.colorSpace=THREE.SRGBColorSpace;
+ return <group>
+  <mesh position={[0,height*.39,0]}><cylinderGeometry args={[.41,.43,height*.77,28]}/><meshStandardMaterial color={color} emissive={color} emissiveIntensity={.08} roughness={.72}/></mesh>
+  <mesh position={[0,height/2,0]}><cylinderGeometry args={[.48,.5,height,32]}/><meshPhysicalMaterial color="#d9fff0" transparent opacity={.3} transmission={.55} thickness={.35} roughness={.12} metalness={0}/></mesh>
+  <mesh position={[0,height+.09,0]}><cylinderGeometry args={[.5,.5,.18,32]}/><meshStandardMaterial color="#d5d2bd" metalness={.78} roughness={.34}/></mesh>
+  <mesh position={[0,height+.18,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.39,.055,8,32]}/><meshStandardMaterial color="#a9a794" metalness={.9} roughness={.28}/></mesh>
+  <mesh position={[0,height*.53,.492]}><circleGeometry args={[.37,32]}/><meshBasicMaterial color="#fff"/></mesh>
+  <mesh position={[0,height*.53,.5]}><planeGeometry args={[.66,.66]}/><meshBasicMaterial map={label} transparent toneMapped={false}/></mesh>
+ </group>;
+}
+
+function JarFallback({color,height}:{color:string;height:number}){
+ return <group><mesh position={[0,height/2,0]}><cylinderGeometry args={[.48,.5,height,24]}/><meshStandardMaterial color={color} transparent opacity={.62} roughness={.5}/></mesh><mesh position={[0,height+.09,0]}><cylinderGeometry args={[.5,.5,.18,24]}/><meshStandardMaterial color="#d5d2bd" metalness={.75} roughness={.35}/></mesh></group>;
+}
 
 function FridgeShelf({data}:{data:ShelfData}){
  const group=useRef<THREE.Group>(null);
@@ -18,8 +35,7 @@ function FridgeShelf({data}:{data:ShelfData}){
   {data.tokens.slice(0,12).map((token,index)=>{
    const col=index%4,row=Math.floor(index/4),funded=BigInt(token.balance)>0n,height=funded?1.18:.72;
    return <group key={token.address} position={[-2.7+col*1.8,2.28-row*1.5,.06]}>
-    <mesh position={[0,height/2,0]}><cylinderGeometry args={[.46,.46,height,24]}/><meshStandardMaterial color={COLORS[index%COLORS.length]} emissive={COLORS[index%COLORS.length]} emissiveIntensity={funded ? .26 : .06} metalness={.55} roughness={.3}/></mesh>
-    <mesh position={[0,height+.035,0]}><cylinderGeometry args={[.39,.39,.08,24]}/><meshStandardMaterial color="#e8efe8" metalness={.85} roughness={.2}/></mesh>
+    <Suspense fallback={<JarFallback color={COLORS[index%COLORS.length]} height={height}/>}><PreserveJar address={token.address} color={COLORS[index%COLORS.length]} height={height}/></Suspense>
    </group>;
   })}
   <pointLight position={[0,4,4]} intensity={34} color="#c8ff8b" distance={12}/><ambientLight intensity={1.8}/>
