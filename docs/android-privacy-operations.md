@@ -47,4 +47,6 @@ Official references checked:
 
 ## Release boundary
 
+The publisher requested removal of the personal name from the public notices on 20 September 2026. They now use the explicitly labelled public pseudonym pastaman and the support/privacy email. This editorial choice does not establish that a pseudonym satisfies GDPR Article 13 controller-identification requirements. Resolve legal controller identification before treating the notice as cleared for compliance; do not describe the pseudonym as a registered company or claim store/legal approval.
+
 The APK already submitted to the store contains an older offline technical notice. Publishing this policy updates the URL in the store listing without replacing that signed APK. The new online notice explicitly identifies itself as the current policy. Sync the generated text notices to the Android document assets when preparing the next binary release; do not replace a published signed artifact under the same filename/version.

@@ -5,7 +5,7 @@ export const privacy = {
     intro: 'This policy explains how DevFridge World processes personal data in the Android app (cool.devfridge.world), the game, TopShelf, and the associated pages at world.devfridge.cool. Wallet addresses and linked activity can be personal data even when no real name is provided.',
     sections: [
       ['controller', '1. Controller and contact', [
-        'The controller is Michele Angelo Forlani, an individual based in Italy, publishing as pastaman. For privacy questions and requests, contact welcome@devfridge.cool. This address also handles support. You do not need to connect a wallet or make a payment to contact us.',
+        'The controller operates under the public pseudonym pastaman, an individual publisher based in Italy. For privacy questions and requests, contact welcome@devfridge.cool. This address also handles support. You do not need to connect a wallet or make a payment to contact us.',
         'This notice covers our processing. Wallet providers, blockchains, app stores and external services you choose also have their own responsibilities and privacy policies.'
       ]],
       ['data', '2. Data we process and where it comes from', [
@@ -70,7 +70,7 @@ export const privacy = {
     intro: 'Questa informativa descrive il trattamento dei dati personali nell’app Android DevFridge World (cool.devfridge.world), nel gioco, in TopShelf e nelle relative pagine di world.devfridge.cool. Gli indirizzi dei wallet e le attività collegate possono essere dati personali anche senza un nome reale.',
     sections: [
       ['controller', '1. Titolare e contatti', [
-        'Il titolare del trattamento è Michele Angelo Forlani, persona fisica con sede in Italia, che pubblica con il nome pastaman. Per domande e richieste sulla privacy scrivi a welcome@devfridge.cool, utilizzato anche per l’assistenza. Non occorre collegare un wallet o effettuare un pagamento per contattarci.',
+        'Il titolare del trattamento opera con lo pseudonimo pubblico pastaman, publisher individuale con sede in Italia. Per domande e richieste sulla privacy scrivi a welcome@devfridge.cool, utilizzato anche per l’assistenza. Non occorre collegare un wallet o effettuare un pagamento per contattarci.',
         'L’informativa riguarda i trattamenti svolti da noi. Fornitori dei wallet, blockchain, app store e servizi esterni scelti dall’utente hanno anche proprie responsabilità e informative.'
       ]],
       ['data', '2. Dati trattati e provenienza', [
