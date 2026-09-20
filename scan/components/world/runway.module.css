@@ -151,9 +151,11 @@
 .launchNewsletter > button, .newsletterForm > button { display: flex; align-items: center; justify-content: center; min-height: 48px; width: 100%; padding: 12px; border: 0; border-radius: 10px; background: #a4edff; color: #071624; font-size: 14px; font-weight: 700; line-height: 1.4; cursor: pointer; }
 .launchNewsletter > button:hover, .newsletterForm > button:hover { background: #d0f6ff; }
 .launchNewsletter button:focus-visible, .newsletterForm input:focus-visible, .newsletterForm a:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
-.playToEarnBadge { display: flex; width: fit-content; margin: 20px auto 0; border-radius: 16px; }
+.storeBadges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; width: 100%; margin: 20px auto 0; }
+.playToEarnBadge, .solanaStoreBadge { display: flex; width: fit-content; border-radius: 16px; }
 .playToEarnBadge img { display: block; width: 120px; height: 120px; border-radius: 14px; object-fit: contain; }
-.playToEarnBadge:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
+.solanaStoreBadge img { display: block; width: 176px; height: auto; border-radius: 10px; object-fit: contain; }
+.playToEarnBadge:focus-visible, .solanaStoreBadge:focus-visible { outline: 3px solid #ff91d9; outline-offset: 4px; }
 .newsletterForm { display: flex; flex-direction: column; gap: 12px; min-width: 0; text-align: left; }
 .newsletterForm > label { font-size: 14px; line-height: 1.5; color: #e6f5ff; }
 .newsletterForm > input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid #a4edff88; border-radius: 10px; padding: 12px; background: #080b18; color: #f3f8ff; font-size: 16px; }
@@ -163,5 +165,5 @@
 .newsletterForm > p { font-size: 13px; color: #ffccd9; line-height: 1.6; margin: 0; }
 .newsletterForm button:disabled { opacity: .6; cursor: wait; }
 @media (max-width: 900px), (max-height: 600px) and (pointer: coarse) {
-  .panel .playToEarnBadge { order: 8; align-self: center; margin-top: 18px; }
+  .panel .storeBadges { order: 8; align-self: center; margin-top: 18px; }
 }

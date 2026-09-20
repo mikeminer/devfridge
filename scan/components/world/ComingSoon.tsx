@@ -129,22 +129,38 @@ export default function ComingSoon() {
           </a>
           <a className="fridge-key" href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">Game guide ↗</a>
         </nav>
-        <a
-          className={styles.playToEarnBadge}
-          href="https://playtoearn.com/blockchaingame/devfridge-world"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View DevFridge World on PlayToEarn"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://business.playtoearn.com/badge/6314.png"
-            alt="View DevFridge World on PlayToEarn"
-            width="120"
-            height="120"
-            loading="lazy"
-          />
-        </a>
+        <div className={styles.storeBadges} aria-label="DevFridge World listings">
+          <a
+            className={styles.playToEarnBadge}
+            href="https://playtoearn.com/blockchaingame/devfridge-world"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View DevFridge World on PlayToEarn"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://business.playtoearn.com/badge/6314.png"
+              alt="View DevFridge World on PlayToEarn"
+              width="120"
+              height="120"
+              loading="lazy"
+            />
+          </a>
+          <a
+            className={styles.solanaStoreBadge}
+            href="solanadappstore://details?id=cool.devfridge.world"
+            aria-label="Open DevFridge World in the Solana dApp Store"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/world/android/solana-dapp-store-badge.svg"
+              alt="Available in the Solana dApp Store"
+              width="232"
+              height="91"
+              loading="lazy"
+            />
+          </a>
+        </div>
       </section>
     </main>
   );
