@@ -6,7 +6,12 @@ export function shelfConnection() {
  const address=process.env.TOPSHELF_CONTRACT_ADDRESS;
  if(!address) return null;
  if(!isAddress(address)||address===ZeroAddress) throw Error('Invalid TopShelf deployment configuration');
- const request=new FetchRequest(process.env.ROBINHOOD_RPC_URL||'https://rpc.mainnet.chain.robinhood.com');request.timeout=12000;
+ const rpcUrl=process.env.ROBINHOOD_RPC_URL;
+ if(!rpcUrl) throw Error('ROBINHOOD_RPC_URL is required for TopShelf');
+ let endpoint:URL;
+ try {endpoint=new URL(rpcUrl);} catch {throw Error('Invalid ROBINHOOD_RPC_URL');}
+ if(endpoint.protocol!=='https:'||endpoint.hostname!=='robinhood-mainnet.g.alchemy.com')throw Error('TopShelf requires the Alchemy Robinhood Mainnet RPC');
+ const request=new FetchRequest(endpoint.toString());request.timeout=12000;
  const provider=new JsonRpcProvider(request,TOPSHELF_CHAIN,{staticNetwork:true});
  return {address:getAddress(address),provider,contract:new Contract(address,TOPSHELF_ABI,provider)};
 }
