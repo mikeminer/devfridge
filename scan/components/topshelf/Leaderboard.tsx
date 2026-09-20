@@ -1,10 +1,12 @@
 'use client';
 import {useEffect,useState,useCallback,useRef} from 'react';
+import dynamic from 'next/dynamic';
 import {BrowserProvider,Contract,formatUnits,parseUnits,isAddress,ZeroAddress,type Eip1193Provider} from 'ethers';
 import {TOPSHELF_ABI,TOPSHELF_CHAIN,EXPLORER,ERC20_ABI,type ShelfData} from '@/lib/topshelf/config';
 import styles from './topshelf.module.css';
 const short=(address:string)=>`${address.slice(0,6)}…${address.slice(-4)}`;
 const amount=(raw:string,decimals:number)=>Number(formatUnits(raw,decimals)).toLocaleString('en-US',{maximumFractionDigits:6});
+const TopShelfAnalytics=dynamic(()=>import('./TopShelfAnalytics'),{ssr:false});
 type Injected=Eip1193Provider&{on?:(event:string,listener:()=>void)=>void;removeListener?:(event:string,listener:()=>void)=>void};
 function injected():Injected|undefined{return (window as unknown as {ethereum?:Injected;phantom?:{ethereum?:Injected}}).ethereum||(window as unknown as {phantom?:{ethereum?:Injected}}).phantom?.ethereum;}
 export default function Leaderboard(){
@@ -29,6 +31,7 @@ export default function Leaderboard(){
  {!data?<p>Loading TopShelf…</p>:<>
  {!data.configured&&<section className={styles.notice}><h2>TopShelf is being prepared</h2><p>The contract is not connected yet. Score registration, claims and owner transactions will open after deployment and verification. No registrations or prize balances are being reported.</p></section>}
  <div className={styles.stats}><article><small>COLLECTING</small><strong>Season {data.currentSeason}</strong></article><article><small>PLAYERS · SEASON {data.season}</small><strong>{data.configured?data.players.toLocaleString():'—'}</strong></article><article><small>REGISTERED RUNS</small><strong>{data.configured?data.registrations.toLocaleString():'—'}</strong></article><article><small>OWNER’S NEXT WINNER COUNT</small><strong>{data.winnerCount||'Not set'}</strong></article></div>
+ {data.configured&&<TopShelfAnalytics data={data}/>}
  <section className={styles.card}><div className={styles.sectionTitle}><h2>Season leaderboard</h2><div><label>Season <input aria-label="Season number" type="number" min="1" max={data.currentSeason} value={season} placeholder={String(data.currentSeason)} onChange={e=>setSeason(e.target.value)}/></label><button onClick={()=>void refresh()}>Refresh</button></div></div><p>One place per wallet, ranked by its best verified score this season. Equal scores are ordered by wallet address.</p>
  <div className={styles.tableWrap}><table><thead><tr><th>Rank</th><th>Player</th><th>Best score</th></tr></thead><tbody>{data.rows.map(row=><tr key={row.address}><td>{row.rank===1?'♛ ':''}{row.rank}</td><td><a title={row.address} href={`${EXPLORER}/address/${row.address}`} target="_blank" rel="noopener noreferrer"><strong>{row.name||short(row.address)}</strong>{row.name&&<small> · {short(row.address)}</small>}</a>{row.address.toLowerCase()===wallet.toLowerCase()&&' · You'}</td><td>{BigInt(row.score).toLocaleString('en-US')}</td></tr>)}</tbody></table></div>
  {!data.rows.length&&<p className={styles.empty}>{data.configured?'No scores registered in this season yet.':'The leaderboard will display confirmed on-chain scores once TopShelf is active.'}</p>}
