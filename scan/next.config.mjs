@@ -9,6 +9,7 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/world/game-v2", destination: "/world/game-v2/index.html" },
+      { source: "/world/game-v3", destination: "/world/game-v3/index.html" },
       { source: "/world/android", destination: "/world/android/index.html" },
       ...androidRegions.map(({ id }) => ({
         source: `/world/android/${id}`,
@@ -40,6 +41,14 @@ const nextConfig = {
       },
       {
         source: "/world/game-v2/assets/cold-storage.css",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
+      {
+        source: "/world/game-v3",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
+      {
+        source: "/world/game-v3/index.html",
         headers: [{ key: "Cache-Control", value: "no-store" }],
       },
     ];

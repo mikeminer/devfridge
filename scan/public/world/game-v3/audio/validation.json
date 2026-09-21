@@ -1,0 +1,182 @@
+[
+  {
+    "file": "rugarugo-voice.wav",
+    "seconds": 8.122,
+    "peak": 0.67889404296875,
+    "valid": true
+  },
+  {
+    "file": "rugarugo-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.642791748046875,
+    "valid": true
+  },
+  {
+    "file": "rugarugo-signature.wav",
+    "seconds": 10.372,
+    "peak": 0.773590087890625,
+    "valid": true
+  },
+  {
+    "file": "aperitivo-voice.wav",
+    "seconds": 8.016,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "aperitivo-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "aperitivo-signature.wav",
+    "seconds": 10.266,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "friedfomo-voice.wav",
+    "seconds": 3.36,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "friedfomo-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "friedfomo-signature.wav",
+    "seconds": 5.61,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "fudfusilli-voice.wav",
+    "seconds": 4.894,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "fudfusilli-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.70770263671875,
+    "valid": true
+  },
+  {
+    "file": "fudfusilli-signature.wav",
+    "seconds": 7.144,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "lambocello-voice.wav",
+    "seconds": 7.481,
+    "peak": 0.706329345703125,
+    "valid": true
+  },
+  {
+    "file": "lambocello-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.429290771484375,
+    "valid": true
+  },
+  {
+    "file": "lambocello-signature.wav",
+    "seconds": 9.731,
+    "peak": 0.8101806640625,
+    "valid": true
+  },
+  {
+    "file": "gmgnocco-voice.wav",
+    "seconds": 9.372,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "gmgnocco-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.5787353515625,
+    "valid": true
+  },
+  {
+    "file": "gmgnocco-signature.wav",
+    "seconds": 11.622,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "sersugo-voice.wav",
+    "seconds": 10.47,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "sersugo-sfx.wav",
+    "seconds": 2.55,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "sersugo-signature.wav",
+    "seconds": 12.72,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "moonzarella-voice.wav",
+    "seconds": 4.325,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "moonzarella-sfx.wav",
+    "seconds": 2.55,
+    "peak": 0.748626708984375,
+    "valid": true
+  },
+  {
+    "file": "moonzarella-signature.wav",
+    "seconds": 6.575,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "bonkatino-voice.wav",
+    "seconds": 4.633,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "bonkatino-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "bonkatino-signature.wav",
+    "seconds": 6.883,
+    "peak": 0.869964599609375,
+    "valid": true
+  },
+  {
+    "file": "ciccia-voice.wav",
+    "seconds": 13.242,
+    "peak": 0.814453125,
+    "valid": true
+  },
+  {
+    "file": "ciccia-sfx.wav",
+    "seconds": 2.0,
+    "peak": 0.753631591796875,
+    "valid": true
+  },
+  {
+    "file": "ciccia-signature.wav",
+    "seconds": 15.492,
+    "peak": 0.859832763671875,
+    "valid": true
+  }
+]

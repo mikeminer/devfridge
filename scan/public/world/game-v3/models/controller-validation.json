@@ -1,0 +1,52 @@
+[
+  {
+    "id": "rugarugo",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "aperitivo",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "friedfomo",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "fudfusilli",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "lambocello",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "gmgnocco",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "sersugo",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "moonzarella",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "bonkatino",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  },
+  {
+    "id": "ciccia",
+    "clips": 12,
+    "checks": "walk/run, diagonal normalization, deceleration, held jump, landing, world boundary, expressions and binding targets"
+  }
+]

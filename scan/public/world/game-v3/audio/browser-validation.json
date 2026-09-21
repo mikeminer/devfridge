@@ -1,0 +1,169 @@
+{
+  "files": [
+    {
+      "channels": 2,
+      "id": "rugarugo",
+      "seconds": 10.371833333333331,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "rugarugo",
+      "seconds": 8.121833333333333,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "rugarugo",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "aperitivo",
+      "seconds": 10.266041666666666,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "aperitivo",
+      "seconds": 8.016041666666666,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "aperitivo",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "friedfomo",
+      "seconds": 5.60975,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "friedfomo",
+      "seconds": 3.35975,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "friedfomo",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "fudfusilli",
+      "seconds": 7.144125,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "fudfusilli",
+      "seconds": 4.894125,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "fudfusilli",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "lambocello",
+      "seconds": 9.731083333333334,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "lambocello",
+      "seconds": 7.481083333333333,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "lambocello",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "gmgnocco",
+      "seconds": 11.622125,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "gmgnocco",
+      "seconds": 9.372125,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "gmgnocco",
+      "seconds": 2,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "sersugo",
+      "seconds": 12.72,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "sersugo",
+      "seconds": 10.47,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "sersugo",
+      "seconds": 2.55,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "moonzarella",
+      "seconds": 6.5754166666666665,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "moonzarella",
+      "seconds": 4.3254166666666665,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "moonzarella",
+      "seconds": 2.55,
+      "variant": "sfx"
+    },
+    {
+      "channels": 2,
+      "id": "bonkatino",
+      "seconds": 6.882708333333333,
+      "variant": "signature"
+    },
+    {
+      "channels": 2,
+      "id": "bonkatino",
+      "seconds": 4.632708333333333,
+      "variant": "voice"
+    },
+    {
+      "channels": 2,
+      "id": "bonkatino",
+      "seconds": 2,
+      "variant": "sfx"
+    }
+  ],
+  "noAutoplayAfterSelection": true,
+  "playbackAdvanced": true,
+  "stopsOnCharacterChange": true
+}
