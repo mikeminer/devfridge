@@ -1,0 +1,97 @@
+{
+  "version": 3,
+  "status": "disabled",
+  "mode": "timelock-access",
+  "paymentsEnabled": false,
+  "rewardsEnabled": false,
+  "escrowProgramId": null,
+  "entry": "minimum-active-character-token-balance",
+  "retriesRequireNewPayment": false,
+  "minimumRemainingDurationSeconds": 0,
+  "timelockSource": "https://devfridge.cool",
+  "timelockReader": "https://sdk.devfridge.cool/sdk/devfridge-sdk.js",
+  "acceptedTokens": [
+    {
+      "characterId": "rugarugo",
+      "mint": "An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump",
+      "symbol": "RUGARUGO",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "aperitivo",
+      "mint": "B31GwpFQco9R4HX1GrfyXgdmLArBN9pBBinqRn8Jpump",
+      "symbol": "APE",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "friedfomo",
+      "mint": "3Pg4b7wtcYTGacRzyRFGLBG4s6eeJ2d5jxK2jjz4pump",
+      "symbol": "FIFO",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "fudfusilli",
+      "mint": "4ZbHvh5xPMB3vTbURzQfDPPH6iy5KNXg7pTdySNtpump",
+      "symbol": "FUSILLI",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "lambocello",
+      "mint": "HAUTWMn41Qg1RvtwLFC3SEK7JSc19gns2vJL7TgRpump",
+      "symbol": "LAMBOCELLO",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "gmgnocco",
+      "mint": "8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump",
+      "symbol": "GMGN",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "sersugo",
+      "mint": "AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump",
+      "symbol": "SESU",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "moonzarella",
+      "mint": "6ZbWBzH9TyQdGhhxjJ573M9p59SVfRaX25FCFY3spump",
+      "symbol": "MOONZARELL",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "bonkatino",
+      "mint": "HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump",
+      "symbol": "BONKATINO",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "characterId": "ciccia",
+      "mint": "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump",
+      "symbol": "CICCIA",
+      "decimals": 6,
+      "program": "token-2022",
+      "programId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    }
+  ],
+  "minimumTimelockTokens": "500000",
+  "lockAggregation": "active-locks-per-wallet-and-mint"
+}
