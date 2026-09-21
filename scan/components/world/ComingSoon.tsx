@@ -129,6 +129,7 @@ export default function ComingSoon() {
           </a>
           <a className="fridge-key" href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">Game guide ↗</a>
         </nav>
+        <div className={styles.storeBadges}>
         <a
           className={styles.playToEarnBadge}
           href="https://playtoearn.com/blockchaingame/devfridge-world"
@@ -145,6 +146,20 @@ export default function ComingSoon() {
             loading="lazy"
           />
         </a>
+        <a
+          className={styles.solanaMobileBadge}
+          href="solanadappstore://details?id=cool.devfridge.world"
+          aria-label="Download DevFridge World from the Solana dApp Store"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/world/android/solana-dapp-store-badge.svg"
+            alt="Get it on Solana dApp Store"
+            width="232"
+            height="91"
+          />
+        </a>
+        </div>
       </section>
     </main>
   );
