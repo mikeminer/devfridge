@@ -58,6 +58,11 @@ export const OFFICIAL_SITES: OfficialLink[] = [
     hint: "Pastalovers vs The Shelf — lock decides your team",
   },
   {
+    label: "DevFridge World — Android app",
+    href: "https://world.devfridge.cool/android",
+    hint: "Official Android download page for DevFridge World",
+  },
+  {
     label: "Docs",
     href: "https://docs.devfridge.cool",
     hint: "How to fridge, scan, and feature a memecoin",
@@ -124,9 +129,24 @@ export const OFFICIAL_SOCIAL: OfficialLink[] = [
     hint: "Official DevFridge Discord server",
   },
   {
-    label: "Telegram channel",
-    href: "https://t.me/pastamemelovers",
-    hint: "@pastamemelovers",
+    label: "PastaHQ — Telegram",
+    href: "https://t.me/pastaHQ",
+    hint: "@pastaHQ — official DevFridge community",
+  },
+  {
+    label: "DevFridge — YouTube",
+    href: "https://www.youtube.com/@devfridge",
+    hint: "Official channel — gameplay, demos, and project updates",
+  },
+  {
+    label: "DevFridge World — Colosseum",
+    href: "https://colosseum.com/arena/projects/devfridge-world",
+    hint: "Hackathon project, pitch, and builder updates",
+  },
+  {
+    label: "DevFridge World — PlayToEarn",
+    href: "https://playtoearn.com/blockchaingame/devfridge-world",
+    hint: "DevFridge World game listing",
   },
   {
     label: "Trust Me Capital Telegram",
