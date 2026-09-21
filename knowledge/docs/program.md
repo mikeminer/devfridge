@@ -4,7 +4,7 @@ title: "Program IDs and fees"
 description: "DevFridge investor knowledge: Program IDs and fees"
 resource: "https://docs.devfridge.cool/program"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-21T10:43:26Z"
+timestamp: "2026-09-21T12:47:20Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/program) · ok · last successful observation: 2026-09-21T10:43:26Z · last attempt: 2026-09-21T10:43:26Z.
+[Canonical page](https://docs.devfridge.cool/program) · ok · last successful observation: 2026-09-21T12:47:20Z · last attempt: 2026-09-21T12:47:20Z.
 
 ON-CHAIN
 

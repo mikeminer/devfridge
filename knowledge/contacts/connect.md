@@ -4,7 +4,7 @@ title: "Official contacts, project leader and community"
 description: "DevFridge investor knowledge: Official contacts, project leader and community"
 resource: "https://connect.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-21T10:43:26Z"
+timestamp: "2026-09-21T12:47:20Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-21T10:43:26Z · last attempt: 2026-09-21T10:43:26Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-09-21T12:47:20Z · last attempt: 2026-09-21T12:47:20Z.
 
 ## OFFICIAL TELEGRAM BOT
 
@@ -29,6 +29,7 @@ Project-published contact observations. Only team members with verified PASTA co
 - [Scanner Trust report and Fridge badge](https://scan.devfridge.cool)
 - [Ecosystem Kitchen map of products, identities, and live evidence](https://ecosystem.devfridge.cool)
 - [World Pastalovers vs The Shelf — lock decides your team](https://world.devfridge.cool)
+- [DevFridge World — Android app Official Android download page for DevFridge World](https://world.devfridge.cool/android)
 - [Docs How to fridge, scan, and feature a memecoin](https://docs.devfridge.cool)
 - [Health Live status of Fridge, RPC, and $PASTA](https://health.devfridge.cool)
 - [Bot Telegram bot landing page — add @frigopastabot to your group](https://bot.devfridge.cool)
@@ -43,7 +44,10 @@ Project-published contact observations. Only team members with verified PASTA co
 - [Project leader — Telegram @anonimocommando](https://t.me/anonimocommando)
 - [X @anonimocommando](https://x.com/anonimocommando)
 - [Discord Official DevFridge Discord server](https://discord.com/invite/9RSrhuUtu)
-- [Telegram channel @pastamemelovers](https://t.me/pastamemelovers)
+- [PastaHQ — Telegram @pastaHQ — official DevFridge community](https://t.me/pastaHQ)
+- [DevFridge — YouTube Official channel — gameplay, demos, and project updates](https://www.youtube.com/@devfridge)
+- [DevFridge World — Colosseum Hackathon project, pitch, and builder updates](https://colosseum.com/arena/projects/devfridge-world)
+- [DevFridge World — PlayToEarn DevFridge World game listing](https://playtoearn.com/blockchaingame/devfridge-world)
 - [Trust Me Capital Telegram @trustmecapitalTG — official TMC and Trust Rewards group](https://t.me/trustmecapitalTG)
 - [$PASTA on pump.fun Official mint listing](https://pump.fun/coin/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump)
 - [Dev on pump.fun Official pump.fun profile](https://pump.fun/profile/GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W)
