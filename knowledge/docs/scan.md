@@ -4,7 +4,7 @@ title: "Solana token risk scanner"
 description: "DevFridge investor knowledge: Solana token risk scanner"
 resource: "https://docs.devfridge.cool/scan"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-20T12:48:39Z"
+timestamp: "2026-09-21T04:07:13Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/scan) · ok · last successful observation: 2026-09-20T12:48:39Z · last attempt: 2026-09-20T12:48:39Z.
+[Canonical page](https://docs.devfridge.cool/scan) · ok · last successful observation: 2026-09-21T04:07:13Z · last attempt: 2026-09-21T04:07:13Z.
 
 SCANNER
 
