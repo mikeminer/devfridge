@@ -1,0 +1,53 @@
+{
+  "name": "devfridge-game-builder",
+  "version": "1.0.0",
+  "reviewedAt": "2026-09-22",
+  "bytes": 16913,
+  "sha256": "ad3c0f2ba6535db61e25a94fe81e7ff7ae8bdaa914da66e797ac2c71ce37da3f",
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "df1ef740c1af1ea782c82d87cbeee92d93dedda76936de6f3ef2b4c82795b23a"
+    },
+    {
+      "path": "assets/timelock-gate.mjs",
+      "sha256": "75a1bf31424598360b24ed867512a683af423de12d28276f0633033ba121390a"
+    },
+    {
+      "path": "assets/timelock-gate.test.mjs",
+      "sha256": "920a27c3c778608a6d40c4b670ec06044eb63797e74c194f094be4c8961b410f"
+    },
+    {
+      "path": "references/competition.md",
+      "sha256": "83134c93e7050403b382bac5adf9debf674bcfcdb44ec440f7eb43094c84f810"
+    },
+    {
+      "path": "references/discovery.md",
+      "sha256": "976616aa2a9ee81268d45660b28fdb5e778f13e328c63cc2797275f3822ab3e7"
+    },
+    {
+      "path": "references/ecosystem.md",
+      "sha256": "487f057543b621035f67b5e3455d6b8d5aa53b01ee83dc841d9c2e9c7cd82cf6"
+    },
+    {
+      "path": "references/game-delivery.md",
+      "sha256": "1b79e9da4449e2bfdb16638b1610e555e9eb73e7ccb413bd12ff1e833d4f1983"
+    },
+    {
+      "path": "references/phantom.md",
+      "sha256": "09f46489d69b87d979be8758274daf3c2351f54db0d11e66417159a8540e0577"
+    },
+    {
+      "path": "references/sdk-access.md",
+      "sha256": "4721b22c0be14797dc03eae82bfbf377c3e78a396e9c70892f679cc2fab16534"
+    },
+    {
+      "path": "references/sources.md",
+      "sha256": "d0b744f7a8667642dc37e440cbf7302023f64ed79ba4e0e84ff325915cef19f8"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "fc1c2b5fc4969e099522d5310baf1a57a519376e0ae262740d399a8356e75465"
+    }
+  ]
+}
