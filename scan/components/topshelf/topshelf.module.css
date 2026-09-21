@@ -9,3 +9,7 @@
 .tokenBalance{flex:0 0 38%;text-align:right}
 
 @media(max-width:700px){.entryToken{flex-direction:column;gap:14px}.tokenBalance{flex:auto;text-align:left}}
+
+.heroActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.heroActions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 18px;border:1px solid #9cefc677;border-radius:10px;background:#163b35;color:#d6ffe6;font-size:14px;font-weight:600;line-height:1.4}
+.heroActions a:hover{background:#215347}
