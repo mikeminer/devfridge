@@ -45,6 +45,9 @@ export async function transitionLive(t:RunTicket,s:LiveState,body:Record<string,
    g.queue[0]=s.nextTier;const x=Math.round(g.clampX(Number(body.x))*1000)/1000;
    if(x!==body.x||!g.drop(x))throw new RegistrationError('This drop is not legal at this time.',422);
    const state={...s,revision:s.revision+1,nonce:randomNonce(),nextTier:s.previewTier,previewTier:entropy(),lastAt:now,moves:[...s.moves,{tick,x,tier:s.nextTier}],snapshot:capturePhysics(g)};
+   // The client and cold restore cross this boundary after every accepted drop.
+   // Keep a warm worker identical: retaining the un-restored world can change contacts.
+   checkpointPhysics(g);
    return {state,game:g};
   }catch(e){g.dispose();throw e;}
  }
@@ -67,7 +70,12 @@ export async function advanceLiveRun(t:RunTicket,body:Record<string,unknown>) {
  if(s.lastRequest===fingerprint)return ack(s);
  const {state:updated,game}=await transitionLive(t,s,body);updated.lastRequest=fingerprint;
  const result=await scoreStore(['EVAL',"if redis.call('GET',KEYS[1])==ARGV[1] then redis.call('SET',KEYS[1],ARGV[2],'KEEPTTL'); return 1 else return 0 end",1,runKey,raw,JSON.stringify(updated)]);
- if(result!==1){game?.dispose();throw new RegistrationError('Another input already advanced this run. Retry the same move.',409);}
+ if(result!==1){
+  game?.dispose();
+  const committed=await scoreStore(['GET',runKey]);
+  if(committed){const current:LiveState=JSON.parse(committed);if(current.lastRequest===fingerprint)return ack(current);}
+  throw new RegistrationError('Another input already advanced this run. Retry the same move.',409);
+ }
  if(game)rememberWorld(t,updated.revision,game);
  return ack(updated);
 }
