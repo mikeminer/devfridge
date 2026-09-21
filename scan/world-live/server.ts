@@ -63,12 +63,19 @@ async function handleLive(body: Record<string, unknown>, ip: string) {
   if (!secret || secret.length < 32) throw new RegistrationError("Score verification is not configured.", 503);
   const live = body.action === "move" || body.action === "finish";
   if (!live) throw new RegistrationError("Unknown registration action");
-  await scoreRateLimit(`ip:live:${ip}`, 1200);
+  // Gateway and worker must not increment the same bucket for a single move.
+  await scoreRateLimit(`worker:ip:live:${ip}`, 1200);
   const ticket = unseal<RunTicket>(body.ticket, secret, "run");
   if (ticket.liveVersion !== 2) throw new RegistrationError("This run predates live verification. Start a new run.", 409);
-  await scoreRateLimit(`live:${ticket.runId}`, 240);
+  await scoreRateLimit(`worker:live:${ticket.runId}`, 240);
   await assertNotExcluded(ticket.wallet);
-  const ack = await advanceLiveRun(ticket, body);
+  let ack;
+  try { ack = await advanceLiveRun(ticket, body); }
+  catch (error) {
+    // Enough context to diagnose a legitimate rejected run, without wallet signatures or tickets.
+    console.warn(JSON.stringify({event:"live-verification-rejected",runId:ticket.runId,action:body.action,tick:body.tick,sequence:body.sequence,status:error instanceof RegistrationError?error.status:503,reason:error instanceof RegistrationError?error.message:"Verifier unavailable"}));
+    throw error;
+  }
   try {
     await appendLog(ticket.runId, { action: body.action, tick: body.tick, x: body.x, score: body.score, sequence: body.sequence });
   } catch {
@@ -80,7 +87,7 @@ async function handleLive(body: Record<string, unknown>, ip: string) {
 const server = createServer(async (req, res) => {
   try {
     if (req.method === "GET" && req.url === "/health") {
-      send(res, 200, { ok: true, worker: true, worlds: cachedWorldCount() });
+      send(res, 200, { ok: true, worker: true, worlds: cachedWorldCount(), physicsCheckpoint: 2 });
       return;
     }
     if (req.method !== "POST" || req.url !== "/live") {
