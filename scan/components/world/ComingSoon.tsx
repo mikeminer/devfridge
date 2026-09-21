@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import styles from "./runway.module.css";
 import { LAUNCH_X_URL } from "@/lib/world-share";
 import NewsletterSignup from "./NewsletterSignup";
+import PrelaunchOnboarding from "./PrelaunchOnboarding";
 
 const MemeRunway = dynamic(() => import("./MemeRunway"), { ssr: false });
 
@@ -114,6 +115,7 @@ export default function ComingSoon() {
             </div>
           ))}
         </div>
+        <PrelaunchOnboarding />
         <NewsletterSignup />
         <div className={styles.launchShare}>
           <a className={styles.xPrimary} href={LAUNCH_X_URL} target="_blank" rel="noopener noreferrer">Share the countdown on X ↗</a>
