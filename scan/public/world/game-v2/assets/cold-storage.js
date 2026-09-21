@@ -4122,7 +4122,7 @@ function Ok(game, access) {
         return;
     const session = { pending: true, cancelled: false };
     wk.set(game, session);
-    Tk.set(game, Dk({ action: 'start', liveVersion: 2, wallet: access.address, character: game.favourite, seed: game.seed, mk: mk.id }).then((ticket) => {
+    Tk.set(game, Dk({ action: 'start', liveVersion: 2, wallet: access.address, character: game.favourite, seed: game.seed, rules: mk.id }).then((ticket) => {
         if (ticket.liveVersion !== 2 || !Number.isInteger(ticket.sequence) || !ticket.nonce || ![1, 2, 3].includes(ticket.previewTier))
             throw Error('Live verification is unavailable. Reload the game.');
         session.ticket = ticket;
@@ -4139,7 +4139,24 @@ function jk(game) { const s = wk.get(game); if (s) {
     s.cancelled = true;
     s.controller?.abort();
 } }
-function worldLiveSyncMessage(game) { return wk.get(game)?.retrying ? 'Connection paused · reconnecting…' : ''; }
+function worldLiveSyncMessage(game) { const s = wk.get(game); return s?.retrying ? 'Connection paused · reconnecting…' : s?.ticket?.error && !game.inputs.length ? 'TopShelf could not start · reload to retry' : ''; }
+function worldShowScoreStartError(message) {
+    if (typeof document === 'undefined')
+        return;
+    const modal = document.getElementById('dialog'), content = document.getElementById('dialog-content');
+    if (!modal || !content)
+        return;
+    const heading = document.createElement('h2'), reason = document.createElement('p'), help = document.createElement('p'), reload = document.createElement('button');
+    heading.textContent = 'Your run has not started';
+    reason.textContent = message;
+    help.textContent = 'TopShelf could not verify the start of this run. Reload and reconnect before playing so your score can be registered.';
+    reload.className = 'primary-button';
+    reload.textContent = 'Reload game';
+    reload.onclick = () => window.location.reload();
+    content.replaceChildren(heading, reason, help, reload);
+    if (!modal.open)
+        modal.showModal();
+}
 function worldLiveRunLabel(game) { const s = wk.get(game); return !s ? '' : s.pending ? 'Confirming live move…' : s.ticket?.error ? 'Unranked run · live verification unavailable' : 'Live verified run · server-generated pieces'; }
 async function Mk(body, session) {
     const controller = session.controller = new AbortController();
@@ -4176,10 +4193,17 @@ async function Mk(body, session) {
 }
 async function Nk(game, x) {
     const s = wk.get(game), ticket = s?.ticket;
-    if (!s || !ticket?.ticket || ticket.error)
+    if (!s)
         return game.drop(x);
     if (s.pending || s.cancelled || !game.ready)
         return false;
+    if (!ticket?.ticket || ticket.error) {
+        if (!game.inputs.length) {
+            worldShowScoreStartError(ticket?.error || 'The live session is unavailable.');
+            return false;
+        }
+        return game.drop(x);
+    }
     const canonical = Math.round(game.clampX(x) * 1000) / 1000, tick = game.tick;
     s.pending = true;
     try {

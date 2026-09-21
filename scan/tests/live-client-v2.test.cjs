@@ -12,7 +12,10 @@ test('shipped V2 retries identical live input and retains its kitchen and render
   wk:new WeakMap(),Tk:new WeakMap(),gk:'/test',mk:{id:'test'},Cr:checkpointPhysics,AbortSignal,AbortController,setTimeout,clearTimeout,Error,
   Ek:class extends Error{constructor(message,status,retryAfter=0){super(message);Object.assign(this,{status,retryAfter});}},
   fetch:async(url,init)=>{
-   const body=JSON.parse(init.body);if(body.action==='start')return Response.json({ticket:'test',liveVersion:2,sequence:0,nonce:'n',nextTier:1,previewTier:2});
+   const body=JSON.parse(init.body);if(body.action==='start'){
+    assert.deepEqual(body,{action:'start',liveVersion:2,wallet:'test',character:1,seed:264,rules:'test'});
+    return Response.json({ticket:'test',liveVersion:2,sequence:0,nonce:'n',nextTier:1,previewTier:2});
+   }
    sent.push(body);return sent.length===1?Response.json({error:'Busy'},{status:503}):Response.json({sequence:1,nonce:'next',nextTier:2,previewTier:3});
   },
  });
