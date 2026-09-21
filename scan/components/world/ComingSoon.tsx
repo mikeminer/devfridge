@@ -130,6 +130,7 @@ export default function ComingSoon() {
             Capital
           </a>
           <a className="fridge-key" href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">Game guide ↗</a>
+          <a className="fridge-key" href="https://world.devfridge.cool/skill">Build your game ↗</a>
         </nav>
         <div className={styles.storeBadges}>
         <a
