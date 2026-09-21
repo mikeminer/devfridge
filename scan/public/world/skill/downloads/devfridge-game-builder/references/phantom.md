@@ -19,6 +19,8 @@ Before gating gameplay, show character selection, full mint/Copy CA, `https://pu
 
 SDK reads do **not** create/redeem locks. External DevFridge is the simplest supported path. For requested native signing, inspect deployed program/current IDL and account schema; validate owner, Token-2022 extensions, balance, decimals, amount and unlock time; derive depositor PDAs/ATAs; simulate; then request explicit wallet approval. Never guess instruction bytes or reuse World-only mint allowlists. Persist pending signatures across retries and check chain status before resubmitting. Unsupported transfer fees/hooks must not be silently accepted.
 
+For player-facing retention and PASTA developer-support messaging, follow [retention and economics](retention-and-economics.md). Display the redemption fee before any lock approval.
+
 ## Facts before locking
 
 Fridge program on Solana: `9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6`. Current integration is Token-2022; check actual mint ownership, not a Pump.fun suffix. No early withdrawals, including by the depositor. Keep SOL for fees/rent. A token lock is not an LP lock.

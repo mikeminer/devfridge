@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.0.0"
+  version: "1.1.0"
   sources-reviewed: "2026-09-22"
 ---
 # DevFridge Game Builder
@@ -14,7 +14,13 @@ Turn a developer's meme into a playable browser game. Interview only for missing
 
 Read [the discovery guide](references/discovery.md). Start with up to three short questions about the core loop, exact Solana mint and desired lock rule. Offer concrete choices when the developer has no genre in mind. Reuse answers already supplied. Ask a second focused round for missing production decisions while building reversible scene/input work.
 
-Produce a short build brief: loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting. Separate confirmed requirements, proposed defaults and unresolved blockers. No arbitrary World token, 500,000 minimum, ten-character limit, fee or reward contract is a universal requirement.
+Produce a short build brief: loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting. Separate confirmed requirements, proposed defaults and unresolved blockers. No arbitrary World token, 500,000 minimum, ten-character limit, entry fee or reward contract is a universal requirement.
+
+## Explain why players lock and return
+
+Read [retention and token economics](references/retention-and-economics.md). Give the game a clear, honest pitch: a meme becomes a playable identity, a voluntary timelock unlocks access, and enjoyable progression/community gives players reasons to return. Ask what earns the next visit. A locked balance alone is not evidence of retention.
+
+Explain that the gate reads timelocks in the existing DevFridge Solana program through the SDK/API; a new game does not need a separate timelock program. Use the developer's supported token and independent access rules. Include the 2% redemption fee and its PASTA buy-and-burn purpose in onboarding before any lock approval, alongside expiry, no early withdrawal, network costs and route constraints. Explain PASTA's developer-support role without claiming burned funds are direct infrastructure revenue or promising token appreciation.
 
 ## Choose the integration
 
