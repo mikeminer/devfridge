@@ -1,0 +1,65 @@
+{
+  "name": "devfridge-game-builder",
+  "version": "1.3.0",
+  "reviewedAt": "2026-09-22",
+  "bytes": 26678,
+  "sha256": "90755b5f69ebb8d8f2e93a6bbc92400e00e3ad1ddcb80a4a5bfb1ea0a77b5f6c",
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "df1ef740c1af1ea782c82d87cbeee92d93dedda76936de6f3ef2b4c82795b23a"
+    },
+    {
+      "path": "assets/timelock-gate.mjs",
+      "sha256": "75a1bf31424598360b24ed867512a683af423de12d28276f0633033ba121390a"
+    },
+    {
+      "path": "assets/timelock-gate.test.mjs",
+      "sha256": "920a27c3c778608a6d40c4b670ec06044eb63797e74c194f094be4c8961b410f"
+    },
+    {
+      "path": "references/competition.md",
+      "sha256": "83134c93e7050403b382bac5adf9debf674bcfcdb44ec440f7eb43094c84f810"
+    },
+    {
+      "path": "references/discovery.md",
+      "sha256": "976616aa2a9ee81268d45660b28fdb5e778f13e328c63cc2797275f3822ab3e7"
+    },
+    {
+      "path": "references/ecosystem.md",
+      "sha256": "487f057543b621035f67b5e3455d6b8d5aa53b01ee83dc841d9c2e9c7cd82cf6"
+    },
+    {
+      "path": "references/game-delivery.md",
+      "sha256": "e623af77d1434b82ef19592f7056439f49e24858feb9a2d0567c96ad4458d94c"
+    },
+    {
+      "path": "references/phantom.md",
+      "sha256": "574a46e0ebb79e4780c6d7419a726705096a77b244968367ee1e0803cc7c4f50"
+    },
+    {
+      "path": "references/program-and-verification.md",
+      "sha256": "fe9187b979c703e6104593641cd16b951b52151ccb2ded6be9f5dcfb109320f5"
+    },
+    {
+      "path": "references/retention-and-economics.md",
+      "sha256": "71f931591ce02f7d194e7cf93aecbeb5b1906cab14af23044ebe077216cf2059"
+    },
+    {
+      "path": "references/sdk-access.md",
+      "sha256": "4721b22c0be14797dc03eae82bfbf377c3e78a396e9c70892f679cc2fab16534"
+    },
+    {
+      "path": "references/sources.md",
+      "sha256": "9a79cf3d0e31faaf084ccdfc673f8e0da33a0f4ab003f9b7885e98bddb23c24c"
+    },
+    {
+      "path": "references/visual-realism.md",
+      "sha256": "e9f006aedcfbb4f717c1e6d866c8a1fedaf3d74a9f2c63c9ecc0238c5aaf6396"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "5fb271a90adbfcadfc90828a5b7f29bb9e98731d88c5001b7996eeb1beb1ef2a"
+    }
+  ]
+}

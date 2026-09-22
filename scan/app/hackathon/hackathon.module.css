@@ -14,3 +14,5 @@
 @media(max-width:480px){.hero h1{font-size:clamp(50px,14.8vw,70px)}.header nav>a:first-child{display:none}.navCta{white-space:nowrap}}
 @media(max-width:360px){.heroArt{height:335px}.arcade{top:100px}.screen{height:112px}.orbit{width:150px;height:150px;right:14px}.token{inset:18px;font-size:12px}.token strong{font-size:23px}.docGrid,.kitGrid{grid-template-columns:1fr}.artNote{display:none}}
 @media(prefers-reduced-motion:reduce){.site *{scroll-behavior:auto!important;transition:none!important}}
+
+.header nav>a.projectsNav{display:inline-flex}

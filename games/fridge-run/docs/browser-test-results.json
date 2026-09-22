@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-22T12:10:04.520Z",
+  "browser": "Chrome headless / SwiftShader",
+  "physicalPhone": false,
+  "results": [
+    {
+      "name": "Desktop WebGL scene; challenge denies without wallet",
+      "result": "PASS"
+    },
+    {
+      "name": "No-wallet fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "Fixture demo is labelled and cannot grant live access",
+      "result": "PASS"
+    },
+    {
+      "name": "Desktop keyboard collects a crate",
+      "result": "PASS"
+    },
+    {
+      "name": "Pause freezes simulation and resumes",
+      "result": "PASS"
+    },
+    {
+      "name": "Return home and restart resets cargo",
+      "result": "PASS"
+    },
+    {
+      "name": "390×844 touch input collects a crate",
+      "result": "PASS"
+    },
+    {
+      "name": "Phone landscape controls stay inside viewport",
+      "result": "PASS"
+    },
+    {
+      "name": "Mock provider + exact qualifying evidence enables challenge UI",
+      "result": "PASS"
+    },
+    {
+      "name": "Account switch clears eligibility and rejects foreign evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "Disconnect clears wallet",
+      "result": "PASS"
+    },
+    {
+      "name": "Wallet rejection fails closed without retry loop",
+      "result": "PASS"
+    },
+    {
+      "name": "No browser runtime errors",
+      "result": "PASS"
+    }
+  ]
+}
