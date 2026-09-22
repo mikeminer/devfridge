@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "slug": "bike-tyson-one-last-delivery",
+  "name": "BIKE TYSON: ONE LAST DELIVERY",
+  "pitch": "Ride, punch, crash and deliver in 45 seconds. A muscle bicycle races an absurd city, then turns its worst moment into a shareable Funny Finish.",
+  "community": "BIKE TYSON",
+  "playUrl": "https://bike-tyson-mikeminer.vercel.app/",
+  "repositoryUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery",
+  "commit": "87063ff7ebced77e81c293cdf710995e2ec49ab3",
+  "demoUrl": "https://bike-tyson-mikeminer.vercel.app/demo/",
+  "submissionUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/SUBMISSION.md",
+  "buildLogUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/BUILD_LOG.md",
+  "verificationUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/VERIFICATION.md",
+  "access": "Solana mainnet-beta; launched Token-2022 mint CbyTNf7UPzvewHh4Zp6umogM2RWahhmGRJWLJnPwpump (6 decimals). Midnight Dispatch requires at least 1,000 whole tokens (1000000000 raw) summed across the authenticated wallet's unexpired locks for this mint in existing DevFridge program 9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6. No minimum original or remaining duration. Expired deposits stop counting; failed or stale evidence never grants access and practice remains available. Separate server-verified wallet signatures, RPC eligibility and local scores. No early withdrawal. Redemption fee: 2% for PASTA buy-and-burn plus network costs. Non-PASTA redemption needs an executable Jupiter route; this mint's route is unverified, so no locking transactions are offered.",
+  "limitations": "Prototype; local unverified scores, no prizes, ranked multiplayer or on-chain score writes. Public HTTPS browser tests passed with desktop and mobile emulation; no physical-phone or real Phantom extension/mobile validation. Demo lock states and test wallets are explicitly synthetic; no real deposits or fund movements. Hosted nonces, sessions and rate limits are ephemeral per-instance; shared persistence is needed for reliable scaled authentication. Public RPC may be unavailable. Character uses a user-supplied reference and generated face/skin textures; no scanned or licensed likeness or independent asset-rights verification is claimed. Gemini composed numeric music/effect recipes, rendered locally; no Lyria recordings or cloned voice. Gallery review does not establish audit, prize eligibility or final competition admission.",
+  "practiceAvailable": true
+}
