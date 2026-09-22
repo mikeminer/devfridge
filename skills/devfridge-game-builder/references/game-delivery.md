@@ -8,7 +8,7 @@ Use `100dvh`, safe-area insets and reserved HUD/touch space. Pointer capture and
 
 Start audio on a gesture. Keep mute separate from suspended AudioContext. On visibility/page-show, pause/resync and offer gesture-based resume; preserve mute and avoid stacked sounds. Recheck wallet/locks, clamp time after screen lock and do not silently fast-forward competitive play. Pause/recover on WebGL loss instead of leaving a blank canvas.
 
-Load art with progress/retry/fallback; procedural art is suitable for labeled prototypes. Check asset provenance/licences before copying another game's models, voices or branding.
+Follow [the visual-realism guide](visual-realism.md) for model detail, PBR texture sets, lighting and visual acceptance checks. Load art with progress/retry/fallback; procedural art is suitable for labeled prototypes. Check asset provenance/licences before copying another game's models, voices or branding.
 
 Verify: complete win/loss/restart; mouse/keyboard; 390×844 portrait; phone landscape; constrained GPU; resize; no wallet; Phantom desktop/mobile; account change mid-check; rejected sign-in; expired/insufficient locks; unavailable/429 evidence; pending transaction if implemented; background audio; context loss; share cancellation. Report untested physical-device cases honestly.
 

@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "reviewedAt": "2026-09-22",
-  "bytes": 19788,
-  "sha256": "235e95f65308f0b8409f4d9385c61323dedae9a6e88d43816233f18cc9fc8343",
+  "bytes": 22688,
+  "sha256": "28a612a90e28d6a6b1ccb760d55ed0a2d83be3af148270219785ddc6fad4ca6f",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -31,7 +31,7 @@
     },
     {
       "path": "references/game-delivery.md",
-      "sha256": "1b79e9da4449e2bfdb16638b1610e555e9eb73e7ccb413bd12ff1e833d4f1983"
+      "sha256": "e623af77d1434b82ef19592f7056439f49e24858feb9a2d0567c96ad4458d94c"
     },
     {
       "path": "references/phantom.md",
@@ -50,8 +50,12 @@
       "sha256": "d0b744f7a8667642dc37e440cbf7302023f64ed79ba4e0e84ff325915cef19f8"
     },
     {
+      "path": "references/visual-realism.md",
+      "sha256": "e9f006aedcfbb4f717c1e6d866c8a1fedaf3d74a9f2c63c9ecc0238c5aaf6396"
+    },
+    {
       "path": "SKILL.md",
-      "sha256": "a4154acc77b7650e5b8baf465b3f06bcafb8b3b446cbb47f1118f50c8e3edc83"
+      "sha256": "44fa4ad7620b325bb0eade812be6131708dbd1c457a250f76137f9c5513c875a"
     }
   ]
 }

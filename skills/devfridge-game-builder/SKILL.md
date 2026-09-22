@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.1.0"
+  version: "1.2.0"
   sources-reviewed: "2026-09-22"
 ---
 # DevFridge Game Builder
@@ -33,6 +33,8 @@ Use the tested [exact lock evaluator](assets/timelock-gate.mjs) for precise raw-
 ## Build for desktop and phones
 
 Read [Three.js and mobile delivery](references/game-delivery.md). Prefer TypeScript and the existing build system; Vite is a reasonable new-project default. Separate simulation, renderer, input, audio, wallet/access and persistence. Build a complete small loop with start, play, win/loss and restart before optional economy features.
+
+Read [visual realism](references/visual-realism.md) and make a finished visual pass: detailed models with convincing silhouettes, realistic PBR textures, environment reflections, soft contact shadows and consistent scale. Prefer material realism by default, including for playful meme characters; respect a developer’s explicit alternate style. Placeholder cubes are for blockout, not finished art. Budget and test the result on mobile.
 
 Deliver equivalent keyboard/mouse and touch controls, responsive camera/canvas, bounded GPU cost, GLB loading/fallbacks, audio recovery after screen lock and dialogs that do not cover active play. Pin tested dependencies in a lockfile. Use user-owned/licensed art; public access to World's site is not a licence to copy its characters.
 
