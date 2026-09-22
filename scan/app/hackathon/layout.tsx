@@ -17,7 +17,7 @@ export default function HackathonLayout({ children }: { children: React.ReactNod
     <a className={s.skip} href="#main">Skip to content</a>
     <header className={s.header}>
       <a href="/hackathon" className={s.brand} aria-label="DevFridge Hackathon home"><span className={s.mark} aria-hidden="true">D<span>F</span></span><span>DEVFRIDGE<small>HACKATHON / BUILD SEASON</small></span></a>
-      <nav aria-label="Main navigation"><a href="/hackathon/handbook/start">Handbook</a><a href="/hackathon#kit">Builder kit</a><a className={s.navCta} href={SKILL_URL}>Get the skill ↗</a></nav>
+      <nav aria-label="Main navigation"><a href="/hackathon/handbook/start">Handbook</a><a href="/projects" className={s.projectsNav}>Projects</a><a className={s.navCta} href={SKILL_URL}>Get the skill ↗</a></nav>
     </header>
     {children}
     <footer className={s.footer}><div><a className={s.brand} href="/hackathon">DEVFRIDGE / HACKATHON</a><p>Built for communities that want something to play.</p><small>A DevFridge initiative. No announced sponsorship by Solana, Pump.fun or Phantom.</small></div><div><a href="/hackathon/handbook/rules">Rules & conduct</a><a href="/hackathon/handbook/faq">FAQ</a><a href="https://connect.devfridge.cool">Official contacts ↗</a><a href="/hackathon/llms.txt">For AI agents ↗</a></div><p className={s.footerStatus}>Preparation kit available<br />Dates & prizes to be announced</p></footer>

@@ -1,0 +1,51 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "context": {
+      "apiVersion": "4.3.0-rc.0",
+      "slot": 449367314
+    },
+    "value": {
+      "data": {
+        "parsed": {
+          "info": {
+            "decimals": 6,
+            "extensions": [
+              {
+                "extension": "metadataPointer",
+                "state": {
+                  "authority": null,
+                  "metadataAddress": "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump"
+                }
+              },
+              {
+                "extension": "tokenMetadata",
+                "state": {
+                  "additionalMetadata": [],
+                  "mint": "39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump",
+                  "name": "pappardelle",
+                  "symbol": "PASTA",
+                  "updateAuthority": null,
+                  "uri": "https://ipfs.io/ipfs/bafkreiefsbomqnhnxa6c3pc4oajl2ihr5ci6cbnoz7zkgjeju6lvr6hemy"
+                }
+              }
+            ],
+            "freezeAuthority": null,
+            "isInitialized": true,
+            "mintAuthority": null,
+            "supply": "963341299993979"
+          },
+          "type": "mint"
+        },
+        "program": "spl-token-2022",
+        "space": 414
+      },
+      "executable": false,
+      "lamports": 3772320,
+      "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "rentEpoch": 18446744073709551615,
+      "space": 414
+    }
+  },
+  "id": 1
+}
