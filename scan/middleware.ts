@@ -16,6 +16,17 @@ export function middleware(req: NextRequest) {
   const host = req.headers.get("host") || "";
   const path = req.nextUrl.pathname;
 
+  if (host.split(":")[0] === "hackathon.devfridge.cool") {
+    if (path.startsWith("/api/") || path.startsWith("/_next/") || path === "/favicon.ico") {
+      return NextResponse.next();
+    }
+    const url = req.nextUrl.clone();
+    if (path !== "/hackathon" && !path.startsWith("/hackathon/")) {
+      url.pathname = path === "/" ? "/hackathon" : `/hackathon${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("ecosystem.") || path.startsWith("/ecosystem")) {
     const url = req.nextUrl.clone();
     if (host.startsWith("ecosystem.")) {
