@@ -4,6 +4,7 @@ import s from './hackathon.module.css';
 
 const description = 'Build your meme into a playable Solana game with AI coding agents, Three.js, Phantom and DevFridge timelocks. Get the free skill, builder handbook and submission kit.';
 export const metadata: Metadata = {
+  metadataBase: new URL(HACKATHON_ORIGIN),
   title: { absolute: 'DevFridge Hackathon — Your meme. Your game.' }, description,
   applicationName: 'DevFridge Hackathon', keywords: ['Solana hackathon', 'agentic coding', 'Pump.fun', 'Three.js', 'DevFridge', 'Phantom', 'game development'],
   alternates: { canonical: HACKATHON_ORIGIN },
