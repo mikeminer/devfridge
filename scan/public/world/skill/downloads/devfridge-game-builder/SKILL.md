@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.2.0"
+  version: "1.3.0"
   sources-reviewed: "2026-09-22"
 ---
 # DevFridge Game Builder
@@ -21,6 +21,8 @@ Produce a short build brief: loop and win/loss condition; camera; desktop/touch 
 Read [retention and token economics](references/retention-and-economics.md). Give the game a clear, honest pitch: a meme becomes a playable identity, a voluntary timelock unlocks access, and enjoyable progression/community gives players reasons to return. Ask what earns the next visit. A locked balance alone is not evidence of retention.
 
 Explain that the gate reads timelocks in the existing DevFridge Solana program through the SDK/API; a new game does not need a separate timelock program. Use the developer's supported token and independent access rules. Include the 2% redemption fee and its PASTA buy-and-burn purpose in onboarding before any lock approval, alongside expiry, no early withdrawal, network costs and route constraints. Explain PASTA's developer-support role without claiming burned funds are direct infrastructure revenue or promising token appreciation.
+
+Read [program reuse and verification](references/program-and-verification.md) when presenting Fridge: describe its reusable vault infrastructure and graphical explorer, separate security metadata from source/build verification and independent audits, and link dated evidence. Use the reusable-rocket analogy without implying endorsement. Publish development/audit costs only when substantiated; an explorer badge or rent balance does not establish an audit or expenditure total.
 
 ## Choose the integration
 

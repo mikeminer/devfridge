@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "reviewedAt": "2026-09-22",
-  "bytes": 22688,
-  "sha256": "28a612a90e28d6a6b1ccb760d55ed0a2d83be3af148270219785ddc6fad4ca6f",
+  "bytes": 26678,
+  "sha256": "90755b5f69ebb8d8f2e93a6bbc92400e00e3ad1ddcb80a4a5bfb1ea0a77b5f6c",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -38,6 +38,10 @@
       "sha256": "574a46e0ebb79e4780c6d7419a726705096a77b244968367ee1e0803cc7c4f50"
     },
     {
+      "path": "references/program-and-verification.md",
+      "sha256": "fe9187b979c703e6104593641cd16b951b52151ccb2ded6be9f5dcfb109320f5"
+    },
+    {
       "path": "references/retention-and-economics.md",
       "sha256": "71f931591ce02f7d194e7cf93aecbeb5b1906cab14af23044ebe077216cf2059"
     },
@@ -47,7 +51,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "d0b744f7a8667642dc37e440cbf7302023f64ed79ba4e0e84ff325915cef19f8"
+      "sha256": "9a79cf3d0e31faaf084ccdfc673f8e0da33a0f4ab003f9b7885e98bddb23c24c"
     },
     {
       "path": "references/visual-realism.md",
@@ -55,7 +59,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "44fa4ad7620b325bb0eade812be6131708dbd1c457a250f76137f9c5513c875a"
+      "sha256": "5fb271a90adbfcadfc90828a5b7f29bb9e98731d88c5001b7996eeb1beb1ef2a"
     }
   ]
 }
