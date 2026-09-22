@@ -2,6 +2,7 @@ import {ToolLoopAgent,tool,jsonSchema,isStepCount} from 'ai';
 import {xai} from '@ai-sdk/xai';
 import {getContext,readDocumentation,DOCS,instructions} from '../lib/context.mjs';
 import {validateBody,allowedOrigin,publicSource} from '../lib/request.mjs';
+import {streamGrok} from '../lib/grok.mjs';
 
 export default async function chat(req,res){
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
@@ -14,14 +15,17 @@ export default async function chat(req,res){
  const send=value=>res.write(JSON.stringify(value)+'\n');let stage='sources';
  try{
   const context=await getContext();const used=new Map(context.sources.filter(s=>!s.unavailable).map(s=>[s.url,{url:s.url,title:new URL(s.url).hostname}]));
-  stage='grok';const agent=new ToolLoopAgent({model:process.env.IR_MODEL||'spacexai/grok-4.6',instructions:instructions(context),maxOutputTokens:2200,reasoning:'low',maxRetries:0,stopWhen:isStepCount(3),providerOptions:{xai:{store:false},gateway:{only:['xai']}},tools:{
+  stage='grok';const stream=streamGrok({model:process.env.IR_MODEL||undefined,signal:abort.signal,
+   onFallback:details=>console.warn('IR Grok fallback',details),
+   start:async profile=>new ToolLoopAgent({model:profile.model,
+    instructions:instructions(context)+(profile.xSearch?'':'\nX search is unavailable for this response. Use the official evidence and readDocumentation only. If asked for X posts or current founder announcements, explicitly say you cannot search X right now. Never imply that you searched or verified a post.'),
+    maxOutputTokens:2200,...(profile.xSearch?{reasoning:'low'}:{}),maxRetries:0,stopWhen:isStepCount(3),providerOptions:profile.providerOptions,tools:{
    readDocumentation:tool({description:'Read a current page of the official DevFridge documentation. Use for mechanics, rules, availability and integration details.',inputSchema:jsonSchema({type:'object',properties:{slug:{type:'string',enum:DOCS}},required:['slug'],additionalProperties:false}),execute:async({slug})=>{try{const source=await readDocumentation(slug);used.set(source.url,{url:source.url,title:'Docs · '+slug});return source;}catch{return {unavailable:true,slug};}}}),
-   x_search:xai.tools.xSearch({allowedXHandles:['anonimocommando']})
-  }});
-  const result=await agent.stream({messages,abortSignal:abort.signal});
+   ...(profile.xSearch?{x_search:xai.tools.xSearch({allowedXHandles:['anonimocommando']})}:{})
+  }}).stream({messages,abortSignal:abort.signal,onError:()=>{}})});
   res.setHeader('Content-Type','application/x-ndjson; charset=utf-8');res.setHeader('X-Accel-Buffering','no');res.statusCode=200;
   let xSearched=false,hasText=false;
-  for await(const part of result.fullStream){
+  for await(const part of stream){
    if(part.type==='text-delta'){hasText=true;send({type:'text',text:part.text});}
    if(part.type==='tool-result'&&part.toolName==='x_search')xSearched=true;
    if(part.type==='source'){const source=publicSource(part);if(source)used.set(source.url,source);}
