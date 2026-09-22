@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "slug": "your-game",
+  "name": "Your game",
+  "pitch": "Describe one playable loop in a sentence.",
+  "community": "Your community",
+  "playUrl": "https://your-public-game.com/",
+  "repositoryUrl": "https://github.com/YOUR-ACCOUNT/YOUR-GAME",
+  "commit": "0000000000000000000000000000000000000000",
+  "demoUrl": "https://your-public-game.com/demo",
+  "submissionUrl": "https://github.com/YOUR-ACCOUNT/YOUR-GAME/blob/REPLACE-WITH-COMMIT/SUBMISSION.md",
+  "buildLogUrl": "https://github.com/YOUR-ACCOUNT/YOUR-GAME/blob/REPLACE-WITH-COMMIT/BUILD_LOG.md",
+  "verificationUrl": "https://github.com/YOUR-ACCOUNT/YOUR-GAME/blob/REPLACE-WITH-COMMIT/VERIFICATION.md",
+  "access": "State Solana network, exact mint or labelled fixture, minimum amount, duration, aggregation, expiry and redemption disclosures.",
+  "limitations": "State score authority, unfinished work and actual device/wallet test coverage.",
+  "practiceAvailable": true
+}
