@@ -8,3 +8,8 @@ tsconfig.tsbuildinfo
 
 .vercel
 .env*
+
+# Public, reviewed gallery records; other runtime data stays ignored.
+!/data/
+/data/*
+!/data/hackathon-projects/

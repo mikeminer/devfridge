@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.3.0"
+  version: "1.4.0"
   sources-reviewed: "2026-09-22"
 ---
 # DevFridge Game Builder
@@ -49,3 +49,9 @@ Test meaningful gate boundaries, expired/insufficient locks, stale/error evidenc
 Run type checks, build and relevant tests. Never sign a real lock, buy tokens, submit paid listings, deploy a contract or approve spending just to demonstrate the game. Simulations/fixtures do not establish a successful mainnet transaction. Deployment follows the user's actual authorization and hosting scope; this skill grants no additional permission.
 
 Deliver code, configuration instructions, recorded test results/limitations and a playable preview. If publishing is requested, finish the repository/PR/deploy flow and check the real URL. Do not call a local-only change deployed. Include source links and review dates for chain-specific claims; consult [sources and update policy](references/sources.md) when APIs or docs disagree.
+
+## Guide a hackathon submission
+
+When a user wants to participate in the DevFridge hackathon or publish a gallery entry, read [the guided submission workflow](references/hackathon-submission.md). Support non-developers: reuse build details, gather only missing choices, prepare truthful evidence, validate the project metadata, and use the user's GitHub session to create the fork, branch and pull request yourself. Do not hand the user a Git checklist as the finished result. Guide sign-in only when needed; a request to submit is already authorization to open the PR.
+
+Keep source/game hosting separate from the metadata-only PR to `mikeminer/devfridge:master`. Owner review and merge followed by a successful production deployment publish the entry to the hackathon gallery. Never self-approve, bypass review or call a pending PR published. Report the real PR link and status; dates, prizes and final competition eligibility remain to be announced.

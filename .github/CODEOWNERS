@@ -1,0 +1,8 @@
+# Gallery publication and pipeline changes require the repository owner.
+/scan/data/hackathon-projects/ @mikeminer
+/scan/lib/hackathon-projects.cjs @mikeminer
+/scan/app/hackathon/projects/ @mikeminer
+/scan/tests/hackathon-project-registry.test.cjs @mikeminer
+/scripts/validate-hackathon-projects.cjs @mikeminer
+/.github/ @mikeminer
+/docs/hackathon/ @mikeminer

@@ -1,0 +1,30 @@
+name: Hackathon projects
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-projects:
+    name: Validate hackathon projects
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test submission validation
+        run: node --test scan/tests/hackathon-project-registry.test.cjs
+      - name: Validate gallery records
+        run: node scripts/validate-hackathon-projects.cjs
+      # Publication is the existing Vercel Git deployment after an owner-reviewed
+      # merge to master. Never auto-merge, execute submitted demos, or use a
+      # pull_request_target workflow to run code from a fork.
