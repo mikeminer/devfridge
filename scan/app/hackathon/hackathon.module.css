@@ -16,3 +16,5 @@
 @media(prefers-reduced-motion:reduce){.site *{scroll-behavior:auto!important;transition:none!important}}
 
 .header nav>a.projectsNav{display:inline-flex}
+
+.submissionSteps{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:32px}.submissionNote{color:var(--muted);font-size:15px;margin-bottom:28px!important}@media(max-width:760px){.header{flex-wrap:wrap}.header nav{flex-wrap:wrap;gap:14px}.submissionSteps{grid-template-columns:1fr}}

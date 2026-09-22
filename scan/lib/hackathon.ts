@@ -1,18 +1,7 @@
 export const HACKATHON_ORIGIN = 'https://hackathon.devfridge.cool';
 export const SKILL_URL = 'https://world.devfridge.cool/skill';
 export const PROGRAM = '9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6';
-export const INSTALL_PROMPT = `Help me enter the DevFridge agentic game hackathon.
-
-Read https://hackathon.devfridge.cool/llms.txt and its linked handbook first.
-Install the official DevFridge Game Builder skill from:
-https://world.devfridge.cool/world/skill/downloads/devfridge-game-builder.zip
-Verify its SHA-256 using https://world.devfridge.cool/world/skill/downloads/manifest.json, inspect SKILL.md and the archive, and extract only inside the destination directory.
-Use .agents/skills/devfridge-game-builder/ for Codex, .claude/skills/devfridge-game-builder/ for Claude Code, or your agent's documented skill directory. Preserve existing customized files and ask before replacing them. Keep all references, assets and agents files. If installation is unavailable, explain manual steps instead of claiming success.
-
-Load the skill. Ask me up to three questions: the game and community I want to build for; my exact Solana token mint (or whether it is not launched yet); and my intended timelock access rules.
-Create a playable Three.js browser game for desktop and mobile with Phantom and DevFridge timelock gating. Start with a clearly labelled practice mode if there is no verified mint. Use realistic materials, an original art direction and touch controls. Keep wallet authentication, token eligibility and score verification separate.
-Use the existing DevFridge Solana program; do not deploy a new timelock contract. Explain expiry, the 2% redemption fee and routing constraints before any locking flow. Do not buy tokens, move funds or sign transactions during setup.
-Keep an AI build log. When I ask to submit, follow references/hackathon-submission.md: prepare my evidence and project metadata, validate it, and handle the GitHub fork, branch and PR to mikeminer/devfridge for me. Guide sign-in only if needed; do not give me Git homework. Owner review, merge and successful deployment publish the gallery entry. Dates, prizes and final competition eligibility remain to be announced.`;
+export { INSTALL_PROMPT } from './game-builder-prompts';
 
 export type Chapter = { slug: string; title: string; intro: string; sections: { title: string; paragraphs?: string[]; items?: string[] }[]; links: [string, string][] };
 export const CHAPTERS: Chapter[] = [
