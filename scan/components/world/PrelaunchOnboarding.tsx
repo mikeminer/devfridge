@@ -32,7 +32,7 @@ export default function PrelaunchOnboarding() {
   return <section className={styles.prelaunch} aria-label="Pre-launch onboarding">
     <span>PRE-LAUNCH ONBOARDING IS LIVE</span>
     <h2>Your favourite memes. Ready for launch.</h2>
-    <p>Choose one or more of your favourite characters and get their official Solana tokens ahead of launch. Prices may rise and make access more expensive, but they can also fall.</p>
+    <p>Choose one or more of your favourite characters and get their official Solana tokens ahead of launch. Prices may rise and make access more expensive.</p>
     <p>Lock at least <strong>500,000 tokens per character</strong> in DevFridge. Keep each qualifying lock active when you play.</p>
     <button type="button" onClick={open} disabled={busy} aria-haspopup="dialog">{busy ? "Opening timelock…" : "Lock Solana meme to unlock a character"}</button>
     <a href="https://docs.devfridge.cool/world" target="_blank" rel="noopener noreferrer">How character access works ↗</a>
