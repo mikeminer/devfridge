@@ -19,6 +19,9 @@ export default function EcosystemNav({ host, embed }: { host: string; embed?: bo
               {item.label}
             </a>
           ))}
+          <a className="fridge-key justify-center" href="https://hackathon.devfridge.cool">
+            Hackathon
+          </a>
           <a className="fridge-key justify-center" href="https://connect.devfridge.cool">
             Connect
           </a>
