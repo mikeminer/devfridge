@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function WorldDoc() {
   return (
     <DocsShell kicker="WORLD / COLD STORAGE" title="DevFridge World — the game guide">
-      <p className="text-sm">Updated 8 September 2026 · Current pre-launch build</p>
+      <p className="text-sm">Updated 25 September 2026 · Current pre-launch build</p>
       <h2 id="what-is-world">What is DevFridge World?</h2>
       <p>
         <strong>DevFridge World</strong> is a browser game featuring ten Italian brainrot
@@ -67,14 +67,31 @@ export default function WorldDoc() {
         The game is deployed as a pre-launch build. The public entrance at{" "}
         <a href="https://world.devfridge.cool/">world.devfridge.cool</a> still shows the countdown
         and character runway until <strong>1 October 2026, 00:00 Europe/Rome</strong>.
-        This guide describes the current game behind that launch screen.
+        This guide describes the current game behind that launch screen. An Android tester
+        beta, version <strong>0.3.1-beta.1</strong>, is also available as a signed APK and in
+        the Solana dApp Store. The app beta is available before the public game opening.
       </p>
+      <div className="mb-6 flex flex-wrap items-center gap-4">
+        <a
+          href="solanadappstore://details?id=cool.devfridge.world"
+          aria-label="Get DevFridge World on the Solana dApp Store"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/world/android/solana-dapp-store-badge.svg"
+            alt="Get it on Solana dApp Store"
+            width="232"
+            height="91"
+          />
+        </a>
+        <a href="https://world.devfridge.cool/android">Android beta details and APK ↗</a>
+      </div>
       <div className="overflow-x-auto">
         <table>
           <tbody>
             <tr><th scope="row">Genre</th><td>Casual physics merge puzzle, with a 3D kitchen to explore</td></tr>
             <tr><th scope="row">Players</th><td>Single-player; shareable saved fridge snapshots</td></tr>
-            <tr><th scope="row">Platform</th><td>Desktop and mobile web browsers</td></tr>
+            <tr><th scope="row">Platform</th><td>Desktop and mobile web browsers; Android tester beta 0.3.1-beta.1 via APK and Solana dApp Store</td></tr>
             <tr><th scope="row">Blockchain integration</th><td>Solana wallet sign-in and Token-2022 timelock access</td></tr>
             <tr><th scope="row">Entry requirement</th><td>500,000 of one supported character token in active locks</td></tr>
             <tr><th scope="row">NFT requirement</th><td>None</td></tr>
@@ -273,8 +290,11 @@ export default function WorldDoc() {
       </p>
       <h3>Which devices can I use?</h3>
       <p>
-        Play in a desktop or mobile browser. World does not currently offer a native
-        App Store or Google Play release. On a phone, use your wallet’s browser if the
+        Play in a desktop or mobile browser, or install the Android tester beta
+        <strong> 0.3.1-beta.1</strong> from the Solana dApp Store. The signed APK is also
+        available from the <a href="https://world.devfridge.cool/android">Android download page</a>.
+        The beta is for testing; the public game opening remains scheduled for
+        1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the
         regular browser cannot detect the wallet, and tap to enable sound when prompted.
       </p>
       <h3>How do I start, and is the game open yet?</h3>
