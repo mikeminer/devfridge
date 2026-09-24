@@ -270,6 +270,17 @@ export const NODES: EcoNode[] = [
     audiences: ["collector", "pasta"],
   },
   {
+    id: "hackathon",
+    name: "Hackathon",
+    kicker: "Build with your agent",
+    room: "pass",
+    what: "Preparation hub for Solana meme creators and builders. Use the DevFridge Game Builder skill to plan and build a Three.js browser game with Phantom and DevFridge timelock gating. Follow the handbook; dates, submissions and prizes are still to be announced.",
+    notThis: "This is a preparation hub. Visiting it does not register a submission or guarantee a prize.",
+    href: "https://hackathon.devfridge.cool",
+    cta: "Open the hackathon hub",
+    audiences: ["dev", "builder"],
+  },
+  {
     id: "bridge",
     name: "Bridge",
     kicker: "Verified routes",
