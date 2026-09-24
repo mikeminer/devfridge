@@ -55,7 +55,7 @@ export const OFFICIAL_SITES: OfficialLink[] = [
   {
     label: "World",
     href: "https://world.devfridge.cool",
-    hint: "Pastalovers vs The Shelf — lock decides your team",
+    hint: "Single-player Cold Storage merge puzzle; optional paid TopShelf score registration can qualify top scores for owner-approved seasonal token rewards on Robinhood Chain",
   },
   {
     label: "DevFridge World — Android app",

@@ -162,6 +162,11 @@ export default function ComingSoon() {
             height="91"
           />
         </a>
+        <p className={styles.storeBadgeNote}>
+          PlayToEarn listing: ordinary runs are free with no per-run payout. Optional, paid
+          TopShelf score registration may qualify top scores for tokens only after the owner
+          approves and funds a seasonal distribution.
+        </p>
         </div>
       </section>
     </main>

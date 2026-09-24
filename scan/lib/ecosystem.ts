@@ -261,8 +261,8 @@ export const NODES: EcoNode[] = [
     name: "World",
     kicker: "Cold Storage",
     room: "pass",
-    what: "Browser merge puzzle. Unlock a meme with 500,000 of its Solana character token in active Fridge locks. Public countdown until 1 Oct 2026, 00:00 Europe/Rome. No per-run payment, no prizes.",
-    notThis: "Not a team shooter. Robinhood locks do not unlock this build. Scores are local, not token payouts.",
+    what: "Single-player browser merge puzzle. Unlock a meme with 500,000 of its Solana character token in active Fridge locks. Ordinary runs have no per-run payment or automatic payout. Optional TopShelf score registration on Robinhood Chain can qualify top scores for owner-approved seasonal token distributions.",
+    notThis: "No PvP or live multiplayer. Robinhood locks do not unlock the game. TopShelf is optional, costs an owner-configured token fee, and does not guarantee a reward.",
     href: "https://world.devfridge.cool",
     cta: "Pick a brainrot",
     proofHref: "https://docs.devfridge.cool/world",
@@ -493,7 +493,7 @@ export const FLOWS = [
     id: "lock-world",
     title: "Lock a meme. Enter Cold Storage.",
     room: "pass" as EcoRoom,
-    steps: ["Lock 500,000 of one Solana character mint", "Unlock that meme", "Merge in the fridge. No prizes."],
+    steps: ["Lock 500,000 of one Solana character mint", "Unlock that meme", "Merge in the fridge. Optional TopShelf rewards are separate."],
   },
 ];
 

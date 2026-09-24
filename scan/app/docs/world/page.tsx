@@ -95,7 +95,7 @@ export default function WorldDoc() {
             <tr><th scope="row">Blockchain integration</th><td>Solana wallet sign-in and Token-2022 timelock access</td></tr>
             <tr><th scope="row">Entry requirement</th><td>500,000 of one supported character token in active locks</td></tr>
             <tr><th scope="row">NFT requirement</th><td>None</td></tr>
-            <tr><th scope="row">Game rewards</th><td>Score, personal best and discovered collection; no token payouts</td></tr>
+            <tr><th scope="row">Game rewards</th><td>Cold Storage has no per-run fee or automatic payout. Optional TopShelf registration can qualify high scores for owner-approved seasonal token distributions on Robinhood Chain.</td></tr>
           </tbody>
         </table>
       </div>
@@ -186,15 +186,18 @@ export default function WorldDoc() {
       <p>
         The daily piece sequence refreshes at midnight in Europe/Rome; the chosen first piece
         can differ between players. Local best and the discovered collection stay in this
-        browser, under the connected wallet. On-chain best is the TopShelf score registered
-        for the linked Robinhood player; it is not written from local play alone.
+        browser, under the connected wallet. To put a score on the on-chain leaderboard, use
+        the optional TopShelf registration on Robinhood Chain. A registered score belongs to
+        the linked Robinhood player; ordinary local play does not submit or pay out a score.
       </p>
 
       <h3 id="sharing">The kitchen and fridge visits</h3>
       <p>
         Walk around as your meme, run, jump, shout its line and enter the fridge to play.
         Browse the collection to hear character voices, signature sounds and themes.
-        The kitchen is single-player: the current game has no team shooter, PvP combat or live multiplayer avatars.
+        The kitchen and Cold Storage are single-player. This build has no team shooter, PvP
+        combat or live multiplayer avatars. Optional TopShelf score registration is a separate
+        Robinhood Chain feature, not a multiplayer game mode.
       </p>
       <p>
         <strong>Fridge visits</strong> let you share a saved fridge, open an invitation and react
@@ -252,26 +255,35 @@ export default function WorldDoc() {
         social app; choosing a meme does not post automatically or unlock game access.
       </p>
 
-      <h2 id="earnings">How do you earn money in DevFridge World?</h2>
+      <h2 id="earnings">How do gameplay and TopShelf rewards work?</h2>
       <p>
-        The current game has <strong>no money-earning mechanic</strong>. Merges award
-        gameplay points, and runs contribute to your personal best and discovered collection;
-        these are local game records, not redeemable tokens or cash. There is no reward
-        token, NFT sale or rental system, staking yield, scholarship payout or cash tournament
-        implemented in World.
+        Ordinary Cold Storage runs are free and have <strong>no per-run payment or automatic
+        token payout</strong>. Merges award gameplay points, and local runs update your personal
+        best and discovered collection. A high score by itself does not earn tokens or cash.
       </p>
       <h3>Playing is free once your meme is unlocked</h3>
       <p>
         Play as many runs as you like while your qualifying timelock remains active.
-        There is <strong>no per-run payment, game escrow, play-to-earn reward or daily token prize</strong>.
+        There is <strong>no per-run payment or daily token prize</strong>.
         Buying tokens and creating a DevFridge lock are separate actions; see the{" "}
         <a href="https://docs.devfridge.cool/fridge">Fridge guide</a> for the locking process and its rules.
       </p>
       <p>
         World is best described as a game with <strong>crypto required for access</strong>:
         the qualifying tokens must already be owned and actively locked. A timelock is an
-        access condition, not a deposit into a game prize pool, and a high score does not
-        change the lock’s release time or grant a token payout.
+        access condition, not a deposit into a game prize pool. A high score does not change
+        the lock’s release time.
+      </p>
+      <h3>Optional TopShelf seasonal score registration</h3>
+      <p>
+        TopShelf is a separate feature on <strong>Robinhood Chain</strong>. A player may pay
+        the owner-configured registration fee in an accepted Robinhood token to register a
+        verified score; network gas is separate. Each linked Robinhood wallet has one position
+        per season, ranked by its highest registered score. When a season closes and the owner
+        approves and funds a distribution, the configured top-ranked players can claim seasonal
+        token rewards. Registration does not guarantee a distribution or a prize. See the{" "}
+        <a href="https://world.devfridge.cool/leaderboard">TopShelf leaderboard and claims</a>
+        {" "}for the current season and status.
       </p>
 
       <h2 id="faq">Frequently asked questions</h2>
@@ -333,9 +345,10 @@ export default function WorldDoc() {
       </p>
       <h3>Do I pay for every run or win tokens for a high score?</h3>
       <p>
-        No. You can start further runs while your meme remains unlocked, without a game
-        entry payment. Scores, combos and wins have no token payout or cash redemption.
-        Buying tokens and creating locks are separate from playing.
+        Runs are free while your meme remains unlocked, with no per-run fee or automatic
+        payout. TopShelf is separate: you can optionally pay its owner-configured Robinhood
+        token fee to register a verified score. A seasonal prize is possible only if the
+        owner approves and funds a distribution; it is not guaranteed.
       </p>
       <h3>Are scores and fridge visits shared live between players?</h3>
       <p>
