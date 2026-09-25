@@ -14,3 +14,8 @@ h1{font-size:clamp(46px,7vw,78px);line-height:.98;letter-spacing:-.055em;margin:
 aside,footer{display:none!important}
 @media(max-width:900px){main{display:block;padding:30px 28px 42px}.chat{min-height:calc(100dvh - 118px)}}
 @media(max-width:560px){main{padding:24px 16px 32px}.chat{min-height:calc(100dvh - 96px)}.chat-heading{margin:18px 0 20px;gap:12px}h1{font-size:clamp(39px,11vw,57px)}.hero-subtitle{font-size:19px}.chat-heading .quiet{margin-top:8px}}
+/* Show the optional support note below the chat, with a compact copyable wallet. */
+.tip-card{max-width:760px;margin:18px auto 0}
+.tip-card #verify-wallet,.tip-card .tiny{display:none}
+.tip-card #wallet{font-size:12px}
+@media(max-width:560px){.tip-card{margin-top:16px;padding:18px}.tip-card #wallet{font-size:10px}.tip-card #copy{min-height:42px}}
