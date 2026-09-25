@@ -4,7 +4,7 @@ title: "DevFridge World — the game guide"
 description: "DevFridge investor knowledge: DevFridge World — the game guide"
 resource: "https://docs.devfridge.cool/world"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-24T22:23:30Z"
+timestamp: "2026-09-25T11:50:05Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-24T22:23:30Z · last attempt: 2026-09-24T22:23:30Z.
+[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-09-25T11:50:05Z · last attempt: 2026-09-25T11:50:05Z.
 
 WORLD / COLD STORAGE
 
@@ -20,7 +20,7 @@ WORLD / COLD STORAGE
 
 DevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.
 
-Updated 8 September 2026 · Current pre-launch build
+Updated 25 September 2026 · Current pre-launch build
 
 ### What is DevFridge World?
 
@@ -60,12 +60,14 @@ World brings the Italian brainrot cast into a physics puzzle where positioning, 
 
 ### Availability and game facts
 
-The game is deployed as a pre-launch build. The public entrance at [world.devfridge.cool](https://world.devfridge.cool/) still shows the countdown and character runway until 1 October 2026, 00:00 Europe/Rome. This guide describes the current game behind that launch screen.
+The game is deployed as a pre-launch build. The public entrance at [world.devfridge.cool](https://world.devfridge.cool/) still shows the countdown and character runway until 1 October 2026, 00:00 Europe/Rome. This guide describes the current game behind that launch screen. An Android tester beta, version 0.3.1-beta.1, is also available as a signed APK and in the Solana dApp Store. The app beta is available before the public game opening.
+
+[Android beta details and APK ↗](https://world.devfridge.cool/android)
 
 | Genre | Casual physics merge puzzle, with a 3D kitchen to explore |
 | --- | --- |
 | Players | Single-player; shareable saved fridge snapshots |
-| Platform | Desktop and mobile web browsers |
+| Platform | Desktop and mobile web browsers; Android tester beta 0.3.1-beta.1 via APK and Solana dApp Store |
 | Blockchain integration | Solana wallet sign-in and Token-2022 timelock access |
 | Entry requirement | 500,000 of one supported character token in active locks |
 | NFT requirement | None |
@@ -188,7 +190,7 @@ The current access gate checks Solana Token-2022 character tokens locked in DevF
 
 #### Which devices can I use?
 
-Play in a desktop or mobile browser. World does not currently offer a native App Store or Google Play release. On a phone, use your wallet’s browser if the regular browser cannot detect the wallet, and tap to enable sound when prompted.
+Play in a desktop or mobile browser, or install the Android tester beta 0.3.1-beta.1 from the Solana dApp Store. The signed APK is also available from the [Android download page](https://world.devfridge.cool/android). The beta is for testing; the public game opening remains scheduled for 1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the regular browser cannot detect the wallet, and tap to enable sound when prompted.
 
 #### How do I start, and is the game open yet?
 
