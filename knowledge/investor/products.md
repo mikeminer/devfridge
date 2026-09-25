@@ -3,7 +3,7 @@ type: "Concept"
 title: "Products and asset roles"
 description: "Investor guide for DevFridge: Products and asset roles"
 tags: [devfridge, investors]
-timestamp: "2026-09-08T00:00:00Z"
+timestamp: "2026-09-25T00:00:00Z"
 generated: false
 ---
 
@@ -38,6 +38,8 @@ TMC is listed on Robinhood Chain and Solana. See both network entries in the [as
 Ten named characters are currently in the published registry: Rugarugo, Aperitivo, FriedFomo, FudFusilli, Lambocello, GmGnocco, SerSugo, MoonZarella, Bonkatino and Ciccia Salsiccia. Each has a Solana and a Robinhood entry, with independent addresses and supplies.
 
 The [World guide](../docs/world.md) documents the current game and access rules. Use the live guide for thresholds and timelock requirements; a website plan, character story or same-name token on another network is not proof of current access.
+
+[Pastacast](https://pastacast.devfridge.cool/) is the DevFridge 3D character studio for the ten original Italian brainrot characters. Its live page provides an interactive Three.js viewer, character animation and audio previews, and downloadable GLB/PBR models, with links to each character's listed Solana/Pump.fun and Robinhood/Pons token pages. Refer to the site for the current experience.
 
 ## Other products
 
