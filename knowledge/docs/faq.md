@@ -4,7 +4,7 @@ title: "Scanner, Feature, and Fridge questions"
 description: "DevFridge investor knowledge: Scanner, Feature, and Fridge questions"
 resource: "https://docs.devfridge.cool/faq"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-25T11:50:05Z"
+timestamp: "2026-09-25T11:59:06Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/faq) · ok · last successful observation: 2026-09-25T11:50:05Z · last attempt: 2026-09-25T11:50:05Z.
+[Canonical page](https://docs.devfridge.cool/faq) · ok · last successful observation: 2026-09-25T11:59:06Z · last attempt: 2026-09-25T11:59:06Z.
 
 FAQ
 

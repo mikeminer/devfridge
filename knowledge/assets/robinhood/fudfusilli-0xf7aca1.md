@@ -4,7 +4,7 @@ title: "FudFusilli (robinhood)"
 description: "DevFridge investor knowledge: FudFusilli (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0xF7aca11cDB86115eEDce7da43C5326A12408201e"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-25T11:50:05Z"
+timestamp: "2026-09-25T11:59:06Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0xf7aca11cdb86115eedce7da43c5326a12408201e`
 
-Registry status: ok · last successful observation: 2026-09-25T11:50:05Z · last attempt: 2026-09-25T11:50:05Z.
+Registry status: ok · last successful observation: 2026-09-25T11:59:06Z · last attempt: 2026-09-25T11:59:06Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-25T11:50:05Z · last attempt: 2026-09-25T11:50:05Z.
+ok · last successful observation: 2026-09-25T11:59:06Z · last attempt: 2026-09-25T11:59:06Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 72203974 |
+| Block | 72209349 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-25T11:50:05Z · last attempt: 2026-09-25T11:50:05Z.
+ok · last successful observation: 2026-09-25T11:59:06Z · last attempt: 2026-09-25T11:59:06Z.
 
 ```json
 {
