@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "slug": "mezzo-pollo-academy",
+  "name": "Mezzo Pollo Academy",
+  "pitch": "A plush half-chicken runs three lanes and must pass under the gate with the right half: numbers, words and mirrored shapes. When the WHOLE CHICKEN flies over, don't move.",
+  "community": "Mezzo Pollo (original meme)",
+  "playUrl": "https://mezzo-pollo-academy.vercel.app/",
+  "repositoryUrl": "https://github.com/mikeminer/mezzo-pollo-academy",
+  "commit": "9b339697862d1b534afb8ddc8ad7f377465db4cf",
+  "demoUrl": "https://mezzo-pollo-academy.vercel.app/demo",
+  "submissionUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/9b339697862d1b534afb8ddc8ad7f377465db4cf/SUBMISSION.md",
+  "buildLogUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/9b339697862d1b534afb8ddc8ad7f377465db4cf/BUILD_LOG.md",
+  "verificationUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/9b339697862d1b534afb8ddc8ad7f377465db4cf/VERIFICATION.md",
+  "access": "Pre-launch fixture declaration: no Solana mint exists yet (intended network: Solana mainnet-beta). This build is practice-only: no wallet connection, no timelock gate, no transactions. Planned policy: any unexpired lock of the future mint in the existing DevFridge program 9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6, with no minimum original or remaining duration; minimum amount and aggregation still to be decided. Expired locks stop counting and failed or stale evidence never grants access. Locks would unlock cosmetics and seasonal challenges only; all educational modes stay free. No early withdrawal. Redemption fee: 2% for PASTA buy-and-burn plus network costs. Non-PASTA redemption needs an executable Jupiter route; Token-2022 compatibility and routing are unverified until launch. Wallet features intended for adults only.",
+  "limitations": "Single-file Three.js r128 prototype, without a TypeScript/Vite build. Free practice only: no launched mint, wallet, DevFridge gate or transactions. Scores and personal bests are local and unverified; no leaderboard, rewards or multiplayer. Verified in headless Chromium 153.0.8010.12 at desktop 1280x720 and mobile portrait 390x844 emulation, including start, pause/resume, desktop game over/restart and emulated touch swipe. Public production smoke passed. Silent desktop/mobile gameplay recordings are linked. No physical-phone, Phantom, landscape, sustained-performance or real-chain testing. Art is procedural; sound is synthesized; Three.js is MIT and Google Fonts are SIL OFL. Gallery review is not final competition eligibility.",
+  "practiceAvailable": true
+}
