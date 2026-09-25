@@ -26,6 +26,14 @@ test('source failure does not silently invent or reuse missing evidence',async()
  const result=await getContext({fetcher:async url=>new Response(url.includes('synapse')?'Evidence '.repeat(30):'',{status:url.includes('synapse')?200:503})});
  assert.equal(result.sources.filter(s=>s.unavailable).length,2);assert.match(result.text,/Unavailable/);
 });
+test('Pastacast is indexed as the 3D character studio and not confused with Farcaster',async()=>{
+ const context=await getContext({fetcher:async()=>new Response('Official evidence '.repeat(12),{status:200})});
+ assert.ok(context.sources.some(source=>source.url==='https://pastacast.devfridge.cool/'));
+ assert.match(context.text,/interactive Three\.js viewer/);
+ const policy=instructions(context);
+ assert.match(policy,/When asked to show or explain Pastacast, point to that site/);
+ assert.match(policy,/Do not confuse Pastacast with the founder's Farcaster profile/);
+});
 test('failed source status survives for operational diagnosis without source content',async()=>{
  await assert.rejects(()=>getContext({fetcher:async()=>new Response('Not found',{status:404})}),error=>error.statusCode===404&&error.cause.message==='Source unavailable');
 });
