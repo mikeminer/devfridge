@@ -61,6 +61,7 @@ export function middleware(req: NextRequest) {
     if (path === "/" || path === "") url.pathname = "/world";
     else if (
       !path.startsWith("/world") &&
+      !path.startsWith("/demo") &&
       !path.startsWith("/api") &&
       !path.startsWith("/_next")
     ) {
