@@ -8,7 +8,7 @@ export default function WorldDemoPage() {
   return (
     <main style={{ position: "fixed", inset: 0, zIndex: 2147483647, background: "#171b18" }}>
       <iframe
-        src="/demo/index.html"
+        src="/demo-player/index.html"
         title="DevFridge World · Cold Storage 60-second demo"
         allow="autoplay; fullscreen; gamepad"
         style={{ display: "block", width: "100%", height: "100dvh", border: 0 }}
