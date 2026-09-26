@@ -3,8 +3,8 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.4.0"
-  sources-reviewed: "2026-09-22"
+  version: "1.5.0"
+  sources-reviewed: "2026-09-26"
 ---
 # DevFridge Game Builder
 
@@ -55,3 +55,5 @@ Deliver code, configuration instructions, recorded test results/limitations and 
 When a user wants to participate in the DevFridge hackathon or publish a gallery entry, read [the guided submission workflow](references/hackathon-submission.md). Support non-developers: reuse build details, gather only missing choices, prepare truthful evidence, validate the project metadata, and use the user's GitHub session to create the fork, branch and pull request yourself. Do not hand the user a Git checklist as the finished result. Guide sign-in only when needed; a request to submit is already authorization to open the PR.
 
 Keep source/game hosting separate from the metadata-only PR to `mikeminer/devfridge:master`. Owner review and merge followed by a successful production deployment publish the entry to the hackathon gallery. Never self-approve, bypass review or call a pending PR published. Report the real PR link and status; dates, prizes and final competition eligibility remain to be announced.
+
+The gallery and public `https://hackathon.devfridge.cool/projects.json` feed share the owner-maintained `scan/data/projects.json` release registry. Publication requires updating that file after owner review; incoming submission JSON files alone never publish a game. Follow the maintainer steps in the guided workflow and verify both the live gallery and feed.

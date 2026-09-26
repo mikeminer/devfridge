@@ -37,7 +37,7 @@ def build():
     data = buffer.getvalue()
     for ext in ['zip', 'skill']:
         (DEST / f'{NAME}.{ext}').write_bytes(data)
-    release = {'name':NAME, 'version':'1.4.0', 'reviewedAt':'2026-09-22', 'bytes':len(data), 'sha256':hashlib.sha256(data).hexdigest(), 'files':manifest}
+    release = {'name':NAME, 'version':'1.5.0', 'reviewedAt':'2026-09-26', 'bytes':len(data), 'sha256':hashlib.sha256(data).hexdigest(), 'files':manifest}
     (DEST / 'manifest.json').write_text(json.dumps(release, indent=2)+'\n', encoding='utf-8')
     print(f'{len(files)} files, {len(data)} bytes, SHA-256 {release["sha256"]}')
 

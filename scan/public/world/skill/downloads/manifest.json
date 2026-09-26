@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.4.0",
-  "reviewedAt": "2026-09-22",
-  "bytes": 30093,
-  "sha256": "76c15c5fb0f8fe6ba7260bc94d6cfbe7c0f879db9f81f2a77c6158c471c600cf",
+  "version": "1.5.0",
+  "reviewedAt": "2026-09-26",
+  "bytes": 31065,
+  "sha256": "f84186854ed86a3686fae584dde1e342ece176739c7341e4ab1325be5e75f0a6",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -35,7 +35,7 @@
     },
     {
       "path": "references/hackathon-submission.md",
-      "sha256": "d5a6915a41651cc2fec2b7f34d6af39af0b044a8fd082b5f5084889e7955e33c"
+      "sha256": "6bfe97d5dc515a9dcced0d96235334d1b0dcb6c471cf79a45bf6a6cf4287e6d8"
     },
     {
       "path": "references/phantom.md",
@@ -63,7 +63,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "ba3ffd4f518aadcaf3c202175ffd31bfd4e1f7cf79e02499fffaf23f304acd85"
+      "sha256": "e538f2bb025e1127a2f678f269054fa54f64c71c94d04d6fb81e6c3a3e0fe8cd"
     }
   ]
 }
