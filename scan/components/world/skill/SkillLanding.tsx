@@ -88,6 +88,6 @@ export default function SkillLanding() {
       ['Does the skill make scores impossible to cheat?','No. Token gating, wallet authentication and score verification solve different problems. Competitive games need server-authoritative sessions; even those cannot guarantee the absence of bots.'],
       ['Are all ecosystem components automatically included?','No. The core is Phantom plus DevFridge access. Other components are selected during discovery. Existing TopShelf, rewards or bridge systems require their own supported integration; the skill does not grant access to production services.'],
     ].map(([question,answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</section>
-    <footer className={styles.footer}><a href="https://world.devfridge.cool/">DEVFRIDGE WORLD</a><span>Skill v1.4.0 · Sources reviewed 22 September 2026</span><div><a href="https://docs.devfridge.cool/sdk">SDK docs ↗</a><a href="/world/skill/downloads/manifest.json">Package checksums ↗</a><a href="https://connect.devfridge.cool/">Connect ↗</a></div></footer>
+    <footer className={styles.footer}><a href="https://world.devfridge.cool/">DEVFRIDGE WORLD</a><span>Skill v1.5.0 · Sources reviewed 26 September 2026</span><div><a href="https://docs.devfridge.cool/sdk">SDK docs ↗</a><a href="/world/skill/downloads/manifest.json">Package checksums ↗</a><a href="https://connect.devfridge.cool/">Connect ↗</a></div></footer>
   </main>;
 }

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "schemaVersion": 1,
+      "slug": "fridge-run",
+      "name": "Fridge Run",
+      "pitch": "Six cold crates. One sleepy market. Drive a tiny refrigerated courier, dodge warm vents and get home before the ice runs out.",
+      "community": "PASTA",
+      "playUrl": "https://hackathon.devfridge.cool/projects/fridge-run/index.html",
+      "repositoryUrl": "https://github.com/mikeminer/devfridge/tree/3b04f2dc811ad435f99770aa677c442deccbf193/games/fridge-run",
+      "commit": "3b04f2dc811ad435f99770aa677c442deccbf193",
+      "demoUrl": "https://hackathon.devfridge.cool/projects/fridge-run/index.html",
+      "submissionUrl": "https://hackathon.devfridge.cool/projects/fridge-run/SUBMISSION.md",
+      "buildLogUrl": "https://hackathon.devfridge.cool/projects/fridge-run/BUILD_LOG.md",
+      "verificationUrl": "https://hackathon.devfridge.cool/projects/fridge-run/VERIFICATION.md",
+      "access": "Solana mainnet-beta, PASTA mint 39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump. Free practice. The challenge requires 100 PASTA (100000000 raw), summed across qualifying same-wallet, same-mint vaults. Each vault needs an original duration of at least 24 hours and at least 60 seconds remaining. Access ends when eligibility expires. No early withdrawal; 2% redemption fee plus network costs. This PASTA mint uses direct burning; other mints require an executable redemption route.",
+      "limitations": "Client-side eligibility only; wallet connection is not server authentication. Local unverified scores, no rewards. Initial build passed 12 logic tests and 13 browser checks. Mobile screenshots are emulated; real-phone and real-Phantom testing remain pending. Demo URL is the playable practice build, not a recorded video.",
+      "practiceAvailable": true,
+      "approved": true,
+      "published": true
+    },
+    {
+      "schemaVersion": 1,
+      "slug": "bike-tyson-one-last-delivery",
+      "name": "BIKE TYSON: ONE LAST DELIVERY",
+      "pitch": "Ride, punch, crash and deliver in 45 seconds. A muscle bicycle races an absurd city, then turns its worst moment into a shareable Funny Finish.",
+      "community": "BIKE TYSON",
+      "playUrl": "https://bike-tyson-mikeminer.vercel.app/",
+      "repositoryUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery",
+      "commit": "87063ff7ebced77e81c293cdf710995e2ec49ab3",
+      "demoUrl": "https://bike-tyson-mikeminer.vercel.app/demo/",
+      "submissionUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/SUBMISSION.md",
+      "buildLogUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/BUILD_LOG.md",
+      "verificationUrl": "https://github.com/mikeminer/bike-tyson-one-last-delivery/blob/87063ff7ebced77e81c293cdf710995e2ec49ab3/VERIFICATION.md",
+      "access": "Solana mainnet-beta; launched Token-2022 mint CbyTNf7UPzvewHh4Zp6umogM2RWahhmGRJWLJnPwpump (6 decimals). Midnight Dispatch requires at least 1,000 whole tokens (1000000000 raw) summed across the authenticated wallet's unexpired locks for this mint in existing DevFridge program 9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6. No minimum original or remaining duration. Expired deposits stop counting; failed or stale evidence never grants access and practice remains available. Separate server-verified wallet signatures, RPC eligibility and local scores. No early withdrawal. Redemption fee: 2% for PASTA buy-and-burn plus network costs. Non-PASTA redemption needs an executable Jupiter route; this mint's route is unverified, so no locking transactions are offered.",
+      "limitations": "Prototype; local unverified scores, no prizes, ranked multiplayer or on-chain score writes. Public HTTPS browser tests passed with desktop and mobile emulation; no physical-phone or real Phantom extension/mobile validation. Demo lock states and test wallets are explicitly synthetic; no real deposits or fund movements. Hosted nonces, sessions and rate limits are ephemeral per-instance; shared persistence is needed for reliable scaled authentication. Public RPC may be unavailable. Character uses a user-supplied reference and generated face/skin textures; no scanned or licensed likeness or independent asset-rights verification is claimed. Gemini composed numeric music/effect recipes, rendered locally; no Lyria recordings or cloned voice. Gallery review does not establish audit, prize eligibility or final competition admission.",
+      "practiceAvailable": true,
+      "approved": true,
+      "published": true
+    },
+    {
+      "schemaVersion": 1,
+      "slug": "mezzo-pollo-academy",
+      "name": "Mezzo Pollo Academy",
+      "pitch": "A plush half-chicken runs three lanes and must pass under the gate with the right half: numbers, words and mirrored shapes. When the WHOLE CHICKEN flies over, don't move.",
+      "community": "Mezzo Pollo (MEMEZZO)",
+      "playUrl": "https://mezzopollo.it/",
+      "repositoryUrl": "https://github.com/mikeminer/mezzo-pollo-academy",
+      "commit": "bd3b3c85c92cae30b5a103728c71df76e90df510",
+      "demoUrl": "https://mezzopollo.it/practice",
+      "submissionUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/bd3b3c85c92cae30b5a103728c71df76e90df510/SUBMISSION.md",
+      "buildLogUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/bd3b3c85c92cae30b5a103728c71df76e90df510/BUILD_LOG.md",
+      "verificationUrl": "https://github.com/mikeminer/mezzo-pollo-academy/blob/bd3b3c85c92cae30b5a103728c71df76e90df510/VERIFICATION.md",
+      "access": "Free public reviewer demo: https://mezzopollo.it/practice. No wallet or tokens; exactly 2 lives per new game, no refill on pause/resume, separate local unverified record. The main game at / requires at least 1,000,000 MEMEZZO (1000000000000 raw, six decimals) summed across active DevFridge locks of the same connected Phantom wallet and Solana mainnet mint Dv1prgxPZs1M6vpacCzmGjLkd7ZFZVJSHCH9PLwEpump, program 9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6. No minimum original or remaining duration; unlockAt must be in the future. Each main run starts with floor(active MEMEZZO / 1,000,000) total lives, no base lives: 1m gives 1, 1.999999m gives 1, 2m gives 2. Refresh/resume never refills lives; above-threshold changes apply next run. Lost eligibility, disconnect, stale evidence or errors pause and block continuation until fresh qualifying evidence returns for the same wallet; switching wallets requires a new run. Browser-side checks, no server authentication or verified scores. The game reads locks and requests no signatures/transactions. Locks are created/redeemed externally on DevFridge: no early withdrawal, 2% redemption fee for PASTA buy-and-burn plus network costs; MEMEZZO redemption needs an executable Jupiter route. Wallet features for adults.",
+      "limitations": "Static Three.js r128 prototype. Access, lives and local scores are browser-side; no server-authenticated sessions, leaderboard, rewards or multiplayer. The free 2-life reviewer demo is public and does not verify reviewer identity or load the wallet controller. Italy/United States/Poland flags select Italian/English/Polish, including 40 native word targets each; country is a language preference, not location/access evidence. The free-demo revision passed 32 local browser checks (natural 2-to-0 game over, pause/restart, score separation, no wallet/API, main gate and synthetic 1m case); 43 access unit tests passed. Prior locale, access and caption verification is documented in VERIFICATION.md. Wallet/lock tests use explicit synthetic fixtures and mobile viewport emulation, not physical Phantom approval, mainnet transactions or physical devices. No screen-lock or sustained-performance certification. SDK caching or upstream RPC failure can leave sufficient locks unconfirmed and deny main-game access. Procedural art/SFX; Google Lyria soundtrack with documented provenance and approximate English subtitles. Media at /demo includes silent English walkthroughs that visibly disclose simulated wallet evidence; these are separate from the live free demo. Three.js MIT; Google Fonts SIL OFL. Gallery review does not establish competition eligibility.",
+      "practiceAvailable": true,
+      "approved": true,
+      "published": true
+    }
+  ]
+}

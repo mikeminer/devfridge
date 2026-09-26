@@ -6,12 +6,12 @@ const TEXT = { name: 80, pitch: 240, community: 80, access: 1600, limitations: 1
 const URLS = ['playUrl', 'repositoryUrl', 'demoUrl', 'submissionUrl', 'buildLogUrl', 'verificationUrl'];
 const FIELDS = ['schemaVersion', 'slug', ...Object.keys(TEXT), ...URLS, 'commit', 'practiceAvailable'];
 
-function validateProject(project, filename) {
+function validateProject(project, filename, { allowFeatured = false } = {}) {
   const fail = message => { throw new Error(`${filename}: ${message}`); };
   if (!project || typeof project !== 'object' || Array.isArray(project)) fail('expected an object');
   if (Object.keys(project).some(key => !FIELDS.includes(key)) || FIELDS.some(key => !Object.hasOwn(project, key))) fail('unexpected or missing fields');
   if (project.schemaVersion !== 1) fail('schemaVersion must be 1');
-  if (typeof project.slug !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug) || project.slug.length > 60 || project.slug === 'fridge-run') fail('invalid or reserved slug');
+  if (typeof project.slug !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug) || project.slug.length > 60 || (!allowFeatured && project.slug === 'fridge-run')) fail('invalid or reserved slug');
   if (filename !== `${project.slug}.json`) fail('filename must match slug');
   for (const [key, max] of Object.entries(TEXT)) {
     const value = project[key];

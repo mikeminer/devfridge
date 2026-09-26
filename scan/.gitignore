@@ -13,3 +13,4 @@ tsconfig.tsbuildinfo
 !/data/
 /data/*
 !/data/hackathon-projects/
+!/data/projects.json

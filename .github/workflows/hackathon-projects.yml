@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 24
       - name: Test submission validation
-        run: node --test scan/tests/hackathon-project-registry.test.cjs
+        run: node --test scan/tests/hackathon-project-registry.test.cjs scan/tests/hackathon-feed.test.cjs
       - name: Validate gallery records
         run: node scripts/validate-hackathon-projects.cjs
       # Publication is the existing Vercel Git deployment after an owner-reviewed

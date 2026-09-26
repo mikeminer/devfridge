@@ -6,3 +6,8 @@
 /scripts/validate-hackathon-projects.cjs @mikeminer
 /.github/ @mikeminer
 /docs/hackathon/ @mikeminer
+
+/scan/data/projects.json @mikeminer
+/scan/lib/hackathon-feed.cjs @mikeminer
+/scan/app/hackathon/projects.json/ @mikeminer
+/scan/tests/hackathon-feed.test.cjs @mikeminer
