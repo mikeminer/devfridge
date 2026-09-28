@@ -4,7 +4,7 @@ title: "Trust Me Capital (solana)"
 description: "DevFridge investor knowledge: Trust Me Capital (solana)"
 resource: "https://solscan.io/token/EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-27T12:01:11Z"
+timestamp: "2026-09-28T13:53:23Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:EAkUGfkiAwthJmpci5o5UivzQr2YMnrg4EirEUMjpump`
 
-Registry status: ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+Registry status: ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Trust Me Capital token. The Hyperliquid vault and the token are separate product
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 999999999.999995 |
 | Supply in base units | `999999999999995` |
 | Decimals | 6 |
-| Finalized slot | 450990897 |
+| Finalized slot | 451338096 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,34 +68,12 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 ```json
 {
   "interpretation": "No indexed pair is not proof of no market. Pump.fun bonding-curve markets can be absent. Price, FDV and liquidity are provider estimates, not executable quotes.",
-  "pairs": [
-    {
-      "dexId": "pumpfun",
-      "fdv": 3442.92,
-      "liquidity": null,
-      "marketCap": 3442.92,
-      "pairAddress": "84Jm5CpYEPK1S4fibzUpZkp5BRxUgvcCbQK1bq6KWzLD",
-      "pairCreatedAt": 1787587138000,
-      "priceUsd": "0.000003442",
-      "quoteToken": {
-        "address": "So11111111111111111111111111111111111111112",
-        "name": "Wrapped SOL",
-        "symbol": "SOL"
-      },
-      "url": "https://dexscreener.com/solana/84jm5cpyepk1s4fibzupzkp5brxugvccbqk1bq6kwzld",
-      "volume": {
-        "h1": 0,
-        "h24": 0.32,
-        "h6": 0,
-        "m5": 0
-      }
-    }
-  ],
+  "pairs": [],
   "provider": "DexScreener"
 }
 ```

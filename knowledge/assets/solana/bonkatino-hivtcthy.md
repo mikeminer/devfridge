@@ -4,7 +4,7 @@ title: "Bonkatino (solana)"
 description: "DevFridge investor knowledge: Bonkatino (solana)"
 resource: "https://solscan.io/token/HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-27T12:01:11Z"
+timestamp: "2026-09-28T13:53:23Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:HivTCtHY1GbC8ws9jwCh3Km5EH4CGtnTdDeo3SdKpump`
 
-Registry status: ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+Registry status: ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 450990894 |
+| Finalized slot | 451338093 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-27T12:01:11Z · last attempt: 2026-09-27T12:01:11Z.
+ok · last successful observation: 2026-09-28T13:53:23Z · last attempt: 2026-09-28T13:53:23Z.
 
 ```json
 {
