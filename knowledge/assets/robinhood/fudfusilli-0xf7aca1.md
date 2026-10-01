@@ -4,7 +4,7 @@ title: "FudFusilli (robinhood)"
 description: "DevFridge investor knowledge: FudFusilli (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0xF7aca11cDB86115eEDce7da43C5326A12408201e"
 tags: ["devfridge", "investors"]
-timestamp: "2026-09-30T12:33:27Z"
+timestamp: "2026-10-01T13:12:58Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0xf7aca11cdb86115eedce7da43c5326a12408201e`
 
-Registry status: ok · last successful observation: 2026-09-30T12:33:27Z · last attempt: 2026-09-30T12:33:27Z.
+Registry status: ok · last successful observation: 2026-10-01T13:12:58Z · last attempt: 2026-10-01T13:12:58Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-09-30T12:33:27Z · last attempt: 2026-09-30T12:33:27Z.
+ok · last successful observation: 2026-10-01T13:12:58Z · last attempt: 2026-10-01T13:12:58Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 76518364 |
+| Block | 77401141 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,11 +42,11 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-09-30T12:33:27Z · last attempt: 2026-09-30T12:33:27Z.
+ok · last successful observation: 2026-10-01T13:12:58Z · last attempt: 2026-10-01T13:12:58Z.
 
 ```json
 {
-  "holders_count": 4,
+  "holders_count": 5,
   "interpretation": "Account concentration can include curves, pools and custodians; it is not beneficial-owner concentration.",
   "provider": "Pons",
   "top_accounts": [
@@ -57,8 +57,8 @@ ok · last successful observation: 2026-09-30T12:33:27Z · last attempt: 2026-09
     },
     {
       "address": "0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134",
-      "balance": "14229133049728619627402083",
-      "percentage": 1.4229
+      "balance": "14179133049728619627402083",
+      "percentage": 1.4179
     },
     {
       "address": "0x0f163e7e331091b55a14dc324afc2dbdfde3a7c6",
@@ -69,6 +69,11 @@ ok · last successful observation: 2026-09-30T12:33:27Z · last attempt: 2026-09
       "address": "0x3387c7ffd04926a1c185c2d64e8193fdf756f28c",
       "balance": "866130650521001433819122",
       "percentage": 0.0866
+    },
+    {
+      "address": "0xc1db49694e0db50778c333350c8a553fde221989",
+      "balance": "50000000000000000000000",
+      "percentage": 0.005
     }
   ]
 }
