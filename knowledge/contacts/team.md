@@ -4,7 +4,7 @@ title: "Team, CEO and leadership contacts"
 description: "DevFridge investor knowledge: Team, CEO and leadership contacts"
 resource: "https://team.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-01T13:12:58Z"
+timestamp: "2026-10-02T12:33:32Z"
 generated: true
 ---
 
@@ -12,13 +12,13 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Team site](https://team.devfridge.cool/) · [Public roster API](https://scan.devfridge.cool/api/team) · ok · last successful observation: 2026-10-01T13:12:58Z · last attempt: 2026-10-01T13:12:58Z.
+[Team site](https://team.devfridge.cool/) · [Public roster API](https://scan.devfridge.cool/api/team) · ok · last successful observation: 2026-10-02T12:33:32Z · last attempt: 2026-10-02T12:33:32Z.
 
 ## pappardelle.sol — CEO
 
 Public wallet: `GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W`
 
-**Verified commitment** · checked 2026-10-01T13:12:58Z · tier 1 · qualifying PASTA base units: `105937269340957`. [Lock evidence](https://scan.devfridge.cool/api/sdk/check?wallet=GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump).
+**Verified commitment** · checked 2026-10-02T12:33:32Z · tier 1 · qualifying PASTA base units: `105937269340957`. [Lock evidence](https://scan.devfridge.cool/api/sdk/check?wallet=GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump).
 
 - [x: anonimocommando](https://x.com/anonimocommando)
 - [github: mikeminer](https://github.com/mikeminer)
@@ -31,7 +31,7 @@ Public wallet: `GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W`
 
 Public wallet: `DmkJWVRmwNJqjrJRxyPsfcCdVDGCswr1EZpBYmtPwPJn`
 
-**Verified commitment** · checked 2026-10-01T13:12:58Z · tier 5 · qualifying PASTA base units: `3655229667684`. [Lock evidence](https://scan.devfridge.cool/api/sdk/check?wallet=DmkJWVRmwNJqjrJRxyPsfcCdVDGCswr1EZpBYmtPwPJn&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump).
+**Verified commitment** · checked 2026-10-02T12:33:32Z · tier 5 · qualifying PASTA base units: `3655229667684`. [Lock evidence](https://scan.devfridge.cool/api/sdk/check?wallet=DmkJWVRmwNJqjrJRxyPsfcCdVDGCswr1EZpBYmtPwPJn&mint=39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump).
 
 
 
