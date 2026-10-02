@@ -1,0 +1,433 @@
+{
+  "source": "devfridge/scan/public/world/game-v2",
+  "copiedAt": "2026-10-02T11:50:42.166Z",
+  "files": [
+    {
+      "path": "assets/cold-storage.css",
+      "bytes": 40383,
+      "sha256": "b8e3147c9f919c9bb273c4fe84e590bcbbe1c0ddfcb3f27e62d2513047ce9fcc"
+    },
+    {
+      "path": "assets/cold-storage.js",
+      "bytes": 3260119,
+      "sha256": "d3ab63b9cabd3803944aa74c0d1307db1b5e24da4c6065f4c784acb2f5f09dcd"
+    },
+    {
+      "path": "assets/gate-2.js",
+      "bytes": 9662,
+      "sha256": "15aa373aeea226c1b0913aa168c893f688873bcd7cbf6858186b0e51f6fcf322"
+    },
+    {
+      "path": "assets/gate.css",
+      "bytes": 1356,
+      "sha256": "b3204e6bd501e81863c693028caf8271a759d0f03967f416601447ea92a5644a"
+    },
+    {
+      "path": "assets/gate.js",
+      "bytes": 9656,
+      "sha256": "1d2c56b5472b4ad76373ff28c64dc80cbd4bb51b5a39b55efd4f8dde2509aaa3"
+    },
+    {
+      "path": "audio/aperitivo-sfx.mp3",
+      "bytes": 8761,
+      "sha256": "ad83857ee59302a20f059740d76bc43bf635a41e12180e47c938d7772ad76576"
+    },
+    {
+      "path": "audio/aperitivo-signature.mp3",
+      "bytes": 33777,
+      "sha256": "a223f64237479d1c2173a5747feca3be0b887adac168e591068ddceb1c276720"
+    },
+    {
+      "path": "audio/aperitivo-theme.mp3",
+      "bytes": 120686,
+      "sha256": "caeadc3081745041304cb8010ae14aa2701eabbd100c4a606920f45545667ddc"
+    },
+    {
+      "path": "audio/aperitivo-voice.mp3",
+      "bytes": 24201,
+      "sha256": "7e18fec226bcb256280e705f9ed45dc211900df748fba029fd4186c922631529"
+    },
+    {
+      "path": "audio/bonkatino-sfx.mp3",
+      "bytes": 6218,
+      "sha256": "4c0ef6d9976eb8ff40d92e8d637a48908b995c32df47a334f7769af11631490a"
+    },
+    {
+      "path": "audio/bonkatino-signature.mp3",
+      "bytes": 24838,
+      "sha256": "9ddb098e5ee70930abb54ae7bd12562e5dfe9d7217c8f9d308dbeb36e58d67e6"
+    },
+    {
+      "path": "audio/bonkatino-theme.mp3",
+      "bytes": 130502,
+      "sha256": "013b30729a075e223a7c2419a8fc35089d1f5c882e44d5cdc85dff9f8d7c86e9"
+    },
+    {
+      "path": "audio/bonkatino-voice.mp3",
+      "bytes": 16609,
+      "sha256": "1b021ee30b1cb5197ae9b6877f6eaebca2d6a9db46fee864b208be4300d7da01"
+    },
+    {
+      "path": "audio/ciccia-sfx.mp3",
+      "bytes": 8785,
+      "sha256": "87e4ad4bcfc4f2c4cf6757ffca1ff62fa4d77f855be2b79c53049f7633d49cb4"
+    },
+    {
+      "path": "audio/ciccia-signature.mp3",
+      "bytes": 54443,
+      "sha256": "92570c1275712913a704a26f6f72ef9f3e2f12178eaaf77a5268d46abe049c69"
+    },
+    {
+      "path": "audio/ciccia-theme.mp3",
+      "bytes": 123838,
+      "sha256": "c7cc90ca083cc2a6f5057e7a52a27aa337287a4af9a32f2ec7e866735e68b593"
+    },
+    {
+      "path": "audio/ciccia-voice.mp3",
+      "bytes": 43832,
+      "sha256": "b15028af5db427c710b4369b4b386f805d324d9b5c1edd13b654bf10f1ff8c84"
+    },
+    {
+      "path": "audio/friedfomo-sfx.mp3",
+      "bytes": 10227,
+      "sha256": "5f6eb180e15db13c8ca94c997bdd267d75da140cdf0f545f181ce1851319d5c4"
+    },
+    {
+      "path": "audio/friedfomo-signature.mp3",
+      "bytes": 26881,
+      "sha256": "e234ae499f5ee8456d9a3ba514e7521d3350b23a6291a3c826c7c7291c50314a"
+    },
+    {
+      "path": "audio/friedfomo-theme.mp3",
+      "bytes": 126756,
+      "sha256": "caa6a49d324155624876b3b71802a99032501ad64443e7ade51c05d3d9ce7d2e"
+    },
+    {
+      "path": "audio/friedfomo-voice.mp3",
+      "bytes": 13601,
+      "sha256": "f13f788b2fd5a29b74e0dae8db7163c875f8eb9645ec2079e948c69d4cf5e7c9"
+    },
+    {
+      "path": "audio/fudfusilli-sfx.mp3",
+      "bytes": 3114,
+      "sha256": "e387a908eb6194a2b2fde5b750a53d86072f5c89c6a55ce996b28e1243c7b016"
+    },
+    {
+      "path": "audio/fudfusilli-signature.mp3",
+      "bytes": 22616,
+      "sha256": "05bc59fe5c1314c5c49d1406903d6cee5cb9adff79246410a7f97001b93d3534"
+    },
+    {
+      "path": "audio/fudfusilli-theme.mp3",
+      "bytes": 120577,
+      "sha256": "797b0dae78e63f96ff6fa2fda202ad640d1d1cb573bd032fb24d8808014f7428"
+    },
+    {
+      "path": "audio/fudfusilli-voice.mp3",
+      "bytes": 19131,
+      "sha256": "0a9ac69d1dbcf3ecff8cbf29c5ca95b66350142778f70b7414731e6df3a2f26f"
+    },
+    {
+      "path": "audio/gmgnocco-sfx.mp3",
+      "bytes": 7299,
+      "sha256": "adb271a9fdc9b034d3b4ed8d10ccfa4496a6d2e5145656c719349334d8d95d31"
+    },
+    {
+      "path": "audio/gmgnocco-signature.mp3",
+      "bytes": 34989,
+      "sha256": "577a140de7ac983d88dd57b7b07184980e6d94b9ae31886a426977e7112d4c7f"
+    },
+    {
+      "path": "audio/gmgnocco-theme.mp3",
+      "bytes": 114438,
+      "sha256": "bd2b494b5e0ea42458b13ae2258564000a2f364bb4263bec87d6a7d327b7520e"
+    },
+    {
+      "path": "audio/gmgnocco-voice.mp3",
+      "bytes": 28906,
+      "sha256": "22e8002f3c049adf61e0280017b0f067a4e864d9f47160bcc86749e6fa76634a"
+    },
+    {
+      "path": "audio/lambocello-sfx.mp3",
+      "bytes": 8808,
+      "sha256": "4be43134e62608eb2fb2208b90cf5abd6e13fa68bf96f4f8e77951adc92ae3fe"
+    },
+    {
+      "path": "audio/lambocello-signature.mp3",
+      "bytes": 32962,
+      "sha256": "39560d301e6acfc3aeb67330a081c5bb5f9b4c0445c94a435cbf5219bc188c5a"
+    },
+    {
+      "path": "audio/lambocello-theme.mp3",
+      "bytes": 119896,
+      "sha256": "b866c0f5a029dce98bda5bbd1b3563fec9bc20a42cf3586548164b3d886dc641"
+    },
+    {
+      "path": "audio/lambocello-voice.mp3",
+      "bytes": 23290,
+      "sha256": "e5eb0869c6742d066b758416e4815f0606a2600241b6fd401920e6e4554e2334"
+    },
+    {
+      "path": "audio/lyria/aperitivo-full.mp3",
+      "bytes": 4295591,
+      "sha256": "b311210a4a6833940ae44ab5f831e2c99cd1485c35189894a28b8bd3162dff38"
+    },
+    {
+      "path": "audio/lyria/bonkatino-full.mp3",
+      "bytes": 1561511,
+      "sha256": "70614a019cb403970e004dc7d35245fd80731cd7f85079ab74965a852d575d4d"
+    },
+    {
+      "path": "audio/lyria/ciccia-full.mp3",
+      "bytes": 2185315,
+      "sha256": "7a4bbef74a0f2fae92a3022cf717fb3cd480605d3046baee2ab4e4d135ac6679"
+    },
+    {
+      "path": "audio/lyria/friedfomo-full.mp3",
+      "bytes": 3294369,
+      "sha256": "5f6ee11eda6ca3ba82ef354d925eb400797bace7141deb50fdc61ef5833917a8"
+    },
+    {
+      "path": "audio/lyria/fudfusilli-full.mp3",
+      "bytes": 786614,
+      "sha256": "a676555486443dbd56fe3bbc4641e7defc919d5160b0abece746e075bc956a9c"
+    },
+    {
+      "path": "audio/lyria/gmgnocco-full.mp3",
+      "bytes": 1466216,
+      "sha256": "444dbd93bf5dba45e8678203e094213be3094ea792b693b994707bb7a1d974f7"
+    },
+    {
+      "path": "audio/lyria/lambocello-full.mp3",
+      "bytes": 913256,
+      "sha256": "270ade7d2b04c190b970b98389377dd2a9da813d6653037617b1579eba999907"
+    },
+    {
+      "path": "audio/lyria/moonzarella-full.mp3",
+      "bytes": 4315653,
+      "sha256": "ef598dfc4e465dc3a3d24039773d1114cbb2d6d4f64d0e72e0da1b6b16a257b7"
+    },
+    {
+      "path": "audio/lyria/rugarugo-full.mp3",
+      "bytes": 1485651,
+      "sha256": "38ec2204864085fa0052024d318663788e217f250ee13e4ead737cbf166b5dc7"
+    },
+    {
+      "path": "audio/lyria/sersugo-full.mp3",
+      "bytes": 1606023,
+      "sha256": "54e8cc268e140a96b272a0aa071f06d028f8a710927b130bf8d6be6765bd890e"
+    },
+    {
+      "path": "audio/moonzarella-sfx.mp3",
+      "bytes": 6182,
+      "sha256": "f248d00b9f228c7d3a4a83b32ed6dbb70860e41b5da2d7a89e9ab11142f8739c"
+    },
+    {
+      "path": "audio/moonzarella-signature.mp3",
+      "bytes": 25478,
+      "sha256": "0f019e4649ae4c70f49691918df12ea16c75ae2aaccbf4572cfa9a0a89240ced"
+    },
+    {
+      "path": "audio/moonzarella-theme.mp3",
+      "bytes": 118969,
+      "sha256": "23ae18a156bb5577ade5629260d6466a9fb2aa372371e0dda3da4892d333fa37"
+    },
+    {
+      "path": "audio/moonzarella-voice.mp3",
+      "bytes": 19916,
+      "sha256": "d0aa98e025109e8eceadc474de1270d20613b7a185a66e4e89291b753fdfd49c"
+    },
+    {
+      "path": "audio/rugarugo-sfx.mp3",
+      "bytes": 2984,
+      "sha256": "4df36bff7b0cdcfd647ad3b31ca2ef83900c28ef0c2aa60ebd89b83fc5488cb4"
+    },
+    {
+      "path": "audio/rugarugo-signature.mp3",
+      "bytes": 29817,
+      "sha256": "5d1dab82453e9005df0a198438f8cb9424d68fdd78de360b9ca29eb0290ba70a"
+    },
+    {
+      "path": "audio/rugarugo-theme.mp3",
+      "bytes": 120929,
+      "sha256": "14d12318e0b99c84e467a34466b50757e8e5e026371542740d3e60713625abf8"
+    },
+    {
+      "path": "audio/rugarugo-voice.mp3",
+      "bytes": 27138,
+      "sha256": "5f372795735822319133bed3eeb63f356abec636c269207cb819818a1b73dcb5"
+    },
+    {
+      "path": "audio/sersugo-sfx.mp3",
+      "bytes": 7077,
+      "sha256": "3f2ffd02c142082512518bcedc68aed4d43464c395e11115baada23e8f242806"
+    },
+    {
+      "path": "audio/sersugo-signature.mp3",
+      "bytes": 39690,
+      "sha256": "7318e504f076c794be6ab891818d20cd618bb12eb215d8cab7872749dbdd12b4"
+    },
+    {
+      "path": "audio/sersugo-theme.mp3",
+      "bytes": 118870,
+      "sha256": "dbb139821aaea532cd46e4c4d514539f1782a44c730f047692f93afa6a0654ef"
+    },
+    {
+      "path": "audio/sersugo-voice.mp3",
+      "bytes": 30362,
+      "sha256": "59208a3624f328f3538edbdf55f1a680342b294f25d12a6b76828c960ba23d34"
+    },
+    {
+      "path": "cast.json",
+      "bytes": 12287,
+      "sha256": "63506c7d0e4d8358d695004c9e5a8d960d6a78d55623394958cb985c527a16b9"
+    },
+    {
+      "path": "economy.json",
+      "bytes": 3140,
+      "sha256": "de38c256ea36b3e2ff2f9153c15c77bce0c632e81d91fd26fdee48d73208cacc"
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 243,
+      "sha256": "718f635971eb2beca1917a8fe086e0d4b9116b0145f78e68d9c9b5e26c22851f"
+    },
+    {
+      "path": "index.html",
+      "bytes": 869,
+      "sha256": "ca5d440777f6f0090298d243ba2920ac505ed18e1f6c72aa7b531144c4b2e1f7"
+    },
+    {
+      "path": "models/aperitivo.glb",
+      "bytes": 3681472,
+      "sha256": "a3de3460164b71d3f0d5f850a4f65fc50624a7e2d4d9e62429982a544a27dd37"
+    },
+    {
+      "path": "models/bonkatino.glb",
+      "bytes": 4683696,
+      "sha256": "f6a07b9e8fd9f68f9ff8bf0b342d91f6f654d658f9f643e13a9e449c897d3bbe"
+    },
+    {
+      "path": "models/ciccia.glb",
+      "bytes": 4683924,
+      "sha256": "b37b54826a0aeb3721eab09c5ea63d05f778e934e6fa9fba25d5d9ec28098951"
+    },
+    {
+      "path": "models/friedfomo.glb",
+      "bytes": 4139320,
+      "sha256": "0d63a77067330fba434c5abecc99bfbfbedb5435ceddb3744a8f565269260c85"
+    },
+    {
+      "path": "models/fudfusilli.glb",
+      "bytes": 3830824,
+      "sha256": "ed002ac0777e29e7e6967acc9165e7229c10f9fd1d73b72975039d330d12323b"
+    },
+    {
+      "path": "models/gmgnocco.glb",
+      "bytes": 3821280,
+      "sha256": "28c07e8a450387a204afe95cdaccdee9c91231f020045626e67f324559c95cec"
+    },
+    {
+      "path": "models/lambocello.glb",
+      "bytes": 5137928,
+      "sha256": "8bce8bd3bacfb394400e61c80ac65e443677765b12e8375241660a8e4068116c"
+    },
+    {
+      "path": "models/moonzarella.glb",
+      "bytes": 4082784,
+      "sha256": "7f3d235fb9daae8cdb99f3c2bacc54799e7ba70263efd65e1fb4c11c43b55bdb"
+    },
+    {
+      "path": "models/rugarugo.glb",
+      "bytes": 4217492,
+      "sha256": "d45afd7fcc1a89b1e070930180a7b79466ab28789a0c40362ec046e19d07c859"
+    },
+    {
+      "path": "models/sersugo.glb",
+      "bytes": 4736856,
+      "sha256": "1ccf7ab5236aa7e1de54a88ebf54367ef5cc8ef29faecab7fce60515246a17ce"
+    },
+    {
+      "path": "portraits/aperitivo.webp",
+      "bytes": 31168,
+      "sha256": "5a7e6b19b9a1b2461ee771044335ceab3d96eb98369de8a498c078ae084dbf30"
+    },
+    {
+      "path": "portraits/bonkatino.webp",
+      "bytes": 33440,
+      "sha256": "efb86ab5f49a1df481cd719bf3d56699f0d24434caf488548b7fbcc68fc68845"
+    },
+    {
+      "path": "portraits/ciccia.webp",
+      "bytes": 11092,
+      "sha256": "1cc32f671fef925408d5dbb3681a494a9dea10d5c5b99947d019cea17be7cb39"
+    },
+    {
+      "path": "portraits/friedfomo.webp",
+      "bytes": 33588,
+      "sha256": "ba363e43b760c15ae5864ac30b4170fa1735686c5aeb5c9da89f41e0f3e8cf7e"
+    },
+    {
+      "path": "portraits/fudfusilli.webp",
+      "bytes": 33564,
+      "sha256": "2e5961dcbb8f907d8cc0e46a8bf926143fc237e3cc9cdd6c6dfc4465ac04c260"
+    },
+    {
+      "path": "portraits/gmgnocco.webp",
+      "bytes": 30954,
+      "sha256": "2024c529a97d12b4d28b255f937d4c504d1b2357dd34bfb2cb7192f572fe9a16"
+    },
+    {
+      "path": "portraits/lambocello.webp",
+      "bytes": 34328,
+      "sha256": "7c7c8c339c95edea221ead6a6a2b08f13444c5871f0e9a8034cd7c2e605d40fb"
+    },
+    {
+      "path": "portraits/moonzarella.webp",
+      "bytes": 32734,
+      "sha256": "a61ec8afa0abe4ab7cd72e5dad6cd5dbbfc181a28772b32c88d32228d810269d"
+    },
+    {
+      "path": "portraits/rugarugo.webp",
+      "bytes": 37802,
+      "sha256": "23afe95601481b28de91ad7f551ac825b170aefddff3fe6dd0d4e9ae91b8479d"
+    },
+    {
+      "path": "portraits/sersugo.webp",
+      "bytes": 34044,
+      "sha256": "2d557a134121c4c8b5940b3e9ec5e7b0e6397554160da7f31078b3b390d08a5e"
+    },
+    {
+      "path": "vendor/devfridge-sdk.js",
+      "bytes": 10069,
+      "sha256": "6e9d25a24d0552419cdb9d5dd605b81b921270f692e80b00441307a9260230ad"
+    },
+    {
+      "path": "vendor/meshopt_decoder.module.js",
+      "bytes": 25028,
+      "sha256": "8c2129cc3237e0d22e12815d05e71d61bdbbe07441f082cd3e32b48ab8644246"
+    }
+  ],
+  "androidOverrides": [
+    {
+      "path": "assets/gate-2.js",
+      "reason": "Bounded network requests, visible retryable errors, date validation and accurate TopShelf disclosures",
+      "sha256": "29f6968f4e740cfabefdbc809552e585cd87c5aebcdb99d446d4a5b362ce2b83"
+    },
+    {
+      "path": "index.html",
+      "reason": "Native bridge scripts, Android styling and accurate TopShelf metadata",
+      "sha256": "ec9a7e3cbf06fc6ffcabbe08f169f85c1c87eaef05bbb747289fc18d8884e1a5"
+    },
+    {
+      "path": "adaptive-coach.js",
+      "reason": "On-device adaptive gameplay coaching; local run history and feedback only",
+      "sha256": "71dee6a3a3aa748a8ef24688d82afc541a7243e421b7d8cec10120ee8cdceda3"
+    },
+    {
+      "path": "android.css",
+      "reason": "Native touch-target styling, SKR Aurora cosmetic, and adaptive-coach UI",
+      "sha256": "072ee8edacf01f63d8d4e6c6085981be06b6ae4de5d78ee61a12ab2ad707fb1f"
+    }
+  ]
+}
