@@ -6,7 +6,7 @@ Release certificate SHA-256: `2acabfed1ae887ed90e650a4446e5ef747de096f0fd6ea75a8
 
 ## Signing and backup
 
-The private PKCS#12 keystore is stored outside the project at `C:\Users\mikfo\.android\devfridge-world-signing\devfridge-world.p12`. The directory ACL permits the current Windows user and SYSTEM. Its random password is saved with Windows DPAPI in `signing-password.clixml`, not in source, GitHub, the APK or this document.
+The private PKCS#12 keystore is stored in a protected local user profile outside the project. Its random password is saved with Windows DPAPI in a separate credential file, not in source, GitHub, the APK or this document. Machine-specific paths and credentials are intentionally omitted.
 
 The Windows-bound credential is **not a portable backup**. Before replacing this PC or Windows account, run the following yourself and enter a strong backup password in the secure prompt. Use an existing directory on an offline drive and keep the password separately in your password manager:
 
@@ -33,7 +33,7 @@ Release build, 4 release JVM tests, lint (0 errors / 17 warnings), APK signature
 
 ## Store gates still open
 
-- Real Seeker: original Solana wallet approval, return to Phantom, exact allowance/payment, confirmation, restart and retry. The owner confirmed no Seeker is available.
+- Compatible Android wallet: demonstrate original Solana account approval, return to Phantom, fee review, payment cancellation, confirmation, restart and retry. These production wallet and payment steps have not been recorded.
 - Publisher Portal KYC/KYB and publisher wallet under the owner's control.
 - Final privacy policy: legal bases, vendors, international transfers and provider-log retention verified by the publisher.
 - TopShelf legal/territory assessment. The official Discord response of 19 September states that the store does not assess models or prize structures before submission; developer compliance remains the publisher's responsibility. This is not prior approval.

@@ -1,51 +1,24 @@
-# Mobile registration, version 0.2.0
+# Android TopShelf registration handoff
 
-The Android app retains the original game engine. A narrow fetch observer records only successful `start` and matching `finish` responses from the first-party live-score endpoint. It never converts an unverified run into a ranked result. Drafts are written before opening another app, and no age or timelock checks are bypassed.
+The Android app preserves the game and its existing score verification. It records only matching successful live-score responses and never turns an offline or unverified run into a ranked score. Registration remains optional.
 
-## Flow
+## Current flow
 
-1. Finish a server-verified run. Open **Saved scores / Robinhood registration** from the native menu or use the score registration button.
-2. The app checks public `usedRun(runId)` on the configured Robinhood contract. An already registered run cannot start another payment flow.
-3. A new `/api/world/topshelf/mobile` POST unseals the existing run ticket and calls `finishedLiveRun`. It stores a short-lived draft behind an HMAC-derived capability; retries produce the same capability and retain the ticket's original expiry.
-4. Android opens the explicitly targeted `app.phantom` package using Phantom's documented browse link. The URL contains an opaque identifier in its fragment, not the score, ticket, recovery phrase or native wallet token.
-5. The dedicated static page retrieves the draft using a bearer header. The user connects the same Solana wallet. Existing TopShelf UI code performs the EVM connection, fee review, signed Solana challenge, server receipt verification, exact allowance, simulation, final payment and receipt-event checks.
-6. A return link opens the Android saved-score panel. No success data in the return URI is accepted. The app queries the contract again. Lost connectivity leaves the result unconfirmed and retryable.
+1. Finish a server-verified run and open Saved scores or the TopShelf registration option.
+2. The game checks the configured Robinhood Chain contract for an existing registration. A run already used by the contract is not offered for another payment.
+3. The Android handoff requests a short-lived server draft for the verified run. The server protects retrieval with a temporary capability; the deep link does not contain the score, ticket, wallet key, or signature.
+4. The app opens the registration page in Phantom. Players may connect the same Solana account inside Phantom. On Android, a separate Use game wallet option can request authorization and the exact registration message signature from the original Solana account through Mobile Wallet Adapter, including a Seed Vault account.
+5. The user reviews the selected Robinhood account, token, amount, network fee, and contract details, then separately approves any wallet prompts. The Android app does not submit a payment transaction.
+6. Returning to the game does not count as payment success. The app checks the contract again and leaves uncertain results retryable.
 
-## Build and activation
+The app never requests, imports, or exports a recovery phrase. Solana private keys remain in the wallet. Wallet signing, token allowance, and Robinhood payment are separate actions.
 
-```powershell
-node scripts/build-registration-page.mjs
-node scripts/prepare-game.mjs
-npm test
-node ../cold-storage/node_modules/tsx/dist/cli.mjs --test tests/mobile-handoff.test.ts
-```
+## Implementation and deployment
 
-The page build uses the sibling `cold-storage` development dependencies and original registration source, with a provenance hash. The generated browser bundle keeps the existing registration UI; only bootstrap and provider preference are changed. No new transaction or contract protocol is introduced.
+Android bridge code is in `mobile/native-bridge.js`, `mobile/native-signing.ts`, and `mobile/registration-handoff.js`. The dedicated-page bootstrap is `mobile/registration-page.ts`; it is bundled with the pre-existing registration UI in production. The server handoff and page were deployed through [devfridge PR 55](https://github.com/mikeminer/devfridge/pull/55), production commit `5e7758be59823a1f5bfa1cd32b9c78f19f73e105`.
 
-Deploy these new files together from `devfridge/scan`:
+The generated production registration bundle is not stored in this repository. Therefore, three browser integration tests are skipped by default. Set `REGISTRATION_BUNDLE` to that built JavaScript file to run them. The native handoff and wallet-signing bridge tests are included in the normal Android JavaScript test suite.
 
-- `app/api/world/topshelf/mobile/route.ts`
-- `lib/topshelf/mobile-handoff.ts`
-- `public/world/mobile-register/`
+## Verification limits
 
-Existing TopShelf contract, KV and run-secret configuration are reused. This work has **not deployed** those files. Until activation, Android explains that registration is unavailable and retains the saved run. Do not represent mock API tests as mainnet registration tests.
-
-## Emulator profiles
-
-```powershell
-./scripts/start-emulator.ps1 -Profile standard
-./scripts/start-emulator.ps1 -Profile solana
-```
-
-Both profiles use Android 16 / API 36 with the same bundled game. The second has the official `solana-mobile/mock-mwa-wallet` installed. This exercises the MWA protocol and wallet discovery; it does not emulate the Seeker's secure element, Seed Vault protection or actual Seeker firmware. No production private key is configured.
-
-The official mock was built at `d444aff0c72dadd0f5c442ea2bc3559b62916e01`, with only `buildToolsVersion = '36.0.0'` added to use the installed SDK. Authentication logic is unchanged. Device PIN/biometric setup and wallet authorization remain manual.
-
-## Remaining acceptance steps
-
-- Complete a message-signing round trip after manual mock-wallet authentication.
-- Test Phantom's actual mobile browser, both account providers, app return and payment cancellation on a physical Android phone.
-- Complete a real eligible run and optional, explicitly approved registration transaction after server activation.
-- Test a physical Seeker for Seed Vault behavior, thermals, haptic feel and sustained game performance.
-
-The Phantom route requires the run's Solana account to be available in Phantom. A Seed Vault-only account needs a future round trip back to native MWA for the registration signature; importing or replacing a protected wallet is not a workaround.
+Android unit tests cover SKR balance filtering and native bridge policy. JavaScript tests cover the exact wallet identity, exact message bytes, refusal and error cases, persistence, and handoff state. These tests do not prove a production wallet signature or a paid on-chain registration. The Android 15 emulator launch was verified, but it had no compatible MWA wallet and could not load the live game through this PC's HTTPS interception. A successful wallet flow, live score, and payment have not been recorded.
