@@ -58,7 +58,14 @@ export function middleware(req: NextRequest) {
 
   if (host.startsWith("world.")) {
     const url = req.nextUrl.clone();
-    if (path === "/" || path === "") url.pathname = "/world";
+    if (path === "/" || path === "" || path === "/world" || path === "/world/") {
+      url.pathname = "/game";
+      return NextResponse.redirect(url, 308);
+    }
+    if (path === "/game" || path === "/game/") {
+      url.pathname = "/world/game/index.html";
+      return NextResponse.rewrite(url);
+    }
     else if (
       !path.startsWith("/world") &&
       !path.startsWith("/demo") &&
