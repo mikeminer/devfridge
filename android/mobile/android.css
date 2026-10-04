@@ -1,0 +1,37 @@
+/* The game's responsive board and multi-touch kitchen controls are retained. */
+.native-android { -webkit-tap-highlight-color: transparent; }
+.native-android body { overscroll-behavior-y: contain; }
+.native-android button, .native-android a { touch-action: manipulation; }
+.native-android button, .native-android input, .native-android select { min-height: 48px; }
+.native-android .access-page { padding-top: 12px; }
+.native-android .access-brand { display: none; }
+.native-android .access-heading h1 { font-size: clamp(2.2rem, 10vw, 4rem); }
+.native-android .access-wallets button { width: 100%; min-height: 56px; font-size: 16px; }
+.native-android .access-ca input { font-size: 12px; }
+.native-android .kitchen-pad button { touch-action: none; }
+.native-android .native-capability-note { font-size: 14px; line-height: 1.5; color: #dce9ce; }
+.native-android #world-exclude { z-index: 3; }
+.native-android #world-exclude button { min-height: 36px; font-size: 11px; }
+.native-android #g-enter:disabled { opacity: .65; }
+.native-android #g-err { overflow-wrap: anywhere; }
+.native-android #native-saved-score { position: fixed; right: 8px; bottom: 8px; z-index: 4; padding: 8px 12px; border-radius: 10px; background: #c1ec73; color: #17231c; font: 600 12px system-ui; }
+.native-android #native-saved-score[hidden] { display: none; }
+.native-android.skr-perk-active .stage { border-color: #53d4d5; box-shadow: 0 0 0 2px #53d4d544, 0 0 26px #42c5c533; }
+.native-android.skr-perk-active .stage-top::after { content: 'SKR · AURORA'; position: absolute; right: 0; bottom: -22px; padding: 4px 7px; border: 1px solid #53d4d5; border-radius: 5px; background: #172b30eF; color: #b9fbf7; font: 9px 'Courier New', monospace; letter-spacing: .45px; }
+.native-android .native-adaptive-coach { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px; margin: 16px 0; padding: 14px; border: 1px solid #536742; border-radius: 10px; background: linear-gradient(135deg,#293629,#202a21); color: #e0e9d5; text-align: left; }
+.native-android .native-adaptive-coach strong { grid-column: 1 / -1; color: #c1ec73; font: 600 10px 'Courier New', monospace; letter-spacing: .45px; }
+.native-android .native-adaptive-coach p { grid-column: 1 / -1; margin: 0 0 4px; font-size: 14px; line-height: 1.5; }
+.native-android .native-adaptive-coach span { font-size: 12px; }
+.native-android .native-adaptive-coach button { min-height: 40px; padding: 6px 12px; border: 1px solid #667b52; border-radius: 7px; background: #34442e; color: #eef2df; }
+.native-android .native-adaptive-coach button:disabled { opacity: .55; }
+.native-android .native-adaptive-coach small { grid-column: 1 / -1; color: #c1ec73; }
+.native-android .native-score-dialog { width: min(90vw, 520px); max-height: 80vh; overflow: auto; background: #17231c; color: #eef4e6; border: 1px solid #8ba85c; border-radius: 16px; padding: 20px; font: 16px/1.5 system-ui; }
+.native-android .native-score-dialog::backdrop { background: #000b; }
+.native-android .native-score-dialog button { width: 100%; padding: 10px; margin: 6px 0; border-radius: 10px; background: #c1ec73; color: #17231c; }
+.native-android .native-score-dialog section { border-bottom: 1px solid #52614c; padding-bottom: 18px; margin-bottom: 18px; }
+@media (max-width: 900px) {
+  .native-android body.mobile-layout .header { display: none; }
+  .native-android body.mobile-layout .game-controls { min-height: 64px; height: 64px; }
+  .native-android body.mobile-layout .game-controls button { min-height: 48px; height: 48px; }
+  .native-android body.mobile-layout .drop-button { font-size: 16px; }
+}

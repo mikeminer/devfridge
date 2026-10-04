@@ -1,0 +1,10 @@
+import {createRequire} from 'node:module';
+import {readFile,mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {join} from 'node:path';
+const root=fileURLToPath(new URL('..',import.meta.url));
+const require=createRequire(join(root,'../cold-storage/package.json'));
+const {build}=require('esbuild');
+await mkdir(join(root,'app/src/androidTest/assets'),{recursive:true});
+await build({stdin:{contents:await readFile(join(root,'tests/physics-fixture.ts'),'utf8'),loader:'ts',resolveDir:join(root,'../cold-storage/src')},bundle:true,minify:true,format:'iife',target:'es2022',outfile:join(root,'app/src/androidTest/assets/physics-fixture.js')});
+console.log('Built isolated original-engine fixture in the test APK only.');

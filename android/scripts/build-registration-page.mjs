@@ -1,0 +1,24 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
+import {join,resolve} from 'node:path';
+const root=fileURLToPath(new URL('..',import.meta.url));
+const sourceDir=join(root,'../cold-storage/src');
+const source=await readFile(join(sourceDir,'score-registration.ts'),'utf8');
+const pick=(start,end)=>{const a=source.indexOf(start),b=source.indexOf(end,a);if(a<0||b<0)throw Error('Registration source changed; review the mobile build.');return source.slice(a,b);};
+const shared=pick('const API=','type Ticket=')+pick('type Ticket=','type LiveClient=')+pick('type Token=','const tickets=')+pick('class ApiError','export function startScoreRun')+source.slice(source.indexOf('const safe='));
+const challengeCall="const challenge=await request({...payload,action:'challenge',player:wallet,token:t.address});";
+const signCall='access.signRegistration(new TextEncoder().encode(challenge.message))';
+if(!shared.includes(challengeCall)||!shared.includes(signCall))throw Error('Registration signing source changed; review native signing hooks.');
+const mobileShared=shared.replace(challengeCall,"const challenge=await ((access as any).createChallenge || request)({...payload,action:'challenge',player:wallet,token:t.address});")
+  .replace(signCall,'(access as any).signRegistration(new TextEncoder().encode(challenge.message),challenge.challenge)');
+const bootstrap=await readFile(join(root,'mobile/registration-page.ts'),'utf8');
+const require=createRequire(join(root,'../cold-storage/package.json'));
+const {build}=require('esbuild');
+const out=process.argv[2]?resolve(process.argv[2]):join(root,'../devfridge/scan/public/world/mobile-register');await mkdir(out,{recursive:true});
+const nativeImport=join(root,'mobile/native-signing').replaceAll('\\','/');
+await build({stdin:{contents:`import {BrowserProvider,Contract,formatUnits,getAddress,verifyTypedData,type Eip1193Provider} from 'ethers';\nimport {SCORE_TYPES} from './score-protocol';\nconst tickets=new WeakMap(),sessions=new WeakMap();\n${mobileShared.replace('injected=w.ethereum||w.phantom?.ethereum','injected=w.phantom?.ethereum||w.ethereum')}\n${bootstrap.replace("'./native-signing'",JSON.stringify(nativeImport))}`,resolveDir:sourceDir,loader:'ts'},outfile:join(out,'registration.js'),bundle:true,minify:true,target:'es2022',format:'iife'});
+await writeFile(join(out,'index.html'),await readFile(join(root,'mobile/registration-page.html'),'utf8'));
+await writeFile(join(out,'provenance.json'),JSON.stringify({source:'cold-storage/src/score-registration.ts',sha256:createHash('sha256').update(source).digest('hex'),note:'Reuses existing fee, authorization, allowance, payment and duplicate-run checks. Adds optional native Solana signature relay; original Phantom Solana path remains available.',nativeSigningSha256:createHash('sha256').update(await readFile(join(root,'mobile/native-signing.ts'))).digest('hex')},null,2)+'\n');
+console.log('Built the dedicated Phantom registration page using the existing registration flow.');

@@ -1,0 +1,8 @@
+.gradle/
+**/build/
+tools/
+local.properties
+*.jks
+*.keystore
+app/src/main/assets/game/
+app/src/androidTest/assets/physics-fixture.js
