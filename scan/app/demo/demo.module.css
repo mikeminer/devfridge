@@ -1,0 +1,37 @@
+.page { position: fixed; inset: 0; z-index: 2147483647; overflow-y: auto; background: radial-gradient(ellipse at 15% 0%, #293929 0%, #171f1a 45%, #101713 100%); color: #eef4e6; font-family: system-ui, sans-serif; }
+.content { width: min(1100px, 100%); margin: 0 auto; padding: 24px clamp(18px, 4vw, 44px); box-sizing: border-box; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #b9db8326; }
+.brand { color: #d0f58a; font-weight: 800; font-size: 15px; letter-spacing: .4px; text-decoration: none; }
+.androidLink { color: #e2edd4; font-size: 14px; text-decoration: none; border: 1px solid #76954e; padding: 9px 14px; border-radius: 10px; }
+.hero { display: grid; grid-template-columns: 1fr minmax(240px, 340px); align-items: center; gap: clamp(28px, 5vw, 64px); padding: 50px 0; }
+.eyebrow { color: #c1ec73; font: 600 11px/1.4 ui-monospace, monospace; letter-spacing: 1.3px; margin: 0 0 16px; }
+.hero h1 { margin: 0 0 24px; font-size: clamp(40px, 6vw, 70px); line-height: 1.03; letter-spacing: -2px; font-weight: 800; }
+.lead { font-size: clamp(18px, 2vw, 22px); line-height: 1.5; margin: 0 0 16px; color: #e4efd6; }
+.scope, .muted { color: #b4c0aa; font-size: 14px; line-height: 1.6; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0; }
+.primary, .secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 16px; box-sizing: border-box; border-radius: 10px; font-size: 14px; font-weight: 650; text-decoration: none; }
+.primary { background: #c1ec73; color: #17231c; }
+.secondary { background: #253222; border: 1px solid #72914e; color: #eef4e6; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.facts span { padding: 7px 9px; background: #c1ec7310; border: 1px solid #c1ec7333; color: #d4e9bc; border-radius: 6px; font-size: 11px; }
+.videoFrame { margin: 0; text-align: center; scroll-margin-top: 20px; }
+.videoFrame video { display: block; width: 100%; max-height: 78vh; aspect-ratio: 9 / 20; background: #101713; object-fit: contain; border: 1px solid #738a5c; border-radius: 20px; box-shadow: 0 20px 70px #0006; }
+.videoFrame figcaption { font-size: 11px; line-height: 1.5; margin: 12px 0 3px; color: #b4c0aa; }
+.smallLink { display: inline-flex; min-height: 44px; align-items: center; color: #c1ec73; text-underline-offset: 3px; font-size: 13px; }
+.transcript { padding: 32px 0 42px; border-top: 1px solid #b9db8326; }
+.transcript h2, .previous h2 { margin: 0 0 12px; font-size: clamp(25px, 4vw, 34px); font-weight: 750; letter-spacing: -.7px; }
+.transcript > ol { margin: 28px 0; padding-left: 25px; }
+.transcript li { padding-left: 10px; margin-bottom: 23px; }
+.transcript li::marker { color: #c1ec73; font: 650 14px ui-monospace, monospace; }
+.transcript h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #e6f1d9; }
+.transcript li p, .boundary p, .previous p { margin: 0; font-size: 14px; line-height: 1.7; color: #c5d0bb; }
+.boundary { padding: 18px 20px; background: #232e23; border-left: 3px solid #b3d86f; border-radius: 0 10px 10px 0; }
+.boundary strong { display: block; margin-bottom: 8px; color: #e6efdc; font-size: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 5px 22px; margin-top: 22px; }
+.links a, .footer a { display: inline-flex; min-height: 44px; align-items: center; color: #c1ec73; text-underline-offset: 4px; font-size: 13px; }
+.previous { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 26px; padding: 28px; margin-bottom: 30px; background: #1d2820; border: 1px solid #b9db8326; border-radius: 16px; }
+.previous .eyebrow { margin-bottom: 12px; }
+.previousActions { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.footer { display: flex; flex-wrap: wrap; gap: 10px 24px; border-top: 1px solid #b9db8326; padding-top: 16px; }
+.page a:focus-visible, .page video:focus-visible { outline: 3px solid #d0f58a; outline-offset: 4px; }
+@media (max-width: 720px) { .content { padding-top: 18px; } .hero { grid-template-columns: 1fr; padding: 34px 0; gap: 30px; } .hero h1 { letter-spacing: -1.4px; } .videoFrame { width: min(340px, 100%); margin: 0 auto; } .videoFrame video { max-height: none; } .previous { grid-template-columns: 1fr; padding: 22px; } .previousActions { align-items: stretch; } .previousActions .secondary { text-align: center; } }
