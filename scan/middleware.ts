@@ -57,6 +57,8 @@ export function middleware(req: NextRequest) {
   }
 
   if (host.startsWith("world.")) {
+    // Wallet identity verification requires the root URL without a rewrite or redirect.
+    if (path === "/.well-known/assetlinks.json") return NextResponse.next();
     const url = req.nextUrl.clone();
     if (path === "/" || path === "" || path === "/world" || path === "/world/") {
       url.pathname = "/game";

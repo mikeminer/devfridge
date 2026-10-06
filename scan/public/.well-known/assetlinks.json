@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "cool.devfridge.world",
+      "sha256_cert_fingerprints": [
+        "2A:CA:BF:ED:1A:E8:87:ED:90:E6:50:A4:44:6E:5E:F7:47:DE:09:6F:0F:D6:EA:75:A8:94:8B:75:B0:60:71:CA"
+      ]
+    }
+  }
+]
