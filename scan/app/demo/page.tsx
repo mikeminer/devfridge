@@ -52,7 +52,7 @@ export default function WorldDemoPage() {
               allowFullScreen
               loading="lazy"
             />
-            <figcaption>Android emulator recording · local practice and wallet diagnostic</figcaption>
+            <figcaption>Original Android emulator recording · local practice, wallet diagnostic and the earlier SKR network error</figcaption>
             <a className={styles.smallLink} href={androidVideo} target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
           </figure>
         </section>
@@ -66,7 +66,7 @@ export default function WorldDemoPage() {
             <li><h3>Progress after reopening the app</h3><p>After the app is force-stopped and reopened, the local personal best remains 20. The native Recent sessions menu displays the completed 20-point local results and their completion times. This is progress stored on the device, not an on-chain score.</p></li>
             <li><h3>Native sharing</h3><p>The Android share chooser delivers the generated 20-point practice PNG to a local test receiving app. The receiver reads the 1080 × 1350 image through its temporary URI permission and confirms acceptance. The caption identifies local practice with no ranking or prizes. Nothing is posted externally.</p></li>
             <li><h3>Wallet authorization and exact-message signing</h3><p>A visible MWA diagnostic panel states “Not game access, a ranked score or a payment.” The official SDK Fake Wallet opens for normal account authorization, returns a connected test account, then approves one message-signing payload. The app reports a 64-byte signature. Independent Ed25519 verification of the exported public evidence returned true.</p></li>
-            <li><h3>Optional SKR consent and network failure</h3><p>The native disclosure explains the read-only mainnet SKR query, RPC visibility of the public address and IP, and cosmetic-only Aurora benefit. The real query attempt ends in “SKR check unavailable” with Retry and Close because the emulator cannot resolve the RPC host. No successful balance result or perk unlock is shown.</p></li>
+            <li><h3>Optional SKR consent and the recorded network failure</h3><p>The native disclosure explains the read-only mainnet SKR query, RPC visibility of the public address and IP, and cosmetic-only Aurora benefit. In this recording, the real query attempt ends in “SKR check unavailable” with Retry and Close because the emulator cannot resolve the RPC host at recording time. No successful balance result or perk unlock appears in this footage. A later native network check is documented below.</p></li>
           </ol>
           <aside className={styles.boundary}>
             <strong>What this recording establishes</strong>
@@ -76,6 +76,20 @@ export default function WorldDemoPage() {
             <a href={`${source}/blob/main/ANDROID-EVIDENCE-2026-10-06.md`} target="_blank" rel="noopener noreferrer">Dated Android evidence</a>
             <a href={source} target="_blank" rel="noopener noreferrer">Source and build instructions</a>
             <a href={`${source}/blob/main/DEPENDENCY-EVIDENCE-2026-10-06.md`} target="_blank" rel="noopener noreferrer">Dependency remediation</a>
+          </div>
+        </section>
+
+        <section className={styles.transcript} aria-labelledby="native-network-title">
+          <p className={styles.eyebrow}>LATER NATIVE CHECK · 6 OCTOBER 2026</p>
+          <h2 id="native-network-title">Native SKR query completed</h2>
+          <p className={styles.muted}>Enabling guest Wi-Fi and restarting the emulator restored its default network. At 15:26 UTC, a separate instrumentation test called the installed debug app’s unchanged native SKR network function on Solana mainnet. The installed app was 0.3.2-beta.1, version code 8. The real read-only query completed with zero parsed token-account records, raw SKR balance 0 and eligibility false, without a mocked response or financial transaction.</p>
+          <aside className={styles.boundary}>
+            <strong>Scope of the later receipt</strong>
+            <p>This check covers native networking and parsing. The visible SKR consent/result dialog, positive SKR holdings, an Aurora unlock and execution of the signed beta.2 release remain outside this check. Zero parsed records do not establish the raw RPC array count. Certificate validation remained enabled; the diagnostic did not audit the debug trust store or establish release TLS behavior. The original video and its recorded failure remain unchanged.</p>
+          </aside>
+          <div className={styles.links}>
+            <a href={`${source}/blob/b4a80efc7c8ffb9e30e27e0f900e580ca4002e62/evidence/2026-10-06/native-skr-network-evidence.json`} target="_blank" rel="noopener noreferrer">Native SKR result JSON</a>
+            <a href={`${source}/blob/b4a80efc7c8ffb9e30e27e0f900e580ca4002e62/evidence/2026-10-06/EMULATOR-NETWORK-FIX.md`} target="_blank" rel="noopener noreferrer">Network repair and reproduction</a>
           </div>
         </section>
 
