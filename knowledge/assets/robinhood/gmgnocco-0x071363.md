@@ -4,7 +4,7 @@ title: "GmGnocco (robinhood)"
 description: "DevFridge investor knowledge: GmGnocco (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x0713636AAe9DC16921F3f862fba52AF6DB5d1db3"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-05T14:36:39Z"
+timestamp: "2026-10-06T13:17:43Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x0713636aae9dc16921f3f862fba52af6db5d1db3`
 
-Registry status: ok · last successful observation: 2026-10-05T14:36:39Z · last attempt: 2026-10-05T14:36:39Z.
+Registry status: ok · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-10-06T13:17:43Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-10-05T14:36:39Z · last attempt: 2026-10-05T14:36:39Z.
+ok · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-10-06T13:17:43Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 80860635 |
+| Block | 81659280 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-10-05T14:36:39Z · last attempt: 2026-10-05T14:36:39Z.
+ok · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-10-06T13:17:43Z.
 
 ```json
 {
