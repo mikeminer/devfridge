@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./demo.module.css";
 
-const androidVideo = "https://github.com/mikeminer/devfridge-world-android/releases/download/android-v0.3.2-beta.1/DevFridge-World-Android-Demo-2026-10-06.mp4";
+const androidVideo = "https://youtube.com/shorts/LRDAhJhFfLI?feature=share";
 const source = "https://github.com/mikeminer/devfridge-world-android";
 
 export const metadata: Metadata = {
@@ -44,12 +44,16 @@ export default function WorldDemoPage() {
             </div>
           </div>
           <figure className={styles.videoFrame} id="android-recording">
-            <video controls playsInline preload="metadata" poster="/demo-evidence/android-practice-touch.png" aria-label="DevFridge World Android emulator demonstration">
-              <source src={androidVideo} type="video/mp4" />
-              <a href={androidVideo}>Open the Android recording</a>
-            </video>
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/LRDAhJhFfLI?playsinline=1&rel=0"
+              title="DevFridge World Android emulator demonstration"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              loading="lazy"
+            />
             <figcaption>Android emulator recording · local practice and wallet diagnostic</figcaption>
-            <a className={styles.smallLink} href={androidVideo}>Open the MP4 directly</a>
+            <a className={styles.smallLink} href={androidVideo} target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
           </figure>
         </section>
 
