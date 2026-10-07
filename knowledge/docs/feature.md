@@ -4,7 +4,7 @@ title: "Feature a Solana memecoin"
 description: "DevFridge investor knowledge: Feature a Solana memecoin"
 resource: "https://docs.devfridge.cool/feature"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-06T13:17:43Z"
+timestamp: "2026-10-07T13:22:00Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/feature) · ok · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-10-06T13:17:43Z.
+[Canonical page](https://docs.devfridge.cool/feature) · ok · last successful observation: 2026-10-07T13:22:00Z · last attempt: 2026-10-07T13:22:00Z.
 
 GET FEATURED
 
