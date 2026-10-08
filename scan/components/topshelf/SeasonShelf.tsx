@@ -50,7 +50,8 @@ function useLabel(token: RankedToken, rank: number) {
     draw(); setTexture(map);
     const image = new Image();
     image.onload = () => {if (active && image.naturalWidth) draw(image);};
-    image.src = `/api/world/topshelf/logo?token=${token.address}`;
+    // Drop previously cached fallback labels after the Pons metadata migration.
+    image.src = `/api/world/topshelf/logo?token=${token.address}&v=2`;
     return () => {active = false; image.onload = null; map.dispose();};
   }, [token.address, token.symbol, token.tvlUsd, rank, stocked, invalidate]);
   return texture;
