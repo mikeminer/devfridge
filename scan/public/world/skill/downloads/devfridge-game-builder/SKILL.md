@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.5.1"
+  version: "1.5.2"
   sources-reviewed: "2026-10-08"
 ---
 # DevFridge Game Builder
@@ -18,7 +18,7 @@ Produce a short build brief: loop and win/loss condition; camera; desktop/touch 
 
 ## Explain why players lock and return
 
-Read [retention and token economics](references/retention-and-economics.md). Give the game a clear, honest pitch: a meme becomes a playable identity, a voluntary timelock unlocks access, and enjoyable progression/community gives players reasons to return. Explain the separate speculative market layer accurately: a game may create demand for its community mint, but it does not promise appreciation, encode audience size into the token, or pay earlier players with later players' deposits. Tokens remain unavailable inside the vault until expiry; after redemption, the holder faces the open market. Ask what earns the next visit. A locked balance alone is not evidence of retention.
+Read [retention and token economics](references/retention-and-economics.md). Pitch this as a tokenized game: map the community's existing fungible mint to a playable character/feature and use a qualifying DevFridge timelock as its access gate. Explain why this stack uses Token-2022 and how MetadataPointer, TokenMetadata, URI JSON and any Metaplex metadata help wallets/tools identify the character; never imply Fridge reads metadata or that metadata contains the game. The same token remains traded on its existing market. Explain how shared gameplay may give the Pump.fun community utility and reasons to return, while making demand/appreciation a possibility, never a promise. Do not imply token holders own the game, audience size is encoded into the mint, or later players pay earlier ones. Tokens stay unavailable until expiry; after redemption the holder faces the open market. Ask what earns the next visit. A locked balance alone is not evidence of retention.
 
 Explain that the gate reads timelocks in the existing DevFridge Solana program through the SDK/API; a new game does not need a separate timelock program. Use the developer's supported token and independent access rules. Include the 2% redemption fee and its PASTA buy-and-burn purpose in onboarding before any lock approval, alongside expiry, no early withdrawal, network costs and route constraints. Explain PASTA's developer-support role without claiming burned funds are direct infrastructure revenue or promising token appreciation.
 
