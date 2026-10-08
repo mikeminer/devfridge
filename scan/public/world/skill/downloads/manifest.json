@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.5.0",
-  "reviewedAt": "2026-09-26",
-  "bytes": 31065,
-  "sha256": "f84186854ed86a3686fae584dde1e342ece176739c7341e4ab1325be5e75f0a6",
+  "version": "1.5.1",
+  "reviewedAt": "2026-10-08",
+  "bytes": 31814,
+  "sha256": "c2e3283b269644d6f073d64dfb0636138098b8258518663a26022b772a4204ab",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -47,7 +47,7 @@
     },
     {
       "path": "references/retention-and-economics.md",
-      "sha256": "71f931591ce02f7d194e7cf93aecbeb5b1906cab14af23044ebe077216cf2059"
+      "sha256": "90383f6d5407a72936fcd16f78e042d535f708cd84a2a1f8737221009da61a11"
     },
     {
       "path": "references/sdk-access.md",
@@ -63,7 +63,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "e538f2bb025e1127a2f678f269054fa54f64c71c94d04d6fb81e6c3a3e0fe8cd"
+      "sha256": "83fbc2c4ea9d11f6f8391ab5fcd5e427793c9ad71beaced2c505da3bfd0b9e91"
     }
   ]
 }
