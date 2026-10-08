@@ -1,0 +1,8 @@
+{
+  "sourceRepository": "https://github.com/mikeminer/devfridge-world",
+  "sourceCommit": "6168eeb",
+  "builtAt": "2026-10-08",
+  "buildCommand": "tsc --noEmit && vite build --mode=world --base=/world/game/",
+  "scoreEngine": "0d2a817df9448a02c788b892ce2d680b86ae77896c206f368e382367775593df",
+  "change": "Game-first onboarding with an existing free demo, optional token details and transparent fee explanations"
+}
