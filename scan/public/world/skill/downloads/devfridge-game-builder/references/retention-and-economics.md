@@ -8,6 +8,14 @@ The problem: owning a meme token does not itself give a holder a recurring activ
 
 The mechanism: Phantom identifies the wallet; the player voluntarily locks a supported token in the existing DevFridge Solana program; SDK/API reads supply eligibility evidence; the game applies its own amount/duration rules. Tokens sit in program-owned vaults, not a game developer's wallet. A new timelock program is unnecessary for this integration. An existing lock can qualify for another game only if that game independently accepts the same mint and policy; there is no universal access pass.
 
+## The speculative market layer
+
+A game may associate the community's existing Token-2022 mint with a playable character or feature: for example, a character in Cold Storage, lives in MezzoPollo or food in Pikko. A qualifying lock unlocks that feature. It does not give the holder ownership of the game or character, a share of revenue, or a claim on future players. The Fridge program validates timelocks; it does not read or write token metadata. Images, website and social links belong to the mint identity configured before a lock.
+
+Tokens in an active vault cannot be transferred or sold from that vault before the chosen unlock time, and the depositor cannot withdraw early. After expiry, the same wallet redeems: 2% of the redeemed amount buys and burns PASTA, or is burned directly if the locked mint is PASTA; the remainder is returned, subject to an executable redemption route and separate network costs. The holder may then sell into the market available at that time.
+
+If more players want access, demand for the associated mint may increase. That gives the game a speculative market layer, but not a payout loop: later players do not pay earlier players, and the program does not encode audience size or engagement as token value. The open market determines price and liquidity; either can rise or fall. A timelock sets no price floor or market cap and guarantees no return. A player may realize a gain or a loss after redemption, while bearing the risk of having the locked balance unavailable until expiry. Never pitch a lock as a way to make the token appreciate.
+
 ## Why players might return
 
 - **Identity:** a character tied to their meme gives community membership a visible, playable expression.
