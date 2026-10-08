@@ -1,8 +1,8 @@
 {
   "sourceRepository": "https://github.com/mikeminer/devfridge-world",
-  "sourceCommit": "71b8ff6",
+  "sourceCommit": "23c6c94",
   "builtAt": "2026-10-08",
   "buildCommand": "tsc --noEmit && vite build --mode=world --base=/world/game/",
   "scoreEngine": "0d2a817df9448a02c788b892ce2d680b86ae77896c206f368e382367775593df",
-  "change": "Explain premium runs without the demo timer, optional Robinhood Chain score registration and seasonal prize funding"
+  "change": "Explain character-specific brainrot soundtracks and add small Pump.fun logos to market links"
 }
