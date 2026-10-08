@@ -4,7 +4,7 @@ title: "Solana assets"
 description: "DevFridge investor knowledge: Solana assets"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-08T13:36:34Z"
+timestamp: "2026-10-08T17:35:08Z"
 generated: true
 ---
 
