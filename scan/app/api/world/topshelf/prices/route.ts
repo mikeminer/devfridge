@@ -17,7 +17,7 @@ export async function GET() {
       } catch { /* Missing prices stay unranked; never substitute token units. */ }
       return [token.address.toLowerCase(), price];
     }));
-    return NextResponse.json({prices: Object.fromEntries(entries)}, {
+    return NextResponse.json({prices: Object.fromEntries(entries), checkedAt: new Date().toISOString()}, {
       headers: {'Cache-Control': 'public, max-age=60, s-maxage=60'},
     });
   } catch {
