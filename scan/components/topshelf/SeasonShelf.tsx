@@ -7,7 +7,7 @@ import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type {ShelfToken} from '@/lib/topshelf/config';
 
-type RankedToken = ShelfToken & {tvlUsd: number | null};
+type RankedToken = ShelfToken & {tvlUsd: number | null; fillFraction: number | null};
 const PRESERVES = ['#bba944','#629c75','#c2643c','#84617e','#d3a844','#668b9b','#b66b70','#749551','#bb8051','#60938d','#95758f','#b0a85e'];
 const JAR_PROFILE = [[0,.02],[.34,.02],[.415,.045],[.45,.12],[.45,.88],[.44,.97],[.39,1.06],[.36,1.09],[.36,1.17],[.325,1.17],[.325,1.08],[.4,.94],[.413,.87],[.413,.14],[.34,.09],[0,.09]];
 
@@ -44,7 +44,7 @@ function useLabel(token: RankedToken, rank: number) {
       context.fillStyle = '#243a2d'; context.font = `bold ${token.symbol.length > 10 ? 32 : 40}px sans-serif`;
       context.fillText(token.symbol, 256, 423, 442);
       context.font = '500 21px sans-serif'; context.fillStyle = '#68745e';
-      context.fillText(stocked ? 'SEASON POOL · STOCKED' : 'AWAITING DEPOSITS', 256, 465);
+      context.fillText(stocked ? token.tvlUsd === null ? 'STOCKED · PRICE PENDING' : 'SEASON POOL · STOCKED' : 'AWAITING DEPOSITS', 256, 465);
       map.needsUpdate = true; invalidate();
     };
     draw(); setTexture(map);
@@ -76,11 +76,12 @@ function PreserveJar({token, index}: {token: RankedToken; index: number}) {
   const label = useLabel(token, index+1);
   const points = useMemo(() => JAR_PROFILE.map(([x,y]) => new THREE.Vector2(x,y)), []);
   const stocked = BigInt(token.balance) > 0n;
+  const fillHeight = .82 * Math.max(0, Math.min(1, token.fillFraction ?? 0));
   const color = PRESERVES[parseInt(token.address.slice(-4),16) % PRESERVES.length];
   return <group rotation={[0, (index % 3 - 1) * .045, 0]}>
-    {stocked && <group>
-      <mesh position={[0,.43,0]} castShadow><cylinderGeometry args={[.403,.403,.69,32]}/><meshPhysicalMaterial color={color} roughness={.31} clearcoat={.7}/></mesh>
-      <mesh position={[0,.785,0]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.4,32]}/><meshPhysicalMaterial color={color} roughness={.2} clearcoat={1}/></mesh>
+    {stocked && fillHeight > 0 && <group>
+      <mesh position={[0,.1+fillHeight/2,0]} castShadow><cylinderGeometry args={[.403,.403,fillHeight,32]}/><meshPhysicalMaterial color={color} roughness={.31} clearcoat={.7}/></mesh>
+      <mesh position={[0,.1+fillHeight,0]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.4,32]}/><meshPhysicalMaterial color={color} roughness={.2} clearcoat={1}/></mesh>
     </group>}
     <mesh receiveShadow>
       <latheGeometry args={[points,48]}/>

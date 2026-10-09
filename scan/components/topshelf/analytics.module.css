@@ -8,5 +8,24 @@
 .sceneFooter i{width:5px;height:5px;border-radius:50%;background:#c8ff5c;box-shadow:0 0 8px #c8ff5c66}
 .sceneCopy>span{display:block;color:#a99e89;font-size:10px;margin-top:5px}
 .tokenUnits{display:block;color:#82958d;font-size:9px;margin-top:4px}
+.poolSummary{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;margin-top:18px}
+.visuals{align-items:start}
+.scene{height:600px}
+.poolSummary article{min-width:0;padding:20px;border:1px solid #3c5147;border-radius:14px;background:#14211e}
+.poolSummary .prizeTotal{background:linear-gradient(130deg,#263b25,#16251e);border-color:#78964e}
+.poolSummary small,.poolSummary span{display:block;color:#a2b6a8;font-size:11px;line-height:1.5}
+.poolSummary strong{display:block;margin:10px 0;font-size:clamp(24px,3vw,36px);line-height:1.1;color:#effadf;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.prizeTotal>small:first-child{color:#d6ff89;font-weight:800;letter-spacing:.08em}
+.poolSummary article>small:last-child{margin-top:8px;color:#a4b897;font-size:10px}
+.panelTitle small{display:block;margin-bottom:6px}
+.valueExplanation{margin:0 0 18px!important;font-size:12px!important;line-height:1.5!important;color:#a9bdb0!important}
+.tokenPrice{display:block;color:#a9bdae;font-size:10px;margin-top:4px;font-variant-numeric:tabular-nums}
+.tokenUnits{font-size:11px;margin-top:6px}
+.barRow{padding:10px 0;border-bottom:1px solid #263b32}
+.barRow>div:first-child{font-size:12px}
+.priceNotice{padding:14px 16px;border:1px solid #78663f;border-radius:10px;background:#302c20;color:#eadcb6!important;font-size:12px!important;line-height:1.6!important}
+.priceNotice button{padding:3px 8px;margin-left:6px;border:1px solid #aeaa71;border-radius:5px;background:transparent;color:#e8ffbb;font:inherit;cursor:pointer}
+@media(max-width:800px){.scene{height:560px}.poolSummary{grid-template-columns:1fr 1fr}.poolSummary .prizeTotal{grid-column:1/-1}}
+@media(max-width:430px){.scene{height:440px}.poolSummary{grid-template-columns:1fr}.poolSummary article{padding:16px}.poolSummary strong{font-size:30px}}
 @media(max-width:800px){.scene{min-height:480px}.shelfViewport{min-height:380px}}
 @media(max-width:430px){.scene{min-height:410px}.sceneCopy{padding:18px 16px 0}.sceneCopy strong{font-size:12px}.shelfViewport{min-height:310px}.sceneFooter{padding:0 16px 16px;flex-direction:column;gap:4px}}
