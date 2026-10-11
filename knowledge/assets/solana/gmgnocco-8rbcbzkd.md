@@ -4,7 +4,7 @@ title: "GmGnocco (solana)"
 description: "DevFridge investor knowledge: GmGnocco (solana)"
 resource: "https://solscan.io/token/8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-10T12:30:51Z"
+timestamp: "2026-10-11T12:48:46Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:8RBcBZkdM8U4eoAi1MsftW7RcXYryobawfPz3Nuupump`
 
-Registry status: ok · last successful observation: 2026-10-10T12:30:51Z · last attempt: 2026-10-10T12:30:51Z.
+Registry status: ok · last successful observation: 2026-10-11T12:48:46Z · last attempt: 2026-10-11T12:48:46Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-10-10T12:30:51Z · last attempt: 2026-10-10T12:30:51Z.
+ok · last successful observation: 2026-10-11T12:48:46Z · last attempt: 2026-10-11T12:48:46Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 455256283 |
+| Finalized slot | 455656859 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-10-10T12:30:51Z · last attempt: 2026-10-10T12:30:51Z.
+ok · last successful observation: 2026-10-11T12:48:46Z · last attempt: 2026-10-11T12:48:46Z.
 
 ```json
 {
