@@ -4,7 +4,7 @@ title: "Lock Token-2022 supply on Solana"
 description: "DevFridge investor knowledge: Lock Token-2022 supply on Solana"
 resource: "https://docs.devfridge.cool/fridge"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-15T11:27:42Z"
+timestamp: "2026-10-16T11:22:47Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/fridge) · ok · last successful observation: 2026-10-15T11:27:42Z · last attempt: 2026-10-15T11:27:42Z.
+[Canonical page](https://docs.devfridge.cool/fridge) · ok · last successful observation: 2026-10-16T11:22:47Z · last attempt: 2026-10-16T11:22:47Z.
 
 FRIDGE
 

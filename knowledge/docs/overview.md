@@ -4,7 +4,7 @@ title: "Too many tokens? Fridge them."
 description: "DevFridge investor knowledge: Too many tokens? Fridge them."
 resource: "https://docs.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-15T11:27:42Z"
+timestamp: "2026-10-16T11:22:47Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool) · ok · last successful observation: 2026-10-15T11:27:42Z · last attempt: 2026-10-15T11:27:42Z.
+[Canonical page](https://docs.devfridge.cool) · ok · last successful observation: 2026-10-16T11:22:47Z · last attempt: 2026-10-16T11:22:47Z.
 
 DOCS
 

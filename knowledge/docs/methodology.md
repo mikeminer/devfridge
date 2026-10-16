@@ -4,7 +4,7 @@ title: "How the risk grade works"
 description: "DevFridge investor knowledge: How the risk grade works"
 resource: "https://docs.devfridge.cool/methodology"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-15T11:27:42Z"
+timestamp: "2026-10-16T11:22:47Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/methodology) · ok · last successful observation: 2026-10-15T11:27:42Z · last attempt: 2026-10-15T11:27:42Z.
+[Canonical page](https://docs.devfridge.cool/methodology) · ok · last successful observation: 2026-10-16T11:22:47Z · last attempt: 2026-10-16T11:22:47Z.
 
 METHODOLOGY
 
