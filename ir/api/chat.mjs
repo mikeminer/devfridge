@@ -18,8 +18,8 @@ export default async function chat(req,res){
   stage='grok';const stream=streamGrok({model:process.env.IR_MODEL||undefined,signal:abort.signal,
    onFallback:details=>console.warn('IR Grok fallback',details),
    start:async profile=>new ToolLoopAgent({model:profile.model,
-    instructions:instructions(context)+(profile.xSearch?'':'\nX search is unavailable for this response. Use the official evidence and readDocumentation only. If asked for X posts or current founder announcements, explicitly say you cannot search X right now. Never imply that you searched or verified a post.'),
-    maxOutputTokens:2200,...(profile.xSearch?{reasoning:'low'}:{}),maxRetries:0,stopWhen:isStepCount(3),providerOptions:profile.providerOptions,tools:{
+    instructions:instructions(context)+(profile.xSearch?'':'\nThis response is not from Grok. Do not claim to be Grok. X search is unavailable for this response. Use the official evidence and readDocumentation only. If asked for X posts or current founder announcements, explicitly say you cannot search X right now. Never imply that you searched or verified a post.'),
+    maxOutputTokens:2200,...(profile.reasoning?{reasoning:profile.reasoning}:{}),maxRetries:0,stopWhen:isStepCount(3),providerOptions:profile.providerOptions,tools:{
    readDocumentation:tool({description:'Read a current page of the official DevFridge documentation. Use for mechanics, rules, availability and integration details.',inputSchema:jsonSchema({type:'object',properties:{slug:{type:'string',enum:DOCS}},required:['slug'],additionalProperties:false}),execute:async({slug})=>{try{const source=await readDocumentation(slug);used.set(source.url,{url:source.url,title:'Docs · '+slug});return source;}catch{return {unavailable:true,slug};}}}),
    ...(profile.xSearch?{x_search:xai.tools.xSearch({allowedXHandles:['anonimocommando']})}:{})
   }}).stream({messages,abortSignal:abort.signal,onError:()=>{}})});

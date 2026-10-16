@@ -7,15 +7,15 @@ const result=(...parts)=>({fullStream:(async function*(){yield* parts;})()});
 const text={type:'text-delta',text:'Documented answer'};
 const collect=async stream=>{const parts=[];for await(const part of stream)parts.push(part);return parts;};
 
-test('a restricted free-tier primary falls back to Grok without unsupported X tools',async()=>{
+test('a restricted free-tier primary falls back without X search',async()=>{
  const calls=[],fallbacks=[];
  const parts=await collect(streamGrok({start:async profile=>{
   calls.push(profile);
   return calls.length===1?result({type:'error',error:error(403,'Free tier users do not have access to this model. Upgrade to paid credits.')}):result(text);
  },onFallback:details=>fallbacks.push(details)}));
  assert.deepEqual(parts,[text]);assert.equal(calls[0].model,PRIMARY_MODEL);
- assert.equal(calls[0].xSearch,true);assert.equal(calls[1].model,FALLBACK_MODEL);
- assert.equal(calls[1].xSearch,false);assert.deepEqual(calls[1].providerOptions.gateway.only,['vertex']);
+ assert.equal(calls[0].xSearch,true);assert.equal(calls[0].reasoning,'low');assert.equal(calls[1].model,FALLBACK_MODEL);
+ assert.equal(calls[1].xSearch,false);assert.equal(calls[1].reasoning,'none');assert.deepEqual(calls[1].providerOptions,{});
  assert.equal(fallbacks.length,1);
 });
 

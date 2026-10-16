@@ -1,10 +1,11 @@
 export const PRIMARY_MODEL='spacexai/grok-4.6';
-export const FALLBACK_MODEL='spacexai/grok-4.1-fast-non-reasoning';
+export const FALLBACK_MODEL='nvidia/nemotron-3.5-lightning-free';
 
-// Vertex hosts the fallback Grok model but does not accept xAI's x_search tool.
+// Grok 4.6 is outside the Gateway free tier. The old Vertex Grok 4.1 route now returns 404.
+// Nemotron is on the free-tier catalog and accepts tools, but it cannot search X.
 export async function* streamGrok({start,signal,model=PRIMARY_MODEL,onFallback=()=>{}}){
- const profiles=[{model,xSearch:true,providerOptions:{xai:{store:false},gateway:{only:['xai']}}},
-  {model:FALLBACK_MODEL,xSearch:false,providerOptions:{gateway:{only:['vertex']}}}];
+ const profiles=[{model,xSearch:true,reasoning:'low',providerOptions:{xai:{store:false},gateway:{only:['xai']}}},
+  {model:FALLBACK_MODEL,xSearch:false,reasoning:'none',providerOptions:{}}];
  for(let index=0;index<profiles.length;index++){
   let sentText=false;
   try{
