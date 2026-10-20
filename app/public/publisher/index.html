@@ -109,6 +109,16 @@
       ul {
         padding-left: 20px;
       }
+      h3 {
+        font-size: 17px;
+        margin: 18px 0 6px;
+      }
+      ol.steps li {
+        margin: 10px 0;
+      }
+      ol.steps ul li {
+        margin: 3px 0;
+      }
       table.chain {
         width: 100%;
         border-collapse: collapse;
@@ -279,14 +289,49 @@
         </article>
       </div>
 
-      <h2>Build on DevFridge</h2>
+      <h2>Build a game for your memecoin</h2>
       <p>
-        Anyone can build a game for the DevFridge collection with the <b>DevFridge Game Builder</b>, our agentic AI skill, <b>without deploying a program on Solana</b>. Your game reuses the
-        DevFridge program already on mainnet and reads its timelocks, so it needs no token vault or contract of its own. Get the skill, then follow the builder handbook.
+        Anyone can build a game for the DevFridge collection with the <b>DevFridge Game Builder</b> and wire it to their <b>existing memecoin</b>. You don’t need to be a Solana developer
+        or know Git, and you don’t deploy anything on Solana.
       </p>
+      <h3>How it works</h3>
+      <ol class="steps">
+        <li>
+          <b>Open your project in an AI coding agent</b> (for example Claude Code or Codex) and paste the prompt from
+          <a href="https://world.devfridge.cool/skill">world.devfridge.cool/skill</a>. It installs the DevFridge Game Builder, an agentic skill: instructions and tools your agent
+          follows to build the game with you.
+        </li>
+        <li>
+          <b>Answer three questions:</b>
+          <ul>
+            <li>what game you want and for which community;</li>
+            <li>your token’s exact mint address (the “CA”), or that it isn’t launched yet;</li>
+            <li>your access rule, for example “lock at least 1,000,000 tokens to play the premium levels”.</li>
+          </ul>
+        </li>
+        <li>
+          <b>The agent builds the game:</b> a 3D game in the browser, for desktop and phone, with the Phantom wallet and the timelock check. Without a launched token it starts in a
+          practice mode.
+        </li>
+        <li>
+          <b>Your holders lock your token on <a href="https://devfridge.cool/">devfridge.cool</a></b> until a date they choose. The tokens sit in a vault of the DevFridge program and
+          can’t be withdrawn early. While the lock is active, your game opens the premium part to that wallet: a subscription paid with a commitment instead of money.
+        </li>
+        <li>
+          <b>At the end,</b> the holder takes the tokens back. 2% of what is redeemed buys and burns $PASTA, the dev token.
+        </li>
+      </ol>
+      <h3>What you don’t need</h3>
+      <ul>
+        <li>No Solana program or contract to write or deploy: your game only <i>reads</i> the locks in the DevFridge program already on mainnet, through the DevFridge SDK.</li>
+        <li>No new token: you use the one your community already has. It must be a Solana Token-2022 mint that the DevFridge program supports; the skill checks this with you.</li>
+        <li>No Git homework: when you want, the agent prepares your game for the DevFridge gallery.</li>
+      </ul>
+      <p class="muted">Locking gives access to the game. It does not guarantee a token’s price, and the game must be fun on its own to keep people coming back.</p>
       <div class="links">
-        <a class="primary" href="https://world.devfridge.cool/skill">DevFridge Game Builder skill</a>
+        <a class="primary" href="https://world.devfridge.cool/skill">Get the DevFridge Game Builder</a>
         <a href="https://hackathon.devfridge.cool/hackathon/handbook/start">Builder handbook</a>
+        <a href="https://sdk.devfridge.cool/">DevFridge SDK</a>
         <a href="https://hackathon.devfridge.cool/">hackathon.devfridge.cool</a>
       </div>
 
