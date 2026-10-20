@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DevFridge · Publisher</title>
+    <meta name="description" content="DevFridge, the publisher of OnlyFridge Club, PIKKO, DevFridge World and MezzoPollo: games and tools for Solana and the Solana dApp Store." />
+    <meta property="og:title" content="DevFridge · Publisher" />
+    <meta property="og:description" content="Games and tools for Solana and the Solana dApp Store: OnlyFridge Club, PIKKO, DevFridge World and MezzoPollo." />
+    <link rel="icon" href="/favicon.jpg" />
+    <style>
+      :root {
+        --bg: #07090d;
+        --panel: #10141c;
+        --ink: #e9eef6;
+        --muted: #9aa6b8;
+        --accent: #6fd6ff;
+        --line: rgba(255, 255, 255, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      a {
+        color: var(--accent);
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 28px 16px 64px;
+      }
+      h1 {
+        font-size: 38px;
+        line-height: 1.15;
+        margin: 0 0 8px;
+      }
+      .lead {
+        font-size: 18px;
+        color: var(--ink);
+        margin: 0 0 6px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      h2 {
+        font-size: 22px;
+        margin: 36px 0 14px;
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+      }
+      .apps {
+        display: grid;
+        gap: 16px;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 18px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+      }
+      .app img {
+        width: 96px;
+        height: 96px;
+        border-radius: 20px;
+        object-fit: cover;
+        background: #1a2030;
+      }
+      .app h3 {
+        margin: 0;
+        font-size: 21px;
+      }
+      .pkg {
+        font: 13px ui-monospace, SFMono-Regular, Consolas, monospace;
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+      .app p {
+        margin: 8px 0;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .links a {
+        display: inline-block;
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 15px;
+      }
+      .links a.primary {
+        border-color: var(--accent);
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin: 6px 0;
+      }
+      footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      @media (max-width: 560px) {
+        h1 {
+          font-size: 30px;
+        }
+        .app {
+          grid-template-columns: 64px 1fr;
+          gap: 14px;
+          padding: 14px;
+        }
+        .app img {
+          width: 64px;
+          height: 64px;
+          border-radius: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>DevFridge</h1>
+      <p class="lead">Games and tools for Solana. This is the publisher page of our apps for the Solana dApp Store.</p>
+      <p class="muted">
+        DevFridge builds around Solana token timelocks: the Fridge program, where anyone can lock a token until a date of their choice; <a href="https://scan.devfridge.cool/">DevFridge Scan</a>, which
+        shows the locks; and a family of games that read them. Every app below is free to play. Wallet features are optional.
+      </p>
+
+      <h2>Our apps</h2>
+      <div class="apps">
+        <article class="app" id="onlyfridge-club">
+          <img src="/publisher/onlyfridge-club.webp" alt="OnlyFridge Club icon" width="96" height="96" />
+          <div>
+            <h3>OnlyFridge Club</h3>
+            <div class="pkg">Android · online.onlyfridgeclub.app</div>
+            <p>
+              A free 3D social nightclub for Android and the Solana Seeker. Dance, mix drinks at the bar, play billiards, bowling and arcade games, and sing karaoke live with the people in
+              your room. The wallet is optional, with Seed Vault through Mobile Wallet Adapter.
+            </p>
+            <div class="links">
+              <a class="primary" href="https://www.onlyfridgeclub.online/app">App page</a>
+              <a href="https://onlyfridgeclub.online">Play in the browser</a>
+              <a href="https://www.onlyfridgeclub.online/privacy.html">Privacy</a>
+              <a href="https://www.onlyfridgeclub.online/terms.html">Terms</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="app" id="pikko">
+          <img src="/publisher/pikko.webp" alt="PIKKO icon" width="96" height="96" />
+          <div>
+            <h3>PIKKO</h3>
+            <div class="pkg">Android · art.pikko.game</div>
+            <p>
+              A 3D healthy-eating game, about a minute a round: feed Pikko the healthier food and dodge the junk. It has 24 country food bags and 20 languages. Kid mode is on by default and
+              hides every crypto screen. Free, with no account. The bags can optionally be unlocked with a DevFridge timelock, which the game only reads.
+            </p>
+            <div class="links">
+              <a class="primary" href="https://pikko.art">pikko.art</a>
+              <a href="https://pikko.art/play/">Play</a>
+              <a href="https://pikko.art/privacy.html">Privacy</a>
+              <a href="https://pikko.art/terms.html">Terms</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="app" id="devfridge-world">
+          <img src="/publisher/devfridge-world.webp" alt="DevFridge World icon" width="96" height="96" />
+          <div>
+            <h3>DevFridge World</h3>
+            <div class="pkg">Android · cool.devfridge.world</div>
+            <p>
+              <i>Cold Storage</i>, the DevFridge 3D merge game: match the memes, discover the cast and keep the fridge door closed. The Android app bundles the game, with touch controls,
+              haptics and Mobile Wallet Adapter sign-in.
+            </p>
+            <div class="links">
+              <a class="primary" href="https://world.devfridge.cool">world.devfridge.cool</a>
+              <a href="https://world.devfridge.cool/world/android/privacy.html">Privacy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="app" id="mezzopollo">
+          <img src="/publisher/mezzopollo.webp" alt="MezzoPollo icon" width="96" height="96" />
+          <div>
+            <h3>MezzoPollo</h3>
+            <div class="pkg">Android · it.mezzopollo.academy</div>
+            <p>
+              A 3D runner with a plush chicken that has lost half of itself: run through the gate with the matching half to complete numbers, words and shapes. It has 20 languages and an
+              interactive tutorial. Play the Arcade's four paid levels, or the Subscription for holders of at least 10,000,000 actively timelocked MEMEZZO on DevFridge. The game only reads
+              the timelock and never asks for a transaction to check it.
+            </p>
+            <div class="links">
+              <a class="primary" href="https://mezzo-pollo-academy.vercel.app">Play</a>
+              <a href="https://mezzo-pollo-academy.vercel.app/android-privacy">Privacy</a>
+              <a href="https://mezzo-pollo-academy.vercel.app/android-terms">Terms</a>
+              <a href="https://t.me/playmezzopollo">Telegram</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <h2>Contact and support</h2>
+      <ul>
+        <li>Email: <a href="mailto:welcome@devfridge.cool">welcome@devfridge.cool</a></li>
+        <li>Telegram: <a href="https://t.me/pastaHQ">@pastaHQ</a></li>
+        <li>Source code: <a href="https://github.com/mikeminer">github.com/mikeminer</a></li>
+      </ul>
+      <p class="muted">For questions about an app, its privacy policy or your data, write to us and name the app.</p>
+
+      <footer>DevFridge · <a href="/">devfridge.cool</a> · <a href="https://scan.devfridge.cool/">DevFridge Scan</a></footer>
+    </main>
+  </body>
+</html>
