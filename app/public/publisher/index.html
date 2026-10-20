@@ -109,6 +109,41 @@
       ul {
         padding-left: 20px;
       }
+      table.chain {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+      }
+      table.chain th,
+      table.chain td {
+        text-align: left;
+        vertical-align: top;
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--line);
+      }
+      table.chain th {
+        color: var(--muted);
+        font-weight: 600;
+        width: 32%;
+      }
+      table.chain code {
+        font: 14px ui-monospace, SFMono-Regular, Consolas, monospace;
+        overflow-wrap: anywhere;
+      }
+      @media (max-width: 560px) {
+        table.chain th,
+        table.chain td {
+          display: block;
+          width: auto;
+          border: 0;
+          padding: 2px 0;
+        }
+        table.chain tr {
+          display: block;
+          border-bottom: 1px solid var(--line);
+          padding: 8px 0;
+        }
+      }
       li {
         margin: 6px 0;
       }
@@ -146,6 +181,21 @@
         and around $PASTA, the dev token. <a href="https://scan.devfridge.cool/">DevFridge Scan</a> shows the locks, and the games below read them. Every app is free to play, and wallet
         features are optional. Documentation: <a href="https://docs.devfridge.cool/">docs.devfridge.cool</a>.
       </p>
+
+      <h2>On-chain</h2>
+      <table class="chain">
+        <tbody>
+          <tr>
+            <th>$PASTA, the dev token (CA)</th>
+            <td><code>39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump</code> · <a href="https://solscan.io/token/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump">Solscan</a></td>
+          </tr>
+          <tr>
+            <th>DevFridge Solana program</th>
+            <td><code>9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6</code> · <a href="https://solscan.io/account/9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6">Solscan</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted">Always check the full address before you buy, lock or sign anything. Solana mainnet.</p>
 
       <h2>Our apps</h2>
       <div class="apps">
