@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.5.2",
-  "reviewedAt": "2026-10-08",
-  "bytes": 32501,
-  "sha256": "6a0fbd9305848edecf062496a969dfd748f2ec17ece357051c4e5171b111b520",
+  "version": "1.5.3",
+  "reviewedAt": "2026-10-21",
+  "bytes": 39389,
+  "sha256": "5445863d70df56697a7b2341e4c3317b5700852b06d867c76b55a714c94aa2ca",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -23,11 +23,15 @@
     },
     {
       "path": "references/discovery.md",
-      "sha256": "976616aa2a9ee81268d45660b28fdb5e778f13e328c63cc2797275f3822ab3e7"
+      "sha256": "e6e2a7f842862af5b4c8e181c16ffd0fba1bcf838b3bd82b6a5ef02402cee958"
     },
     {
       "path": "references/ecosystem.md",
-      "sha256": "487f057543b621035f67b5e3455d6b8d5aa53b01ee83dc841d9c2e9c7cd82cf6"
+      "sha256": "29835d18bc5ff9496dea10feb56e58b596a9996e3dfcd8d80e1897d3379248b6"
+    },
+    {
+      "path": "references/free-play-sponsors.md",
+      "sha256": "e993d9a878073205b8b365523e3e9b7c1fd9aeec84f19c1dbb5527c9d9354fa2"
     },
     {
       "path": "references/game-delivery.md",
@@ -55,7 +59,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "9a79cf3d0e31faaf084ccdfc673f8e0da33a0f4ab003f9b7885e98bddb23c24c"
+      "sha256": "78c911a43f608c5f1ff3ab2bba245a5e1cacfef63d4487bb0c9a713ab894a8f2"
     },
     {
       "path": "references/visual-realism.md",
@@ -63,7 +67,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "6d3d0424157f27c61bf3f8f431505b261c3086b76d211d924894d938e5c1c0e3"
+      "sha256": "729a2b3f0f8c09cfb6a4caaf9eabc6826c41b69438650dccfc9a2d951e66a203"
     }
   ]
 }

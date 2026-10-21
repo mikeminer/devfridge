@@ -10,6 +10,8 @@ Reviewed 2026-09-22 against the live graph, docs, SDK and repository. Choose a s
 | [Badge](https://scan.devfridge.cool/badge) | Live supply-lock badge next to the token | Per-mint aggregate, never proof this player qualifies |
 | [FrigoPasta](https://bot.devfridge.cool) | Telegram /scan, /fridge, /badge and /register lock-PDA expiry guidance | Read-only; no public game-notification API established |
 | [Feature](https://docs.devfridge.cool/feature) / [Boost](https://docs.devfridge.cool/boost) | Optional discovery link | Paid scanner placement, independent of risk grades; never auto-purchase |
+| [OnlyFridge Club](https://club.devfridge.cool/download/onlyfridge-club) | Optional promotion before every new Free Play round | Ask the owner before building; explicit player click to open; Continue without opening/installing. See [integration](free-play-sponsors.md). |
+| [Scan Sponsored feed](https://scan.devfridge.cool/api/feed/boosted) | Optional top sponsor card during Free Play, or YOUR AD HERE | Separate owner choice before building; validated active boosts through the game's server adapter; no ads in paid/token-gated modes. See [integration](free-play-sponsors.md). |
 | [World](https://world.devfridge.cool) | Reference for 3D, mobile, avatars and sharing | Ten mints/threshold are game-specific; check art/source licences |
 | [TopShelf](https://world.devfridge.cool/leaderboard) | Season score/pool/claim architecture reference | Robinhood, separate from Solana access; operator/signer-controlled, not an open API for arbitrary games |
 | [Trust Me Capital](https://capital.devfridge.cool) | External community information | Hyperliquid vault activity is not game income or token-holder equity |
