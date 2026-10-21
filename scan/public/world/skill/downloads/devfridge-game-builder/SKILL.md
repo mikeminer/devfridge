@@ -3,8 +3,8 @@ name: devfridge-game-builder
 description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
 metadata:
   author: DevFridge
-  version: "1.5.2"
-  sources-reviewed: "2026-10-08"
+  version: "1.5.3"
+  sources-reviewed: "2026-10-21"
 ---
 # DevFridge Game Builder
 
@@ -12,7 +12,9 @@ Turn a developer's meme into a playable browser game. Interview only for missing
 
 ## Discover the game
 
-Read [the discovery guide](references/discovery.md). Start with up to three short questions about the core loop, exact Solana mint and desired lock rule. Offer concrete choices when the developer has no genre in mind. Reuse answers already supplied. Ask a second focused round for missing production decisions while building reversible scene/input work.
+Read [the discovery guide](references/discovery.md). Start with up to three short questions about the core loop, exact Solana mint and desired lock rule. Offer concrete choices when the developer has no genre in mind. Reuse answers already supplied. Resolve the Free Play placement choices below before scene/input implementation; then ask focused follow-ups for other missing production decisions while building reversible work.
+
+Before implementing gameplay, always resolve two independent owner choices: **include an OnlyFridge Club promotion before every new Free Play round?** and **include a DevFridge Scan sponsored-token / YOUR AD HERE card at the top during Free Play?** Offer both, either one, or neither. Reuse explicit answers for this game; otherwise ask and wait for those choices before building gameplay. Read-only discovery and setup may continue. Unanswered is unresolved, never consent or an automatic default; record each choice in the brief. These are build-time questions for the owner, not prompts to players on every run. If the owner chooses no Free Play, record both as not applicable and do not add a free mode just for ads.
 
 Produce a short build brief: loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting. Separate confirmed requirements, proposed defaults and unresolved blockers. No arbitrary World token, 500,000 minimum, ten-character limit, entry fee or reward contract is a universal requirement.
 
@@ -31,6 +33,8 @@ Read [the ecosystem map](references/ecosystem.md). Use Fridge + SDK + Phantom as
 Read [SDK and access rules](references/sdk-access.md) and [Phantom and transactions](references/phantom.md) before implementing the gate. They describe differences between the SDK's whole-day subscription plans and an exact active-lock game gate. Use real published methods; do not invent an npm SDK package or a lock method on the read-only SDK.
 
 Use the tested [exact lock evaluator](assets/timelock-gate.mjs) for precise raw-unit or sub-day rules. Its [tests](assets/timelock-gate.test.mjs) run with `node --test assets/timelock-gate.test.mjs` from this skill directory. The helper evaluates fetched evidence; it does not authenticate wallets, prove chain data, submit transactions or prevent score cheating.
+
+For either approved Free Play placement, read [free-play promotions and sponsors](references/free-play-sponsors.md). Implement only the chosen placements. OnlyFridge Club appears before each new free round, including the first and retries, with a clear Continue action. The top card uses validated active Scan boosts or YOUR AD HERE; paid/token-gated modes show neither placement. Keep external links optional, localize the labels and disclosures, and let unavailable sponsor services fall back without blocking free gameplay. Ad clicks, installs and boosts never grant paid-round or timelock admission.
 
 ## Build for desktop and phones
 
