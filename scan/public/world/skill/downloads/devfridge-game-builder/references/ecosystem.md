@@ -25,6 +25,6 @@ Reviewed 2026-09-22 against the live graph, docs, SDK and repository. Choose a s
 | [PastaCast](https://pastacast.devfridge.cool) | External lore reference if wanted | Confirm availability/asset rights; no assumed SDK |
 | [Docs](https://docs.devfridge.cool) / [listing kit](https://docs.devfridge.cool/listing-kit) | Access explanations/release material | Submissions/publication are separate actions |
 
-A small integration can be game + Phantom + Fridge/SDK with Scan/Badge in the token chooser. Social, EVM, bridges, payments and rewards remain separately scoped choices.
+A small integration can be game + the chosen platform's wallet + Fridge/SDK with Scan/Badge in the token chooser: Phantom/browser wallets for web, Seeker Connect/Mobile Wallet Adapter for Android. Social, EVM, bridges, payments and rewards remain separately scoped choices.
 
 Known conflict: the current ecosystem graph and some World prose say local scores/no prizes, while repository code and the deployed TopShelf leaderboard expose optional Robinhood score registration and season claims. Do not blend these claims. Inspect the selected game version/contract, label unresolved details and confirm third-party access with its operator.

@@ -1,22 +1,30 @@
 ---
 name: devfridge-game-builder
-description: Design and build Three.js browser games for Pump.fun communities with Phantom on desktop and mobile, using DevFridge timelocks for token-gated access. Use for new games or adding DevFridge access to an existing game, with optional ecosystem integrations.
+description: Build Three.js games for browser, Solana Seeker Android apps, or both, with DevFridge timelock access. Use for new or existing games, Phantom and Seeker wallet integration, bundled signed APKs, device testing and Solana dApp Store releases, with optional Free Play sponsorships.
 metadata:
   author: DevFridge
-  version: "1.5.3"
-  sources-reviewed: "2026-10-21"
+  version: "1.6.0"
+  sources-reviewed: "2026-10-22"
 ---
 # DevFridge Game Builder
 
-Turn a developer's meme into a playable browser game. Interview only for missing decisions, then implement and verify the game; do not stop at a concept or landing page. Respect an existing repository and the user's chosen genre. World is an example, not a template every game must copy.
+Turn a developer's meme into a playable game on their chosen platform. Interview only for missing decisions, then implement and verify the game; do not stop at a concept or landing page. Respect an existing repository and the user's chosen genre. World is an example, not a template every game must copy.
+
+## Choose the platform first
+
+Before building a game, always resolve: **Browser, Seeker app, or both?** Reuse an explicit platform choice already supplied for this game; otherwise ask and wait before gameplay or platform implementation. Read-only discovery and setup may continue. Do not infer an APK from “mobile-friendly”, or infer browser-only from a Three.js game. Record the choice in the brief and copied prompts; unanswered has no default.
+
+- **Browser:** deliver the web game with desktop/touch controls and browser wallets. Read [browser wallet integration](references/phantom.md). A mobile website is not a signed Android app.
+- **Seeker app:** read [Android APK delivery](references/seeker-android.md) and [Seeker wallets and payment recovery](references/seeker-wallet.md). Bundle the game in the APK, implement native wallet access, and test the release on a physical Seeker. Read [Solana dApp Store publishing](references/solana-dapp-store.md) for listing preparation, new releases and updates.
+- **Both:** share game rules, assets and translations; separate browser/native wallet, storage, lifecycle and external-link adapters. Deliver and verify both artifacts. A passing browser test does not certify the APK, or vice versa.
 
 ## Discover the game
 
-Read [the discovery guide](references/discovery.md). Start with up to three short questions about the core loop, exact Solana mint and desired lock rule. Offer concrete choices when the developer has no genre in mind. Reuse answers already supplied. Resolve the Free Play placement choices below before scene/input implementation; then ask focused follow-ups for other missing production decisions while building reversible work.
+Read [the discovery guide](references/discovery.md). After the platform choice, ask up to three short questions about the core loop, exact Solana mint and desired lock rule, omitting known answers. Offer concrete choices when the developer has no genre in mind. Resolve the Free Play placement choices below before scene/input implementation; then ask focused follow-ups for other missing production decisions while building reversible work.
 
 Before implementing gameplay, always resolve two independent owner choices: **include an OnlyFridge Club promotion before every new Free Play round?** and **include a DevFridge Scan sponsored-token / YOUR AD HERE card at the top during Free Play?** Offer both, either one, or neither. Reuse explicit answers for this game; otherwise ask and wait for those choices before building gameplay. Read-only discovery and setup may continue. Unanswered is unresolved, never consent or an automatic default; record each choice in the brief. These are build-time questions for the owner, not prompts to players on every run. If the owner chooses no Free Play, record both as not applicable and do not add a free mode just for ads.
 
-Produce a short build brief: loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting. Separate confirmed requirements, proposed defaults and unresolved blockers. No arbitrary World token, 500,000 minimum, ten-character limit, entry fee or reward contract is a universal requirement.
+Produce a short build brief: platform and deliverables; loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting and any Android package/release identity. Separate confirmed requirements, proposed defaults and unresolved blockers. No example game's token, minimum, entry price, recipient, package ID or RPC endpoint is a universal requirement.
 
 ## Explain why players lock and return
 
@@ -28,31 +36,31 @@ Read [program reuse and verification](references/program-and-verification.md) wh
 
 ## Choose the integration
 
-Read [the ecosystem map](references/ecosystem.md). Use Fridge + SDK + Phantom as the core. Add only selected modules; considering the ecosystem does not authorize every integration. Verify current docs and on-chain mint ownership/decimals/extensions before enabling real locks. An existing Pump.fun token is not automatically Token-2022 compatible. If unsupported, continue a clearly labeled practice build and explain the blocker; never silently replace the user's token.
+Read [the ecosystem map](references/ecosystem.md). Use Fridge + SDK with the selected platform's wallet adapter as the core: Phantom/browser wallets on web, current Seeker Connect/Mobile Wallet Adapter on Android. Add only selected modules; considering the ecosystem does not authorize every integration. Verify current docs and on-chain mint ownership/decimals/extensions before enabling real locks. An existing Pump.fun token is not automatically Token-2022 compatible. If unsupported, use labeled development fixtures and explain the blocker; player-facing practice must fit the owner's chosen free-mode scope. Never silently replace the user's token.
 
-Read [SDK and access rules](references/sdk-access.md) and [Phantom and transactions](references/phantom.md) before implementing the gate. They describe differences between the SDK's whole-day subscription plans and an exact active-lock game gate. Use real published methods; do not invent an npm SDK package or a lock method on the read-only SDK.
+Read [SDK and access rules](references/sdk-access.md) and the chosen platform's wallet guide before implementing the gate. Distinguish the SDK's whole-day subscription plans from an exact active-lock game gate. Use real published methods; do not invent an npm SDK package or a lock method on the read-only SDK. Keep wallet connection, authenticated identity, timelock entitlement, paid-round receipt and score authority separate.
 
 Use the tested [exact lock evaluator](assets/timelock-gate.mjs) for precise raw-unit or sub-day rules. Its [tests](assets/timelock-gate.test.mjs) run with `node --test assets/timelock-gate.test.mjs` from this skill directory. The helper evaluates fetched evidence; it does not authenticate wallets, prove chain data, submit transactions or prevent score cheating.
 
 For either approved Free Play placement, read [free-play promotions and sponsors](references/free-play-sponsors.md). Implement only the chosen placements. OnlyFridge Club appears before each new free round, including the first and retries, with a clear Continue action. The top card uses validated active Scan boosts or YOUR AD HERE; paid/token-gated modes show neither placement. Keep external links optional, localize the labels and disclosures, and let unavailable sponsor services fall back without blocking free gameplay. Ad clicks, installs and boosts never grant paid-round or timelock admission.
 
-## Build for desktop and phones
+## Build for the selected devices
 
 Read [Three.js and mobile delivery](references/game-delivery.md). Prefer TypeScript and the existing build system; Vite is a reasonable new-project default. Separate simulation, renderer, input, audio, wallet/access and persistence. Build a complete small loop with start, play, win/loss and restart before optional economy features.
 
 Read [visual realism](references/visual-realism.md) and make a finished visual pass: detailed models with convincing silhouettes, realistic PBR textures, environment reflections, soft contact shadows and consistent scale. Prefer material realism by default, including for playful meme characters; respect a developer’s explicit alternate style. Placeholder cubes are for blockout, not finished art. Budget and test the result on mobile.
 
-Deliver equivalent keyboard/mouse and touch controls, responsive camera/canvas, bounded GPU cost, GLB loading/fallbacks, audio recovery after screen lock and dialogs that do not cover active play. Pin tested dependencies in a lockfile. Use user-owned/licensed art; public access to World's site is not a licence to copy its characters.
+Deliver appropriate touch controls and, for browser desktop, equivalent keyboard/mouse controls; responsive camera/canvas, bounded GPU cost, GLB loading/fallbacks, audio recovery after screen lock and dialogs that do not cover active play. Pin tested dependencies. For Seeker, keep playable assets local, RPC secrets on the server and native bridge operations narrowly scoped. Use user-owned/licensed art; public access to World's site is not a licence to copy its characters.
 
 Practice mode must be visibly distinct from verified/ranked access. Browser-only gating cannot protect downloaded code or prove scores. Protect server features with server-side wallet and lock verification. Read [competitive modes](references/competition.md) when rankings, multiplayer, registration or rewards are requested.
 
 ## Verify and deliver
 
-Test meaningful gate boundaries, expired/insufficient locks, stale/error evidence, wallet rejection/account changes, reconnects and no-wallet fallback. Test gameplay, touch input, orientation, safe areas, dialog focus, audio resume and WebGL loss. Include 390×844 portrait, phone landscape and desktop; distinguish emulation from actual Phantom mobile hardware tests.
+Test meaningful gate boundaries, expired/insufficient locks, stale/error evidence, wallet rejection/account changes, reconnects and no-wallet fallback. Test gameplay, touch input, orientation, safe areas, dialog focus, audio resume and WebGL loss. For web include 390×844 portrait, phone landscape and desktop; distinguish emulation from hardware tests. For Seeker verify cold start, wallet return/cancellation, process recreation, payment recovery, offline boundaries and upgrade install of the signed release APK. Record untested physical-device cases instead of claiming certification.
 
 Run type checks, build and relevant tests. Never sign a real lock, buy tokens, submit paid listings, deploy a contract or approve spending just to demonstrate the game. Simulations/fixtures do not establish a successful mainnet transaction. Deployment follows the user's actual authorization and hosting scope; this skill grants no additional permission.
 
-Deliver code, configuration instructions, recorded test results/limitations and a playable preview. If publishing is requested, finish the repository/PR/deploy flow and check the real URL. Do not call a local-only change deployed. Include source links and review dates for chain-specific claims; consult [sources and update policy](references/sources.md) when APIs or docs disagree.
+Deliver code, configuration instructions and recorded test results/limitations, plus the chosen web preview and/or signed APK with checksum, package, version and signing-certificate fingerprint. If publishing is requested, finish the applicable repository/deploy or Store submission workflow within the user's authorization; honor any explicit request to wait for final approval. Verify the real URL or portal status. Uploaded, submitted for review and live in the Store are distinct outcomes. Include source links and review dates for chain-specific claims; consult [sources and update policy](references/sources.md) when APIs or docs disagree.
 
 ## Guide a hackathon submission
 

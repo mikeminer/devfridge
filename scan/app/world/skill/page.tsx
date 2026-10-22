@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import SkillLanding from '@/components/world/skill/SkillLanding';
 
-const description = 'Turn your Pump.fun meme into a Three.js browser game. Download the DevFridge AI skill for Phantom, mobile controls and timelock access, with copyable prompts and game examples.';
+const description = 'Build a Solana game for Browser, Seeker app or Both. Download the DevFridge AI skill for timelock access, native Seeker wallet integration, signed APKs and Solana dApp Store preparation.';
 export const metadata: Metadata = {
   title: { absolute: 'DevFridge Game Builder — AI Skill for Solana Games' }, description,
   alternates: { canonical: 'https://world.devfridge.cool/skill' },
