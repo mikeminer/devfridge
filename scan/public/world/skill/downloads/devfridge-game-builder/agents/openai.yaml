@@ -1,4 +1,4 @@
 interface:
   display_name: "DevFridge Game Builder"
-  short_description: "Build Phantom-ready 3D games with timelock access"
-  default_prompt: "Use $devfridge-game-builder to interview me and build a mobile-friendly Three.js game for my Pump.fun token with Phantom and DevFridge timelock access."
+  short_description: "Build browser and Seeker games with timelock access"
+  default_prompt: "Use $devfridge-game-builder to first resolve browser, Seeker app or both, reusing my explicit prior choice or asking if missing, then build my game with DevFridge access and my chosen Free Play promotions."
