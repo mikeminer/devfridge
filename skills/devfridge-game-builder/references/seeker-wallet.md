@@ -16,6 +16,24 @@ Generic [MWA](https://docs.solanamobile.com/solana-mobile-stack/mobile-wallet-ad
 
 Read current [MWA capabilities and identity requirements](https://solana-mobile.github.io/mobile-wallet-adapter/spec/spec.html) before choosing signing methods. Check supported transaction versions, payload limits and optional/account-specific features. Do not assume `signTransactions` or SIWS exists merely because an SDK exposes a method. Use the installed library's matching chain/network representation. For native identity verification, configure the owned domain's Digital Asset Links with the actual package and release signing-certificate fingerprint; a local asset origin is not a substitute. This identity association is separate from whether a wrapper requires TWA setup.
 
+## Chrome's local network permission (browser and Custom Tab)
+
+Reviewed on a Seeker with Chrome 155 on **2026-10-23**. In a browser (Chrome on Android, and a Chrome Custom Tab opened by an app such as OnlyFridge Club), Mobile Wallet Adapter reaches the wallet through a WebSocket on `localhost`: the wallet is another app on the same phone. Chrome now asks before a public site may reach "other apps and services on this device" (Local Network Access: permission `loopback-network`, `local-network-access` on older builds).
+
+If that question first appears while the wallet is already opening, it stays behind the wallet and ends as a denial. The wallet's sheet then waits forever and the page logs `net::ERR_BLOCKED_BY_LOCAL_NETWORK_ACCESS_CHECKS`. A denial is remembered for the site, and Chrome does not ask again.
+
+- The official `@solana-mobile/wallet-standard-mobile` (0.7.0 checked) handles this. Before opening the wallet, it shows its own **“Allow connections to your wallet”** modal, raises Chrome's question while the page is visible, then opens the wallet from a fresh tap. On a denied state it shows a blocked modal and throws `ERROR_LOOPBACK_ACCESS_BLOCKED`. Map that error to a localized explanation; the modals themselves are English.
+- A game that drives `@solana-mobile/mobile-wallet-adapter-protocol` `transact()` directly must do the same itself:
+  1. read the permission state and keep it current (`navigator.permissions.query`, `onchange`), so a click can check it synchronously;
+  2. on `prompt`, raise the question with any request to the phone (for example `fetch('http://localhost:1/', { mode: 'no-cors' })`) and do not open the wallet in that click;
+  3. on `granted`, or where the permission is unknown, start `transact()` synchronously in the click as before;
+  4. on `denied`, explain in the player's language that Chrome's site settings must allow other apps and services on this device.
+
+  [MezzoPollo's `web-wallet.mjs`](https://github.com/mikeminer/mezzo-pollo-academy/blob/main/web-wallet.mjs) is a small reference.
+- WebView hosts (a Solana Mobile web shell, an APK WebView) ask nothing, and injected providers (Phantom's in-app browser) don't use localhost. Test each runtime separately.
+
+Test on a Seeker in Chrome and, for Game Room entries, from the Club app's Custom Tab: once with the permission undecided, and once after choosing Block.
+
 ## Seed Vault and authorization boundaries
 
 [Seed Vault](https://docs.solanamobile.com/solana-mobile-stack/seed-vault) provides secure custody to wallet apps. A game requests authorization/signing through Seeker Connect/MWA and the wallet; it must never request seed phrases, export private keys, implement its own biometric bypass or integrate the wallet-developer Seed Vault SDK as an access shortcut.

@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "reviewedAt": "2026-10-23",
-  "bytes": 61485,
-  "sha256": "5b6eed45c5135907853c942d04bdea7954f5a0089949e7fda82282827efe57c1",
+  "bytes": 62803,
+  "sha256": "250e67b40d290aee973b82e10c413536a58f17f47850122548b4befee36e02e6",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -39,7 +39,7 @@
     },
     {
       "path": "references/game-room.md",
-      "sha256": "c8825bc1b1f054ae53597269beaf4b024eeab9d62e9aa6c73b9ce6547a61c11b"
+      "sha256": "8e5f12bac104ed5f16e404b7e2acff751b2e07075a551cacc443ff8287a1273c"
     },
     {
       "path": "references/hackathon-submission.md",
@@ -67,7 +67,7 @@
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "915e330f5c7d35cb04fc1194eb4649ae234dbf2219c1ecff954519e6469b27b1"
+      "sha256": "c59819805abccc73394fe5e3c142b33c63178aed51529682b3c261d867b6d2ed"
     },
     {
       "path": "references/solana-dapp-store.md",
@@ -83,7 +83,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "7c75f7c9a34d17d9afd0f4bba9087586f56083b45f617c853015bb1b998bd3dc"
+      "sha256": "d8a246de8d36927c8cb8f3addd25bfc5e37e954feb6406dc183223f18cb81966"
     }
   ]
 }
