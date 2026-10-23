@@ -1,13 +1,13 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.6.0",
-  "reviewedAt": "2026-10-22",
-  "bytes": 55862,
-  "sha256": "6719264c7b495abeeecfc1061b78b76d1a3d59e127d5d58d4cf4a9081e4c0341",
+  "version": "1.7.0",
+  "reviewedAt": "2026-10-23",
+  "bytes": 60185,
+  "sha256": "4022d03f8b3048b2cb1ddd3bb0f16faa537fe33d8ef3852c6100bddbb03cab3c",
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "d52a1667e187ffbf8b1d6fd8e3dc8481bbace1c4d2054d79a3888d680175bfa0"
+      "sha256": "4e8f1c7707b9cb71e4a777b4197bcafae22b220eeaa330b9c121210466d9a5de"
     },
     {
       "path": "assets/timelock-gate.mjs",
@@ -23,11 +23,11 @@
     },
     {
       "path": "references/discovery.md",
-      "sha256": "e6fba4995845ce92afb51963ea4b1248d244e5991eac49dad9397d278fdab1d3"
+      "sha256": "900d9c9808f061e164c5e9985ecaf8f8903f552128723c4be6fd26dffd72e19a"
     },
     {
       "path": "references/ecosystem.md",
-      "sha256": "16ff26d18f1373300d40f11b6728b4d090cfaf8da11fc93ca7e93944bddb7e99"
+      "sha256": "dae992a1d6d9e056a5eb3e6198941b54ead1cb113597f6ad3415d061bee67770"
     },
     {
       "path": "references/free-play-sponsors.md",
@@ -35,7 +35,11 @@
     },
     {
       "path": "references/game-delivery.md",
-      "sha256": "fe4ef321b064b6be5135e1e41352c40d5d882f436f000a58a519f45ba8e2ef60"
+      "sha256": "33a4fc10deb846966be4edf9a2bc7559365afe303732977bcebdfbea11c87f46"
+    },
+    {
+      "path": "references/game-room.md",
+      "sha256": "d2d7299f48567ab6c277368e9fbbde2c93950dafff844faef607af052e14c498"
     },
     {
       "path": "references/hackathon-submission.md",
@@ -43,7 +47,7 @@
     },
     {
       "path": "references/phantom.md",
-      "sha256": "dc91b8b29121e97d457e9baf77206c043cbd72703e6cec66f7542fc8ae313681"
+      "sha256": "6bbb8cce1f89ad37702473e8ef764f9c4598320b15db55f3835267cb5b962a0f"
     },
     {
       "path": "references/program-and-verification.md",
@@ -59,11 +63,11 @@
     },
     {
       "path": "references/seeker-android.md",
-      "sha256": "6a96e9bd3449f962c6885320594174e6354090e86f357aae7814dbbf1e93febb"
+      "sha256": "bc58f332cb09b3690610d0f75b63510f1e5a38192dc12037aa566f4d8383cb7e"
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "0e2fced629bf4c70cb2898c59751193bbbeaa42d1a6779f921341f4cd2838184"
+      "sha256": "915e330f5c7d35cb04fc1194eb4649ae234dbf2219c1ecff954519e6469b27b1"
     },
     {
       "path": "references/solana-dapp-store.md",
@@ -71,7 +75,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "5d403606ceb03afe5df7e467c6728f200750e525adf3256e66dd9821b386de08"
+      "sha256": "e1467292c6add0c2f6251fa7094941227b6d8077282991076836efd5b9af0b18"
     },
     {
       "path": "references/visual-realism.md",
@@ -79,7 +83,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "14b00e8b887816d1e70751ac0d1fb0711d8e7064eea526e8ab424b69e3c5d063"
+      "sha256": "881ce40303ce558bd8ac944512d2b6400815321f13215172621fb58cdcaac8b3"
     }
   ]
 }

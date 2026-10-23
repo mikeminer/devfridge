@@ -1,4 +1,4 @@
 interface:
   display_name: "DevFridge Game Builder"
   short_description: "Build browser and Seeker games with timelock access"
-  default_prompt: "Use $devfridge-game-builder to first resolve browser, Seeker app or both, reusing my explicit prior choice or asking if missing, then build my game with DevFridge access and my chosen Free Play promotions."
+  default_prompt: "Use $devfridge-game-builder to resolve platform, applicable APK architecture, Game Room and Free Play promotions from my explicit choices, ask only what is missing, then build and verify my game with DevFridge access."
