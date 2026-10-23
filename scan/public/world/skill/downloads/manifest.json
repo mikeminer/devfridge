@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "reviewedAt": "2026-10-23",
-  "bytes": 62803,
-  "sha256": "250e67b40d290aee973b82e10c413536a58f17f47850122548b4befee36e02e6",
+  "bytes": 63367,
+  "sha256": "c05bb9054697f3b2be523516830b87a38c4a5441e7e0af6877b33f2f39d0c893",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -67,7 +67,7 @@
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "c59819805abccc73394fe5e3c142b33c63178aed51529682b3c261d867b6d2ed"
+      "sha256": "72378df5d3e3f3d53a00735d66d700ff43640aba322ae29ee810a43e7dfc96af"
     },
     {
       "path": "references/solana-dapp-store.md",
@@ -83,7 +83,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "d8a246de8d36927c8cb8f3addd25bfc5e37e954feb6406dc183223f18cb81966"
+      "sha256": "39b6c55322f9ffb1e0097524e25b3c1ad4d4aeab889e0843124c4aed4c5e34f3"
     }
   ]
 }
