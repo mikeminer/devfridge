@@ -28,7 +28,7 @@ function landing() {
     if (id === '@/lib/game-builder-prompts') return prompts;
     if (id === './skill.module.css') return {};
     if (id === 'next/dynamic') return () => () => null;
-    if (id === './ProgramStory') return () => null;
+    if (id === './ProgramStory' || id === './SkillBoxShowcase') return () => null;
     throw new Error(`Unexpected landing dependency: ${id}`);
   };
   new Function('require', 'module', 'exports', compiled.outputText)(load, module, module.exports);

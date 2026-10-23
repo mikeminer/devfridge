@@ -3,6 +3,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './skill.module.css';
 import ProgramStory from './ProgramStory';
+import BoxShowcase from './SkillBoxShowcase';
 import { INSTALL_PROMPT, SUBMISSION_PROMPT, SUBMISSION_INTRO, SUBMISSION_STEPS, SHOWCASE_STATUS, FREE_PLAY_SPONSOR_PROMPT, freePlaySponsorPrompt, type FreePlaySponsorChoice, PLATFORM_PROMPT, gamePlatformPrompt, hasWebDelivery, type GamePlatformChoice, type ApkDeliveryChoice, type GameRoomChoice } from '@/lib/game-builder-prompts';
 
 const Scene = dynamic(() => import('./SkillScene'), { ssr: false, loading: () => <div className={styles.scenePlaceholder}>Preparing your little world…</div> });
@@ -46,12 +47,27 @@ export default function SkillLanding() {
   return <main className={styles.page}>
     <nav className={styles.nav} aria-label="Game builder navigation"><a className={styles.brand} href="https://world.devfridge.cool/">▧ DEVFRIDGE <span>WORLD / BUILD</span></a><div><a href="#quick-install">Install with AI</a><a href="#examples">Ideas</a><a href="#submit">Submit your game</a><a href="#install">Get the skill <span aria-hidden="true">↗</span></a></div></nav>
     <header className={styles.hero}>
-      <div className={styles.heroCopy}><p className={styles.eyebrow}><i/> THE GAME BUILDER SKILL · v1.7.3</p><h1>Your meme.<br/>A world<br/><em>to play.</em></h1><p className={styles.lead}>Turn your meme into a character worth coming back for. Build a 3D game for Browser, Seeker app or Both, with DevFridge timelock access and the wallet experience for your platform.</p>
-        <section className={styles.quickInstall} id="quick-install" aria-labelledby="quick-install-title"><h2 id="quick-install-title">Start here. Install the skill.</h2><p>Open your project in a coding agent and paste this prompt. It installs the skill, asks Browser, Seeker app or Both first, then helps you shape your game.</p><textarea aria-label="Skill installation prompt" readOnly value={INSTALL_PROMPT} spellCheck={false}/><CopyButton text={INSTALL_PROMPT} label="Copy installation prompt"/><a href="#install">Prefer a manual install? See the steps ↓</a></section>
-        <div className={styles.actions}><a className={styles.primary} href={`${DOWNLOAD}.zip`} download>Download the skill <span>↓</span></a><a className={styles.secondary} href="#prompt">Make my prompt ↗</a></div><p className={styles.micro}>Open Agent Skills format · Browser + Seeker · Your token, your rules</p></div>
-      <div className={styles.preview}><div className={styles.previewBar}><span><i/> CONCEPT LAB</span><span>THREE.JS / PBR</span></div><div className={styles.scene}><Scene genre={genre}/></div><div className={styles.previewCaption}><span>{current.genre}</span><strong>Small world. Endless possibilities.</strong><div className={styles.sceneTabs}>{examples.slice(0,3).map(item => <button key={item.id} aria-pressed={genre === item.id} onClick={() => setGenre(item.id)}>{item.id}</button>)}</div><p>PBR material study · detailed models, textured surfaces and studio lighting. Your AI builds the actual game.</p></div></div>
+      <div className={styles.heroCopy}>
+        <p className={styles.eyebrow}><i/> DEVFRIDGE GAME BUILDER · v1.7.3</p>
+        <h1>Unbox your<br/><em>next game.</em></h1>
+        <p className={styles.lead}>Your meme. Your world. Your rules. An AI coding skill to build playable 3D games for the browser and Seeker, from the first idea to the release.</p>
+        <div className={styles.heroPlatforms}><span>Browser</span><span>Seeker</span><span>Or both.</span></div>
+        <div className={styles.actions}><a className={styles.primary} href={`${DOWNLOAD}.zip`} download>Get the skill <span>↓</span></a><a className={styles.secondary} href="#quick-install">Install with AI <span>↗</span></a></div>
+        <p className={styles.micro}>OPEN AGENT SKILLS FORMAT · DIGITAL DOWNLOAD</p>
+        <a className={styles.heroPromptLink} href="#prompt">Already have an idea? Make your prompt ↗</a>
+        <div className={styles.boxContents}><span>INSIDE THE BOX</span><p>3D gameplay. Seeker Connect. Timelock access.<br/>Signed APKs. Free Play sponsors. Store release guidance.</p></div>
+      </div>
+      <BoxShowcase/>
     </header>
     <div className={styles.strip}><span>01 / BRING A MEME</span><b>+</b><span>02 / SHAPE THE GAME</span><b>+</b><span>03 / LOCK TO UNLOCK</span><b>→</b><span>PLAY ANYWHERE</span></div>
+    <section className={`${styles.quickInstall} ${styles.quickInstallWide}`} id="quick-install" aria-labelledby="quick-install-title">
+      <div><p className={styles.eyebrow}>YOUR NEXT MOVE</p><h2 id="quick-install-title">Open the box.<br/>Give your agent the skill.</h2><p>Open your project in a coding agent and paste this prompt. It installs the skill, asks Browser, Seeker app or Both first, then helps you shape your game.</p><a href="#install">Prefer a manual install? See the steps ↓</a></div>
+      <div><textarea aria-label="Skill installation prompt" readOnly value={INSTALL_PROMPT} spellCheck={false}/><CopyButton text={INSTALL_PROMPT} label="Copy installation prompt"/></div>
+    </section>
+    <section className={styles.conceptShelf} aria-labelledby="concept-lab-title">
+      <div className={styles.sectionHeading}><p className={styles.eyebrow}>THEN, MAKE IT YOURS</p><h2 id="concept-lab-title">One skill.<br/>Entirely your world.</h2><p>A runner, a drift club, an arena. Start with the game your community wants to play, then build it around your character and your rules.</p><a className={styles.heroPromptLink} href="#examples">Explore six starting points ↗</a></div>
+      <div className={styles.preview}><div className={styles.previewBar}><span><i/> CONCEPT LAB</span><span>THREE.JS / PBR</span></div><div className={styles.scene}><Scene genre={genre}/></div><div className={styles.previewCaption}><span>{current.genre}</span><strong>Small world. Endless possibilities.</strong><div className={styles.sceneTabs}>{examples.slice(0,3).map(item => <button key={item.id} aria-pressed={genre === item.id} onClick={() => setGenre(item.id)}>{item.id}</button>)}</div><p>PBR material study · detailed models, textured surfaces and studio lighting. Your AI builds the actual game.</p></div></div>
+    </section>
     <section className={styles.section} id="platforms"><div className={styles.sectionHeading}><p className={styles.eyebrow}>FIRST, CHOOSE WHERE TO PLAY</p><h2>Browser. Seeker app.<br/>Or both.</h2><p>Your agent asks this before building and reuses your answer. An unanswered choice stays open until you decide.</p></div><div className={styles.steps}>{[
       ['BROWSER', 'Open a link. Play.', 'A Three.js game for desktop and mobile browsers, with Phantom, touch controls and DevFridge access.'],
       ['SEEKER APP', 'A game on your phone.', 'Choose game content included in the APK or loaded from your website. Both options deliver a signed Android APK, with wallet integration, physical Seeker tests and Store preparation.'],
