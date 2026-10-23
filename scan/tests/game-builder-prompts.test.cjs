@@ -108,14 +108,14 @@ test('platform and independent ad selections reach the copied brief in all 36 co
 
 test('resolved platforms preserve the chosen wallet and delivery requirements', () => {
   const browser = prompts.gamePlatformPrompt('browser');
-  const seeker = prompts.gamePlatformPrompt('seeker');
-  const both = prompts.gamePlatformPrompt('both');
+  const seeker = prompts.gamePlatformPrompt('seeker', 'bundled');
+  const both = prompts.gamePlatformPrompt('both', 'bundled');
   for (const prompt of [browser, seeker, both]) assert.match(prompt, /Reuse an explicit prior platform choice without asking again/);
   assert.match(browser, /Phantom extension\/mobile-browser access/);
   assert.doesNotMatch(browser, /deliver a signed release APK/);
   assert.doesNotMatch(seeker, /with Phantom/);
   for (const prompt of [seeker, both]) {
-    assert.match(prompt, /bundle the Three.js game assets/);
+    assert.match(prompt, /APK content: Included in the APK/);
     assert.match(prompt, /signed release APK/);
     assert.match(prompt, /Seeker Connect \/ Mobile Wallet Adapter/);
     assert.match(prompt, /physical Seeker/);
@@ -123,6 +123,103 @@ test('resolved platforms preserve the chosen wallet and delivery requirements', 
     assert.match(prompt, /a built APK is not Store approval or publication/);
     for (const reference of ['seeker-android.md', 'seeker-wallet.md', 'solana-dapp-store.md']) assert.ok(prompt.includes(reference));
   }
-  assert.match(both, /share gameplay source and assets, keep browser\/native wallet adapters separate/);
+  assert.match(both, /share gameplay source and assets, keep platform-specific wallet adapters separate/);
   assert.match(both, /Phantom extension\/mobile-browser access/);
+});
+
+test('APK content remains unresolved until chosen and both architectures produce APKs', () => {
+  for (const platform of ['seeker', 'both']) {
+    const pending = prompts.gamePlatformPrompt(platform);
+    assert.match(pending, /APK content: Ask me; no new choice supplied/);
+    assert.match(pending, /Reuse my explicit prior choice; otherwise ask whether/);
+    assert.match(pending, /wait before choosing the architecture/);
+    for (const content of ['bundled', 'hosted']) {
+      const prompt = prompts.gamePlatformPrompt(platform, content);
+      assert.match(prompt, /Both content choices produce an installable signed APK; Browser alone does not require an APK/);
+      assert.match(prompt, /native bridge for a native WebView wrapper, or the supported web-wallet path for browser\/TWA delivery/);
+    }
+  }
+  assert.doesNotMatch(prompts.PLATFORM_PROMPT, /^APK content:|^Game Room integration:/m);
+  assert.match(prompts.PLATFORM_PROMPT, /After resolving the delivery choices, ask about Game Room only if web delivery is selected/);
+});
+
+test('Game Room is conditional on web delivery and stale choices cannot escape a hidden field', () => {
+  for (const platform of ['ask', 'browser', 'seeker', 'both']) {
+    for (const content of ['ask', 'bundled', 'hosted']) {
+      const applicable = platform === 'browser' || platform === 'both' || (platform === 'seeker' && content === 'hosted');
+      assert.equal(prompts.hasWebDelivery(platform, content), applicable);
+      for (const choice of ['ask', 'include', 'exclude']) {
+        const prompt = prompts.gamePlatformPrompt(platform, content, choice);
+        assert.equal(/^Game Room integration:/m.test(prompt), applicable, `${platform}/${content}/${choice}`);
+        if (applicable) {
+          if (choice === 'include') {
+            assert.match(prompt, /Game Room integration: Include; this is my explicit owner choice/);
+            assert.match(prompt, /references\/game-room.md/);
+            assert.match(prompt, /do not claim publication before review and verified deployment/);
+          } else if (choice === 'exclude') assert.match(prompt, /Game Room integration: Do not include/);
+          else {
+            assert.match(prompt, /Reuse my explicit prior choice; otherwise ask whether I want this web game integrated into OnlyFridge Club Game Room/);
+            assert.match(prompt, /wait before gameplay or integration work/);
+          }
+          assert.match(prompt, /independent of both free-play ad choices and whether Free Play exists/);
+        } else {
+          assert.doesNotMatch(prompt, /Game Room integration: Include|Game Room integration: Do not include/);
+          if (platform === 'seeker' && content === 'bundled') {
+            assert.match(prompt, /Game Room is not applicable/);
+            assert.match(prompt, /Do not ask its opt-in question or carry over a stale Game Room choice/);
+            assert.doesNotMatch(prompt, /references\/game-room.md/);
+          }
+        }
+      }
+    }
+  }
+});
+
+test('conditional fields and copied briefs follow platform/content changes without leaking old opt-ins', () => {
+  const page = landing();
+  const platformLabel = 'Where should your game run?';
+  const apkLabel = 'Where should the APK load game content?';
+  const roomLabel = 'Include this web game in OnlyFridge Club Game Room?';
+  const visible = label => page.render().some(node => node.type === 'label' && React.Children.toArray(node.props.children)[0] === label);
+  const brief = () => {
+    const nodes = page.render();
+    const text = nodes.find(node => node.type === 'textarea' && node.props['aria-label'] === 'Generated game builder prompt').props.value;
+    assert.ok(nodes.some(node => node.type?.name === 'CopyButton' && node.props.text === text));
+    return text;
+  };
+  assert.equal(visible(apkLabel), false);
+  assert.equal(visible(roomLabel), false);
+  page.select(platformLabel, 'browser');
+  assert.equal(visible(apkLabel), false);
+  assert.equal(visible(roomLabel), true);
+  page.select(roomLabel, 'include');
+  assert.match(brief(), /Game Room integration: Include/);
+  page.select(platformLabel, 'both');
+  assert.equal(visible(apkLabel), true);
+  assert.equal(visible(roomLabel), true);
+  assert.match(brief(), /APK content: Ask me/);
+  for (const content of ['bundled', 'hosted']) {
+    page.select(apkLabel, content);
+    assert.equal(visible(roomLabel), true);
+    assert.match(brief(), /Game Room integration: Include/);
+  }
+  page.select(platformLabel, 'seeker');
+  assert.equal(visible(roomLabel), true);
+  assert.match(brief(), /APK content: Loaded from a hosted website/);
+  for (const content of ['bundled', 'ask']) {
+    page.select(apkLabel, content);
+    assert.equal(visible(roomLabel), false);
+    assert.doesNotMatch(brief(), /^Game Room integration:/m);
+  }
+  page.select(apkLabel, 'hosted');
+  assert.equal(visible(roomLabel), true);
+  assert.match(brief(), /Game Room integration: Include/);
+  page.select(roomLabel, 'exclude');
+  assert.match(brief(), /Game Room integration: Do not include/);
+  page.select(roomLabel, 'ask');
+  assert.match(brief(), /Game Room integration: Ask me; no new choice supplied/);
+  page.select(platformLabel, 'ask');
+  assert.equal(visible(apkLabel), false);
+  assert.equal(visible(roomLabel), false);
+  assert.doesNotMatch(brief(), /^APK content:|^Game Room integration:/m);
 });
