@@ -4,7 +4,7 @@ title: "DevFridge PASTA (solana)"
 description: "DevFridge investor knowledge: DevFridge PASTA (solana)"
 resource: "https://solscan.io/token/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-22T11:51:06Z"
+timestamp: "2026-10-23T07:43:42Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`
 
-Registry status: ok · last successful observation: 2026-10-22T11:51:06Z · last attempt: 2026-10-22T11:51:06Z.
+Registry status: ok · last successful observation: 2026-10-23T07:43:42Z · last attempt: 2026-10-23T07:43:42Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ DevFridge ecosystem burn token. Claim fees and Get Featured payments feed the do
 
 ## On-chain observation
 
-ok · last successful observation: 2026-10-22T11:51:06Z · last attempt: 2026-10-22T11:51:06Z.
+ok · last successful observation: 2026-10-23T07:43:42Z · last attempt: 2026-10-23T07:43:42Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 962336169.302028 |
 | Supply in base units | `962336169302028` |
 | Decimals | 6 |
-| Finalized slot | 460024820 |
+| Finalized slot | 460362283 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-10-22T11:51:06Z · last attempt: 2026-10-22T11:51:06Z.
+ok · last successful observation: 2026-10-23T07:43:42Z · last attempt: 2026-10-23T07:43:42Z.
 
 ```json
 {
@@ -76,16 +76,16 @@ ok · last successful observation: 2026-10-22T11:51:06Z · last attempt: 2026-10
   "pairs": [
     {
       "dexId": "pumpswap",
-      "fdv": 3937,
+      "fdv": 3880,
       "liquidity": {
-        "base": 693469931,
-        "quote": 9.2852,
-        "usd": 3805.98
+        "base": 699183553,
+        "quote": 9.375,
+        "usd": 3790.51
       },
-      "marketCap": 3937,
+      "marketCap": 3880,
       "pairAddress": "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5",
       "pairCreatedAt": 1786892428000,
-      "priceUsd": "0.000004090",
+      "priceUsd": "0.000004031",
       "quoteToken": {
         "address": "So11111111111111111111111111111111111111112",
         "name": "Wrapped SOL",
@@ -93,9 +93,9 @@ ok · last successful observation: 2026-10-22T11:51:06Z · last attempt: 2026-10
       },
       "url": "https://dexscreener.com/solana/5o5jbdwzd3zke3jc8tb81d3bph7bwxftvwllroz1eql5",
       "volume": {
-        "h1": 0.62,
-        "h24": 50.68,
-        "h6": 2.66,
+        "h1": 0,
+        "h24": 3.68,
+        "h6": 0,
         "m5": 0
       }
     }
