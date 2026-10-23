@@ -18,21 +18,22 @@ Read current [MWA capabilities and identity requirements](https://solana-mobile.
 
 ## Chrome's local network permission (browser and Custom Tab)
 
-Reviewed on a Seeker with Chrome 155 on **2026-10-23**. In a browser (Chrome on Android, and a Chrome Custom Tab opened by an app such as OnlyFridge Club), Mobile Wallet Adapter reaches the wallet through a WebSocket on `localhost`: the wallet is another app on the same phone. Chrome now asks before a public site may reach "other apps and services on this device" (Local Network Access: permission `loopback-network`, `local-network-access` on older builds).
+Reviewed on a Seeker with Chrome 155 on **2026-10-23**; official 0.7.0 SDK source checked on the same date. This section applies only when the selected browser adapter uses **local-WebSocket MWA** to reach the wallet on the phone. From a public website in Android Chrome or a Chrome Custom Tab, that connection can require permission to reach "other apps and services on this device" (Local Network Access: `loopback-network`, `local-network-access` on older builds).
 
 If that question first appears while the wallet is already opening, it stays behind the wallet and ends as a denial. The wallet's sheet then waits forever and the page logs `net::ERR_BLOCKED_BY_LOCAL_NETWORK_ACCESS_CHECKS`. A denial is remembered for the site, and Chrome does not ask again.
 
-- The official `@solana-mobile/wallet-standard-mobile` (0.7.0 checked) handles this. Before opening the wallet, it shows its own **“Allow connections to your wallet”** modal, raises Chrome's question while the page is visible, then opens the wallet from a fresh tap. On a denied state it shows a blocked modal and throws `ERROR_LOOPBACK_ACCESS_BLOCKED`. Map that error to a localized explanation; the modals themselves are English.
-- A game that drives `@solana-mobile/mobile-wallet-adapter-protocol` `transact()` directly must do the same itself:
-  1. read the permission state and keep it current (`navigator.permissions.query`, `onchange`), so a click can check it synchronously;
-  2. on `prompt`, raise the question with any request to the phone (for example `fetch('http://localhost:1/', { mode: 'no-cors' })`) and do not open the wallet in that click;
-  3. on `granted`, or where the permission is unknown, start `transact()` synchronously in the click as before;
-  4. on `denied`, explain in the player's language that Chrome's site settings must allow other apps and services on this device.
+- The official `@solana-mobile/wallet-standard-mobile` [0.7.0 permission handling](https://github.com/solana-mobile/mobile-wallet-adapter/blob/12b1784ca7b0ab0f54c8333c2b4694b2f3fb4f13/js/packages/wallet-standard-mobile/src/getIsSupported.ts#L116) handles this for local association where permission is required. Before opening the wallet, it shows its own **“Allow connections to your wallet”** modal, raises Chrome's question while the page is visible, then opens the wallet from a fresh tap. On a denied state it shows a blocked modal and throws `ERROR_LOOPBACK_ACCESS_BLOCKED`. Map that error to a localized explanation; the modals themselves are English.
+- A game that drives local-WebSocket `@solana-mobile/mobile-wallet-adapter-protocol` `transact()` directly must handle the same applicable cases:
+  1. first bypass this permission preflight when the **game page itself** is served from a loopback origin: `localhost`/`*.localhost`, `127.0.0.1` (or another `127.0.0.0/8` address), or `[::1]`, including development through `adb reverse`. The [SDK's exemption](https://github.com/solana-mobile/mobile-wallet-adapter/blob/12b1784ca7b0ab0f54c8333c2b4694b2f3fb4f13/js/packages/wallet-standard-mobile/src/getIsSupported.ts#L85) explains that these same-space requests need no prompt; waiting for `prompt` to change can deadlock. Start the local wallet flow on the user's click;
+  2. otherwise read the supported permission state and keep it current (`navigator.permissions.query`, `onchange`), so a click can check it synchronously;
+  3. on `prompt`, trigger the question while the page is visible, using the [SDK's request target and error handling](https://github.com/solana-mobile/mobile-wallet-adapter/blob/12b1784ca7b0ab0f54c8333c2b4694b2f3fb4f13/js/packages/wallet-standard-mobile/src/embedded-modal/loopbackPermissionModal.ts#L12): `void fetch('http://localhost').catch(() => {});`. Do not open the wallet in that click. Use the permission state, not fetch success/failure, to decide the next step. Do not use port `1`: [Fetch blocks that port](https://fetch.spec.whatwg.org/#port-blocking) before a request can trigger permission;
+  4. on `granted`, or where the browser does not support this permission API, start `transact()` synchronously from a fresh click;
+  5. on `denied`, explain in the player's language that Chrome's site settings must allow other apps and services on this device.
 
-  [MezzoPollo's `web-wallet.mjs`](https://github.com/mikeminer/mezzo-pollo-academy/blob/main/web-wallet.mjs) is a small reference.
-- WebView hosts (a Solana Mobile web shell, an APK WebView) ask nothing, and injected providers (Phantom's in-app browser) don't use localhost. Test each runtime separately.
+  [MezzoPollo's `web-wallet.mjs`](https://github.com/mikeminer/mezzo-pollo-academy/blob/main/web-wallet.mjs) illustrates the fresh-click flow; use the pinned SDK sources above for permission requests and exemptions rather than copying an older game implementation.
+- Do not apply this browser-local preflight to [Seeker Connect web's Nostr relay](https://docs.solanamobile.com/solana-mobile-stack/seeker-connect-quickstart#relay-url), native wallet calls or injected providers such as Phantom's in-app browser. The SDK explicitly exempts Solana Mobile Web Shell; use the verified host adapter for other APK WebViews instead of assuming Chrome-tab permission behavior.
 
-Test on a Seeker in Chrome and, for Game Room entries, from the Club app's Custom Tab: once with the permission undecided, and once after choosing Block.
+Test the selected local-WebSocket path on a Seeker in Chrome and, for Game Room entries, from the Club app's Custom Tab: undecided, granted and blocked permission, plus a loopback-hosted development page that must not wait for permission. Verify relay/native/injected paths separately without adding this preflight.
 
 ## Seed Vault and authorization boundaries
 
