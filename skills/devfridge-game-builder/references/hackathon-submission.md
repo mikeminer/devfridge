@@ -36,6 +36,8 @@ Return the actual PR link and a plain-language status: “Submitted for review; 
 
 The publication path is: project JSON PR → validation and owner review → owner-maintained scan/data/projects.json update → owner-approved merge to master → successful Vercel production deployment → gallery and projects.json feed at https://hackathon.devfridge.cool/projects. An approval comment alone does not publish; a failed deploy does not publish. After a merge, verify the live gallery and https://hackathon.devfridge.cool/projects.json contain the correct project, source commit and links. Report pending review, checks, deployment or authentication honestly, with the one next action needed from the user when relevant.
 
+This is the **hackathon gallery/feed** publication path. The operator's 2026-10-23 [OnlyFridge Game Room contract](game-room.md) instead imports merged `scan/data/hackathon-projects/<slug>.json` records directly from `master` on refresh. If Game Room inclusion was selected, prepare the same full CI-valid record, provide a playable cabinet demo and verify Club visibility/launch separately; do not require a curated `projects.json` entry for that importer or claim either surface is live based on the other.
+
 ## Updates
 
 Find the existing slug and PR before creating anything. Update the existing entry for a new release, with a new commit and evidence. Only the project owner or a verified authorized maintainer should request changes; the DevFridge owner verifies this during review. Never set an `approved` flag in the submitted project JSON or self-publish into `scan/data/projects.json`. That file is an owner-maintained release registry; admission requires owner review, not a submitter-controlled flag.

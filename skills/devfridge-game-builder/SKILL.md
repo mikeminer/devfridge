@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with DevFridge access. Use for wallet integration, bundled or hosted signed APKs, device tests, Store releases and optional Game Room discovery or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.7.0"
+  version: "1.7.1"
   sources-reviewed: "2026-10-23"
 ---
 # DevFridge Game Builder
