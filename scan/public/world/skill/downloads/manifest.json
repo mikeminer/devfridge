@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "reviewedAt": "2026-10-23",
-  "bytes": 60185,
-  "sha256": "4022d03f8b3048b2cb1ddd3bb0f16faa537fe33d8ef3852c6100bddbb03cab3c",
+  "bytes": 61485,
+  "sha256": "5b6eed45c5135907853c942d04bdea7954f5a0089949e7fda82282827efe57c1",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -39,11 +39,11 @@
     },
     {
       "path": "references/game-room.md",
-      "sha256": "d2d7299f48567ab6c277368e9fbbde2c93950dafff844faef607af052e14c498"
+      "sha256": "c8825bc1b1f054ae53597269beaf4b024eeab9d62e9aa6c73b9ce6547a61c11b"
     },
     {
       "path": "references/hackathon-submission.md",
-      "sha256": "6bfe97d5dc515a9dcced0d96235334d1b0dcb6c471cf79a45bf6a6cf4287e6d8"
+      "sha256": "a4bf8255a32604732402a3a7ed5b89c1e199da3bbe090e19717af115a631bfc9"
     },
     {
       "path": "references/phantom.md",
@@ -75,7 +75,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "e1467292c6add0c2f6251fa7094941227b6d8077282991076836efd5b9af0b18"
+      "sha256": "e5c36b5395a24d30289dcde4f1b95d298257950aef200cb6fe26b01827499bcf"
     },
     {
       "path": "references/visual-realism.md",
@@ -83,7 +83,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "881ce40303ce558bd8ac944512d2b6400815321f13215172621fb58cdcaac8b3"
+      "sha256": "7c75f7c9a34d17d9afd0f4bba9087586f56083b45f617c853015bb1b998bd3dc"
     }
   ]
 }
