@@ -1,6 +1,6 @@
 # Detailed models and realistic surfaces
 
-Default to convincing material realism, including for humorous meme characters. Ask about the developer's preferred art direction and reference images; preserve an explicit cartoon, low-poly or other style. Realism means coherent shapes, surface response, lighting and scale, not maximum polygon or texture counts.
+Default to convincing material realism, including for humorous meme characters. Ask about the developer's preferred art direction and reference images; preserve an explicit cartoon, low-poly or other style. Realism means coherent shapes, surface response, lighting and scale, not maximum polygon or texture counts. For a realistic character brief, never ship capsules, primitive stand-ins or a crude instanced horde as finished people/enemies. Reduce character count or use a decimated LOD of the same approved model when performance needs it. Follow the [3D asset and character pipeline](3d-assets-and-characters.md) and [routed gamedev skills](gamedev-skills.md).
 
 ## Build a visual target before expanding the world
 
@@ -22,6 +22,8 @@ For supplied/licensed GLB assets, inspect units, pivot, orientation, normals, UV
 Start with 1K material sets and 2K only for a visibly important hero surface; justify higher resolutions with an actual close-up. Transfer size is not GPU texture memory: count decoded dimensions, mipmaps and compressed-format support. Use supported KTX2/Basis assets when worthwhile, or optimized WebP/JPEG with a GPU budget. Atlas/reuse textures and materials; batch rigid geometry or instance repeated props without baking away animated joints.
 
 For a small scene, a useful starting budget is a DPR cap around 1–1.5, one 1024px shadow-casting light, limited physical materials and no obligatory postprocessing chain. These are starting points, not certified performance. Measure renderer draw calls, triangle count, load bytes and frame time on target devices; offer lower shadow/texture quality when needed. Keep readable controls and a stable camera ahead of visual effects.
+
+Use [quality-governor.mjs](../assets/quality-governor.mjs) for a measured adaptive ladder: reduce full-detail character cap, then total crowd, shadow resolution and DPR. Preserve the same realistic assets at every tier. Read [release pitfalls](release-pitfalls.md) for hysteresis, background-gap handling, measured FPS reporting and extreme expression checks. Keep gore optional and owner-selected; a horror case study is not a general visual style requirement.
 
 Pause the animation loop when offscreen/hidden. Honor reduced motion by rendering a still frame, not running a redundant continuous loop. Dispose geometries, materials, every texture, environment targets and shadow targets on scene changes. Ignore/dispose late async loads after teardown and show a useful loading/failure state.
 

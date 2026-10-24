@@ -4,8 +4,9 @@ Reviewed 2026-09-22 against the live graph, docs, SDK and repository. Choose a s
 
 | Component | Appropriate game use | Boundary |
 | --- | --- | --- |
-| [Fridge](https://devfridge.cool) | Player-created Solana Token-2022 timelocks | Depositor vaults, expiry/redeem; [docs](https://docs.devfridge.cool/fridge) |
-| [SDK](https://sdk.devfridge.cool) | Read locks, access plans, lock/scan/badge URLs | No custody, authentication, score verification or transaction submission |
+| [Fridge](https://devfridge.cool) | In-app Season Pass on the existing Token-2022 program | Per-deposit amount/duration verification; developer mechanics in [program guide](program-and-verification.md), player terms in [Season Pass](season-pass.md). No new contract. |
+| [SDK](https://sdk.devfridge.cool) | Optional read-only compatibility path, Scan/badge links | Summed floored-day plans differ from Season Pass tiers; no custody, authentication, score verification or transaction submission |
+| [In-game token market](in-game-market.md) | Optional Buy <TOKEN> screen without leaving the game | Ask separately; detect curve/pool routes on-chain, quote, simulate, validate and recover uncertain outcomes. Never buy as a demonstration. |
 | [Scan](https://scan.devfridge.cool) | Mint report from onboarding | Automated evidence, not an audit; [methodology](https://docs.devfridge.cool/methodology) |
 | [Badge](https://scan.devfridge.cool/badge) | Live supply-lock badge next to the token | Per-mint aggregate, never proof this player qualifies |
 | [FrigoPasta](https://bot.devfridge.cool) | Telegram /scan, /fridge, /badge and /register lock-PDA expiry guidance | Read-only; no public game-notification API established |
@@ -26,6 +27,6 @@ Reviewed 2026-09-22 against the live graph, docs, SDK and repository. Choose a s
 | [PastaCast](https://pastacast.devfridge.cool) | External lore reference if wanted | Confirm availability/asset rights; no assumed SDK |
 | [Docs](https://docs.devfridge.cool) / [listing kit](https://docs.devfridge.cool/listing-kit) | Access explanations/release material | Submissions/publication are separate actions |
 
-A small integration can be game + the runtime's verified wallet adapter + Fridge/SDK with Scan/Badge in the token chooser: Phantom/browser wallets and optional Seeker Connect web on the website, compatible Seeker Connect/Mobile Wallet Adapter in the Android host. Bundled/hosted asset delivery does not determine wallet transport. Social, Game Room inclusion, advertisements, EVM, bridges, payments and rewards remain separately scoped choices.
+A small integration can be game + the runtime's verified wallet adapter + an in-app Season Pass on Fridge: Phantom/browser wallets and optional Seeker Connect web on the website, compatible Seeker Connect/Mobile Wallet Adapter in the Android host. SDK, Scan/Badge and the in-game market are optional. Bundled/hosted asset delivery does not determine wallet transport. Social, Game Room inclusion, advertisements, EVM, bridges, payments and rewards remain separately scoped choices. The Season Pass and market use the game's own identity and plain wording; technical ecosystem names stay in developer documentation or the explicitly approved Free Play placements.
 
 Known conflict: the current ecosystem graph and some World prose say local scores/no prizes, while repository code and the deployed TopShelf leaderboard expose optional Robinhood score registration and season claims. Do not blend these claims. Inspect the selected game version/contract, label unresolved details and confirm third-party access with its operator.

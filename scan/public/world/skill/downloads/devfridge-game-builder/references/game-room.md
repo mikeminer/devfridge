@@ -1,6 +1,6 @@
 # Optional OnlyFridge Club Game Room integration
 
-Source review: **2026-10-23**. This is a discovery/catalog integration choice, separate from Free Play, the OnlyFridge pre-round advertisement and the Scan sponsor card. None authorizes another or grants timelock/paid admission.
+Source review: **2026-10-23**; Season Pass wording updated **2026-10-24**. This is a discovery/catalog integration choice, separate from Free Play, the OnlyFridge pre-round advertisement and the Scan sponsor card. None authorizes another or grants Season Pass/paid admission. Describe new-game access as Season Pass in public copy while retaining the exact technical evidence and truthful required disclosures for review.
 
 ## Resolve applicability and the owner's choice
 

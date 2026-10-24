@@ -33,6 +33,8 @@ Reserve Android system-bar/cutout space once, then size the canvas and touch HUD
 
 ## Build, sign and identify the artifact
 
+Ask for the final permanent case-sensitive application ID before the first release build; the internal Kotlin namespace can differ. For a **new** app only, create a PKCS12 keystore with RSA 4096 and a dedicated alias outside the repository, with two offline backups the owner controls. Updates must reuse the existing signing identity. Gradle reads `<keystore.properties path>` through protected configuration or an environment variable holding that path. Ignore `*.jks`, `*.keystore` and signing properties; never print passwords, copy keys into delivery/source ZIPs or export a browser wallet key. Offer a private keystore download only if explicitly requested. Record only the certificate SHA-256 and APK checksum, not secrets.
+
 Keep the release application ID stable, use an increasing `versionCode` and set the displayed `versionName`; see [Android versioning](https://developer.android.com/studio/publish/versioning). Keep debug installs separate where appropriate. Reuse the existing release signing key for updates; never generate a replacement to bypass missing credentials or an install mismatch. Store keystore/passwords outside source control and pass secrets through the project's protected configuration. See [Android signing](https://developer.android.com/studio/publish/app-signing).
 
 Use the project's Gradle wrapper; adapt module/flavor names to the repository. Typical PowerShell tasks are:
@@ -48,6 +50,22 @@ Get-FileHash -Algorithm SHA256 app/build/outputs/apk/release/app-release.apk
 Run connected tests only against the intended authorized device. A release task needs its real signing configuration; a debug/unsigned artifact is not a Store release. The [Store APK guide](https://docs.solanamobile.com/dapp-store/build-and-sign-an-apk) requires a signed APK. Verify the actual output's package, versions, certificate fingerprint, permissions and debuggable flag, not just the source configuration.
 
 Record source commit (or explicitly identified working snapshot), architecture, tool/dependency versions, bundled game-file hashes or tested website URL/deployment identity, APK SHA-256, certificate SHA-256 and completed tests in a release manifest. Hashes establish artifact identity, not an audit or byte-for-byte reproducibility claim. Continue authorized build/preparation work; missing signing credentials block release signing, not implementation or debug validation. Proceed to [Store submission](solana-dapp-store.md) within the user's publication scope.
+
+## Launcher icon (required check)
+
+Create a genuine adaptive icon, not a small square on a white plate. Use [make-adaptive-icons.py](../assets/make-adaptive-icons.py): 108dp layers (432px xxxhdpi), key art inside the central 66dp, background + foreground + monochrome, `ic_launcher.xml` and `ic_launcher_round.xml` under `mipmap-anydpi-v26`. Supply full-bleed 48dp legacy PNGs for each density and an opaque RGB 512×512 Store icon. Use an owner-approved crop/badge, full-bleed art or dark background. Wire the manifest's icon and roundIcon, test circle/squircle/rounded masks on light/dark backgrounds, and inspect the installed release on a Seeker. See [logo/store art](logo-and-store-art.md); passing dimensions is not a visual approval.
+
+## RPC, audio and production diagnostics
+
+Use a server proxy for private paid RPC credentials, even with bundled gameplay. Restrict methods and parameter shapes to this game's reads/simulation/send needs; enforce quotas, timeouts, response caps and abuse limits. Fixed program/mint filters apply to `getProgramAccounts`. Include `getBalance`, fee/rent estimation, block-height/history methods only where the implementation actually needs them; no arbitrary endpoint or open relay. Sponsor feed requests use the separate [native fixed-upstream adapter](free-play-sponsors.md#bundled-apk-native-feed-adapter). Do not inline a secret via a frontend build variable.
+
+Only with explicit owner acceptance may a dedicated restricted rotatable client credential be considered; restrictions do not make it secret. Record risk and distribution blocker until resolved. Apply `redactRpcUrl`/`scrubSecrets` before all logs, native errors and crash reporting; replace full RPC URLs with `<YOUR_RPC_URL>`, never print credentials to prove redaction. Run [check-no-secrets.py](../assets/check-no-secrets.py) on built assets, extracted APK, release folder and ZIP. Scanning is a detection layer, not permission to ship a key.
+
+For the Android host's own game content set `WebSettings.mediaPlaybackRequiresUserGesture = false`; initialize AudioContext and decode menu loops at startup. Honor saved mute. Browsers try autoplay and fall back to the first gesture with one player, not stacked handlers. Background suspends audio and gameplay; foreground may resume allowed music, but gameplay always awaits deliberate resume. See [music](music-prompts.md).
+
+Gate debug fixtures/labels on DEV or an explicitly non-release fixture build. Release visible-string checks reject Prototype, DEV-FIXTURE, TODO and placeholder labels; legitimate technical strings are reviewed by scope rather than blanket deletion. Match Android `resourceConfigurations` to shipped UI locales; country flags alone are not translations. Forward scrubbed game-prefixed console lines to dedicated logcat tags, e.g. `adb logcat -s <Game>Wallet <Game>Web chromium`.
+
+Dependency evidence reviewed 2026-10-24: Kotlin MWA clientlib **2.0.3** in the official docs version constants; Seeker Connect **0.2.0** quickstart requires compileSdk **36+**, AGP **8.9.1+**, Kotlin **2+**. Pin tested exact versions and record why the selected transport was used. Inspect the Gradle dependency graph for `androidx.test` leaked by clientlib-ktx; exclude only the offending transitive test artifacts if present, then rebuild/test. Do not exclude all AndroidX. Check Node engines from actual npm package metadata rather than assuming a major version is enough. Keep dated BUILD_BRIEF and ASSETS_LICENSES, and a CHANGELOG for every uploaded versionCode; mark superseded decisions so old stub notes cannot become release claims.
 
 ## Verify on a physical Seeker
 

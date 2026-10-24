@@ -8,6 +8,8 @@ Ask whether to include (1) an OnlyFridge Club promotion before every new free ro
 
 These are build-time owner decisions, not questions shown to players before each round. Implement only approved placements; a declined placement adds no UI or network requests. These promotions do not establish Arcade payment, timelock eligibility, prizes or rewards. An ad click, installation or token boost must never grant admission to a paid or token-gated round.
 
+v1.7.4 scope clarification: the top Scan/YOUR AD HERE card is the **only ad during active Free Play**. Do not add other ad networks, video interruptions or banners. The separately approved OnlyFridge promotion remains **before** each new free round, never layered over play. This preserves the owner's two independent choices; selecting the top card does not silently enable or remove the pre-round promotion. Both are absent from the Season Pass gate, review and gated play. The two explicitly opted-in Free Play promotional components (pre-round Club and top Scan card) are the only permitted brand exceptions to [player-copy rules](season-pass.md); isolate their strings/chunks and exact allowlist entries, never exempt a whole app bundle or pass/market chunk.
+
 ## OnlyFridge Club before a new free round
 
 After explicit owner approval, show a clearly labelled promotion before **every new Free Play round, including the first and retries**. Use one transition per new-round intent: idle/menu or results -> promotion -> Continue -> start. Re-rendering, double clicks, pausing/resuming, background/foreground and returning from an external link must not repeat the promotion or start duplicate rounds. Keep tutorial instruction separate from advertisements.
@@ -53,6 +55,12 @@ Keep the upstream URL fixed. Use a bounded timeout (the reference uses four seco
 Cache successful and failed attempts for 60 seconds per warm server instance; share an in-flight refresh among concurrent callers. A failed refresh returns an empty list, not an old placement. Filter expired records on every cached response. Separate instances do not share this memory cache: do not claim a global one-request-per-minute limit.
 
 Set CDN freshness to the snapshot's **remaining** lifetime, for example `public, max-age=0, s-maxage=<remaining whole seconds>, must-revalidate`; never restart a full minute at each layer. Invalid/future/exhausted snapshot times have zero freshness. Unexpected adapter errors return an empty snapshot with `no-store`, without infrastructure details. Use `application/json` and `nosniff`; restrict CORS to the game's intended origins when needed. Client/native caching must respect the upstream snapshot time and back off failures without polling. Recheck each placement's expiry on render, foreground, timer expiry and click.
+
+## Bundled APK native feed adapter
+
+A bundled APK has no same-origin application server. Implement a narrow native sponsor method backed by the fixed `https://scan.devfridge.cool/api/feed/boosted` upstream, or a fixed game-owned proxy if one actually exists. Never pass an arbitrary URL from JavaScript. Keep the HTTPS host/path fixed, reject redirects, omit credentials, require JSON, cap declared and streamed bytes, and use bounded connect/read deadlines. Coalesce callers and cache both success and failure for sixty seconds per process; drop expired records from each response. Produce only the sanitized public sponsor fields above. A failed/empty feed returns YOUR AD HERE; network state never blocks Free Play.
+
+The same mint/name/symbol/logo/link validation, 12-item limit, snapshot expiry and stable once-per-visit draw apply in native and browser adapters. Check bridge origin/frame/document generation and lifecycle. Never grant the WebView arbitrary network or intent access to make a logo work. External card clicks pause play, open the phone browser only from an explicit user action, and never auto-resume. Verify native size/time/redirect limits with local fixtures as well as browser mocks.
 
 ## Validation and destination boundaries
 

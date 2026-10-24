@@ -1,8 +1,14 @@
-# SDK, exact amounts and access
+# Season Pass, optional SDK reads and exact amounts
 
 Published SDK v1.0 reviewed 2026-09-22: https://sdk.devfridge.cool/sdk/devfridge-sdk.js . SHA-256: `cad31b18ff0a9adc32241d341d37f9920f492ab63a321fea266d01b26966dc07`. Re-fetch/review before vendoring. A changed hash is a review signal, not permission to blindly replace an integrity check.
 
-## Actual API
+## Default: direct on-chain Season Pass
+
+Use [the Season Pass flow](season-pass.md): build the existing program instruction in-app and evaluate verified accounts per deposit with [season-pass.mjs](../assets/season-pass.mjs). Keep [timelock-gate.mjs](../assets/timelock-gate.mjs) unchanged for evidence shape/freshness (`maxAgeSeconds: 90`, `aggregation: 'single'`). A pass qualifies by raw BigInt amount and original duration with 3600-second tolerance; one qualifying account is necessary. Connect/authenticate the wallet separately. RPC failures mean unavailable, not a fabricated inactive balance or admission.
+
+The SDK and Scan endpoint below remain **optional read paths**, for an explicitly chosen browser prototype or compatible legacy integration. They do not create the pass, verify raw account ownership/PDA/vault contents, or replace authoritative checks. Preserve original timestamps and disclose caching. A read-only SDK is not a wallet transaction API.
+
+## Optional SDK API
 
 Load the script once and use `globalThis.DevFridgeSDK`. No official npm package is established by these sources.
 
@@ -13,7 +19,6 @@ const fridge = new DevFridgeSDK({
   cacheTTL: 30_000,
 });
 const status = await fridge.checkSubscription(verifiedWallet);
-const lockUrl = fridge.getLockUrl(30);
 const scanUrl = fridge.getScanUrl();
 const badgeUrl = fridge.getBadgeUrl({ theme: 'dark', style: 'full' });
 ```
@@ -29,9 +34,11 @@ Current implementation details:
 - `cacheTTL: 0` falls back to 60,000ms. Poll errors are logged, not sent as inactive callbacks. Implement explicit timeout/error states and freshness deadlines.
 - Returned `wallet` echoes the argument; it is not ownership proof. Validate every lock's depositor/mint.
 
-## Exact active-lock policy
+The SDK's `checkSubscription` plan names can label Season Pass tiers, but its summed amounts and whole-day flooring do **not** implement the default per-deposit rule. Do not use its boolean to grant that entitlement. `getLockUrl()` is an **optional / legacy** external handoff only, never the default activation path.
 
-For any-active/sub-day or large-amount access, use the documented endpoint behind the SDK with `assets/timelock-gate.mjs`. Do not modify shared SDK semantics for one game.
+## Optional API evidence and legacy exact policy
+
+For an explicitly selected legacy any-active/sub-day or large-amount policy, the documented endpoint can feed the unchanged evidence helper. For new Season Pass tiers prefer current on-chain account reads. Do not modify shared SDK semantics for one game, silently sum tier amounts, or replace a shipped game's policy without the owner's decision.
 
 `GET https://scan.devfridge.cool/api/sdk/check?wallet=<base58>&mint=<base58>` supports CORS. Response: `wallet`, `mint`, `ts` (Unix seconds), `locks`, `activeLocks`, `bestLock`, `daysRemaining`. Lock fields: `address`, `depositor`, `mint`, `amount` (raw decimal string), `createdAt`, `unlockAt` (Unix seconds), `lockId`.
 

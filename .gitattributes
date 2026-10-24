@@ -1,0 +1,8 @@
+# Keep the reviewed skill and public copies byte-identical on every checkout.
+skills/devfridge-game-builder/** text eol=lf
+scan/public/world/skill/downloads/devfridge-game-builder/** text eol=lf
+scan/public/world/skill/downloads/manifest.json text eol=lf
+scan/public/world/skill/downloads/*.zip -text
+scan/public/world/skill/downloads/*.skill -text
+scripts/package-game-skill.py text eol=lf
+scan/tests/game-builder-skill.test.cjs text eol=lf
