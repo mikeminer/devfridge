@@ -106,3 +106,7 @@ Use [the official mock-wallet setup](https://docs.solanamobile.com/get-started/d
 - Modified amount/recipient/network/memo, failed transaction and repeated receipt; local one-use behavior and the separately claimed server-wide guarantee.
 
 Run the actual release APK with the actual Seeker wallet before reporting that combination verified. Record device, wallet/SDK versions, cluster and tested outcomes. Missing credentials, required user signatures or unapproved real spending block only those dependent actions; continue mocks, implementation, packaging and documentation within the existing authorization.
+
+## Private provider transport
+
+For a paid RPC, use the [deployable fixed-upstream proxy](rpc-proxy.md). Its server-only key, origin policy and quotas do not authenticate a player or grant a paid run. Keep wallet/native intent validation and one-use receipt recovery intact. A rejected or timed-out proxy request must never authorize access or automatically retry signing.

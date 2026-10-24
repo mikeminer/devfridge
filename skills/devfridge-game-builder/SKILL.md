@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with an on-chain Season Pass. Use for wallet and optional in-game market integration, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.7.4"
+  version: "1.7.5"
   sources-reviewed: "2026-10-24"
 ---
 # DevFridge Game Builder
@@ -54,11 +54,17 @@ For either approved Free Play placement, read [free-play promotions and sponsors
 
 Read [Three.js and mobile delivery](references/game-delivery.md). Prefer TypeScript and the existing build system; Vite is a reasonable new-project default. Separate simulation, renderer, input, audio, wallet/access and persistence. Build a complete small loop with start, play, win/loss and restart before optional economy features.
 
+Follow [incremental stages and checkpoints](references/incremental-build.md): one working loop first, then one bounded improvement and its acceptance check at a time. Save a verified, secret-checked source snapshot plus actual test results and the exact next action at every stage using [checkpoint.py](assets/checkpoints/checkpoint.py). Recover by comparing against current work; never overwrite newer changes. Continue through the full requested scope. Checkpoints make interruptions recoverable; they cannot guarantee uninterrupted execution.
+
 Load the relevant [vendored gamedev skills](references/gamedev-skills.md); DevFridge's wallet, access, Store and honesty rules win on conflicts. Route production work to [3D assets and characters](references/3d-assets-and-characters.md), [logo and store art](references/logo-and-store-art.md), [sound effects](references/sound-prompts.md) and [music briefs](references/music-prompts.md). The horror examples are examples, not the style or content of every game.
 
 Read [visual realism](references/visual-realism.md) and make a finished visual pass: detailed models with convincing silhouettes, realistic PBR textures, environment reflections, soft contact shadows and consistent scale. Prefer material realism by default, including for playful meme characters; respect a developer’s explicit alternate style. Placeholder cubes are for blockout, not finished art. Budget and test the result on mobile.
 
 Deliver appropriate touch controls and, for browser desktop, equivalent keyboard/mouse controls; responsive camera/canvas, bounded GPU cost, GLB loading/fallbacks, audio recovery after screen lock and dialogs that do not cover active play. Pin tested dependencies. For Seeker, follow the selected bundled/hosted architecture, keep RPC secrets on the server and native bridge operations narrowly scoped. Use user-owned/licensed art; public access to World's site is not a licence to copy its characters.
+
+Use the [deployable RPC proxy](references/rpc-proxy.md) for a private paid provider: fixed server-only upstream, scoped methods/programs, limits and safe errors. Only the owned proxy URL belongs in the game/APK. Origin rules are not authentication and a shared client secret is not protection; deploy with HTTPS, real edge controls and provider budgets. Verify reads, wallet simulation/submission compatibility and unknown-outcome recovery without spending funds as a test.
+
+Generate or update the [app landing, privacy and terms pages](references/public-site.md) from the app's actual data/payment practices and publisher details. Reuse the real owned domain and support contact. Separate public HTTPS privacy/terms URLs and wallet identity are release prerequisites. A bundled-only app gets a support site, not an inferred web game or Game Room opt-in. Missing facts remain visibly draft; do not invent them or put credentials in public pages.
 
 Practice mode must be visibly distinct from verified/ranked access. Browser-only gating cannot protect downloaded code or prove scores. Protect server features with server-side wallet and lock verification. Read [competitive modes](references/competition.md) when rankings, multiplayer, registration or rewards are requested.
 
@@ -68,9 +74,17 @@ Test meaningful gate boundaries, expired/insufficient locks, stale/error evidenc
 
 Run type checks, build and relevant tests. Never sign a real lock, buy tokens, submit paid listings, deploy a contract or approve spending just to demonstrate the game. Simulations/fixtures do not establish a successful mainnet transaction. Deployment follows the user's actual authorization and hosting scope; this skill grants no additional permission.
 
+Before **every game release**, run [the automated performance and capture workflow](references/performance-and-capture.md) on the exact candidate: representative real gameplay, render-committed frame evidence and at least 50 FPS in every complete measured one-second window after explicit warm-up. A failed, stale, missing or invalid sample blocks release. The 50 FPS floor is this skill's release policy, not a Solana Store requirement. For APKs, require physical Seeker performance evidence and the completed device checklist; desktop/emulator results do not substitute. Keep development moving while missing hardware/evidence blocks publication.
+
+When Store materials are requested, automate screenshots through the same bounded scenario runner, waiting for actual visible action/state (for example, enemies present), never a guessed sleep or fabricated scene. Keep raw screenshots, add accurate caption bands using the compositor and validate count, dimensions, aspect ratio and size. Capture all advertised modes from the submitted build; Store acceptance and featuring remain separate decisions. Browser-only performance testing does not require Store artwork.
+
 Apply [release pitfalls and acceptance checks](references/release-pitfalls.md): adaptive icons, protected signing/RPC credentials, audio lifecycle, chosen locale, measured quality governor, permitted content settings, genuine screenshots and complete pending recovery. Run `node --test assets/*.test.mjs` for the skill helpers; generated games also need their own native validators, transaction simulations and device checks. Scan the release folder and archive with [the secret checker](assets/check-no-secrets.py). Deliver the [Store listing template](assets/templates/store-listing.md), [asset provenance](assets/templates/ASSETS_LICENSES.md) and dated build evidence where relevant; passing helper tests is not a completed game release.
 
+For changes to this toolkit also run `node --test assets/rpc-proxy/server.test.mjs assets/release-capture/release-capture.test.mjs`, `python -B assets/public-site/site_test.py`, `python -B assets/checkpoints/checkpoint_test.py` and `python -B assets/release-delivery/release_delivery_test.py`. The separate capture composition smoke requires Pillow and an approved local font; follow its reference. These synthetic/local tests do not contact a paid provider or certify a real APK.
+
 Deliver code, configuration instructions and recorded test results/limitations, plus the chosen web preview and/or signed APK with checksum, package, version and signing-certificate fingerprint. If publishing is requested, finish the applicable repository/deploy or Store submission workflow within the user's authorization; honor any explicit request to wait for final approval. Verify the real URL or portal status. Uploaded, submitted for review and live in the Store are distinct outcomes. Include source links and review dates for chain-specific claims; consult [sources and update policy](references/sources.md) when APIs or docs disagree.
+
+Use [repeatable updates and delivery](references/release-updates.md): increment versions, preserve package/signing identity, pass candidate-bound release preflight, then use the current dApp Store publishing CLI only within authorized submission scope. Automatically route each explicitly selected deliverable **over 25,000,000 bytes** to the configured private Drive destination; scan first, resume/reconcile safely and verify remote metadata. Smaller files remain normal deliverables. This threshold is a delivery policy, not a Store upload limit. If Drive authorization/destination is missing, prepare locally and report delivery pending; never claim an upload happened. Do not upload keys, environment files, session data or private checkpoints. Drive delivery does not publish a Store release or replace its APK upload.
 
 ## Guide a hackathon submission
 

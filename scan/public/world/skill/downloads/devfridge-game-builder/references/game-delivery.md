@@ -21,3 +21,7 @@ Use the pure [quality governor](../assets/quality-governor.mjs) with the game's 
 Use the approved logo as a dimensioned WebP/PNG `<picture>` in the menu `<h1>`, with the game name as alt. All UI/HUD/errors/disclosures/lore/ads/wallet identity and store text follow the chosen locales; test real dictionaries and Android resource filtering, not country flags. For blood/dismemberment games, persist Full / Reduced / Off in title and pause, default Reduced in Store builds; Off removes gore visuals and SFX, Reduced removes dismemberment and softens wounds. Do not add gore to unrelated games.
 
 Use deterministic capture hooks to advance/freeze the real simulation at a representative moment. Capture native-resolution frames with safe HUD areas, without development labels or unrelated wallets. Run the [release-pitfalls checks](release-pitfalls.md) before packaging.
+
+## Stage and release gates
+
+Apply [incremental build checkpoints](incremental-build.md) after each accepted change. Before every release run [representative real-gameplay measurement](performance-and-capture.md); every complete measured one-second window must reach 50 FPS after warmup. This authored release floor is separate from the adaptive quality governor and from Store policy. Record actual hardware/settings and do not substitute a desktop run for physical Seeker evidence.
