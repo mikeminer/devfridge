@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "factsReviewed": false,
+  "appName": "Your game",
+  "publisherName": "REPLACE with the actual publisher",
+  "description": "REPLACE with the actual game, supported devices and access modes.",
+  "supportEmail": "support@example.com",
+  "origin": "https://example.com",
+  "updatedAt": "2026-10-24",
+  "language": "en",
+  "platform": "seeker-bundled",
+  "playUrl": null,
+  "downloadUrl": null,
+  "privacy": {
+    "collection": "REPLACE with actual processing: wallet addresses, public chain data, RPC requests and proxy/server IP logs, account or score data. Say explicitly if a category is not collected.",
+    "localStorage": "REPLACE with actual local saves, preferences, wallet authorization and pending-receipt storage, and how to clear them safely.",
+    "providers": "REPLACE with actual RPC, hosting, analytics, advertising and wallet providers, purposes, disclosures and external-link behavior. Include only the Free Play placements selected by the owner.",
+    "retention": "REPLACE with actual retention periods, deletion process and public blockchain deletion limits.",
+    "rights": "REPLACE with applicable privacy rights and how to contact the responsible publisher.",
+    "children": "REPLACE with the intended audience and actual age/data practices. Do not invent an age rating."
+  },
+  "terms": {
+    "service": "REPLACE with the game and publisher identity, platforms and real functionality.",
+    "access": "REPLACE with the actual free modes, paid rounds or Season Pass terms, availability and suspension rules.",
+    "payments": "REPLACE with exact amounts/durations, fees, recipient, refund policy and transaction recovery. Describe the Fridge 2% fee and route constraints only if that integration is used. Do not promise profits or automatic refunds.",
+    "conduct": "REPLACE with the rules for player behavior, cheating and user content where applicable.",
+    "rights": "REPLACE with actual content licences and permitted use.",
+    "liability": "REPLACE with applicable responsibilities and limitations, without overriding mandatory consumer rights.",
+    "law": "REPLACE with the applicable jurisdiction and dispute rules after confirming the publisher's actual circumstances."
+  }
+}

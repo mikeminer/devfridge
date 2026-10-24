@@ -19,6 +19,7 @@ SOURCE = ROOT / 'skills' / NAME
 DEST = ROOT / 'scan/public/world/skill/downloads'
 TEXT_SUFFIXES = {'.md', '.yaml', '.mjs', '.py', '.json', '.txt'}
 BARE_NAMES = {'LICENSE', 'NOTICE'}
+TEMPLATE_PATHS = {'assets/rpc-proxy/Dockerfile'}
 
 
 def digest(data):
@@ -51,7 +52,7 @@ def build(source=SOURCE, dest=DEST):
     if len({name.lower() for name in names}) != len(names):
         raise ValueError('Case-colliding package paths')
     for path in files:
-        if path.suffix not in TEXT_SUFFIXES and path.name not in BARE_NAMES:
+        if path.suffix not in TEXT_SUFFIXES and path.name not in BARE_NAMES and path.relative_to(source).as_posix() not in TEMPLATE_PATHS:
             raise ValueError('Unexpected package file: ' + path.relative_to(source).as_posix())
 
     for document in [source / 'SKILL.md', *sorted((source / 'references').glob('*.md'))]:

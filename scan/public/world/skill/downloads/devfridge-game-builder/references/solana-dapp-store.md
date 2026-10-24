@@ -104,3 +104,7 @@ Use `apk/` for the signed APK, `SHA256SUMS` and `CERT-FINGERPRINT.txt`; root `st
 Construct `solanadappstore://details?id=<actual-application-id>` from the verified package, never from another game's example or untrusted caller input. Open only after the player's explicit action; handle a missing Store app or failed intent by opening this game's fixed, publicly reachable **HTTPS download/info page**. That fallback is an app-owned delivery choice, not an assumed official HTTPS Store URL. Do not install an APK automatically. On web, offer both the Store link and usable HTTPS fallback. [Official deep-link scheme and Android package visibility](https://docs.solanamobile.com/dapp-store/link-to-dapp-listing-page)
 
 Before delivery, test the Store intent on Seeker, fallback without a handler, correct package destination and return to the game. Preserve the live app's version and pending submission state when only preparing future materials.
+
+## v1.7.5 update toolkit
+
+Use [generated landing/privacy/terms pages](public-site.md), [automated gameplay capture and the 50 FPS release gate](performance-and-capture.md), and [same-key update preflight, publishing CLI and private Drive delivery](release-updates.md). Preflight binds version/certificate and physical Seeker evidence to the exact candidate, while the broader Store checklist still applies. The automatic Drive route is for selected delivery files over 25,000,000 bytes; it is not a Store size restriction or a substitute for submission.

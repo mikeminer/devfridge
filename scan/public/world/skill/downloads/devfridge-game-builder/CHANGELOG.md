@@ -1,5 +1,18 @@
 # DevFridge Game Builder — Changelog
 
+## 1.7.5 — 2026-10-24
+
+Adds six executable production workflows while preserving the 1.7.4 platform/architecture choices, Seeker Connect and MWA, per-deposit Season Pass, optional market, independent Free Play placements, web-only Game Room, asset/audio tools, exact legacy evaluator and vendored licences.
+
+- **Private RPC proxy:** deployable Node server with a fixed server-only upstream, bounded/scoped RPC methods, origin/native policy, quotas, concurrency/time/byte limits and sanitized errors. HTTPS/edge configuration and provider budgets are still necessary. No private provider key belongs in an APK.
+- **Public app pages:** generates a responsive landing page plus separate privacy and terms pages from actual reviewed app/publisher facts. Draft/noindex output stays distinct from release copy. Escaped prose, safe URLs, placeholder/secret checks and no-overwrite output; a bundled-only app does not become a web game.
+- **Automatic performance gate:** records committed render frames during real input-driven gameplay and blocks release below 50 FPS in any complete measured one-second window after warmup. Evidence is bound to the candidate, settings, scenario and freshness. APK release additionally requires physical Seeker/thermal/checklist evidence. Helper fixtures do not certify a real game.
+- **Incremental checkpoints:** first a working loop, then small tested improvements with an immutable secret-checked source snapshot, checksums, actual check results and exact next action. Recovery extracts only to a new directory. No automatic Git staging/reset or promise that interruptions cannot happen.
+- **Store screenshot automation:** bounded game-state predicates wait for actual ready scenes; retains raw captures, adds caption bands with approved fonts and validates preview count/aspect/dimensions/weight. Captions never fabricate gameplay; final visual review remains required.
+- **Updates and delivery:** candidate inspection and preflight enforce version advancement, package/certificate continuity and fresh passing performance evidence. Documents the current dApp Store CLI separately from the development CLI. Explicit deliverables over 25,000,000 bytes automatically route to an authorized private Drive folder using resumable, idempotent uploads and checksum/permission checks; keys, environment/session state and private checkpoints are excluded. Drive delivery and Store publication remain distinct.
+
+Also removes an outdated discovery fallback that proposed external locking by default; direct in-app Season Pass activation remains the 1.7.4 default and explicitly selected legacy flows remain supported. The 50 FPS and 25 MB values are workflow policies, not Store requirements. Local synthetic tests exercise these helpers; no existing game, real wallet transaction, Drive artifact or Store submission was altered to implement this release.
+
 ## 1.7.4 — 2026-10-24
 
 Prepared from the exact public v1.7.3 package, applying the supplied Street Meat lessons and companion changelog. Game names, quantities, package IDs and horror styling in worked examples are not defaults. This package updates the skill and reusable tools; it does not publish a game, deploy the site or execute financial transactions.

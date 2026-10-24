@@ -1,0 +1,11 @@
+{
+  "stage": "01-playable-loop",
+  "summary": "Record what actually works: start, movement, win/loss and restart.",
+  "nextAction": "Name one small next improvement and its acceptance check.",
+  "decisions": ["Copy the confirmed platform, architecture and applicable opt-in decisions from the brief."],
+  "blockers": [],
+  "checks": [
+    {"command": "REPLACE with the actual build/test command", "status": "skipped", "result": "Example only; no check has run."}
+  ],
+  "files": ["src/main.ts", "package.json"]
+}

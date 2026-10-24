@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "reviewedAt": "2026-10-24",
-  "bytes": 311976,
-  "sha256": "e73d6a85051c2edd1f9524655bfe8e41cce243a17c4dc2f110657f84ab14bf9b",
+  "bytes": 417335,
+  "sha256": "01ffc6e75454d9241323901801926620eead5d346edfd1a2cdd2caf837153abc",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -22,6 +22,18 @@
       "sha256": "ec136d53f25633b3552d178980298eb7cbb0823b3b719ea68ec76f54665f84d4"
     },
     {
+      "path": "assets/checkpoints/checkpoint.example.json",
+      "sha256": "705e9d7e3ab07aa01bf1a277b76e7a3581d158f3af539c9a397765d00b24b8b6"
+    },
+    {
+      "path": "assets/checkpoints/checkpoint.py",
+      "sha256": "20e4faa13c0b8c13e77e5ec8258c78a2489a4a0a07d2e79fb823c99208cc08d4"
+    },
+    {
+      "path": "assets/checkpoints/checkpoint_test.py",
+      "sha256": "d85fb079a278bbbd31be4de8496359e892695cfd276a821545b1a6d6fdb62254"
+    },
+    {
       "path": "assets/launcher-icon.test.mjs",
       "sha256": "66c6a6cbde205df1a4236e26bd87bb027527d75690fef2f94799c4e04c84e2c9"
     },
@@ -30,12 +42,112 @@
       "sha256": "893b17d1715e2a20602dd69e0d5e98af5ed96e9d3834745131cf343def01d597"
     },
     {
+      "path": "assets/public-site/generate-site.py",
+      "sha256": "c7bcf20730e072672d976e30e6c407a240e0c826fcbc288686703503ba81906c"
+    },
+    {
+      "path": "assets/public-site/site.example.json",
+      "sha256": "8a835dd69059ef1a7a99a9ec2b00a744b1ea75a85077206211c12964ff872547"
+    },
+    {
+      "path": "assets/public-site/site_test.py",
+      "sha256": "d3070aaaab06560884855c409f59642b225fc6469d2a9bb52024757d1aa862b2"
+    },
+    {
       "path": "assets/quality-governor.mjs",
       "sha256": "326eee0e7c22a8da1a4108e72e3127107ef594f852ecb1587e7b559b6c0e0ada"
     },
     {
       "path": "assets/quality-governor.test.mjs",
       "sha256": "d4c000d7d881a2bddd98d0c59ea308198afc794ded3fb75aa9e4514572581d8b"
+    },
+    {
+      "path": "assets/release-capture/adb-capture.mjs",
+      "sha256": "0e5ef112d086494dc0bfe4b54ce2abf18ffac6262b816463cd6a8154229b3c48"
+    },
+    {
+      "path": "assets/release-capture/capture-release.mjs",
+      "sha256": "f6173748aa499aa11868561d3972b35d3924e62f7119b6aaf9984d88b936daa1"
+    },
+    {
+      "path": "assets/release-capture/compose-smoke.mjs",
+      "sha256": "5d0687778faba9f13cf3806636616ed4109ad0d7dbead1c60064bde1adadc897"
+    },
+    {
+      "path": "assets/release-capture/frame-recorder.mjs",
+      "sha256": "fc1c2b1759d3b7294a903b85ab51b89536078d588cb35b73f8a06b67d5547770"
+    },
+    {
+      "path": "assets/release-capture/performance-gate.mjs",
+      "sha256": "6aad58298c2996f059c18cea607c6d63b412662811a4eb6da88f77806bb34d0a"
+    },
+    {
+      "path": "assets/release-capture/profile.example.json",
+      "sha256": "fe84e8d3c4726597fd1deb1a1a51ae431b4fd4141f70182f0193b148a4aa2e4a"
+    },
+    {
+      "path": "assets/release-capture/release-capture.test.mjs",
+      "sha256": "db921bc9078954faba0dc69aa4287eee1017be2d9fdb9bf1dc5f0baab33332e1"
+    },
+    {
+      "path": "assets/release-capture/scenario-runner.mjs",
+      "sha256": "65c48cec483d3f98667a95f1c36f05e4320b7f2359e8a9e53f63b95f8095096b"
+    },
+    {
+      "path": "assets/release-delivery/drive_delivery.py",
+      "sha256": "1bb5a6f83742ef5d96982bf6ed7be58c978cd0f33a491a03d92ebb3fb0ff78f9"
+    },
+    {
+      "path": "assets/release-delivery/manifest.example.json",
+      "sha256": "90b0abbd410f39f640a2700760a19089d4cd998d771ccd73c18c32d7a243643b"
+    },
+    {
+      "path": "assets/release-delivery/preflight.py",
+      "sha256": "75df572f279d038dfc4c94797790c13f02bef0e37da31aeecbac211536aaa6ac"
+    },
+    {
+      "path": "assets/release-delivery/release_delivery_test.py",
+      "sha256": "c59096bd19c36d790905e51505ba24cdf971ebdbbd72b73565650e944a52d7cc"
+    },
+    {
+      "path": "assets/rpc-proxy/Dockerfile",
+      "sha256": "6a3237271aa6819ab9bc4c613d8e0ff653209106b6218f0dac42bdbfaace5e7f"
+    },
+    {
+      "path": "assets/rpc-proxy/dockerignore.txt",
+      "sha256": "ed97683ac147ebd341e4549c6a537039882b6e7e3086b1a941fa4d5d449e3190"
+    },
+    {
+      "path": "assets/rpc-proxy/env.example.txt",
+      "sha256": "9408e45a19a5591bcb40310e8d07964aeea5ba656d592df08eb2ef2fd20fda51"
+    },
+    {
+      "path": "assets/rpc-proxy/gitignore.txt",
+      "sha256": "8cb362932f27990fd925040d9b37faa5017494cc53d0ccf0387e2e8198039419"
+    },
+    {
+      "path": "assets/rpc-proxy/node-version.txt",
+      "sha256": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce"
+    },
+    {
+      "path": "assets/rpc-proxy/package.json",
+      "sha256": "e68827831de108a9a2dc92e653a179a4a3641636c56edf6b9c8973857d73c482"
+    },
+    {
+      "path": "assets/rpc-proxy/policy.mjs",
+      "sha256": "fb81df440f6c7c5abaa1eefeb7c9f690e5e8cc3eece9abd31fe12dacc4ea4752"
+    },
+    {
+      "path": "assets/rpc-proxy/README.md",
+      "sha256": "4fb0d0e5cccb6a7bf0a5d6559b72ce497d12575ffab650c08db462f817860f55"
+    },
+    {
+      "path": "assets/rpc-proxy/server.mjs",
+      "sha256": "cb21fdf12556b869145e1661fe63a77e93fe830a40859fa3cc57edc311b7b71f"
+    },
+    {
+      "path": "assets/rpc-proxy/server.test.mjs",
+      "sha256": "5562b1545265ceb38c087eb498a43c860772023db470e15427cff7f8792b0dff"
     },
     {
       "path": "assets/season-pass.mjs",
@@ -79,7 +191,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "68031c20da1cc1096aef9a2603bdf30fb142c414d1315799410c445d91d7afa4"
+      "sha256": "baa22c324fe41aabf635c88bc58ce6c488115adf72be14c343377a7a8112715a"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -91,7 +203,7 @@
     },
     {
       "path": "references/discovery.md",
-      "sha256": "6050e2396bbff4ecb975aa67ba122c4c2b8c0a6ef48efb464f8ec015d7f3587b"
+      "sha256": "3fc04969d94e171ee8a8ec54263df587a85b20af5b5aac7420afea5fa58b0d52"
     },
     {
       "path": "references/ecosystem.md",
@@ -103,7 +215,7 @@
     },
     {
       "path": "references/game-delivery.md",
-      "sha256": "c944f22cc2633f644883adec1b216faeca8bdba0db635a80eb49c203e8be2d74"
+      "sha256": "db7eb3e7ea8ace90dcc629ea49da6bdd46fd76ea019c4899afbc8e125c8acf2b"
     },
     {
       "path": "references/game-room.md",
@@ -122,12 +234,20 @@
       "sha256": "316f8bfeb3fa7f222bfa430dca96b9e33774907eaa02110e1019a3a630bf2795"
     },
     {
+      "path": "references/incremental-build.md",
+      "sha256": "81c03d4557a16417ab878d05b3c5220abbe7070f0f520d228df4cbdc5a13de49"
+    },
+    {
       "path": "references/logo-and-store-art.md",
-      "sha256": "21672cb477f2fb13f690cfe27e526b5204c6104bcb13af991a6c2855c107f45f"
+      "sha256": "44f9517eef80db1f338b24a2919684706add10a0b756e7748d507449d005c8a1"
     },
     {
       "path": "references/music-prompts.md",
       "sha256": "431462a09a04efddeb500a66d8dc98669c19666ff009a1f7331c8c668bca224f"
+    },
+    {
+      "path": "references/performance-and-capture.md",
+      "sha256": "b1e62254058ae6c025d30a232e579d841985cfce6fc08e3998ba3e4fc08a4cd9"
     },
     {
       "path": "references/phantom.md",
@@ -138,12 +258,24 @@
       "sha256": "a017561233378d1bbf131208e0f9009142e0559e8ca556630940a13fedd741fc"
     },
     {
+      "path": "references/public-site.md",
+      "sha256": "6d173513c23bbd2e99ab4d3d242766bf106ef404ad3d2e554f864ff530ed7736"
+    },
+    {
       "path": "references/release-pitfalls.md",
-      "sha256": "608899dd4d4e6d55d05cd27205b5ae5cc5715cc17cbb43f39d11a07bca796eea"
+      "sha256": "2d88670c5708b06c7a8ccbfa646356440806a82fde1de8159fc19aed95c8a212"
+    },
+    {
+      "path": "references/release-updates.md",
+      "sha256": "9b77c941e2cdb2e3ae9ba763f95abd0ad4b85d97e0e745105d5302520fac16fa"
     },
     {
       "path": "references/retention-and-economics.md",
       "sha256": "bafd06d4dd718895166754d563d41fb1986671d86a0019a1d64233911bd0e9cc"
+    },
+    {
+      "path": "references/rpc-proxy.md",
+      "sha256": "5f21ab361b188527e5b06d1e5cfed67049caad0b644234a098a471bfeb16f1af"
     },
     {
       "path": "references/sdk-access.md",
@@ -155,15 +287,15 @@
     },
     {
       "path": "references/seeker-android.md",
-      "sha256": "25c9140a71a2c489c345298f5d56741b96ce6b565d44b8bb56372aa0f1201556"
+      "sha256": "58c8871f089d0cbb3be00828de9fe11359b1cc762ac02a640e2e3d2fc3c26db9"
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "e3a95c0ffa4c0efb56f45ec05da336d03c547deb5f54a5b47ae626807ecf5983"
+      "sha256": "77e17810a5078e810d860e5ef06d0a3233d9d07391a22fb73f9972e86e78ecbe"
     },
     {
       "path": "references/solana-dapp-store.md",
-      "sha256": "a39ff5d7cdbbe73f66af1a6843470d1789d06f6f7f56c81f94dfa28d0a912a68"
+      "sha256": "34333e11f5a5710c03095d07b23021c18be1b88900a7d540f0c7b9f3b190cae3"
     },
     {
       "path": "references/sound-prompts.md",
@@ -171,7 +303,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "637b23b35e619ae1e9186f54198281cc40834e553766de90af7af8726ad9860f"
+      "sha256": "da9878e4bb34dc72c5d21bbb07d8c48b2d96caf3c1d5da76421285468ff81ed7"
     },
     {
       "path": "references/visual-realism.md",
@@ -179,7 +311,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "a37a5a72dadfd2866acb8586da748332a2c4252cdc46439736716ea70f93ef94"
+      "sha256": "5dda2bfa08070e3144b6c8f9d40fc952f4bdc73a81f1d2695cc1a97bc528c68f"
     },
     {
       "path": "vendor/gamedev-skills/audio-design/references/adaptive-music.md",

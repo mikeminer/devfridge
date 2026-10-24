@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = { version: '1.7.4', reviewedAt: '2026-10-24', bytes: 311976, sha256: 'e73d6a85051c2edd1f9524655bfe8e41cce243a17c4dc2f110657f84ab14bf9b' };
+const expectedRelease = {"version": "1.7.5", "reviewedAt": "2026-10-24", "bytes": 417335, "sha256": "01ffc6e75454d9241323901801926620eead5d346edfd1a2cdd2caf837153abc"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -47,7 +47,7 @@ function zipMembers(zip) {
 test('published skill contains exactly the reviewed sources, standalone files and archive members', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(output, 'manifest.json'), 'utf8'));
   for (const [key, value] of Object.entries(expectedRelease)) assert.equal(manifest[key], value, key);
-  assert.equal(manifest.files.length, 95);
+  assert.equal(manifest.files.length, 128);
   const zip = fs.readFileSync(path.join(output, `${manifest.name}.zip`));
   assert.equal(zip.length, manifest.bytes);
   assert.equal(crypto.createHash('sha256').update(zip).digest('hex'), manifest.sha256);
@@ -66,7 +66,7 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.7.4"\n'));
+  assert.ok(skill.includes('  version: "1.7.5"\n'));
   assert.ok(skill.includes('  sources-reviewed: "2026-10-24"\n'));
 });
 
@@ -105,7 +105,7 @@ test('packager reproduces the reviewed ZIP under either creator platform and rej
     assert.match(result.stderr, /Stale standalone download/);
     const fixture = path.join(temp, 'fixture');
     fs.mkdirSync(fixture);
-    fs.writeFileSync(path.join(fixture, 'SKILL.md'), '---\nname: devfridge-game-builder\nmetadata:\n  version: "1.7.4"\n  sources-reviewed: "2026-10-24"\n---\n');
+    fs.writeFileSync(path.join(fixture, 'SKILL.md'), '---\nname: devfridge-game-builder\nmetadata:\n  version: "1.7.5"\n  sources-reviewed: "2026-10-24"\n---\n');
     fs.mkdirSync(path.join(fixture, '__pycache__'));
     fs.writeFileSync(path.join(fixture, '__pycache__/module.pyc'), 'Not distributable');
     const rejectedDest = path.join(temp, 'rejected');
@@ -120,5 +120,14 @@ test('pure skill helpers run in standard Node CI without media dependencies', as
   // Launcher media/device tests remain a separate release check with Pillow.
   for (const name of ['timelock-gate', 'season-pass', 'quality-governor', 'check-player-copy']) {
     await import(`../../skills/devfridge-game-builder/assets/${name}.test.mjs`);
+  }
+  await import('../../skills/devfridge-game-builder/assets/rpc-proxy/server.test.mjs');
+  await import('../../skills/devfridge-game-builder/assets/release-capture/release-capture.test.mjs');
+});
+
+test('site, checkpoints and private delivery helpers pass their offline failure/recovery suites', () => {
+  for (const file of ['public-site/site_test.py', 'checkpoints/checkpoint_test.py', 'release-delivery/release_delivery_test.py']) {
+    const result = spawnSync(python, ['-B', path.join(source, 'assets', file)], { encoding: 'utf8', timeout: 120000, env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' } });
+    assert.equal(result.status, 0, file + ': ' + (result.stderr || result.error?.message));
   }
 });

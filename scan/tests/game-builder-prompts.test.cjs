@@ -125,7 +125,7 @@ test('Season Pass defaults leave amounts, durations, free scope and token market
   assert.match(pending, /^Optional in-app Buy <TOKEN> screen: Ask me; no new choice supplied/m);
   assert.match(pending, /keep disabled while pending/);
   assert.match(pending, /market choice is independent of platform, Game Room and both free-play ad choices/);
-  assert.match(pending, /verify each deposit using exact integer amounts, connected-wallet ownership, the correct mint and fresh on-chain expiry/);
+  assert.match(pending, /verify each deposit using exact integer amounts, original deposit duration with the documented one-hour tolerance, connected-wallet ownership, the correct mint and fresh on-chain expiry/);
   assert.match(pending, /Do not combine insufficient deposits or let an unknown RPC result grant access/);
   assert.match(pending, /calculate Best value only from their actual token amount per day/);
   assert.match(pending, /2% fee, network costs and route constraints before wallet approval/);
@@ -176,7 +176,12 @@ test('installation and generated capabilities preserve safe setup, rights and re
   assert.match(prompts.INSTALL_PROMPT, /Keep wallet authentication, token eligibility and score verification separate/);
   assert.match(prompts.INSTALL_PROMPT, /Keep simulations, physical Seeker tests, signed APK creation and Store publication status distinct/);
   assert.match(prompts.INSTALL_PROMPT, /Owner review, merge and successful deployment publish the gallery entry/);
-  for (const ref of ['season-pass', 'in-game-market', 'gamedev-skills', '3d-assets-and-characters', 'visual-realism', 'logo-and-store-art', 'sound-prompts', 'music-prompts', 'release-pitfalls']) {
+  assert.match(prompts.INSTALL_PROMPT, /every stage/);
+  assert.match(prompts.INSTALL_PROMPT, /below 50 FPS after warmup/);
+  assert.match(prompts.INSTALL_PROMPT, /Missing hardware evidence blocks release, not ongoing development/);
+  assert.match(prompts.INSTALL_PROMPT, /over 25,000,000 bytes/);
+  assert.match(prompts.INSTALL_PROMPT, /never upload keys, credentials or private checkpoints/);
+  for (const ref of ['season-pass', 'in-game-market', 'gamedev-skills', '3d-assets-and-characters', 'visual-realism', 'logo-and-store-art', 'sound-prompts', 'music-prompts', 'release-pitfalls', 'rpc-proxy', 'public-site', 'incremental-build', 'performance-and-capture', 'release-updates']) {
     assert.ok(prompts.INSTALL_PROMPT.includes(`references/${ref}.md`), ref);
   }
 });

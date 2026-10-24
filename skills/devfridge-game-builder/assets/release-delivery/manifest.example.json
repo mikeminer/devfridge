@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "root": "./release-files",
+  "artifacts": [
+    {
+      "path": "app-release.apk",
+      "sha256": "REPLACE_WITH_SHA256_OF_REVIEWED_APK",
+      "size": 0
+    }
+  ]
+}

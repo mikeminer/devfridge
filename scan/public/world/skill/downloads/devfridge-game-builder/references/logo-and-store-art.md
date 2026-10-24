@@ -46,3 +46,7 @@ The example uses Creepster lettering, cream outline, dark shadow, gradient red/g
 ## Acceptance
 
 Run icon fixture and actual-output tests; render light/dark masks; inspect a physical Seeker; validate 4–8 captioned real screenshots; open every image at 100%; check that the visible text matches the chosen locale and current build. Document unperformed device/art checks instead of claiming them complete. The toolkit is newly authored from the requested specification; unavailable private example scripts were not copied.
+
+## Automated ready-state capture
+
+Use [the performance and capture runner](performance-and-capture.md) to wait for genuine game state before each capture, retain original pixels, add caption bands and validate Store dimensions/count/size. Scenes such as enemies arriving are configured predicates, not a hardcoded zombie requirement for every game. No fixed delay or fabricated composition substitutes for submitted-build gameplay.

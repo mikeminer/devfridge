@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "captureStore": true,
+  "platform": "browser",
+  "buildId": "<EXACT_RELEASE_BUILD_ID>",
+  "url": "https://<OWNER_DOMAIN>/",
+  "viewport": {"width": 1080, "height": 1920, "deviceScaleFactor": 1},
+  "captions": {"font": "<LICENSED_FONT_PATH>", "fontLicense": "<FONT_LICENSE_PATH>", "fontApproved": false, "size": "1080x1920", "bandHeight": 240},
+  "performance": {
+    "id": "representative-worst-case", "kind": "gameplay", "worstCase": "<OWNER_CONFIRMED_HEAVIEST_SUPPORTED_SCENE_AND_SETTINGS>",
+    "warmupMs": 10000, "measurementMs": 120000, "timeoutMs": 30000,
+    "actions": [{"kind":"click","selector":"[data-action='start-free-run']","financial":false}],
+    "ready": [{"path":"phase","equals":"gameplay"},{"path":"worldReady","equals":true},{"path":"visibleChallenges","gte":1}],
+    "inputs": [
+      {"atMs":1000,"action":{"kind":"key","key":"ArrowLeft","holdMs":200,"financial":false}},
+      {"atMs":5000,"action":{"kind":"key","key":"ArrowRight","holdMs":200,"financial":false}}
+    ]
+  },
+  "stages": [
+    {"id":"gameplay","kind":"gameplay","caption":"REAL GAMEPLAY","timeoutMs":30000,"actions":[],"ready":[{"path":"phase","equals":"gameplay"},{"path":"worldReady","equals":true},{"path":"visibleChallenges","gte":1}]},
+    {"id":"progress","kind":"gameplay","caption":"MASTER THE CHALLENGE","timeoutMs":30000,"actions":[{"kind":"key","key":"ArrowLeft","holdMs":200,"financial":false}],"ready":[{"path":"phase","equals":"gameplay"},{"path":"progressVisible","equals":true}]},
+    {"id":"results","kind":"results","caption":"YOUR RUN RESULTS","timeoutMs":120000,"actions":[],"ready":[{"path":"phase","equals":"results"},{"path":"scoreVisible","equals":true}]},
+    {"id":"options","kind":"menu","caption":"MAKE IT YOURS","timeoutMs":15000,"actions":[{"kind":"click","selector":"[data-action='options']","financial":false}],"ready":[{"path":"phase","equals":"options"},{"path":"settingsVisible","equals":true}]}
+  ],
+  "exampleNote": "Replace every placeholder, selector, input schedule and readiness signal with the real game's controls. visibleChallenges is a generic example, not a zombie requirement. For Seeker use platform seeker, final package, confirmed expectedSeekerModel, real tap/swipe controls and the documented read-only native export. This is not a completed or passed capture profile."
+}
