@@ -1,13 +1,73 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.3",
-  "reviewedAt": "2026-10-23",
-  "bytes": 63367,
-  "sha256": "c05bb9054697f3b2be523516830b87a38c4a5441e7e0af6877b33f2f39d0c893",
+  "version": "1.7.4",
+  "reviewedAt": "2026-10-24",
+  "bytes": 311976,
+  "sha256": "e73d6a85051c2edd1f9524655bfe8e41cce243a17c4dc2f110657f84ab14bf9b",
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "4e8f1c7707b9cb71e4a777b4197bcafae22b220eeaa330b9c121210466d9a5de"
+      "sha256": "a6a86be326dbb70a375c2d74d566e5c7b3353085daaa803fa8c36fffe661108d"
+    },
+    {
+      "path": "assets/check-no-secrets.py",
+      "sha256": "de3c6f18d92d54263648bcb79e1feac7a4e94298f66c9101dbbb21172824292d"
+    },
+    {
+      "path": "assets/check-player-copy.mjs",
+      "sha256": "be22978623447e05e46669f26e91983c025bb464082ff6430a562737515d6d43"
+    },
+    {
+      "path": "assets/check-player-copy.test.mjs",
+      "sha256": "ec136d53f25633b3552d178980298eb7cbb0823b3b719ea68ec76f54665f84d4"
+    },
+    {
+      "path": "assets/launcher-icon.test.mjs",
+      "sha256": "66c6a6cbde205df1a4236e26bd87bb027527d75690fef2f94799c4e04c84e2c9"
+    },
+    {
+      "path": "assets/make-adaptive-icons.py",
+      "sha256": "893b17d1715e2a20602dd69e0d5e98af5ed96e9d3834745131cf343def01d597"
+    },
+    {
+      "path": "assets/quality-governor.mjs",
+      "sha256": "326eee0e7c22a8da1a4108e72e3127107ef594f852ecb1587e7b559b6c0e0ada"
+    },
+    {
+      "path": "assets/quality-governor.test.mjs",
+      "sha256": "d4c000d7d881a2bddd98d0c59ea308198afc794ded3fb75aa9e4514572581d8b"
+    },
+    {
+      "path": "assets/season-pass.mjs",
+      "sha256": "cfb8bf64831c9eb316023420b76c1e844d1a12df38a33edafff08d9b71853995"
+    },
+    {
+      "path": "assets/season-pass.test.mjs",
+      "sha256": "20a908f15915bb9aa6f7c98adc1a19c1b81c53acc14d09eb88174f293394f0a7"
+    },
+    {
+      "path": "assets/sfx-build.py",
+      "sha256": "23b14970bfca43cdf4cc3a4f88968b383666c6b54a91e59473f22980bd0f86fa"
+    },
+    {
+      "path": "assets/store-compose.py",
+      "sha256": "9b5216566fd10dd81e1238a4c131639c8f8b04dfedbc72c5d2e67a7b92f35df4"
+    },
+    {
+      "path": "assets/templates/ASSETS_LICENSES.md",
+      "sha256": "ece46cceab95cdf0e386319801ea04fba4f9953a195636b7aa6c40ffc175e52f"
+    },
+    {
+      "path": "assets/templates/music-brief.md",
+      "sha256": "ba93986a403b75a41bd1fbef5f1450d482228d8d2d4ea8f9bac407d6bf6d1f96"
+    },
+    {
+      "path": "assets/templates/sfx-manifest.example.json",
+      "sha256": "c61e355a7b36b960db3645d6391bc01824b982a011b21d36ebfd785613d015a0"
+    },
+    {
+      "path": "assets/templates/store-listing.md",
+      "sha256": "8599943f7cba2d51d080b25a341b2a612b1e9616ca3c07d49825ed513e6b04c0"
     },
     {
       "path": "assets/timelock-gate.mjs",
@@ -18,72 +78,312 @@
       "sha256": "920a27c3c778608a6d40c4b670ec06044eb63797e74c194f094be4c8961b410f"
     },
     {
+      "path": "CHANGELOG.md",
+      "sha256": "68031c20da1cc1096aef9a2603bdf30fb142c414d1315799410c445d91d7afa4"
+    },
+    {
+      "path": "references/3d-assets-and-characters.md",
+      "sha256": "28abf8ac0568e5ed46845744ad0d81d1ed6ab06b1f132380457100e985702ffc"
+    },
+    {
       "path": "references/competition.md",
-      "sha256": "83134c93e7050403b382bac5adf9debf674bcfcdb44ec440f7eb43094c84f810"
+      "sha256": "48cfbcebcc05b98021d3a38a059679c3fc1515599a7a3c9d53d2f3978559f53e"
     },
     {
       "path": "references/discovery.md",
-      "sha256": "900d9c9808f061e164c5e9985ecaf8f8903f552128723c4be6fd26dffd72e19a"
+      "sha256": "6050e2396bbff4ecb975aa67ba122c4c2b8c0a6ef48efb464f8ec015d7f3587b"
     },
     {
       "path": "references/ecosystem.md",
-      "sha256": "dae992a1d6d9e056a5eb3e6198941b54ead1cb113597f6ad3415d061bee67770"
+      "sha256": "311da1ff03c9255d18b843f40aba1504979a4a6948962bd6ee0b169a73167631"
     },
     {
       "path": "references/free-play-sponsors.md",
-      "sha256": "e993d9a878073205b8b365523e3e9b7c1fd9aeec84f19c1dbb5527c9d9354fa2"
+      "sha256": "b8e3afefcca920d3efa48011015bf528df1cc1137556b0b10cd2f373d18f2134"
     },
     {
       "path": "references/game-delivery.md",
-      "sha256": "33a4fc10deb846966be4edf9a2bc7559365afe303732977bcebdfbea11c87f46"
+      "sha256": "c944f22cc2633f644883adec1b216faeca8bdba0db635a80eb49c203e8be2d74"
     },
     {
       "path": "references/game-room.md",
-      "sha256": "8e5f12bac104ed5f16e404b7e2acff751b2e07075a551cacc443ff8287a1273c"
+      "sha256": "d5eeaa7bad438eae704bec8b7199d1cc13943142eb255d96f7741aeab958efff"
+    },
+    {
+      "path": "references/gamedev-skills.md",
+      "sha256": "c9022399183320331b390fa637ce07ef38214f331c3640d0bd1d1b48b00ac69d"
     },
     {
       "path": "references/hackathon-submission.md",
-      "sha256": "a4bf8255a32604732402a3a7ed5b89c1e199da3bbe090e19717af115a631bfc9"
+      "sha256": "45be2b8a52ad794762d69a1ad9743e97cd4dbf8da582f0f3968fe297ac88a52b"
+    },
+    {
+      "path": "references/in-game-market.md",
+      "sha256": "316f8bfeb3fa7f222bfa430dca96b9e33774907eaa02110e1019a3a630bf2795"
+    },
+    {
+      "path": "references/logo-and-store-art.md",
+      "sha256": "21672cb477f2fb13f690cfe27e526b5204c6104bcb13af991a6c2855c107f45f"
+    },
+    {
+      "path": "references/music-prompts.md",
+      "sha256": "431462a09a04efddeb500a66d8dc98669c19666ff009a1f7331c8c668bca224f"
     },
     {
       "path": "references/phantom.md",
-      "sha256": "6bbb8cce1f89ad37702473e8ef764f9c4598320b15db55f3835267cb5b962a0f"
+      "sha256": "c475b83fa42c466d0466494d9eaebc44f4a44b813fb622fe3e27bdd4931a6116"
     },
     {
       "path": "references/program-and-verification.md",
-      "sha256": "fe9187b979c703e6104593641cd16b951b52151ccb2ded6be9f5dcfb109320f5"
+      "sha256": "a017561233378d1bbf131208e0f9009142e0559e8ca556630940a13fedd741fc"
+    },
+    {
+      "path": "references/release-pitfalls.md",
+      "sha256": "608899dd4d4e6d55d05cd27205b5ae5cc5715cc17cbb43f39d11a07bca796eea"
     },
     {
       "path": "references/retention-and-economics.md",
-      "sha256": "9fa7613c7bdb4c9dbbe1b5ee4b83bc789c238ee9473ea6f83948177b2cada06d"
+      "sha256": "bafd06d4dd718895166754d563d41fb1986671d86a0019a1d64233911bd0e9cc"
     },
     {
       "path": "references/sdk-access.md",
-      "sha256": "4721b22c0be14797dc03eae82bfbf377c3e78a396e9c70892f679cc2fab16534"
+      "sha256": "0d2241b54cb0a84900f170b0f45c6fe2795bcfa0f4d26b161b65280a0d5d0ed6"
+    },
+    {
+      "path": "references/season-pass.md",
+      "sha256": "03a2b0dbf909ebd7b85cb41ff44c342f8aef8a1e978166635fbf05376d993005"
     },
     {
       "path": "references/seeker-android.md",
-      "sha256": "bc58f332cb09b3690610d0f75b63510f1e5a38192dc12037aa566f4d8383cb7e"
+      "sha256": "25c9140a71a2c489c345298f5d56741b96ce6b565d44b8bb56372aa0f1201556"
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "72378df5d3e3f3d53a00735d66d700ff43640aba322ae29ee810a43e7dfc96af"
+      "sha256": "e3a95c0ffa4c0efb56f45ec05da336d03c547deb5f54a5b47ae626807ecf5983"
     },
     {
       "path": "references/solana-dapp-store.md",
-      "sha256": "3feed8a5c985f1d2d6699bced24e59795c3772a8f5699f9924a8ab8c3943bf81"
+      "sha256": "a39ff5d7cdbbe73f66af1a6843470d1789d06f6f7f56c81f94dfa28d0a912a68"
+    },
+    {
+      "path": "references/sound-prompts.md",
+      "sha256": "df3d27a3fade3fc42c93ad3747c27010abfcde3ca42c65f329744f1a2104af46"
     },
     {
       "path": "references/sources.md",
-      "sha256": "e5c36b5395a24d30289dcde4f1b95d298257950aef200cb6fe26b01827499bcf"
+      "sha256": "637b23b35e619ae1e9186f54198281cc40834e553766de90af7af8726ad9860f"
     },
     {
       "path": "references/visual-realism.md",
-      "sha256": "e9f006aedcfbb4f717c1e6d866c8a1fedaf3d74a9f2c63c9ecc0238c5aaf6396"
+      "sha256": "60ce6dd198794b2f28e85aba2c0712a1311f0528dd6ff819553085682e22e804"
     },
     {
       "path": "SKILL.md",
-      "sha256": "39b6c55322f9ffb1e0097524e25b3c1ad4d4aeab889e0843124c4aed4c5e34f3"
+      "sha256": "a37a5a72dadfd2866acb8586da748332a2c4252cdc46439736716ea70f93ef94"
+    },
+    {
+      "path": "vendor/gamedev-skills/audio-design/references/adaptive-music.md",
+      "sha256": "1aa1a14bc163f248583f7385c27cb36aa8748014df2b1d499c77c2b0846365ba"
+    },
+    {
+      "path": "vendor/gamedev-skills/audio-design/SKILL.md",
+      "sha256": "6644943d62dc49b29e142259c54e27d0cca68f404de3f4ade58778b663f7ca02"
+    },
+    {
+      "path": "vendor/gamedev-skills/camera-systems/references/follow-and-framing.md",
+      "sha256": "7664d4ab898e183a41bfe2ded1c71c5e16704575545a711830707df60e3a88fa"
+    },
+    {
+      "path": "vendor/gamedev-skills/camera-systems/SKILL.md",
+      "sha256": "419dc9912b1ab007b17df615fc2347158255b63f93000b43b4c4ed1b5605d01e"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/agents/openai.yaml",
+      "sha256": "b5ff9e75ab8a845324d28745aa97af0a3cd4fccc56067a6494947e12e40f1990"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/assets/art-direction-brief.md",
+      "sha256": "6d5dc4f9f5fcb24300bab9ce7dbd56d5c948ba41da3cca2d3b3d235fee5fb72c"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/assets/asset-manifest.json",
+      "sha256": "6cce05638c11b80eb5c8f776cf187f479a2579f1a1729b0970b1cc8e5fab4c8e"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/references/art-direction.md",
+      "sha256": "19b2ccb827eae0c6c4cd3648ab7febb82e44706bef8515f2e8912de23dec0a5c"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/references/provenance.md",
+      "sha256": "098d3cf915cd66e8ff0ad3a639964167edf2280f9e23efbae3ea6242d5bea3db"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/references/raster-pipeline.md",
+      "sha256": "d7a5714628fd8f4b66d03e060488e353b163b811112b164af218beb2b6450a02"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/references/three-d-pipeline.md",
+      "sha256": "ee6ed7c373e15ffeb8e6b275618482f028279a8146f01b6cfe6a8411cb8a3db4"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/scripts/asset_report.py",
+      "sha256": "99f4b38f9c4fe036f97ab1d4effd7f6931b62d24a90330a5a2f5ae71e7d1a77c"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/scripts/build_preview_sheet.py",
+      "sha256": "002a550a7b5fac6d8815078a72afc249dd828c40d975b2323223fc770118c64b"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/scripts/requirements.txt",
+      "sha256": "bbced595a25debee9232fbb784d35ee4f04967d3dbc528e8c3073d3e9adbe2ca"
+    },
+    {
+      "path": "vendor/gamedev-skills/create-game-assets/SKILL.md",
+      "sha256": "36cd246a434fefe1e36feff066597a6268d9f63364bee387ee65a22f03838b5d"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-ai/references/behavior-trees.md",
+      "sha256": "eed3fdb943801a7696f2ca03a54d60fc9111a63c5c817e567516b5e2df2c04a9"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-ai/references/pathfinding.md",
+      "sha256": "75d6c8397fc5ff2fb8ac3dd74e7b4f881331f2531f40b6f8db451f14adb6534d"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-ai/SKILL.md",
+      "sha256": "5c193ac1debc8ec9ed8f44be7a05d12d817ac390e1fa82018bcae4f2ff53fbd8"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-feel/references/feedback-recipes.md",
+      "sha256": "f8cca962733b0b1f5d1db75fe966f6e13bf11015e39a04a849d6ff5c3e0e835e"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-feel/SKILL.md",
+      "sha256": "48971c7ad1fbb39069cb165f0e45f88c13776585870d69d5de8a04bbe0988e28"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-ui-ux/references/layout-and-flow.md",
+      "sha256": "961fc8c8e45a1ee5120e1deef9f6aef932ae3949e6f1ce26548b9d7616775d73"
+    },
+    {
+      "path": "vendor/gamedev-skills/game-ui-ux/SKILL.md",
+      "sha256": "54816447c4d07f9ab65782ebb7138dd0927c9cd84a3647e8806f2a86a3a094ff"
+    },
+    {
+      "path": "vendor/gamedev-skills/input-systems/references/buffering-and-accessibility.md",
+      "sha256": "dadd5fc9f7bbe88daeeb506e4e1b447267e232273a08ca32095a78f31aea0d84"
+    },
+    {
+      "path": "vendor/gamedev-skills/input-systems/SKILL.md",
+      "sha256": "638bd3c07746a09e3945e81c0b9a2ca90c75d2f8a63c0be3c285d75475790b1f"
+    },
+    {
+      "path": "vendor/gamedev-skills/level-design/references/pacing-and-flow.md",
+      "sha256": "e8e3940f585e376f353aefea009befe8199a1871f99d34d7b2340cb35cb61872"
+    },
+    {
+      "path": "vendor/gamedev-skills/level-design/SKILL.md",
+      "sha256": "9dd60fec5dc09957f7836739da96b5a2bcff2b46ecaab020f0a9ccff7463ba3a"
+    },
+    {
+      "path": "vendor/gamedev-skills/LICENSE",
+      "sha256": "6f82dcfeb95a1c0a0452180a3b16f21bf82111780018fed59d95a052b5b75f6c"
+    },
+    {
+      "path": "vendor/gamedev-skills/NOTICE",
+      "sha256": "2dcb65b1c5be24e5ba11e937f3996100f4e980d8cf8ac5b30ba1d70dae6c40f8"
+    },
+    {
+      "path": "vendor/gamedev-skills/performance-optimization/references/profiling-and-budgets.md",
+      "sha256": "e68c43d5e66ec0f2fe60e0c0121c85360144ab7da5876ce6e2e3f26a2244e284"
+    },
+    {
+      "path": "vendor/gamedev-skills/performance-optimization/SKILL.md",
+      "sha256": "ce89bd6ffe1515a70ba8fd9302f78fb82a558a423870a09cf7c6b27a7104578f"
+    },
+    {
+      "path": "vendor/gamedev-skills/physics-tuning/references/timestep-and-ccd.md",
+      "sha256": "de507b0bee47cfa3ca5d051d0c4100f99736186e26cdb9488c252d6cc8d6f9ab"
+    },
+    {
+      "path": "vendor/gamedev-skills/physics-tuning/SKILL.md",
+      "sha256": "3e0f3d9ad049e552235cb98612381c82361fff582391c4d5584438309a14c35f"
+    },
+    {
+      "path": "vendor/gamedev-skills/procedural-gen/references/dungeon-generation.md",
+      "sha256": "808451354e49b779111383827dba7c97964ce34647bbb3e33e21ae53728ca43c"
+    },
+    {
+      "path": "vendor/gamedev-skills/procedural-gen/references/noise.md",
+      "sha256": "4f4da0458cdebcd4323ee36da9e25032d5f3a52b3cf8b46177eced6cf79597ab"
+    },
+    {
+      "path": "vendor/gamedev-skills/procedural-gen/SKILL.md",
+      "sha256": "4bd422eff2c28dbb12e0edf7ef68f3e98bcbbdf4d430815ba6da2d0692630cc4"
+    },
+    {
+      "path": "vendor/gamedev-skills/prototype-fast/SKILL.md",
+      "sha256": "02491395c621833d2252f7a33a96aa11f26eb48523fea167c68272fb3c785ba1"
+    },
+    {
+      "path": "vendor/gamedev-skills/README.md",
+      "sha256": "5cdc077e5b666f1ab0a62bb1384e38118c27047f004ac95b13a5c353f46de55c"
+    },
+    {
+      "path": "vendor/gamedev-skills/router/agents/openai.yaml",
+      "sha256": "1304cad1da9611f8cf73ffb122bf7628b0fd6f0cce5a9f9072cd3fbdbe9ce128"
+    },
+    {
+      "path": "vendor/gamedev-skills/router/references/engine-detection.md",
+      "sha256": "0ab97f27f300b70617ba4c1cf522249e708a7823a211a00f52ed87fe4d86c8fa"
+    },
+    {
+      "path": "vendor/gamedev-skills/router/references/routing-table.md",
+      "sha256": "166b3cbf7eca79ba9940428250b0cdaf19e1e801ac4c2868fdbf1cbd751cf099"
+    },
+    {
+      "path": "vendor/gamedev-skills/router/SKILL.md",
+      "sha256": "940789817933aba088692baa3ffaf16e3162f1f499dc957c95ff8a19ad48603f"
+    },
+    {
+      "path": "vendor/gamedev-skills/save-systems/references/versioning-and-migration.md",
+      "sha256": "a95ee265936b5bb332934ae19a90c02c70f927adb3898e5a95ce1877abe9873c"
+    },
+    {
+      "path": "vendor/gamedev-skills/save-systems/SKILL.md",
+      "sha256": "17a7e580cdb8ee2fe654fe1b2d9ba3066c57ef1ea6a8cd9cc69141ebaea16224"
+    },
+    {
+      "path": "vendor/gamedev-skills/shader-programming/references/effects.md",
+      "sha256": "af47d6efff3741f587e8f7a5338fce251b91a1a4b7fe514742edae8b5a84f71b"
+    },
+    {
+      "path": "vendor/gamedev-skills/shader-programming/SKILL.md",
+      "sha256": "a13ed34325b8c18f0c6982edb1a5aede99497a26b9e00fc19e9ce01e566f9923"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-gltf-loading/references/loaders-and-animation.md",
+      "sha256": "733d9df9b6a9f5ef9af5826ba80bdff14f6627c123db86abae0ddb41c2ee1f4a"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-gltf-loading/SKILL.md",
+      "sha256": "6ead2c9e21cff45ebf244f16bc1b815771f95f14d6479f5aae21d4ee3702a3f6"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-materials-lighting/references/materials-lights-table.md",
+      "sha256": "b35eb1e9f194e871f9f79965f947928efa9b5626d41facac1b53fcf539113909"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-materials-lighting/SKILL.md",
+      "sha256": "51451f53c44b9bb3ee87b8f12fcc0d8c8f5b44d9426686cec4090636d7580784"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-scene-setup/references/scene-graph.md",
+      "sha256": "ab2f19b3f2425d3e6f67ba26faa6e76fd67290fff977b410feef8aaab088c82e"
+    },
+    {
+      "path": "vendor/gamedev-skills/threejs-scene-setup/SKILL.md",
+      "sha256": "bdb7f24b888cc728a05a09779502ecc339c4a4f8a9b4dee2ae380fadd95f68f0"
     }
   ]
 }

@@ -49,7 +49,12 @@ function landing() {
     assert.ok(field, label);
     React.Children.toArray(field.props.children).find(node => node.type === 'select').props.onChange({ target: { value } });
   }
-  return { render, select };
+  function input(label, value) {
+    const field = render().find(node => node.type === 'label' && React.Children.toArray(node.props.children)[0] === label);
+    assert.ok(field, label);
+    React.Children.toArray(field.props.children).find(node => node.type === 'input' || node.type === 'textarea').props.onChange({ target: { value } });
+  }
+  return { render, select, input };
 }
 
 test('unresolved platform is the first decision in installation and all six example prompts', () => {
@@ -63,6 +68,8 @@ test('unresolved platform is the first decision in installation and all six exam
   for (const example of examples) {
     assert.ok(example.props.text.startsWith(`Use $devfridge-game-builder. ${prompts.PLATFORM_PROMPT}`));
     assert.ok(example.props.text.includes(prompts.FREE_PLAY_SPONSOR_PROMPT));
+    assert.ok(example.props.text.includes(prompts.seasonPassPrompt()));
+    assert.ok(example.props.text.includes(prompts.GAME_BUILD_CAPABILITIES));
     assert.doesNotMatch(example.props.text, /Use Phantom on desktop\/mobile|Phantom desktop\/mobile and DevFridge/);
   }
 });
@@ -84,7 +91,7 @@ test('blank prompt fields defer to explicit prior owner decisions instead of res
 test('platform and independent ad selections reach the copied brief in all 36 combinations', () => {
   const page = landing();
   const initial = page.render();
-  assert.equal(initial.filter(node => node.type === 'select' && node.props.value === 'ask').length, 3);
+  assert.equal(initial.filter(node => node.type === 'select' && node.props.value === 'ask').length, 4);
   const choices = { ask: 'Ask me;', include: 'Include;', exclude: 'Do not include;' };
   for (const platform of ['ask', 'browser', 'seeker', 'both']) {
     page.select('Where should your game run?', platform);
@@ -102,7 +109,75 @@ test('platform and independent ad selections reach the copied brief in all 36 co
       assert.match(brief, /If I explicitly choose no Free Play, mark both not applicable/);
       assert.match(brief, /first run and every retry\/restart, but never on pause\/resume/);
       assert.match(brief, /during free mode only/);
+      assert.match(brief, /The top card is the only ad during a free run/);
+      assert.match(brief, /Neither integration may appear in Season Pass or paid sessions/);
+      assert.match(brief, /Optional in-app Buy <TOKEN> screen: Ask me/);
     }
+  }
+});
+
+test('Season Pass defaults leave amounts, durations, free scope and token market undecided', () => {
+  const pending = prompts.seasonPassPrompt('  ', '\n');
+  assert.match(pending, /Missing values supply no new decision: reuse my explicit prior choices; otherwise ask and wait/);
+  assert.match(pending, /Do not invent token amounts, durations or a free mode/);
+  assert.match(pending, /^Season Pass tiers .*: Ask me; reuse my explicit prior tiers/m);
+  assert.match(pending, /^What stays free: Ask me; reuse my explicit prior free scope/m);
+  assert.match(pending, /^Optional in-app Buy <TOKEN> screen: Ask me; no new choice supplied/m);
+  assert.match(pending, /keep disabled while pending/);
+  assert.match(pending, /market choice is independent of platform, Game Room and both free-play ad choices/);
+  assert.match(pending, /verify each deposit using exact integer amounts, connected-wallet ownership, the correct mint and fresh on-chain expiry/);
+  assert.match(pending, /Do not combine insufficient deposits or let an unknown RPC result grant access/);
+  assert.match(pending, /calculate Best value only from their actual token amount per day/);
+  assert.match(pending, /2% fee, network costs and route constraints before wallet approval/);
+});
+
+test('Season Pass form carries exact owner tiers and free scope while market stays independent of ads', () => {
+  const page = landing();
+  const brief = () => page.render().find(node => node.type === 'textarea' && node.props['aria-label'] === 'Generated game builder prompt').props.value;
+  const tiers = 'Month: 30 days, 1000000.000001 MEMEZZO\nYear: 365 days, 5000000 MEMEZZO';
+  const free = 'Free arcade, one life per run';
+  page.input('Season Pass tiers (label, duration and exact token amount)', `  ${tiers}  `);
+  page.input('What stays free?', free);
+  page.select('Where should your game run?', 'both');
+  page.select('Where should the APK load game content?', 'hosted');
+  page.select('Include this web game in OnlyFridge Club Game Room?', 'include');
+  for (const market of ['ask', 'include', 'exclude']) {
+    page.select('Optional in-app Buy <TOKEN> screen', market);
+    for (const preRun of ['ask', 'include', 'exclude']) for (const card of ['ask', 'include', 'exclude']) {
+      page.select('OnlyFridge Club before every free run', preRun);
+      page.select('YOUR AD HERE / sponsored-token top card', card);
+      const text = brief();
+      assert.ok(text.includes(prompts.seasonPassPrompt(tiers, free, market)));
+      assert.ok(text.includes(prompts.freePlaySponsorPrompt(preRun, card)));
+      assert.ok(text.includes(prompts.GAME_BUILD_CAPABILITIES));
+      if (market === 'include') assert.match(text, /Buy <TOKEN> screen: Include; this is my explicit owner choice/);
+      if (market === 'exclude') assert.match(text, /Buy <TOKEN> screen: Do not include; this is my explicit owner choice/);
+      assert.match(text, /do not execute a real purchase as a test/);
+    }
+  }
+  page.input('Season Pass tiers (label, duration and exact token amount)', '');
+  page.input('What stays free?', '');
+  page.select('Optional in-app Buy <TOKEN> screen', 'ask');
+  assert.ok(brief().includes(prompts.seasonPassPrompt()));
+  assert.doesNotMatch(brief(), /1000000\.000001/);
+});
+
+test('installation and generated capabilities preserve safe setup, rights and release evidence', () => {
+  assert.ok(prompts.INSTALL_PROMPT.includes(prompts.seasonPassPrompt()));
+  assert.ok(prompts.INSTALL_PROMPT.includes(prompts.GAME_BUILD_CAPABILITIES));
+  assert.match(prompts.INSTALL_PROMPT, /Verify its SHA-256/);
+  assert.match(prompts.INSTALL_PROMPT, /Preserve existing customized files and ask before replacing them/);
+  assert.match(prompts.INSTALL_PROMPT, /vendor files, including licenses and notices/);
+  assert.match(prompts.INSTALL_PROMPT, /real wallet-identity domain, permanent Android package if applicable, supported UI languages and logo\/art\/audio rights/);
+  assert.match(prompts.INSTALL_PROMPT, /direct on-chain Season Pass activation and per-deposit eligibility/);
+  assert.match(prompts.INSTALL_PROMPT, /fresh quote and all costs, simulate and validate the exact transaction/);
+  assert.match(prompts.INSTALL_PROMPT, /recover unknown outcomes without an automatic second request/);
+  assert.match(prompts.INSTALL_PROMPT, /Do not buy tokens, move funds or sign transactions during setup/);
+  assert.match(prompts.INSTALL_PROMPT, /Keep wallet authentication, token eligibility and score verification separate/);
+  assert.match(prompts.INSTALL_PROMPT, /Keep simulations, physical Seeker tests, signed APK creation and Store publication status distinct/);
+  assert.match(prompts.INSTALL_PROMPT, /Owner review, merge and successful deployment publish the gallery entry/);
+  for (const ref of ['season-pass', 'in-game-market', 'gamedev-skills', '3d-assets-and-characters', 'visual-realism', 'logo-and-store-art', 'sound-prompts', 'music-prompts', 'release-pitfalls']) {
+    assert.ok(prompts.INSTALL_PROMPT.includes(`references/${ref}.md`), ref);
   }
 });
 

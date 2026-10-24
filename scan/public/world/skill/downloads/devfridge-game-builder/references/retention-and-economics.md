@@ -1,12 +1,16 @@
-# Retention, commitment and the PASTA loop
+# Season Pass, retention and honest economics
+
+Developer reference. Technical descriptions below are not player-facing copy. Use the explicitly marked copy blocks for UI and [the Season Pass guide](season-pass.md) for implementation.
 
 ## The simple pitch
 
-“Give your meme a world worth coming back to. Lock your community token, unlock your character, and play while your lock qualifies.”
+```player-copy/general
+Give your meme a world worth coming back to. Pick a Season Pass, play while it is active.
+```
 
 The problem: owning a meme token does not itself give a holder a recurring activity. A game can turn the community's character and lore into something players do together. DevFridge supplies the access infrastructure so the developer can focus on the game.
 
-The mechanism: Phantom identifies the wallet; the player voluntarily locks a supported token in the existing DevFridge Solana program; SDK/API reads supply eligibility evidence; the game applies its own amount/duration rules. Tokens sit in program-owned vaults, not a game developer's wallet. A new timelock program is unnecessary for this integration. An existing lock can qualify for another game only if that game independently accepts the same mint and policy; there is no universal access pass.
+The mechanism: the chosen runtime's wallet connects; the player approves a locally built `create_lock` transaction for one configured tier in the existing Fridge program; current on-chain account evidence establishes eligibility per deposit. The optional SDK/API read path has different semantics and caching limitations. Tokens sit in PDA-controlled vaults, not a game developer's wallet. No new timelock program is necessary. An existing deposit qualifies elsewhere only if that game independently accepts the same mint and policy; there is no universal access pass. Connection alone is not authenticated server identity.
 
 ## The speculative market layer
 
@@ -30,11 +34,41 @@ These are design hypotheses, not measured results or a psychological guarantee. 
 
 ## Copyable player onboarding
 
-“Your token is your character key. Connect Phantom and lock [amount] [token] on DevFridge under [duration policy] to unlock [access]. Your game checks that lock on Solana. Choose your unlock date carefully: there is no early withdrawal. When you redeem after expiry, DevFridge charges 2% of the redeemed vault amount to buy and burn PASTA. Network costs are separate. Check token compatibility and redemption routing before you lock.”
+Use a tier radiogroup; a true best-value choice may be preselected. Disable the selected tier's action if a fresh live balance is insufficient. Unknown balance means a distinct checking/unavailable state. Substitute verified game values into these templates:
 
-Replace every placeholder with verified game policy. Show the full mint, exact quantity, unlock date and fee estimate before signing. A timelock is a commitment with a redemption cost, not a free refundable deposit. No per-run fee is implied by this access model; disclose any separate game charges explicitly.
+```player-copy/pass
+<Game> Season Pass
+Get Season Pass
+Not enough <TOKEN> for the <tier> pass.
+Your <X> <TOKEN> stays held on-chain for <N> days, until your pass ends.
+These tokens cannot be used before your pass ends. Their market value can fall.
+Activate Season Pass · <tier>
+<TOKEN> held
+Pass length
+Pass ends
+Network fee and account setup
+Approve in wallet
+Season Pass active (<tier>) until <date>.
+```
 
-## What the 2% does
+Render the exact end in local time and UTC. The amount/duration line stays visible and follows the selected tier; do not bury the unavailable-balance fact. Present Details before approval, linked from the gate and review:
+
+```player-copy/details
+Details
+The Solana program behind the Season Pass
+Your pass is checked on-chain, using one qualifying deposit from your connected wallet.
+Token address
+Copy
+Network fees and account setup are separate.
+When your pass ends and your <TOKEN> leaves the program, a 2% fee buys and burns PASTA.
+A market route must be available for this transfer. The end date alone does not guarantee that it can complete immediately.
+```
+
+Replace every placeholder with verified game policy. Show the full mint with Copy, program address, exact quantity, end date, fee estimate and route caveat before signing. No per-run fee is implied by this access model; disclose any separately selected Arcade charge in its own flow. Hiding a technical word must never hide the economic fact. PASTA is permitted only inside Details in player copy; raw program errors and CamelCase names go through a plain-language mapper.
+
+## What the Details section must disclose
+
+This section is developer/reviewer documentation, not a UI string source. Explain the underlying timelock honestly in reviews. The player commits tokens until expiry, cannot access them early, incurs a protocol fee when they leave, and retains market/liquidity risk. A Season Pass sets no token price or price floor. Read-only eligibility does not spend tokens; activation requires wallet approval. This wording change does not alter the on-chain mechanics.
 
 Current DevFridge docs: on redemption, 2% of the vault amount buys PASTA through Jupiter and burns the PASTA acquired. For PASTA vaults, that portion is burned directly. The remaining 98% returns to the depositor on successful redemption, before separate network costs and any token-specific effects. Example: a 100,000-token vault has a 2,000-token protocol fee and a 98,000-token remainder; this is token arithmetic, not a USD value or a guaranteed executable quote.
 

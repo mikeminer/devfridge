@@ -70,6 +70,31 @@ Retain blockhash validity metadata and reconcile until expiry; [Solana's confirm
 
 Grant admission only after verified evidence and atomically consume the receipt once at the game's defined start boundary. A durable local database can enforce reuse limits for one installation; it cannot prevent replay after reinstall or on another device. Global one-use admission requires a server/on-chain authority with a unique purchase constraint and atomic consume operation. Plan recovery for verified but unconsumed credit, and crash recovery for consumed admission, without silently granting a second run. Keep this separate from ad clicks and timelock access.
 
+## Season Pass and market intents
+
+For new games, follow [Season Pass](season-pass.md) and the separately selected [in-game market](in-game-market.md). They build transactions locally; the read-only SDK is not an activation method. Pin the IDL and verify its program/deployment before release. The pass validator accepts an unsigned v0 transaction, one signer (connected wallet), no lookup tables, at most one leading SetComputeUnitLimit ≤400,000 and exactly one configured `create_lock`. Validate every account/flag, amount, derived ATA/PDA/vault and timestamp window; reject trailing bytes. The market has its own route/fee-recipient validator, not a broad arbitrary-transaction bridge. Test valid fixtures, account-order mutations, truncation/trailing data and byte flips. These validators are required generated-game code, not binaries bundled with this skill.
+
+Keep the wallet client in a ViewModel; allow calls only while the Activity is RESUMED and only one at a time. Freeze the pass/review view while wallet UI is open; do not re-render it into a new action. Pause gameplay before handoff. A native identity uses the game name, `favicon.ico` relative to the owner's real HTTPS identity URI, and its package/certificate association. Local asset URLs, third-party identity domains and release placeholders are not substitutes.
+
+Pass state: `draft -> awaiting-wallet -> submitted(signature) / unknown -> confirmed`, with definitive pre-broadcast decline as a separate terminal state. Persist synchronously **before** wallet handoff. Record the deterministic PDA, wallet, cluster, tier, raw amount, timestamps, transaction hash and blockhash validity; write any signature immediately. Recompute the pass end at the signing step rather than retaining a stale review-open timestamp, and display the final reviewed end.
+
+A stale awaiting-wallet record without a signature triggers reconciliation through its PDA, with a ten-minute bound for the stale UI attempt. Age alone never proves an unsubmitted transaction. If the wallet was never opened, safely discard the draft. If handoff may have occurred, reconcile the exact PDA and blockhash/history at the required commitment; only verified absence after transaction validity plus final reconciliation permits an explicit new attempt. Preserve uncertain outcomes across process death. An unavailable RPC cannot clear them. This prevents the false first-launch unfinished-payment bug without creating duplicate charges. Long-lived unknown outcomes need Check again/support, not a permanently spinning modal or an automatic replacement.
+
+Map native/adapter outcomes to localized player sentences:
+
+| Outcome | Action and copy |
+| --- | --- |
+| AUTH_FAILED | “Reconnect your wallet to continue.” Clear invalid cached authorization only. |
+| DECLINED / WALLET_REJECTED | “You declined the request.” Cancel only when the SDK proves no broadcast. |
+| WALLET_CANCELLED | “The wallet window closed.” If after handoff, reconcile; do not infer rejection. |
+| BUSY | “A wallet request is already open.” Keep the one existing action. |
+| NOT_FOREGROUND | “Return to the game to continue.” No background wallet launch. |
+| OUTCOME_UNKNOWN / JS TIMEOUT / SESSION_CLOSED | “We could not confirm the result. Check again before starting another request.” Persist recovery. |
+
+Use structured error types from the installed SDK, never guess definitiveness from an arbitrary error message. If an explicit unsupported-method response (MWA **−32601**) proves `signAndSendTransactions` unavailable, capability-check `signTransactions` and send its signed bytes through the approved RPC. Persist the known signature before send; use the exact same transaction bytes for uncertain transport retries, never obtain another signature for a replacement. Do not invoke this fallback after a timeout or ambiguous submission. Some wallets do not support the signing-only method; explain that case without a loop.
+
+Import the Buffer polyfill **first in every lazy chain module** (entry, checker and transaction builder); a menu can query a pass before the signing chunk loads. Test that import order in a fresh browser/WebView context. Redact RPC URLs/keys and auth tokens from console and logcat; show plain program-error mappings from [program verification](program-and-verification.md#error-mapping-from-this-idl).
+
 ## Focused verification
 
 Use [the official mock-wallet setup](https://docs.solanamobile.com/get-started/development-setup) and fixtures for errors before physical Seeker testing. No mainnet spend is needed to test state transitions. Test:

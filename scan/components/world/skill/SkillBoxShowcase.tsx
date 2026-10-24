@@ -47,7 +47,7 @@ export default function SkillBoxShowcase() {
           <p className={styles.edition}><span aria-hidden="true" /> THE BUILDER’S EDITION</p>
           <h2 className={styles.title} id={titleId}>A little box. A world of possibility.</h2>
         </div>
-        <span className={styles.release}>VOL. 001<br /><strong>v1.7.3</strong></span>
+        <span className={styles.release}>VOL. 001<br /><strong>v1.7.4</strong></span>
       </div>
 
       <div className={styles.stage}>
@@ -63,7 +63,7 @@ export default function SkillBoxShowcase() {
           <div className={styles.posterCover}>
             <div className={styles.coverBrand}>DEVFRIDGE<span>WORLD / BUILD</span></div>
             <div className={styles.coverTitle}>Game<br />Builder<span>YOUR MEME.<br />A WORLD TO PLAY.</span></div>
-            <div className={styles.coverFooter}><span>AGENT SKILL<br />BROWSER + SEEKER</span><strong>1.7.3</strong></div>
+            <div className={styles.coverFooter}><span>AGENT SKILL<br />BROWSER + SEEKER</span><strong>1.7.4</strong></div>
           </div>
         </div>
         <div className={styles.cornerBottom} aria-hidden="true"><span>CASE / COVER / DISC</span><span>OPEN. EXPLORE. BUILD.</span></div>
