@@ -5,7 +5,15 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: { serverComponentsExternalPackages: ["@paragraph-com/sdk"] },
   images: { unoptimized: true },
-  transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
+  transpilePackages: [
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei",
+    "@solana-mobile/seeker-connect-wallet-standard",
+    "@solana-mobile/seeker-connect-web",
+    "@solana-mobile/seeker-connect-ui",
+    "@solana-mobile/seeker-connect-core",
+  ],
   async rewrites() {
     return [
       { source: "/world/game-v2", destination: "/world/game-v2/index.html" },

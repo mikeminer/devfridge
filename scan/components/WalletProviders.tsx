@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, type ComponentType, type ReactNode } from
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
+import { registerScannerSeeker } from "@/lib/seeker";
 
 const FALLBACK_RPC = "https://scan.devfridge.cool/api/solana";
 
@@ -11,6 +12,7 @@ export default function WalletProviders({ children }: { children: React.ReactNod
   const [endpoint, setEndpoint] = useState(FALLBACK_RPC);
   useEffect(() => {
     setEndpoint(`${window.location.origin}/api/solana`);
+    registerScannerSeeker();
   }, []);
   /** Wallet Standard (Phantom, Solflare) auto-registers. Do not also mount PhantomWalletAdapter. */
   const wallets = useMemo(() => [], []);

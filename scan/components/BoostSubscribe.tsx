@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { SEEKER_CONNECT_WALLET_NAME } from "@/lib/seeker";
 import {
   Connection,
   PublicKey,
@@ -55,6 +56,27 @@ async function waitForBoostedMint(mint: string): Promise<boolean> {
   return false;
 }
 
+function walletLabel(name?: string): string {
+  if (name === SEEKER_CONNECT_WALLET_NAME) return "Seeker";
+  return name || "your wallet";
+}
+
+function readableWalletError(raw: string, tier?: BoostTier): string {
+  if (tier && /insufficient|debit|no record of a prior credit|0x1/i.test(raw)) {
+    return `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.02).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees.`;
+  }
+  if (/session-closed/i.test(raw)) {
+    return "The Seeker session closed before the wallet answered. The payment may already be in the wallet history. Check it before you click Feature again.";
+  }
+  if (/cancelled|authorization-declined|request-declined|user rejected/i.test(raw)) {
+    return "The wallet closed the request. You were not charged.";
+  }
+  if (/block height exceeded|blockhash/i.test(raw)) {
+    return "The transaction expired before it landed. You were not charged. Click Feature again and approve in your wallet immediately.";
+  }
+  return raw;
+}
+
 function compileLegacy(plan: Plan, payer: PublicKey, blockhash: string): Transaction {
   const tx = new Transaction();
   tx.feePayer = payer;
@@ -82,12 +104,42 @@ export default function BoostSubscribe({
   fixedMint?: string;
   compact?: boolean;
 }) {
-  const { publicKey, signTransaction, connected } = useWallet();
+  const {
+    publicKey,
+    signTransaction,
+    sendTransaction,
+    connected,
+    connecting,
+    wallets,
+    wallet,
+    select,
+    connect,
+  } = useWallet();
   const { setVisible } = useWalletModal();
   const [mint, setMint] = useState(fixedMint ?? "");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [needFridge, setNeedFridge] = useState(false);
+  const seekerWallet = wallets.find((item) => item.adapter.name === SEEKER_CONNECT_WALLET_NAME);
+  const signerName = walletLabel(wallet?.adapter.name);
+
+  function connectSeeker() {
+    if (!seekerWallet) {
+      setStatus("Seeker Connect is not ready in this browser yet. Reload the page on the Seeker.");
+      return;
+    }
+    if (wallet?.adapter.name === SEEKER_CONNECT_WALLET_NAME) {
+      if (!connected) {
+        void connect().catch((err: unknown) => {
+          const raw = err instanceof Error ? err.message : String(err);
+          setStatus(readableWalletError(raw));
+        });
+      }
+      return;
+    }
+    // autoConnect is on, and selecting a wallet calls connect() for that adapter.
+    select(seekerWallet.adapter.name);
+  }
 
   async function boost(tier: BoostTier) {
     setStatus("");
@@ -110,8 +162,8 @@ export default function BoostSubscribe({
         setBusy(false);
         return;
       }
-      if (!signTransaction) {
-        throw new Error("This wallet cannot sign locally. Use Phantom or Solflare.");
+      if (!signTransaction && !sendTransaction) {
+        throw new Error("This wallet cannot sign. Connect Phantom, Solflare, or Seeker.");
       }
 
       const rpc = boostConnection();
@@ -127,54 +179,69 @@ export default function BoostSubscribe({
       }
 
       let sig = "";
-      for (let attempt = 1; attempt <= 3; attempt++) {
-        setStatus(
-          attempt === 1
-            ? "Sign now — approve Phantom immediately."
-            : "Blockhash expired. Sign again (you were not charged)."
-        );
+      // Seeker may only offer sign-and-send. That path must not be retried:
+      // a closed session can mean the wallet already submitted the payment.
+      if (!signTransaction) {
+        setStatus(`Sign now — approve in ${signerName} immediately.`);
         const latest = await rpc.getLatestBlockhash("confirmed");
         const tx = compileLegacy(plan, publicKey, latest.blockhash);
-        const signed = await signTransaction(tx);
-        const still = await rpc.isBlockhashValid(latest.blockhash, { commitment: "processed" });
-        if (!still.value) {
-          if (attempt < 3) continue;
-          throw new Error(
-            "Blockhash expired while Phantom was open. You were not charged — click Feature and approve immediately."
-          );
-        }
-        const wire = bytesToB64(signed.serialize());
-        const sent = await fetch("/api/boost/send", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ transaction: wire }),
+        sig = await sendTransaction(tx, rpc, {
+          skipPreflight: false,
+          maxRetries: 4,
+          preflightCommitment: "processed",
         });
-        const sentJson = await sent.json();
-        if (!sent.ok) {
-          const msg = String(sentJson.error || "send failed");
-          if (attempt < 3 && /blockhash|block height|expired|0x1/i.test(msg)) continue;
-          throw new Error(msg);
-        }
-        sig = sentJson.signature;
-        setStatus("Confirming on Solana…");
-        const started = Date.now();
-        let landed = false;
-        while (Date.now() - started < 45_000) {
-          const st = await rpc.getSignatureStatus(sig, { searchTransactionHistory: true });
-          if (st.value?.err) {
-            throw new Error(`Boost failed on-chain: ${JSON.stringify(st.value.err)}`);
+      } else {
+        for (let attempt = 1; attempt <= 3; attempt++) {
+          setStatus(
+            attempt === 1
+              ? `Sign now — approve in ${signerName} immediately.`
+              : "Blockhash expired. Sign again (you were not charged)."
+          );
+          const latest = await rpc.getLatestBlockhash("confirmed");
+          const tx = compileLegacy(plan, publicKey, latest.blockhash);
+          const signed = await signTransaction(tx);
+          const still = await rpc.isBlockhashValid(latest.blockhash, { commitment: "processed" });
+          if (!still.value) {
+            if (attempt < 3) continue;
+            throw new Error(
+              `Blockhash expired while ${signerName} was open. You were not charged — click Feature and approve immediately.`
+            );
           }
-          if (
-            st.value?.confirmationStatus === "confirmed" ||
-            st.value?.confirmationStatus === "finalized"
-          ) {
-            landed = true;
-            break;
+          const wire = bytesToB64(signed.serialize());
+          const sent = await fetch("/api/boost/send", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ transaction: wire }),
+          });
+          const sentJson = await sent.json();
+          if (!sent.ok) {
+            const msg = String(sentJson.error || "send failed");
+            if (attempt < 3 && /blockhash|block height|expired|0x1/i.test(msg)) continue;
+            throw new Error(msg);
           }
-          await new Promise((r) => setTimeout(r, 1000));
+          sig = sentJson.signature;
+          break;
         }
-        if (landed) break;
-        if (attempt < 3) continue;
+      }
+
+      setStatus("Confirming on Solana…");
+      const started = Date.now();
+      let landed = false;
+      while (Date.now() - started < 45_000) {
+        const st = await rpc.getSignatureStatus(sig, { searchTransactionHistory: true });
+        if (st.value?.err) {
+          throw new Error(`Boost failed on-chain: ${JSON.stringify(st.value.err)}`);
+        }
+        if (
+          st.value?.confirmationStatus === "confirmed" ||
+          st.value?.confirmationStatus === "finalized"
+        ) {
+          landed = true;
+          break;
+        }
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+      if (!landed) {
         throw new Error(`Boost not confirmed yet. Check https://solscan.io/tx/${sig}`);
       }
 
@@ -197,17 +264,7 @@ export default function BoostSubscribe({
       void fetch("/api/boost/crank", { method: "POST" }).catch(() => {});
     } catch (err) {
       const raw = err instanceof Error ? err.message : String(err);
-      if (/insufficient|debit|no record of a prior credit|0x1/i.test(raw)) {
-        setStatus(
-          `Not enough SOL in the connected wallet. Keep about ${(BOOST_TIERS[tier].sol + 0.02).toFixed(2)} SOL free: ${BOOST_TIERS[tier].sol} for the package plus rent and fees.`
-        );
-      } else if (/block height exceeded|blockhash/i.test(raw)) {
-        setStatus(
-          "The transaction expired before it landed. You were not charged. Click Feature again and approve Phantom immediately."
-        );
-      } else {
-        setStatus(raw);
-      }
+      setStatus(readableWalletError(raw, tier));
     } finally {
       setBusy(false);
     }
@@ -225,6 +282,33 @@ export default function BoostSubscribe({
       <p className="mt-2 text-xs text-mute">
         This is a labeled sponsored placement. Payment never changes scanner checks or risk grades.
       </p>
+      <p className="mt-2 text-xs text-mute">
+        On a Seeker, the phone wallet signs through Seeker Connect and the seed stays in the wallet.
+        Phantom and Solflare still work in the browser.
+      </p>
+
+      {!connected && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            className="fridge-key fridge-key-primary disabled:opacity-50"
+            disabled={busy || connecting}
+            onClick={connectSeeker}
+          >
+            {connecting && wallet?.adapter.name === SEEKER_CONNECT_WALLET_NAME
+              ? "Opening Seeker…"
+              : "Connect with Seeker"}
+          </button>
+          <button type="button" className="fridge-key disabled:opacity-50" disabled={busy} onClick={() => setVisible(true)}>
+            Other wallet
+          </button>
+        </div>
+      )}
+      {connected && publicKey && (
+        <p className="mt-3 font-mono text-xs text-mute">
+          {signerName} · {publicKey.toBase58().slice(0, 4)}…{publicKey.toBase58().slice(-4)}
+        </p>
+      )}
 
       {!fixedMint && (
         <input
