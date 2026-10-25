@@ -3,8 +3,8 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with an on-chain Season Pass. Use for wallet and optional in-game market integration, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.7.5"
-  sources-reviewed: "2026-10-24"
+  version: "1.7.6"
+  sources-reviewed: "2026-10-25"
 ---
 # DevFridge Game Builder
 
@@ -15,7 +15,7 @@ Turn a developer's meme into a playable game on their chosen platform. Interview
 Before building a game, always resolve: **Browser, Seeker app, or both?** Reuse an explicit platform choice already supplied for this game; otherwise ask and wait before gameplay or platform implementation. Read-only discovery and setup may continue. Do not infer an APK from “mobile-friendly”, or infer browser-only from a Three.js game. Record the choice in the brief and copied prompts; unanswered has no default.
 
 - **Browser:** deliver the web game with desktop/touch controls and browser wallets; no APK is required. Read [browser wallet integration](references/phantom.md).
-- **Seeker app:** next resolve **game and assets included in the APK, or an APK that loads the game website?** Reuse an explicit answer; otherwise ask and wait before platform/gameplay implementation. Both choices deliver a signed installable APK; there is no architecture default. Read [Android APK delivery](references/seeker-android.md), [Seeker wallets and payment recovery](references/seeker-wallet.md) and, for listing preparation/releases, [Solana dApp Store publishing](references/solana-dapp-store.md). Test the chosen release on a physical Seeker.
+- **Seeker app:** next resolve **game and assets included in the APK, or an APK that loads the game website?** Reuse an explicit answer; otherwise ask and wait before platform/gameplay implementation. Both choices deliver a signed installable APK; there is no architecture default. Read [Android APK delivery](references/seeker-android.md), [Seeker wallets and payment recovery](references/seeker-wallet.md) and, for listing preparation/releases, [Solana dApp Store publishing](references/solana-dapp-store.md). Before proposing a Store submission, apply [wallet trust and transaction simulation](references/wallet-trust.md). Test the chosen release on a physical Seeker.
 - **Both:** share game rules, assets and translations; separate browser/native wallet, storage, lifecycle and external-link adapters. Deliver and verify both artifacts. A passing browser test does not certify the APK, or vice versa.
 
 Apply the same APK architecture question to **Both**. A bundled game can still use online services; a hosted game can have explicitly implemented caching. Neither choice alone promises offline access or decides the wallet transport.

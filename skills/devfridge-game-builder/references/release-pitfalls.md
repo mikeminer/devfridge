@@ -18,7 +18,7 @@ Apply the relevant checks to the selected game/platform. These are lessons gener
 
 **Rule:** use a method/parameter-allowlisted server proxy; fixed program/mint filters, per-IP quotas, response/deadline caps and no open relay. Typical needs: getAccountInfo, getMultipleAccounts, getProgramAccounts, getLatestBlockhash, getTokenAccountsByOwner, getSignatureStatuses, simulateTransaction, and sendTransaction only for the selected signing fallback; add balance/rent/fee/blockheight/history methods only when required. Never inline a private frontend env value. A restricted, dedicated, rotatable client key requires explicit owner risk acceptance and a distribution blocker until resolved.
 
-**Check:** run [secret scanner](../assets/check-no-secrets.py) on source release folder, dist, extracted APK and ZIP, including exact sensitive values via process environment without printing them. Unit-test `redactRpcUrl` and `scrubSecrets` with synthetic keys; console, native errors and reports must not expose values. Review scanner limits; zero hits is not proof that every possible secret is absent.
+**Check:** run [secret scanner](../assets/check-no-secrets.py) on source release folder, dist, extracted APK and ZIP, including exact sensitive values via process environment without printing them. Unit-test `redactRpcUrl` and `scrubSecrets` with synthetic keys; console, native errors and reports must not expose values. Review scanner limits; zero hits is not proof that every possible secret is absent. A Seeker Store candidate also fails until the final-APK string gate in [wallet trust](wallet-trust.md) passes.
 
 ## 4. Silent menu or stacked music
 
@@ -52,9 +52,9 @@ Apply the relevant checks to the selected game/platform. These are lessons gener
 
 ## 9. Uncontrolled violent content
 
-**Rule:** only when the chosen game has blood/dismemberment, expose persisted Full / Reduced / Off in Title and Pause. Store default Reduced; Reduced softens wounds around half severity and removes dismemberment, Off removes blood, dismemberment and gore SFX. Use adult models/voices for victims. Do not impose this theme on other games.
+**Rule:** only when the chosen game has blood/dismemberment, expose persisted Full / Reduced / Off in Title and Pause. The Store candidate and its screenshots default to Off, as required by [wallet trust](wallet-trust.md). Reduced softens wounds around half severity and removes dismemberment, Off removes blood, dismemberment and gore SFX. Use adult models/voices for victims. Do not impose this theme on other games.
 
-**Check:** exercise all modes across restart/pause and event→SFX mapping. Capture Store assets in Reduced, include a truthful warning and declare the appropriate horror/violence content classification in the portal (e.g. Mature where applicable); never treat an example rating as automatic approval.
+**Check:** exercise all modes across restart/pause and event→SFX mapping. Capture Store assets from the submitted build in Off, include a truthful warning and declare 17+ using the portal's actual classification control; never treat an example rating as automatic approval. See [wallet trust](wallet-trust.md).
 
 ## 10. Empty or misleading store screenshots
 
@@ -70,7 +70,7 @@ Apply the relevant checks to the selected game/platform. These are lessons gener
 
 ## 12. Mixed language or identity placeholder
 
-**Rule:** UI, HUD, plain errors, terms, lore, ads, wallet identity and Store text follow the owner's locales. Android resourceConfigurations matches actual shipped translations. Identity is game name + favicon.ico under the owner's real HTTPS domain; missing domain blocks release.
+**Rule:** UI, HUD, plain errors, terms, lore, ads, wallet identity and Store text follow the owner's locales. Android resourceConfigurations matches actual shipped translations. Identity is game name + favicon.ico under the owner's real HTTPS domain; missing domain blocks release. Submission identity requirements are in [wallet trust](wallet-trust.md).
 
 **Check:** dictionary completeness, real visible-text snapshots and errors in each supported locale, copy scan and installed language selection. Country flags do not demonstrate translation. No fabricated HTTPS domain or old stub claim enters Store notes.
 

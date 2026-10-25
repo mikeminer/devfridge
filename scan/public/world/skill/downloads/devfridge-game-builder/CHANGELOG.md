@@ -1,5 +1,19 @@
 # DevFridge Game Builder — Changelog
 
+## 1.7.6 — 2026-10-25
+
+Adds a submission gate for how Seed Vault Wallet and Phantom judge the MWA identity domain and the transaction. A signed APK, legal URLs and listing text do not replace that judgment. The v0.1.5 finding "Transaction simulation: scam site detected" is mapped to the identity domain.
+
+- **Real identity from the first submittable build.** `identityUri` must be an owner-controlled HTTPS domain with favicon and `assetlinks.json` for the release certificate. Placeholders such as `streetmeat.app` block submission.
+- **Flagged domains stay out.** Check the hostname before choosing it. `devfridge.cool` is a known blocked example. Each game uses its own domain.
+- **Reviews before the Store.** Once the site is live, prepare Blockaid and Phantom requests, send them only with the owner's approval, and wait several days. The retired Blowfish form is not the path.
+- **Seeker simulation screenshot.** The owner signs one real Seed Vault Wallet transaction. An error or "scam site" blocks submission. "We cannot guarantee" is acceptable only when the amounts are correct and both reviews are already filed. Record the result in the reviewer notes.
+- **Simulatable transactions.** One transaction per action, known programs only, visible amounts, no opaque instructions and no partial signatures. Submit the game mint on Jupiter's free verification so the orange unverified-token mark can clear after Jupiter verifies it.
+- **RPC proxy is required.** The final APK is string-scanned. A provider key in the package blocks submission.
+- **Review content.** Gore or violence defaults to Off on the submitted build, age is declared 17+ with the portal's real control, progress has Continue, and screenshots come from that build.
+
+The RPC proxy implementation, Season Pass evaluator and vendored licences are unchanged. No wallet transaction, domain review or Store submission was performed to write this release.
+
 ## 1.7.5 — 2026-10-24
 
 Adds six executable production workflows while preserving the 1.7.4 platform/architecture choices, Seeker Connect and MWA, per-deposit Season Pass, optional market, independent Free Play placements, web-only Game Room, asset/audio tools, exact legacy evaluator and vendored licences.
