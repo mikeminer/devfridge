@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.5",
-  "reviewedAt": "2026-10-24",
-  "bytes": 417335,
-  "sha256": "01ffc6e75454d9241323901801926620eead5d346edfd1a2cdd2caf837153abc",
+  "version": "1.7.6",
+  "reviewedAt": "2026-10-25",
+  "bytes": 422509,
+  "sha256": "814612bdada32a0274c1a2c2388fa129ae3f5bf830e09aedcc5a8a14a7e6e7f5",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -191,7 +191,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "baa22c324fe41aabf635c88bc58ce6c488115adf72be14c343377a7a8112715a"
+      "sha256": "02fb31d7fae356dc50de2664355b8b9b5269d1b45d70917f49a0fb66c065b2c9"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -263,7 +263,7 @@
     },
     {
       "path": "references/release-pitfalls.md",
-      "sha256": "2d88670c5708b06c7a8ccbfa646356440806a82fde1de8159fc19aed95c8a212"
+      "sha256": "c606d8df34f201d76a695581b3e9b85005693d50999d79758a8f7b3911892f33"
     },
     {
       "path": "references/release-updates.md",
@@ -275,7 +275,7 @@
     },
     {
       "path": "references/rpc-proxy.md",
-      "sha256": "5f21ab361b188527e5b06d1e5cfed67049caad0b644234a098a471bfeb16f1af"
+      "sha256": "01a2e4f3299852f77c2d26d66ada9f7cf5499c269a6170c9e95873c533e8d103"
     },
     {
       "path": "references/sdk-access.md",
@@ -291,11 +291,11 @@
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "77e17810a5078e810d860e5ef06d0a3233d9d07391a22fb73f9972e86e78ecbe"
+      "sha256": "daf151c1cf20f8632cfd6a98982cf7b05b3c7fa799a4baf5a7a3200efc1c0a80"
     },
     {
       "path": "references/solana-dapp-store.md",
-      "sha256": "34333e11f5a5710c03095d07b23021c18be1b88900a7d540f0c7b9f3b190cae3"
+      "sha256": "709fe7d7f14c1a2df0c82e4ecca1a07c2c3ae308d77c73f2178c60b175daeaa4"
     },
     {
       "path": "references/sound-prompts.md",
@@ -303,15 +303,19 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "da9878e4bb34dc72c5d21bbb07d8c48b2d96caf3c1d5da76421285468ff81ed7"
+      "sha256": "3b48defef8b2ff32b71a22f81400c81c675a697447e8577c134eec3e958a5e95"
     },
     {
       "path": "references/visual-realism.md",
       "sha256": "60ce6dd198794b2f28e85aba2c0712a1311f0528dd6ff819553085682e22e804"
     },
     {
+      "path": "references/wallet-trust.md",
+      "sha256": "35fb31c7dfc4a283b42af872a3ca4198f1ebaf9c6baf513cbae63d58cdd0e316"
+    },
+    {
       "path": "SKILL.md",
-      "sha256": "5dda2bfa08070e3144b6c8f9d40fc952f4bdc73a81f1d2695cc1a97bc528c68f"
+      "sha256": "5d9ade31a17fc28736625c898d88d25e1a79593b4830f5a77768d0e6f12c24cc"
     },
     {
       "path": "vendor/gamedev-skills/audio-design/references/adaptive-music.md",

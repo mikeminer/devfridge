@@ -45,7 +45,7 @@ function paintCover(context: CanvasRenderingContext2D, artwork?: HTMLImageElemen
   context.font = '700 39px Arial, sans-serif'; context.fillText('DEVFRIDGE', 94, 101);
   context.fillStyle = '#d4f7a2'; context.fillRect(772, 65, 186, 48);
   context.fillStyle = '#14261a'; context.textAlign = 'center';
-  context.font = '700 27px Arial, sans-serif'; context.fillText('v1.7.5', 865, 99);
+  context.font = '700 27px Arial, sans-serif'; context.fillText('v1.7.6', 865, 99);
   context.textAlign = 'left'; context.fillStyle = '#f7f8ec';
   context.font = '900 115px Arial, sans-serif'; context.fillText('GAME', 63, 225); context.fillText('BUILDER', 63, 339);
   context.font = '500 25px Arial, sans-serif'; context.fillStyle = '#c9d8c3';
@@ -195,7 +195,7 @@ export default function SkillDvdScene(props: SkillDvdSceneProps) {
       ['Private RPC. Public app pages.', '50 FPS gate. Saved checkpoints.', 'Real screenshots. Verified updates.'].forEach((line, index) => c.fillText(line, 60, 595 + index * 44));
       c.fillStyle = '#c6e89c'; c.fillRect(60, 923, 648, 2);
       c.font = '700 25px Arial, sans-serif'; c.fillText('BROWSER + SEEKER', 60, 981);
-      c.fillStyle = '#7e9a83'; c.font = '400 20px Arial, sans-serif'; c.fillText('DEVFRIDGE GAME BUILDER  /  1.7.5', 60, 1041);
+      c.fillStyle = '#7e9a83'; c.font = '400 20px Arial, sans-serif'; c.fillText('DEVFRIDGE GAME BUILDER  /  1.7.6', 60, 1041);
       const insideMaterial = material(new THREE.MeshStandardMaterial({ map: texture(inside.canvas), roughness: .8 }));
       const insideMesh = new THREE.Mesh(geometry(new THREE.PlaneGeometry(2.57, 3.7)), insideMaterial);
       insideMesh.position.set(1.4, 0, -.041); insideMesh.rotation.y = Math.PI; hinge.add(insideMesh);
@@ -238,7 +238,7 @@ export default function SkillDvdScene(props: SkillDvdSceneProps) {
       const l = label.context; l.textAlign = 'center'; l.fillStyle = '#142c22';
       l.font = '900 65px Arial, sans-serif'; l.fillText('DEVFRIDGE', 512, 259);
       l.font = '700 37px Arial, sans-serif'; l.fillText('GAME BUILDER', 512, 316);
-      l.font = '700 39px Arial, sans-serif'; l.fillText('1.7.5', 512, 805);
+      l.font = '700 39px Arial, sans-serif'; l.fillText('1.7.6', 512, 805);
       l.font = '500 20px Arial, sans-serif'; l.fillText('BROWSER + SEEKER  /  CREATOR EDITION', 512, 852);
       const print = new THREE.Mesh(geometry(new THREE.RingGeometry(.33, 1.065, 96)), material(new THREE.MeshBasicMaterial({ map: texture(label.canvas), transparent: true, depthWrite: false, side: THREE.DoubleSide, toneMapped: false })));
       print.position.z = .033; disc.add(print);

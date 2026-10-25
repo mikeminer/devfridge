@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = {"version": "1.7.5", "reviewedAt": "2026-10-24", "bytes": 417335, "sha256": "01ffc6e75454d9241323901801926620eead5d346edfd1a2cdd2caf837153abc"};
+const expectedRelease = {"version": "1.7.6", "reviewedAt": "2026-10-25", "bytes": 422509, "sha256": "814612bdada32a0274c1a2c2388fa129ae3f5bf830e09aedcc5a8a14a7e6e7f5"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -47,7 +47,7 @@ function zipMembers(zip) {
 test('published skill contains exactly the reviewed sources, standalone files and archive members', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(output, 'manifest.json'), 'utf8'));
   for (const [key, value] of Object.entries(expectedRelease)) assert.equal(manifest[key], value, key);
-  assert.equal(manifest.files.length, 128);
+  assert.equal(manifest.files.length, 129);
   const zip = fs.readFileSync(path.join(output, `${manifest.name}.zip`));
   assert.equal(zip.length, manifest.bytes);
   assert.equal(crypto.createHash('sha256').update(zip).digest('hex'), manifest.sha256);
@@ -66,8 +66,8 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.7.5"\n'));
-  assert.ok(skill.includes('  sources-reviewed: "2026-10-24"\n'));
+  assert.ok(skill.includes('  version: "1.7.6"\n'));
+  assert.ok(skill.includes('  sources-reviewed: "2026-10-25"\n'));
 });
 
 test('packager reproduces the reviewed ZIP under either creator platform and rejects stale files/caches', () => {
