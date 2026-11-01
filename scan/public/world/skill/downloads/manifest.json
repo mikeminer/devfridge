@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "reviewedAt": "2026-11-01",
-  "bytes": 1951401,
-  "sha256": "51c7378532b74bc81c62746ae961db4d0e4adf344fb6e78e1c54a1396df91977",
+  "bytes": 1952119,
+  "sha256": "1a6e7fb9696469905ab745cf37f072218697e6874c01b1e4a661e84c1cd0f17e",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -199,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2a5519c4d2c41bb6aa676d5e701167c25a0aa8c21178d354a78addc32145a540"
+      "sha256": "405cbf552c4f8489d71394c497d172828b3de039cbaacffe7c0efa1d87f4ac74"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -231,7 +231,7 @@
     },
     {
       "path": "references/game-studio.md",
-      "sha256": "8f1add436779c058774f4c9bebaeded06356b5a7b7c1cfcdec69193c1bcf2374"
+      "sha256": "613e3cf5e11caa9a7e6014c8d66b22bd8d8651f95d97a0f780f25f31029f4bb2"
     },
     {
       "path": "references/gamedev-skills.md",
@@ -327,7 +327,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "e47ce60db8abd77a3a7b7bfcfb43f52b7272e2697bde954a45c2972cf6d4dc07"
+      "sha256": "44b75c73e111080993826788054efe87b5f206013f2ac8366748009c9286548f"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",

@@ -1,5 +1,10 @@
 # DevFridge Game Builder — Changelog
 
+## 1.9.3 — 2026-11-01
+
+- **Studio reachability:** the [game studio adapter](references/game-studio.md) now maps index names to files (`/name` → `vendor/claude-code-game-studios/skills/<name>/SKILL.md`, role → `agents/<name>.md`), names the four Claude Code built-ins the index mentions, and lists the workflows not used in a DevFridge build. Before, 59 of 74 workflows and 43 of 49 roles were listed only by name with no path.
+- **CI reachability test** (`scan/tests/game-builder-reachability.test.cjs`): no broken links from SKILL.md; every reference and all 18 gamedev skills reachable and routed; the Three.js and 3D path (scene setup, glTF/characters, materials/lighting, assets, shaders, procedural generation) routed to the right tasks; every studio workflow and role resolvable from its index name; every documented asset path exists.
+
 ## 1.9.2 — 2026-11-01
 
 - **Shared games domain:** the [public-site generator](assets/public-site/generate-site.py) accepts `"basePath": "/<game>"`. It then writes only the privacy and terms pages and `legal.css` under that path, with matching links, canonical and manifest URLs, and no landing page or root `robots.txt`, so several games can publish their legal pages on one host. Without `basePath` the output is unchanged. Two new tests.
