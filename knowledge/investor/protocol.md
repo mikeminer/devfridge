@@ -4,7 +4,7 @@ title: "Protocol adoption and PASTA LP evidence"
 description: "DevFridge investor knowledge: Protocol adoption and PASTA LP evidence"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-10-31T12:26:28Z"
+timestamp: "2026-11-01T12:14:06Z"
 generated: true
 ---
 
@@ -14,7 +14,7 @@ Evidence for community leaders evaluating a DevFridge integration. Counts are ob
 
 ## Activity
 
-ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10-31T12:26:28Z.
+ok · last successful observation: 2026-11-01T12:14:06Z · last attempt: 2026-11-01T12:14:06Z.
 
 ```json
 {
@@ -25,14 +25,14 @@ ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10
   "open_lock_accounts": 144,
   "program": "9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6",
   "scope": "Currently open accounts, including expired unclaimed locks. Claimed/closed accounts are absent; these are not lifetime adoption counts.",
-  "slot": 463688054,
+  "slot": 464088128,
   "unique_mints": 23
 }
 ```
 
 ## Lp
 
-ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10-31T12:26:28Z.
+ok · last successful observation: 2026-11-01T12:14:06Z · last attempt: 2026-11-01T12:14:06Z.
 
 ```json
 {
@@ -43,7 +43,7 @@ ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10
   "mint_authority": "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5",
   "owner_program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
   "pool": "5o5JBdWZd3zKE3JC8Tb81D3bph7bwxftvwLLRoZ1EqL5",
-  "slot": 463688055,
+  "slot": 464088132,
   "supply_base_units": "15219609596",
   "zero_supply": false
 }
@@ -51,14 +51,14 @@ ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10
 
 ## Reported Stats
 
-ok · last successful observation: 2026-10-31T12:26:28Z · last attempt: 2026-10-31T12:26:28Z.
+ok · last successful observation: 2026-11-01T12:14:06Z · last attempt: 2026-11-01T12:14:06Z.
 
 ```json
 {
   "boost_vault_lamports": 4890880,
   "interpretation": "The published stats implementation reads an incinerator token balance for pastaBurned. It is not a complete ledger of SPL Burn instructions. Vault balance and burn-token value do not establish cumulative fee revenue.",
   "reported_pasta_burned": "876026.010648",
-  "source_timestamp_ms": 1793449590237
+  "source_timestamp_ms": 1793535250662
 }
 ```
 
