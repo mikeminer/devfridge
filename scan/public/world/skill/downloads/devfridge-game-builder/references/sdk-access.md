@@ -4,7 +4,7 @@ Published SDK v1.0 reviewed 2026-09-22: https://sdk.devfridge.cool/sdk/devfridge
 
 ## Default: direct on-chain Season Pass
 
-Use [the Season Pass flow](season-pass.md): build the existing program instruction in-app and evaluate verified accounts per deposit with [season-pass.mjs](../assets/season-pass.mjs). Keep [timelock-gate.mjs](../assets/timelock-gate.mjs) unchanged for evidence shape/freshness (`maxAgeSeconds: 90`, `aggregation: 'single'`). A pass qualifies by raw BigInt amount and original duration with 3600-second tolerance; one qualifying account is necessary. Connect/authenticate the wallet separately. RPC failures mean unavailable, not a fabricated inactive balance or admission.
+Use [the subscription flow](season-pass.md): build the purchase in-app and evaluate verified accounts with [subscription.mjs](../assets/subscription.mjs). Keep [timelock-gate.mjs](../assets/timelock-gate.mjs) unchanged for evidence shape/freshness (`maxAgeSeconds: 90`). Any active verified deposit of the mint for the wallet grants access; the amount is not compared with a price, and the countdown reads its end time. Existing games may keep the legacy token-amount rule in [season-pass.mjs](../assets/season-pass.mjs). Connect/authenticate the wallet separately. RPC failures mean unavailable, not a fabricated inactive balance or admission.
 
 The SDK and Scan endpoint below remain **optional read paths**, for an explicitly chosen browser prototype or compatible legacy integration. They do not create the pass, verify raw account ownership/PDA/vault contents, or replace authoritative checks. Preserve original timestamps and disclose caching. A read-only SDK is not a wallet transaction API.
 
@@ -34,11 +34,11 @@ Current implementation details:
 - `cacheTTL: 0` falls back to 60,000ms. Poll errors are logged, not sent as inactive callbacks. Implement explicit timeout/error states and freshness deadlines.
 - Returned `wallet` echoes the argument; it is not ownership proof. Validate every lock's depositor/mint.
 
-The SDK's `checkSubscription` plan names can label Season Pass tiers, but its summed amounts and whole-day flooring do **not** implement the default per-deposit rule. Do not use its boolean to grant that entitlement. `getLockUrl()` is an **optional / legacy** external handoff only, never the default activation path.
+The SDK's `checkSubscription` sums amounts and floors days; it is not the subscription rule above. Do not use its boolean to grant access. `getLockUrl()` is an **optional / legacy** external handoff only, never the default activation path.
 
 ## Optional API evidence and legacy exact policy
 
-For an explicitly selected legacy any-active/sub-day or large-amount policy, the documented endpoint can feed the unchanged evidence helper. For new Season Pass tiers prefer current on-chain account reads. Do not modify shared SDK semantics for one game, silently sum tier amounts, or replace a shipped game's policy without the owner's decision.
+For an explicitly selected legacy any-active/sub-day or large-amount policy, the documented endpoint can feed the unchanged evidence helper. For new subscriptions prefer current on-chain account reads. Do not modify shared SDK semantics for one game, silently sum tier amounts, or replace a shipped game's policy without the owner's decision.
 
 `GET https://scan.devfridge.cool/api/sdk/check?wallet=<base58>&mint=<base58>` supports CORS. Response: `wallet`, `mint`, `ts` (Unix seconds), `locks`, `activeLocks`, `bestLock`, `daysRemaining`. Lock fields: `address`, `depositor`, `mint`, `amount` (raw decimal string), `createdAt`, `unlockAt` (Unix seconds), `lockId`.
 
