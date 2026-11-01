@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "reviewedAt": "2026-11-01",
-  "bytes": 1952119,
-  "sha256": "1a6e7fb9696469905ab745cf37f072218697e6874c01b1e4a661e84c1cd0f17e",
+  "bytes": 3619371,
+  "sha256": "9de2f5ebd91be190ec6e6efd7a88864de82765774653d7f6920b424d4ebf580d",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -199,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "405cbf552c4f8489d71394c497d172828b3de039cbaacffe7c0efa1d87f4ac74"
+      "sha256": "1aa703c18060fbe1a6d4f814f1de2f610f26f58f851d52dfe644cdbc1600c9ab"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -235,7 +235,7 @@
     },
     {
       "path": "references/gamedev-skills.md",
-      "sha256": "946a622da8fd947f52a55db3874417f1892e2cd91ec1bcf2b1cd0c218dbd2db9"
+      "sha256": "090052cc63f128558e6d321454fc686b10460ef45fad1279a10d8fc2289ec3eb"
     },
     {
       "path": "references/hackathon-submission.md",
@@ -248,6 +248,10 @@
     {
       "path": "references/incremental-build.md",
       "sha256": "81c03d4557a16417ab878d05b3c5220abbe7070f0f520d228df4cbdc5a13de49"
+    },
+    {
+      "path": "references/landscapes-and-architecture.md",
+      "sha256": "982021ecc1111cbb11f0eaede28e0105bd7327497b346f25bfe2dc2affa85fc6"
     },
     {
       "path": "references/logo-and-store-art.md",
@@ -315,7 +319,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "b473f1cae6651395960d37d96c9e7760c0314bdf8fff1e81ba14f9f6da794955"
+      "sha256": "4b7b733b2f367f80b93e2ea709310972518bf21b1ace352ab3cf0451b64561e7"
     },
     {
       "path": "references/visual-realism.md",
@@ -327,7 +331,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "44b75c73e111080993826788054efe87b5f206013f2ac8366748009c9286548f"
+      "sha256": "dfc0246d1be3431045ee251a590af23f6318b4a6675bc75d0bc81ed864360c4a"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",
@@ -2284,6 +2288,1270 @@
     {
       "path": "vendor/gamedev-skills/threejs-scene-setup/SKILL.md",
       "sha256": "bdb7f24b888cc728a05a09779502ecc339c4a4f8a9b4dee2ae380fadd95f68f0"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/build-mobile-threejs-games/agents/openai.yaml",
+      "sha256": "5856235e4b1cce930ff0c940d777bf6574cca74d26dc1e861f560e751d1d8e1f"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/build-mobile-threejs-games/SKILL.md",
+      "sha256": "7c38939b8b919f8cac1ca2f7040b35a5c05ae43adcd9c4c143184180bc7b007a"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/LICENSE",
+      "sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/optimize-threejs-games/agents/openai.yaml",
+      "sha256": "09dba7d1cd8a3d0b18ae5334ebe8f99379209a8ba57caae65b2084250cb846e5"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/optimize-threejs-games/SKILL.md",
+      "sha256": "d50e8c26ae8130b5cb37da32835024ab281090f107bd52caa476b80a60f2e2b5"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/README.md",
+      "sha256": "29767d4c754f4ba578c98a83e795d699958760abbe2835ee654d82aa98b4b313"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-landscape/agents/openai.yaml",
+      "sha256": "92bc56e5b93243293b261ab56f562ef244604c965884aa6efd0df21cf11697ec"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-landscape/demo/index.html",
+      "sha256": "8529d56b5308cdf7bcc8b32ecd78d9c2a490bf14647e06e0587331849d134f52"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-landscape/demo/PROMPT.md",
+      "sha256": "aa23559b8f4c502e1dc05ea6fb10a77e40f3c30d849edb27106455b584a8c685"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-landscape/SKILL.md",
+      "sha256": "fa361bdf1008be41e9447ebe1e9e195a6d0ecc9a781a8e8c63ac25cdc7aedc86"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-towers/agents/openai.yaml",
+      "sha256": "2d6123d7f8df5d0f0a477b27163f8e51a628b8fae24d8629205924148301a96c"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-towers/demo/index.html",
+      "sha256": "9c1f83cc6535b5cadf58439de3f07abaa7262bb26ddd722e36265b3e3d00d852"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-towers/demo/PROMPT.md",
+      "sha256": "5a85d11d8110d6c69f0cfdab785c3be16548dcf1f7f399644ce631856a15b322"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-towers/SKILL.md",
+      "sha256": "f184ccfbad0ce6ed6e00731decf2fa044109c2bcd40fc9793e4e2de3ee4bb0a7"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-weather/agents/openai.yaml",
+      "sha256": "dc7e341ae40d71eb75f35fc706fdb01e032540063873afe1cf8932341aab4460"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-weather/demo/index.html",
+      "sha256": "b4c4a5c11806f1391137b7e70788c0801aa84f0a7b02272608a6a0ad8ec2f1c7"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-weather/demo/PROMPT.md",
+      "sha256": "142ce18c56c86b0849651d16b789b3a75c1bd1554c61973c9c82c06488f02bda"
+    },
+    {
+      "path": "vendor/mengto-threejs-skills/threejs-weather/SKILL.md",
+      "sha256": "c87f93d7189459fda61cadad78fa938498c0612a106c6084746ee5784fb1d6bd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/LICENSE",
+      "sha256": "f1bda038ede2d9c31d1dfd57db6e064f91f06862a31e36cfce78c351658ea397"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/README.md",
+      "sha256": "94a26c548a8b9e8465aa7703267b7e3b91c0a3dff49f6b7d0b44005138cb4692"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/agents/openai.yaml",
+      "sha256": "85052fdb72318686db7c06a8472959a71833bfa9ce977ce16553973a8f78f949"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/assets/lut-aerial-perspective/THIRD_PARTY_LICENSES.md",
+      "sha256": "75f6194a2c36abc1cd61404273b1b9c35598ce51fe6c0f6a6312de1e7d287546"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/atmosphere-effect.js",
+      "sha256": "1ff337d6d9a3d82fa54ca926a7bf2c59129424ca91fd8a56f22f3ead13ab3af2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/AerialPerspectiveEffect.ts",
+      "sha256": "635e66aa6132c6df207fd20e564aa3be0bdcf9ceb647c61fe63cee8ae8eb81ff"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/AtmosphereMaterialBase.ts",
+      "sha256": "19023fcf9c07c68d9fef704cf3b13286e99b457e701f7215f91fd6f3382b5833"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/AtmosphereParameters.ts",
+      "sha256": "498fcad1d7ccd3779a94d0f314c2fa0ed38a9217cee521d32ea57f9f24c7340f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/blackBodyChromaticity.ts",
+      "sha256": "f1a32829253551f75c7c6f526292e3db9a0c4819bb21939de17fbb6928b2194a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/celestialDirections.ts",
+      "sha256": "b17decc89e6c6ecdc147d9a1f32c1afe4fd3e9ad3d45af0c2f9d7ae407171cf0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/constants.ts",
+      "sha256": "b02c90d8f59b8456bc16de74d4b735c9494000cbb28e9e105b75346013d667df"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/getAltitudeCorrectionOffset.ts",
+      "sha256": "5dd83c54e9ecba86d297250f9dc52f96e8f41582c717478326be72488b5bc00a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/getSunLightColor.ts",
+      "sha256": "dbf85b75931d892ec1f2d2208ccdaf5e3a450f9795bc8842c4d24a5b13d4cd12"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/helpers/functions.ts",
+      "sha256": "5e2292f455218068ccbb078e4971e5fb353fe099a4641928db26f9ebefed6e8b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/helpers/sampleTexture.ts",
+      "sha256": "f56153d1e3da9d95990590737d47b1759d048dc1a5af44c30f80f26f8c86acd2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/index.ts",
+      "sha256": "74181594427bcff4bc0c8d85fd719a17c515574ac3a8dea37d54977198b1cf92"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/IrradianceMaskPass.ts",
+      "sha256": "0684c4fb8c26a14f8e345f939b1aa9a52a1a8b6b95ca99a0c7983633e925e84b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/PrecomputedTexturesLoader.ts",
+      "sha256": "d967e96a966094cf56153049ff3e820ed01a50a17c680a96cd86e568cf0c9034"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/aerialPerspectiveEffect.frag",
+      "sha256": "239f0b99a4c20d67f1eae7acdddfb352aaa33ce1a273010e6f6190d192d6ff51"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/aerialPerspectiveEffect.vert",
+      "sha256": "bf7c462eafe12ba0608a512cba86dd3b425994de0adbc135981ccf05ba3f5b2c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/functions.glsl",
+      "sha256": "caccd3d49cf34408b408a33d858b631c55c78222678db59b67206ae2646e6722"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/index.ts",
+      "sha256": "51176408e716a12da3ec39961b204c5f507ac84c5b25ffed98cd247f43a351c9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/irradianceMask.frag",
+      "sha256": "d2079d4cff7e81243c2e1b5b9aef1ad07872c820dfb5a41476264e6350208b82"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/parameters.glsl",
+      "sha256": "60ce2724fb6518d8dee5749f26990a5cd169d4d8dcf57360dd5224f3b7dfe4da"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/sky.frag",
+      "sha256": "7d3e240f9f0500984aec837286edb9710e3b65db0dc3ce4f74445561895b9b07"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/sky.glsl",
+      "sha256": "c0e93aede3f60a6e25adf3f2fe79f1ee64e1edf478eae7a6aade531ebec32fea"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/sky.vert",
+      "sha256": "29b2e09a7bc6f011ea6f0131b8978089e6de161f4f786305802a74a4b8ef4884"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/stars.frag",
+      "sha256": "5f3d9882f6be18a07d6651ea0f6d29cc528fb214f9e57878e99abba4d3ae8855"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/shaders/stars.vert",
+      "sha256": "7eca65f8f175d95972525ba866fc94ced4229027c0a2a1f0bc325d7bb075dbdc"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/SkyLightProbe.ts",
+      "sha256": "1a602645775cead716572c2ab85bc9642a0600cb4ff331eb8ae3ff6a88ea4b2c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/SkyMaterial.ts",
+      "sha256": "2a7b4efe6f8e5de09c45b5315c1f224c72c944e67193c5f8239b1f05ddacebd8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/StarsGeometry.ts",
+      "sha256": "60747398549e3a6d3ff3789163502b219472fa2e69a5e0305112fe9987ba09eb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/StarsMaterial.ts",
+      "sha256": "b6df36cf20b22637c5072ece276592409baae2cc453b4e63ea2d6aff34d13a9c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/SunDirectionalLight.ts",
+      "sha256": "576190e72e9812bb9ed1b634ef04c0b521df965d79c3e1a6e83d3cc13900eb31"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/atmosphere/types.ts",
+      "sha256": "735bf10b5c74cfc0017d05ac9e38e41fb728de11ba814046b8370c61183ac3ba"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/createHaldLookupTexture.ts",
+      "sha256": "839ced40f5aaff3f9278bb164e459fa354e292c03237d278dc024ee0997ed59a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/DepthEffect.ts",
+      "sha256": "7e8a0a1cc233c78e6e05db548d3643274ef97d786a032c094feec1133d2f16cf"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/DitheringEffect.ts",
+      "sha256": "b3c67f7580c4c776bfaad7a518f7bdaf7b5cf518c0acc91ecadc15875437c4c5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/DownsampleThresholdMaterial.ts",
+      "sha256": "02b4a4c534fee7ce3738c46877c90fd9dfb9c40b30861e5782cd23c2e10491ec"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/GeometryEffect.ts",
+      "sha256": "b7e4cdf24fda7400d6d8b2579ccd54f3e049bc4d049c742a9afe1645e335ed3d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/GeometryPass.ts",
+      "sha256": "006be1fdcefc882adf375675937e13841f10c9583cc99f34f821f578f1f4ba84"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/index.ts",
+      "sha256": "e056d6c18e8d34359cb5cdded5cbccc7cb42f06406a80a0f07870727b06c4bd4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/LensFlareEffect.ts",
+      "sha256": "8189241b901ef0b9e055da1dc76eb75e20ff76e3b52d0ae4e1b3aa1b92bf4f86"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/LensFlareFeaturesMaterial.ts",
+      "sha256": "dd58aa371c0f051d8d733daddb76bb4469213f253cef354e8cf32110aa1e798e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/NormalEffect.ts",
+      "sha256": "5b7f966686fdd6b8e768b32b070eb0c41f23b737ff6b3540739ff6e7cc375fa5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/setupMaterialsForGeometryPass.ts",
+      "sha256": "bf46e742f5de2042fb25d72452757f7706f01b62ded3f3e4d1fa4aa21e5aa1bb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/depthEffect.frag",
+      "sha256": "a3049cad837d75927c4d7f0e4fa4e3d4a5a67fff06e4dd1e57347435d2ba22f7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/ditheringEffect.frag",
+      "sha256": "1e0a027ee24375fbe76adc56d809a95ff66278783a4b47eade092c7550669eda"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/downsampleThreshold.frag",
+      "sha256": "efe4e0541955d5ba53990b1c2f6e9e7fff441ef565ed446dd5ecc7cf49781860"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/downsampleThreshold.vert",
+      "sha256": "20789ba91777e66998731e4855b3a5bd216f9f21cf6a537b71b4baa17d55abb4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/geometryEffect.frag",
+      "sha256": "1688c5664c8d48f597980d1818a80115939884670b34ed659f891b15b10f1d4f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/lensFlareEffect.frag",
+      "sha256": "772354fc69902763eabf3ccf93a6778b06a4f5ff7ff642e2b995e27ecf8aea44"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/lensFlareFeatures.frag",
+      "sha256": "9992cb7cddb1d6dc4c2dafa9f7cd986e91d4b949b048327ee822a954cd9e03d7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/lensFlareFeatures.vert",
+      "sha256": "3e7d7a288483fff5d8b8470f68d5fa93333e848645d3882b9b9aa4e2ae3cb0ef"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/effects/shaders/normalEffect.frag",
+      "sha256": "bb5483dff64f177297b56be06a0aef43d74dfaa3f5d1dc4654a6bb51862253c3"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/ArrayBufferLoader.ts",
+      "sha256": "18b68f7e6d10da87a2be198ff5738605c3a715df3fbebecf43107fbbefc46a3a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/assertions.ts",
+      "sha256": "ff3aab17fb8894d3be3f43a92f9a7a9febee2700e3a65d55f9fc07a38ff9b7f3"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/bufferGeometry.ts",
+      "sha256": "74ceb465c5d6f18f764ad5a18b1896591b1727d3cb13bfb52947e5510967441a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/constants.ts",
+      "sha256": "27e84351eda1ac81e316de2336a1b60622d2e31c2408c80408dda90155e27e42"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/DataLoader.ts",
+      "sha256": "f9458dbaf76372f104f9b4a5dcf0c20b9df250ed8b49e545eadbb02dc8cc1e85"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/decorators.ts",
+      "sha256": "a3e90e0725fcd444786d1079c3f5dafe7b085d70a0d37092457fcd6ceddb8371"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/defineShorthand.ts",
+      "sha256": "da8cba03c4f314cfde0f6e01e8d7a3e58a9cc0ff0ba7882df82e973d16882ecb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/Ellipsoid.ts",
+      "sha256": "54b60bf96ffd174e32289d1925d9b753cc3955315f7d2720a6f1c986a2ba5c41"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/EllipsoidGeometry.ts",
+      "sha256": "af5c2f87204fcbe82fa4fa679cb2bcedda144556b0dbe551989226a4e0e871c6"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/EXR3DLoader.ts",
+      "sha256": "cde2c4dfe5c9dd7fc69a2bf639bdf6982c544241fcb01f06aa385407cf9faf46"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/Geodetic.ts",
+      "sha256": "9e25a166ab61afbda3b57af6f10d6f0f34931dfa3a01e41ba791bbe5e02a7b45"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/helpers/projectOnEllipsoidSurface.ts",
+      "sha256": "ade16834128513e4f2be5745a184ba3761c3ed3df499484bfa24a24795138a31"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/index.ts",
+      "sha256": "d9d6aa10fdcab03b8b2fa3f58af82a61dddb3df4b2c1b54ce3c8b889400082fe"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/math.ts",
+      "sha256": "884b1db3107e5a301403820c25b2d05e6533e8cdedd8a85fb11dfe2bfcd563a7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/PointOfView.ts",
+      "sha256": "8b156e323d601b9414bbd5f08aa1231c33141e646287656ad616aad35983b8f2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/Rectangle.ts",
+      "sha256": "b4ebcd0900a17df7731dd2e90ffee12c27b875b823db5e186c2f2f84f74b5832"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/resolveIncludes.ts",
+      "sha256": "b6d7500fc890f9498f82328dff21ddb1cf7b226695e51a43394ecc57b0fefb70"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/cascadedShadowMaps.glsl",
+      "sha256": "21294861fe7f3c08e2843446fded66e6e748c0d0cc1d0260b83a5398539ec8cc"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/depth.glsl",
+      "sha256": "fc6636dd4e3ee402c21a3534a12f949ff25d77d4975472563c2bcc95dc7edaf3"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/generators.glsl",
+      "sha256": "eb7369ca4676391b7754ce21b32cda02004a18cc628189b8ad485c5110e0036a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/index.ts",
+      "sha256": "42cde3a8fc4ab06717d22ada267f47e9198848ed03652debc48608b36546fd08"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/interleavedGradientNoise.glsl",
+      "sha256": "a557f5b3929198c009ba24f942c31871839e06b56d8d8eb038b853baf388bbd4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/math.glsl",
+      "sha256": "55373dcef9485064c15de7f1df586ee1e4865a32a340d77494b32eb20470448e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/packing.glsl",
+      "sha256": "e46993470503af7aba5a974259725b433b3cc8c61eaa347274a561d868e985af"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/raySphereIntersection.glsl",
+      "sha256": "bafb3ff6d6c9d60aa8a5b3a098906b8cc712a3a3e9cc7119d0688e9bb2b82463"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/transform.glsl",
+      "sha256": "81a99ca8d25eb1fbbadc49cbb9a799af4da2f1b317cedb1cea349a222f55e551"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/turbo.glsl",
+      "sha256": "7c551505d6fe3c640f9cb040cf54639ae6a9b97dd56eaa976e665f1b23a13e7e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/shaders/vogelDisk.glsl",
+      "sha256": "2171ac44bf7ab3c34d03c62da8ea2114bf45ec0cb526949d5da1c90c393acdc5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/STBNLoader.ts",
+      "sha256": "85e0c5582a839a8c5399c5c7f70131ded807058f956340ba183865b71c80fb5c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/Texture3DLoader.ts",
+      "sha256": "d8530859926857230f7044f8ce6f94e4bf5dfd70e344383fe7d36ed0034e1a72"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/TileCoordinate.ts",
+      "sha256": "4b767e182082e6431e610e6cccc4259d85f9a485d10bd569e345627248b34bc1"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/TilingScheme.ts",
+      "sha256": "ea13df003c68d88b3fa0686e65471ac16e8ab7fc81c856713943d1dadb3afdb8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/typedArray.ts",
+      "sha256": "7893948fb132d36fe9d640f4a16a0e2e58cbb3fb6fc37ca8870fd512859d6609"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/TypedArrayLoader.ts",
+      "sha256": "c27502a88ccd94d3f7bdd835f31356c5d9f5cc35dcfdbf32036f92ed3980fbb8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/typedArrayParsers.ts",
+      "sha256": "3a1f774e459995385f5b4d4ac8974c8cd49ec846cbabf20f595293079d9f6c67"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/types.ts",
+      "sha256": "e23f248140a7b00349d34ed3218c000b676f132697ce2fe940a53cfa225d9885"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/geospatial/unrollLoops.ts",
+      "sha256": "48f00f950d4a75d516f11713d5789548e7081009599b896b8e392255cbbc565a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/vendor/tiny-invariant.ts",
+      "sha256": "d67deb2b444437d89fea44e5d9fc4172cfc2926aef769c1566e3925f76bf18ee"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/examples/lut-aerial-perspective/source/vendor/url-join.ts",
+      "sha256": "c3036e64642715a3f75c42a53ade4739216b2fb3aa1a67502494a01f73db1fc3"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/references/atmosphere-system-contract.md",
+      "sha256": "0eb8403d550e1e7a89702ac4de7d0c45691e1eaac7d0f49a7fb9084a9f003598"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-atmosphere-aerial-perspective/SKILL.md",
+      "sha256": "eaf3db23786994eb8216fad63a4e92b256ae20441a7746199c9edc38ef6ddc5e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/agents/openai.yaml",
+      "sha256": "7ffbca75ae84ecd7739b9d2d565c79ae0377be3525aa391fccad31a758bcf665"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/assets/procedural-financial-tower/THIRD_PARTY_LICENSES.md",
+      "sha256": "13daddb1f51c72887578cb205437e5510f7425b9b664ae11bcc5ed06f486d0d8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/examples/procedural-financial-tower/building-system.js",
+      "sha256": "59db7c2674bb50a22340c6bc808d5c31143e670697cdc9cc624a75d3e421b3a6"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/examples/procedural-financial-tower/shadow-clipmaps.js",
+      "sha256": "809e6c9605505cf3fa67de24f9e79db8faf82ad252822817e31f3e161de8efb2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/references/grammar-and-mesh-compiler.md",
+      "sha256": "a7a64db1e0eed0a8bf58d89c6182c9f8ecbd9397133b6479102a05f9f8e18f64"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-architecture/SKILL.md",
+      "sha256": "4a2327585614bd3c878a9ea1ed1048e824f339ad38193c4da4492e5a86c8c609"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-fields/agents/openai.yaml",
+      "sha256": "c34611605c6649c8e7a07c1a0508b4b7803600090230b1c9aed080a1e369a858"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-fields/references/field-stack-recipes.md",
+      "sha256": "6a6d646e6e551a9d32fa51f7e2735f6695a78ef986387d7f0eb7d733db614567"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-fields/SKILL.md",
+      "sha256": "4adda9ecf13be183a30c106834204ae6b96418deb3e254965b3e8ab52f0f9358"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/agents/openai.yaml",
+      "sha256": "bf9dc7b18e79a7f0a53ab2d97fd0b9ec614a5f1766ff208c9062f7a34ae54d2b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/assembly.js",
+      "sha256": "87951bb58ebc35d5d2353759dda94752192bdab8f0dd13b536b7a5c6ef071168"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/geometry-audit.js",
+      "sha256": "3aeac29e9b64164ba25046a587948e8eae206369207cbf77599b5b47eb6cb58a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/geometry-contract.js",
+      "sha256": "2036e0a77a99aba6de29985a939f489fbd316415b023e6604e0cc9e8bc693220"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/mesh-topology-audit.js",
+      "sha256": "bc45caa918d15f04de56874b0a8757462d292736dba24c7d1820b331464babcf"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/procedural-mesh.js",
+      "sha256": "f4d28eb2b4b1d5d18634e846e79259150e96d68d7d145d7ca5a220263601ccdb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/assets/geometry-quality-kit/selftest.js",
+      "sha256": "1c3e622d91220d189ad25431fc7bfc56bd96e6cfec9cd57e28d624454891c09f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/race-car-model.js",
+      "sha256": "c616f2251cddfa0fbc801da83cb6ee76d3711e63fa9dda14c3424224740b243c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/source/design-contract.js",
+      "sha256": "b77b673c2fc2a37dc0f6145c23b1d7aa6b722549334e6f5786e2f7442ba8af29"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/source/mesh-kit.js",
+      "sha256": "0460d95c0eb58732ebfcba734e8a21a83fd7d0dafe7b04cb456014c20ccc688a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/source/race-car-materials.js",
+      "sha256": "bbc995cb06cc44b3e125f390039a334d0c4f929d53028a080afb75ae90b2e83d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/source/race-car-model.js",
+      "sha256": "d0f02b0a2c89a63b211288fffa352188126beca9fbeb37db574d03409fcf83e0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/formula-one-race-car/source/race-car-textures.js",
+      "sha256": "f2a26953a39e91fb802c4eb044a49c4f089a61e0038961fd988394e7e02faea5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/porcelain-brass-submarine/source/design-contract.js",
+      "sha256": "77b4606de96b0eaa382888f5a2acac185cdc87df7ce225a6a8a173b9941b5ed8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/porcelain-brass-submarine/source/mesh-kit.js",
+      "sha256": "40b78a46b2f9011d2f0e2f0b75e2d1ecc395b1e78e0564b724f61c5bb87b9868"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/porcelain-brass-submarine/source/submarine-materials.js",
+      "sha256": "1a45c86b7ddad2bc30c0909d392d3bf775d3c7d55fa8827f47bda510ff3c9749"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/porcelain-brass-submarine/source/submarine-model.js",
+      "sha256": "1ad689f1d32621a10eb9aeff878605dd11ff01f0965e3fd86c849f7626a88745"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/porcelain-brass-submarine/submarine-model.js",
+      "sha256": "8b05ae5a5988086dfe16d84285ab512b2707d14a9f05ea238cec873cbfe204cf"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/procedural-optimus-humanoid/procedural-optimus-humanoid.js",
+      "sha256": "2a4c42a7d8032477ffb3daa3006e97dd12bd7dec10a1de1fb59f1df2e5703e20"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/procedural-optimus-humanoid/source/optimus-humanoid-system.js",
+      "sha256": "871812a2c196ff12758e73859a91bf236ed174d91e81ac1a5489d3b1a20468b9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sculpted-gallery-frame/frame-geometry.js",
+      "sha256": "5c72a6b4cf907ff32a5f9e70ac20d465e435058f227b2ea3ded242bd60e8fac6"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/motorcycle-model.js",
+      "sha256": "9df4588bca9255caede415af980e3716ac882acd16eae59a27489e40de47a6dd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/source/design-contract.js",
+      "sha256": "23792a5bceaa8431634dc55efb5bc8ce267873efb81aa273badd3fe1d05c394e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/source/mesh-kit.js",
+      "sha256": "41f7896861495058fadb6dd5d92069b5dc2734f0e43dc96d6d26771c3b53b959"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/source/motorcycle-materials.js",
+      "sha256": "592c2a25680a88008ed1d8567fa6f986d6753e7353344f6c7d383e84e3ecd63f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/source/motorcycle-model.js",
+      "sha256": "8121ef9ddc37536edd9101c49042be8f13fb3ff289711c461062cea6163449ad"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/examples/sport-motorcycle/source/motorcycle-parts.js",
+      "sha256": "25598efff6619547c4127dc86f11ea655754127cf58eaa76dc463b5509616d87"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/complete-submarine-assembly.md",
+      "sha256": "ad2f19f6724a8ca19139e50b29e8d2b0cf76ed119901c1084a2e8508d2838ef5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/geometry-craft-workflow.md",
+      "sha256": "753a5d22d5fea4885f402bebc67d3778b55eb61d3669d74793730edbfd4e731f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/geometry-quality-gates.md",
+      "sha256": "8cf31a921b079c4e964059095a459cec69dc7e3befa6aed5a7678559f9dc1a63"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/procedural-optimus-humanoid-assembly.md",
+      "sha256": "76a12495996fd2ec9d9fd1a9971a8109605f95350a802e96c1693e144d783096"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/profile-sweeps-and-mesh-writers.md",
+      "sha256": "bc8a48f804676da92e5b5d7a85751fed13d71d509eb584f254602d6b8c0301ec"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/references/vehicle-loft-and-projector-contract.md",
+      "sha256": "53f7f3fda3ecfc48cd8e23aa141e9c14dd2261664ce361ac78347da7618130d2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-geometry/SKILL.md",
+      "sha256": "d59eb9333f30c7282de22bf59d9340fbb143af5770daa2c82b7c269d0bb124c0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/agents/openai.yaml",
+      "sha256": "be8f97221587b8b2192555182580a155a51a371724aa1066af5b244346726b0b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/deformable-sand/GPL-3.0.txt",
+      "sha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/deformable-sand/THIRD_PARTY_LICENSES.md",
+      "sha256": "47ee7196957705efa8c5c7b7f76cfe057bdf99cd742a9e5e57d3f8fc02e628c6"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/raytraced-diamond/THIRD_PARTY_LICENSES.md",
+      "sha256": "dd009fc8e29ab38563a39762c7e51647559185be77a94b61c822db2934637eef"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/simulated-tearable-denim/GPL-3.0.txt",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/simulated-tearable-denim/settled-drape.js",
+      "sha256": "83a960f44dd71b6fad58bd6faee4e6022c0fad91d1098e14ac3d83b458d2fe09"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/assets/simulated-tearable-denim/THIRD_PARTY_LICENSES.md",
+      "sha256": "cdc4771bfb0284cb2b7c070070988a313bf9d18844e26344c5ecca9ebb1fb5f9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/deformable-sand.js",
+      "sha256": "8392d5826fb87789f1288a5a67a64fb754c654d3d8c44d469ed8f3dec36b9bae"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/config.ts",
+      "sha256": "d770171ff8a46168c9ca1cea224cc3f1020cc349971cb1f1e0890128e57e8f64"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/input/strokes.ts",
+      "sha256": "646c0e323c1bf050a4ff6684e034e38c923526a466d486bee278593ab3bb5fa4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/platform/shader.ts",
+      "sha256": "cbe4ed45aa4f57ae82dadaee5138ccc46751461c76a500034f596e324dca312c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/airborne-shadow.ts",
+      "sha256": "e31f53c2ea0519cfc27fcedf1cad661dd2990a786e3038ac5fe4dcd88c5995ba"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/camera.ts",
+      "sha256": "e8c56f9f44148de5c49d91a9c10d26714ac230624a92df6d196a2dea95a4e618"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/coconut-shadow.ts",
+      "sha256": "c107c24627b76a8941fec4ff5b1cd9cc30fac17218bdb5da2cd7bc4421ca3c84"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/lighting.ts",
+      "sha256": "5b067ffada5a5ca8d392316bb407cfa719553ba37768d7cd9c20ee112c1e41d0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/postprocess.ts",
+      "sha256": "8b0b33d1c916c7c701ce9d981d75ebf3d23b1163dea5f9d74723474f584cd185"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/renderer.ts",
+      "sha256": "9568589a91554d9c6623f31257c4129132f0fcbb41d54c1851ef649954450abf"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/shaders.ts",
+      "sha256": "66954273b278e94e0621d204dbe9daf6538441db5f90cf1e8613b24e09afb20d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/render/water-reset.ts",
+      "sha256": "03e6bb45b0b583c49bd6dcb209ca54858d5a2f398349648f435a4768fe345402"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/reset/effect.ts",
+      "sha256": "d2da11a254a75dc0b2f6e77a19a7b77118a5d6169109cf0ea8874c4742c2beeb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/reset/viewport.ts",
+      "sha256": "c8c58a59ef1c5fee85a0829a432b1817c201a1dc9a0aaa282b7e40337d50daeb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/reset/wgsl.ts",
+      "sha256": "f2dd13d82ed235f29a79138b5da66fcb7148bc15199024450a11a657873861b2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/simulation/clock.ts",
+      "sha256": "1e1f97974f4ac76fce2f4d94a70c0775bcca2bea83f247fcbecab367d80a6efd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/simulation/flux.ts",
+      "sha256": "caddc2b00792b9518e0f2b308a1a6ecba35bc97f854a6ef485df7a6796ba24dd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/simulation/shaders.ts",
+      "sha256": "d735d69a8efb50726f72e4b874d685fc943835d8ede1cc6793e5b1025c6f3509"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/simulation/solver.ts",
+      "sha256": "ae0f15965074a41ef50086ea9d18f1f55d368b5b43a3ff041c16c03673e210ef"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/deformable-sand/source/simulation/wave-reset-shader.ts",
+      "sha256": "b0459b867b766f31a40e879fdc437f97b51c270c88a2dc6e0488c11b84151056"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/hybrid-soil-moss-surface/hybrid-soil-moss-surface.js",
+      "sha256": "80fd01c8fcb9ec4c167854baf75ad6ce9a8976922e95aec7dc7f433db2584575"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/hybrid-soil-moss-surface/model-moss-accumulation.js",
+      "sha256": "f1670ccb4f6be9e82fd5d117045a3513027f98e85c70558397c68992721f3cdb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/lava-flow-surface/lava-surface.js",
+      "sha256": "492e4fef6e5ba667d2a557255b4979ae7fc52b4879bd67ed286661afa9e42fdb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/luminescent-butterfly/luminescent-butterfly.js",
+      "sha256": "95bc883fef81df66fe3c86c928fb1c41c3d95c5d3e6f85fd9b6578f232b521af"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/luminescent-jellyfish/luminescent-jellyfish.js",
+      "sha256": "323bc384a41633f819a242d0c650240e7c51ad2af31fc97ae7200aa806f11904"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/physical-diffraction-grating/physical-diffraction-grating.js",
+      "sha256": "3931b70f6ea8fc608fdd81304642e16985d8c7907a31416f41575728a630ac98"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/raytraced-diamond/diamond-material.js",
+      "sha256": "4bc99bfa7247a04f5ca618195ace235f06aad48f5168aced7bc8ed761ab76d67"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-cloth/simulated-cloth.js",
+      "sha256": "c9a6c514d61f007fe4523eb7d515bb72c040d14bc1a2724cabdf137f39e2a1b0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-cloth/source/cloth-kernel.js",
+      "sha256": "f13cf47b798e5e7e399148250dcd60cf050d25358055d7fd74d9aafe3f885ba9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-cloth/source/cloth-system.js",
+      "sha256": "db7de98532d85c48c33599e96c3e8316779b0d2062ba2fc15d7286899087f085"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-fur/simulated-fur.js",
+      "sha256": "686a2f6e15211356b0f3410eb5a4efbd7fd6b5c42687218004e7690797424273"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-fur/source/fur-geometry.js",
+      "sha256": "fba73ab647a76590c495b04dab1528699dbc52c7d3e2b9aa067246f1c8b5fe26"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-fur/source/fur-system.js",
+      "sha256": "f02bd48c3cd7a5e4c015da384088146d5b7b16252a0ed5b7d485ecc82c311204"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-paper-burning/simulated-paper-burning.js",
+      "sha256": "9a12a2acd356a541255fc540426d717c44f889d0ec4b440d27cc982c2ec2575e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/simulated-tearable-denim.js",
+      "sha256": "90da7e9b67914ad579e7e76a6a13b74f1fe639f66a0d974dc37e7e1c5e9d3ee7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/denim-system.ts",
+      "sha256": "ac20ffc8eee1fbf65effd094eddcffede97b32afd8cbbe6f19e9cd7f93d8f9a7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/gpu/util.ts",
+      "sha256": "ada5c47c54752f03549a25302a9aebbec5ede682e100c8e8b3911939e8c59f3e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/camera.ts",
+      "sha256": "189f3959547f274c41dd18a37c6f619206a1a05df9d873bb441395c0a641f240"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/math.ts",
+      "sha256": "332c5d91c494cc3c650292d41237c64aeacac97277d3d39c0a243c5d8d2ce21b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/renderer.ts",
+      "sha256": "37318d8b7fb6c051d9981a21cdf7bc79b11ab76809d6cb3db02e23f25104056c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/edge_roots.wgsl",
+      "sha256": "2188a15225c3e99f404dbffc597675518d04c7c29d8238be0524820c4a04117f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/edgefield.wgsl",
+      "sha256": "2e998704e4dddd753c683ac461a5aa4d9be1c117683886b753db52101a4ad1cb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/fuzz.wgsl",
+      "sha256": "a6a46546812a646f10533231a4c4e98b3874f7d7554f997d1257d11f5e580f8c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/material_map.wgsl",
+      "sha256": "6e7eb226fb4fa8c861f3f46dddba9e181e5f16bea28efabcdd3a135dd660df5a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/pieces.wgsl",
+      "sha256": "785c144c61c3e358717f45509a9aad9957e9c0a46c9cfd918d26dd0a42dafbee"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/post.wgsl",
+      "sha256": "63424c22d598e9609202ccb7cd11c4d82bcbd4db3e9b0b75109fcb890062a96f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/refine.wgsl",
+      "sha256": "a1060b51de64d85a72638b39498604a8ff2f3896edfcd2b8933748f32864908b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/render_common.wgsl",
+      "sha256": "f0a0a3daa5862aa779bee518ef3e083772f9845236f03331c9db41dcb53fb5e7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/render_light.wgsl",
+      "sha256": "dc9cae8ae57408948741aafd0c9e80ec987a800b61cdb8f15a6d7f33ec6c06b7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/surface.wgsl",
+      "sha256": "a004d9edd7f1f8a0448f8420441d089e218a55c78551df12db619e2a4ad7d050"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/thread.wgsl",
+      "sha256": "951d28f9fcb10457d5b49e2361b999bb320654715bc7645b3ab630df917cfe1b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/thread_geom.wgsl",
+      "sha256": "44a5f9df60558da0139562619d5cb24c95d1b63548899c9bb750f4bd6b172e55"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/thread_prep.wgsl",
+      "sha256": "4afd44801d0fd27dee672fbdba710b043a68ffe2210e693bae2f0cab69b99c26"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/thread_tail.wgsl",
+      "sha256": "306b65b51b72282b68e3d42412d8326981aa26a96376c8a11d988428c73270d2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/threads.wgsl",
+      "sha256": "bbfc56e5efc60e3405170739545d67def2ceae2eee417346ce2223d4a496550a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/rendering/wgsl/weave_tile.wgsl",
+      "sha256": "73ef04a6e7c772cbcc892cd98161e058f620f8728c5e1980a034c9340fdcfd50"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/shared/noise.ts",
+      "sha256": "be87379b09da402caeec4c1c348d937793f78a881d02af93e4b3aedc84c4e9a1"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/axial.ts",
+      "sha256": "4942cf56243a01c2e49d2a904af6a32711d6097b456593ec1a26f1fba9c56ea9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/fabric-config.ts",
+      "sha256": "dac6babf29b20471719f1255227c38b6787192d18a5c7237275aa8b29ddb49b9"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/contact.ts",
+      "sha256": "09088c5117c8705d2d529c99c4cf0dd3c2e8f039e0280c0a51b0ed9bc6826f3f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/interaction.ts",
+      "sha256": "6f56d43964e26674921ea4c4bb15ade07beeccb84cf20b19ed9bf576522c2b8a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/selfcontact.ts",
+      "sha256": "1c78427093930235c19cd83f8883c90c9d6024a7236d8ba710bae5465150ab08"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/settle.ts",
+      "sha256": "a2fb060a2f7a9574136826f0f596e5ba4680c559fa78c221b3060c186b5cc487"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/solver.ts",
+      "sha256": "d008b7342a79fce0104329811277875bf96a8db09ad4d50956d1dc13766a4ff8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/topology.ts",
+      "sha256": "b8d8247752ba111c3fda9f3a6ecffb96ecdf103e91bbd43f71371eef2fe6e77a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/assemble.wgsl",
+      "sha256": "99a1e788d5e399291693c62f5e8557ab6d8b6929a35baad5ea7499e1bed501a2"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/common.wgsl",
+      "sha256": "69aea5eecf1fef0a68072061a2c2da3fc79cb2001bec72bc8bc26f28d335f103"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/contact.wgsl",
+      "sha256": "c836731e8496772a3f544bd93e7c90d4a5a1e9ed124196f9de216a28878192f0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/drag.wgsl",
+      "sha256": "54f9832f137e1daa0a36e9cc8965c0b6e49e7e9c6881fb2d4357734d9eb58886"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/energy.wgsl",
+      "sha256": "e034454b5e0f28957542fc835b6548dde76c1b8b5f0d6fdc9ceccb2faa0cceb0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/gate.wgsl",
+      "sha256": "fe6b0d68a84591bda8d4076226f84adb7d363a3d4cb8adf66b24c7969ce2be21"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/interact.wgsl",
+      "sha256": "0723d3d2319a4fa41a05a89c57fa67c72f5ed33491b0696d452b4c4cab516f66"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/multigrid.wgsl",
+      "sha256": "04254b45f6ffd0f115e7e0b693f77ab2ab8fd99dc0f6c65f071ef94b90c698cc"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/pcg.wgsl",
+      "sha256": "3e34da823952c74b9446045684c21f48ec96078fac12837a93e0974874c95eac"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/rigid_apply.wgsl",
+      "sha256": "6e61ac16d6c875c4c3372acb0c7686e7e538303694f7a039cd95c9aebe22fd67"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/rigid_frame.wgsl",
+      "sha256": "5cc0ee12304c29e97d800ff1adb4f82dae69244dd3b542c7ad6140f48bce371b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/rigid_spin.wgsl",
+      "sha256": "7a9b1e44b3360968073bdff9827f502e3d197655fb86a80e9502b73163da7161"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/rowcoarse.wgsl",
+      "sha256": "5518a87b9d78588da9179045073ac002e2c1ca4205dcf98ea1f3f5dfe9b18139"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/rowfine.wgsl",
+      "sha256": "1d42a87b7e194f9f6c04d38539eb315dcfea8af7fe764a21927d57ed850aed13"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/scan.wgsl",
+      "sha256": "f9d5b8b64bb5dfdb431917d2885a93d426c01f22bff175078e4428de8053ab57"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/selfcontact.wgsl",
+      "sha256": "940eb88ea4cd05ab5faa48d434c43a24da2cbf3d2daf344499eadc86bfa3ea40"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/smooth.wgsl",
+      "sha256": "4ccd3f1853e3d7b23146b4ee9f8af0fafdd8ee4dd8436d61663b77fb8e7a8e43"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/state.wgsl",
+      "sha256": "1684fbf466e80d260c229ba413da6527441f88083b7aae6d1ccf49a47fe0a87d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/step.wgsl",
+      "sha256": "9f3b48d88fceb7e1dd8aa09a337f9baf34529707d65d17c2d7377e7f0f44e44f"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/gpu/wgsl/yarnfield.wgsl",
+      "sha256": "84f534cc11558beb6103692760d1b868da3d3ccac3ee0aa29a4d238ac1074e96"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/grip.ts",
+      "sha256": "271d20d5755ef84a02ea5c2c02db29d5c79a917b3fceeb73c097e4a7f38ade5d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/hand.ts",
+      "sha256": "5f4b9b972b0f2d97511c7f0c2283484f4c5c36fa5ecd1916c2feea1c096ab23b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/lattice.ts",
+      "sha256": "f47399b43a1d323a7efe92d8ff1bb19b891b0d77b7b6c4d9b4e86c429a229832"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/laws.ts",
+      "sha256": "463e44c9b55f5c11e22fe038f81b09f151fa63a8f478c083035ba78c2a5bb996"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/material.ts",
+      "sha256": "158d271576c52271970d501ba950e3810d826b8be112e2352a7c53f4a204a3c5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/materialPoint.ts",
+      "sha256": "932503517a6d0b2e2814aee579c3926710650804f74048221aa99a807619bf56"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/telemetry.ts",
+      "sha256": "2150ae954bbd8aa3367d27623e53cdf9e80e0e6b93687b4dc5a3e8b7b026fba5"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/simulated-tearable-denim/source/simulation/yarnField.ts",
+      "sha256": "96a60766c24f0da614e92041c4b3477d9aaa4fd6cfb0df1c0b7194b8faf94523"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/softbody-jelly/gpu-caustic-field.js",
+      "sha256": "47233e9b43b3f3e4514a15e3f60c31272b206d295a131cc8ee5f94c743bf21dd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/softbody-jelly/softbody-jelly.js",
+      "sha256": "4fed5bef420320a2520df38e79ef69a876e663fd599ed21f7b7195ca626613d8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/spectral-dispersive-glass/glass-optics.js",
+      "sha256": "ff3e53e07be1b7c99722bbf6c2b5714f47bc72e558a4882c4f35213a08e72766"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/spectral-dispersive-glass/spectral-glass-material.js",
+      "sha256": "bf0772f70a9cc8ffe62c821e29db8cc059b6ccc1c6f3690628235b6267c47212"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/examples/thin-film-soap-bubbles/soap-bubble-system.js",
+      "sha256": "bbe6ac65575a0d375374bc197cbf05577515fe248d0be15d3b5f57fb45192c7e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/dielectric-glass-optics.md",
+      "sha256": "72d0a2b5a20cc4fff9a69a74afbefb7af45c74f6644ad669fd3db0fcf7bbf339"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/hybrid-soil-moss-surface.md",
+      "sha256": "320f056fbcc3b1272e9c27dd04e2dc768e382fb03e91dc737cec18e583a958fe"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/luminescent-butterfly.md",
+      "sha256": "257d85ae48647fa3ee89b1ae5cc3323cf3a039dd6d94c8e2f0b1027de00e01df"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/luminescent-jellyfish.md",
+      "sha256": "ae7bc7e102ce6b6b8d844621555f7d8844f3c92f53a85b701a909002e15be5f0"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/physical-diffraction-grating.md",
+      "sha256": "e46d42c6b6fbd608acb27369a70c13e9de37c239d3a85a1a4e5d7b0d2a99e097"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/procedural-pbr-system.md",
+      "sha256": "5f1f1acf092ea43f275419dc836569ec4bb1bd448c3678e776857899c729678c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/simulated-cloth-system.md",
+      "sha256": "31a16d33325ab5e6c5c78de1ab709e963773dcb1161b2d5011ad11b73c4a7c85"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/simulated-fur-system.md",
+      "sha256": "3746e9a7c233c115be24fd415144be7c2cb48aedc465c4f64e62139ce582b967"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/simulated-paper-burning.md",
+      "sha256": "303dddb845f204802a59699263d41751ce2995ebb0e88dec6712e241f5275f15"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/simulated-tearable-denim.md",
+      "sha256": "f27f621b1852807d2240e61cbbd927b223f7a859ecc38872e37e9f5e5f47fc20"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/softbody-jelly.md",
+      "sha256": "ae7f834eba17710119283069497468f07dcb216b96b7939860751ecac470e82b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/references/thin-film-soap-bubble-system.md",
+      "sha256": "446940a942a540d785d0e86874c9d6d0aa7a401b3b4492f54dce653db13ebd2c"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-materials/SKILL.md",
+      "sha256": "577c2001083b160cec39e95124d60e7c1f4373b765386f038a1c6f2a20f95696"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-planets/agents/openai.yaml",
+      "sha256": "4fc72d263bff54272417ee62a3cab041c03318b293934927f99cf6e91aedc785"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-planets/examples/procedural-planet-surface/planet-system.js",
+      "sha256": "9c4b5df5883ba9d660ab56ead515eb0a921cee7ba1dcb6045c025ac2f851523e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-planets/examples/procedural-planet-surface/terrain-field.js",
+      "sha256": "59bdee7b208b6188857e3ced93e75efc5f57d39861f06d05762b4e7c8a30f629"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-planets/references/planet-field-and-atmosphere-systems.md",
+      "sha256": "6b1b4804ebe303d890a31ad8b125ab29187a47cb3c77593041b9dfc88f6d8c3b"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-planets/SKILL.md",
+      "sha256": "b403e414397fc45a53e66aa0176ac46f2c794fb8a5e57c24a6415a5ac8eba833"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/agents/openai.yaml",
+      "sha256": "8a545aebb80b953d6560df48e7b93104daa9875ed43e5aace294f8189f949d1d"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/assets/gpu-culled-flower-field/THIRD_PARTY_LICENSES.md",
+      "sha256": "db03a921f27f694a757c41e4eaad520e2299d1bde448ed50c75e3f2173395e4e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/assets/structured-ash-growth/THIRD_PARTY_LICENSES.md",
+      "sha256": "82e21d333094676ee4bf035724f1d7f5bb53bf31e83fdf7c38b2534af2344982"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/gpu-computed-grass/gpu-grass-system.js",
+      "sha256": "0f860b0d6d8a0bd7648491dfafd7713201ca4c5d8bc773b364202378846ddacb"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/gpu-culled-flower-field/gpu-culled-flower-field.js",
+      "sha256": "927df46b9f8a6829b22fd101dbb3aa888eb7a9afa2d8b888da03c5ca523284f6"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/gpu-culled-flower-field/source/gpu-culled-flower-field.ts",
+      "sha256": "554145785e8f59b7ffc43fe6b82aea367f5dba19ad7240040027407e680ae863"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/ivy-effect.js",
+      "sha256": "96fd3a23cb2a06899be4bf11e51ea02fbf39702a4c53931353059314a680a7c1"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/source/bvh.ts",
+      "sha256": "3cbc4d8fef8efc9296c54e776071b34ca8964a22658df84c1d21f451a83ed782"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/source/flowers.ts",
+      "sha256": "9bd9588210d00b63081d0c3e91d299021d037d2c0f7c04f829cfe6780ebcbfed"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/source/ivy.ts",
+      "sha256": "aec1d415c64e43f0be279d95d82d61257e684fe915c6a51a7350abfc28ba191a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/source/leafTexture.ts",
+      "sha256": "efce494591d4e07cc1d73f4f4ff33599df85a9401f0d6121d88e5907551108c7"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/procedural-surface-ivy/source/wind.ts",
+      "sha256": "dfd0847dfe36d255a08f64c6208e85452f08ac9d41dadd6530fcf480e6298449"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/structured-ash-growth/ash-preset.js",
+      "sha256": "b86851244e667ce12962848b3f5dab3fbe91d256f5d011fe4e0d65912146bd92"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/structured-ash-growth/tree-system.js",
+      "sha256": "07b7aaa513d3aac47802ab44e163f73b2f0d3b0473a03bc93e650644075cd0c4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/examples/stylized-meadow-grass/grass-system.js",
+      "sha256": "d4cbc657d352c85831db979b8d5676ee0324ed6057fc088a2da94f167e0f0c88"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/references/gpu-culled-flower-field.md",
+      "sha256": "915c9d407f624028e0a0facd86438d995727de0980c96f8477770240ef0e1e05"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/references/structured-ash-growth-system.md",
+      "sha256": "f8d23ec1bc0628562d8605f9a2d69aa3a326a58a01969f870b61350a707ecd31"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-procedural-vegetation/SKILL.md",
+      "sha256": "ba601624c21d7f016220ddb73f733c5ecd4625900cf291ff72afbd8635c0573e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-shadow-systems/agents/openai.yaml",
+      "sha256": "6f072b33c1b4980ba5da4999f176f27170aa677d0c8c5696d61a4d93622d703e"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-shadow-systems/references/cached-clipmap-shadows.md",
+      "sha256": "f1a390b0f9d723199a325f00a0e49776f767424b1d030623611fd57a0947eccd"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-shadow-systems/SKILL.md",
+      "sha256": "0d0ca70a37b2e03488aad0a6153881e1bdfad756412c0abe8fa83907cb9eded4"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-skill-router/agents/openai.yaml",
+      "sha256": "643d93702b7e0f4ab9d3a6651c1e27f11ffcd63e7dfd60c645872f50e5107440"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-skill-router/SKILL.md",
+      "sha256": "ccac8662be14f4b23d89459a57f3e781d1ea2bb6266841623ec6fe11c567bf43"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-visual-validation/agents/openai.yaml",
+      "sha256": "bcc026fb9d1918a86a45bdd9442fb14d1eb3f7fd7e3650f9745cfaf1387d1a73"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-visual-validation/references/graphics-validation-protocol.md",
+      "sha256": "dff7a713ddfb1d103447a6f8bb334680abb610dbe3c13b47258b7148a35dd58a"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-visual-validation/SKILL.md",
+      "sha256": "e5532e7fcc0bf704a761444513d758c6bb036d7dde7035cc439e011b02fba2e8"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/agents/openai.yaml",
+      "sha256": "da7caa73ee237ce04711437c33ad2eba8dad0774f6fbecca1c074032d69fa068"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/assets/photoreal-water/pebbles.js",
+      "sha256": "9b6b33ab0db255a2ed77562d8042421cd0f8d4473d02ed97b63d17946fe2aa52"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/assets/photoreal-water/THIRD_PARTY_LICENSES.md",
+      "sha256": "c4c70bc6558d8ab4b9831fa3023f1a9d2b70f5b83d585d96bd67311d11aa6e26"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/examples/interactive-pool-volume/water-volume-system.js",
+      "sha256": "454700511f31b6e6e3942b525ee004552a58cdd18162da4229428f1a4434edca"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/examples/luminescent-water/luminescent-water.js",
+      "sha256": "6dddb3abad07d946835bca0447ff5e5b32fb1e175ef8bcbd642e43bc1a29fe66"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/examples/photoreal-water/photoreal-water.js",
+      "sha256": "17b912cf0787b11fc20fe562d719325168c21efe4f3ba18399ec5acd3b520f99"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/references/luminescent-water.md",
+      "sha256": "581797074577921044b35ae29c50f2aae24f9e952eda876d95a3694bd57b6cbc"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/references/photoreal-water.md",
+      "sha256": "e4c4d38bcefe5cd93d800cf229c3e77b894b16ff92f858f507df93dbe9dbb8ea"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/references/water-surface-system.md",
+      "sha256": "ab23a4f98d1685704425dd995428fa4ca7d2c742e78301c31a85799541411aef"
+    },
+    {
+      "path": "vendor/threejs-graphics-skills/threejs-water-optics/SKILL.md",
+      "sha256": "b97133b850f6e28b58cac7c69f910efcac3c50ac0bc06db3dad96d501f33d1d7"
     }
   ]
 }

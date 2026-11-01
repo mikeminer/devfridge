@@ -51,14 +51,14 @@ export default function SkillLanding() {
     <nav className={styles.nav} aria-label="Game builder navigation"><a className={styles.brand} href="https://world.devfridge.cool/">▧ DEVFRIDGE <span>WORLD / BUILD</span></a><div><a href="#quick-install">Install with AI</a><a href="#examples">Ideas</a><a href="#submit">Submit your game</a><a href="#install">Get the skill <span aria-hidden="true">↗</span></a></div></nav>
     <header className={styles.hero}>
       <div className={styles.heroCopy}>
-        <p className={styles.eyebrow}><i/> DEVFRIDGE GAME BUILDER · v1.9.3</p>
+        <p className={styles.eyebrow}><i/> DEVFRIDGE GAME BUILDER · v1.10.0</p>
         <h1>Unbox your<br/><em>next game.</em></h1>
         <p className={styles.lead}>Your meme. Your world. Your rules. An AI coding skill to build playable 3D games for the browser and Seeker, from the first idea to the release.</p>
         <div className={styles.heroPlatforms}><span>Browser</span><span>Seeker</span><span>Or both.</span></div>
         <div className={styles.actions}><a className={styles.primary} href={`${DOWNLOAD}.zip`} download>Get the skill <span>↓</span></a><a className={styles.secondary} href="#quick-install">Install with AI <span>↗</span></a></div>
         <p className={styles.micro}>OPEN AGENT SKILLS FORMAT · DIGITAL DOWNLOAD</p>
         <a className={styles.heroPromptLink} href="#prompt">Already have an idea? Make your prompt ↗</a>
-        <div className={styles.boxContents}><span>INSIDE THE BOX</span><p>3D gameplay. Studio roles and workflows. Seeker Connect. Daily, Weekly and Monthly passes in SOL. In-app token market.<br/>Asset, sound and music pipelines. Signed APKs. Optional Free Play sponsors. Store release guidance.</p></div>
+        <div className={styles.boxContents}><span>INSIDE THE BOX</span><p>3D gameplay. Landscapes, architecture and nature. Studio roles and workflows. Seeker Connect. Daily, Weekly and Monthly passes in SOL. In-app token market.<br/>Asset, sound and music pipelines. Signed APKs. Optional Free Play sponsors. Store release guidance.</p></div>
       </div>
       <BoxShowcase/>
     </header>
@@ -142,6 +142,6 @@ export default function SkillLanding() {
       ['When do the optional ads appear?', 'If you include OnlyFridge Club, its ad appears before the first free run and every retry/restart, never on pause/resume. If you include the sponsored-token top card, it is the only ad during active free play. Neither integration appears on the pass gate, its review or in pass-gated or paid sessions.'],
       ['Are all ecosystem components automatically included?','No. The core is an in-app SOL subscription plus the wallet integration for your chosen platform. Other components are selected during discovery. Existing TopShelf, rewards or bridge systems require their own supported integration; the skill does not grant access to production services.'],
     ].map(([question,answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</section>
-    <footer className={styles.footer}><a href="https://world.devfridge.cool/">DEVFRIDGE WORLD</a><span>Skill v1.9.3 · Sources reviewed 1 November 2026</span><div><a href="https://docs.devfridge.cool/sdk">SDK docs ↗</a><a href="/world/skill/downloads/manifest.json">Package checksums ↗</a><a href="https://connect.devfridge.cool/">Connect ↗</a></div></footer>
+    <footer className={styles.footer}><a href="https://world.devfridge.cool/">DEVFRIDGE WORLD</a><span>Skill v1.10.0 · Sources reviewed 1 November 2026</span><div><a href="https://docs.devfridge.cool/sdk">SDK docs ↗</a><a href="/world/skill/downloads/manifest.json">Package checksums ↗</a><a href="https://connect.devfridge.cool/">Connect ↗</a></div></footer>
   </main>;
 }

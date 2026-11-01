@@ -1,0 +1,11 @@
+# Three.js graphics skills: landscapes, architecture, nature
+
+Source: [Threejs-Awesome-Graphics-Agent-Skills](https://github.com/scottstts/Threejs-Awesome-Graphics-Agent-Skills), commit **53eb5a24097425d82532ec33697ad472750132a4**, retrieved and verified **2026-11-01**.
+
+This package contains 11 selected skill directories: `threejs-skill-router`, `threejs-procedural-architecture`, `threejs-procedural-vegetation`, `threejs-procedural-fields`, `threejs-procedural-geometry`, `threejs-procedural-materials`, `threejs-procedural-planets`, `threejs-atmosphere-aerial-perspective`, `threejs-water-optics`, `threejs-shadow-systems` and `threejs-visual-validation`. The pinned upstream tree has 24 skills; the other 13 (bloom, camera direction, exposure/colour grading, image pipeline, parallax occlusion, precipitation, procedural animation and VFX, raymarched space effects, SSAO, spectral ocean, temporal surfaces, volumetric clouds) are not bundled. When the unchanged router names one of them, it is not available here; use the upstream repository at the pinned commit only if the owner asks for that effect.
+
+License: [MIT](LICENSE), the upstream file unchanged. Every copied file was checked against its upstream Git blob hash (296 files). **Local content modifications: none.** Packaging changes: upstream `skills/<name>/` directories are placed at `<name>/`; this README is local documentation.
+
+**Left upstream on purpose:** 69 binary files inside the selected directories (JPEG/PNG/WebP reference images and screenshots, EXR environment maps, GLB models and binary data). They are reference renders and sample assets, not instructions, and would multiply the download size. Text, shader and code examples (`.md`, `.yaml`, `.txt`, `.js`, `.ts`, `.glsl`, `.frag`, `.vert`, `.wgsl`) are all included. An example that loads an omitted image or model needs that file from the pinned upstream commit, or the game's own licensed asset.
+
+Some examples use WebGPU and WGSL. DevFridge games use `WebGLRenderer` unless the owner explicitly chooses WebGPU after a device check; see [landscapes and architecture](../../references/landscapes-and-architecture.md). Load the narrowest skill through [the DevFridge routing table](../../references/gamedev-skills.md); DevFridge performance, wallet, Store and disclosure rules take precedence over general upstream advice.
