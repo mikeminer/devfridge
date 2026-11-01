@@ -1,5 +1,17 @@
 # DevFridge Game Builder — Changelog
 
+## 1.9.0 — 2026-11-01
+
+Replaces token-amount Season Pass tiers with Daily, Weekly and Monthly subscription passes paid in SOL, and moves the blockchain setup to the start of discovery.
+
+- **Ask first:** right after the platform choice the agent asks, together, for the RPC (empty means the public Solana RPC `https://api.mainnet-beta.solana.com`), the game's Token-2022 CA, the website domain, and which passes to sell at what SOL price. A provider key stays server-side in the RPC proxy.
+- **Purchase:** one wallet-approved transaction spends the plan's SOL price to buy the game's token on its live route and deposits the bought amount in the existing Fridge program until the pass ends. The deposit amount is the swap's guaranteed minimum output.
+- **Access:** any active verified deposit of the mint for the connected wallet. The amount is not compared with a price, because swap output varies. The countdown reads the deposit's end time. New helper [subscription.mjs](assets/subscription.mjs) with tests.
+- **Player copy:** players see a subscription, its SOL price and a countdown. Game screens never mention timelocks, vaults, deposits, the program or PASTA; one Details sentence says the SOL buys the game's token, set aside until the subscription ends. The terms page carries the full mechanics. The copy checker drops the price-wording rule and adds a `pass-mechanism` rule.
+- **Legacy:** games already released with token-amount tiers keep [season-pass.mjs](assets/season-pass.mjs) unless the owner migrates.
+
+No wallet transaction, purchase or Store submission was performed to write this release. The RPC proxy code, Fridge layout and vendored studio are unchanged.
+
 ## 1.8.0 — 2026-10-30
 
 Vendors Claude Code Game Studios 1.2.0, commit `05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418`, as build-time knowledge and adds an adapter that keeps DevFridge in charge of the game.

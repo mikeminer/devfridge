@@ -12,7 +12,8 @@ const rules = [
   ['mechanics', /\b(?:lock(?:s|ed|ing)?|unlock(?:s|ed|ing)?|time\s?lock(?:s|ed|ing)?|withdraw\w*|redeem\w*|redemption\w*|refund\w*)\b/i],
   ['brand', /\b(?:dev\s?fridge|fridge)\b/i],
   ['pasta', /\bpasta\b/i],
-  ['pass-commerce', /\b(?:pay(?:ing|ment|ments|s)?|price(?:s|d)?|charg(?:e|es|ed|ing))\b/i],
+  // Subscriptions are sold in SOL, so price wording is allowed; the mechanism behind them is not explained to players.
+  ['pass-mechanism', /\b(?:vaults?|deposit(?:s|ed|ing)?|smart\s?contracts?|(?:solana\s)?programs?\s(?:address|account|id)|on-?chain\sprogram)\b/i],
   ['token-promise', /\b(?:earn(?:s|ed|ing)?|prize(?:s)?|reward(?:s|ed|ing)?|profit(?:s|ed|ing|able)?)\b/i],
   ['release-placeholder', /\b(?:prototype|dev\sfixture|todo|placeholder)\b/i],
 ];
@@ -223,7 +224,7 @@ export function scanPlayerCopy(source, { file = 'copy.txt', scope = 'general', f
     const text = normalize(token.text);
     for (const [rule, pattern] of rules) {
       if (rule === 'pasta' && tokenScope === 'details') continue;
-      if (rule === 'pass-commerce' && !['pass', 'details'].includes(tokenScope)) continue;
+      if (rule === 'pass-mechanism' && !['pass', 'details'].includes(tokenScope)) continue;
       if (rule === 'token-promise' && !tokenContext && !['pass', 'market', 'details'].includes(tokenScope)) continue;
       if (rule === 'release-placeholder' && !release) continue;
       if (dist && rule !== 'brand' && rule !== 'release-placeholder') continue;

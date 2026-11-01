@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = {"version": "1.8.0", "reviewedAt": "2026-10-30", "bytes": 1945601, "sha256": "295cb6353b39a358777161b7e2c75c4abb2cbc048e5be73eaaf9aaa86e70d971"};
+const expectedRelease = {"version": "1.9.0", "reviewedAt": "2026-11-01", "bytes": 1949693, "sha256": "04a08992b24f8d57e5e2730687b8b82e829f8891afc15e968149aa6fea0c5c54"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -47,7 +47,7 @@ function zipMembers(zip) {
 test('published skill contains exactly the reviewed sources, standalone files and archive members', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(output, 'manifest.json'), 'utf8'));
   for (const [key, value] of Object.entries(expectedRelease)) assert.equal(manifest[key], value, key);
-  assert.equal(manifest.files.length, 568);
+  assert.equal(manifest.files.length, 570);
   const zip = fs.readFileSync(path.join(output, `${manifest.name}.zip`));
   assert.equal(zip.length, manifest.bytes);
   assert.equal(crypto.createHash('sha256').update(zip).digest('hex'), manifest.sha256);
@@ -66,8 +66,8 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.8.0"\n'));
-  assert.ok(skill.includes('  sources-reviewed: "2026-10-30"\n'));
+  assert.ok(skill.includes('  version: "1.9.0"\n'));
+  assert.ok(skill.includes('  sources-reviewed: "2026-11-01"\n'));
 });
 
 test('packager reproduces the reviewed ZIP under either creator platform and rejects stale files/caches', () => {
@@ -118,7 +118,7 @@ test('packager reproduces the reviewed ZIP under either creator platform and rej
 
 test('pure skill helpers run in standard Node CI without media dependencies', async () => {
   // Launcher media/device tests remain a separate release check with Pillow.
-  for (const name of ['timelock-gate', 'season-pass', 'quality-governor', 'check-player-copy']) {
+  for (const name of ['timelock-gate', 'season-pass', 'subscription', 'quality-governor', 'check-player-copy']) {
     await import(`../../skills/devfridge-game-builder/assets/${name}.test.mjs`);
   }
   await import('../../skills/devfridge-game-builder/assets/rpc-proxy/server.test.mjs');

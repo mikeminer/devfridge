@@ -19,7 +19,7 @@ Preparation template. Fill from the exact APK and verified behavior; delete inap
 
 **Long description:**
 
-TODO: describe the implemented gameplay, controls, progression and supported modes in the player's language. Explain Free Play scope accurately. For an optional Season Pass, state the required token quantity, how long it stays held on-chain and what gameplay the pass enables. Do not promise token income, fixed value, guaranteed access after expiry, unimplemented features, audits or endorsement. Include an honest violence/content warning only when relevant. Keep technical protocol details in the app's Details and reviewer notes, without concealing financial restrictions.
+TODO: describe the implemented gameplay, controls, progression and supported modes in the player's language. Explain Free Play scope accurately. For the subscription, state the Daily/Weekly/Monthly SOL prices, what the subscription enables and that the SOL buys the game's token, set aside until the subscription ends. Do not promise token income, fixed value, guaranteed access after expiry, unimplemented features, audits or endorsement. Include an honest violence/content warning only when relevant. Keep technical protocol details in the app's Details and reviewer notes, without concealing financial restrictions.
 
 **What's New:** TODO: concrete changes in this exact build; no future roadmap as shipped functionality.
 
@@ -59,7 +59,7 @@ Add at most four more previews if useful. Freeze a deterministic test scene only
 
 ## Reviewer-only notes
 
-Give steps to each advertised mode, network/wallet prerequisites, authorized test access and expected result. State actual Season Pass program/mint, per-deposit rule and financial disclosures here when needed. Never include credentials, seeds, signing keys, private RPC URLs or a hidden review bypass. Fixtures and read-only simulations are not mainnet transactions or physical-device proof.
+Give steps to each advertised mode, network/wallet prerequisites, authorized test access and expected result. State the actual program/mint, the swap route, the any-active-deposit rule and financial disclosures here when needed. Never include credentials, seeds, signing keys, private RPC URLs or a hidden review bypass. Fixtures and read-only simulations are not mainnet transactions or physical-device proof.
 
 ## Submission record
 

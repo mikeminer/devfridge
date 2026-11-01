@@ -1,13 +1,13 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.8.0",
-  "reviewedAt": "2026-10-30",
-  "bytes": 1945601,
-  "sha256": "295cb6353b39a358777161b7e2c75c4abb2cbc048e5be73eaaf9aaa86e70d971",
+  "version": "1.9.0",
+  "reviewedAt": "2026-11-01",
+  "bytes": 1949693,
+  "sha256": "04a08992b24f8d57e5e2730687b8b82e829f8891afc15e968149aa6fea0c5c54",
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "2698500c6b2f9552bda1e65ba5b4da8e5061280255dc859c4968e86707312817"
+      "sha256": "b47831a479a6065679b3fe0f89c51759c2eebf27b63b3a378c5970b45c9474b0"
     },
     {
       "path": "assets/check-no-secrets.py",
@@ -15,11 +15,11 @@
     },
     {
       "path": "assets/check-player-copy.mjs",
-      "sha256": "be22978623447e05e46669f26e91983c025bb464082ff6430a562737515d6d43"
+      "sha256": "e7bb3d2ef6995c9aa2bd3d52d76703232e6527f41448a9b0ded6e7755d2c5625"
     },
     {
       "path": "assets/check-player-copy.test.mjs",
-      "sha256": "ec136d53f25633b3552d178980298eb7cbb0823b3b719ea68ec76f54665f84d4"
+      "sha256": "8eda2ee7f7ff33b766ee39e276063f2200da87b6c462909444dc13072d4659ef"
     },
     {
       "path": "assets/checkpoints/checkpoint.example.json",
@@ -166,6 +166,14 @@
       "sha256": "9b5216566fd10dd81e1238a4c131639c8f8b04dfedbc72c5d2e67a7b92f35df4"
     },
     {
+      "path": "assets/subscription.mjs",
+      "sha256": "588de0fc0e3ca5a3e5d6e75dda39c585d355987877d56536694c713d4cea7dca"
+    },
+    {
+      "path": "assets/subscription.test.mjs",
+      "sha256": "bd2d6bedaad4fb9efc784e7808d1739a2bd326a35a0d0fd8606511ba52e4794c"
+    },
+    {
       "path": "assets/templates/ASSETS_LICENSES.md",
       "sha256": "ece46cceab95cdf0e386319801ea04fba4f9953a195636b7aa6c40ffc175e52f"
     },
@@ -179,7 +187,7 @@
     },
     {
       "path": "assets/templates/store-listing.md",
-      "sha256": "8599943f7cba2d51d080b25a341b2a612b1e9616ca3c07d49825ed513e6b04c0"
+      "sha256": "608534555c982cfc5ec3cc4c08050a54b1776d2ab7b638e079731737d245719c"
     },
     {
       "path": "assets/timelock-gate.mjs",
@@ -191,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e3968260f1e82d981f50a58e36e0ff7517c6990eab4deb10a4abee550c92ab12"
+      "sha256": "d98bf4b024621eae0f6869050347632451db06b5ee0e24753b31bbd6a45915ce"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -203,11 +211,11 @@
     },
     {
       "path": "references/discovery.md",
-      "sha256": "3fc04969d94e171ee8a8ec54263df587a85b20af5b5aac7420afea5fa58b0d52"
+      "sha256": "e38464c96e9f2b4c226c898f30f94b04cbf799d9095440d7bae25febb1e583db"
     },
     {
       "path": "references/ecosystem.md",
-      "sha256": "311da1ff03c9255d18b843f40aba1504979a4a6948962bd6ee0b169a73167631"
+      "sha256": "36c7b985da24ad46add6267f65fe19a68f71285aeff2776601acae0f5f41b22a"
     },
     {
       "path": "references/free-play-sponsors.md",
@@ -223,7 +231,7 @@
     },
     {
       "path": "references/game-studio.md",
-      "sha256": "a4a6ee97c52d4ab7d954ea7cb7a2720b5083119a0f54da2cf8ef644e300e6f7d"
+      "sha256": "8f1add436779c058774f4c9bebaeded06356b5a7b7c1cfcdec69193c1bcf2374"
     },
     {
       "path": "references/gamedev-skills.md",
@@ -235,7 +243,7 @@
     },
     {
       "path": "references/in-game-market.md",
-      "sha256": "316f8bfeb3fa7f222bfa430dca96b9e33774907eaa02110e1019a3a630bf2795"
+      "sha256": "5db3e138159765ffc09da669329a82b7010010d2cdd9c9dc77f5a30c40d8f6a0"
     },
     {
       "path": "references/incremental-build.md",
@@ -255,19 +263,19 @@
     },
     {
       "path": "references/phantom.md",
-      "sha256": "c475b83fa42c466d0466494d9eaebc44f4a44b813fb622fe3e27bdd4931a6116"
+      "sha256": "0c08a388dcfd702944d71604c0b3d04ffa9aa47fa050dbfd0a580549085bc589"
     },
     {
       "path": "references/program-and-verification.md",
-      "sha256": "a017561233378d1bbf131208e0f9009142e0559e8ca556630940a13fedd741fc"
+      "sha256": "f6c73f749571c69eb8c4050677b90fd82e2c41536d74e86df7e1d49f73f69593"
     },
     {
       "path": "references/public-site.md",
-      "sha256": "6d173513c23bbd2e99ab4d3d242766bf106ef404ad3d2e554f864ff530ed7736"
+      "sha256": "78a296171caf4342db6f0f15c7e7d4d867961898d9e12ae57db59878a487f768"
     },
     {
       "path": "references/release-pitfalls.md",
-      "sha256": "c606d8df34f201d76a695581b3e9b85005693d50999d79758a8f7b3911892f33"
+      "sha256": "684c4b84dc5ed3f424ca36da048b5322b8f62923a4ebd499f5e0b910a63a7b8c"
     },
     {
       "path": "references/release-updates.md",
@@ -275,19 +283,19 @@
     },
     {
       "path": "references/retention-and-economics.md",
-      "sha256": "bafd06d4dd718895166754d563d41fb1986671d86a0019a1d64233911bd0e9cc"
+      "sha256": "324da85c1dbbf6640863b2965f15a63fc85f2483ed671793c0dd38b55bf7d2f3"
     },
     {
       "path": "references/rpc-proxy.md",
-      "sha256": "01a2e4f3299852f77c2d26d66ada9f7cf5499c269a6170c9e95873c533e8d103"
+      "sha256": "dd0f019126b88852b759db8960eb434c25f8bb29b3e276629f536fc2ac7be167"
     },
     {
       "path": "references/sdk-access.md",
-      "sha256": "0d2241b54cb0a84900f170b0f45c6fe2795bcfa0f4d26b161b65280a0d5d0ed6"
+      "sha256": "c4ff87ce787a9a614ac27f70cb89ad1bc9458467276904fdf54ae1c27ab47ccf"
     },
     {
       "path": "references/season-pass.md",
-      "sha256": "03a2b0dbf909ebd7b85cb41ff44c342f8aef8a1e978166635fbf05376d993005"
+      "sha256": "f60a1a9ae8223ca633a2f2180c2dd2e3e97e307288b933b4895e23f8ba62e169"
     },
     {
       "path": "references/seeker-android.md",
@@ -295,11 +303,11 @@
     },
     {
       "path": "references/seeker-wallet.md",
-      "sha256": "daf151c1cf20f8632cfd6a98982cf7b05b3c7fa799a4baf5a7a3200efc1c0a80"
+      "sha256": "ff455271702c73505ac9e108384a15cfb70963801a12916d5e22deab59f5b098"
     },
     {
       "path": "references/solana-dapp-store.md",
-      "sha256": "709fe7d7f14c1a2df0c82e4ecca1a07c2c3ae308d77c73f2178c60b175daeaa4"
+      "sha256": "fd706b5ac2e8154fc7791be025ef5cb0b9cc62dac66f4562efcdb606d30f4350"
     },
     {
       "path": "references/sound-prompts.md",
@@ -315,11 +323,11 @@
     },
     {
       "path": "references/wallet-trust.md",
-      "sha256": "35fb31c7dfc4a283b42af872a3ca4198f1ebaf9c6baf513cbae63d58cdd0e316"
+      "sha256": "f0f5e7b186adc7810ddc9207b9e7142f92a3f080c7b69ac5269416755dee7b4f"
     },
     {
       "path": "SKILL.md",
-      "sha256": "ab4bb95a50e9d532e19b8009cf50ff841d59e7a5b5480737129fc312629aa603"
+      "sha256": "a12f77c03247a2060e0930d9d8a5589c8bedf4ae0a4c156b9b98bdd2b904f180"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",

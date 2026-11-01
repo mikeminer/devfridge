@@ -68,7 +68,8 @@ test('unresolved platform is the first decision in installation and all six exam
   for (const example of examples) {
     assert.ok(example.props.text.startsWith(`Use $devfridge-game-builder. ${prompts.PLATFORM_PROMPT}`));
     assert.ok(example.props.text.includes(prompts.FREE_PLAY_SPONSOR_PROMPT));
-    assert.ok(example.props.text.includes(prompts.seasonPassPrompt()));
+    assert.ok(example.props.text.includes(prompts.blockchainSetupPrompt()));
+    assert.ok(example.props.text.includes(prompts.subscriptionPrompt()));
     assert.ok(example.props.text.includes(prompts.GAME_BUILD_CAPABILITIES));
     assert.doesNotMatch(example.props.text, /Use Phantom on desktop\/mobile|Phantom desktop\/mobile and DevFridge/);
   }
@@ -110,33 +111,52 @@ test('platform and independent ad selections reach the copied brief in all 36 co
       assert.match(brief, /first run and every retry\/restart, but never on pause\/resume/);
       assert.match(brief, /during free mode only/);
       assert.match(brief, /The top card is the only ad during a free run/);
-      assert.match(brief, /Neither integration may appear in Season Pass or paid sessions/);
+      assert.match(brief, /Neither integration may appear in subscription or paid sessions/);
       assert.match(brief, /Optional in-app Buy <TOKEN> screen: Ask me/);
     }
   }
 });
 
-test('Season Pass defaults leave amounts, durations, free scope and token market undecided', () => {
-  const pending = prompts.seasonPassPrompt('  ', '\n');
-  assert.match(pending, /Missing values supply no new decision: reuse my explicit prior choices; otherwise ask and wait/);
-  assert.match(pending, /Do not invent token amounts, durations or a free mode/);
-  assert.match(pending, /^Season Pass tiers .*: Ask me; reuse my explicit prior tiers/m);
-  assert.match(pending, /^What stays free: Ask me; reuse my explicit prior free scope/m);
-  assert.match(pending, /^Optional in-app Buy <TOKEN> screen: Ask me; no new choice supplied/m);
-  assert.match(pending, /keep disabled while pending/);
-  assert.match(pending, /market choice is independent of platform, Game Room and both free-play ad choices/);
-  assert.match(pending, /verify each deposit using exact integer amounts, original deposit duration with the documented one-hour tolerance, connected-wallet ownership, the correct mint and fresh on-chain expiry/);
-  assert.match(pending, /Do not combine insufficient deposits or let an unknown RPC result grant access/);
-  assert.match(pending, /calculate Best value only from their actual token amount per day/);
-  assert.match(pending, /2% fee, network costs and route constraints before wallet approval/);
+test('blockchain setup asks RPC, Token-2022 CA, domain and SOL prices, with the public RPC as fallback', () => {
+  const pending = prompts.blockchainSetupPrompt();
+  assert.match(pending, /Right after the platform choice, resolve my blockchain setup together/);
+  assert.match(pending, /^Solana RPC: Ask me which RPC provider to use\. If I give no answer, use the public Solana RPC https:\/\/api\.mainnet-beta\.solana\.com/m);
+  assert.match(pending, /^Token-2022 CA: Ask me for the exact token contract address/m);
+  assert.match(pending, /initialized Token-2022 mint without TransferFee, TransferHook or unknown extensions/);
+  assert.match(pending, /^Website domain: Ask me for my game website domain/m);
+  assert.match(pending, /^Subscription passes and SOL prices: Ask me which of Daily Pass \(1 day\), Weekly Pass \(7 days\) and Monthly Pass \(30 days\)/m);
+  assert.match(pending, /Do not invent prices/);
+  const filled = prompts.blockchainSetupPrompt({ rpc: ' Alchemy ', mint: 'Mint123', domain: 'games.example.com', prices: 'Daily 0.01' });
+  assert.match(filled, /^Solana RPC: Alchemy\. If this provider needs an API key, keep it only in server-side configuration/m);
+  assert.match(filled, /^Token-2022 CA: Mint123/m);
+  assert.match(filled, /^Website domain: games\.example\.com$/m);
+  assert.match(filled, /^Subscription passes and SOL prices: Daily 0\.01$/m);
 });
 
-test('Season Pass form carries exact owner tiers and free scope while market stays independent of ads', () => {
+test('subscription prompt: any active deposit, countdown, no amount match, no timelock wording for players', () => {
+  const pending = prompts.subscriptionPrompt('  ', 'ask');
+  assert.match(pending, /^What stays free: Ask me; reuse my explicit prior free scope/m);
+  assert.match(pending, /^Optional in-app Buy <TOKEN> screen: Ask me; no new choice supplied/m);
+  assert.match(pending, /market choice is independent of platform, Game Room and both free-play ad choices/);
+  assert.match(pending, /Daily, Weekly or Monthly subscription paid in SOL/);
+  assert.match(pending, /the swap's guaranteed minimum output\) is deposited in the existing Fridge program until the pass ends/);
+  assert.match(pending, /any active verified deposit of my mint; never compare the deposited amount with the price/);
+  assert.match(pending, /Read the countdown from that deposit's end time/);
+  assert.match(pending, /An unknown RPC result never grants access/);
+  assert.match(pending, /game screens never mention timelocks, vaults, deposits, the program or PASTA/);
+  assert.match(pending, /Put the full mechanics in the terms page/);
+  assert.match(pending, /Do not deploy a new contract or add automatic renewal/);
+});
+
+test('prompt studio carries RPC, CA, domain, prices and free scope while market stays independent of ads', () => {
   const page = landing();
   const brief = () => page.render().find(node => node.type === 'textarea' && node.props['aria-label'] === 'Generated game builder prompt').props.value;
-  const tiers = 'Month: 30 days, 1000000.000001 MEMEZZO\nYear: 365 days, 5000000 MEMEZZO';
+  const setup = { rpc: 'Helius', mint: 'CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump', domain: 'games.example.com', prices: 'Daily 0.01 · Weekly 0.05 · Monthly 0.15' };
   const free = 'Free arcade, one life per run';
-  page.input('Season Pass tiers (label, duration and exact token amount)', `  ${tiers}  `);
+  page.input('Solana RPC provider', setup.rpc);
+  page.input('Token-2022 CA or Pump.fun URL', setup.mint);
+  page.input('Website domain', setup.domain);
+  page.input('Pass prices in SOL', setup.prices);
   page.input('What stays free?', free);
   page.select('Where should your game run?', 'both');
   page.select('Where should the APK load game content?', 'hosted');
@@ -147,7 +167,8 @@ test('Season Pass form carries exact owner tiers and free scope while market sta
       page.select('OnlyFridge Club before every free run', preRun);
       page.select('YOUR AD HERE / sponsored-token top card', card);
       const text = brief();
-      assert.ok(text.includes(prompts.seasonPassPrompt(tiers, free, market)));
+      assert.ok(text.includes(prompts.blockchainSetupPrompt(setup)));
+      assert.ok(text.includes(prompts.subscriptionPrompt(free, market)));
       assert.ok(text.includes(prompts.freePlaySponsorPrompt(preRun, card)));
       assert.ok(text.includes(prompts.GAME_BUILD_CAPABILITIES));
       if (market === 'include') assert.match(text, /Buy <TOKEN> screen: Include; this is my explicit owner choice/);
@@ -155,21 +176,22 @@ test('Season Pass form carries exact owner tiers and free scope while market sta
       assert.match(text, /do not execute a real purchase as a test/);
     }
   }
-  page.input('Season Pass tiers (label, duration and exact token amount)', '');
-  page.input('What stays free?', '');
+  for (const label of ['Solana RPC provider', 'Token-2022 CA or Pump.fun URL', 'Website domain', 'Pass prices in SOL', 'What stays free?']) page.input(label, '');
   page.select('Optional in-app Buy <TOKEN> screen', 'ask');
-  assert.ok(brief().includes(prompts.seasonPassPrompt()));
-  assert.doesNotMatch(brief(), /1000000\.000001/);
+  assert.ok(brief().includes(prompts.blockchainSetupPrompt()));
+  assert.ok(brief().includes(prompts.subscriptionPrompt()));
+  assert.doesNotMatch(brief(), /Helius|0\.15/);
 });
 
 test('installation and generated capabilities preserve safe setup, rights and release evidence', () => {
-  assert.ok(prompts.INSTALL_PROMPT.includes(prompts.seasonPassPrompt()));
+  assert.ok(prompts.INSTALL_PROMPT.includes(prompts.blockchainSetupPrompt()));
+  assert.ok(prompts.INSTALL_PROMPT.includes(prompts.subscriptionPrompt()));
   assert.ok(prompts.INSTALL_PROMPT.includes(prompts.GAME_BUILD_CAPABILITIES));
   assert.match(prompts.INSTALL_PROMPT, /Verify its SHA-256/);
   assert.match(prompts.INSTALL_PROMPT, /Preserve existing customized files and ask before replacing them/);
   assert.match(prompts.INSTALL_PROMPT, /vendor files, including licenses and notices/);
-  assert.match(prompts.INSTALL_PROMPT, /real wallet-identity domain, permanent Android package if applicable, supported UI languages and logo\/art\/audio rights/);
-  assert.match(prompts.INSTALL_PROMPT, /direct on-chain Season Pass activation and per-deposit eligibility/);
+  assert.match(prompts.INSTALL_PROMPT, /Reuse my website domain as wallet identity\. Ask for my permanent Android package if applicable, supported UI languages and logo\/art\/audio rights/);
+  assert.match(prompts.INSTALL_PROMPT, /an in-app SOL subscription purchase and any-active-deposit access with a countdown/);
   assert.match(prompts.INSTALL_PROMPT, /fresh quote and all costs, simulate and validate the exact transaction/);
   assert.match(prompts.INSTALL_PROMPT, /recover unknown outcomes without an automatic second request/);
   assert.match(prompts.INSTALL_PROMPT, /Do not buy tokens, move funds or sign transactions during setup/);

@@ -48,8 +48,11 @@ test('scopes preserve truthful Details but reject token promises and pass commer
   assert.equal(scan('const text="A 2% fee buys and burns PASTA";').some(item => item.rule === 'pasta'), true);
   assert.deepEqual(scan('const text="A 2% fee buys and burns PASTA";', { scope: 'details' }), []);
   assert.ok(scan('const text="Withdraw after 30 days";', { scope: 'details' }).length);
-  assert.ok(scan('const text="Pass price";', { scope: 'details' }).some(item => item.rule === 'pass-commerce'));
-  assert.ok(scan('const text="Pay the pass price";').some(item => item.rule === 'pass-commerce'));
+  assert.deepEqual(scan('const text="Weekly Pass price: 0.05 SOL. Pay with your wallet.";', { scope: 'pass' }), []);
+  assert.ok(scan('const text="Your tokens go into a vault";', { scope: 'details' }).some(item => item.rule === 'pass-mechanism'));
+  assert.ok(scan('const text="Deposited by the on-chain program";', { scope: 'pass' }).some(item => item.rule === 'pass-mechanism'));
+  assert.ok(scan('const text="Program address";', { scope: 'details' }).some(item => item.rule === 'pass-mechanism'));
+  assert.deepEqual(scan('const text="Your deposit";', { scope: 'market' }), []);
   assert.deepEqual(scan('const text="Buy at the current market price";', { scope: 'market' }), []);
   assert.ok(scan('const text="Earn tokens";', { scope: 'market' }).length);
   assert.deepEqual(scan('const text="Earn points";', { scope: 'general' }), []);

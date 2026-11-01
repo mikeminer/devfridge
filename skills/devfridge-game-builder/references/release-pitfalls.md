@@ -82,7 +82,7 @@ Apply the relevant checks to the selected game/platform. These are lessons gener
 
 ## 14. Build succeeds despite broken access or copy
 
-**Rule:** generated-game `npm run build` chains typecheck, build, dist checks and secret scan. `npm test` covers gate/Season Pass boundaries, copy, icon, market quote/transaction fixtures where selected, governor, audio, persistence and chosen-language checks. Android adds native transaction validators, bridge schema/origin/link allowlists and durable pending storage. Run unsigned read-only simulate:lock and, when selected, simulate:buy with a suitable public holder; never sign to prove a test.
+**Rule:** generated-game `npm run build` chains typecheck, build, dist checks and secret scan. `npm test` covers subscription boundaries (active, expired, countdown, unavailable), copy, icon, market quote/transaction fixtures where selected, governor, audio, persistence and chosen-language checks. Android adds native transaction validators, bridge schema/origin/link allowlists and durable pending storage. Run unsigned read-only simulate:subscribe (swap + deposit) and, when selected, simulate:buy with a suitable public holder; never sign to prove a test.
 
 **Check:** record commands, versions, exit status and limitations in BUILD_BRIEF; no release APK with a red required test. Missing network/hardware makes those results unavailable/untested, never passed. The skill helper suite alone does not supply a game's Kotlin validator, payment server, artwork or audio.
 

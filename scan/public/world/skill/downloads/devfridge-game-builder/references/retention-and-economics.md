@@ -1,16 +1,16 @@
-# Season Pass, retention and honest economics
+# Subscriptions, retention and honest economics
 
-Developer reference. Technical descriptions below are not player-facing copy. Use the explicitly marked copy blocks for UI and [the Season Pass guide](season-pass.md) for implementation.
+Developer reference. Technical descriptions below are not player-facing copy. Use the explicitly marked copy blocks for UI and [the subscription guide](season-pass.md) for implementation.
 
 ## The simple pitch
 
 ```player-copy/general
-Give your meme a world worth coming back to. Pick a Season Pass, play while it is active.
+Give your meme a world worth coming back to. Pick a Daily, Weekly or Monthly Pass and play while it is active.
 ```
 
 The problem: owning a meme token does not itself give a holder a recurring activity. A game can turn the community's character and lore into something players do together. DevFridge supplies the access infrastructure so the developer can focus on the game.
 
-The mechanism: the chosen runtime's wallet connects; the player approves a locally built `create_lock` transaction for one configured tier in the existing Fridge program; current on-chain account evidence establishes eligibility per deposit. The optional SDK/API read path has different semantics and caching limitations. Tokens sit in PDA-controlled vaults, not a game developer's wallet. No new timelock program is necessary. An existing deposit qualifies elsewhere only if that game independently accepts the same mint and policy; there is no universal access pass. Connection alone is not authenticated server identity.
+The mechanism (developer view): the chosen runtime's wallet connects; the player picks a Daily, Weekly or Monthly Pass and approves one locally built transaction that spends the plan's SOL price to buy the game's token and deposits the bought amount with `create_lock` in the existing Fridge program until the pass ends; any active deposit of that mint for that wallet establishes access, and the countdown reads its end time. The optional SDK/API read path has different semantics and caching limitations. Tokens sit in PDA-controlled vaults, not a game developer's wallet. No new timelock program is necessary. An existing deposit qualifies elsewhere only if that game independently accepts the same mint and policy; there is no universal access pass. Connection alone is not authenticated server identity.
 
 ## The speculative market layer
 
@@ -27,56 +27,49 @@ If more players want access, demand for the associated mint may increase. That g
 ## Why players might return
 
 - **Identity:** a character tied to their meme gives community membership a visible, playable expression.
-- **Voluntary commitment:** choosing an amount and unlock date creates a defined participation window. Clearly explain the tradeoff: those tokens cannot be transferred, sold or redeemed early.
+- **A clear window:** a Daily, Weekly or Monthly Pass gives a defined period with a visible countdown. Remind before it ends, never pressure to renew; there is no automatic renewal.
 - **Progress and belonging:** personal bests, mastery, new levels and community challenges provide reasons for the next session. Choose features that fit the genre; rewards are optional and require separate design.
 
 These are design hypotheses, not measured results or a psychological guarantee. Locked TVL and actual play are different metrics. Ask for a concrete return reason, then measure first-session completion, return visits and repeat play separately from lock volume, with appropriate privacy choices. Avoid sunk-cost pressure, price FOMO, “lock longer to avoid losing everything,” fake scarcity and forced renewals. Explain what expires and preserve earned progress where possible.
 
 ## Copyable player onboarding
 
-Use a tier radiogroup; a true best-value choice may be preselected. Disable the selected tier's action if a fresh live balance is insufficient. Unknown balance means a distinct checking/unavailable state. Substitute verified game values into these templates:
+Use a plan radiogroup (Daily / Weekly / Monthly, only the plans the owner sells). Disable the action when a fresh SOL balance cannot cover the price plus fees; unknown balance is a distinct checking state. Substitute verified game values into these templates:
 
 ```player-copy/pass
-<Game> Season Pass
-Get Season Pass
-Not enough <TOKEN> for the <tier> pass.
-Your <X> <TOKEN> stays held on-chain for <N> days, until your pass ends.
-These tokens cannot be used before your pass ends. Their market value can fall.
-Activate Season Pass · <tier>
-<TOKEN> held
-Pass length
-Pass ends
-Network fee and account setup
-Approve in wallet
-Season Pass active (<tier>) until <date>.
+<Game> subscription
+Pick your pass
+Daily Pass · <price> SOL
+Weekly Pass · <price> SOL
+Monthly Pass · <price> SOL
+Subscribe
+Approve in your wallet
+Subscription active · <time> left
+Subscription ended. Subscribe again to keep playing.
 ```
 
-Render the exact end in local time and UTC. The amount/duration line stays visible and follows the selected tier; do not bury the unavailable-balance fact. Present Details before approval, linked from the gate and review:
+Show the end date in local time and UTC on the review. Present Details from the review before approval:
 
 ```player-copy/details
 Details
-The Solana program behind the Season Pass
-Your pass is checked on-chain, using one qualifying deposit from your connected wallet.
+Your SOL buys <TOKEN> for your wallet. That <TOKEN> stays set aside for your subscription until it ends.
+Token value can change.
+Network fees and account setup are separate.
 Token address
 Copy
-Network fees and account setup are separate.
-When your pass ends and your <TOKEN> leaves the program, a 2% fee buys and burns PASTA.
-A market route must be available for this transfer. The end date alone does not guarantee that it can complete immediately.
 ```
 
-Replace every placeholder with verified game policy. Show the full mint with Copy, program address, exact quantity, end date, fee estimate and route caveat before signing. No per-run fee is implied by this access model; disclose any separately selected Arcade charge in its own flow. Hiding a technical word must never hide the economic fact. PASTA is permitted only inside Details in player copy; raw program errors and CamelCase names go through a plain-language mapper.
+Replace every placeholder with verified game values. No per-run fee is implied by this access model; disclose any separately selected Arcade charge in its own flow. Player copy never names timelocks, vaults, deposits, the Fridge or DevFridge program, program addresses, PASTA, redemption or withdrawal; raw program errors go through a plain-language mapper.
 
-## What the Details section must disclose
+## What players are told, and what stays in the terms
 
-This section is developer/reviewer documentation, not a UI string source. Explain the underlying timelock honestly in reviews. The player commits tokens until expiry, cannot access them early, incurs a protocol fee when they leave, and retains market/liquidity risk. A Season Pass sets no token price or price floor. Read-only eligibility does not spend tokens; activation requires wallet approval. This wording change does not alter the on-chain mechanics.
+Game screens present a subscription. They still state the one economic fact a player can see in the wallet anyway: the SOL buys the game's token, which stays set aside until the subscription ends and can change in value. Hiding that would make the wallet's confirmation look unexpected and would make the Store listing untrue.
 
-Current DevFridge docs: on redemption, 2% of the vault amount buys PASTA through Jupiter and burns the PASTA acquired. For PASTA vaults, that portion is burned directly. The remaining 98% returns to the depositor on successful redemption, before separate network costs and any token-specific effects. Example: a 100,000-token vault has a 2,000-token protocol fee and a 98,000-token remainder; this is token arithmetic, not a USD value or a guaranteed executable quote.
+The game's **terms page** and reviewer notes describe the full mechanics honestly: the bought tokens are deposited in the Fridge program until the end time, cannot be moved early, and when they later leave the program 2% buys and burns PASTA; the remainder returns to the depositor, subject to an executable route and network costs; market and liquidity risk remain. A subscription sets no token price or price floor.
 
-Non-PASTA redemption needs an executable Jupiter route. Expiry alone does not guarantee immediate redemption for an illiquid or ungraduated token. Verify the mint/extensions, current fee, program and route; do not invent a second 2% charge inside the game or collect a copy of the protocol fee.
+Current DevFridge docs: on redemption, 2% of the vault amount buys PASTA through Jupiter and burns the PASTA acquired. For PASTA vaults, that portion is burned directly. The remaining 98% returns to the depositor on successful redemption, before separate network costs and any token-specific effects. Non-PASTA redemption needs an executable Jupiter route. Do not invent a second 2% charge inside the game or collect a copy of the protocol fee.
 
-PASTA is pappardelle.sol's developer token. The project's stated intent is to connect ecosystem usage to support for its builder, ongoing development and infrastructure sustainability through PASTA buy-and-burn. Explain this as an ecosystem support model. The on-chain mechanism spends the fee on buying/burning tokens: it does not transfer that same fee to an infrastructure/developer treasury, establish audited cost coverage, guarantee developer income or guarantee a token price increase. Do not present it as a direct donation or server invoice payment.
-
-Players can lock the game's supported token; owning PASTA separately is not required unless the game itself chooses PASTA as its access token.
+PASTA is pappardelle.sol's developer token. The project's stated intent is to connect ecosystem usage to support for its builder, ongoing development and infrastructure sustainability through PASTA buy-and-burn. The on-chain mechanism spends the fee on buying/burning tokens: it does not transfer that fee to a treasury, establish audited cost coverage, guarantee developer income or guarantee a token price increase.
 
 ## Sources and scope
 
