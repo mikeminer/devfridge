@@ -1,5 +1,14 @@
 # DevFridge Game Builder — Changelog
 
+## 1.10.0 — 2026-11-01
+
+Adds landscapes, architecture and nature for Three.js games.
+
+- **Vendored:** 11 skills from [Threejs-Awesome-Graphics-Agent-Skills](vendor/threejs-graphics-skills/README.md) (MIT, commit `53eb5a2`): router, procedural architecture, vegetation, fields, geometry, materials, planets, atmosphere, water optics, shadow systems, visual validation. 5 skills from [MengTo/Skills](vendor/mengto-threejs-skills/README.md) (MIT, commit `a45892d`): landscape, towers, weather, mobile Three.js games, Three.js game optimization. Every file matches its upstream git blob. Binary sample images/models and bundled `three.min.js` copies are left upstream, keeping the download small.
+- **New reference** [landscapes-and-architecture.md](references/landscapes-and-architecture.md): task-to-skill routing plus DevFridge rules for the Seeker: `WebGLRenderer` unless the owner chooses WebGPU after a device check, a written scene budget, instancing, distance tiers, camera-following terrain, one tight shadow, GPU-side wind and waves, and lightmaps baked at build time with `lightmap-baker` for static scenery.
+- **Evaluated, not bundled:** linegel and CK42BB (WebGPU/TSL-first), lhlGitHub architecture effects (reference only), React libraries, web-ifc, Pascal editor, two repositories without a licence.
+- Packaging accepts the text code/shader suffixes these skills use. The reachability test covers both new packs.
+
 ## 1.9.3 — 2026-11-01
 
 - **Studio reachability:** the [game studio adapter](references/game-studio.md) now maps index names to files (`/name` → `vendor/claude-code-game-studios/skills/<name>/SKILL.md`, role → `agents/<name>.md`), names the four Claude Code built-ins the index mentions, and lists the workflows not used in a DevFridge build. Before, 59 of 74 workflows and 43 of 49 roles were listed only by name with no path.

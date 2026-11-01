@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = {"version": "1.9.3", "reviewedAt": "2026-11-01", "bytes": 1952119, "sha256": "1a6e7fb9696469905ab745cf37f072218697e6874c01b1e4a661e84c1cd0f17e"};
+const expectedRelease = {"version": "1.10.0", "reviewedAt": "2026-11-01", "bytes": 3619371, "sha256": "9de2f5ebd91be190ec6e6efd7a88864de82765774653d7f6920b424d4ebf580d"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -47,7 +47,7 @@ function zipMembers(zip) {
 test('published skill contains exactly the reviewed sources, standalone files and archive members', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(output, 'manifest.json'), 'utf8'));
   for (const [key, value] of Object.entries(expectedRelease)) assert.equal(manifest[key], value, key);
-  assert.equal(manifest.files.length, 570);
+  assert.equal(manifest.files.length, 887);
   const zip = fs.readFileSync(path.join(output, `${manifest.name}.zip`));
   assert.equal(zip.length, manifest.bytes);
   assert.equal(crypto.createHash('sha256').update(zip).digest('hex'), manifest.sha256);
@@ -66,7 +66,7 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.9.3"\n'));
+  assert.ok(skill.includes('  version: "1.10.0"\n'));
   assert.ok(skill.includes('  sources-reviewed: "2026-11-01"\n'));
 });
 

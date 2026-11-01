@@ -17,7 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 NAME = 'devfridge-game-builder'
 SOURCE = ROOT / 'skills' / NAME
 DEST = ROOT / 'scan/public/world/skill/downloads'
-TEXT_SUFFIXES = {'.md', '.yaml', '.mjs', '.py', '.json', '.txt'}
+TEXT_SUFFIXES = {'.md', '.yaml', '.mjs', '.py', '.json', '.txt',
+                 # Code and shader examples inside vendored Three.js skills (UTF-8 text, LF).
+                 '.js', '.ts', '.html', '.glsl', '.frag', '.vert', '.wgsl'}
 BARE_NAMES = {'LICENSE', 'NOTICE'}
 TEMPLATE_PATHS = {'assets/rpc-proxy/Dockerfile'}
 

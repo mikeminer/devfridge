@@ -122,3 +122,27 @@ test('every asset path the documentation mentions exists', () => {
   }
   assert.deepEqual([...new Set(missing)], []);
 });
+
+test('landscape and architecture packs: every skill reachable and routed, WebGL rule and licences present', () => {
+  const page = 'references/landscapes-and-architecture.md';
+  assert.ok(linksIn(path.join(root, 'SKILL.md')).includes(page), 'SKILL.md does not link the landscapes page');
+  assert.ok(linksIn(path.join(root, 'references/gamedev-skills.md')).includes('landscapes-and-architecture.md'), 'routing table does not link the landscapes page');
+  const routed = linksIn(path.join(root, page));
+  for (const pack of ['threejs-graphics-skills', 'mengto-threejs-skills']) {
+    assert.ok(fs.existsSync(path.join(root, 'vendor', pack, 'LICENSE')), `${pack} has no LICENSE`);
+    assert.match(read(`vendor/${pack}/README.md`), /Every copied file was checked against its upstream Git blob hash/);
+    for (const entry of listDir(`vendor/${pack}`).filter(e => e.isDirectory())) {
+      const skill = `vendor/${pack}/${entry.name}/SKILL.md`;
+      assert.ok(reached(skill), `unreachable: ${skill}`);
+      assert.ok(routed.includes(`../${skill}`), `not routed from ${page}: ${entry.name}`);
+    }
+  }
+  assert.equal(listDir('vendor/threejs-graphics-skills').filter(e => e.isDirectory()).length, 11);
+  assert.equal(listDir('vendor/mengto-threejs-skills').filter(e => e.isDirectory()).length, 5);
+  const rules = read(page);
+  assert.match(rules, /Use `WebGLRenderer`/);
+  assert.match(rules, /Switch to WebGPU only when the owner explicitly asks/);
+  assert.match(rules, /50 FPS release gate/);
+  assert.match(rules, /lightmap-baker/);
+  assert.match(rules, /InstancedMesh/);
+});

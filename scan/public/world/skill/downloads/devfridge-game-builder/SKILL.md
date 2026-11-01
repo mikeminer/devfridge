@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with Daily, Weekly and Monthly subscription passes paid in SOL. Use for wallet and optional in-game market integration, the vendored game-studio workflow, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.9.3"
+  version: "1.10.0"
   sources-reviewed: "2026-11-01"
 ---
 # DevFridge Game Builder
@@ -59,6 +59,8 @@ Follow [incremental stages and checkpoints](references/incremental-build.md): on
 Load the relevant [vendored gamedev skills](references/gamedev-skills.md); DevFridge's wallet, access, Store and honesty rules win on conflicts. Route production work to [3D assets and characters](references/3d-assets-and-characters.md), [logo and store art](references/logo-and-store-art.md), [sound effects](references/sound-prompts.md) and [music briefs](references/music-prompts.md). The horror examples are examples, not the style or content of every game.
 
 Read [the vendored game studio](references/game-studio.md) while shaping and implementing the game. The package includes Claude Code Game Studios 1.2.0 as build-time knowledge: 49 roles and 74 workflows, with rules, templates and engine notes. Use its minimal path — one gameplay brief, then the playable loop — and look at the running game before calling a visible change done. Do not install its hooks or settings, copy its project config into the game, or switch away from Three.js. Its ask-before-every-edit protocol and missing story files do not pause a build the owner already approved. DevFridge wallet, access, advertisement and release rules win on every conflict.
+
+For terrain, world backdrops, buildings and cities, vegetation, sky, weather or water, read [landscapes and architecture](references/landscapes-and-architecture.md). It routes to the vendored [Three.js graphics](vendor/threejs-graphics-skills/README.md) and [MengTo Three.js](vendor/mengto-threejs-skills/README.md) skills and adds the Seeker rules: `WebGLRenderer` unless the owner chooses WebGPU, a written scene budget, instancing and distance tiers, and lightmaps baked at build time for static scenery.
 
 Read [visual realism](references/visual-realism.md) and make a finished visual pass: detailed models with convincing silhouettes, realistic PBR textures, environment reflections, soft contact shadows and consistent scale. Prefer material realism by default, including for playful meme characters; respect a developer’s explicit alternate style. Placeholder cubes are for blockout, not finished art. Budget and test the result on mobile.
 

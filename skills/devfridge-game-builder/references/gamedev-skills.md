@@ -22,6 +22,7 @@ Reviewed **2026-10-24**. The curated Apache-2.0 source snapshot is pinned in the
 | Save schema, migrations and recovery | [save-systems](../vendor/gamedev-skills/save-systems/SKILL.md) |
 | Enemy behavior and navigation | [game-ai](../vendor/gamedev-skills/game-ai/SKILL.md) |
 | Prove the core loop before expanding scope | [prototype-fast](../vendor/gamedev-skills/prototype-fast/SKILL.md) |
+| Terrain, landscapes, buildings, cities, vegetation, sky, weather, water | [landscapes and architecture](landscapes-and-architecture.md), which routes to the [Three.js graphics](../vendor/threejs-graphics-skills/README.md) and [MengTo](../vendor/mengto-threejs-skills/README.md) packs |
 
 The unchanged upstream router includes paths for the full repository. Map selected names to `vendor/gamedev-skills/<name>/`; use the pinned upstream installation guide for absent skills. Do not follow an absent Godot/Unity/Unreal/Phaser/PixiJS/Bevy skill as if it were bundled, or switch engines without the owner's decision. Verify version-specific APIs against the game's pinned dependencies.
 
