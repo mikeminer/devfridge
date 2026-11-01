@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "reviewedAt": "2026-11-01",
-  "bytes": 1949693,
-  "sha256": "04a08992b24f8d57e5e2730687b8b82e829f8891afc15e968149aa6fea0c5c54",
+  "bytes": 1950221,
+  "sha256": "83e16c4914609586064e8e6e986f79b1705f8ffae45ab6055df42914e4ec3e4a",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -199,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "d98bf4b024621eae0f6869050347632451db06b5ee0e24753b31bbd6a45915ce"
+      "sha256": "a734b1d2f68ec570d914db0e07b3973b6b8f9618aeff189209450aa90fe6ec4c"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -287,7 +287,7 @@
     },
     {
       "path": "references/rpc-proxy.md",
-      "sha256": "dd0f019126b88852b759db8960eb434c25f8bb29b3e276629f536fc2ac7be167"
+      "sha256": "3e20ab47922dd4f96746f0dcd4e804aa41a7b2104df0fa29410caaa34637081f"
     },
     {
       "path": "references/sdk-access.md",
@@ -295,7 +295,7 @@
     },
     {
       "path": "references/season-pass.md",
-      "sha256": "f60a1a9ae8223ca633a2f2180c2dd2e3e97e307288b933b4895e23f8ba62e169"
+      "sha256": "29f881deaeda4a83851dc87e0c6c12860e39bac62ee74600325aaf294e765805"
     },
     {
       "path": "references/seeker-android.md",
@@ -327,7 +327,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "a12f77c03247a2060e0930d9d8a5589c8bedf4ae0a4c156b9b98bdd2b904f180"
+      "sha256": "56662757ead40edb2cb64cad1fdeab132adf34d021bf9344a27bd1b96afc0a1b"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",
