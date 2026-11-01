@@ -43,6 +43,10 @@ Upstream measured four games from one brief. At `minimal` rigor the studio wrote
 
 The role index is [agent-roster.md](../vendor/claude-code-game-studios/docs/agent-roster.md). The workflow index is [skills-reference.md](../vendor/claude-code-game-studios/docs/skills-reference.md). Rigor definitions are in [workflow-modes.md](../vendor/claude-code-game-studios/docs/workflow-modes.md).
 
+**From an index name to a file.** The indexes list names, not paths. A workflow written `/name` is `vendor/claude-code-game-studios/skills/<name>/SKILL.md`; a role written `name` is `vendor/claude-code-game-studios/agents/<name>.md`. All 74 workflows and 49 roles in the indexes are vendored. Four commands the index mentions — `/debug`, `/review`, `/security-review` and `/simplify` — are Claude Code built-ins, not files in this package. Read a workflow or role file; do not type its slash command, because the studio is not installed as Claude Code commands here.
+
+**Not used in a DevFridge build:** `/start`, `/setup-engine`, `/settings`, `/onboard`, `/project-stage-detect` and `/adopt` (this skill already handles onboarding and the engine), `/skill-improve` and `/skill-test` (they edit the studio itself), and the `team-*` workflows unless the owner asks for a team review. Every other workflow can be read when the current task matches it, for example `/playtest-report`, `/localize`, `/smoke-check`, `/bug-triage`, `/hotfix` or `/patch-notes`.
+
 ## Who to read for the current task
 
 | Current task | Read next |

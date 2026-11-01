@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = {"version": "1.9.2", "reviewedAt": "2026-11-01", "bytes": 1951401, "sha256": "51c7378532b74bc81c62746ae961db4d0e4adf344fb6e78e1c54a1396df91977"};
+const expectedRelease = {"version": "1.9.3", "reviewedAt": "2026-11-01", "bytes": 1952119, "sha256": "1a6e7fb9696469905ab745cf37f072218697e6874c01b1e4a661e84c1cd0f17e"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -66,7 +66,7 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.9.2"\n'));
+  assert.ok(skill.includes('  version: "1.9.3"\n'));
   assert.ok(skill.includes('  sources-reviewed: "2026-11-01"\n'));
 });
 
