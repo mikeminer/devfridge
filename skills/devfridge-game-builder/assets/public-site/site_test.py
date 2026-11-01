@@ -88,6 +88,29 @@ class SiteTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             site.validate(c)
 
+    def test_base_path_for_a_shared_games_host(self):
+        self.ready()
+        self.config['basePath'] = '/my-game'
+        result = site.generate(self.config, self.dest)
+        self.assertEqual(sorted(result['files']), ['legal.css', 'privacy/index.html', 'terms/index.html'])
+        self.assertFalse((self.dest / 'index.html').exists())
+        self.assertFalse((self.dest / 'robots.txt').exists())
+        self.assertEqual(result['privacyUrl'], 'https://game.devfridge.cool/my-game/privacy/')
+        self.assertEqual(result['termsUrl'], 'https://game.devfridge.cool/my-game/terms/')
+        self.assertEqual(result['websiteUrl'], 'https://game.devfridge.cool/my-game/')
+        html = (self.dest / 'privacy/index.html').read_text()
+        for needle in ('href="/my-game/legal.css"', 'href="/my-game/terms/"', 'href="/my-game/"', 'href="https://game.devfridge.cool/my-game/privacy/"'):
+            self.assertIn(needle, html)
+        self.assertNotIn('href="/styles.css"', html)
+
+    def test_invalid_base_paths_fail_closed(self):
+        self.ready()
+        for bad in ('my-game', '/My-Game', '/a/b', '/../x', '/game/', '/-x', 7):
+            self.config['basePath'] = bad
+            with self.assertRaises(ValueError):
+                site.generate(self.config, self.dest)
+            self.assertFalse(self.dest.exists())
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -6,6 +6,7 @@
   "description": "REPLACE with the actual game, supported devices and access modes.",
   "supportEmail": "support@example.com",
   "origin": "https://example.com",
+  "basePath": "",
   "updatedAt": "2026-10-24",
   "language": "en",
   "platform": "seeker-bundled",
@@ -21,8 +22,8 @@
   },
   "terms": {
     "service": "REPLACE with the game and publisher identity, platforms and real functionality.",
-    "access": "REPLACE with the actual free modes, paid rounds or Season Pass terms, availability and suspension rules.",
-    "payments": "REPLACE with exact amounts/durations, fees, recipient, refund policy and transaction recovery. Describe the Fridge 2% fee and route constraints only if that integration is used. Do not promise profits or automatic refunds.",
+    "access": "REPLACE with the actual free modes, the Daily/Weekly/Monthly subscription (what it opens, its SOL prices, that access lasts until the end time with no automatic renewal), paid rounds if any, availability and suspension rules.",
+    "payments": "REPLACE with the SOL price of each pass, network fees and account setup, that the SOL buys the game's token which is deposited in the Fridge program until the subscription ends and cannot be moved early, that when it later leaves the program 2% buys and burns PASTA subject to an available route, the refund policy and transaction recovery. Do not promise profits or automatic refunds.",
     "conduct": "REPLACE with the rules for player behavior, cheating and user content where applicable.",
     "rights": "REPLACE with actual content licences and permitted use.",
     "liability": "REPLACE with applicable responsibilities and limitations, without overriding mandatory consumer rights.",

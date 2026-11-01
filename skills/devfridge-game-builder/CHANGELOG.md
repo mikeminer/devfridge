@@ -1,5 +1,10 @@
 # DevFridge Game Builder — Changelog
 
+## 1.9.2 — 2026-11-01
+
+- **Shared games domain:** the [public-site generator](assets/public-site/generate-site.py) accepts `"basePath": "/<game>"`. It then writes only the privacy and terms pages and `legal.css` under that path, with matching links, canonical and manifest URLs, and no landing page or root `robots.txt`, so several games can publish their legal pages on one host. Without `basePath` the output is unchanged. Two new tests.
+- **Example facts:** `site.example.json` now describes the Daily/Weekly/Monthly SOL subscription in `terms.access` and `terms.payments` instead of the old Season Pass wording.
+
 ## 1.9.1 — 2026-11-01
 
 Corrects the RPC proxy guidance for subscription purchases. `RPC_REQUIRED_TX_PROGRAM_IDS` admits a transaction when **at least one** listed program appears, so 1.9.0's advice to require both the swap program and Fridge would have accepted a swap without a deposit. Require Fridge only. The allowlist now also names System and SPL Token for PumpSwap routes that wrap SOL. Pairing swap and deposit stays the job of the game's builder and native validator. No code or helper changed.

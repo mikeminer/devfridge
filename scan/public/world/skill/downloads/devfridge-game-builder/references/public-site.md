@@ -28,3 +28,7 @@ Deploy the static output to the actual approved host. Verify all three URLs over
 Scan output and archive for secrets. Keep public files separate from server environment settings. Record the live URLs/status in release evidence and link them from the Store and app settings. Keep this site and disclosures updated when ads, RPC providers, account/data practices or payments change.
 
 Sources reviewed 2026-10-24: [new-app submission](https://docs.solanamobile.com/dapp-store/submit-new-app), [listing requirements](https://docs.solanamobile.com/dapp-store/listing-page-guidelines).
+
+## Several games on one domain
+
+When games share a host (for example `games.example.com/<game>/`), set `"basePath": "/<game>"` (one lowercase segment). The generator then writes only `privacy/index.html`, `terms/index.html` and `legal.css` for that path, with links, canonical URLs and the stylesheet under the base path; it writes no landing page and no `robots.txt`, because `/<game>/` is the game itself and the root belongs to the shared host. Deploy the output at `/<game>/` beside the game. The site manifest's `privacyUrl`, `termsUrl` and `websiteUrl` include the base path; use those URLs in the Store listing. Without `basePath` the generator keeps producing the full single-game site at the domain root.
