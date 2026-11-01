@@ -1,4 +1,4 @@
 interface:
   display_name: "DevFridge Game Builder"
   short_description: "Build browser and Seeker games with an on-chain Season Pass"
-  default_prompt: "Use $devfridge-game-builder to resolve platform, APK architecture, Season Pass tiers and free scope, Game Room, optional market and both Free Play promotions from my choices, then build and verify my game."
+  default_prompt: "Use $devfridge-game-builder to resolve platform, APK architecture, Season Pass tiers and free scope, Game Room, optional market and both Free Play promotions from my choices, then build and verify my Three.js game with the vendored studio workflow."

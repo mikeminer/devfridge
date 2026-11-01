@@ -1,5 +1,16 @@
 # DevFridge Game Builder — Changelog
 
+## 1.8.0 — 2026-10-30
+
+Vendors Claude Code Game Studios 1.2.0, commit `05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418`, as build-time knowledge and adds an adapter that keeps DevFridge in charge of the game.
+
+- **Studio knowledge:** 49 role definitions, 74 workflow skills, 14 coding rules, workflow docs and templates. 437 upstream files match that commit's git blobs. The MIT license and copyright notice are included. Local content edits: none. Packaging documentation is the vendor README.
+- **Adapter:** [game-studio.md](references/game-studio.md) maps the studio onto this skill. Default rigor is minimal, matching the upstream result that a one-page brief produced a better playtest than a 30-document pass. The agent reads one relevant role, implements the approved Three.js loop, and looks at the running game.
+- **Left upstream on purpose:** Claude Code hooks, bash helpers, `settings.json`, the empty engine stub and the studio's own test suite. A missing bash helper does not block the game. Those files are not copied into the game repository.
+- **Unchanged authority:** platform and APK discovery, Game Room, Season Pass tiers, the optional market, both Free Play choices, wallet trust, the RPC proxy, the 50 FPS gate and Store delivery. The studio cannot switch the engine to Godot, Unity or Unreal, set token amounts, or replace a DevFridge release block.
+
+No wallet transaction, domain review or Store submission was performed to write this release. The 1.7.6 RPC proxy, Season Pass evaluator and gamedev-skill licences are unchanged.
+
 ## 1.7.6 — 2026-10-25
 
 Adds a submission gate for how Seed Vault Wallet and Phantom judge the MWA identity domain and the transaction. A signed APK, legal URLs and listing text do not replace that judgment. The v0.1.5 finding "Transaction simulation: scam site detected" is mapped to the identity domain.

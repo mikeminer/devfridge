@@ -61,3 +61,9 @@ The 50 FPS minimum per complete measured second, 25,000,000-byte delivery thresh
 - [Digital Asset Links](https://developers.google.com/digital-asset-links/v1/statements): `assetlinks.json` must be HTTPS, JSON, and match package plus signing-certificate fingerprint.
 
 `devfridge.cool` as a blocked identity example, the several-day wait, the screenshot classes, Off as the submitted gore default, and the required APK string scan are lessons from a Store rejection. They are workflow gates in [wallet trust](wallet-trust.md), not new Solana Mobile policy text. No domain review, wallet signature or Store resubmission was performed for this package.
+
+## v1.8.0 scoped sources — 2026-10-30
+
+- [Claude Code Game Studios 1.2.0 at 05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418](https://github.com/Donchitos/Claude-Code-Game-Studios/tree/05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418) and its [MIT license](https://github.com/Donchitos/Claude-Code-Game-Studios/blob/05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418/LICENSE). Copyright (c) 2026 Donchitos. Retrieved 2026-10-30. 437 vendored files match that commit's git blobs. The [local packaging README](../vendor/claude-code-game-studios/README.md) lists the path map and the files left upstream: hooks, bash scripts, Claude settings, the engine stub and studio-framework tests.
+- Upstream README measurement, same commit: at `minimal` rigor one document was written before game code; at `standard`, 30 documents and 58 minutes. Blind review and a human playtest ranked the `standard` build last. [The adapter](game-studio.md) therefore defaults to minimal and does not treat the studio's ask-before-every-edit protocol as a DevFridge gate.
+- This scoped addition does not refresh the chain, Store or wallet-trust observations above. Studio engine notes for Godot, Unity and Unreal are reference text. They are not a tested migration path for this Three.js skill.

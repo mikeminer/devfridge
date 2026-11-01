@@ -181,7 +181,7 @@ test('installation and generated capabilities preserve safe setup, rights and re
   assert.match(prompts.INSTALL_PROMPT, /Missing hardware evidence blocks release, not ongoing development/);
   assert.match(prompts.INSTALL_PROMPT, /over 25,000,000 bytes/);
   assert.match(prompts.INSTALL_PROMPT, /never upload keys, credentials or private checkpoints/);
-  for (const ref of ['season-pass', 'in-game-market', 'gamedev-skills', '3d-assets-and-characters', 'visual-realism', 'logo-and-store-art', 'sound-prompts', 'music-prompts', 'release-pitfalls', 'rpc-proxy', 'public-site', 'incremental-build', 'performance-and-capture', 'release-updates']) {
+  for (const ref of ['season-pass', 'in-game-market', 'gamedev-skills', 'game-studio', '3d-assets-and-characters', 'visual-realism', 'logo-and-store-art', 'sound-prompts', 'music-prompts', 'release-pitfalls', 'rpc-proxy', 'public-site', 'incremental-build', 'performance-and-capture', 'release-updates']) {
     assert.ok(prompts.INSTALL_PROMPT.includes(`references/${ref}.md`), ref);
   }
 });

@@ -1,10 +1,10 @@
 ---
 name: devfridge-game-builder
-description: Build Three.js games for browser, Seeker Android or both with an on-chain Season Pass. Use for wallet and optional in-game market integration, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
+description: Build Three.js games for browser, Seeker Android or both with an on-chain Season Pass. Use for wallet and optional in-game market integration, the vendored game-studio workflow, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.7.6"
-  sources-reviewed: "2026-10-25"
+  version: "1.8.0"
+  sources-reviewed: "2026-10-30"
 ---
 # DevFridge Game Builder
 
@@ -57,6 +57,8 @@ Read [Three.js and mobile delivery](references/game-delivery.md). Prefer TypeScr
 Follow [incremental stages and checkpoints](references/incremental-build.md): one working loop first, then one bounded improvement and its acceptance check at a time. Save a verified, secret-checked source snapshot plus actual test results and the exact next action at every stage using [checkpoint.py](assets/checkpoints/checkpoint.py). Recover by comparing against current work; never overwrite newer changes. Continue through the full requested scope. Checkpoints make interruptions recoverable; they cannot guarantee uninterrupted execution.
 
 Load the relevant [vendored gamedev skills](references/gamedev-skills.md); DevFridge's wallet, access, Store and honesty rules win on conflicts. Route production work to [3D assets and characters](references/3d-assets-and-characters.md), [logo and store art](references/logo-and-store-art.md), [sound effects](references/sound-prompts.md) and [music briefs](references/music-prompts.md). The horror examples are examples, not the style or content of every game.
+
+Read [the vendored game studio](references/game-studio.md) while shaping and implementing the game. The package includes Claude Code Game Studios 1.2.0 as build-time knowledge: 49 roles and 74 workflows, with rules, templates and engine notes. Use its minimal path — one gameplay brief, then the playable loop — and look at the running game before calling a visible change done. Do not install its hooks or settings, copy its project config into the game, or switch away from Three.js. Its ask-before-every-edit protocol and missing story files do not pause a build the owner already approved. DevFridge wallet, access, advertisement and release rules win on every conflict.
 
 Read [visual realism](references/visual-realism.md) and make a finished visual pass: detailed models with convincing silhouettes, realistic PBR textures, environment reflections, soft contact shadows and consistent scale. Prefer material realism by default, including for playful meme characters; respect a developer’s explicit alternate style. Placeholder cubes are for blockout, not finished art. Budget and test the result on mobile.
 

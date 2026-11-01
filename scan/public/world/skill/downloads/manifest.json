@@ -1,13 +1,13 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.7.6",
-  "reviewedAt": "2026-10-25",
-  "bytes": 422509,
-  "sha256": "814612bdada32a0274c1a2c2388fa129ae3f5bf830e09aedcc5a8a14a7e6e7f5",
+  "version": "1.8.0",
+  "reviewedAt": "2026-10-30",
+  "bytes": 1945601,
+  "sha256": "295cb6353b39a358777161b7e2c75c4abb2cbc048e5be73eaaf9aaa86e70d971",
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "a6a86be326dbb70a375c2d74d566e5c7b3353085daaa803fa8c36fffe661108d"
+      "sha256": "2698500c6b2f9552bda1e65ba5b4da8e5061280255dc859c4968e86707312817"
     },
     {
       "path": "assets/check-no-secrets.py",
@@ -191,7 +191,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "02fb31d7fae356dc50de2664355b8b9b5269d1b45d70917f49a0fb66c065b2c9"
+      "sha256": "e3968260f1e82d981f50a58e36e0ff7517c6990eab4deb10a4abee550c92ab12"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -222,8 +222,12 @@
       "sha256": "d5eeaa7bad438eae704bec8b7199d1cc13943142eb255d96f7741aeab958efff"
     },
     {
+      "path": "references/game-studio.md",
+      "sha256": "a4a6ee97c52d4ab7d954ea7cb7a2720b5083119a0f54da2cf8ef644e300e6f7d"
+    },
+    {
       "path": "references/gamedev-skills.md",
-      "sha256": "c9022399183320331b390fa637ce07ef38214f331c3640d0bd1d1b48b00ac69d"
+      "sha256": "946a622da8fd947f52a55db3874417f1892e2cd91ec1bcf2b1cd0c218dbd2db9"
     },
     {
       "path": "references/hackathon-submission.md",
@@ -303,7 +307,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "3b48defef8b2ff32b71a22f81400c81c675a697447e8577c134eec3e958a5e95"
+      "sha256": "b473f1cae6651395960d37d96c9e7760c0314bdf8fff1e81ba14f9f6da794955"
     },
     {
       "path": "references/visual-realism.md",
@@ -315,7 +319,1759 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "5d9ade31a17fc28736625c898d88d25e1a79593b4830f5a77768d0e6f12c24cc"
+      "sha256": "ab4bb95a50e9d532e19b8009cf50ff841d59e7a5b5480737129fc312629aa603"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",
+      "sha256": "a177c5e0a837f293c73c5615128735255117517e37e20282ca5b84cb647fb5bb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ai-programmer.md",
+      "sha256": "d2b459057da8d13757f617d9a6e11d71e1859223d24d7fb9b1dec821798f4096"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/analytics-engineer.md",
+      "sha256": "04dde33d8c84b3c5d7189fcb663e0cb538c8d772139df28a4eec8d0046817a61"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/art-director.md",
+      "sha256": "36fecf445d9bfac1af6702ca9ef229013f101bcf0626dcb273886397c975e1dd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/audio-director.md",
+      "sha256": "d04bd4129db4670df9c4241b900aff691478d5241278f350e812a414a540dda0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/community-manager.md",
+      "sha256": "b9f73f133c93e9b4556206b81e3d02e8db3dc17df5884f24bfd1fc6b0da92b06"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/creative-director.md",
+      "sha256": "cb19bd1d93745f7b648fc9eff8aaaadd33d704aa9014819afdeeca963fc89804"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/devops-engineer.md",
+      "sha256": "5c554b26e1e9fb7ef44b6ba8044ab1406b5c90021d9524d12ecadb1727cfc511"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/economy-designer.md",
+      "sha256": "845090b44f2a85c8515ce65e00102ca89a241192fdf096351c327af5f40fc164"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/engine-programmer.md",
+      "sha256": "2ab8db5c67d80a133293812ebf3c45184ec3f1cf173246544dfe2c4ba9e66978"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/game-designer.md",
+      "sha256": "757a7bee8608fbd1fa741c83ac2621f78322f6141736527c73205a81075ce11b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/gameplay-programmer.md",
+      "sha256": "a2d3e81dc8b3d1251f3ee0fa4bdb2e9b39589578659326fddb0031360430099f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/godot-csharp-specialist.md",
+      "sha256": "7ea413488703457e07d95c1e3b0c02f0ef828d6b8e09b410b653fb37627fc6e1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/godot-gdextension-specialist.md",
+      "sha256": "d6fa1f00fb09d4b24e13556e55b55ae593107f7828a2c7d92066b575681d6981"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/godot-gdscript-specialist.md",
+      "sha256": "8a13f3674f6c113e4340e779737d7938009091944fc72443bc1359405bfaa569"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/godot-shader-specialist.md",
+      "sha256": "c40b89d6ff749f1310c4a583faad31b07fa6849e13b0e5c5afda84a97b6b2ec1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/godot-specialist.md",
+      "sha256": "d7fb09e07a02b22a2709f80174eaa832dd00011f42c1fb39a43a537d75992e4a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/lead-programmer.md",
+      "sha256": "040cd3f0f4d310a0490a67bf75835d21dd589050cb1c6c5fa2837df9eb7a0c43"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/level-designer.md",
+      "sha256": "8cd41d5b2ffa4c1ba5243c10379602a8155481e7e35605fe1e063a45517ca8d0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/live-ops-designer.md",
+      "sha256": "8d5bafde506cd9270f1af7da7a2046a929c1f82ba1de39c6addc73bd60eb3caf"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/localization-lead.md",
+      "sha256": "1fe9b6840dec1992104f2268d773543c523ce0c0cf8d6b0fb6d23f57707fd36a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/narrative-director.md",
+      "sha256": "4f67fc41741b6bc24c468edeb2209703f910fe56e780f3537eb90529cff06cfa"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/network-programmer.md",
+      "sha256": "8060320bb115241806b7287540ccee94722c1b47879a9324f562f13d2591bc74"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/performance-analyst.md",
+      "sha256": "6de37cd348ec29eb2ee30a7bcf3429841ee80969c9d9aa4e03e2d3b4eca8ef3f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/producer.md",
+      "sha256": "da0f24cc4255ef7ad64439c855fbe24c7a0bb4d602974579132b6c34e90d4e7f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/prototyper.md",
+      "sha256": "9d7c4c78097e85eb05737e71e1cd17106e1610a94a56d4b34efa4e8221363789"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/qa-lead.md",
+      "sha256": "c47e5b8e6c1c815c1e47be70a3f91ba83352eee0d3470907dfa8537cfdbf2d4e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/qa-tester.md",
+      "sha256": "7c06298528a011630846ab29e8a63d2068c820c7db5d827bfcfaf13b3c2ded54"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/release-manager.md",
+      "sha256": "a22fcf8fbbca3cfcf9393343be2d9f76a3656ed301236e6172a5d816a3417fa3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/security-engineer.md",
+      "sha256": "87441f7cf64ec79b27bdb1f213b9601edeae8d1e9a9ebcf67007986a8bb3f248"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/sound-designer.md",
+      "sha256": "1ab0a440d38f6a61561eda0da073acdea325c194abc1d4c0e58d637f05291744"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/systems-designer.md",
+      "sha256": "ca4658d0ccfc277fbe15c888ba9d78a84ea7f6341fc235e5afc5773af50f3f2b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/technical-artist.md",
+      "sha256": "fa0659ab3524a521c4296fbacffe5baec47fdb25e0abd2dbaeed4ab2d915afb5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/technical-director.md",
+      "sha256": "38a497947bd398f87acacbdc2a042ba54fa836722db589f6bbcdfa80a6f2773c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/tools-programmer.md",
+      "sha256": "2ffd83c3d619988995b1df1426c4fd77bfa312fa5bd55ac9e910503ccb53d0b6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ue-blueprint-specialist.md",
+      "sha256": "31b370beeefe1ba6357c5c0b48f54885329d9b2edb0dbf1e57070847a8824b83"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ue-gas-specialist.md",
+      "sha256": "1c671ff2e5866f6d45813ac929d63aa2df1e98b0d09be3e159015ae74ddd9358"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ue-replication-specialist.md",
+      "sha256": "df64bfd77cdd549f68cf661963d6cb6654065df7e5d35fab47d1acee7623cab2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ue-umg-specialist.md",
+      "sha256": "a2e03041fec587bc5404ce67eeec11f84bf5bc07ec39ed3a79f7267c38a8b352"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ui-programmer.md",
+      "sha256": "864b6dc1b3034cd136d67751d503ca80ffb8141823296f077cf58b5786707a74"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unity-addressables-specialist.md",
+      "sha256": "18ad921c6204741b268c0c328a1148e170fdfd73144833eda912fa8e43cd1118"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unity-dots-specialist.md",
+      "sha256": "449a1b8d59a844525495d07f6e89a9e9fea7827b07178007ae179c6a2cbb378d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unity-shader-specialist.md",
+      "sha256": "03fd2d2a0a99bdd1671af4084e28b8fff6fb086baeab8e339d451811b71b4704"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unity-specialist.md",
+      "sha256": "bbf06de405979a9ea44fa2beb466ae267e9d6485326b6f721b26b233244cf172"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unity-ui-specialist.md",
+      "sha256": "bf53caed9c761f2f52ef50961fa96d3154b872517d199c9d3bd0e1480922d85a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/unreal-specialist.md",
+      "sha256": "700e18a491fb0a82262e630e495de03547054d5616471649aa4ddc5316ba3820"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/ux-designer.md",
+      "sha256": "90d079a8d336c9f477b6d4e9ebf7479da9573ceb5f2390854163357c2714530d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/world-builder.md",
+      "sha256": "564a7d7faadae5bc8cf02f3a32b97685df80e7e5299839e23252aa07a3fbf809"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/agents/writer.md",
+      "sha256": "cc27537381614ccf09177ffd38a40a73229528e5353a95662e6f904700506531"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/CLAUDE.md",
+      "sha256": "d8dda907c8a133ad884560a3b028729b44c83f052f673a416cfaaaf2b8850cda"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/design/CLAUDE.md",
+      "sha256": "d412339372d4921be67add5caeba39814a52468b76d11e7742678b3ad1516662"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/design/registry/entities.yaml",
+      "sha256": "381c23f6e9ca11375b73a0840a50839091612fb868dab35e5b94d2ddd1234d5e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/agent-roster.md",
+      "sha256": "d1625dbd35a2d57936cc818d31989bbf6bd22398bfd8b43993181fd18cf75a2d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/agent-teams.md",
+      "sha256": "a47a929581e22b9e45d131df21055ee1aebc40854d55f5f66b783b7331682638"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/automation-modes.md",
+      "sha256": "dee6d368627c081dd0c224acca21d9e1a6bc76575451e69e5f25aba52040d9e8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/CLAUDE-local-template.md",
+      "sha256": "18158b03f609cafb3abdef3f70f21f3ee4aefc2c8d5c7df623d9f46c7f9db435"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/code-root-resolution.md",
+      "sha256": "c992bb8e40822dbdb638b000c79a9313dca07d492c248072cac967b73351d4fc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/coding-standards.md",
+      "sha256": "d481dcd85afa98d4c19d4af18c5bb296d56e6677612a68da4ef2077d72eaaf90"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/config-resolution.md",
+      "sha256": "2881c5db839c5b65acea8378d3810a1a80d8883226cb3e830b2199877faba3a1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/context-management.md",
+      "sha256": "5ee14ebc9aeb7b130bab5607e70e1dd9520e86827778635e09f94a2e57206f22"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/coordination-rules.md",
+      "sha256": "188ff1e8b93355af4a578253e637dd7926b804919c68eeae9c9f47a987d73792"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates.md",
+      "sha256": "a7af3491f86db4c9a2430512f56aa0073d32db5ed759b3a7c4213527caf93745"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ad-art-bible.md",
+      "sha256": "443ef0fd490c50db0ffc9ffb6f1c6e8632fb7426b9cb93c8d8f0ed1b8c78e3f3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ad-concept-visual.md",
+      "sha256": "cc27b36bf0b0d4592c39873f18d04bfe8ca92fabc0c2642887bbfe8389e6ec2c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ad-phase-gate.md",
+      "sha256": "8427a273639a1b732821706fcbeba2d0206bbd791304720551344313c3b61919"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ad-visual.md",
+      "sha256": "09801e2ed6b23576fb7aa4f256ee30abf922386011a40ddaf61171a796e43205"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-gdd-align.md",
+      "sha256": "04dca340d431770dcafa3849f5a4acf0852de70aa462d6b52780614ca9aff3f0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-narrative.md",
+      "sha256": "2b3653b0dad85f750547be363bd7f04b48041cd6e52918be7603c559662791c7"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-phase-gate.md",
+      "sha256": "e5643d6838cb0169b38dfafdfbdd025ca7f87723b03c1922daa1c1e5b993d345"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-pillars.md",
+      "sha256": "c3d89c7639b51d947845d202fb73f2a6d5d9dc0b1f2494c8a59e479d9167d7d4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-playtest.md",
+      "sha256": "c06460005440c2659dc7615bb9b408f240ec80d4415e0f6e90631d532d548cdc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/cd-systems.md",
+      "sha256": "6ffe572cf8269854e9cdc13c3154107eaa05fe0f2b6b89c08f5ebb5b0a33c89a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/lp-code-review.md",
+      "sha256": "015e05c374db311f4c97d1bf9c5745aa09e7cb66bb3da076ec975f7444a0c3bb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/lp-feasibility.md",
+      "sha256": "a4d67c7e79087eceed0375e7c4c3fc8794515da0acbc6faf45305238c3f78684"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/nd-consistency.md",
+      "sha256": "b2fcbfbf66a392d3c8fc2d89391b0f00e8ed02830a5e80a37c706d2739cb8bf7"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/pr-epic.md",
+      "sha256": "250bf9fb1d22c119c9f90716ffee6774d1a1f97c9128239448c438213686a02f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/pr-milestone.md",
+      "sha256": "6951266c747f8991ab053dd083ed8bceb4ae759d5ecb5c8451d37d69d6754dc6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/pr-phase-gate.md",
+      "sha256": "799ad36dcc4e37eb230f82ec8ae38468da8116737c12783322d823b7a36deb7a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/pr-scope.md",
+      "sha256": "8c48f9903804ef1a1eba266aa68da69804752045c2d3b1b60525a07db5ee2a5a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/pr-sprint.md",
+      "sha256": "855c719828f92d3788a22761b5cd2a9b2d008ffd0645e81b64fd78da6e374bf1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ql-story-ready.md",
+      "sha256": "80d9b1c0de13915c4107beb32bb2cf21357bda01fefbf43f8ddbde9622846f11"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/ql-test-coverage.md",
+      "sha256": "70f04f2cccfb96d698b5f9e94c855ed08dd4a28e978ced3d26a901a5d9afe75f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-adr.md",
+      "sha256": "a793f3b29a82e3ac7c11254456125f66c181161b762c18e80bc6c793597ebc34"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-architecture.md",
+      "sha256": "059bdb845813471e397e65d95722a848628339870fe5e7174ece44b530918da8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-change-impact.md",
+      "sha256": "f5cd7a8bc3c03dd024a8e2480347f78f3d7947ab9083e8c1cc095562202691e3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-engine-risk.md",
+      "sha256": "f529389fe90cf5c2dc19bb8647266fef3dc0d2c86f2b983ac58eada37e3afb66"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-feasibility.md",
+      "sha256": "a9fc59b79406daa233c5e03acc4731569441cccf9310e3184ed162e484154070"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-manifest.md",
+      "sha256": "4f5415bdbefa53e615ae233e02a125a9133c1c926d839dad6dad02070f0fd97d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-phase-gate.md",
+      "sha256": "564aaecfc69f5265a4eabf4da52a55425a2abf6495f89677169e74f5f9437cdb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/director-gates/td-system-boundary.md",
+      "sha256": "1829a37b6eb780ca64b842708c50f0ed24628c5eec6bac23151c9916129663f5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/directory-structure.md",
+      "sha256": "b7a84db3f2ee1ef57ea2a0ef1adfa53bb7b88b024c621a3661237e2ca4a2c31c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/effects-map.md",
+      "sha256": "18aa505d7decdf16b8d25d07a6c1cb8d41411a89bc5f3a86e0c06d0da730273e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/error-recovery-protocol.md",
+      "sha256": "e98a3b47f921e9c83f3ef586e564382a15aaf34e8cf8648938ba6443eea1c1c9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference.md",
+      "sha256": "004d7442ba5376470f0f60f840151fe4b9282583a596dad39de2267924eea0bc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/hook-input-schemas.md",
+      "sha256": "9a5c9942043791e2437a6a2274b92c7835c6c984975d845363c80faacc868db8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/post-merge-asset-validation.md",
+      "sha256": "ccf0caa75339ec1b9a1b0528adfb0a5dc04f08ae045cef3a3b903e439973fcd2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/post-sprint-retrospective.md",
+      "sha256": "022cecf8189033ea3b1c3b9e7518ad26a89ea2791b7c91186300536497afd14a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/pre-commit-code-quality.md",
+      "sha256": "c6e63366e6a172161dde45b6556e5b2985de640db0cb4d8d52af3675cb380b1c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/pre-commit-design-check.md",
+      "sha256": "6b1e955cf730fec7790e1f0e90c364f92903a58bf1cc9236f34256113235cb84"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/hooks-reference/pre-push-test-gate.md",
+      "sha256": "d38d29a7267c3bd2eda3e3a5c2f7d8581ed8cb916e629ac0c59e47fb1d6b4d1a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/model-tiers.md",
+      "sha256": "d0195dfd21964f4ee173a3fa63e973c73e9fd6ffbd5fc0d0eb11ced7c94080a1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/quick-start.md",
+      "sha256": "c099b40d5016719af01eb0e398b6b2bc65aa4321abe1bf284e8fc1a4a5c67560"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/rules-reference.md",
+      "sha256": "6cc54f31c2f7bfa1213ae221888dd0464c8fba9a62ea03ec7538917175133ac8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/run-and-observe.md",
+      "sha256": "d84bf2ceb4b532fbc1a741ecd05cb50b1a463df54ef3e7faa6d79eaf6b7e1364"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/settings-guidance.md",
+      "sha256": "6b6b030f555e5512b6717ae7cfd1acd42a7c48e4794c7335f829c27d344d9fc4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/settings-local-template.md",
+      "sha256": "d2301fed67b7443f10426306fa4523c7d66f5fdbf685a3d731ec67108ad2d72b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/setup-requirements.md",
+      "sha256": "f9bfbf70a6389e737599cfe695cbac07de70071e7bccc2e0613f335cd2ec48dc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/skills-reference.md",
+      "sha256": "3ec77ab2e7b06f86c7f4585f3cd123fb12b562480cef854c0364cee615bc4ed6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/technical-preferences.md",
+      "sha256": "1701ea6e2a853f299ce687b5efe18fbd860feecc3b23ca4cc616e8572a1e1dc3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/accessibility-requirements.md",
+      "sha256": "cc0ca46ab59d6aeb9d59166b8da3ef094053808f5e7d2e8bf240934077c0455f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/adoption-plan.md",
+      "sha256": "6c93f6a4be3ab97aa1d63a340c102db3aae25ae0c26aa09f0aae8cf5fad5bd09"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/adoption-summary.md",
+      "sha256": "c8aa0cadc36c0526f340e228a2351d4e4af93bc53fccf20d3ed823150d6ac1c5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/architecture-decision-record.md",
+      "sha256": "6a951a46a0b06f98b8e89d8ddeb04c27b9f5f29a9c85d25d74ced6bda1016467"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/architecture-doc-from-code.md",
+      "sha256": "120a052b06f0f687fd3e5d2fb9fbe796cae81626dd0d6bcfc3fd341f67abf982"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/architecture-traceability.md",
+      "sha256": "ab11b121a108af6c9f4e5cd232189318fafb2105fd00589c7ea695e79f02b00e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/art-bible.md",
+      "sha256": "a28c30415db944f38fb08c27c05543cc79f207ccfd9b5343680b15ab7665e6f6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/bug-closure-record.md",
+      "sha256": "a07cde04ca837053fe611171c81b88399f38ee95ceb3b476353f1147700febcb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/bug-report.md",
+      "sha256": "ed115a7509082066bb4e059dac21183b674c0251979c9ca43e1aa7a717e8fd83"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/certification-console.md",
+      "sha256": "f635142588ec4d53ed863f4e4032c35db56f465f3d74ded493d12d33d19a51af"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/certification-itch.md",
+      "sha256": "bc1ffb11cc7f69bbb0ec7956d6a2a4c32baac10981c106705c6da7fffa8fa033"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/certification-none.md",
+      "sha256": "705bbdb75a0d416a9b423bc887d667796f406aaec68a3776625e9b4392d4751f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/certification-steam.md",
+      "sha256": "f07458b6f77820c557bb6ba29ae031db2d5754c3aebe48a09011007e4c93f521"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/certification-unknown.md",
+      "sha256": "e845aa4171a019e82c0322ac0137fc627b5d68f1a7159e2691cabc066cc1ecdc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/changelog-internal.md",
+      "sha256": "c49595e5fac70f0920f3753b6c3c315a9fa0c94e107444095b9a336e938c8210"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/changelog-template.md",
+      "sha256": "cc9a45f7b0dbede27fba78745c754f5fe29b7c90e4ea641a346191daba9457a1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/concept-doc-from-prototype.md",
+      "sha256": "f42d764e92891b1f98774a1501a5368c7fcf46b1c4ad4e87757ef2101633f135"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/design-doc-from-implementation.md",
+      "sha256": "cdb12f8909534e8491cbe8d7920a8d54e6df49685df39c1dda0c8731a8993c7a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/difficulty-curve.md",
+      "sha256": "4aa7b30c66c2882110c3b1cd794594a52d8fd98666bf6c491921515993290279"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/economy-model.md",
+      "sha256": "22af6a9df657a17e8155a6130d04a8ce04c095e5dcb7ad5c2648449013b35a58"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/faction-design.md",
+      "sha256": "abe1d5720e68169e349156bbcb42db135ecca25bf1510dda5ddd1deb3980f257"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/game-brief.md",
+      "sha256": "70d49670b663619843301aa9a1e105f892d6db715f3e0a552b5241632e212b60"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/game-concept.md",
+      "sha256": "fa94f05c71decac7183be449c87767acd99db822f05701121f45f5a5e2251156"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/game-design-document.md",
+      "sha256": "8631250debc1b322f6ae3795296ea7fdf18aba14b9430cfa21abd18e92629f43"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/game-pillars.md",
+      "sha256": "3603610be7704cdee1c421813cd248ce07a410969dc3416aa2b9e4959801d3c8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/accessibility-requirements-guide.md",
+      "sha256": "9e86f4bbd8d3b5d4dda65fa7a719af2c448f3037137b9742fcc39d1914518233"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/game-design-document-guide.md",
+      "sha256": "107a32667a114dbb6cd49d48bf14491899fbd8a77f34bb592011beef2615624a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/hud-design-guide.md",
+      "sha256": "68c7c3871c959408b5dbcd8a73a4c906f674f7e8d17c03f735f29e9549613e9a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/interaction-pattern-library-guide-game-specific.md",
+      "sha256": "2298ecf4a701a14e8ee861e3ce1787c2394221b36a9a410a993a232b6b0bc149"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/interaction-pattern-library-guide-navigation-feedback.md",
+      "sha256": "72f3e8f3e5a9347b171cb76d18ce9ae57478bdd61a9c9fcbbf1ae4aff83b0ebd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/interaction-pattern-library-guide-standard-controls.md",
+      "sha256": "635ea81444d00fca02a17f9a0d4fef75149a9f0f103ebdf21f62ef313d3af55d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/interaction-pattern-library-guide.md",
+      "sha256": "3acc7d239ff79e2ea642790b053cad4302002c1202b8577b9cc0c554722c1d6c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/guidance/ux-spec-guide.md",
+      "sha256": "47f72f705ffef14cbf81fba6ebb5d914f992a9f06612ce04ec3e90da05a9dfb2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/help-escalation.md",
+      "sha256": "76cf8b6fe5eda91de427cf7ca5f8413cd00f60459386569731371b08f8748869"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/help-where-you-are-minimal.md",
+      "sha256": "e273a39857981cd2b7cb1bf5344c315130a0bab7e5faae7931a31e0f50fd759d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/help-where-you-are.md",
+      "sha256": "1b972e22678d0527acc38c52b5f1bbb930dad81c3e3c0ece5f34fb7f9142586a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/hud-design.md",
+      "sha256": "b98ab81a3c23a473909358240947193ebe99c37a2aeb30524e2fcb200c815c87"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/incident-response.md",
+      "sha256": "a332006b15e79a3e8a40bd20cbd6e3c88e79883c1deda3073be27df14402689e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/interaction-pattern-library.md",
+      "sha256": "cb2630df55abc32eeaead9a4a61f9d8135185b39598d051d24b6615e20c50508"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/launch-checklist.md",
+      "sha256": "f855bf09a82c228212a091e02980cb8d736be2f92ce922e35b71997cd31de53a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/level-design-document.md",
+      "sha256": "61b48448c070490ebb0bb5214cfbfa3a926683f687dc1f74c83d310dc063aacb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/milestone-definition.md",
+      "sha256": "787462069d14754bb367a63ed41228cf15e78725326c5f4ca6638c1ea2e6932b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/narrative-character-sheet.md",
+      "sha256": "b40bb1cb386727a9c506cbbd76f037990e4461315554e0f78f896f0195cc79e2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/patch-notes-brief.md",
+      "sha256": "7d87eda21b344ba1af19314fb22fc90e803d4eac2d64f10694f554e41fcbb998"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/patch-notes-commentary.md",
+      "sha256": "79dd00b7b422780b23df83f8f1d204a3d037be113bc5aa801bbda7f70fbd027e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/pitch-document.md",
+      "sha256": "ed0a544b18032bad4c9dcbe9a79b1154f943e1c5df210d308976f590eb8889b6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/player-journey.md",
+      "sha256": "fcb350eefe8fd77ce179880beff2e55023ec1e3101e3f48bff32cb8777a05be7"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/post-mortem.md",
+      "sha256": "e7e2ea73be4295761c2a355ab542be620d5b947ca5749ad8efd43abdd9c16390"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/project-stage-report.md",
+      "sha256": "1b69bbf848758f639bec2579fb5e5e8c46b4b4c4d1191e7947614c0b9a4a26bb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/prototype-report.md",
+      "sha256": "2228475bd6122e826affd20039ab117acaea064872893a21b2b70e7f8d510145"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/quick-design-change.md",
+      "sha256": "59e13603547fa738e0ccae595a539e25934bb6769712334858f95ce77f46a038"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/quick-design-new-system.md",
+      "sha256": "c3f00e1388040a32fe4de840d97c42677db0ccf825791bd7ff34773f545c8445"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/quick-design-tuning.md",
+      "sha256": "148eff6e25710b4d37e71742d80f1471f1ea4f16ce37e89ba3b42e9eb22212f5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/release-checklist-template.md",
+      "sha256": "c8493708c0a47cd38062cdae6dbc1cf379d7e9a6cacd9c50850dcd2bc556fe63"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/release-notes.md",
+      "sha256": "aee845f552de39f60e0febf7262536bc1ff42a180043f43ba5c8cdd03cdc3944"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/release-platform-requirements.md",
+      "sha256": "a0da131cba4eda0a530c042eba6eda589412dfeb09d31bb9d695835fd4637731"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/risk-register-entry.md",
+      "sha256": "0d4460ea5b5a3b2a87506fab8db2344efbffb9cf39b4ece285025038f9e0ff34"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/session-state.md",
+      "sha256": "68b8d7ccd6a09f600facc73607bcffd449277633f3a956149b7122419c47487a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/SKILL-CONTRACT-TEMPLATE.md",
+      "sha256": "7f80582f56140cd60c9dcee7da71bac9608b424cb079a5492e378b4482678654"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/soak-test-protocol.md",
+      "sha256": "30d1fae457a73c93b35642c5eab7956df14cd8494b174092189e329c0fc8f9ed"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/sound-bible.md",
+      "sha256": "f15d102361545eb93c1e265a50bff958bdba1e276fe03ba701eddc168b99037f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/sprint-plan.md",
+      "sha256": "95348349ebc0eeeb88016fb8cabeade73da866b3645b2e9a5071476e2710d17c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/sprint-status.yaml",
+      "sha256": "1fcf3b4e661d39777c383ea5e54597f6de164ade50a6bcee066f13c1512763d4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/start-paths.md",
+      "sha256": "3a845831f454c483e04654f6f0f0af7d5a3b2611b56d31084ad8a6516cc6e788"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/story.md",
+      "sha256": "312132c53a67d903609fe33644ea342feeaff47fecffb07851cb20a44e66644f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/systems-index.md",
+      "sha256": "a40a9957676be4adc79d36f654d17e98badb59bd12480dfa67bc47ac51e11d38"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/technical-design-document.md",
+      "sha256": "6823816cd83b7adf04dddb42ea34a1fd69b61824972004192f5ca7edda5629b9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/test-evidence.md",
+      "sha256": "20974d965d2b57fed99fb94b8f309af852ce879fa6ad9052819840fc645280c8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/test-plan.md",
+      "sha256": "5342973379ddf4a64fea16861c147a85fd94aa4dcb7b90c9bb1bdec712362a71"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/ux-spec.md",
+      "sha256": "dc7797c608967844786fd301dea0ba9e01af867feb73f2abd63b46a604150a99"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/templates/vertical-slice-report.md",
+      "sha256": "fec321cce5380d3bd99a90175b6457ef22e7ca199fa0f04ff2636c344ff2ce47"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/workflow-catalog.yaml",
+      "sha256": "3e87564320fae7f46f3f5c010b8c9c0b32674b0a8cdd1ab1dc76475020c2739a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/docs/workflow-modes.md",
+      "sha256": "b5199fe7d1a20a2274936e55b102af780bb37d3fc6875713b017e9fab457bafe"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/LICENSE",
+      "sha256": "6ecc068715c0edffc4bc21e5dca450803e0a45af145f72221da23d14e7588359"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/project.yaml",
+      "sha256": "858f80b1f4dec0a5c440d22ec5554d74008cada82e557b22afc759389b9c3e1e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/README.md",
+      "sha256": "72021e949c297a7181a595f24f5e47fb63e546084d397e53dc2945a3129dfc51"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/agent-memory.md",
+      "sha256": "6f5b9f8db55f057d3f6c2a824347fa27ecf46947eb04812224001a87dad45c14"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/ai-code.md",
+      "sha256": "23719730e64627bfd5f07dd75a8b1dcfc7f1b35543c24bed78e518430542b1b5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/data-files.md",
+      "sha256": "d3847d07cb858ee9c8d41fff8750c8d83ca3b54d01f092e96475cf2f041a973e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/design-docs.md",
+      "sha256": "bbd53d0ff0b740d420c1218e4a47cefcc5f1a535c30b0fbcbf3fddaba5eb1b28"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/engine-code.md",
+      "sha256": "0c4d68da1f3ae79619001e1115c054a9e6cdeccf02dee98d16c7fc4f5da757d5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/gameplay-code.md",
+      "sha256": "26deb5b1ea2a443d1bdbcdddb98402cf4ca3b6670b7bc47faae44e0300eb6362"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/narrative.md",
+      "sha256": "be8925e4d9a6242eb7db40fd918bdc94aa6f40e498f9e3aa8d7ffe27ede4a819"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/network-code.md",
+      "sha256": "ff65f01bdaa2e571caca0dd025001fb6e043b3f2e16454eba36e24fbff8d12ca"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/prototype-code.md",
+      "sha256": "67cf516d0febcb9829407386b4d16b773ea38cc21012fdeb03a53943cc6ed5bd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/scene-files.md",
+      "sha256": "c184c693e5f31a21faa66512d305881f446b62209aaabfaf6b78749907ea480c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/shader-code.md",
+      "sha256": "e52f3a5fc123771c333038d141fc0053a34cf36495798e352b97e710e1c44e33"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/skill-authoring.md",
+      "sha256": "2d8f100d9d84b94decd964c6aa97ffea21102e7ea155d8b40f51fcace0f8ccd2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/test-standards.md",
+      "sha256": "21ad3e43b7efa1ee5c1474ed0d68d410c42b1b42fdbb0f236b46488398ebc882"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/rules/ui-code.md",
+      "sha256": "3e956ed2b2995a3e20022f0bba08f6d8074e43c08fe3a1164801201271a9a524"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/1-detect.md",
+      "sha256": "4120e881103940ec84816951b7f4fd2b5e206b6ad0325fa172a0354b79575ea8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/2-format-audit.md",
+      "sha256": "625b3d1dbfe60001089e66253a09f5e0e9dd62f5162d55bc4a79419212739c46"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/3-classify.md",
+      "sha256": "ba708873c7a72055da515a7f290be80b6a6b8e63610b4f6a1549fab82ed9e042"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/4-migration-plan.md",
+      "sha256": "27386c73a5fde71606320013f80d55d093c3cbbdca0318dbcbf70d13a9f7b99e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/5-summary.md",
+      "sha256": "0661b1c4feb24d630ad4a1fd6a888cee699d907fbe01cef18e8dc658b0178622"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/6-write.md",
+      "sha256": "cb23a80201a30fbe66b92f3356220945fb3fd18ff4ea8966238dff4804152ed9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/references/7-first-action.md",
+      "sha256": "290607da90ceea57ddceccf45c4444c1136fc8e258a8bd631658121ec55462bf"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/adopt/SKILL.md",
+      "sha256": "79547d656e76fde14f1761a6840cb3a6fbb058f69f33d7829d5e073390f46b98"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/CONTRACT.md",
+      "sha256": "f295ec9326ff3050d71219be899bc4a75a97fff28a1221ead0693006c8f8a2be"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/0-accept.md",
+      "sha256": "abc2ab957854d947d7ee01c132cebf9c19c851aef3dfa788e3ee21ce82881016"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/0-retrofit.md",
+      "sha256": "f41ba65eda577623b3dbcef762495672924bf8ab382e7c2650e61006a378d0ce"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/1-engine-context.md",
+      "sha256": "0e0e4e96781ee752bff34d705c1dc26359fd662b50087ae7780495ddfaea353c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/3-gather-context.md",
+      "sha256": "f226269d8c23f6d9fbc784fbc0dbf050d12a860ec20be0a3388b9b9345ff2d55"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/4-decide.md",
+      "sha256": "14a595f2efc8c0fdbbd9dbf6c0912250b817073db2a1de17ebf1c831d0822f8a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/references/5-generate.md",
+      "sha256": "c6862e0d8ce98ad9b0d1c2287f685019d5cb47cb808456d1d164c6dd4deb3138"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-decision/SKILL.md",
+      "sha256": "b550883ebd9973ad6534c2984a77fdb6229f47eb8d2b2c31e7501d8a89f2cdf5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/1-load.md",
+      "sha256": "d866809875b0d6499cb9ae243ea28643c6d7a72bb06a0dec0894853c45f807ce"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/2-extract-requirements.md",
+      "sha256": "c34e4466059db1c71ccbd42946a91ee62964db38f761f333288cb59db2a84263"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/3-traceability.md",
+      "sha256": "dd90c9669632cb844d45ca3a1ce2007fd0f34dbf8b13031f22db100cc8961a75"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/4-conflicts.md",
+      "sha256": "b20b53754a69064941366d5ab8ca34cc1aced6f0e40ef09b4d39a0b6d48d2d57"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/5-engine.md",
+      "sha256": "6d48c267b83bca7de2fba89e7c57685277d2fa5c728a10dc6d01a6b876cd3939"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/6-document-coverage.md",
+      "sha256": "f902dc64c01721cee13fd880a3670704c409cc82b9686eb7c0b7609dbdd5fcb7"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/7-report.md",
+      "sha256": "d0d31c337e976a1427a770d5f8d761212de181ad66455963a87900a196b966cc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/8-write.md",
+      "sha256": "f7c34fad5198874728b61cb23faae6555debaa63bed376082ed2da1f24e165bc"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/references/9-handoff.md",
+      "sha256": "5620d237cb8f5c429215ec60921ec1ea83f723b004611217f7ccd11422eb7516"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/architecture-review/SKILL.md",
+      "sha256": "0219e6c2545af2416775bff139d921c1bc3c3e9cc1ffc25a25d6186f8e444f6e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/art-bible/SKILL.md",
+      "sha256": "7873271f9e19fd6f126f00770c3861a2001afa492350f9232e3609fb4d61518a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/asset-audit/SKILL.md",
+      "sha256": "9aaa056c533cd0d61af1da5332fd26065fbfa6937db4bd117ac0692f8c65a3f4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/asset-spec/SKILL.md",
+      "sha256": "8e9126653dcf25bdd2e197ee9df6587e3ffd7ee67de7103087cf8971c59fe025"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/balance-check/SKILL.md",
+      "sha256": "1081b0a21d197310c7ea244c8ac1cf1832b95b0235c6288fcf1575fceacdfa44"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/brainstorm/references/full-concept.md",
+      "sha256": "ce34add9f9eb81de45a955d47bda252091a3d8fd6a6c390ee2c09d277f0e1dfa"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/brainstorm/SKILL.md",
+      "sha256": "fa665de84aea3834111c981e919ac166f0a8400764c4c23d579d9a929c0539b6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/bug-report/SKILL.md",
+      "sha256": "cf643bf40ba2bfd45d580ecb5dfadb186b779b1152ca650962418bbcb3c8d783"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/bug-triage/SKILL.md",
+      "sha256": "818f27203a1adfe2f5a6bc3a351a2673d5297d2fd3e69d773c228c98c8a83b01"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/changelog/SKILL.md",
+      "sha256": "e8ab97b0b07e7cfef09d00b1d273ec7b926fba26c567853a03843243e25874f2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/code-review/SKILL.md",
+      "sha256": "3468d605b4627e0568c80d0732d1ab1281652641f3dede555191657c40571b8c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/consistency-check/SKILL.md",
+      "sha256": "be7697de6ff3b8b38b0078c7fa9a71eafe87cc04d008db7192a0439e3d000228"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/content-audit/SKILL.md",
+      "sha256": "56f522eabb8c7a8e70f9fd8f9dcdc40563fdbe3586fad18c027579c9dfb49cba"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/0-load-context.md",
+      "sha256": "2083798d7784c597ca8b9c0933f13d3fd2161936c0fc6771a351f98ab0b56481"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/1-layers.md",
+      "sha256": "889231d49bd42e96bb0d4cd3bb052434bce83f5567ebf2d1567b82b3712a0f46"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/2-module-ownership.md",
+      "sha256": "1c373de52748ed4941a223092f6a6d17b251df32cac500f275672f4742ee5dff"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/3-data-flow.md",
+      "sha256": "33664f68c24c751182df4a95eda3ae2740a94381d58a7806b1d2a40c2b96506a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/4-api-boundaries.md",
+      "sha256": "dc914d8fa14cb7e80b46fbc4702d327ba473284744425272f854237645f6d0fd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/5-adr-audit.md",
+      "sha256": "f2dffe08fe962b555cf87f62141cd82b12928ceb7fa67544f5a6c8f485b58e51"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/6-missing-adrs.md",
+      "sha256": "d88aa82cabb0803e6b8d989664da8b219eed7f8e39de7fe66b9c635aefdf1ade"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/7-write.md",
+      "sha256": "e10e9fb89a6b09bd0cd41791d8da83dd79f996a83847982daccf144e0960ee69"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/references/8-handoff.md",
+      "sha256": "dd6f3eb676c4497cf61383cee696d94db1dc7d22c73d5baa574a1f215229bf77"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-architecture/SKILL.md",
+      "sha256": "0613360ba1247bbfc53f840b0f97d15430f38799b4a67498c6efabe53763c23d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-control-manifest/SKILL.md",
+      "sha256": "a487bb167b3154b19fe76ac618625ef0bfeb65a2a90432804e96e0a83271b75a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-epics/CONTRACT.md",
+      "sha256": "a48adfb04175d21ba016118e614c11def9477ad76c06ca26acf767d3ad4139b3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-epics/references/pr-epic-gate.md",
+      "sha256": "990efdfb2d6955ace5c3562e4753a5a8599f63cb39a48e51366124bcbca4f6d3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-epics/SKILL.md",
+      "sha256": "a867fed460ac1ad49debf36302da1f1e44d0c9bc08aee2e14119fa09b572abd0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-stories/CONTRACT.md",
+      "sha256": "7ab7c94960b73477bbd2620e986d7c6c1b7046e7cecfe48aa10e7f420d117b5e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-stories/references/qa-lead-gate.md",
+      "sha256": "752d3bc7d4d5de0fa36031821d00128d5c7eb3f3bf66fd6f9e869e943e51eb98"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/create-stories/SKILL.md",
+      "sha256": "6fbbc16b580e90cf219e1bc67aaebeaf5e81e0dbc24c3b419d493dc6362282c3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/day-one-patch/SKILL.md",
+      "sha256": "dcd3d710b55dfd9e426965850cb572945d00d5d2d52daf53e83682ad573da971"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-review/SKILL.md",
+      "sha256": "8ed70a1d109fdd5e1a765ae4b2198730c033fb183ac3e3539fa339c106cebe1f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/references/1-parse-arguments.md",
+      "sha256": "5a0ad57af5d5d3b4d225c6a81f1d21d5e6e709c723ab48d115829d2531175329"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/references/2-gather-context.md",
+      "sha256": "149f349250ed5c49c8fbe9cba92f4f1f750b9d5dce96c9a98267cfe29d8a0040"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/references/3-file-skeleton.md",
+      "sha256": "95dc956f90e443d15f4cd0ff4f7709f70c9068d5da5b163c9226220ac7d89e52"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/references/4-section-design.md",
+      "sha256": "56ad86f7973a67284731c7ff02e5b740a5e1738e95fe7f8bb2b72d736ac3d29d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/references/5-post-design.md",
+      "sha256": "ea90124e8c6caa5e9cdbd61480f4e94ac540c058e709dd1cac4b2c46a32f86df"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/design-system/SKILL.md",
+      "sha256": "9c4e7d1f1594e062c50f96e60a06d5a0fbaae1f90a7f4f9762f0952b7248d396"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/dev-story/CONTRACT.md",
+      "sha256": "95abf80e16dfc28230989db818e6f8afeb05d73cb4600882855f598f5ee77071"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/dev-story/references/engine-checks.md",
+      "sha256": "c3ec789cc1c424366e5e85ebc56e5df317b5dfdd011f9e944e6242235640fdb4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/dev-story/references/version-mismatch.md",
+      "sha256": "2f38c7964569cba3b22bfbfc0cc702ecb1c4580e7aa294994b3047cae9318a41"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/dev-story/SKILL.md",
+      "sha256": "ca76457c34ec9a8468c34bcc55664273eff2b077afbebe36f1dda0c8ec8e474d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/estimate/SKILL.md",
+      "sha256": "61d821627b3db4f4038f60b7ce799599a219b864036023ce15d5fc85348874f0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/CONTRACT.md",
+      "sha256": "efc3ec5e64ffe3fef6c5acb475d6f3d6246e9ac46ba877d45c780b0a28bbe380"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/2b-workflow-tier.md",
+      "sha256": "3daee07be4df4801b2d5295dbfee80d04cccb526ca37552fd32a3d3b101fc055"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/3-run-gate-check.md",
+      "sha256": "c1194a18249ee653ec5b582d66dc2499c48ef93b2d5224fb72b56bbb30e62bca"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/4-assessment.md",
+      "sha256": "f3ebcc4955e4b76c1f20e8d417dcfc9a049dc627f9588d2a08db10c578bcd9d3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/5-verdict.md",
+      "sha256": "d373188788563e8683727bd42baee68dcd82a0814174ebd5eaf79a242abc727c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/6-update-stage.md",
+      "sha256": "6f5039acd8c824e4a2ece527cb2bcf4c00571194cb6060e739ebea076c875b94"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/7-next-steps.md",
+      "sha256": "a1f9be494110861ce15ce0157e56b568fd42d12f0d0c396f0abd134b522966b1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-polish.md",
+      "sha256": "f55ab0697622578b8bf84b41806f9e17cd23247f81975e84031a299f0fc3d1e2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-pre-production.md",
+      "sha256": "6acf2cf7a92ed8ce4d2a77f8d75560fce49b98ad5218f2b06606a5ba0545786b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-production.md",
+      "sha256": "9d77573b61576d4fb233ed9d3ee3f1efab81e26814c1596208fb408b57956e4a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-release.md",
+      "sha256": "acc2705086afe5cf766b839fbfbe6dfd0b96039af56737e3d0726457b0a0973f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-systems-design.md",
+      "sha256": "2472d9706f3b938c76eeb747b571d9a695232ada2ca05f4ecce4dffbd868be67"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/references/gate-technical-setup.md",
+      "sha256": "26279888b7a13b8b2f2ecbdc0105a1b743ddd39f621e304391d917df1d388bcb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/gate-check/SKILL.md",
+      "sha256": "e2ca66469e396bfd53de98fe3ba9761c24ce76b514cb933e5c5b00f17b36c8de"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/help/SKILL.md",
+      "sha256": "3a5fd66a1e29fd86133ef3085e764cf0f8e15ce935ed06e9000580a577ddbeb6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/hotfix/SKILL.md",
+      "sha256": "20233b7851f526da3ad80ee9acb9e2ec9b99bd15e861252eddef04c0d7aaee6c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/launch-checklist/SKILL.md",
+      "sha256": "ce8813df00b1b1f513c935fa6fcefd560c293e96fee02040a7705063a6afa7d2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/localize/SKILL.md",
+      "sha256": "321672db96810276c52b6630119d38bfeee8010cf6cd4a4f39511737ed450144"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/map-systems/SKILL.md",
+      "sha256": "d27959d0043bd8c9f08c0f3fb56aa66de8e6ce84812a7e43d5f2d2c43cae01dd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/milestone-review/SKILL.md",
+      "sha256": "1028ff3cc2f0f1ad609efb5c91d62b40be9644a0d39cc1fb3bb8c0fd42ca29df"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/onboard/SKILL.md",
+      "sha256": "e10acba4b4cac6b95471b3b5b11c524dfea578e030029b87a55407ac129c756c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/patch-notes/SKILL.md",
+      "sha256": "41e7a4b4b1d5536dd2957ffa048a80391ddcf2c6cf8eac169b05962d66c5f0e7"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/perf-profile/SKILL.md",
+      "sha256": "6d9d1967d68f06b2d3f4f4f8b144ea38894612d3cf9885e50c459fcfa8dc6e8b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/playtest-report/SKILL.md",
+      "sha256": "503d55d2b3a0144dfdc287e6dc3ba8c6da998e2611fe62ef0cd0d546438286fe"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/project-stage-detect/SKILL.md",
+      "sha256": "be78698fe68ddc7fa79a0d763a1f5e474b1b4c2947237c4ca741071ac1b8f4b8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/propagate-design-change/SKILL.md",
+      "sha256": "bf110550ddd1ca9c8bbd266cda2808b40aec02646b6ff9886d850ab9f1f1d7c9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/1-question.md",
+      "sha256": "0e3e23eb0e55f565292ee744ccd102d1297c8b95e82ab891624b9634ffb68954"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/2-load-context.md",
+      "sha256": "be6b3a58b15b69a7d4dd1bf6f54daf70c0abfb05016c8f5f2fe91d40154330ef"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/3-choose-path.md",
+      "sha256": "66e109f694bea94d07b9ba4d33fa577028cb8c0fb23f1e1fc4f6d8bac9a227d8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/4-plan.md",
+      "sha256": "8e2c9901b370d38506cfc9253d6035de4f5796e91da2088b1511f51f5b9e0072"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/5-implement.md",
+      "sha256": "49ed558badc1b7f5c539094fdaf61f3fa1197ed65f072916bef35b3fd1130c78"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/6-debrief.md",
+      "sha256": "cc1f527562b4c202ae09050738c041950d0bbf78b08370c422bcafd08fec8b76"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/7-report.md",
+      "sha256": "d04c5a675e652a83aa5f7bdfa166004324874a667ae5891100a97250f604c8ab"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/8-cd-review.md",
+      "sha256": "cb05e4a4667666af6517ec469b3b3094ad1ac6bacd2b69c04b28ae126b2e1f03"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/9-summary.md",
+      "sha256": "9773ac9f283228d16dc7bcb23217f6da2b43f58aa19a34cc7b2127dbdf327ba1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/references/spike-mode.md",
+      "sha256": "52588d00b47dca01513730126e70dab8af627c9e23eb5a8f6491f9cb586aaffe"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/prototype/SKILL.md",
+      "sha256": "3fc9e89b027234972d595df6adf2d6b6ed501aae7bd11a24fe3887d0e92f0956"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/qa-plan/SKILL.md",
+      "sha256": "fa3a333c9f0e298979e8e174165bcd58042d686b788327644487644c25c8efa5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/quick-design/SKILL.md",
+      "sha256": "32a4521f5290f459b84cf3500f86487d63b03d192281c392b7a023dcede03fb3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/regression-suite/SKILL.md",
+      "sha256": "65b91a43cfc319b8f369d31f78686549a84cbfaa32ba2c125b9b3abce7f29717"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/release-checklist/SKILL.md",
+      "sha256": "a7bd13a309e683c5a2b8a39f18df753d423d9d0b02ccf384802e3882cac4cfd5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/retrospective/SKILL.md",
+      "sha256": "29b136a0f3ea57c09acbc6e97e18df413444305f26e2eeac35c7c99de9f9dc61"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/reverse-document/SKILL.md",
+      "sha256": "c498c673b8f1b8d5634e33839b6117b17a827c2f41207acb115eb276f716189a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/1-load.md",
+      "sha256": "1bafd370ec7fa114b23e1d109eff3c1f9dfadca2c432427f214521d197a27ddd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/2-consistency.md",
+      "sha256": "38596caeb557efbca1ecb7b767f558865453b2266a35a59f7e34f173b44a2351"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/3-design-holism.md",
+      "sha256": "8855ba326fc36a2406c15afbcbdb22f01875ed079e4cd1446d8ffed668e819ee"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/4-scenarios.md",
+      "sha256": "6cbabdb03c253ab2c2fe384ae075d68fbeeef705fc5acd60fcb60f9784ae286d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/5-report.md",
+      "sha256": "ae51d4b943c57dbedb5f08a78ec7b4608324c0a9bb97b509c40bb1772e4040cb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/6-write.md",
+      "sha256": "e4f3a48fd218f010138b5ef0453178dc7d4617db93044a1c57b7f2d35cbd2942"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/references/7-handoff.md",
+      "sha256": "76a11e26daef756825db1aabf6380c3781a1ac479eea38a63104ad697163b4c6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/review-all-gdds/SKILL.md",
+      "sha256": "2b5bae8837d3b47bee678ab78aa23f0e177326b4655f22d5c16470089a25241b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/scope-check/SKILL.md",
+      "sha256": "70af8cd294881a0c1e62852bc5e47a63f142381f008f4f92adc1b0ed03ab5e11"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/security-audit/SKILL.md",
+      "sha256": "91d9c01dfed0f6bb2dc977c0e3bfe76d705653c307546b19e1d5fd413033daf4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/settings/SKILL.md",
+      "sha256": "5741b2ef90d60ee3ee350b908d106c10fcd037ad280d2a9ee4cb8f8a7fcc506e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/11-upgrade.md",
+      "sha256": "4099ab07db41a6ef9cc7c19280c52e1241b3c1cb46621aeffed3365ab466d248"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/12-output-summary.md",
+      "sha256": "0d722f38faecad23c1acf89aa085d6bf9a5db3f0814129c11869a013b2dc90bb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/2-guided-mode.md",
+      "sha256": "77ef8e043ef536db796f3d32a78d960ecde7a8320caf568f30b7b93036128ffa"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/3-version.md",
+      "sha256": "e39430dbb5b1e0afe002568fb150ebd123de5079be48d5a257ada36a22be74ac"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/4-claude-md-stack.md",
+      "sha256": "a122df4ebb9167c2defa5a8b9dc5b6a4a649e29f0c48eb43795a1230fb24d2cf"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/5-technical-preferences.md",
+      "sha256": "fc332503d281bfbd6163b89f835276ba4ad3f3d6d17ec6df673ffbe2d0103aa5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/5.5-project-yaml.md",
+      "sha256": "853492f39487b65f8155d8dc972e7861adbd01087068c3c525a2954f45b601bd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/6-knowledge-gap.md",
+      "sha256": "694517ca40542c55b671af5c47afe39420dbe9170b29f749e479894acef67a27"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/7-reference-docs.md",
+      "sha256": "f072c0a70331e75f7931b5b9ed4d63c9b10b5455e044683616220b4f7846704e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/7.5-scaffold.md",
+      "sha256": "4906f271bd3020520dfe22716f65fb1a8df60554946faf74be810611cb383e22"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/8-verify.md",
+      "sha256": "9d75412fd622ec9a51686a9ba81bc9e3f81b097eee0cba22e8cf67bd38d15fa1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/references/godot-language-config.md",
+      "sha256": "82b2aad2ad6a63616c30a5168f720eb6e83ca40e585bddf82dc13395a0a7d404"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/setup-engine/SKILL.md",
+      "sha256": "37c08d68ed58b70e6880e269e711e2617b89f2f165d9bba5d966e326e73e9a17"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/skill-improve/SKILL.md",
+      "sha256": "79b9febba255d732e2e722d45be8e2b90f7182b7ce5bdb772195e22c1ad8c65e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/skill-test/SKILL.md",
+      "sha256": "c4a1775aabdac131a0fde02fa380bd741eaffb380516f4e004ae34cfedb363c9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/1-detect-setup.md",
+      "sha256": "07af6a1dc13f17fddb6f1877e578969471ffa37e3e5b1845334ca216a36fdff3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/2-run-tests.md",
+      "sha256": "93981f1b4aadeff6d3c8db199de990972e7a7d0540313e3cad4c74aaf52c9f62"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/3-coverage.md",
+      "sha256": "34cee3af8199169ed5771a889174c96f955ed3a56cf26fd56077fada46d62224"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/4-manual-checks.md",
+      "sha256": "08d9d33dd0441f00346500e00bbea206c21239d83190cc6edbb5d986f9721d07"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/5-report.md",
+      "sha256": "f819079544bfd59504d79d1e6a6607aaf98f7476cef0a91e15eb6cf1f73adabb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/references/6-write-gate.md",
+      "sha256": "35510aaea59e83332a5eccc98a417afed5327114a6180fe62f2b7344cd716192"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/smoke-check/SKILL.md",
+      "sha256": "8531f6d673bf35704b2a0676594e3ab4d6af0153fe772ab590479247fddee6d0"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/soak-test/SKILL.md",
+      "sha256": "cd1ad9ab08b98b978f7dc5188822597b602e4f8170a811f0ca2ccab2f7f96122"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/sprint-plan/SKILL.md",
+      "sha256": "55b5da9a8180dd0d62a6babffd63dc2cbcc6d5156a2dbcc2528b427253a1606e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/sprint-status/SKILL.md",
+      "sha256": "34d09121606a14f6b5c5a82cafe65796f97adb4ed8ed8857554384ae6fe90a14"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/start/SKILL.md",
+      "sha256": "ab6e079a48c99479ac71deca11b9143a4b87874b6589e39c3e0a81422d9d1f32"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-done/CONTRACT.md",
+      "sha256": "b805929ac2ad562172f5ff9d0492268b172cd7db0f3043a94bf35dc7eec9117a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-done/references/review-gates.md",
+      "sha256": "49618b4e574a5db5dd9b25bc681b92d357b513ef9e05c760a4509d0471913741"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-done/references/sprint-next.md",
+      "sha256": "d18331c32a0e15ac6858d60ac4c9b220b81da607c3f5c83f69eaa691cc932c10"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-done/references/tech-debt-row.md",
+      "sha256": "9bc9090f96ee6b1e3e03a99fee382dcd5029647f07ce1bcdb6d730a492f8c31e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-done/SKILL.md",
+      "sha256": "3946b6770a8f27fd679a0a2f5d9c8aec6096bba6ee7982827700d1b542c9e74f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-readiness/CONTRACT.md",
+      "sha256": "9f72e5fad1591d91ddb19f295ef392ac31d227908c248354b7584327ebd73891"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-readiness/references/qa-lead-gate.md",
+      "sha256": "f919c5e0cfc94d1caccd0c68c4ab5b97b64fca75c24d1632ab6f2297a534c226"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/story-readiness/SKILL.md",
+      "sha256": "0c73e0a2c22b13a711a40ea4682a1d31c3c61cd8ad4a5a5115c41f8270659d12"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-audio/SKILL.md",
+      "sha256": "ba6c237d4e63b25a397c06c967c7f98f7827db920237fd9be0170d3e0c59e4e3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-combat/SKILL.md",
+      "sha256": "2bea102f0344c9387f281b59cf3ad9905523e8fe084f63d12091594eb3fd7eb9"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-level/SKILL.md",
+      "sha256": "226bbc8a01b071761fedc60ba222bb51b62818e2ceacc792c6c898fd90311fd4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-live-ops/SKILL.md",
+      "sha256": "ac1996365db5638b43ae25dd92cba785bdd33333929a43614149c68d0e1a7f03"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-narrative/SKILL.md",
+      "sha256": "66b923ff3dd13b9e633d3ba05885bb5f53b1294c5765ab3a891205dbd8dea8c3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-polish/SKILL.md",
+      "sha256": "8d394fd7111b8ee96d4a91809e6959225d73938ffeafdaa06b0fa5a33679086d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-qa/SKILL.md",
+      "sha256": "19448b88956168db4a56c8e6be312def07f7c8297cdaa746d8bead633a1716bb"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-release/SKILL.md",
+      "sha256": "7b9950f0848a72af225564d9820bda4655d56493cd0930208447dfe728d34933"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/team-ui/SKILL.md",
+      "sha256": "dce06487831bdcea7f62ead4f47de38c6b6acd877fb047655bf82ed28cfcfb36"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/tech-debt/SKILL.md",
+      "sha256": "11299c8a170286b24a040e965fc19d74d9d631b32a021678286e4480a24d1408"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-evidence-review/SKILL.md",
+      "sha256": "a7ab49090d3018910d1efc2a43bb16f8239c9150bc3b180bdfdaf8bca208c96f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-flakiness/SKILL.md",
+      "sha256": "382ee117ffbcade9c0b598db075a43087762da6873c5e7c7af67b0472e1d42b3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-helpers/SKILL.md",
+      "sha256": "b368b009a8abd6fd9282ce55b6a88aaccb512535cd9622b405b1f5a3f98053c1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/1-detect.md",
+      "sha256": "88e37a991c459ec5021a6be8657e5ca0ef6909354c407cd00364eb36c17c31c2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/2-plan.md",
+      "sha256": "c815ab098204cdf75159bc544100b7538f20500204f60590a3544ac6969932b4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/3-directories.md",
+      "sha256": "87d07a2a7a8fd4eeb642a6d310057f6a315e2d534cdab2c4739de86c57468be1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/4-ci.md",
+      "sha256": "1897b67d5b21a5274e83758a356837076e5bd6fd2886ad05dbb96eccb1a45245"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/5-smoke-seed.md",
+      "sha256": "c2c4dabcf16bca70fa3d4170b5fbb6ea9ae92dae4567a23fc0066025f5c9ba6e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/references/6-summary.md",
+      "sha256": "4b614ab4edcc1e9b90f7b8429b3498e17dd59055f592c7565c3689484f18298a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/test-setup/SKILL.md",
+      "sha256": "7d420f14829ba4062dcaf354a91808e41523c091516160593bac048533679973"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/2-gather-context.md",
+      "sha256": "b8c7dac24f6ea2fdd7ef278bf5074a4cba6c068e500154099231dad0997d2b8e"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/3-file-skeleton.md",
+      "sha256": "ec58c4982148229b4d336f217c92f9fdf71029e22e68b9d0d0e51e909b22a901"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/4-authoring.md",
+      "sha256": "c0df1eb0c791565c660e93ee813cc96dcc4a5f687ac25406cd75f8801f3abd40"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/5-crossref-handoff.md",
+      "sha256": "b1785beef772c20984ce2f545edd29104a5587df8fca57f1d4d7d547af5aaa00"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/sections-hud.md",
+      "sha256": "41f737fdc05271030b85f8d8af1e2030d9558eca831376bb4fd92a3d4243b054"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/sections-patterns.md",
+      "sha256": "f22f4012b3d7e7a78ebe3b18d7aee67319aef65b2799405d6a8e5a5717e8fe75"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/references/sections-ux-spec.md",
+      "sha256": "fce8ca3eb9ab452328e2f1b20ceb01c707a3be9d6a74b5acf481ecdb6a1e9219"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-design/SKILL.md",
+      "sha256": "4afc2b07ed5c854906f6a6bebd06f7f10ddc174a80ce30d0df2beddb80cfe101"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/ux-review/SKILL.md",
+      "sha256": "064b9ce2ad6b8dd954448dab6e5130da6c8bfc784e368c852202a71bf5a2c619"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/skills/vertical-slice/SKILL.md",
+      "sha256": "e7d48f49119cf1ea8c18b13a6cf5857e7d9e11bb91b8c76b12cc322103021aa5"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/architecture/tr-registry.yaml",
+      "sha256": "a3131e91ce72fa8c30f1d0690d9a693007b4bf14d9ae5a5a3a9ba30a975d01f6"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/CLAUDE.md",
+      "sha256": "b613d0c5b855e4d2c813f08279765dd40453b6a46ac38a0e22a3f9f989ddc032"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/COLLABORATIVE-DESIGN-PRINCIPLE.md",
+      "sha256": "6cc6e8759e1f91586f9a9132b47f00285aa1a2acac7edc15c1d0e2daf6503213"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/breaking-changes.md",
+      "sha256": "f0c7c97b8e016df69406da77e3672e91d8de3eddd86cba33be24dcd80edb0368"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/current-best-practices.md",
+      "sha256": "59c77f46c0acfd5efddc704c45b9cc1f07796e9b2b167430bde93e800bf7543f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/deprecated-apis.md",
+      "sha256": "1a66684256189c9e11900a9ce1e948a9ad84459dcaaa26ef76bc775499832f98"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/animation.md",
+      "sha256": "3f309b298a442ee5e19b9d3f036a12f5f0d5cc8c70b76c9f148542471421ebbf"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/audio.md",
+      "sha256": "e346e34f63b48d04b04d055bdc64f02767f06368065d959940d923212215b18f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/input.md",
+      "sha256": "2aada941fbd899c7d16651d0fc29658010fd38f8ffa8b2c1b6587193e9d12dc4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/navigation.md",
+      "sha256": "75bab2ba713a946ffe1dff6438179205b9743193b27013d791ca6d359fc748ef"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/networking.md",
+      "sha256": "0c268b5fdeb6c592c19fb9e342a419ef3ed4436fbd490bd4c73e0bd7bad43259"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/physics.md",
+      "sha256": "c4a3ef5417e634a207e2ecedc1ff457512c50974534cae2d7636536bf52eef77"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/rendering.md",
+      "sha256": "1bbc2534a46d797881c02e0f62aa6d49fa55c9910c43ad6f24ea07571a41b599"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/modules/ui.md",
+      "sha256": "cdd6f0d69706c057a7c051a80eb60262fc2c5348ffdc62d9f59139a2269dbb1c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/godot/VERSION.md",
+      "sha256": "e056f696d9cb5b543e6c69527a564ad42997a15cf1f978830c1658b32cd8b37a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/README.md",
+      "sha256": "73777090f297ddae6244c6adb21de53b862804a84df1062e29e9cf12409b028d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/breaking-changes.md",
+      "sha256": "18552463ef012450a493ec20046e0722bc53b629116caf1b482c0e076aa41391"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/current-best-practices.md",
+      "sha256": "4a49203b4f33d35fded2771758d4dab0b0d28fc75de3a3191fc5a2c31b7af1e8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/deprecated-apis.md",
+      "sha256": "e72ebe44b37c85aa9bf45123aad31425d3170889b59723ce3420cea2558ba691"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/animation.md",
+      "sha256": "a34f5c692dee08f1f1f3d805fd79a14957ca5443ecf6a06e446ec5af5bdd882b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/audio.md",
+      "sha256": "a4b9cc6ea8d8e4d662698cebad19739d5d044440148e05bb37e82098ce971002"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/input.md",
+      "sha256": "5763459442ecbbb843b90e6deb8955e76f4dcc5c44ce9911d2300994a1ad390a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/navigation.md",
+      "sha256": "fa9fa5e442a97282c83ab17a86a22b5afd610ab604f7f4c516953d77f32edcc2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/networking.md",
+      "sha256": "bae4446e74e369bc0d854f3f1db0627a2c761a44414cb951d429547e4893be32"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/physics.md",
+      "sha256": "695a063419773551158803d264e2fea534cdab8f7638e4a4052af8e3201252b2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/rendering.md",
+      "sha256": "0e92faf290529cf7d01512e40b501fb8fd908a5a65eb24512bd541aef875e47f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/modules/ui.md",
+      "sha256": "eb562e228579a79d5bd7cd90dbfe3b885098f413399a50e56b920811ecd0e34a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/PLUGINS.md",
+      "sha256": "e3fc38b36dc94ba19440a48c7e2d0cce75458f1bcaefc15fa9d1916b32d451ba"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/plugins/addressables.md",
+      "sha256": "7d816932c765ddde59e1c0739ad813c9dccb3d8b9d098c761469300f8b9e8286"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/plugins/cinemachine.md",
+      "sha256": "015401a08d7e56729b57d58509ba73c31265134b6b75c33f9fb896e81192571a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/plugins/dots-entities.md",
+      "sha256": "2f25288586c23be8ab02d8d575fa4ec0ffda1bc9b767f60ccbe21d6c7fc7b9e1"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unity/VERSION.md",
+      "sha256": "52144bd9f717204bc6d93e00f3323691249bd7a7d84379dee86fda69cc340733"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/breaking-changes.md",
+      "sha256": "a09644018f1d4a44d6230f4001d8bfb75e52c13dfabd068d2ee247a5e87c844c"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/current-best-practices.md",
+      "sha256": "3a368803c41a2d798b560a76633a18a7c684a9c538b33f08949897761a6856bd"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/deprecated-apis.md",
+      "sha256": "0241d87b3e535fe5a9f01dff811534ada50073165e1caa3e4cdd5c36a4deb400"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/animation.md",
+      "sha256": "cdcd87543de1af981725c3cd6f799a265d8d4c655cb597c6ada51199701b4212"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/audio.md",
+      "sha256": "9921b8365938258d013562260342024dbdb22124cd6b1af12cde41118e5881d2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/input.md",
+      "sha256": "9028f94eba067676e67334ff45b243c00498e7a2ff8b040fee797a365f05707a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/navigation.md",
+      "sha256": "36386a8039dd01cb2caf523721b7f24b99b7b8b43c52c727468daae9da67d2e8"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/networking.md",
+      "sha256": "7a93652c397952bc621db78835cf3b5625775b916846c4880bb41dcdbc273830"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/physics.md",
+      "sha256": "1b6e37e0cfb7082801a84c9b6b388de3c72a4790f0c304a52be4d9b9f489574d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/rendering.md",
+      "sha256": "f482041dd302712d15d1dcccf4822ac8551c6359fbcfcbbbf119016626623c7b"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/modules/ui.md",
+      "sha256": "ce3dd69d610a7421c5310dbe92d64e6f07aed8e0c8b3b1c902726ea1f128c2a3"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/PLUGINS.md",
+      "sha256": "63858fb906de0d264df0e4accaf96d7ae972c1042a9b5f4cc001bc7cd2064ae2"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/plugins/common-ui.md",
+      "sha256": "22670acf08273611d853bf8c5e54aa4c65247ddced56a596e49da12de8e16806"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/plugins/gameplay-ability-system.md",
+      "sha256": "479e58deafd02521d7b1fc9172e0dd657004843d9660681307633762e0ff2624"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/plugins/gameplay-camera-system.md",
+      "sha256": "e5e7b45e383eba6f8c9d2f59bc58440e63edb360df6d49b7790997bb7dcac067"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/plugins/pcg.md",
+      "sha256": "85d602c2457c95b8e484393a9ed6950e662a595e23fa8d5eadbb2e2390c0098f"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/engine-reference/unreal/VERSION.md",
+      "sha256": "3b13bd788e5868e7c061faac3a96612dbe5b398924023d437a1e0b77e4f5b784"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/migration-guide-v1.1.md",
+      "sha256": "618b44121b9544b8bf32bd64040dd3ea800788079585f8a061d80563941ea51a"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/registry/architecture.yaml",
+      "sha256": "8ccaae65fd39f29ba36448bf0c9e4484dd39498a6ff18468239ea003191eefe4"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/skill-flow-diagrams.md",
+      "sha256": "e063d0aa1d48cc08bbfec9b296b5b721d95e012c1379630d7406396d967f5d7d"
+    },
+    {
+      "path": "vendor/claude-code-game-studios/studio-docs/WORKFLOW-GUIDE.md",
+      "sha256": "c8808fa8a4199cc0641b89cbe41ac411f131514d097e5df3d78765d300255e25"
     },
     {
       "path": "vendor/gamedev-skills/audio-design/references/adaptive-music.md",
