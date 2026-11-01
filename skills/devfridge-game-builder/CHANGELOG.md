@@ -1,5 +1,9 @@
 # DevFridge Game Builder — Changelog
 
+## 1.9.1 — 2026-11-01
+
+Corrects the RPC proxy guidance for subscription purchases. `RPC_REQUIRED_TX_PROGRAM_IDS` admits a transaction when **at least one** listed program appears, so 1.9.0's advice to require both the swap program and Fridge would have accepted a swap without a deposit. Require Fridge only. The allowlist now also names System and SPL Token for PumpSwap routes that wrap SOL. Pairing swap and deposit stays the job of the game's builder and native validator. No code or helper changed.
+
 ## 1.9.0 — 2026-11-01
 
 Replaces token-amount Season Pass tiers with Daily, Weekly and Monthly subscription passes paid in SOL, and moves the blockchain setup to the start of discovery.

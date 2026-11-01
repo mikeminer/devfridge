@@ -59,7 +59,7 @@ Before the review: verify the initialized Token-2022 mint, owner and decimals; r
 
 Order: authenticated wallet → prechecks → review → freshly built transaction → read-only simulation of the **final** transaction → native validator when applicable → **synchronous durable pending record** → wallet handoff → signature/PDA reconciliation → fresh subscription read. Browser wallets use `signAndSendTransaction`; MWA uses `signAndSendTransactions`, with the documented `signTransactions` fallback only after a definite `-32601` before any signature. A timeout is never a reason to sign again.
 
-The [RPC proxy](rpc-proxy.md) must allow `simulateTransaction`, and its transaction program allowlist must contain exactly the reviewed programs: Compute Budget, Associated Token, the route's swap program(s) and Fridge, with the swap program and Fridge required.
+The [RPC proxy](rpc-proxy.md) must allow `simulateTransaction`, and its transaction program allowlist must contain exactly the reviewed programs: Compute Budget, Associated Token, the route's swap program(s), System and SPL Token when the route wraps SOL, and Fridge. Make Fridge the only required program: the proxy needs just one required program present, so requiring the swap program as well would admit a swap without a deposit. Pairing the swap and the deposit in one transaction is enforced by the game's builder and native validator, not by the proxy.
 
 ## Read and decode accounts
 

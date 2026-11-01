@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with Daily, Weekly and Monthly subscription passes paid in SOL. Use for wallet and optional in-game market integration, the vendored game-studio workflow, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.9.0"
+  version: "1.9.1"
   sources-reviewed: "2026-11-01"
 ---
 # DevFridge Game Builder
