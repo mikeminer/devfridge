@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "reviewedAt": "2026-11-01",
-  "bytes": 1950221,
-  "sha256": "83e16c4914609586064e8e6e986f79b1705f8ffae45ab6055df42914e4ec3e4a",
+  "bytes": 1951401,
+  "sha256": "51c7378532b74bc81c62746ae961db4d0e4adf344fb6e78e1c54a1396df91977",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -43,15 +43,15 @@
     },
     {
       "path": "assets/public-site/generate-site.py",
-      "sha256": "c7bcf20730e072672d976e30e6c407a240e0c826fcbc288686703503ba81906c"
+      "sha256": "f7e066117f9ff3884022562486a7859efc204ab8f854a7a787c9ade62ebdef80"
     },
     {
       "path": "assets/public-site/site.example.json",
-      "sha256": "8a835dd69059ef1a7a99a9ec2b00a744b1ea75a85077206211c12964ff872547"
+      "sha256": "7b4e7ba84d93208876d172b981d2eb3a9d755ca35c572382e17c60c5e750f560"
     },
     {
       "path": "assets/public-site/site_test.py",
-      "sha256": "d3070aaaab06560884855c409f59642b225fc6469d2a9bb52024757d1aa862b2"
+      "sha256": "c2cb7e5d5929772cb5ef2eb9e40a1c3a5afc5237ec778ad136454b4c3c09acbf"
     },
     {
       "path": "assets/quality-governor.mjs",
@@ -199,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a734b1d2f68ec570d914db0e07b3973b6b8f9618aeff189209450aa90fe6ec4c"
+      "sha256": "2a5519c4d2c41bb6aa676d5e701167c25a0aa8c21178d354a78addc32145a540"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -271,7 +271,7 @@
     },
     {
       "path": "references/public-site.md",
-      "sha256": "78a296171caf4342db6f0f15c7e7d4d867961898d9e12ae57db59878a487f768"
+      "sha256": "8386395b17324e10d2ae81b2ba3419234567426e5b8a49dbdc6faaff52367f2f"
     },
     {
       "path": "references/release-pitfalls.md",
@@ -327,7 +327,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "56662757ead40edb2cb64cad1fdeab132adf34d021bf9344a27bd1b96afc0a1b"
+      "sha256": "e47ce60db8abd77a3a7b7bfcfb43f52b7272e2697bde954a45c2972cf6d4dc07"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",

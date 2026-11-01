@@ -101,6 +101,10 @@ def validate(config, draft=False):
     out['origin'] = https_url(config.get('origin'), draft, origin=True)
     out['downloadUrl'] = https_url(config['downloadUrl'], draft) if config.get('downloadUrl') else None
     out['playUrl'] = https_url(config['playUrl'], draft) if config.get('playUrl') else None
+    base = config.get('basePath') or ''
+    if not isinstance(base, str) or (base and not re.fullmatch(r'/[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?', base)):
+        raise ValueError('basePath must be empty or one lowercase path segment such as /my-game')
+    out['basePath'] = base
     out['platform'] = config.get('platform')
     if out['platform'] not in ('browser', 'seeker-bundled', 'seeker-hosted', 'both-bundled', 'both-hosted'):
         raise ValueError('Select the actual platform/architecture')
@@ -120,10 +124,12 @@ def page(config, title, body, path):
     e = escape
     draft = '<p class="draft">DRAFT — app facts and public links need review. Do not submit this page to the Store.</p>' if config['draft'] else ''
     robots = '<meta name="robots" content="noindex,nofollow">' if config['draft'] else ''
-    canonical = config['origin'] + path
+    base = config['basePath']
+    canonical = config['origin'] + base + path
+    style = base + ('/legal.css' if base else '/styles.css')
     return f'''<!doctype html>
-<html lang="{e(config['language'], quote=True)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · {e(config['appName'])}</title><meta name="description" content="{e(config['description'], quote=True)}">{robots}<link rel="canonical" href="{e(canonical, quote=True)}"><link rel="stylesheet" href="/styles.css"></head>
-<body><nav aria-label="Main navigation"><a href="/">{e(config['appName'])}</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>{draft}<main><h1>{e(title)}</h1>{body}</main><footer><p>Published by {e(config['publisherName'])}. <a href="mailto:{e(config['supportEmail'], quote=True)}">Contact support</a></p><small>Updated {e(config['updatedAt'])}</small></footer></body></html>
+<html lang="{e(config['language'], quote=True)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} · {e(config['appName'])}</title><meta name="description" content="{e(config['description'], quote=True)}">{robots}<link rel="canonical" href="{e(canonical, quote=True)}"><link rel="stylesheet" href="{e(style, quote=True)}"></head>
+<body><nav aria-label="Main navigation"><a href="{e(base + '/', quote=True)}">{e(config['appName'])}</a><a href="{e(base + '/privacy/', quote=True)}">Privacy</a><a href="{e(base + '/terms/', quote=True)}">Terms</a></nav>{draft}<main><h1>{e(title)}</h1>{body}</main><footer><p>Published by {e(config['publisherName'])}. <a href="mailto:{e(config['supportEmail'], quote=True)}">Contact support</a></p><small>Updated {e(config['updatedAt'])}</small></footer></body></html>
 '''
 
 
@@ -138,14 +144,18 @@ def generate(config, destination, draft=False):
     for field, label in [('playUrl', 'Play the web game'), ('downloadUrl', 'Get the app')]:
         if c[field]:
             body += f'<p><a href="{escape(c[field], quote=True)}" rel="noopener noreferrer">{label}</a></p>'
-    files = {'index.html': page(c, c['appName'], body, '/'), 'styles.css': CSS + '\n'}
+    base = c['basePath']
+    # With basePath the host is shared by several games: the game owns base + '/', so only the
+    # legal pages and their stylesheet are generated there; no landing page or root robots.txt.
+    files = {'legal.css': CSS + '\n'} if base else {'index.html': page(c, c['appName'], body, '/'), 'styles.css': CSS + '\n'}
     for key, fields in [('privacy', PRIVACY), ('terms', TERMS)]:
         body = ''.join(f'<section><h2>{escape(title)}</h2><p>{escape(c[key][field])}</p></section>' for field, title in fields.items())
         files[key + '/index.html'] = page(c, 'Privacy policy' if key == 'privacy' else 'Terms of use', body, '/' + key + '/')
-    files['robots.txt'] = 'User-agent: *\nDisallow: /\n' if draft else 'User-agent: *\nAllow: /\n'
+    if not base:
+        files['robots.txt'] = 'User-agent: *\nDisallow: /\n' if draft else 'User-agent: *\nAllow: /\n'
     manifest = {'schemaVersion': 1, 'draft': draft, 'factsReviewed': not draft, 'language': c['language'],
-                'walletIdentityOrigin': c['origin'], 'websiteUrl': c['origin'] + '/',
-                'privacyUrl': c['origin'] + '/privacy/', 'termsUrl': c['origin'] + '/terms/',
+                'walletIdentityOrigin': c['origin'], 'basePath': base, 'websiteUrl': c['origin'] + base + '/',
+                'privacyUrl': c['origin'] + base + '/privacy/', 'termsUrl': c['origin'] + base + '/terms/',
                 'checksRemaining': ['Deploy to the owned domain', 'Verify all three HTTPS pages and support contact', 'Compare copy to the actual release and applicable requirements'],
                 'files': {name: hashlib.sha256(data.encode()).hexdigest() for name, data in files.items()}}
     # Render privately first: validation/write failure never creates a partly ready destination.
