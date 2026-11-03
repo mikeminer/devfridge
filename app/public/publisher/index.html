@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DevFridge · Publisher</title>
-    <meta name="description" content="DevFridge (founder: Michele Angelo Forlani), the publisher of OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo: games and tools for Solana and the Solana dApp Store." />
+    <meta name="description" content="DevFridge (founder: Michele Angelo Forlani), the publisher of SEEK &amp; STRIKE, OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo: games and tools for Solana and the Solana dApp Store." />
     <meta property="og:title" content="DevFridge · Publisher" />
-    <meta property="og:description" content="Games and tools for Solana and the Solana dApp Store: OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo." />
+    <meta property="og:description" content="Games and tools for Solana and the Solana dApp Store: SEEK &amp; STRIKE, OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo." />
     <link rel="icon" href="/favicon.jpg" />
     <style>
       :root {
@@ -81,6 +81,11 @@
         margin: 0;
         font-size: 21px;
       }
+      .app > div { min-width: 0; }
+      .app .store-badge { display: inline-block; width: 208px; max-width: 100%; margin-top: 12px; }
+      .app .store-badge img { width: 100%; height: auto; border-radius: 0; object-fit: contain; background: none; }
+      .store-badge:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 10px; }
+      .app .release-status { color: var(--accent); font-size: 14px; }
       .pkg {
         font: 13px ui-monospace, SFMono-Regular, Consolas, monospace;
         color: var(--muted);
@@ -210,6 +215,24 @@
 
       <h2>Our apps</h2>
       <div class="apps">
+        <article class="app" id="seek-and-strike">
+          <img src="/publisher/seek-and-strike.png" alt="SEEK &amp; STRIKE icon" width="96" height="96" />
+          <div>
+            <h3>SEEK &amp; STRIKE</h3>
+            <div class="pkg">Android · it.seekandstrike.app</div>
+            <p>A tactical first-person shooter built for Solana Seeker. Plant or defuse the charge, choose one of five classes and coordinate with your squad. One free offline match each day; an active Daily Pass unlocks unlimited matches and online play. Includes 17 interface languages.</p>
+            <p class="release-status">Version 0.5.0 submitted to the Solana dApp Store — in review. Available after approval.</p>
+            <a class="store-badge" href="solanadappstore://details?id=it.seekandstrike.app"><img src="/publisher/solana-dapp-store-badge.png" alt="Open SEEK &amp; STRIKE in the Solana dApp Store" width="696" height="273" /></a>
+            <div class="links">
+              <a class="primary" href="https://seekandstrike.it/">App page</a>
+              <a href="https://seekandstrike.it/#download">Store information</a>
+              <a href="https://seekandstrike.it/privacy">Privacy</a>
+              <a href="https://seekandstrike.it/terms">Terms</a>
+              <a href="mailto:welcome@devfridge.cool">Support</a>
+              <a href="https://github.com/mikeminer/seekandstrike">Source code</a>
+            </div>
+          </div>
+        </article>
         <article class="app" id="onlyfridge-club">
           <img src="/publisher/onlyfridge-club.webp" alt="OnlyFridge Club icon" width="96" height="96" />
           <div>
