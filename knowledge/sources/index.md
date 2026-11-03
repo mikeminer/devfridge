@@ -4,7 +4,7 @@ title: "Sources and evidence hierarchy"
 description: "DevFridge investor knowledge: Sources and evidence hierarchy"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-02T15:48:59Z"
+timestamp: "2026-11-03T14:11:55Z"
 generated: true
 ---
 

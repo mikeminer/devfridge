@@ -4,7 +4,7 @@ title: "Rugarugo (solana)"
 description: "DevFridge investor knowledge: Rugarugo (solana)"
 resource: "https://solscan.io/token/An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-02T15:48:59Z"
+timestamp: "2026-11-03T14:11:55Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:An91P3ZkntqPoQJrYbLdZkbwbdMfCCVzLt8HVA2Mpump`
 
-Registry status: ok · last successful observation: 2026-11-02T15:48:59Z · last attempt: 2026-11-02T15:48:59Z.
+Registry status: ok · last successful observation: 2026-11-03T14:11:55Z · last attempt: 2026-11-03T14:11:55Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-11-02T15:48:59Z · last attempt: 2026-11-02T15:48:59Z.
+ok · last successful observation: 2026-11-03T14:11:55Z · last attempt: 2026-11-03T14:11:55Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 464551485 |
+| Finalized slot | 464927916 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-11-02T15:48:59Z · last attempt: 2026-11-02T15:48:59Z.
+ok · last successful observation: 2026-11-03T14:11:55Z · last attempt: 2026-11-03T14:11:55Z.
 
 ```json
 {
