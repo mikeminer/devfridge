@@ -4,7 +4,7 @@ title: "Official contacts, project leader and community"
 description: "DevFridge investor knowledge: Official contacts, project leader and community"
 resource: "https://connect.devfridge.cool/"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-04T12:50:47Z"
+timestamp: "2026-11-04T13:02:50Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Project-published contact observations. Only team members with verified PASTA commitment at observation are indexed. Verification follows the Team tier amounts and original lock durations, including its one-day tolerance. It does not verify real-world identity. Check source dates.
 
-[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-11-04T12:50:47Z · last attempt: 2026-11-04T12:50:47Z.
+[Connect](https://connect.devfridge.cool/) · ok · last successful observation: 2026-11-04T13:02:50Z · last attempt: 2026-11-04T13:02:50Z.
 
 ## OFFICIAL TELEGRAM BOT
 
@@ -28,7 +28,7 @@ Project-published contact observations. Only team members with verified PASTA co
 - [DevFridge Bridge Rate-limited LayerZero OFT bridge for verified token routes](https://bridge.devfridge.cool)
 - [Scanner Trust report and Fridge badge](https://scan.devfridge.cool)
 - [Ecosystem Kitchen map of products, identities, and live evidence](https://ecosystem.devfridge.cool)
-- [World Pastalovers vs The Shelf — lock decides your team](https://world.devfridge.cool)
+- [World Cold Storage merge puzzle, open since 1 October 2026](https://world.devfridge.cool)
 - [DevFridge World — Android app Official Android download page for DevFridge World](https://world.devfridge.cool/android)
 - [Docs How to fridge, scan, and feature a memecoin](https://docs.devfridge.cool)
 - [Health Live status of Fridge, RPC, and $PASTA](https://health.devfridge.cool)
