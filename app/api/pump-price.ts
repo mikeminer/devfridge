@@ -1,6 +1,8 @@
 export const config = { runtime: "edge" };
 
-import { Buffer } from "buffer";
+import bs58 from "bs58";
+import { ed25519 } from "@noble/curves/ed25519";
+import { sha256 } from "@noble/hashes/sha256";
 
 const TIMEOUT = 8_000;
 const SOL = "So11111111111111111111111111111111111111112";
@@ -12,10 +14,10 @@ const TOKEN_2022 = "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb";
 const RAYDIUM = "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8";
 /** Raydium AMM v4 SOL/USDC. Vaults are read from this account, not assumed. */
 const SOL_POOL = "58oQChx4yWmvKdwLLZzBi4ChoCc2fqCUWBkwMihLYQo2";
-const POOL_DISC = Buffer.from([241, 154, 109, 4, 17, 177, 109, 188]);
-const CURVE_DISC = Buffer.from([23, 183, 248, 55, 96, 216, 172, 96]);
+const POOL_DISC = [241, 154, 109, 4, 17, 177, 109, 188];
+const CURVE_DISC = [23, 183, 248, 55, 96, 216, 172, 96];
+const PDA_MARKER = new TextEncoder().encode("ProgramDerivedAddress");
 
-type Pubkey = typeof import("@solana/web3.js").PublicKey;
 type RpcAccount = { owner: string; executable: boolean; data: [string, string] } | null;
 
 class PriceError extends Error {
@@ -46,14 +48,72 @@ function priced(mint: string, priceUsd: number, source: "alchemy" | "alchemy-rpc
   });
 }
 
-let web3: Promise<typeof import("@solana/web3.js")> | null = null;
-function solana(): Promise<typeof import("@solana/web3.js")> {
-  if (!web3) {
-    const g = globalThis as typeof globalThis & { Buffer?: typeof Buffer };
-    if (!g.Buffer) g.Buffer = Buffer;
-    web3 = import("@solana/web3.js");
+function bytes(value: string): Uint8Array | null {
+  try {
+    const raw = Uint8Array.from(bs58.decode(value));
+    return raw.length === 32 ? raw : null;
+  } catch {
+    return null;
   }
-  return web3;
+}
+
+function encodeKey(raw: Uint8Array): string {
+  return bs58.encode(raw);
+}
+
+function concat(parts: Uint8Array[]): Uint8Array {
+  const out = new Uint8Array(parts.reduce((sum, part) => sum + part.length, 0));
+  let offset = 0;
+  for (const part of parts) {
+    out.set(part, offset);
+    offset += part.length;
+  }
+  return out;
+}
+
+function onCurve(raw: Uint8Array): boolean {
+  try {
+    ed25519.ExtendedPoint.fromHex(raw);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function findPda(seeds: Uint8Array[], program: Uint8Array): Uint8Array | null {
+  for (let bump = 255; bump >= 0; bump--) {
+    const hash = sha256(concat([...seeds, Uint8Array.of(bump), program, PDA_MARKER]));
+    if (!onCurve(hash)) return hash;
+  }
+  return null;
+}
+
+function ascii(value: string): Uint8Array {
+  return new TextEncoder().encode(value);
+}
+
+function b64(data: string): Uint8Array {
+  const binary = atob(data);
+  const out = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) out[i] = binary.charCodeAt(i);
+  return out;
+}
+
+function viewOf(data: Uint8Array): DataView {
+  return new DataView(data.buffer, data.byteOffset, data.byteLength);
+}
+
+function u64(data: Uint8Array, offset: number): bigint {
+  return viewOf(data).getBigUint64(offset, true);
+}
+
+function hasDisc(data: Uint8Array, disc: number[]): boolean {
+  return disc.every((byte, index) => data[index] === byte);
+}
+
+function keyAt(data: Uint8Array, offset: number): string | null {
+  if (offset + 32 > data.length) return null;
+  return encodeKey(data.slice(offset, offset + 32));
 }
 
 /** Quote units per base unit, times quoteUsd. Raw amounts stay integers until the last step. */
@@ -81,22 +141,16 @@ export function spotUsd(
   return Number.isFinite(price) && price > 0 ? price : null;
 }
 
-function pubkeyAt(PublicKey: Pubkey, data: Buffer, offset: number): string | null {
-  if (offset + 32 > data.length) return null;
-  return new PublicKey(data.subarray(offset, offset + 32)).toBase58();
-}
-
-function readI128(data: Buffer, offset: number): bigint {
+function readI128(data: Uint8Array, offset: number): bigint {
   if (offset + 16 > data.length) return 0n;
-  const lo = data.readBigUInt64LE(offset);
-  const hi = data.readBigInt64LE(offset + 8);
-  return (hi << 64n) + lo;
+  const view = viewOf(data);
+  return (view.getBigInt64(offset + 8, true) << 64n) + view.getBigUint64(offset, true);
 }
 
-function accountData(account: RpcAccount, owner: string | null): Buffer | null {
+function accountData(account: RpcAccount, owner: string | null): Uint8Array | null {
   if (!account || account.executable || account.data?.[1] !== "base64") return null;
   if (owner && account.owner !== owner) return null;
-  return Buffer.from(account.data[0], "base64");
+  return b64(account.data[0]);
 }
 
 function mintDecimals(account: RpcAccount): number | null {
@@ -106,13 +160,13 @@ function mintDecimals(account: RpcAccount): number | null {
   return data[44] <= 18 ? data[44] : null;
 }
 
-function tokenAmount(PublicKey: Pubkey, account: RpcAccount, mint: string, owner: string | null): bigint | null {
+function tokenAmount(account: RpcAccount, mint: string, owner: string | null): bigint | null {
   if (!account || (account.owner !== TOKEN && account.owner !== TOKEN_2022)) return null;
   const data = accountData(account, account.owner);
   if (!data || data.length < 72) return null;
-  if (pubkeyAt(PublicKey, data, 0) !== mint) return null;
-  if (owner && pubkeyAt(PublicKey, data, 32) !== owner) return null;
-  return data.readBigUInt64LE(64);
+  if (keyAt(data, 0) !== mint) return null;
+  if (owner && keyAt(data, 32) !== owner) return null;
+  return u64(data, 64);
 }
 
 async function alchemyRpc(key: string, method: string, params: unknown[]): Promise<unknown> {
@@ -159,33 +213,37 @@ async function indexedUsd(key: string, mint: string): Promise<number | null> {
 
 /** USD from the canonical PumpSwap pool, or the live bonding curve, using Alchemy RPC reserves. */
 async function rpcUsd(key: string, mint: string): Promise<number | null> {
-  const { PublicKey } = await solana();
-  const base = new PublicKey(mint);
-  const [creator] = PublicKey.findProgramAddressSync([Buffer.from("pool-authority"), base.toBuffer()], new PublicKey(PUMP));
-  const poolId = PublicKey.findProgramAddressSync(
-    [Buffer.from("pool"), Buffer.alloc(2), creator.toBuffer(), base.toBuffer(), new PublicKey(SOL).toBuffer()],
-    new PublicKey(PUMP_AMM),
-  )[0].toBase58();
-  const curveId = PublicKey.findProgramAddressSync([Buffer.from("bonding-curve"), base.toBuffer()], new PublicKey(PUMP))[0].toBase58();
+  const base = bytes(mint);
+  const pump = bytes(PUMP);
+  const amm = bytes(PUMP_AMM);
+  const solMint = bytes(SOL);
+  if (!base || !pump || !amm || !solMint) return null;
+  const creator = findPda([ascii("pool-authority"), base], pump);
+  if (!creator) return null;
+  const poolBytes = findPda([ascii("pool"), Uint8Array.of(0, 0), creator, base, solMint], amm);
+  const curveBytes = findPda([ascii("bonding-curve"), base], pump);
+  if (!poolBytes || !curveBytes) return null;
+  const poolId = encodeKey(poolBytes);
+  const curveId = encodeKey(curveBytes);
   const first = await multiple(key, [poolId, curveId, mint, SOL_POOL]);
   const decimals = mintDecimals(first[2]);
   if (decimals == null) return null;
 
   const poolRaw = accountData(first[0], PUMP_AMM);
   let pool: { baseVault: string; quoteVault: string; quoteMint: string; virtualQuote: bigint } | null = null;
-  if (poolRaw && poolRaw.length >= 203 && poolRaw.subarray(0, 8).equals(POOL_DISC)) {
-    const baseMint = pubkeyAt(PublicKey, poolRaw, 43);
-    const quoteMint = pubkeyAt(PublicKey, poolRaw, 75);
-    const baseVault = pubkeyAt(PublicKey, poolRaw, 139);
-    const quoteVault = pubkeyAt(PublicKey, poolRaw, 171);
+  if (poolRaw && poolRaw.length >= 203 && hasDisc(poolRaw, POOL_DISC)) {
+    const baseMint = keyAt(poolRaw, 43);
+    const quoteMint = keyAt(poolRaw, 75);
+    const baseVault = keyAt(poolRaw, 139);
+    const quoteVault = keyAt(poolRaw, 171);
     if (baseMint === mint && (quoteMint === SOL || quoteMint === USDC) && baseVault && quoteVault) {
       pool = { baseVault, quoteVault, quoteMint, virtualQuote: readI128(poolRaw, 245) };
     }
   }
 
   const curveRaw = accountData(first[1], PUMP);
-  const curve = curveRaw && curveRaw.length >= 49 && curveRaw.subarray(0, 8).equals(CURVE_DISC) && curveRaw[48] <= 1
-    ? { virtualToken: curveRaw.readBigUInt64LE(8), virtualSol: curveRaw.readBigUInt64LE(16), complete: curveRaw[48] === 1 }
+  const curve = curveRaw && curveRaw.length >= 49 && hasDisc(curveRaw, CURVE_DISC) && curveRaw[48] <= 1
+    ? { virtualToken: u64(curveRaw, 8), virtualSol: u64(curveRaw, 16), complete: curveRaw[48] === 1 }
     : null;
   const usePool = pool != null;
   const useCurve = !usePool && curve != null && !curve.complete;
@@ -193,26 +251,26 @@ async function rpcUsd(key: string, mint: string): Promise<number | null> {
 
   const solRaw = accountData(first[3], RAYDIUM);
   if (!solRaw || solRaw.length !== 752) return null;
-  const status = solRaw.readBigUInt64LE(0);
-  const coinVault = pubkeyAt(PublicKey, solRaw, 336);
-  const pcVault = pubkeyAt(PublicKey, solRaw, 368);
+  const status = u64(solRaw, 0);
+  const coinVault = keyAt(solRaw, 336);
+  const pcVault = keyAt(solRaw, 368);
   if (status === 0n || status > 7n || !coinVault || !pcVault) return null;
-  if (pubkeyAt(PublicKey, solRaw, 400) !== SOL || pubkeyAt(PublicKey, solRaw, 432) !== USDC) return null;
+  if (keyAt(solRaw, 400) !== SOL || keyAt(solRaw, 432) !== USDC) return null;
 
   const ids = [...(pool ? [pool.baseVault, pool.quoteVault] : []), coinVault, pcVault];
   const rows = await multiple(key, ids);
   let cursor = 0;
   const sol = spotUsd(
-    tokenAmount(PublicKey, rows[rows.length - 2], SOL, null) ?? 0n,
+    tokenAmount(rows[rows.length - 2], SOL, null) ?? 0n,
     9,
-    tokenAmount(PublicKey, rows[rows.length - 1], USDC, null) ?? 0n,
+    tokenAmount(rows[rows.length - 1], USDC, null) ?? 0n,
     6,
     1,
   );
   if (sol == null) return null;
   if (pool) {
-    const baseRaw = tokenAmount(PublicKey, rows[cursor++], mint, poolId);
-    const quoteRaw = tokenAmount(PublicKey, rows[cursor++], pool.quoteMint, poolId);
+    const baseRaw = tokenAmount(rows[cursor++], mint, poolId);
+    const quoteRaw = tokenAmount(rows[cursor++], pool.quoteMint, poolId);
     if (baseRaw == null || quoteRaw == null) return null;
     const effective = quoteRaw + pool.virtualQuote;
     const quoteUsd = pool.quoteMint === USDC ? 1 : sol;
