@@ -7,6 +7,8 @@ import { sha256 } from "@noble/hashes/sha256";
 const TIMEOUT = 8_000;
 const SOL = "So11111111111111111111111111111111111111112";
 const USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
+/** Pump writes this when the bonding-curve quote is SOL. A shorter curve means the same. */
+const SOL_QUOTE = "11111111111111111111111111111111";
 const PUMP = "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P";
 const PUMP_AMM = "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA";
 const TOKEN = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
@@ -116,6 +118,14 @@ function keyAt(data: Uint8Array, offset: number): string | null {
   return encodeKey(data.slice(offset, offset + 32));
 }
 
+/** Quote mint appended after creator, is_mayhem and is_cashback. Absent or default means SOL. */
+function curveQuoteMint(data: Uint8Array): string {
+  if (data.length < 115) return SOL;
+  const quote = keyAt(data, 83);
+  if (!quote || quote === SOL_QUOTE || quote === SOL) return SOL;
+  return quote;
+}
+
 /** Quote units per base unit, times quoteUsd. Raw amounts stay integers until the last step. */
 export function spotUsd(
   baseRaw: bigint,
@@ -211,8 +221,48 @@ async function indexedUsd(key: string, mint: string): Promise<number | null> {
   return Number.isFinite(price) && price > 0 ? price : null;
 }
 
+async function solUsd(key: string, poolAccount: RpcAccount): Promise<number | null> {
+  const solRaw = accountData(poolAccount, RAYDIUM);
+  if (!solRaw || solRaw.length !== 752) return null;
+  const status = u64(solRaw, 0);
+  const coinVault = keyAt(solRaw, 336);
+  const pcVault = keyAt(solRaw, 368);
+  if (status === 0n || status > 7n || !coinVault || !pcVault) return null;
+  if (keyAt(solRaw, 400) !== SOL || keyAt(solRaw, 432) !== USDC) return null;
+  const rows = await multiple(key, [coinVault, pcVault]);
+  return spotUsd(
+    tokenAmount(rows[0], SOL, null) ?? 0n,
+    9,
+    tokenAmount(rows[1], USDC, null) ?? 0n,
+    6,
+    1,
+  );
+}
+
+/** USD price of a non-SOL curve quote. A cycle returns null instead of a made-up number. */
+async function quotedUsd(
+  key: string,
+  quoteMint: string,
+  seen: Set<string>,
+): Promise<{ usd: number; decimals: number } | null> {
+  if (quoteMint === USDC) return { usd: 1, decimals: 6 };
+  const [account] = await multiple(key, [quoteMint]);
+  const decimals = mintDecimals(account);
+  if (decimals == null) return null;
+  let usd: number | null = null;
+  try {
+    usd = await indexedUsd(key, quoteMint);
+  } catch (err) {
+    if (!(err instanceof PriceError)) throw err;
+  }
+  if (usd == null) usd = await rpcUsd(key, quoteMint, seen);
+  return usd == null ? null : { usd, decimals };
+}
+
 /** USD from the canonical PumpSwap pool, or the live bonding curve, using Alchemy RPC reserves. */
-async function rpcUsd(key: string, mint: string): Promise<number | null> {
+async function rpcUsd(key: string, mint: string, seen = new Set<string>()): Promise<number | null> {
+  if (seen.has(mint)) return null;
+  seen.add(mint);
   const base = bytes(mint);
   const pump = bytes(PUMP);
   const amm = bytes(PUMP_AMM);
@@ -243,41 +293,33 @@ async function rpcUsd(key: string, mint: string): Promise<number | null> {
 
   const curveRaw = accountData(first[1], PUMP);
   const curve = curveRaw && curveRaw.length >= 49 && hasDisc(curveRaw, CURVE_DISC) && curveRaw[48] <= 1
-    ? { virtualToken: u64(curveRaw, 8), virtualSol: u64(curveRaw, 16), complete: curveRaw[48] === 1 }
+    ? {
+        virtualToken: u64(curveRaw, 8),
+        virtualQuote: u64(curveRaw, 16),
+        complete: curveRaw[48] === 1,
+        quoteMint: curveQuoteMint(curveRaw),
+      }
     : null;
-  const usePool = pool != null;
-  const useCurve = !usePool && curve != null && !curve.complete;
-  if (!usePool && !useCurve) return null;
-
-  const solRaw = accountData(first[3], RAYDIUM);
-  if (!solRaw || solRaw.length !== 752) return null;
-  const status = u64(solRaw, 0);
-  const coinVault = keyAt(solRaw, 336);
-  const pcVault = keyAt(solRaw, 368);
-  if (status === 0n || status > 7n || !coinVault || !pcVault) return null;
-  if (keyAt(solRaw, 400) !== SOL || keyAt(solRaw, 432) !== USDC) return null;
-
-  const ids = [...(pool ? [pool.baseVault, pool.quoteVault] : []), coinVault, pcVault];
-  const rows = await multiple(key, ids);
-  let cursor = 0;
-  const sol = spotUsd(
-    tokenAmount(rows[rows.length - 2], SOL, null) ?? 0n,
-    9,
-    tokenAmount(rows[rows.length - 1], USDC, null) ?? 0n,
-    6,
-    1,
-  );
-  if (sol == null) return null;
   if (pool) {
-    const baseRaw = tokenAmount(rows[cursor++], mint, poolId);
-    const quoteRaw = tokenAmount(rows[cursor++], pool.quoteMint, poolId);
+    const quoteUsd = pool.quoteMint === USDC ? 1 : await solUsd(key, first[3]);
+    if (quoteUsd == null) return null;
+    const rows = await multiple(key, [pool.baseVault, pool.quoteVault]);
+    const baseRaw = tokenAmount(rows[0], mint, poolId);
+    const quoteRaw = tokenAmount(rows[1], pool.quoteMint, poolId);
     if (baseRaw == null || quoteRaw == null) return null;
     const effective = quoteRaw + pool.virtualQuote;
-    const quoteUsd = pool.quoteMint === USDC ? 1 : sol;
     const quoteDecimals = pool.quoteMint === USDC ? 6 : 9;
     return effective > 0n ? spotUsd(baseRaw, decimals, effective, quoteDecimals, quoteUsd) : null;
   }
-  return spotUsd(curve!.virtualToken, decimals, curve!.virtualSol, 9, sol);
+  if (!curve || curve.complete) return null;
+  if (curve.quoteMint === SOL) {
+    const sol = await solUsd(key, first[3]);
+    if (sol == null) return null;
+    return spotUsd(curve.virtualToken, decimals, curve.virtualQuote, 9, sol);
+  }
+  const quoted = await quotedUsd(key, curve.quoteMint, seen);
+  if (quoted == null) return null;
+  return spotUsd(curve.virtualToken, decimals, curve.virtualQuote, quoted.decimals, quoted.usd);
 }
 
 /** USD spot for one Solana mint. The Alchemy key stays on the server. */

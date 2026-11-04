@@ -139,11 +139,15 @@ test("Alchemy RPC reserves price a PumpSwap pool and a bonding curve", async (t)
     else process.env.VITE_ALCHEMY_API_KEY = previous;
   });
   const curveMint = "CvjWYRkV7iFftU8PKsa7Lyyz7hhWKTj6nG1rk2mMpump";
+  const quotedMint = "BTCxVi7u6DSKbRohALwMay2i4PDsiejKqoSmMDeWpump";
   const [pastaCurve] = PublicKey.findProgramAddressSync(
     [Buffer.from("bonding-curve"), new PublicKey(mint).toBuffer()], PUMP,
   );
   const [curveAddress] = PublicKey.findProgramAddressSync(
     [Buffer.from("bonding-curve"), new PublicKey(curveMint).toBuffer()], PUMP,
+  );
+  const [quotedCurve] = PublicKey.findProgramAddressSync(
+    [Buffer.from("bonding-curve"), new PublicKey(quotedMint).toBuffer()], PUMP,
   );
   const baseVault = Keypair.generate().publicKey;
   const quoteVault = Keypair.generate().publicKey;
@@ -166,11 +170,17 @@ test("Alchemy RPC reserves price a PumpSwap pool and a bonding curve", async (t)
   Buffer.from([23, 183, 248, 55, 96, 216, 172, 96]).copy(curveData, 0);
   curveData.writeBigUInt64LE(1_000_000_000_000n, 8);
   curveData.writeBigUInt64LE(2_000_000_000n, 16);
+  const quotedCurveData = Buffer.alloc(115);
+  Buffer.from([23, 183, 248, 55, 96, 216, 172, 96]).copy(quotedCurveData, 0);
+  quotedCurveData.writeBigUInt64LE(1_000_000_000_000n, 8);
+  quotedCurveData.writeBigUInt64LE(2_000_000_000n, 16);
+  new PublicKey(mint).toBuffer().copy(quotedCurveData, 83);
 
   const serve = (requested: string) => {
     const pool = new PublicKey(PASTA_POOL);
     if (requested === mint) return rpcAccount(TOKEN, mintData(6));
     if (requested === curveMint) return rpcAccount(TOKEN, mintData(6));
+    if (requested === quotedMint) return rpcAccount(TOKEN, mintData(6));
     if (requested === PASTA_POOL) return rpcAccount(PUMP_AMM.toBase58(), poolData);
     if (requested === SOL_POOL) return rpcAccount("675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8", solPool);
     if (requested === baseVault.toBase58()) return rpcAccount(TOKEN, tokenData(new PublicKey(mint), pool, 1_000_000_000_000n));
@@ -178,6 +188,7 @@ test("Alchemy RPC reserves price a PumpSwap pool and a bonding curve", async (t)
     if (requested === solCoin.toBase58()) return rpcAccount(TOKEN, tokenData(SOL, solCoin, 1_000_000_000_000n));
     if (requested === solPc.toBase58()) return rpcAccount(TOKEN, tokenData(USDC, solPc, 100_000_000_000n));
     if (requested === curveAddress.toBase58()) return rpcAccount(PUMP.toBase58(), curveData);
+    if (requested === quotedCurve.toBase58()) return rpcAccount(PUMP.toBase58(), quotedCurveData);
     return null;
   };
 
@@ -210,6 +221,13 @@ test("Alchemy RPC reserves price a PumpSwap pool and a bonding curve", async (t)
   assert.equal(curveBody.mint, curveMint);
   assert.equal(curveBody.source, "alchemy-rpc");
   assert.ok(curveBody.priceUsd != null && Math.abs(curveBody.priceUsd - 0.0002) < 1e-12);
+
+  const quoted = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${quotedMint}`));
+  assert.equal(quoted.status, 200);
+  const quotedBody = await quoted.json() as { mint?: string; priceUsd?: number; source?: string };
+  assert.equal(quotedBody.mint, quotedMint);
+  assert.equal(quotedBody.source, "alchemy-rpc");
+  assert.ok(quotedBody.priceUsd != null && Math.abs(quotedBody.priceUsd - 0.0000004) < 1e-12);
 
   curveData[48] = 1;
   const finished = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${curveMint}`));
