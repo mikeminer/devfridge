@@ -47,6 +47,7 @@ test("missing prices reject the total and are retried instead of cached as zero"
 test("server converts Pump.fun raw supply to whole tokens and validates upstream data", async (t) => {
   let payload: unknown = { mint, usd_market_cap: 3600, total_supply: 1_000_000_000_000000 };
   t.mock.method(globalThis, "fetch", async (url: string) => {
+    if (String(url).includes("dexscreener.com")) return Response.json({ pairs: [] });
     assert.equal(url, `https://frontend-api-v3.pump.fun/coins/${mint}`);
     return Response.json(payload);
   });
@@ -65,4 +66,20 @@ test("server converts Pump.fun raw supply to whole tokens and validates upstream
     assert.equal(response.headers.get("cache-control"), "no-store");
   }
   assert.equal((await handler(new Request("https://devfridge.cool/api/pump-price?mint=invalid"))).status, 400);
+});
+
+test("DexScreener supplies the door TVL when Pump.fun refuses the coin", async (t) => {
+  t.mock.method(globalThis, "fetch", async (url: string) => {
+    if (String(url).includes("pump.fun")) return new Response("forbidden", { status: 403 });
+    assert.match(String(url), /api\.dexscreener\.com\/latest\/dex\/tokens\//);
+    return Response.json({
+      pairs: [
+        { priceUsd: "0.000001", liquidity: { usd: 10 } },
+        { priceUsd: "0.000004", liquidity: { usd: 900 } },
+      ],
+    });
+  });
+  const result = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${mint}`));
+  assert.equal(result.status, 200);
+  assert.deepEqual(await result.json(), { mint, priceUsd: 0.000004, source: "dexscreener" });
 });

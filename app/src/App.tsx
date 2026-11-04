@@ -1042,9 +1042,9 @@ export default function App() {
             <p className="tl-badge">Done</p>
             <h3>2% buy &amp; burn</h3>
             <p>
-              Redeem fee is Jupiter-swapped into $PASTA and burned. Not sent to
-              a wallet. Ungraduated pump.fun tokens wait until PumpSwap for a
-              route.
+              Redeem fee is 2%. A $PASTA fee burns in place. Any other fee is
+              swapped through Jupiter into $PASTA and burned. Not sent to a
+              wallet.
             </p>
           </li>
           <li className="is-done">
@@ -1071,6 +1071,100 @@ export default function App() {
               releases.{" "}
               <a href={PASTA_TG_URL} target="_blank" rel="noreferrer">
                 @pastamemelovers
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Scanner, badge, and Get Featured</h3>
+            <p>
+              Live trust report, embeddable badge, and the paid featured slot
+              that buys and burns $PASTA. A scan is automated signals, not an
+              audit. A paid placement does not change the checks.{" "}
+              <a href="https://scan.devfridge.cool" target="_blank" rel="noreferrer">
+                scan.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Kitchen map</h3>
+            <p>
+              Public map of the DevFridge sites.{" "}
+              <a href="https://ecosystem.devfridge.cool" target="_blank" rel="noreferrer">
+                ecosystem.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>World</h3>
+            <p>
+              Cold Storage, the browser merge puzzle, has been open since 1
+              October 2026, 00:00 Europe/Rome. One run needs 500,000 of that
+              character&apos;s token in an active Fridge lock. No payout per run
+              and no prizes. Robinhood locks do not open this build.{" "}
+              <a href="https://world.devfridge.cool" target="_blank" rel="noreferrer">
+                world.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Game Builder and hackathon gallery</h3>
+            <p>
+              Gallery submissions are open through the{" "}
+              <a href="https://world.devfridge.cool/skill" target="_blank" rel="noreferrer">
+                Game Builder skill
+              </a>
+              . Dates, prizes, and final eligibility are still unannounced.{" "}
+              <a href="https://hackathon.devfridge.cool" target="_blank" rel="noreferrer">
+                hackathon.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Games catalog</h3>
+            <p>
+              Public catalog of games that use DevFridge. A card is not a Solana
+              dApp Store approval, a partnership, or a prize.{" "}
+              <a href="https://games.devfridge.cool" target="_blank" rel="noreferrer">
+                games.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>Synapse</h3>
+            <p>
+              Dated research brief with sources. Not investment advice.{" "}
+              <a href="https://synapse.devfridge.cool" target="_blank" rel="noreferrer">
+                synapse.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>IR</h3>
+            <p>
+              Chat for investors and communities. It reads Synapse, the official
+              docs, and posts from @anonimocommando. Not investment advice. Do
+              not send a seed or a private key.{" "}
+              <a href="https://ir.devfridge.cool" target="_blank" rel="noreferrer">
+                ir.devfridge.cool
+              </a>
+            </p>
+          </li>
+          <li className="is-done">
+            <p className="tl-badge">Done</p>
+            <h3>DefiLlama</h3>
+            <p>
+              Listed as a token locker. Headline TVL is $0 by design: active
+              locks are counted as vesting, and $PASTA is reported under
+              staking, not in that headline.{" "}
+              <a href="https://defillama.com/protocol/devfridge" target="_blank" rel="noreferrer">
+                defillama.com/protocol/devfridge
               </a>
             </p>
           </li>
@@ -1125,14 +1219,6 @@ export default function App() {
             <p>
               Get $PASTA listed on CoinGecko for reliable price tracking,
               market data visibility, and trust signals across the ecosystem.
-            </p>
-          </li>
-          <li className="is-next">
-            <p className="tl-badge">Next</p>
-            <h3>DefiLlama listing</h3>
-            <p>
-              TVL adapter submitted to DefiLlama so on-chain Fridge deposits
-              are tracked transparently alongside every other Solana protocol.
             </p>
           </li>
           <li className="is-next">

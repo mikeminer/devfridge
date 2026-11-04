@@ -498,7 +498,7 @@ img { display: block; max-width: 100%; }
   bottom: 18px;
   width: 3px;
   border-radius: 99px;
-  background: linear-gradient(180deg, #8ef0c4 0%, #8ef0c4 42%, var(--brass) 100%);
+  background: linear-gradient(180deg, #8ef0c4 0%, #8ef0c4 64%, var(--brass) 100%);
   box-shadow: 0 0 12px rgba(142, 240, 196, 0.25);
 }
 .timeline li {
@@ -570,6 +570,11 @@ img { display: block; max-width: 100%; }
   font-size: 12px;
   color: var(--ice);
 }
+.timeline a {
+  color: var(--ice);
+  text-decoration: none;
+}
+.timeline a:hover { text-decoration: underline; }
 
 .logo, .logo-img {
   width: 52px;
@@ -1103,6 +1108,7 @@ input[type="text"], input[type="datetime-local"] {
 .led span { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; }
 .led-tvl { top: 216px; }
 .led-tvl em { font-size: 16px; }
+.is-open .led-tvl { visibility: hidden; }
 
 .handle {
   position: absolute;
