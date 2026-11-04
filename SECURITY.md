@@ -44,7 +44,7 @@ Cross-referenced against [coral-xyz/sealevel-attacks](https://github.com/coral-x
 | **Missing owner check** | Mitigated | Anchor `Account<>` and `InterfaceAccount<>` enforce owner/program checks |
 | **Account data matching** | Mitigated | `has_one`, `require_keys_eq!`, and PDA seed constraints enforce relationships |
 | **Reinitialization** | Mitigated | `init` on Lock prevents reuse; `init_if_needed` on Boost is intentional (extends expiry window) |
-| **Arbitrary CPI** | Mitigated | Jupiter CPI validates `program_id == JUPITER_V6` before `invoke_signed` |
+| **Arbitrary CPI** | Mitigated | Jupiter v6 exact-in routes only. Source, destination, mints, and fee accounts are pinned to the burn-PDA escrow and the burn-PDA PASTA ATA. Other writable burn-controlled token accounts are rejected. Output is a balance delta, not an absolute balance. |
 | **Integer overflow** | Mitigated | All arithmetic uses `checked_mul`, `checked_div`, `checked_add`, `checked_sub` |
 | **PDA seed collision** | Mitigated | Lock PDA seeds include `[depositor, mint, lock_id]` — unique per user per mint per lock |
 | **Type cosplay** | Mitigated | Anchor 8-byte discriminator prevents account type confusion |
@@ -58,7 +58,8 @@ Cross-referenced against [coral-xyz/sealevel-attacks](https://github.com/coral-x
 - `mint` in `BoostFeature` is `UncheckedAccount` — validated by `constraint = lock.mint == mint.key()`.
 - `init_if_needed` is used on `depositor_ata` (Claim), `boost` (BoostFeature), `wsol_ata` and `pasta_ata` (CrankBuyback). These are all intentional: ATAs may not exist yet, and Boost accounts extend rather than reset.
 - The `test-cluster` feature flag bypasses Jupiter buyback and burns the locked mint directly. **This must never be enabled on mainnet.** CI does not build with this feature outside of test targets.
-- `remaining_accounts` is used for Jupiter route accounts. The program validates the first remaining account is the Jupiter program ID but does not individually validate subsequent accounts — Jupiter itself enforces its own account constraints.
+- Jupiter route accounts still arrive as `remaining_accounts`, after named accounts for the PASTA mint, the burn-PDA fee ATA, the burn-PDA PASTA ATA, and the Jupiter v6 program. The program parses the route header and rejects any destination other than that PASTA ATA. A pre-seeded PASTA balance does not count: the burn PDA's PASTA balance must increase by at least the program floor (`MIN_CLAIM_PASTA_OUT` = 1 PASTA, or `max(1 PASTA, lamports)` on `crank_buyback`), and the caller cannot set a lower minimum. The escrowed input must be spent in full. Burn-PDA lamports must not fall during the CPI.
+- `crank_buyback` is restricted to `CRANK_AUTHORITY` (`GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W`) and capped at 0.5 SOL per instruction.
 
 ## Bounty Program
 
@@ -97,5 +98,6 @@ We commit to:
 1. **No formal audit.** See above.
 2. **Thin liquidity.** $PASTA is a micro-cap token (~$8.9k FDV, ~$6.3k pool depth). LP tokens are permanently burned (supply = 0), so liquidity cannot be rugged, but it is thin. The Jupiter buyback path depends on available DEX liquidity at claim time — low liquidity may cause non-PASTA claims to fail due to slippage. See [`LIQUIDITY.md`](LIQUIDITY.md) for full details and live tracking links.
 3. **Program is not frozen.** The upgrade authority has not been revoked. The deployer can upgrade the program. This is disclosed, not hidden.
-4. **Permissionless crank.** Anyone can call `crank_buyback`. This is by design (protocol-owned liquidity disposal), but means the timing of PASTA burns is not controlled by the team.
-5. **Holder concentration.** Top-10 holders control ~78% of supply (including the LP pool at 45%). See [`HOLDERS.md`](HOLDERS.md) for full wallet-level breakdown, insider disclosures, and verification methodology.
+4. **Crank authority.** `crank_buyback` is not permissionless. Only the treasury crank authority can call it, and each call is capped at 0.5 SOL. Burns can still lag Feature payments until that authority cranks. The PASTA-per-lamport floor is a backstop against dust output, not a price oracle: a quote that cannot clear it reverts and leaves the vault in place.
+5. **Claim account migration.** `claim` now requires `pasta_mint`, `fee_ata` (burn-PDA ATA for the locked mint), `pasta_ata`, and `jupiter_program` on every claim, including PASTA and devnet/testnet burns that do not swap. The fee ATA must exist before the instruction. `test-cluster` still burns the locked mint in place and does not invoke Jupiter. Do not enable `test-cluster` on mainnet.
+6. **Holder concentration.** Top-10 holders control ~78% of supply (including the LP pool at 45%). See [`HOLDERS.md`](HOLDERS.md) for full wallet-level breakdown, insider disclosures, and verification methodology.

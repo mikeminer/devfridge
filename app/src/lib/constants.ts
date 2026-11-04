@@ -29,6 +29,8 @@ export const GITHUB_REPO = "https://github.com/mikeminer/devfridge";
 export const LICENSE_URL = "https://github.com/mikeminer/devfridge/blob/master/LICENSE";
 export const JUPITER_V6 = new PublicKey("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
 export const REDEMPTION_FEE_BPS = 200n;
+/** Must match `MIN_CLAIM_PASTA_OUT` in the Fridge program. 1 PASTA at 6 decimals. */
+export const MIN_CLAIM_PASTA_OUT = 1_000_000n;
 
 export const ALCHEMY_API_KEY =
   (typeof import.meta !== "undefined" &&

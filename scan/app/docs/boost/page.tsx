@@ -19,8 +19,9 @@ export default function BoostDoc() {
       </p>
       <h2>2. Crank buyback</h2>
       <p>
-        <code>crank_buyback</code> is permissionless. It wraps vault SOL to WSOL owned by the burn
-        PDA, Jupiter-swaps to $PASTA on PumpSwap, and Token-2022-burns the output.
+        <code>crank_buyback</code> is signed by the treasury crank authority. It wraps at most 0.5 SOL
+        from the vault to WSOL owned by the burn PDA, Jupiter-swaps that WSOL into the burn PDA&apos;s
+        $PASTA account, and Token-2022-burns the output. The route cannot pay any other wallet.
       </p>
       <ul>
         <li>

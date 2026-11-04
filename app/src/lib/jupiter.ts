@@ -47,6 +47,7 @@ export async function fetchPastaBuybackRoute(
   const quoteRes = await fetch(quoteUrl);
   const quote = (await quoteRes.json().catch(() => ({}))) as {
     outAmount?: string;
+    otherAmountThreshold?: string;
     error?: string;
     errorCode?: string;
   };
@@ -88,7 +89,7 @@ export async function fetchPastaBuybackRoute(
     swapAccounts: swapIx.keys,
     swapData: new Uint8Array(swapIx.data),
     cleanup: swap.cleanupInstruction ? [decodeIx(swap.cleanupInstruction)] : [],
-    minPastaOut: BigInt(quote.outAmount),
+    minPastaOut: BigInt(quote.otherAmountThreshold || quote.outAmount),
     lookupTableAddresses: (swap.addressLookupTableAddresses ?? []).map(
       (addr) => new PublicKey(addr)
     ),

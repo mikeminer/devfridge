@@ -23,8 +23,12 @@ import {
   BOOST_VAULT_RENT,
   BOOST_VAULT_SEED,
   BURN_SEED,
+  CRANK_AUTHORITY,
   CRANK_BUYBACK_IX_DISC,
   JUPITER_V6,
+  MAX_CRANK_LAMPORTS,
+  MIN_CRANK_PASTA_OUT,
+  MIN_PASTA_PER_LAMPORT,
   PASTA_MINT,
   PROGRAM_ID,
   TIER_INDEX,
@@ -314,11 +318,12 @@ export type CrankResult =
   | { ok: true; skipped: true; reason: string; vaultLamports: string }
   | { ok: false; error: string; vaultLamports?: string };
 
-/** Permissionless-style server crank: wrap vault SOL, Jupiter-buy $PASTA as the burn PDA, burn it. */
+/** Authority crank: wrap at most one 7d tier of vault SOL, Jupiter-buy $PASTA as the burn PDA, burn it. */
 export async function runCrankBuyback(): Promise<CrankResult> {
   const [vault] = boostVaultPda();
   const lamports = await vaultLamports();
-  const spend = lamports > BigInt(BOOST_VAULT_RENT) ? lamports - BigInt(BOOST_VAULT_RENT) : 0n;
+  const spendable = lamports > BigInt(BOOST_VAULT_RENT) ? lamports - BigInt(BOOST_VAULT_RENT) : 0n;
+  const spend = spendable > MAX_CRANK_LAMPORTS ? MAX_CRANK_LAMPORTS : spendable;
   if (spend < 1_000_000n) {
     return {
       ok: true,
@@ -334,6 +339,13 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       ok: true,
       skipped: true,
       reason: "CRANK_SECRET_KEY not set",
+      vaultLamports: lamports.toString(),
+    };
+  }
+  if (cranker.publicKey.toBase58() !== CRANK_AUTHORITY) {
+    return {
+      ok: false,
+      error: "CRANK_SECRET_KEY must be the crank authority (treasury wallet)",
       vaultLamports: lamports.toString(),
     };
   }
@@ -365,6 +377,15 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       );
       if (route.swapProgram.toBase58() !== JUPITER_V6) {
         throw new Error("Jupiter route did not use v6");
+      }
+      const pastaFloor =
+        spend * MIN_PASTA_PER_LAMPORT > MIN_CRANK_PASTA_OUT
+          ? spend * MIN_PASTA_PER_LAMPORT
+          : MIN_CRANK_PASTA_OUT;
+      if (route.minPastaOut < pastaFloor) {
+        throw new Error(
+          `Quote is below the program PASTA floor (${pastaFloor.toString()} base units)`
+        );
       }
       const data = concat(
         CRANK_BUYBACK_IX_DISC,

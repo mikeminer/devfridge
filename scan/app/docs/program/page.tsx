@@ -70,8 +70,9 @@ export default function ProgramDoc() {
         In the published <a href="https://github.com/mikeminer/devfridge/blob/master/programs/fridge/src/lib.rs">
           program source
         </a>, <code>PASTA_MINT</code> is fixed to <code className="break-all">{PASTA_MINT}</code>.
-        Both <code>crank_buyback</code> and <code>buyback_and_burn_pasta</code> check this mint
-        and the token account&apos;s burn authority before invoking Token-2022 Burn.
+        Both <code>crank_buyback</code> and <code>buyback_and_burn_pasta</code> pin the Jupiter
+        destination to the burn PDA&apos;s ATA for this mint, require the escrow to be fully spent,
+        and burn only after the PASTA balance increases by at least the program floor.
       </p>
       <p>
         To verify an actual burn, inspect a successful transaction from this program: its
