@@ -4,7 +4,7 @@ title: "DevFridge World — the game guide"
 description: "DevFridge investor knowledge: DevFridge World — the game guide"
 resource: "https://docs.devfridge.cool/world"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-04T12:41:56Z"
+timestamp: "2026-11-04T12:50:47Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-11-04T12:41:56Z · last attempt: 2026-11-04T12:41:56Z.
+[Canonical page](https://docs.devfridge.cool/world) · ok · last successful observation: 2026-11-04T12:50:47Z · last attempt: 2026-11-04T12:50:47Z.
 
 WORLD / COLD STORAGE
 
@@ -20,7 +20,7 @@ WORLD / COLD STORAGE
 
 DevFridge $PASTA · Solana mint: [`39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`](https://docs.devfridge.cool/program) · Ticker ≠ identity.
 
-Updated 25 September 2026 · Current pre-launch build
+Updated 4 November 2026 · Public game is open
 
 ### What is DevFridge World?
 
@@ -60,7 +60,7 @@ World brings the Italian brainrot cast into a physics puzzle where positioning, 
 
 ### Availability and game facts
 
-The game is deployed as a pre-launch build. The public entrance at [world.devfridge.cool](https://world.devfridge.cool/) still shows the countdown and character runway until 1 October 2026, 00:00 Europe/Rome. This guide describes the current game behind that launch screen. An Android tester beta, version 0.3.1-beta.1, is also available as a signed APK and in the Solana dApp Store. The app beta is available before the public game opening.
+The public entrance at [world.devfridge.cool](https://world.devfridge.cool/) opens the game. It has been open since 1 October 2026, 00:00 Europe/Rome. An Android tester beta, version 0.3.1-beta.1, is also available as a signed APK and in the Solana dApp Store.
 
 [Android beta details and APK ↗](https://world.devfridge.cool/android)
 
@@ -164,9 +164,9 @@ Where photo sharing is supported, your device opens its share menu with the prep
 
 You can also save a replay file from the result screen. Scores and replays are local records, not verified competitive rankings.
 
-#### Share your pick before launch
+#### The public site opens the game
 
-On the countdown page, pick a character and choose Post my pick on Xto preview the group banner and your caption. The caption includes the selected token’s full Solana contract address, its Pump.fun link and the World link, with #SolanaGems, #SolanaCommunity and #solanamemes among the hashtags. Use Share banner + post on supported devices, or save the banner and copy the caption to attach them in X. You review and publish the post in your social app; choosing a meme does not post automatically or unlock game access.
+[world.devfridge.cool](https://world.devfridge.cool/) opens Cold Storage. Character access still follows the [wallet and timelock steps](https://docs.devfridge.cool/world#wallet-access). Choosing a meme does not post to a social app and does not unlock a character by itself.
 
 ### How do you earn money in DevFridge World?
 
@@ -190,11 +190,11 @@ The current access gate checks Solana Token-2022 character tokens locked in DevF
 
 #### Which devices can I use?
 
-Play in a desktop or mobile browser, or install the Android tester beta 0.3.1-beta.1 from the Solana dApp Store. The signed APK is also available from the [Android download page](https://world.devfridge.cool/android). The beta is for testing; the public game opening remains scheduled for 1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the regular browser cannot detect the wallet, and tap to enable sound when prompted.
+Play in a desktop or mobile browser, or install the Android tester beta 0.3.1-beta.1 from the Solana dApp Store. The signed APK is also available from the [Android download page](https://world.devfridge.cool/android). The public game has been open since 1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the regular browser cannot detect the wallet, and tap to enable sound when prompted.
 
-#### How do I start, and is the game open yet?
+#### How do I start?
 
-Visit [World](https://world.devfridge.cool/) for the current countdown and character runway. The scheduled opening is 1 October 2026, 00:00 Europe/Rome. Once entering the game, follow the [wallet and timelock steps](https://docs.devfridge.cool/world#wallet-access), choose an unlocked meme and enter the fridge from the kitchen.
+Visit [World](https://world.devfridge.cool/). The game has been open since 1 October 2026, 00:00 Europe/Rome. Follow the [wallet and timelock steps](https://docs.devfridge.cool/world#wallet-access), choose an unlocked meme and enter the fridge from the kitchen.
 
 #### Do I need 500,000 tokens in a single lock?
 

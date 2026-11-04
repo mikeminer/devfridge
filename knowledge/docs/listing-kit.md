@@ -4,7 +4,7 @@ title: "DevFridge listing kit"
 description: "DevFridge investor knowledge: DevFridge listing kit"
 resource: "https://docs.devfridge.cool/listing-kit"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-04T12:41:56Z"
+timestamp: "2026-11-04T12:50:47Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-11-04T12:41:56Z · last attempt: 2026-11-04T12:41:56Z.
+[Canonical page](https://docs.devfridge.cool/listing-kit) · ok · last successful observation: 2026-11-04T12:50:47Z · last attempt: 2026-11-04T12:50:47Z.
 
 PARTNERS
 
@@ -70,7 +70,7 @@ Lead token listings, promotions, and screenshots with the full mint, not the tic
 
 ### Integration message
 
-DevFridge $PASTA (Solana mint: 39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump). Lock Token-2022 supply at devfridge.cool, then scan the mint to verify a live Fridge vault. Get Featured costs 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees; paid placement never changes risk grades. Add @frigopastabot for /scan, /fridge, and /badge. Use /register with the lock account PDA, not the token mint, for expiry DMs. Embed a live badge from scan.devfridge.cool/badge. Feature payments and the 2% claim fee fund $PASTA burns. DevFridge World’s Cold Storage merge game is deployed as a pre-launch build; the public countdown runs until 1 October 2026. A meme requires at least 500,000 of its supported character token in active DevFridge locks. There are no per-run payments or prizes. See the [World game guide](https://docs.devfridge.cool/world). Official contacts only at connect.devfridge.cool.
+DevFridge $PASTA (Solana mint: 39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump). Lock Token-2022 supply at devfridge.cool, then scan the mint to verify a live Fridge vault. Get Featured costs 0.1 SOL / 24h, 0.18 SOL / 48h, or 0.5 SOL / 7d, plus network fees; paid placement never changes risk grades. Add @frigopastabot for /scan, /fridge, and /badge. Use /register with the lock account PDA, not the token mint, for expiry DMs. Embed a live badge from scan.devfridge.cool/badge. Feature payments and the 2% claim fee fund $PASTA burns. DevFridge World’s Cold Storage merge game is open at world.devfridge.cool. It opened on 1 October 2026. A meme requires at least 500,000 of its supported character token in active DevFridge locks. There are no per-run payments or prizes. See the [World game guide](https://docs.devfridge.cool/world). Official contacts only at connect.devfridge.cool.
 
 ### Assets
 
