@@ -88,7 +88,8 @@ test("a missing Alchemy price does not become zero dollars", async (t) => {
   const response = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${mint}`));
   assert.equal(response.status, 502);
   assert.equal(response.headers.get("cache-control"), "no-store");
-  const body = await response.json() as { error?: string; priceUsd?: number };
+  const body = await response.json() as { error?: string; reason?: string; priceUsd?: number };
   assert.equal(body.priceUsd, undefined);
+  assert.equal(body.reason, "missing");
   assert.match(body.error ?? "", /unavailable/);
 });

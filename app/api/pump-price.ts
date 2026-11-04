@@ -6,8 +6,8 @@ function alchemyKey(): string {
   return (process.env.ALCHEMY_API_KEY || process.env.VITE_ALCHEMY_API_KEY || "").trim();
 }
 
-function unavailable(): Response {
-  return Response.json({ error: "Price unavailable" }, {
+function unavailable(reason: string): Response {
+  return Response.json({ error: "Price unavailable", reason }, {
     status: 502,
     headers: { "cache-control": "no-store" },
   });
@@ -21,7 +21,7 @@ export default async function handler(req: Request): Promise<Response> {
     return Response.json({ error: "Invalid mint" }, { status: 400 });
   }
   const key = alchemyKey();
-  if (!key) return unavailable();
+  if (!key) return unavailable("no-key");
   try {
     const res = await fetch(
       `https://api.g.alchemy.com/prices/v1/${encodeURIComponent(key)}/tokens/by-address`,
@@ -34,7 +34,7 @@ export default async function handler(req: Request): Promise<Response> {
         signal: AbortSignal.timeout(TIMEOUT),
       },
     );
-    if (!res.ok) return unavailable();
+    if (!res.ok) return unavailable(`upstream-${res.status}`);
     const data = await res.json() as {
       data?: Array<{
         address?: string;
@@ -45,11 +45,11 @@ export default async function handler(req: Request): Promise<Response> {
     const row = data.data?.find((item) => item.address === mint) ?? data.data?.[0];
     const usd = row?.prices?.find((price) => price.currency?.toLowerCase() === "usd");
     const priceUsd = Number(usd?.value);
-    if (!row || row.error || !Number.isFinite(priceUsd) || priceUsd <= 0) return unavailable();
+    if (!row || row.error || !Number.isFinite(priceUsd) || priceUsd <= 0) return unavailable("missing");
     return Response.json({ mint, priceUsd, source: "alchemy" }, {
       headers: { "cache-control": "public, max-age=0, s-maxage=60" },
     });
   } catch {
-    return unavailable();
+    return unavailable("upstream");
   }
 }
