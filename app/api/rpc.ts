@@ -42,9 +42,9 @@ function rpcs(cluster: string, method: string): string[] {
     ];
   } else {
     urls = [
+      ...(key ? [`https://solana-mainnet.g.alchemy.com/v2/${key}`] : []),
       "https://api.mainnet.solana.com",
       "https://api.mainnet-beta.solana.com",
-      ...(key ? [`https://solana-mainnet.g.alchemy.com/v2/${key}`] : []),
     ];
   }
   if (method === "getProgramAccounts") {

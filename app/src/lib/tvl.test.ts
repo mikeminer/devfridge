@@ -44,42 +44,51 @@ test("missing prices reject the total and are retried instead of cached as zero"
   assert.equal(attempts, 2);
 });
 
-test("server converts Pump.fun raw supply to whole tokens and validates upstream data", async (t) => {
-  let payload: unknown = { mint, usd_market_cap: 3600, total_supply: 1_000_000_000_000000 };
-  t.mock.method(globalThis, "fetch", async (url: string) => {
-    if (String(url).includes("dexscreener.com")) return Response.json({ pairs: [] });
-    assert.equal(url, `https://frontend-api-v3.pump.fun/coins/${mint}`);
-    return Response.json(payload);
+test("Alchemy USD price is what the closed door shows", async (t) => {
+  const previous = process.env.VITE_ALCHEMY_API_KEY;
+  process.env.VITE_ALCHEMY_API_KEY = "test-key-1234567890";
+  t.after(() => {
+    if (previous == null) delete process.env.VITE_ALCHEMY_API_KEY;
+    else process.env.VITE_ALCHEMY_API_KEY = previous;
   });
-  const request = () => new Request(`https://devfridge.cool/api/pump-price?mint=${mint}`);
-  const result = await handler(request());
-  assert.equal(result.status, 200);
-  assert.deepEqual(await result.json(), { mint, priceUsd: 0.0000036, source: "pump.fun" });
-  for (const invalid of [
-    { mint, usd_market_cap: 3600, total_supply: 0 },
-    { mint, total_supply: 1_000_000 },
-    { mint: "wrong", usd_market_cap: 3600, total_supply: 1_000_000 },
-  ]) {
-    payload = invalid;
-    const response = await handler(request());
-    assert.equal(response.status, 502);
-    assert.equal(response.headers.get("cache-control"), "no-store");
-  }
-  assert.equal((await handler(new Request("https://devfridge.cool/api/pump-price?mint=invalid"))).status, 400);
-});
-
-test("DexScreener supplies the door TVL when Pump.fun refuses the coin", async (t) => {
-  t.mock.method(globalThis, "fetch", async (url: string) => {
-    if (String(url).includes("pump.fun")) return new Response("forbidden", { status: 403 });
-    assert.match(String(url), /api\.dexscreener\.com\/latest\/dex\/tokens\//);
+  t.mock.method(globalThis, "fetch", async (url: string, init?: RequestInit) => {
+    assert.equal(
+      url,
+      "https://api.g.alchemy.com/prices/v1/test-key-1234567890/tokens/by-address",
+    );
+    assert.equal(init?.method, "POST");
+    assert.deepEqual(JSON.parse(String(init?.body)), {
+      addresses: [{ network: "solana-mainnet", address: mint }],
+    });
     return Response.json({
-      pairs: [
-        { priceUsd: "0.000001", liquidity: { usd: 10 } },
-        { priceUsd: "0.000004", liquidity: { usd: 900 } },
-      ],
+      data: [{
+        network: "solana-mainnet",
+        address: mint,
+        prices: [{ currency: "usd", value: "0.0000036", lastUpdatedAt: "2026-11-04T00:00:00Z" }],
+        error: null,
+      }],
     });
   });
   const result = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${mint}`));
   assert.equal(result.status, 200);
-  assert.deepEqual(await result.json(), { mint, priceUsd: 0.000004, source: "dexscreener" });
+  assert.deepEqual(await result.json(), { mint, priceUsd: 0.0000036, source: "alchemy" });
+  assert.equal((await handler(new Request("https://devfridge.cool/api/pump-price?mint=invalid"))).status, 400);
+});
+
+test("a missing Alchemy price does not become zero dollars", async (t) => {
+  const previous = process.env.VITE_ALCHEMY_API_KEY;
+  process.env.VITE_ALCHEMY_API_KEY = "test-key-1234567890";
+  t.after(() => {
+    if (previous == null) delete process.env.VITE_ALCHEMY_API_KEY;
+    else process.env.VITE_ALCHEMY_API_KEY = previous;
+  });
+  t.mock.method(globalThis, "fetch", async () => Response.json({
+    data: [{ address: mint, prices: [], error: "Token not found" }],
+  }));
+  const response = await handler(new Request(`https://devfridge.cool/api/pump-price?mint=${mint}`));
+  assert.equal(response.status, 502);
+  assert.equal(response.headers.get("cache-control"), "no-store");
+  const body = await response.json() as { error?: string; priceUsd?: number };
+  assert.equal(body.priceUsd, undefined);
+  assert.match(body.error ?? "", /unavailable/);
 });
