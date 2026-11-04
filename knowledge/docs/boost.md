@@ -4,7 +4,7 @@ title: "How Feature SOL becomes a $PASTA burn"
 description: "DevFridge investor knowledge: How Feature SOL becomes a $PASTA burn"
 resource: "https://docs.devfridge.cool/boost"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-04T08:31:16Z"
+timestamp: "2026-11-04T12:07:02Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/boost) · ok · last successful observation: 2026-11-04T08:31:16Z · last attempt: 2026-11-04T08:31:16Z.
+[Canonical page](https://docs.devfridge.cool/boost) · ok · last successful observation: 2026-11-04T12:07:02Z · last attempt: 2026-11-04T12:07:02Z.
 
 BUY & BURN
 
@@ -28,7 +28,7 @@ Feature is two on-chain steps so Phantom only signs a small payment. The swap ne
 
 ### 2. Crank buyback
 
-`crank_buyback` is permissionless. It wraps vault SOL to WSOL owned by the burn PDA, Jupiter-swaps to $PASTA on PumpSwap, and Token-2022-burns the output.
+`crank_buyback` is signed by the treasury crank authority. It wraps at most 0.5 SOL from the vault to WSOL owned by the burn PDA, Jupiter-swaps that WSOL into the burn PDA's $PASTA account, and Token-2022-burns the output. The route cannot pay any other wallet.
 
 - $PASTA mint: `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`
 

@@ -4,7 +4,7 @@ title: "Program IDs and fees"
 description: "DevFridge investor knowledge: Program IDs and fees"
 resource: "https://docs.devfridge.cool/program"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-04T08:31:16Z"
+timestamp: "2026-11-04T12:07:02Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/program) · ok · last successful observation: 2026-11-04T08:31:16Z · last attempt: 2026-11-04T08:31:16Z.
+[Canonical page](https://docs.devfridge.cool/program) · ok · last successful observation: 2026-11-04T12:07:02Z · last attempt: 2026-11-04T12:07:02Z.
 
 ON-CHAIN
 
@@ -36,7 +36,7 @@ The Solana mint above identifies the $PASTA tied to DevFridge. Match the full ad
 
 Burn authority PDA: [`6PQhfXQNnqrau7EKjFxrH6xwX3uv97RMsx62LmKBmT9m`](https://solscan.io/account/6PQhfXQNnqrau7EKjFxrH6xwX3uv97RMsx62LmKBmT9m). Derive it from the UTF-8 seed `burn` and the Fridge program ID above. This authority is distinct from a user's lock PDA and the incinerator address.
 
-In the published [program source](https://github.com/mikeminer/devfridge/blob/master/programs/fridge/src/lib.rs), `PASTA_MINT` is fixed to `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`. Both `crank_buyback` and `buyback_and_burn_pasta` check this mint and the token account's burn authority before invoking Token-2022 Burn.
+In the published [program source](https://github.com/mikeminer/devfridge/blob/master/programs/fridge/src/lib.rs), `PASTA_MINT` is fixed to `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`. Both `crank_buyback` and `buyback_and_burn_pasta` pin the Jupiter destination to the burn PDA's ATA for this mint, require the escrow to be fully spent, and burn only after the PASTA balance increases by at least the program floor.
 
 To verify an actual burn, inspect a successful transaction from this program: its inner Token-2022 Burn instruction must name that mint and the derived authority. The PDA alone does not prove which mint was burned. Source checks describe this version; verify the deployed program and its upgrade authority before assuming future behavior.
 
