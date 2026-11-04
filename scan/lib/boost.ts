@@ -318,9 +318,30 @@ export type CrankResult =
   | { ok: true; skipped: true; reason: string; vaultLamports: string }
   | { ok: false; error: string; vaultLamports?: string };
 
+type AssembledCrank =
+  | { ok: true; skipped: true; reason: string; vaultLamports: string }
+  | { ok: true; skipped: false; tx: VersionedTransaction; spend: bigint; lamports: bigint }
+  | { ok: false; error: string; vaultLamports?: string };
+
+export type TreasuryCrankBuild =
+  | { ok: true; skipped: true; reason: string; vaultLamports: string }
+  | { ok: true; skipped?: undefined; transaction: string; amount: string; vaultLamports: string }
+  | { ok: false; error: string; vaultLamports?: string };
+
+/** Unsigned crank for the treasury. Spends at most 0.5 SOL from the boost vault. */
+export async function buildTreasuryCrankTransaction(): Promise<TreasuryCrankBuild> {
+  const assembled = await assembleTreasuryCrank();
+  if (!assembled.ok || assembled.skipped) return assembled;
+  return {
+    ok: true,
+    transaction: Buffer.from(assembled.tx.serialize()).toString("base64"),
+    amount: assembled.spend.toString(),
+    vaultLamports: assembled.lamports.toString(),
+  };
+}
+
 /** Authority crank: wrap at most one 7d tier of vault SOL, Jupiter-buy $PASTA as the burn PDA, burn it. */
 export async function runCrankBuyback(): Promise<CrankResult> {
-  const [vault] = boostVaultPda();
   const lamports = await vaultLamports();
   const spendable = lamports > BigInt(BOOST_VAULT_RENT) ? lamports - BigInt(BOOST_VAULT_RENT) : 0n;
   const spend = spendable > MAX_CRANK_LAMPORTS ? MAX_CRANK_LAMPORTS : spendable;
@@ -332,7 +353,6 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       vaultLamports: lamports.toString(),
     };
   }
-
   const cranker = crankerKeypair();
   if (!cranker) {
     return {
@@ -349,7 +369,53 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       vaultLamports: lamports.toString(),
     };
   }
+  const assembled = await assembleTreasuryCrank();
+  if (!assembled.ok || assembled.skipped) return assembled;
+  assembled.tx.sign([cranker]);
+  const wire = Buffer.from(assembled.tx.serialize()).toString("base64");
+  const signature = await rpc<string>("sendTransaction", [
+    wire,
+    {
+      encoding: "base64",
+      skipPreflight: false,
+      preflightCommitment: "processed",
+      maxRetries: 4,
+    },
+  ]);
+  if (!signature) throw new Error("RPC did not return a crank signature");
+  const started = Date.now();
+  while (Date.now() - started < 45_000) {
+    const st = await rpc<{
+      value?: Array<{ confirmationStatus?: string; err?: unknown } | null>;
+    }>("getSignatureStatuses", [[signature], { searchTransactionHistory: true }]).catch(() => null);
+    const row = st?.value?.[0];
+    if (row?.err) throw new Error(`Crank failed on-chain: ${JSON.stringify(row.err)}`);
+    if (row?.confirmationStatus === "confirmed" || row?.confirmationStatus === "finalized") {
+      return { ok: true, signature, amount: assembled.spend.toString() };
+    }
+    await new Promise((r) => setTimeout(r, 1200));
+  }
+  return { ok: true, signature, amount: assembled.spend.toString() };
+}
 
+async function assembleTreasuryCrank(): Promise<AssembledCrank> {
+  const [vault] = boostVaultPda();
+  const lamports = await vaultLamports();
+  const spendable = lamports > BigInt(BOOST_VAULT_RENT) ? lamports - BigInt(BOOST_VAULT_RENT) : 0n;
+  const spend = spendable > MAX_CRANK_LAMPORTS ? MAX_CRANK_LAMPORTS : spendable;
+  if (spend < 1_000_000n) {
+    return {
+      ok: true,
+      skipped: true,
+      reason: "vault has no spendable SOL yet",
+      vaultLamports: lamports.toString(),
+    };
+  }
+  if (spend > MAX_CRANK_LAMPORTS) {
+    return { ok: false, error: "crank spend exceeds 0.5 SOL", vaultLamports: lamports.toString() };
+  }
+
+  const cranker = new PublicKey(CRANK_AUTHORITY);
   const programId = new PublicKey(PROGRAM_ID);
   const [burnAuthority] = burnPda();
   const burnLamports = await rpc<{ value: number }>("getBalance", [
@@ -397,7 +463,7 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       const crankIx = new TransactionInstruction({
         programId,
         keys: [
-          { pubkey: cranker.publicKey, isSigner: true, isWritable: true },
+          { pubkey: cranker, isSigner: true, isWritable: true },
           { pubkey: vault, isSigner: false, isWritable: true },
           { pubkey: wsolMint, isSigner: false, isWritable: false },
           { pubkey: wsolAta, isSigner: false, isWritable: true },
@@ -450,7 +516,7 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       if (burnLamports < 5_000_000n) {
         ixs.push(
           SystemProgram.transfer({
-            fromPubkey: cranker.publicKey,
+            fromPubkey: cranker,
             toPubkey: burnAuthority,
             lamports: 5_000_000,
           })
@@ -458,12 +524,11 @@ export async function runCrankBuyback(): Promise<CrankResult> {
       }
       ixs.push(crankIx);
       const message = new TransactionMessage({
-        payerKey: cranker.publicKey,
+        payerKey: cranker,
         recentBlockhash: blockhash,
         instructions: ixs,
       }).compileToV0Message(altRows);
       const tx = new VersionedTransaction(message);
-      tx.sign([cranker]);
       const wire = Buffer.from(tx.serialize()).toString("base64");
       const sim = await rpc<{
         value?: { err?: unknown; logs?: string[] | null };
@@ -475,31 +540,7 @@ export async function runCrankBuyback(): Promise<CrankResult> {
         const logs = (sim.value.logs || []).slice(-12).join(" | ");
         throw new Error(`crank simulate: ${JSON.stringify(sim.value.err)} ${logs}`);
       }
-      const signature = await rpc<string>("sendTransaction", [
-        wire,
-        {
-          encoding: "base64",
-          skipPreflight: false,
-          preflightCommitment: "processed",
-          maxRetries: 4,
-        },
-      ]);
-      if (!signature) throw new Error("RPC did not return a crank signature");
-      const started = Date.now();
-      while (Date.now() - started < 45_000) {
-        const st = await rpc<{
-          value?: Array<{ confirmationStatus?: string; err?: unknown } | null>;
-        }>("getSignatureStatuses", [[signature], { searchTransactionHistory: true }]).catch(
-          () => null
-        );
-        const row = st?.value?.[0];
-        if (row?.err) throw new Error(`Crank failed on-chain: ${JSON.stringify(row.err)}`);
-        if (row?.confirmationStatus === "confirmed" || row?.confirmationStatus === "finalized") {
-          return { ok: true, signature, amount: spend.toString() };
-        }
-        await new Promise((r) => setTimeout(r, 1200));
-      }
-      return { ok: true, signature, amount: spend.toString() };
+      return { ok: true, skipped: false, tx, spend, lamports };
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
       if (!/no routes found|no jupiter route/i.test(lastError.message)) break;
