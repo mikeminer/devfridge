@@ -38,7 +38,11 @@
         { "name": "burn_authority" },
         { "name": "token_program" },
         { "name": "associated_token_program" },
-        { "name": "system_program" }
+        { "name": "system_program" },
+        { "name": "pasta_mint", "writable": true },
+        { "name": "fee_ata", "writable": true },
+        { "name": "pasta_ata", "writable": true },
+        { "name": "jupiter_program" }
       ],
       "args": [
         { "name": "swap_data", "type": "bytes" },
@@ -74,7 +78,8 @@
         { "name": "token_program" },
         { "name": "wsol_token_program" },
         { "name": "associated_token_program" },
-        { "name": "system_program" }
+        { "name": "system_program" },
+        { "name": "jupiter_program" }
       ],
       "args": [
         { "name": "amount", "type": "u64" },
@@ -108,7 +113,11 @@
     { "code": 6011, "name": "BuybackFailed", "msg": "Buyback did not produce enough PASTA to burn" },
     { "code": 6012, "name": "InvalidBoostTier", "msg": "Boost tier must be 0=24h, 1=48h, or 2=7d" },
     { "code": 6013, "name": "NeedLiveLock", "msg": "Boost requires a live Fridge lock that has not unlocked yet" },
-    { "code": 6014, "name": "InsufficientVault", "msg": "Boost vault does not hold enough SOL to buy back $PASTA" }
+    { "code": 6014, "name": "InsufficientVault", "msg": "Boost vault does not hold enough SOL to buy back $PASTA" },
+    { "code": 6015, "name": "SlippageFloor", "msg": "Buyback minimum is below the program floor" },
+    { "code": 6016, "name": "CrankLimit", "msg": "Crank amount exceeds the per-instruction cap" },
+    { "code": 6017, "name": "InvalidSwapDestination", "msg": "Jupiter route must spend the escrow into the burn PASTA account" },
+    { "code": 6018, "name": "UnauthorizedCrank", "msg": "Only the crank authority may buy back from the boost vault" }
   ],
   "types": [
     {

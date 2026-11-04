@@ -3,6 +3,8 @@ import test from "node:test";
 import { PublicKey } from "@solana/web3.js";
 import {
   buildClaimInstruction,
+  burnFeeAta,
+  burnPastaAta,
   burnPda,
   decodeLock,
   encodeClaimData,
@@ -13,10 +15,13 @@ import {
   buildCreateLockInstruction,
 } from "./fridge.ts";
 
+import { getAssociatedTokenAddressSync, TOKEN_2022_PROGRAM_ID } from "@solana/spl-token";
 import {
   CLAIM_DISCRIMINATOR,
   CREATE_LOCK_DISCRIMINATOR,
+  JUPITER_V6,
   LOCK_ACCOUNT_DISCRIMINATOR,
+  PASTA_MINT,
   PROGRAM_ID,
 } from "./constants.ts";
 
@@ -46,8 +51,20 @@ test("claim instruction layout", () => {
   });
   const [burn] = burnPda();
   assert.deepEqual([...ix.data.slice(0, 8)], [...CLAIM_DISCRIMINATOR]);
+  assert.equal(ix.keys.length, 13);
   assert.equal(ix.keys[0].pubkey.toBase58(), depositor.toBase58());
   assert.equal(ix.keys[5].pubkey.toBase58(), burn.toBase58());
+  assert.equal(ix.keys[9].pubkey.toBase58(), PASTA_MINT.toBase58());
+  assert.equal(ix.keys[10].pubkey.toBase58(), burnFeeAta(mint).toBase58());
+  assert.equal(ix.keys[11].pubkey.toBase58(), burnPastaAta().toBase58());
+  assert.equal(ix.keys[12].pubkey.toBase58(), JUPITER_V6.toBase58());
+  const depositorAta = getAssociatedTokenAddressSync(
+    mint,
+    depositor,
+    false,
+    TOKEN_2022_PROGRAM_ID
+  );
+  assert.notEqual(ix.keys[10].pubkey.toBase58(), depositorAta.toBase58());
   assert.equal(ix.data.length, 8 + 4 + 8);
 });
 

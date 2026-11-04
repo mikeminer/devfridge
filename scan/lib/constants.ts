@@ -36,6 +36,11 @@ export const WSOL_MINT = "So11111111111111111111111111111111111111112";
 export const JUPITER_V6 = "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4";
 export const BOOST_IX_DISC = Uint8Array.from([198, 156, 184, 145, 58, 140, 148, 22]);
 export const CRANK_BUYBACK_IX_DISC = Uint8Array.from([37, 215, 1, 139, 147, 5, 99, 198]);
+/** Must match the Fridge program. Treasury is the only crank signer. */
+export const CRANK_AUTHORITY = TREASURY;
+export const MAX_CRANK_LAMPORTS = 500_000_000n;
+export const MIN_CRANK_PASTA_OUT = 1_000_000n;
+export const MIN_PASTA_PER_LAMPORT = 1n;
 export const BOOST_ACC_DISC = Uint8Array.from([161, 53, 13, 23, 230, 62, 118, 153]);
 export const BOOST_ACCOUNT_SIZE = 90;
 export const BOOST_VAULT_RENT = 890_880;

@@ -28,8 +28,10 @@ import {
   BURN_SEED,
   CLAIM_DISCRIMINATOR,
   CREATE_LOCK_DISCRIMINATOR,
+  JUPITER_V6,
   LOCK_ACCOUNT_DISCRIMINATOR,
   LOCK_SEED,
+  MIN_CLAIM_PASTA_OUT,
   PASTA_MINT,
   PROGRAM_ID,
   REDEMPTION_FEE_BPS,
@@ -120,6 +122,17 @@ export function vaultAddress(mint: PublicKey, lock: PublicKey): PublicKey {
 
 export function burnPda(programId: PublicKey = PROGRAM_ID): [PublicKey, number] {
   return PublicKey.findProgramAddressSync([new TextEncoder().encode(BURN_SEED)], programId);
+}
+
+/** Burn-PDA ATA that must receive the 2% fee. Not the depositor's token account. */
+export function burnFeeAta(mint: PublicKey, programId: PublicKey = PROGRAM_ID): PublicKey {
+  const [burn] = burnPda(programId);
+  return getAssociatedTokenAddressSync(mint, burn, true, TOKEN_2022_PROGRAM_ID);
+}
+
+export function burnPastaAta(programId: PublicKey = PROGRAM_ID): PublicKey {
+  const [burn] = burnPda(programId);
+  return getAssociatedTokenAddressSync(PASTA_MINT, burn, true, TOKEN_2022_PROGRAM_ID);
 }
 
 export function redemptionFee(amount: bigint): bigint {
@@ -248,6 +261,10 @@ export function buildClaimInstruction(args: {
       { pubkey: TOKEN_2022_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: ASSOCIATED_TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
       { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
+      { pubkey: PASTA_MINT, isSigner: false, isWritable: true },
+      { pubkey: burnFeeAta(args.mint, programId), isSigner: false, isWritable: true },
+      { pubkey: burnPastaAta(programId), isSigner: false, isWritable: true },
+      { pubkey: JUPITER_V6, isSigner: false, isWritable: false },
       ...(args.extraKeys ?? []),
     ],
     data: encodeClaimData(args.swapData ?? new Uint8Array(), args.minPastaOut ?? 0n),
@@ -818,6 +835,17 @@ export async function claimTransaction(
     Boolean(opts.localFeeBurn) ||
     endpoint.includes("devnet") ||
     endpoint.includes("testnet");
+  const [burnAuthority] = burnPda(programId);
+  const feeAta = burnFeeAta(lock.mint, programId);
+  tx.add(
+    createAssociatedTokenAccountIdempotentInstruction(
+      depositor,
+      feeAta,
+      burnAuthority,
+      lock.mint,
+      TOKEN_2022_PROGRAM_ID
+    )
+  );
 
   if (fee === 0n || isPasta || localFeeBurn) {
     const extraKeys = await extraHookAccounts(
@@ -834,7 +862,7 @@ export async function claimTransaction(
         lockId: lock.lockId,
         programId,
         swapData: new Uint8Array(),
-        minPastaOut: isPasta ? fee : 0n,
+        minPastaOut: 0n,
         extraKeys,
       })
     );
@@ -843,19 +871,7 @@ export async function claimTransaction(
     return tx;
   }
 
-  const [burnAuthority] = burnPda(programId);
-  const feeAta = getAssociatedTokenAddressSync(
-    lock.mint,
-    burnAuthority,
-    true,
-    TOKEN_2022_PROGRAM_ID
-  );
-  const pastaAta = getAssociatedTokenAddressSync(
-    PASTA_MINT,
-    burnAuthority,
-    true,
-    TOKEN_2022_PROGRAM_ID
-  );
+  const pastaAta = burnPastaAta(programId);
   const prelude: TransactionInstruction[] = [];
   if (!ataInfo) {
     prelude.push(
@@ -895,13 +911,15 @@ export async function claimTransaction(
         burnAuthority,
         maxAccounts
       );
-      const extraKeys: AccountMeta[] = [
-        { pubkey: PASTA_MINT, isSigner: false, isWritable: true },
-        { pubkey: feeAta, isSigner: false, isWritable: true },
-        { pubkey: pastaAta, isSigner: false, isWritable: true },
-        { pubkey: route.swapProgram, isSigner: false, isWritable: false },
-        ...route.swapAccounts,
-      ];
+      if (route.minPastaOut < MIN_CLAIM_PASTA_OUT) {
+        throw new Error(
+          "This Jupiter route does not clear the program minimum of 1 $PASTA. The lock stays in the fridge until a route does."
+        );
+      }
+      if (!route.swapProgram.equals(JUPITER_V6)) {
+        throw new Error("Jupiter route did not use v6");
+      }
+      const extraKeys: AccountMeta[] = route.swapAccounts;
       const claimIx = buildClaimInstruction({
         depositor,
         mint: lock.mint,

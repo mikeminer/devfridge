@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{
-    instruction::{AccountMeta, Instruction},
+    instruction::Instruction,
     program::invoke_signed,
     system_instruction,
 };
@@ -12,6 +12,14 @@ use anchor_spl::{
     token_interface::{
         self, CloseAccount, Mint, TokenAccount, TokenInterface, TransferChecked,
     },
+};
+
+mod buyback;
+use buyback::{
+    assert_caller_min, assert_crank_amount, assert_crank_signer, assert_escrowed,
+    assert_not_drained, assert_swap_deltas, assert_token_custody, canonical_ata,
+    crank_pasta_floor, jupiter_metas, route_accounts_from, token_amount, validate_jupiter_route,
+    SwapExpectation,
 };
 
 declare_id!("9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6");
@@ -37,6 +45,15 @@ pub const BOOST_VAULT_SEED: &[u8] = b"boost_vault";
 pub const PASTA_MINT: Pubkey = pubkey!("39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump");
 pub const WSOL_MINT: Pubkey = pubkey!("So11111111111111111111111111111111111111112");
 pub const JUPITER_V6: Pubkey = pubkey!("JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4");
+/// Treasury. The only signer allowed to call `crank_buyback`.
+pub const CRANK_AUTHORITY: Pubkey = pubkey!("GxPoKNX26GCisuH8Sdr8rtfZY98L5t5eegKtDzSA9P6W");
+/// One top-tier Feature payment. A crank cannot empty a larger vault in one instruction.
+pub const MAX_CRANK_LAMPORTS: u64 = 500_000_000;
+/// Claim buybacks must receive at least 1 PASTA (6 decimals). Caller mins cannot go below this.
+pub const MIN_CLAIM_PASTA_OUT: u64 = 1_000_000;
+/// SOL cranks must receive at least 1 PASTA, and at least `MIN_PASTA_PER_LAMPORT` atoms per lamport.
+pub const MIN_CRANK_PASTA_OUT: u64 = 1_000_000;
+pub const MIN_PASTA_PER_LAMPORT: u64 = 1;
 pub const REDEMPTION_FEE_BPS: u64 = 200;
 pub const BOOST_TIER_LAMPORTS: [u64; 3] = [100_000_000, 180_000_000, 500_000_000];
 pub const BOOST_TIER_SECS: [i64; 3] = [86_400, 172_800, 604_800];
@@ -182,7 +199,7 @@ pub mod fridge {
                     fee,
                 )?;
             } else {
-                buyback_and_burn_pasta(&ctx, fee, decimals, &swap_data, min_pasta_out)?;
+                buyback_and_burn_pasta(&ctx, fee, &swap_data, min_pasta_out)?;
             }
         }
 
@@ -261,26 +278,43 @@ pub mod fridge {
         Ok(())
     }
 
-    /// Permissionless crank: wrap SOL from the boost vault, Jupiter-buy $PASTA, burn it.
+    /// Authority-gated crank: wrap at most `MAX_CRANK_LAMPORTS` from the boost vault,
+    /// Jupiter-buy $PASTA into the burn PDA's ATA, and burn the received balance.
     pub fn crank_buyback<'info>(
         ctx: Context<'_, '_, 'info, 'info, CrankBuyback<'info>>,
         amount: u64,
         swap_data: Vec<u8>,
         min_pasta_out: u64,
     ) -> Result<()> {
-        require!(amount > 0, FridgeError::InvalidAmount);
+        assert_crank_signer(&ctx.accounts.cranker.key())?;
         let rent_min = Rent::get()?.minimum_balance(0);
-        require!(
-            ctx.accounts
-                .vault
-                .lamports()
-                .saturating_sub(rent_min)
-                >= amount,
-            FridgeError::InsufficientVault
-        );
+        let spendable = ctx
+            .accounts
+            .vault
+            .lamports()
+            .saturating_sub(rent_min);
+        assert_crank_amount(amount, spendable)?;
+        assert_caller_min(min_pasta_out, crank_pasta_floor(amount)?)?;
         require!(!swap_data.is_empty(), FridgeError::MissingSwapRoute);
-        require!(!ctx.remaining_accounts.is_empty(), FridgeError::MissingSwapRoute);
 
+        let burn_key = ctx.accounts.burn_authority.key();
+        let route = route_accounts_from(ctx.remaining_accounts)?;
+        validate_jupiter_route(
+            &swap_data,
+            &route,
+            &SwapExpectation {
+                burn: burn_key,
+                source: ctx.accounts.wsol_ata.key(),
+                source_mint: WSOL_MINT,
+                destination: ctx.accounts.pasta_ata.key(),
+                input_amount: amount,
+            },
+            &[ctx.accounts.vault.key()],
+        )?;
+
+        let wsol_before = ctx.accounts.wsol_ata.amount;
+        let pasta_before = ctx.accounts.pasta_ata.amount;
+        let burn_lamports = ctx.accounts.burn_authority.lamports();
         let vault_bump = [ctx.bumps.vault];
         let vault_seeds: &[&[u8]] = &[BOOST_VAULT_SEED, vault_bump.as_ref()];
 
@@ -301,53 +335,33 @@ pub mod fridge {
                 account: ctx.accounts.wsol_ata.to_account_info(),
             },
         ))?;
-
-        let jupiter_program = &ctx.remaining_accounts[0];
-        let jupiter_accounts = &ctx.remaining_accounts[1..];
-        require_keys_eq!(
-            *jupiter_program.key,
-            JUPITER_V6,
-            FridgeError::InvalidSwapProgram
-        );
+        ctx.accounts.wsol_ata.reload()?;
+        assert_escrowed(wsol_before, ctx.accounts.wsol_ata.amount, amount)?;
 
         let burn_bump = [ctx.bumps.burn_authority];
         let burn_seeds: &[&[u8]] = &[BURN_SEED, burn_bump.as_ref()];
-        let burn_key = ctx.accounts.burn_authority.key();
-        let metas: Vec<AccountMeta> = jupiter_accounts
-            .iter()
-            .map(|acc| {
-                let is_signer = acc.key() == burn_key;
-                if acc.is_writable {
-                    AccountMeta::new(*acc.key, is_signer)
-                } else {
-                    AccountMeta::new_readonly(*acc.key, is_signer)
-                }
-            })
-            .collect();
-        let mut infos = Vec::with_capacity(jupiter_accounts.len() + 1);
-        infos.push(jupiter_program.clone());
-        infos.extend(jupiter_accounts.iter().cloned());
-        invoke_signed(
-            &Instruction {
-                program_id: JUPITER_V6,
-                accounts: metas,
-                data: swap_data,
-            },
-            &infos,
-            &[burn_seeds],
+        invoke_jupiter(
+            &ctx.accounts.jupiter_program.to_account_info(),
+            ctx.remaining_accounts,
+            &swap_data,
+            &burn_key,
+            burn_seeds,
         )?;
+        assert_not_drained(burn_lamports, ctx.accounts.burn_authority.lamports())?;
 
+        ctx.accounts.wsol_ata.reload()?;
         ctx.accounts.pasta_ata.reload()?;
-        require!(
-            ctx.accounts.pasta_ata.amount >= min_pasta_out && ctx.accounts.pasta_ata.amount > 0,
-            FridgeError::BuybackFailed
-        );
-        require_keys_eq!(ctx.accounts.pasta_ata.mint, PASTA_MINT, FridgeError::InvalidMint);
-        require_keys_eq!(
-            ctx.accounts.pasta_ata.owner,
-            ctx.accounts.burn_authority.key(),
-            FridgeError::InvalidAuthority
-        );
+        assert_swap_deltas(
+            wsol_before
+                .checked_add(amount)
+                .ok_or(error!(FridgeError::Overflow))?,
+            ctx.accounts.wsol_ata.amount,
+            amount,
+            pasta_before,
+            ctx.accounts.pasta_ata.amount,
+            min_pasta_out,
+        )?;
+        let burned = ctx.accounts.pasta_ata.amount;
         token_2022::burn(
             CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
@@ -358,7 +372,7 @@ pub mod fridge {
                 },
                 &[burn_seeds],
             ),
-            ctx.accounts.pasta_ata.amount,
+            burned,
         )?;
         Ok(())
     }
@@ -386,21 +400,29 @@ pub fn redemption_fee(amount: u64) -> Result<u64> {
 fn buyback_and_burn_pasta<'info>(
     ctx: &Context<'_, '_, 'info, 'info, Claim<'info>>,
     fee: u64,
-    decimals: u8,
     swap_data: &[u8],
     min_pasta_out: u64,
 ) -> Result<()> {
     require!(!swap_data.is_empty(), FridgeError::MissingSwapRoute);
-    require!(ctx.remaining_accounts.len() >= 4, FridgeError::MissingSwapRoute);
+    assert_caller_min(min_pasta_out, MIN_CLAIM_PASTA_OUT)?;
 
-    let pasta_mint_info = &ctx.remaining_accounts[0];
-    let fee_ata_info = &ctx.remaining_accounts[1];
-    let pasta_ata_info = &ctx.remaining_accounts[2];
-    let jupiter_program = &ctx.remaining_accounts[3];
-    let jupiter_accounts = &ctx.remaining_accounts[4..];
-
-    require_keys_eq!(*pasta_mint_info.key, PASTA_MINT, FridgeError::InvalidMint);
-    require_keys_eq!(*jupiter_program.key, JUPITER_V6, FridgeError::InvalidSwapProgram);
+    let burn_key = ctx.accounts.burn_authority.key();
+    let route = route_accounts_from(ctx.remaining_accounts)?;
+    validate_jupiter_route(
+        swap_data,
+        &route,
+        &SwapExpectation {
+            burn: burn_key,
+            source: ctx.accounts.fee_ata.key(),
+            source_mint: ctx.accounts.mint.key(),
+            destination: ctx.accounts.pasta_ata.key(),
+            input_amount: fee,
+        },
+        &[
+            ctx.accounts.vault.key(),
+            ctx.accounts.depositor_ata.key(),
+        ],
+    )?;
 
     let lock = &ctx.accounts.lock;
     let lock_id_bytes = lock.lock_id.to_le_bytes();
@@ -413,41 +435,98 @@ fn buyback_and_burn_pasta<'info>(
         lock_bump.as_ref(),
     ];
 
+    let fee_before = ctx.accounts.fee_ata.amount;
+    let pasta_before = {
+        let data = ctx
+            .accounts
+            .pasta_ata
+            .try_borrow_data()
+            .map_err(|_| error!(FridgeError::InvalidTokenAccount))?;
+        assert_token_custody(&data, &PASTA_MINT, &burn_key)?;
+        token_amount(&data)?
+    };
+    let burn_lamports = ctx.accounts.burn_authority.lamports();
+
     token_interface::transfer_checked(
         CpiContext::new_with_signer(
             ctx.accounts.token_program.to_account_info(),
             TransferChecked {
                 from: ctx.accounts.vault.to_account_info(),
                 mint: ctx.accounts.mint.to_account_info(),
-                to: fee_ata_info.clone(),
+                to: ctx.accounts.fee_ata.to_account_info(),
                 authority: ctx.accounts.lock.to_account_info(),
             },
             &[lock_seeds],
         ),
         fee,
-        decimals,
+        ctx.accounts.mint.decimals,
     )?;
+    let fee_escrowed = live_token_amount(&ctx.accounts.fee_ata.to_account_info())?;
+    assert_escrowed(fee_before, fee_escrowed, fee)?;
 
     let burn_bump = [ctx.bumps.burn_authority];
     let burn_seeds: &[&[u8]] = &[BURN_SEED, burn_bump.as_ref()];
-    let burn_key = ctx.accounts.burn_authority.key();
+    invoke_jupiter(
+        &ctx.accounts.jupiter_program.to_account_info(),
+        ctx.remaining_accounts,
+        swap_data,
+        &burn_key,
+        burn_seeds,
+    )?;
+    assert_not_drained(burn_lamports, ctx.accounts.burn_authority.lamports())?;
 
-    let metas: Vec<AccountMeta> = jupiter_accounts
-        .iter()
-        .map(|acc| {
-            let is_signer = acc.key() == burn_key;
-            if acc.is_writable {
-                AccountMeta::new(*acc.key, is_signer)
-            } else {
-                AccountMeta::new_readonly(*acc.key, is_signer)
-            }
-        })
-        .collect();
+    let fee_after = live_token_amount(&ctx.accounts.fee_ata.to_account_info())?;
+    let pasta_after = {
+        let data = ctx
+            .accounts
+            .pasta_ata
+            .try_borrow_data()
+            .map_err(|_| error!(FridgeError::InvalidTokenAccount))?;
+        assert_token_custody(&data, &PASTA_MINT, &burn_key)?;
+        token_amount(&data)?
+    };
+    assert_swap_deltas(
+        fee_escrowed,
+        fee_after,
+        fee,
+        pasta_before,
+        pasta_after,
+        min_pasta_out,
+    )?;
 
-    let mut infos = Vec::with_capacity(jupiter_accounts.len() + 1);
+    token_2022::burn(
+        CpiContext::new_with_signer(
+            ctx.accounts.token_program.to_account_info(),
+            Burn {
+                mint: ctx.accounts.pasta_mint.to_account_info(),
+                from: ctx.accounts.pasta_ata.to_account_info(),
+                authority: ctx.accounts.burn_authority.to_account_info(),
+            },
+            &[burn_seeds],
+        ),
+        pasta_after,
+    )?;
+    Ok(())
+}
+
+fn live_token_amount(info: &AccountInfo) -> Result<u64> {
+    let data = info
+        .try_borrow_data()
+        .map_err(|_| error!(FridgeError::InvalidTokenAccount))?;
+    token_amount(&data)
+}
+
+fn invoke_jupiter<'info>(
+    jupiter_program: &AccountInfo<'info>,
+    route_accounts: &[AccountInfo<'info>],
+    swap_data: &[u8],
+    burn_key: &Pubkey,
+    burn_seeds: &[&[u8]],
+) -> Result<()> {
+    let metas = jupiter_metas(route_accounts, burn_key);
+    let mut infos = Vec::with_capacity(route_accounts.len() + 1);
     infos.push(jupiter_program.clone());
-    infos.extend(jupiter_accounts.iter().cloned());
-
+    infos.extend(route_accounts.iter().cloned());
     invoke_signed(
         &Instruction {
             program_id: JUPITER_V6,
@@ -456,31 +535,6 @@ fn buyback_and_burn_pasta<'info>(
         },
         &infos,
         &[burn_seeds],
-    )?;
-
-    let pasta_ata = InterfaceAccount::<TokenAccount>::try_from(pasta_ata_info)?;
-    require!(
-        pasta_ata.amount >= min_pasta_out && pasta_ata.amount > 0,
-        FridgeError::BuybackFailed
-    );
-    require_keys_eq!(pasta_ata.mint, PASTA_MINT, FridgeError::InvalidMint);
-    require_keys_eq!(
-        pasta_ata.owner,
-        ctx.accounts.burn_authority.key(),
-        FridgeError::InvalidAuthority
-    );
-
-    token_2022::burn(
-        CpiContext::new_with_signer(
-            ctx.accounts.token_program.to_account_info(),
-            Burn {
-                mint: pasta_mint_info.clone(),
-                from: pasta_ata_info.clone(),
-                authority: ctx.accounts.burn_authority.to_account_info(),
-            },
-            &[burn_seeds],
-        ),
-        pasta_ata.amount,
     )?;
     Ok(())
 }
@@ -576,7 +630,7 @@ pub struct Claim<'info> {
     )]
     pub vault: InterfaceAccount<'info, TokenAccount>,
 
-    /// CHECK: burn PDA, used only as Token-2022 authority. It does not hold SOL.
+    /// CHECK: burn PDA. Signs the Jupiter buyback. Lamports must not fall during the CPI.
     #[account(seeds = [BURN_SEED], bump)]
     pub burn_authority: UncheckedAccount<'info>,
 
@@ -584,6 +638,31 @@ pub struct Claim<'info> {
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
+
+    /// CHECK: Canonical $PASTA mint. Direct burns do not deserialize it; the buyback burn does.
+    #[account(mut, address = PASTA_MINT)]
+    pub pasta_mint: UncheckedAccount<'info>,
+
+    /// Burn-PDA ATA for the locked mint. The 2% fee is transferred here and nowhere else.
+    #[account(
+        mut,
+        associated_token::mint = mint,
+        associated_token::authority = burn_authority,
+        associated_token::token_program = token_program
+    )]
+    pub fee_ata: InterfaceAccount<'info, TokenAccount>,
+
+    /// CHECK: Burn-PDA ATA for PASTA_MINT. The address is enforced here; mint, owner,
+    /// and the swap delta are checked around the Jupiter CPI.
+    #[account(
+        mut,
+        constraint = pasta_ata.key() == canonical_ata(&burn_authority.key(), &PASTA_MINT, &TOKEN_2022_PROGRAM_ID) @ FridgeError::InvalidTokenAccount
+    )]
+    pub pasta_ata: UncheckedAccount<'info>,
+
+    /// CHECK: Jupiter v6. Only invoked on the mainnet non-PASTA buyback path.
+    #[account(address = JUPITER_V6)]
+    pub jupiter_program: UncheckedAccount<'info>,
 }
 
 #[derive(Accounts)]
@@ -625,7 +704,7 @@ pub struct BoostFeature<'info> {
 
 #[derive(Accounts)]
 pub struct CrankBuyback<'info> {
-    #[account(mut)]
+    #[account(mut, address = CRANK_AUTHORITY @ FridgeError::UnauthorizedCrank)]
     pub cranker: Signer<'info>,
 
     /// CHECK: SOL collected from boost payments.
@@ -666,6 +745,10 @@ pub struct CrankBuyback<'info> {
     pub wsol_token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
+
+    /// CHECK: Jupiter v6. Route accounts follow in remaining_accounts.
+    #[account(address = JUPITER_V6)]
+    pub jupiter_program: UncheckedAccount<'info>,
 }
 
 #[account]
@@ -723,6 +806,14 @@ pub enum FridgeError {
     NeedLiveLock,
     #[msg("Boost vault does not hold enough SOL to buy back $PASTA")]
     InsufficientVault,
+    #[msg("Buyback minimum is below the program floor")]
+    SlippageFloor,
+    #[msg("Crank amount exceeds the per-instruction cap")]
+    CrankLimit,
+    #[msg("Jupiter route must spend the escrow into the burn PASTA account")]
+    InvalidSwapDestination,
+    #[msg("Only the crank authority may buy back from the boost vault")]
+    UnauthorizedCrank,
 }
 
 #[cfg(test)]
