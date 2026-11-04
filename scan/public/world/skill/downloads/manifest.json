@@ -1,9 +1,9 @@
 {
   "name": "devfridge-game-builder",
-  "version": "1.10.0",
-  "reviewedAt": "2026-11-01",
-  "bytes": 3619371,
-  "sha256": "9de2f5ebd91be190ec6e6efd7a88864de82765774653d7f6920b424d4ebf580d",
+  "version": "1.11.0",
+  "reviewedAt": "2026-11-04",
+  "bytes": 3621684,
+  "sha256": "06952b72c84100e43a5b1f62b0d2cf2e222c2272be8f5a694ecfa84d89c3dc4c",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -47,7 +47,7 @@
     },
     {
       "path": "assets/public-site/site.example.json",
-      "sha256": "7b4e7ba84d93208876d172b981d2eb3a9d755ca35c572382e17c60c5e750f560"
+      "sha256": "5f14ee9e84e6e5d4fe8354235110f682601742ca2df4daeb957089990c58be42"
     },
     {
       "path": "assets/public-site/site_test.py",
@@ -199,7 +199,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "1aa703c18060fbe1a6d4f814f1de2f610f26f58f851d52dfe644cdbc1600c9ab"
+      "sha256": "25d0c3f59b245913b4a917f244b2534c6521081b223031ebdd2a636c9a608371"
     },
     {
       "path": "references/3d-assets-and-characters.md",
@@ -267,15 +267,15 @@
     },
     {
       "path": "references/phantom.md",
-      "sha256": "0c08a388dcfd702944d71604c0b3d04ffa9aa47fa050dbfd0a580549085bc589"
+      "sha256": "0cb1965a2b9f32518bd846a5087a9b8203c1869392d1b75768d4be65e3d29448"
     },
     {
       "path": "references/program-and-verification.md",
-      "sha256": "f6c73f749571c69eb8c4050677b90fd82e2c41536d74e86df7e1d49f73f69593"
+      "sha256": "b79bd7f5c01eab50241fbbcecb67ee7dd26bcb8363df5306f79c3e8a11462242"
     },
     {
       "path": "references/public-site.md",
-      "sha256": "8386395b17324e10d2ae81b2ba3419234567426e5b8a49dbdc6faaff52367f2f"
+      "sha256": "f15c1adffb435228dd23547725a96df9218baf929663b5081cf4c66ac5fc1dbe"
     },
     {
       "path": "references/release-pitfalls.md",
@@ -287,7 +287,7 @@
     },
     {
       "path": "references/retention-and-economics.md",
-      "sha256": "324da85c1dbbf6640863b2965f15a63fc85f2483ed671793c0dd38b55bf7d2f3"
+      "sha256": "4ca9e547f72e3ee696879554b1d7580170e3c9646d9a3f10d96032db8ddda097"
     },
     {
       "path": "references/rpc-proxy.md",
@@ -299,7 +299,7 @@
     },
     {
       "path": "references/season-pass.md",
-      "sha256": "29f881deaeda4a83851dc87e0c6c12860e39bac62ee74600325aaf294e765805"
+      "sha256": "8993468e18af39bab2e954b0f2cad2406591adf72e493b75bcfa8cf59bc38415"
     },
     {
       "path": "references/seeker-android.md",
@@ -319,7 +319,7 @@
     },
     {
       "path": "references/sources.md",
-      "sha256": "4b7b733b2f367f80b93e2ea709310972518bf21b1ace352ab3cf0451b64561e7"
+      "sha256": "ef0da2d031e9b56185f40203f92d2315753cf6e6e0de6399d80e526f15c34222"
     },
     {
       "path": "references/visual-realism.md",
@@ -327,11 +327,11 @@
     },
     {
       "path": "references/wallet-trust.md",
-      "sha256": "f0f5e7b186adc7810ddc9207b9e7142f92a3f080c7b69ac5269416755dee7b4f"
+      "sha256": "3b6967db9d8d739450ab8f44122fa34f7d9d9ba6c5f7209662073505b86af0be"
     },
     {
       "path": "SKILL.md",
-      "sha256": "dfc0246d1be3431045ee251a590af23f6318b4a6675bc75d0bc81ed864360c4a"
+      "sha256": "dcd00ec136cae792d8c54b9ee3044299c90bf89b207ab8b56b82e1b1a1040b9c"
     },
     {
       "path": "vendor/claude-code-game-studios/agents/accessibility-specialist.md",

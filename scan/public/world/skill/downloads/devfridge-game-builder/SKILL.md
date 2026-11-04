@@ -3,8 +3,8 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with Daily, Weekly and Monthly subscription passes paid in SOL. Use for wallet and optional in-game market integration, the vendored game-studio workflow, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.10.0"
-  sources-reviewed: "2026-11-01"
+  version: "1.11.0"
+  sources-reviewed: "2026-11-04"
 ---
 # DevFridge Game Builder
 
@@ -38,7 +38,7 @@ Access rule: the connected wallet has **at least one active deposit** of the con
 
 Players see a subscription, a price in SOL and a countdown. Player UI, wallet identity, errors and Store copy never mention timelocks, vaults, deposits, the DevFridge or Fridge program, PASTA, redemption or withdrawal. Before approval the review states the plan, SOL price, fees, end date and one plain sentence that the SOL buys the token, which stays set aside for the subscription and can change in value; the wallet shows that purchase anyway. Full mechanics belong in the terms page and reviewer notes. Run the [player-copy checker](assets/check-player-copy.mjs). Use the game's name and owned HTTPS domain as wallet identity; a missing real domain blocks release, not development.
 
-Read [program reuse and verification](references/program-and-verification.md) for developer and reviewer documentation of the Fridge program. That material is for builders, reviewers and the terms page, not for game screens.
+Read [program reuse and verification](references/program-and-verification.md) for developer and reviewer documentation of the Fridge program. That material is for builders, reviewers and the terms page, not for game screens. If the game builds Fridge `claim`, for $PASTA or any other Token-2022, use the claim account list there. Those accounts stay on the instruction when no swap runs. The 2026-10-24 IDL pin does not include them.
 
 ## Choose the integration
 

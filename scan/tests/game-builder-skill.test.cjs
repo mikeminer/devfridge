@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '../..');
 const source = path.join(root, 'skills/devfridge-game-builder');
 const output = path.join(root, 'scan/public/world/skill/downloads');
 const python = process.env.SKILL_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
-const expectedRelease = {"version": "1.10.0", "reviewedAt": "2026-11-01", "bytes": 3619371, "sha256": "9de2f5ebd91be190ec6e6efd7a88864de82765774653d7f6920b424d4ebf580d"};
+const expectedRelease = {"version": "1.11.0", "reviewedAt": "2026-11-04", "bytes": 3621684, "sha256": "06952b72c84100e43a5b1f62b0d2cf2e222c2272be8f5a694ecfa84d89c3dc4c"};
 
 function walkFiles(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -66,8 +66,8 @@ test('published skill contains exactly the reviewed sources, standalone files an
     assert.equal(crypto.createHash('sha256').update(published).digest('hex'), file.sha256, file.path);
   }
   const skill = fs.readFileSync(path.join(source, 'SKILL.md'), 'utf8');
-  assert.ok(skill.includes('  version: "1.10.0"\n'));
-  assert.ok(skill.includes('  sources-reviewed: "2026-11-01"\n'));
+  assert.ok(skill.includes('  version: "1.11.0"\n'));
+  assert.ok(skill.includes('  sources-reviewed: "2026-11-04"\n'));
 });
 
 test('packager reproduces the reviewed ZIP under either creator platform and rejects stale files/caches', () => {

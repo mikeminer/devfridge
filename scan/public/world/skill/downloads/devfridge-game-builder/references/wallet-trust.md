@@ -49,7 +49,7 @@ Treat equivalent wording the same way. Record the date, device, wallet, identity
 
 ## Transactions the wallet can simulate
 
-Use one transaction per player action. Allow only known programs: the pinned Fridge program, the System Program, Token Program and Token-2022, plus the pump.fun programs the selected [market validator](in-game-market.md) already pins. The subscription purchase uses the reviewed swap route plus Fridge `create_lock` in one transaction. Compute Budget and the Associated Token program are allowed only where the subscription or market validator already requires them. Amounts must be visible and match the reviewed product. No opaque instructions and no partial signatures.
+Use one transaction per player action. Allow only known programs: the pinned Fridge program, the System Program, Token Program and Token-2022, plus the pump.fun programs the selected [market validator](in-game-market.md) already pins. The subscription purchase uses the reviewed swap route plus Fridge `create_lock` in one transaction. Compute Budget and the Associated Token program are allowed only where the subscription or market validator already requires them. A separate `claim`, if the game builds one, may name Jupiter v6 only as [Claim accounts](program-and-verification.md#claim-accounts) specifies. Keep that route out of the subscription purchase. Amounts must be visible and match the reviewed product. No opaque instructions and no partial signatures.
 
 The documented MWA −32601 sign-then-send of the **same complete** transaction stays in [Seeker wallets](seeker-wallet.md). That fallback is not a partial signature.
 

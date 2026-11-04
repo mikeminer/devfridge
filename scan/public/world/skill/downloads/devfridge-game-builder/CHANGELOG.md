@@ -1,5 +1,15 @@
 # DevFridge Game Builder — Changelog
 
+## 1.11.0 — 2026-11-04
+
+Corrects Fridge `claim` for every Token-2022 mint, including $PASTA.
+
+- The deployed program names `pasta_mint`, the burn-PDA fee ATA, the burn-PDA PASTA ATA and Jupiter v6 on every claim. That includes a $PASTA lock with no swap and a zero fee. The 2026-10-24 IDL pin stopped before those accounts. A shorter instruction fails with Anchor 3005 before the program runs.
+- A Jupiter route is appended only when the locked mint is not $PASTA and the fee is above zero, and only when that route returns at least 1 PASTA. Otherwise the lock stays.
+- Player screens stay on the subscription copy. New games still have no redeem screen. A game that builds `claim` uses the new list. Terms state the in-place $PASTA burn and the 1 PASTA minimum for every other mint.
+
+No program deploy, wallet signature or Store submission was performed to write this release.
+
 ## 1.10.0 — 2026-11-01
 
 Adds landscapes, architecture and nature for Three.js games.

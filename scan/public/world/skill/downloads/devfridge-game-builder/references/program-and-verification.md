@@ -1,24 +1,56 @@
 # Reuse the Fridge program: evidence and messaging
 
-Read when implementing Season Pass instructions or explaining shared infrastructure, security badges, developer checks, audit claims or development costs. IDL/source review: **2026-10-24**; older chain/verifier observations below retain their original dates. Recheck current deployment before every game's release.
+Read when implementing Season Pass instructions or explaining shared infrastructure, security badges, developer checks, audit claims or development costs. IDL/source review: **2026-10-24** for `create_lock`; `claim` accounts reviewed **2026-11-04**. Older chain/verifier observations below retain their original dates. Recheck current deployment before every game's release.
 
 ## The reusable foundation
 
 Solana mainnet program: `9RY54dNPYTzDyh3TfFqDdt2b2KMM56KW1tw9erRTGQo6`.
 
-Fridge is an Anchor program for Token-2022 timelocks. Separate lock PDAs bind depositor, mint and lock ID. A lock records amount and timestamps; tokens sit in its PDA-controlled associated vault. The current implementation checks depositor signatures, account relationships, positive amounts, future unlock dates and Token-2022 ownership. It records the received vault balance after transfer. Only the depositor can redeem after expiry under current rules. Redemption applies the documented 2% PASTA buy-and-burn mechanism; route availability and token extensions still matter.
+Fridge is an Anchor program for Token-2022 timelocks. Separate lock PDAs bind depositor, mint and lock ID. A lock records amount and timestamps; tokens sit in its PDA-controlled associated vault. The current implementation checks depositor signatures, account relationships, positive amounts, future unlock dates and Token-2022 ownership. It records the received vault balance after transfer. Only the depositor can redeem after expiry under current rules. The fee is the 2% mechanism in [retention and economics](retention-and-economics.md). The instruction is [Claim accounts](#claim-accounts).
 
 A new game using the existing program does not deploy another timelock contract. It sells its subscription in-app and verifies current accounts directly; SDK/API reads remain optional compatibility paths. Apply the any-active-deposit rule in [season-pass.md](season-pass.md), revalidating on the server where access protects server resources. Reuse does not prove wallet ownership, authorize paid transactions or validate scores. Read [SDK boundaries](sdk-access.md) and [Phantom identity](phantom.md) for those separate responsibilities.
 
 ## Pinned instruction and account evidence — 2026-10-24
 
-Fetched the public root `idl.json` and Rust source at commit **`b8685f4f5e2d7c5cd97125876e0e767ac43067d4`**. IDL SHA-256: **`ff7d8b5857f4824cce29d731cfa72c57b48f065743e0b3fa37da9d87e9e06c57`**. [Pinned IDL](https://github.com/mikeminer/devfridge/blob/b8685f4f5e2d7c5cd97125876e0e767ac43067d4/idl.json) and [pinned program source](https://github.com/mikeminer/devfridge/blob/b8685f4f5e2d7c5cd97125876e0e767ac43067d4/programs/fridge/src/lib.rs). A source pin is not proof of the deployed binary or a new audit. Before constructing a release transaction, compare the live program deployment/authority and revalidate the instruction against the deployed revision; stop real activation on a mismatch.
+Fetched the public root `idl.json` and Rust source at commit **`b8685f4f5e2d7c5cd97125876e0e767ac43067d4`**. IDL SHA-256: **`ff7d8b5857f4824cce29d731cfa72c57b48f065743e0b3fa37da9d87e9e06c57`**. [Pinned IDL](https://github.com/mikeminer/devfridge/blob/b8685f4f5e2d7c5cd97125876e0e767ac43067d4/idl.json) and [pinned program source](https://github.com/mikeminer/devfridge/blob/b8685f4f5e2d7c5cd97125876e0e767ac43067d4/programs/fridge/src/lib.rs). That pin still matches `create_lock`. Its `claim` instruction ended at the System program and is not the deployed instruction; build `claim` from [Claim accounts](#claim-accounts). A source pin is not proof of the deployed binary or a new audit. Before constructing a release transaction, compare the live program deployment/authority and revalidate the instruction against the deployed revision; stop real activation on a mismatch.
 
 - `create_lock` discriminator: `abd85ca7a508995a`; 32 instruction bytes total: 8-byte discriminator, amount `u64 LE`, end time `i64 LE`, ID `u64 LE`.
 - Exact ordered accounts: depositor (signer + writable); mint (read-only); depositor Token-2022 ATA (writable); deposit PDA (writable); its Token-2022 ATA vault (writable); Token-2022 program, Associated Token program, System program (all read-only). No remaining accounts in this template.
 - PDA seeds: UTF-8 `lock`, depositor 32 bytes, mint 32 bytes, ID as 8-byte little-endian. Re-derive the bump, ATA owners and account relationships instead of trusting renderer inputs.
 - `Lock` account discriminator: `08ff24cad2163989`; serialized length 105 bytes. Offsets: depositor 8, mint 40, amount `u64` 72, createdAt `i64` 80, unlockAt `i64` 88, bump `u8` 96, lockId `u64` 97. Reject wrong size, owner, discriminator or PDA, including plausible foreign accounts.
 - Read with `getProgramAccounts`, confirmed commitment, fixed `dataSize:105` and memcmp filters at 0/8/40; apply a six-second deadline. Verify each vault's owner/mint/authority and balance at least the recorded raw amount before producing fresh evidence. The fixed-ID `getMultipleAccountsInfo` fallback cannot discover timestamp IDs; a failed/incomplete read cannot establish an authoritative negative for undiscoverable accounts.
+
+## Claim accounts
+
+Reviewed **2026-11-04** against [program source](https://github.com/mikeminer/devfridge/blob/7f5bc49b6fbcd9ef66f8444facb7f80e1385b6ae/programs/fridge/src/lib.rs) at commit `7f5bc49b6fbcd9ef66f8444facb7f80e1385b6ae`, the verified mainnet build. Locks created before that upgrade use this same `claim`. There is no separate migration. The August verification record later in this file does not describe these accounts.
+
+`claim` discriminator `3ec6d6c1d59f6cd2`. Data is Borsh: that 8-byte discriminator, then `swap_data` as a byte vector (`u32` LE length, then the bytes), then `min_pasta_out` as `u64` LE. No trailing bytes.
+
+Use this ordered list for every Token-2022 mint, including $PASTA and including a zero fee:
+
+1. depositor, signer and writable
+2. mint, writable
+3. depositor Token-2022 ATA, writable
+4. lock PDA, writable
+5. vault ATA, writable
+6. burn PDA, seeds UTF-8 `burn`, not a signer and not writable
+7. Token-2022 program
+8. Associated Token program
+9. System program
+10. $PASTA mint, writable, `39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`
+11. fee ATA, writable: the burn PDA's Token-2022 ATA for the locked mint
+12. $PASTA ATA, writable: the burn PDA's Token-2022 ATA for the $PASTA mint
+13. Jupiter v6 `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4`, not writable
+
+A shorter list fails in Anchor before the program runs: error 3005, `AccountNotEnoughKeys`. Map it to a plain sentence that the return could not be prepared. It is not an exchange or route rejection.
+
+The fee ATA must already exist when `claim` runs. Create it in the same transaction with the idempotent associated-token instruction: payer the depositor, owner the burn PDA, mint the locked mint, Token-2022. When the locked mint is $PASTA, the fee ATA and the $PASTA ATA are the same address. Create that account once and still pass it at both indexes. When the addresses differ, also create the $PASTA ATA before a swap.
+
+The fee amount is specified in [retention and economics](retention-and-economics.md). On the instruction: the fee is 2% of the live vault amount, 200 basis points, integer division, so a vault below 50 raw units has a zero fee. A $PASTA lock, or a zero fee, sends empty `swap_data`, `min_pasta_out` 0 and no remaining accounts. The program burns a $PASTA fee from the vault. Any other mint with a fee above zero appends the Jupiter v6 route as remaining accounts, and `min_pasta_out` must be at least `1000000` (1 PASTA at 6 decimals). A route that cannot clear that minimum is not sent; the lock stays. Keep `claim` out of the subscription purchase. That purchase remains one `create_lock`.
+
+Player screens still follow [the subscription copy rules](season-pass.md#player-copy). New games do not add a redeem screen. The depositor can redeem on https://devfridge.cool, which builds this instruction. A game that builds `claim` itself uses this list for $PASTA and for every other Token-2022.
+
+This source check is not a new audit. Recheck the live program before each release.
 
 The historical deployment below is upgradeable. The prompt's claim that no on-chain IDL account exists was **not independently re-established during this package update**; do not substitute it for a current account lookup. No mainnet simulation or signature was performed in making this skill package. A generated game must recheck mint compatibility, fetch a fresh blockhash and run a **read-only unsigned** `simulate:lock` with an appropriate public holder before release; record errors/logs without secrets. A simulation does not authorize or send the transaction.
 

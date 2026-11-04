@@ -55,6 +55,8 @@ Fridge layout, pinned 2026-10-24 (`idl.json` at commit `b8685f4f5e2d7c5cd9712587
 - Accounts: depositor (signer, writable), mint, depositor's Token-2022 ATA (writable), deposit PDA (writable), its Token-2022 vault ATA (writable), Token-2022 program, associated-token program, System program.
 - Deposit PDA `["lock", depositor, mint, lockIdLE]`. Choose the first free ID in 1–64 (a timestamp ID only after a collision check). Persist it before handoff and never change it while reconciling.
 
+`claim` is a different instruction. Build it only from [Claim accounts](program-and-verification.md#claim-accounts), for $PASTA and every other Token-2022. This `create_lock` list is not a claim.
+
 Before the review: verify the initialized Token-2022 mint, owner and decimals; reject TransferFee, TransferHook and unknown extensions. Check SOL for the price plus live rent (deposit, vault, first-time ATA) and a current fee budget. Every precheck failure gets its own plain sentence and a retry.
 
 Order: authenticated wallet → prechecks → review → freshly built transaction → read-only simulation of the **final** transaction → native validator when applicable → **synchronous durable pending record** → wallet handoff → signature/PDA reconciliation → fresh subscription read. Browser wallets use `signAndSendTransaction`; MWA uses `signAndSendTransactions`, with the documented `signTransactions` fallback only after a definite `-32601` before any signature. A timeout is never a reason to sign again.
