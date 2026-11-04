@@ -13,6 +13,13 @@ export const metadata: Metadata = {
 
 const ITEMS = [
   {
+    title: "Game Builder skill",
+    status: "Live",
+    body: "An agent plans a Three.js community game and can prepare a hackathon gallery submission. It asks before showing the DevFridge intro. It does not deploy a new program or award a prize.",
+    href: "https://world.devfridge.cool/skill",
+    cta: "Open the skill",
+  },
+  {
     title: "SDK",
     status: "Proposed pilot",
     body: "Gate a site with Fridge timelocks. Configure mint, amount, duration, renewal. No paying customers are claimed here.",

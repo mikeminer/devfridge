@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function WorldDoc() {
   return (
     <DocsShell kicker="WORLD / COLD STORAGE" title="DevFridge World — the game guide">
-      <p className="text-sm">Updated 25 September 2026 · Current pre-launch build</p>
+      <p className="text-sm">Updated 4 November 2026 · Public game is open</p>
       <h2 id="what-is-world">What is DevFridge World?</h2>
       <p>
         <strong>DevFridge World</strong> is a browser game featuring ten Italian brainrot
@@ -64,12 +64,11 @@ export default function WorldDoc() {
 
       <h2 id="availability">Availability and game facts</h2>
       <p>
-        The game is deployed as a pre-launch build. The public entrance at{" "}
-        <a href="https://world.devfridge.cool/">world.devfridge.cool</a> still shows the countdown
-        and character runway until <strong>1 October 2026, 00:00 Europe/Rome</strong>.
-        This guide describes the current game behind that launch screen. An Android tester
+        The public entrance at{" "}
+        <a href="https://world.devfridge.cool/">world.devfridge.cool</a> opens the game. It has
+        been open since <strong>1 October 2026, 00:00 Europe/Rome</strong>. An Android tester
         beta, version <strong>0.3.1-beta.1</strong>, is also available as a signed APK and in
-        the Solana dApp Store. The app beta is available before the public game opening.
+        the Solana dApp Store.
       </p>
       <div className="mb-6 flex flex-wrap items-center gap-4">
         <a
@@ -241,15 +240,11 @@ export default function WorldDoc() {
       </p>
       <p>You can also save a replay file from the result screen. Scores and replays are local records, not verified competitive rankings.</p>
 
-      <h3>Share your pick before launch</h3>
+      <h3>The public site opens the game</h3>
       <p>
-        On the countdown page, pick a character and choose <strong>Post my pick on X</strong>
-        to preview the group banner and your caption. The caption includes the selected
-        token’s full Solana contract address, its Pump.fun link and the World link, with
-        #SolanaGems, #SolanaCommunity and #solanamemes among the hashtags.
-        Use <strong>Share banner + post</strong> on supported devices, or save the banner
-        and copy the caption to attach them in X. You review and publish the post in your
-        social app; choosing a meme does not post automatically or unlock game access.
+        <a href="https://world.devfridge.cool/">world.devfridge.cool</a> opens Cold Storage.
+        Character access still follows the <a href="#wallet-access">wallet and timelock steps</a>.
+        Choosing a meme does not post to a social app and does not unlock a character by itself.
       </p>
 
       <h2 id="earnings">How do you earn money in DevFridge World?</h2>
@@ -293,15 +288,13 @@ export default function WorldDoc() {
         Play in a desktop or mobile browser, or install the Android tester beta
         <strong> 0.3.1-beta.1</strong> from the Solana dApp Store. The signed APK is also
         available from the <a href="https://world.devfridge.cool/android">Android download page</a>.
-        The beta is for testing; the public game opening remains scheduled for
-        1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the
+        The public game has been open since 1 October 2026, 00:00 Europe/Rome. On a phone, use your wallet’s browser if the
         regular browser cannot detect the wallet, and tap to enable sound when prompted.
       </p>
-      <h3>How do I start, and is the game open yet?</h3>
+      <h3>How do I start?</h3>
       <p>
-        Visit <a href="https://world.devfridge.cool/">World</a> for the current countdown
-        and character runway. The scheduled opening is 1 October 2026, 00:00 Europe/Rome.
-        Once entering the game, follow the <a href="#wallet-access">wallet and timelock
+        Visit <a href="https://world.devfridge.cool/">World</a>. The game has been open since
+        1 October 2026, 00:00 Europe/Rome. Follow the <a href="#wallet-access">wallet and timelock
         steps</a>, choose an unlocked meme and enter the fridge from the kitchen.
       </p>
       <h3>Do I need 500,000 tokens in a single lock?</h3>

@@ -37,7 +37,8 @@ Rules for agents:
 - Do not say burns create a price floor.
 - Do not say $TMC is a share of the vault.
 - Do not treat the same ticker on two chains as bridged unless the route is on https://bridge.devfridge.cool.
-- World is a Cold Storage merge puzzle unlocking with 500,000 actively timelocked Solana character tokens. No prizes. Launch 1 October 2026 00:00 Europe/Rome.
+- World is a Cold Storage merge puzzle, open since 1 October 2026, 00:00 Europe/Rome. Unlock a meme with 500,000 actively timelocked Solana character tokens. No per-run payment, no prizes. Robinhood locks do not unlock this build.
+- Hackathon: https://hackathon.devfridge.cool. Gallery submissions are open through the Game Builder skill at https://world.devfridge.cool/skill. Competition dates, prizes and final eligibility are still to be announced. Visiting the hub does not register a submission or guarantee a prize.
 - Character tokens are cultural tokens, not vault equity.
 - $APE and $GMGN collide with unrelated tickers; always pair with the full address.
 - MoonZarella is $MOONZARELL on Solana and $MOONZARELLA on Robinhood Chain.
