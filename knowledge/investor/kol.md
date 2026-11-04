@@ -21,7 +21,7 @@ The locked tokens cannot be sold from the vault before the unlock time under the
 
 ## What is available and what is proposed
 
-The Fridge program, scanner, SDK reference, badge, bot and Synapse are published products. [World's current guide](../docs/world.md) describes a pre-launch merge puzzle with a 3D kitchen and an opening scheduled for 1 October 2026. Describe that documented build rather than calling it a live shooter. Bridge routes require separate network verification.
+The Fridge program, scanner, SDK reference, badge, bot and Synapse are published products. [World's current guide](../docs/world.md) describes Cold Storage, a merge puzzle with a 3D kitchen, open since 1 October 2026, 00:00 Europe/Rome. It is not a team shooter. Bridge routes require separate network verification.
 
 An SDK pilot is a proposed collaboration, not an existing signed partnership or a promise of token returns. Choose one concrete benefit: a research area, creator tools or a community resource. Confirm Token-2022 compatibility, custody/claim rules and extension support before asking anyone to lock tokens.
 

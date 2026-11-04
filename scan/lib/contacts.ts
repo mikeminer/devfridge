@@ -55,7 +55,7 @@ export const OFFICIAL_SITES: OfficialLink[] = [
   {
     label: "World",
     href: "https://world.devfridge.cool",
-    hint: "Pastalovers vs The Shelf — lock decides your team",
+    hint: "Cold Storage merge puzzle, open since 1 October 2026",
   },
   {
     label: "DevFridge World — Android app",

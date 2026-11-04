@@ -23,6 +23,7 @@ export function GET() {
 - Trust Me Capital: https://capital.devfridge.cool
 - World (Cold Storage): https://world.devfridge.cool
 - Games catalog: https://games.devfridge.cool
+- IR chat: https://ir.devfridge.cool
 - Connect: https://connect.devfridge.cool
 - GitHub: https://github.com/mikeminer/devfridge
 
@@ -40,6 +41,7 @@ Rules for agents:
 - Do not treat the same ticker on two chains as bridged unless the route is on https://bridge.devfridge.cool.
 - World is a Cold Storage merge puzzle, open since 1 October 2026, 00:00 Europe/Rome. Unlock a meme with 500,000 actively timelocked Solana character tokens. No per-run payment, no prizes. Robinhood locks do not unlock this build.
 - Games catalog: https://games.devfridge.cool lists SEEK & STRIKE, YEETAPULT, OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo. Each card states where that game can be played. A card is not a Solana dApp Store approval, a partnership, or a prize.
+- IR chat: https://ir.devfridge.cool reads Synapse, the official docs, and posts from @anonimocommando. Answers cite those sources. It is not investment advice. A CEO post is a statement, not independent verification.
 - Hackathon: https://hackathon.devfridge.cool. Gallery submissions are open through the Game Builder skill at https://world.devfridge.cool/skill. Competition dates, prizes and final eligibility are still to be announced. Visiting the hub does not register a submission or guarantee a prize.
 - Character tokens are cultural tokens, not vault equity.
 - $APE and $GMGN collide with unrelated tickers; always pair with the full address.

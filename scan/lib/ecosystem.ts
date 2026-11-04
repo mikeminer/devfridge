@@ -316,6 +316,17 @@ export const NODES: EcoNode[] = [
     audiences: ["buyer", "builder"],
   },
   {
+    id: "ir",
+    name: "IR",
+    kicker: "Ask Grok",
+    room: "pass",
+    what: "Chat for investors and communities. It reads Synapse, the official docs, and posts from @anonimocommando. Answers cite those sources.",
+    notThis: "Not investment advice. A CEO post is a statement, not independent verification. Do not send a seed or a private key.",
+    href: "https://ir.devfridge.cool",
+    cta: "Ask IR",
+    audiences: ["buyer", "builder"],
+  },
+  {
     id: "connect",
     name: "Connect",
     kicker: "Official door",
