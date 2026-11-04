@@ -270,6 +270,17 @@ export const NODES: EcoNode[] = [
     audiences: ["collector", "pasta"],
   },
   {
+    id: "games",
+    name: "Games",
+    kicker: "Catalog",
+    room: "pass",
+    what: "Catalog of DevFridge games: SEEK & STRIKE, YEETAPULT, OnlyFridge Club, Street Meat, PIKKO, DevFridge World and MezzoPollo. Each card links to that game and states where it can be played.",
+    notThis: "A card is not a Solana dApp Store approval, a partnership, or a prize.",
+    href: "https://games.devfridge.cool",
+    cta: "Open the catalog",
+    audiences: ["collector"],
+  },
+  {
     id: "hackathon",
     name: "Hackathon",
     kicker: "Build with your agent",
