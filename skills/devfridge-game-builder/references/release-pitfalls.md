@@ -97,3 +97,9 @@ Keep dated BUILD_BRIEF, ASSETS_LICENSES and per-versionCode CHANGELOG. Mark supe
 ## 16. Repeatable release and recovery
 
 Use the [private RPC proxy](rpc-proxy.md), [actual-facts public-site generator](public-site.md), [candidate-bound 50 FPS gate and ready-state screenshots](performance-and-capture.md), [stage checkpoints](incremental-build.md) and [same-key updates/Drive delivery](release-updates.md). A missing or failed required gate blocks release, not continuing development. Test the helper integrations against the actual game; synthetic toolkit tests cannot certify a game or device.
+
+## 17. Intro edited, replayed or left on the pass
+
+**Rule:** ask the intro question in [discovery](discovery.md). Include ships [the local intro directory](devfridge-intro.md) once on a cold open, before the menu and the pass. On an APK that directory is inside the package, including when the game website is hosted. Skip and the ending enter the game. Exclude ships nothing. Do not replay it on pause, resume, wallet return or a new round, and do not put its wording on pass, wallet or gameplay screens.
+
+**Check:** include, exclude and pending. Pending and exclude leave no intro request. Include plays the local page once per cold open, with no network fetch for the page, logo, fonts or sound. Skip and the ending both reach the game, and the skill link is an explicit tap that leaves the WebView. The copy checker accepts brand text only in the unchanged `devfridge-intro.html`.

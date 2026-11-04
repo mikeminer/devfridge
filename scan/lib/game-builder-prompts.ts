@@ -58,6 +58,21 @@ The top card is the only ad during a free run; the independently selected Club p
 
 export const FREE_PLAY_SPONSOR_PROMPT = freePlaySponsorPrompt();
 
+export type DevFridgeIntroChoice = 'ask' | 'include' | 'exclude';
+
+export function devFridgeIntroPrompt(choice: DevFridgeIntroChoice = 'ask') {
+  const choices: Record<DevFridgeIntroChoice, string> = {
+    ask: 'Ask me; no new choice supplied in this prompt. Reuse my explicit prior choice; otherwise ask and keep the intro out until I answer.',
+    include: 'Include; this is my explicit owner choice. Copy the assets/devfridge-intro directory unchanged into the game, and into the APK when there is one, and show that local page once before the game opens. Follow references/devfridge-intro.md.',
+    exclude: 'Do not include; this is my explicit owner choice. Do not add the DevFridge intro.',
+  };
+  return `Before implementing gameplay, ask me whether to show the DevFridge Games intro before the game opens. This choice is independent of platform, Game Room, the market and both Free Play ads. Reuse my explicit prior choice. Ask me supplies no new decision and is never consent. Read references/devfridge-intro.md.
+DevFridge intro before the game opens: ${choices[choice]}
+If included, play that local page once on each cold open, before the menu, the pass and play. On an APK the HTML, logo, fonts and synth are files inside the package, including when the rest of the game is hosted. Do not load them from the network. Skip and the ending both enter the game. The door tap starts it. Do not replay it on pause, resume or wallet return. The skill link opens https://world.devfridge.cool/skill outside the WebView only when tapped. Do not put that branding on subscription, wallet or gameplay screens.`;
+}
+
+export const DEVFRIDGE_INTRO_PROMPT = devFridgeIntroPrompt();
+
 export type InGameMarketChoice = 'ask' | 'include' | 'exclude';
 
 export const PUBLIC_SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
@@ -106,6 +121,7 @@ ${blockchainSetupPrompt()}
 Then ask about the game and community I want to build for and what stays free. Reuse decisions I have already provided.
 ${subscriptionPrompt()}
 ${FREE_PLAY_SPONSOR_PROMPT}
+${DEVFRIDGE_INTRO_PROMPT}
 Create a playable Three.js game for my chosen platform and content architecture with the corresponding wallet integration, an in-app SOL subscription purchase and any-active-deposit access with a countdown. Follow the platform delivery references, including the Seeker Android, architecture-specific wallet and Solana dApp Store guides when Seeker app or Both is selected. If there is no verified mint, use clearly labelled development fixtures; include player-facing practice only if it fits my chosen free-mode scope. Use realistic materials, an original art direction and controls appropriate to my platform. Keep wallet authentication, token eligibility and score verification separate.
 Connect my game's subscription to the existing Fridge program on Solana; do not deploy a new contract. Before any wallet approval show the plan, SOL price, network costs, end date and the Details sentence; never show timelock or program wording to players.
 ${GAME_BUILD_CAPABILITIES}

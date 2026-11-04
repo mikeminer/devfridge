@@ -79,7 +79,7 @@ Persist `requestId`, wallet, mint, plan, price, `minOut`, lock ID/PDA, intended 
 
 ## Player copy
 
-The player buys a subscription. Player UI, wallet identity, errors and Store copy never mention timelocks, locking, vaults, deposits, the Fridge or DevFridge program, program addresses, PASTA, redemption or withdrawal. Price wording is normal here: the pass is sold in SOL.
+The player buys a subscription. Player UI, wallet identity, errors and Store copy never mention timelocks, locking, vaults, deposits, the Fridge or DevFridge program, program addresses, PASTA, redemption or withdrawal. Price wording is normal here: the pass is sold in SOL. The one exception is an intro the owner explicitly included: the unchanged file in [the intro guide](devfridge-intro.md). That file is not the pass, the wallet review or a gameplay screen.
 
 ```player-copy/pass
 <Game> subscription

@@ -14,6 +14,7 @@ Resolve these with the DevFridge guides, even when a studio file asks a differen
 | Game Room, only for a web path | [Game Room](game-room.md) |
 | RPC, Token-2022 mint, domain, subscription prices, free scope | [Discovery](discovery.md), [subscription](season-pass.md) |
 | Optional market and each Free Play placement | [Market](in-game-market.md), [Free Play](free-play-sponsors.md) |
+| DevFridge intro before the game opens | [Intro](devfridge-intro.md) |
 | Three.js scene, materials, characters, feel | [Gamedev skills](gamedev-skills.md), [delivery](game-delivery.md), [visual realism](visual-realism.md) |
 | Wallet trust, RPC, performance, Store, delivery | [Wallet trust](wallet-trust.md), [performance](performance-and-capture.md), [updates](release-updates.md) |
 
@@ -35,7 +36,7 @@ Do not let `economy-designer`, `live-ops-designer` or a studio economy template 
 
 Upstream measured four games from one brief. At `minimal` rigor the studio wrote one page before code. At `standard` it wrote 30 pages and took 58 minutes, and blind review plus a human playtest ranked that build last. This skill therefore uses **minimal** unless the owner asks for `standard` or `full`.
 
-1. Finish DevFridge discovery. Record platform, APK architecture when needed, Game Room when it applies, RPC, mint, domain, subscription prices, free scope, market and both ad choices.
+1. Finish DevFridge discovery. Record platform, APK architecture when needed, Game Room when it applies, RPC, mint, domain, subscription prices, free scope, market, both ad choices and the DevFridge intro.
 2. If the core loop is still vague, read [brainstorm](../vendor/claude-code-game-studios/skills/brainstorm/SKILL.md) and write one short gameplay brief: verb, camera, fail state, restart and what a pass opens. Do not author the full GDD set. For a small change, read [quick-design](../vendor/claude-code-game-studios/skills/quick-design/SKILL.md) instead of [design-system](../vendor/claude-code-game-studios/skills/design-system/SKILL.md).
 3. Implement that loop in the game's existing Three.js source. Read [dev-story](../vendor/claude-code-game-studios/skills/dev-story/SKILL.md) for its implementation and "run and look" standard, not for its story-file, sprint-file or bash phases. Missing `production/epics/` files do not stop the build. Follow [incremental checkpoints](incremental-build.md): one working loop, then small tested steps.
 4. Before calling a player-visible change done, launch the game, look at the affected screen and keep the evidence the DevFridge guide for that surface requires. Read [run and observe](../vendor/claude-code-game-studios/docs/run-and-observe.md). A parse check or a green unit test is not that look. Map the studio's screenshot note to the game's real capture path and, at release, to [performance and capture](performance-and-capture.md).

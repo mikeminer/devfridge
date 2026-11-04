@@ -62,12 +62,14 @@ test('unresolved platform is the first decision in installation and all six exam
   assert.match(prompts.PLATFORM_PROMPT, /Ask me supplies no new decision and must never default to Browser/);
   assert.ok(prompts.INSTALL_PROMPT.indexOf(prompts.PLATFORM_PROMPT) < prompts.INSTALL_PROMPT.indexOf('After resolving the platform'));
   assert.ok(prompts.INSTALL_PROMPT.indexOf(prompts.FREE_PLAY_SPONSOR_PROMPT) < prompts.INSTALL_PROMPT.indexOf('Create a playable'));
+  assert.ok(prompts.INSTALL_PROMPT.indexOf(prompts.DEVFRIDGE_INTRO_PROMPT) < prompts.INSTALL_PROMPT.indexOf('Create a playable'));
   const nodes = landing().render();
   const examples = nodes.filter(node => node.type?.name === 'CopyButton' && node.props.text.startsWith('Use $devfridge-game-builder.'));
   assert.equal(examples.length, 6);
   for (const example of examples) {
     assert.ok(example.props.text.startsWith(`Use $devfridge-game-builder. ${prompts.PLATFORM_PROMPT}`));
     assert.ok(example.props.text.includes(prompts.FREE_PLAY_SPONSOR_PROMPT));
+    assert.ok(example.props.text.includes(prompts.DEVFRIDGE_INTRO_PROMPT));
     assert.ok(example.props.text.includes(prompts.blockchainSetupPrompt()));
     assert.ok(example.props.text.includes(prompts.subscriptionPrompt()));
     assert.ok(example.props.text.includes(prompts.GAME_BUILD_CAPABILITIES));
@@ -87,12 +89,19 @@ test('blank prompt fields defer to explicit prior owner decisions instead of res
     assert.match(line, /Reuse my explicit prior choice; otherwise ask and keep disabled while pending/);
   }
   assert.match(prompts.FREE_PLAY_SPONSOR_PROMPT, /If I explicitly choose no Free Play, mark both not applicable without asking ad questions/);
+  assert.match(prompts.DEVFRIDGE_INTRO_PROMPT, /before the game opens/);
+  assert.match(prompts.DEVFRIDGE_INTRO_PROMPT, /is never consent/);
+  assert.match(prompts.devFridgeIntroPrompt('include'), /Copy the assets\/devfridge-intro directory unchanged/);
+  assert.match(prompts.devFridgeIntroPrompt('include'), /into the APK when there is one/);
+  assert.match(prompts.DEVFRIDGE_INTRO_PROMPT, /files inside the package/);
+  assert.match(prompts.DEVFRIDGE_INTRO_PROMPT, /Do not load them from the network/);
+  assert.match(prompts.devFridgeIntroPrompt('exclude'), /Do not add the DevFridge intro/);
 });
 
 test('platform and independent ad selections reach the copied brief in all 36 combinations', () => {
   const page = landing();
   const initial = page.render();
-  assert.equal(initial.filter(node => node.type === 'select' && node.props.value === 'ask').length, 4);
+  assert.equal(initial.filter(node => node.type === 'select' && node.props.value === 'ask').length, 5);
   const choices = { ask: 'Ask me;', include: 'Include;', exclude: 'Do not include;' };
   for (const platform of ['ask', 'browser', 'seeker', 'both']) {
     page.select('Where should your game run?', platform);
@@ -104,6 +113,7 @@ test('platform and independent ad selections reach the copied brief in all 36 co
       assert.ok(nodes.some(node => node.type?.name === 'CopyButton' && node.props.text === brief));
       assert.ok(brief.includes(prompts.gamePlatformPrompt(platform)));
       assert.ok(brief.includes(prompts.freePlaySponsorPrompt(preRun, card)));
+      assert.ok(brief.includes(prompts.devFridgeIntroPrompt()));
       const adLines = brief.split('\n');
       assert.ok(adLines.find(line => line.startsWith('OnlyFridge Club ad')).includes(`: ${choices[preRun]}`));
       assert.ok(adLines.find(line => line.startsWith('YOUR AD HERE /')).includes(`: ${choices[card]}`));
@@ -170,6 +180,7 @@ test('prompt studio carries RPC, CA, domain, prices and free scope while market 
       assert.ok(text.includes(prompts.blockchainSetupPrompt(setup)));
       assert.ok(text.includes(prompts.subscriptionPrompt(free, market)));
       assert.ok(text.includes(prompts.freePlaySponsorPrompt(preRun, card)));
+      assert.ok(text.includes(prompts.DEVFRIDGE_INTRO_PROMPT));
       assert.ok(text.includes(prompts.GAME_BUILD_CAPABILITIES));
       if (market === 'include') assert.match(text, /Buy <TOKEN> screen: Include; this is my explicit owner choice/);
       if (market === 'exclude') assert.match(text, /Buy <TOKEN> screen: Do not include; this is my explicit owner choice/);
@@ -324,4 +335,15 @@ test('conditional fields and copied briefs follow platform/content changes witho
   assert.equal(visible(apkLabel), false);
   assert.equal(visible(roomLabel), false);
   assert.doesNotMatch(brief(), /^APK content:|^Game Room integration:/m);
+});
+
+test('the DevFridge intro choice reaches the copied brief and stays out until answered', () => {
+  const page = landing();
+  const brief = () => page.render().find(node => node.type === 'textarea' && node.props['aria-label'] === 'Generated game builder prompt').props.value;
+  assert.match(brief(), /DevFridge intro before the game opens: Ask me/);
+  page.select('DevFridge intro before the game opens', 'include');
+  assert.ok(brief().includes(prompts.devFridgeIntroPrompt('include')));
+  page.select('DevFridge intro before the game opens', 'exclude');
+  assert.ok(brief().includes(prompts.devFridgeIntroPrompt('exclude')));
+  assert.match(brief(), /Do not add the DevFridge intro/);
 });

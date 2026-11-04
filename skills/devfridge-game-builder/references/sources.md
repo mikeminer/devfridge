@@ -71,6 +71,10 @@ The 50 FPS minimum per complete measured second, 25,000,000-byte delivery thresh
 - [three-lightmap-baker](https://github.com/Ibrahim-3d/three-lightmap-baker/tree/a25b71b6eb2c6cfe15f08588961257aa8b68ee46) (MIT), npm `lightmap-baker` 1.0.0 with peer `three >=0.185.1 <0.186.0`, checked 2026-11-01. Referenced as a build-time tool, not bundled.
 - This scoped addition does not refresh the chain, Store or wallet-trust observations above. Studio engine notes for Godot, Unity and Unreal are reference text. They are not a tested migration path for this Three.js skill.
 
+## v1.12.0 scoped sources — 2026-11-04
+
+- The intro is the local directory [devfridge-intro](../assets/devfridge-intro/). The HTML page draws the DevFridge Games title and links to https://world.devfridge.cool/skill. `logo-mark.jpg` is the 2026-11-04 response from `https://games.devfridge.cool/logo-mark.jpg`: 200, `image/jpeg`, 71257 bytes, SHA-256 `80ea8264beb26bde507ff9a9e34e96adf29dbe4f7833d1868c827f8cbd07e9bb`. `https://games.devfridge.cool/intro-theme.mp3` returned 404 the same day, so no soundtrack file is packaged; the page uses the synth in the HTML. Latin woff2 subsets of Bungee (weight 400) and Chakra Petch (weights 500 and 700) come from the Google Fonts CSS served that day, under SIL OFL 1.1 in [OFL.txt](../assets/devfridge-intro/OFL.txt). This is not a new audit.
+
 ## v1.11.0 scoped sources — 2026-11-04
 
 - [Fridge program source at 7f5bc49b6fbcd9ef66f8444facb7f80e1385b6ae](https://github.com/mikeminer/devfridge/blob/7f5bc49b6fbcd9ef66f8444facb7f80e1385b6ae/programs/fridge/src/lib.rs). `claim` requires `pasta_mint`, `fee_ata`, `pasta_ata` and `jupiter_program` after the System program, including when the locked mint is $PASTA and no swap runs. The [2026-10-24 pin](program-and-verification.md) remains the `create_lock` layout; its `claim` account list is not the deployed instruction.

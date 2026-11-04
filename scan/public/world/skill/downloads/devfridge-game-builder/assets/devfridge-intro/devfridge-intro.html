@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030A14">
+<title>DevFridge Games</title>
+<style>
+  @font-face{font-family:Bungee;src:url("Bungee-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"Chakra Petch";src:url("ChakraPetch-500.woff2") format("woff2");font-weight:500;font-display:swap}
+  @font-face{font-family:"Chakra Petch";src:url("ChakraPetch-700.woff2") format("woff2");font-weight:700;font-display:swap}
+  :root{--void:#030A14;--frost:#EAF8FF;--ice:#7FD8FF;--glow:#FFF1CC;color-scheme:dark}
+  html,body{margin:0;height:100%;background:var(--void);overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  canvas{display:block}
+  .gate{position:fixed;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:0;border:0;cursor:pointer;
+    background:radial-gradient(ellipse at 50% 52%,#0B2440 0%,var(--void) 68%);color:var(--frost);
+    font:700 17px/1.2 "Chakra Petch",system-ui,sans-serif;letter-spacing:.28em}
+  .door{width:70px;height:124px;border:2px solid rgba(127,216,255,.6);border-radius:7px;position:relative;
+    box-shadow:0 0 26px rgba(127,216,255,.22),inset 0 0 18px rgba(127,216,255,.12)}
+  .door::before{content:"";position:absolute;left:10px;top:44px;width:4px;height:26px;border-radius:2px;background:rgba(127,216,255,.65)}
+  .door::after{content:"";position:absolute;right:-2px;top:8px;bottom:8px;width:2px;background:var(--glow);box-shadow:0 0 12px 3px var(--glow);animation:crack 1.6s ease-in-out infinite}
+  .gate span{animation:breathe 1.6s ease-in-out infinite}
+  @keyframes crack{0%,100%{opacity:.2}50%{opacity:1}}
+  @keyframes breathe{0%,100%{opacity:.5}50%{opacity:1}}
+  .skip,.dl{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+    background:rgba(3,10,20,.45);color:var(--frost);border:1px solid rgba(234,248,255,.35);border-radius:999px;padding:10px 18px;
+    font:500 14px "Chakra Petch",system-ui,sans-serif;letter-spacing:.06em;text-decoration:none}
+  .cta{position:fixed;display:block;border-radius:999px;opacity:0;pointer-events:none}
+  .cta.on{pointer-events:auto}
+  .skip{opacity:0;pointer-events:none;transition:opacity .4s}
+  .skip.on{opacity:.8;pointer-events:auto}
+  .gate:focus-visible,.skip:focus-visible,.dl:focus-visible,.cta:focus-visible{outline:2px solid var(--ice);outline-offset:4px}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c"></canvas></div>
+<button class="gate" id="gate" aria-label="Start"><div class="door"></div><span id="gateLabel">Tap to play</span></button>
+<button class="skip" id="skip">Skip</button>
+<a class="cta" id="cta" href="https://world.devfridge.cool/skill" target="_blank" rel="noopener" aria-label="Build your own game at world.devfridge.cool/skill" tabindex="-1"></a>
+<a class="dl" id="dl" hidden>Download video</a>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  const RECORD = qs.has('record');
+  const AUTOSTART = qs.get('autostart') === '1';
+  const SOUND = qs.get('sound') !== '0';
+  const NEXT = qs.get('next');
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const END = 9.1;
+  const C = { void:'#030A14', frost:'#EAF8FF', ice:'#7FD8FF', glow:'#FFF1CC', purple:'#9945FF', green:'#14F195' };
+  const LOGO_FONT = s => `${s}px Bungee, Impact, "Arial Black", sans-serif`;
+  const localFile = value => (!value || /:/.test(value) || value.startsWith('/') || value.includes('..') || value.includes('\\')) ? '' : value;
+  const CONFIG = {
+    logo: localFile(qs.get('logo')) || 'logo-mark.jpg',
+    music: localFile(qs.get('music')),
+    musicHit: parseFloat(qs.get('hit') || '3.0'),
+  };
+  const DOOR_HIT = 2.98;
+  const markImg = new Image(); let markOk = false, musicData = null;
+
+  const clamp = (x,a=0,b=1) => Math.min(b, Math.max(a, x));
+  const ss = (a,b,x) => { const k = clamp((x-a)/(b-a)); return k*k*(3-2*k); };
+  const eOut = x => 1 - Math.pow(1-x, 3);
+  const eIn = x => x*x*x;
+  const pulse = (t,s,d) => (t<s || t>s+d) ? 0 : Math.pow(1-(t-s)/d, 2);
+  const rnd = Math.random;
+
+  const cv = document.getElementById('c'), g = cv.getContext('2d');
+  const gate = document.getElementById('gate'), skipBtn = document.getElementById('skip'), dl = document.getElementById('dl'), ctaEl = document.getElementById('cta');
+  let W, H, DPR, L = {}, lc, purpleC, greenC, sc, sx, tmp, tctx;
+  let snow = [], fog = [], shards = [], crystals = [];
+  let t0 = 0, done = false, timers = [];
+
+  /* ---------- layout ---------- */
+  function resize(){
+    if (RECORD){ W = 360; H = 800; DPR = 3;   // 1080 x 2400, Seeker portrait
+      const s = Math.min(innerWidth/W, innerHeight/H);
+      cv.style.width = W*s + 'px'; cv.style.height = H*s + 'px';
+    } else { W = innerWidth; H = innerHeight; DPR = Math.min(devicePixelRatio || 1, 3);
+      cv.style.width = W + 'px'; cv.style.height = H + 'px'; }
+    cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR);
+    layout();
+  }
+
+  function layout(){
+    const dw = Math.min(W*0.46, H*0.22), dh = dw*1.78;
+    Object.assign(L, { dw, dh, dx: W/2 - dw/2, dy: H*0.46 - dh/2 });
+    g.font = LOGO_FONT(100);
+    const m = g.measureText('DEVFRIDGE').width;
+    L.mark = markOk ? Math.min(W*0.42, H*0.2) : 0;
+    L.logo = markOk ? Math.min(100*(W*0.72)/m, H*0.06) : Math.min(100*(W*0.86)/m, H*0.085);
+    L.logoW = Math.max(m*L.logo/100, L.mark);
+    L.logoY = markOk ? H*0.40 : H*0.44;
+    buildLogo();
+    L.textY = L.logoY + L.textOff;
+    L.gamesY = L.textY + L.logo*1.0;
+    L.tagY = Math.max(L.textY + L.logo*2.3, H*0.68);
+    L.ctaY = L.tagY + clamp(W*0.042,13,18)*4.8;
+    genParticles(); genCrystals();
+    tmp = document.createElement('canvas'); tmp.width = cv.width; tmp.height = cv.height; tctx = tmp.getContext('2d');
+  }
+
+  function buildLogo(){
+    const pad = L.logo*0.15, M = L.mark;
+    const ty = M ? pad+M+L.logo*0.95 : L.logo*0.8;
+    const h = M ? pad+M+L.logo*1.75 : L.logo*1.6; L.lh = h; L.textOff = ty - h/2;
+    lc = document.createElement('canvas'); lc.width = Math.round(W*DPR); lc.height = Math.round(h*DPR);
+    const x = lc.getContext('2d'); x.scale(DPR, DPR);
+    if (M){ // official DevFridge mark, rounded like an app icon
+      const sc0 = Math.min(M/markImg.naturalWidth, M/markImg.naturalHeight);
+      const iw = markImg.naturalWidth*sc0, ih = markImg.naturalHeight*sc0, ix = W/2-iw/2, iy = pad+(M-ih)/2, r = Math.min(iw,ih)*0.22;
+      const shape = () => { x.beginPath(); if (x.roundRect) x.roundRect(ix,iy,iw,ih,r); else x.rect(ix,iy,iw,ih); };
+      x.save(); shape(); x.clip(); x.drawImage(markImg, ix, iy, iw, ih); x.restore();
+      shape(); x.strokeStyle = 'rgba(234,248,255,.85)'; x.lineWidth = 2; x.stroke();
+    }
+    x.font = LOGO_FONT(L.logo); x.textAlign = 'center'; x.textBaseline = 'middle';
+    const gr = x.createLinearGradient(0, ty-L.logo*0.5, 0, ty+L.logo*0.5);
+    gr.addColorStop(0, '#FFFFFF'); gr.addColorStop(0.55, C.frost); gr.addColorStop(1, C.ice);
+    x.fillStyle = gr; x.fillText('DEVFRIDGE', W/2, ty);
+    x.globalCompositeOperation = 'source-atop';           // frost speckle on the letters
+    const sy0 = M ? pad+M : 0;
+    for (let i=0;i<420;i++){ x.fillStyle = rnd()<0.5 ? `rgba(255,255,255,${rnd()*0.7})` : `rgba(60,140,200,${rnd()*0.35})`;
+      x.fillRect(rnd()*W, sy0+rnd()*(h-sy0), 1.3, 1.3); }
+    purpleC = tint(C.purple); greenC = tint(C.green);
+    sc = document.createElement('canvas'); sc.width = lc.width; sc.height = lc.height; sx = sc.getContext('2d');
+  }
+  function tint(col){ const c = document.createElement('canvas'); c.width = lc.width; c.height = lc.height;
+    const x = c.getContext('2d'); x.drawImage(lc,0,0); x.globalCompositeOperation='source-in'; x.fillStyle=col; x.fillRect(0,0,c.width,c.height); return c; }
+
+  function genParticles(){
+    const cy = L.dy + L.dh/2;
+    snow = Array.from({length:80}, () => ({ x:rnd()*W, y:rnd()*H, r:0.5+rnd()*1.5, vy:8+rnd()*26, vx:-6+rnd()*12, ph:rnd()*6.3, f:0.6+rnd()*1.4, a:0.25+rnd()*0.55 }));
+    fog = Array.from({length:56}, () => { const a = rnd()*Math.PI*2;
+      return { x:W/2+(rnd()-.5)*L.dw*0.8, y:cy+(rnd()-.5)*L.dh*0.8, c:Math.cos(a), s:Math.sin(a), spd:60+rnd()*320, r0:18+rnd()*34, gr:40+rnd()*90, life:1.6+rnd()*1.4 }; });
+    shards = Array.from({length:42}, () => { const a = rnd()*Math.PI*2;
+      return { x:W/2+(rnd()-.5)*L.logoW*0.9, y:L.logoY+(rnd()-.5)*L.logo*0.5, c:Math.cos(a), s:Math.sin(a), spd:160+rnd()*420, len:4+rnd()*12 }; });
+  }
+
+  function genCrystals(){
+    crystals = []; const m = Math.min(W,H);
+    for (let i=0;i<18;i++){
+      const side = i%4; let x, y, a;
+      if (side===0){ x=rnd()*W; y=0; a=Math.PI/2; } else if (side===1){ x=W; y=rnd()*H; a=Math.PI; }
+      else if (side===2){ x=rnd()*W; y=H; a=-Math.PI/2; } else { x=0; y=rnd()*H; a=0; }
+      a += (rnd()-.5)*0.9;
+      const len = m*(0.08+rnd()*0.16), segs = [{x,y,a,len,s:0,e:1}];
+      for (let k=1;k<=3;k++){ const f=k/4, bx=x+Math.cos(a)*len*f, by=y+Math.sin(a)*len*f, bl=len*(1-f)*0.55, e=f+(1-f)*0.8;
+        segs.push({x:bx,y:by,a:a+1.05,len:bl,s:f,e}, {x:bx,y:by,a:a-1.05,len:bl,s:f,e}); }
+      crystals.push({ segs, delay:rnd()*0.5 });
+    }
+  }
+
+  function rr(x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+
+  /* ---------- scene ---------- */
+  function draw(t){
+    g.setTransform(DPR,0,0,DPR,0,0); g.globalCompositeOperation='source-over'; g.globalAlpha=1;
+    g.fillStyle = C.void; g.fillRect(0,0,W,H);
+
+    const sh = REDUCED ? 0 : pulse(t,2.98,0.55)*16 + pulse(t,3.73,0.4)*10;
+    if (sh) g.translate((rnd()-.5)*sh, (rnd()-.5)*sh);
+    const cx = W/2, cy = L.dy + L.dh/2;
+
+    // cold ambient glow
+    const amb = ss(1.0,3.0,t)*(1-0.4*ss(8.2,8.7,t));
+    if (amb>0){ const rg = g.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.75);
+      rg.addColorStop(0,`rgba(40,110,170,${0.38*amb})`); rg.addColorStop(1,'rgba(3,10,20,0)');
+      g.fillStyle = rg; g.fillRect(-30,-30,W+60,H+60); }
+
+    // frost creeping in from the edges
+    const fp = ss(0,1.4,t)*(1-0.5*ss(3,4.5,t));
+    if (fp>0){
+      const vg = g.createRadialGradient(cx,H/2,Math.min(W,H)*0.35,cx,H/2,Math.max(W,H)*0.75);
+      vg.addColorStop(0,'rgba(127,216,255,0)'); vg.addColorStop(1,`rgba(127,216,255,${0.13*fp})`);
+      g.fillStyle = vg; g.fillRect(-30,-30,W+60,H+60);
+      g.strokeStyle = `rgba(160,228,255,${0.45*fp})`; g.lineWidth = 1; g.beginPath();
+      for (const c of crystals){ const p = clamp((t-0.1-c.delay)/1.3);
+        for (const s of c.segs){ const k = clamp((p-s.s)/(s.e-s.s)); if (k<=0) continue;
+          g.moveTo(s.x,s.y); g.lineTo(s.x+Math.cos(s.a)*s.len*k, s.y+Math.sin(s.a)*s.len*k); } }
+      g.stroke();
+    }
+
+    // light rays out of the open fridge
+    const ray = ss(2.75,3.05,t)*(1-0.55*ss(3.7,5,t))*(1-0.6*ss(8.1,8.7,t));
+    if (ray>0) drawRays(cx,cy,ray,t);
+
+    const fa = 1 - ss(3.45,3.95,t);
+    if (fa>0 && t>0.85) drawFridge(t,fa);
+
+    drawFog(t);
+
+    // snow / ice dust
+    const sa = (0.4+0.6*ss(2.9,3.2,t));
+    g.fillStyle = C.frost;
+    for (const p of snow){ const x = ((p.x + p.vx*t + Math.sin(t*p.f+p.ph)*8) % W + W) % W, y = (p.y + p.vy*t) % H;
+      g.globalAlpha = p.a*sa; g.beginPath(); g.arc(x,y,p.r,0,6.283); g.fill(); }
+    g.globalAlpha = 1;
+
+    drawLogo(t);
+    drawShards(t);
+    drawGames(t);
+    drawTagline(t);
+    drawCta(t);
+
+    // white-out flash when the door blows open
+    if (t>2.95 && t<3.7){ const a = (t<3.0 ? (t-2.95)/0.05 : 1-(t-3.0)/0.7) * (REDUCED?0.35:1);
+      g.setTransform(DPR,0,0,DPR,0,0); g.fillStyle = `rgba(255,250,235,${clamp(a)})`; g.fillRect(0,0,W,H); }
+
+    // CRT power-off
+    if (t>8.5) crtOff(t);
+  }
+
+  function drawRays(cx,cy,ray,t){
+    g.save(); g.globalCompositeOperation='lighter';
+    const R = Math.max(W,H)*1.1, rg = g.createRadialGradient(cx,cy,0,cx,cy,R);
+    rg.addColorStop(0,`rgba(255,241,204,${0.22*ray})`); rg.addColorStop(0.5,`rgba(127,216,255,${0.06*ray})`); rg.addColorStop(1,'rgba(127,216,255,0)');
+    g.fillStyle = rg; g.beginPath();
+    for (let i=0;i<18;i++){ const a = i/18*Math.PI*2 + t*0.15, w = 0.05 + 0.04*Math.sin(i*1.7);
+      g.moveTo(cx,cy); g.lineTo(cx+Math.cos(a-w)*R, cy+Math.sin(a-w)*R); g.lineTo(cx+Math.cos(a+w)*R, cy+Math.sin(a+w)*R); g.closePath(); }
+    g.fill();
+    const core = g.createRadialGradient(cx,cy,0,cx,cy,L.dw*1.4);
+    core.addColorStop(0,`rgba(255,250,235,${0.6*ray})`); core.addColorStop(1,'rgba(255,250,235,0)');
+    g.fillStyle = core; g.fillRect(cx-L.dw*1.5, cy-L.dw*1.5, L.dw*3, L.dw*3);
+    g.restore();
+  }
+
+  function drawFridge(t,fa){
+    const { dx,dy,dw,dh } = L; g.save(); g.globalAlpha = fa;
+    const op = ss(2.65,3.0,t);
+    if (op>0){ // glowing interior
+      const ig = g.createLinearGradient(dx,dy,dx,dy+dh);
+      ig.addColorStop(0,`rgba(255,250,235,${op})`); ig.addColorStop(1,`rgba(255,222,165,${op})`);
+      g.fillStyle = ig; rr(dx,dy,dw,dh,8); g.fill();
+      g.strokeStyle = `rgba(170,140,100,${0.45*op})`; g.lineWidth = 2; g.beginPath();
+      for (let k=1;k<4;k++){ g.moveTo(dx+6,dy+dh*k/4); g.lineTo(dx+dw-6,dy+dh*k/4); } g.stroke();
+    }
+    // door panel, hinged on the left
+    const a = t<2.65 ? 0 : eIn(clamp((t-2.65)/0.42))*1.9, cosA = Math.cos(a), k = Math.sin(a)*dh*0.1, rx = dx+dw*cosA;
+    g.beginPath(); g.moveTo(dx,dy); g.lineTo(rx,dy-k); g.lineTo(rx,dy+dh+k); g.lineTo(dx,dy+dh); g.closePath();
+    g.fillStyle = 'rgba(9,26,44,.95)'; g.fill();
+    if (t>1.9){ g.strokeStyle = 'rgba(127,216,255,.8)'; g.lineWidth = 1.5; g.stroke();
+      if (cosA>0.15){ g.fillStyle = 'rgba(127,216,255,.75)'; g.fillRect(dx+dw*cosA*0.84-2, dy+dh*0.32, 4, dh*0.16); } }
+    // outline traced in ice light
+    const p1 = eOut(clamp((t-0.9)/1.0));
+    if (p1>0){ g.save(); g.shadowColor = C.ice; g.shadowBlur = 14; g.strokeStyle = C.ice; g.lineWidth = 2;
+      const per = 2*(dw+dh); g.setLineDash([per*p1, per]); rr(dx,dy,dw,dh,8); g.stroke(); g.restore(); }
+    // light leaking through the door seal
+    if (t>1.6 && t<2.75){
+      const f = ss(1.6,2.6,t)*(0.5+0.3*Math.sin(t*37)*Math.sin(t*11)) + pulse(t,1.65,.18) + pulse(t,2.05,.18) + pulse(t,2.35,.2);
+      const ex = dx+dw; g.save(); g.globalCompositeOperation='lighter';
+      const sp = g.createLinearGradient(ex,0,ex+60,0); sp.addColorStop(0,`rgba(255,241,204,${0.5*clamp(f)})`); sp.addColorStop(1,'rgba(255,241,204,0)');
+      g.fillStyle = sp; g.fillRect(ex,dy,60,dh);
+      g.shadowColor = C.glow; g.shadowBlur = 18; g.fillStyle = `rgba(255,246,220,${clamp(f)})`; g.fillRect(ex-1,dy+6,2.5,dh-12);
+      g.restore();
+    }
+    g.restore();
+  }
+
+  function drawFog(t){
+    const age = t-2.97; if (age<0) return;
+    g.save(); g.globalCompositeOperation='lighter';
+    for (const p of fog){ if (age>p.life) continue; const k = 1.8, d = (1-Math.exp(-k*age))/k;
+      const x = p.x+p.c*p.spd*d, y = p.y+p.s*p.spd*d - 10*age, r = p.r0+p.gr*age, a = 0.13*(1-age/p.life);
+      const rg = g.createRadialGradient(x,y,0,x,y,r); rg.addColorStop(0,`rgba(234,248,255,${a})`); rg.addColorStop(1,'rgba(234,248,255,0)');
+      g.fillStyle = rg; g.fillRect(x-r,y-r,r*2,r*2); }
+    g.restore();
+  }
+
+  function drawLogo(t){
+    const lt = t-3.45; if (lt<=0) return;
+    const s = lt<0.28 ? 2.6-1.6*eOut(lt/0.28) : 1+0.035*Math.exp(-(lt-0.28)*7)*Math.sin((lt-0.28)*32);
+    const glitch = (lt>0.3&&lt<0.38)||(lt>1.25&&lt<1.31)||(lt>2.45&&lt<2.5)||(lt>3.2&&lt<3.24);
+    let off = 14*Math.exp(-lt*5)+1.6+(glitch?9:0); if (REDUCED) off = Math.min(off,3);
+    const x0 = -W/2, y0 = -L.lh/2;
+    g.save(); g.translate(W/2, L.logoY); g.scale(s,s); g.globalAlpha = clamp(lt/0.12);
+    g.globalCompositeOperation='lighter';
+    g.drawImage(purpleC, x0-off, y0, W, L.lh);
+    g.drawImage(greenC, x0+off, y0+(glitch?2:0), W, L.lh);
+    g.globalCompositeOperation='source-over';
+    // glint sweep across the frosted letters
+    const sp = clamp((lt-1.1)/0.6); let img = lc;
+    if (sp>0 && sp<1){ sx.globalCompositeOperation='source-over'; sx.clearRect(0,0,sc.width,sc.height); sx.drawImage(lc,0,0);
+      sx.globalCompositeOperation='source-atop'; const bx = (-0.3+1.6*sp)*sc.width, bw = 70*DPR;
+      const bg = sx.createLinearGradient(bx-bw,0,bx+bw,sc.height*0.6); bg.addColorStop(0,'rgba(255,255,255,0)'); bg.addColorStop(0.5,'rgba(255,255,255,0.95)'); bg.addColorStop(1,'rgba(255,255,255,0)');
+      sx.fillStyle = bg; sx.fillRect(0,0,sc.width,sc.height); img = sc; }
+    if (glitch && !REDUCED){ // sliced displacement
+      g.drawImage(img, x0, y0, W, L.lh);
+      for (let i=0;i<4;i++){ const yy = rnd()*L.lh, hh = 3+rnd()*L.lh*0.18, sh = (rnd()-.5)*28;
+        g.clearRect(x0, y0+yy, W, hh); g.drawImage(img, 0, yy*DPR, img.width, hh*DPR, x0+sh, y0+yy, W, hh); }
+    } else g.drawImage(img, x0, y0, W, L.lh);
+    g.restore();
+    // shockwave ring on impact
+    const rp = clamp((t-3.73)/0.65);
+    if (rp>0 && rp<1){ g.save(); g.strokeStyle = `rgba(127,216,255,${1-rp})`; g.lineWidth = 3*(1-rp)+0.5;
+      g.beginPath(); g.ellipse(W/2, L.logoY, eOut(rp)*W*0.9, eOut(rp)*W*0.9*0.35, 0, 0, 6.283); g.stroke(); g.restore(); }
+  }
+
+  function drawShards(t){
+    const age = t-3.73; if (age<0 || age>1.2) return;
+    g.save(); g.globalCompositeOperation='lighter'; g.lineCap='round'; g.lineWidth = 1.5;
+    for (const p of shards){ const k = 2.2, e = Math.exp(-k*age), d = (1-e)/k;
+      const x = p.x+p.c*p.spd*d, y = p.y+p.s*p.spd*d+30*age*age, l = p.len*(1+(p.spd/300)*e);
+      g.strokeStyle = `rgba(234,248,255,${1-age/1.2})`; g.beginPath(); g.moveTo(x,y); g.lineTo(x-p.c*l, y-p.s*l); g.stroke(); }
+    g.restore();
+  }
+
+  function drawGames(t){
+    const gt = t-4.2; if (gt<0) return;
+    const fs = L.logo*(L.mark ? 0.55 : 0.42), y = L.gamesY, sp = fs*0.8;
+    g.save(); g.font = `700 ${fs}px "Chakra Petch", system-ui, sans-serif`; g.textBaseline='middle'; g.textAlign='left';
+    const ch = [...'GAMES'], ws = ch.map(c => g.measureText(c).width), tot = ws.reduce((a,b)=>a+b,0)+sp*(ch.length-1);
+    let x = W/2 - tot/2;
+    // flanking rails
+    const rl = clamp((gt-0.25)/0.4)*W*0.12;
+    g.fillStyle = 'rgba(127,216,255,.6)'; g.fillRect(x-14-rl, y-0.5, rl, 1); g.fillRect(W/2+tot/2+14, y-0.5, rl, 1);
+    g.shadowColor = C.ice; g.shadowBlur = 10; g.fillStyle = C.ice;
+    ch.forEach((c,i) => { const a = clamp((gt-i*0.07)/0.18); g.globalAlpha = a; g.fillText(c, x, y-(1-a)*12); x += ws[i]+sp; });
+    g.restore();
+  }
+
+  function drawTagline(t){
+    const tt = t-5.05; if (tt<0) return;
+    const y = L.tagY, fs = clamp(W*0.042,13,18);
+    g.save();
+    const bw = eOut(clamp(tt/0.5))*Math.min(W*0.42,240), bar = g.createLinearGradient(W/2-bw/2,0,W/2+bw/2,0);
+    bar.addColorStop(0,C.purple); bar.addColorStop(1,C.green);
+    g.shadowColor = C.purple; g.shadowBlur = 12; g.fillStyle = bar; g.fillRect(W/2-bw/2, y-fs*1.6, bw, 2); g.shadowBlur = 0;
+    g.font = `500 ${fs}px "Chakra Petch", system-ui, sans-serif`; g.textAlign='center'; g.textBaseline='middle';
+    const a1 = eOut(clamp((tt-0.15)/0.4)), a2 = eOut(clamp((tt-0.35)/0.4));
+    g.globalAlpha = a1; g.fillStyle = C.frost; g.fillText('Built for Seeker', W/2, y+(1-a1)*10);
+    g.globalAlpha = a2; const w = g.measureText('Powered by Solana').width, tg = g.createLinearGradient(W/2-w/2,0,W/2+w/2,0);
+    tg.addColorStop(0,C.purple); tg.addColorStop(1,C.green); g.fillStyle = tg; g.fillText('Powered by Solana', W/2, y+fs*1.5+(1-a2)*10);
+    g.restore();
+  }
+
+  function drawCta(t){
+    const ct = t-6.6; if (ct<0) return;
+    const fs = clamp(W*0.04,13,17), y = L.ctaY, a = eOut(clamp(ct/0.45)), url = 'world.devfridge.cool/skill';
+    g.save(); g.globalAlpha = a; g.textAlign='center'; g.textBaseline='middle';
+    g.font = `700 ${fs*1.15}px "Chakra Petch", system-ui, sans-serif`; g.fillStyle = C.frost;
+    g.fillText('Build your own game', W/2, y+(1-a)*12);
+    g.font = `500 ${fs}px "Chakra Petch", system-ui, sans-serif`;
+    const w = g.measureText(url).width+fs*2.4, h = fs*2.4, py = y+fs*2.4, pa = 0.55+0.45*Math.sin(ct*5);
+    g.strokeStyle = `rgba(20,241,149,${0.5+0.5*pa})`; g.lineWidth = 1.5; g.shadowColor = C.green; g.shadowBlur = 14*pa;
+    rr(W/2-w/2, py-h/2, w, h, h/2); g.stroke(); g.shadowBlur = 0;
+    g.fillStyle = C.green; g.fillText(url, W/2, py);
+    g.restore();
+    // tappable hit area over the drawn invite (live mode only)
+    if (!RECORD && ct>0.2 && !ctaEl.classList.contains('on')){
+      const top = y-fs*1.2;
+      Object.assign(ctaEl.style, { left:(W/2-w/2)+'px', top:top+'px', width:w+'px', height:(py+h/2-top)+'px', borderRadius:'18px' });
+      ctaEl.classList.add('on'); ctaEl.tabIndex = 0;
+    }
+  }
+
+  function crtOff(t){
+    const p = clamp((t-8.5)/0.3), q = clamp((t-8.8)/0.22);
+    tctx.setTransform(1,0,0,1,0,0); tctx.clearRect(0,0,tmp.width,tmp.height); tctx.drawImage(cv,0,0);
+    g.setTransform(1,0,0,1,0,0); g.globalAlpha = 1; g.globalCompositeOperation='source-over';
+    g.fillStyle = C.void; g.fillRect(0,0,cv.width,cv.height);
+    const sy = Math.max(0.004, 1-eIn(p)), sxx = Math.max(0.002, 1-eIn(q)), cw = cv.width, chh = cv.height;
+    const w = cw*sxx, h = chh*sy;
+    g.drawImage(tmp, cw/2-w/2, chh/2-h/2, w, h);
+    g.globalCompositeOperation='lighter'; g.fillStyle = `rgba(234,248,255,${0.7*p*(1-q*0.6)})`;
+    g.fillRect(cw/2-w/2, chh/2-Math.max(h,2*DPR)/2, w, Math.max(h,2*DPR));
+    g.globalCompositeOperation='source-over';
+  }
+
+  /* ---------- audio ---------- */
+  let ac, master, recDest, noiseBuf;
+  function initAudio(){
+    try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return; }
+    const comp = ac.createDynamicsCompressor(); comp.threshold.value = -12; comp.ratio.value = 4;
+    master = ac.createGain(); master.gain.value = 0.9; master.connect(comp); comp.connect(ac.destination);
+    if (RECORD && ac.createMediaStreamDestination){ recDest = ac.createMediaStreamDestination(); comp.connect(recDest); }
+    noiseBuf = ac.createBuffer(1, ac.sampleRate*2, ac.sampleRate);
+    const d = noiseBuf.getChannelData(0); for (let i=0;i<d.length;i++) d[i] = rnd()*2-1;
+  }
+  function tone({type='sine', f, f2, at, dur, peak, attack=0.005, detune=0, lp}){
+    const o = ac.createOscillator(), gn = ac.createGain(); o.type = type; o.detune.value = detune;
+    o.frequency.setValueAtTime(f, at); if (f2) o.frequency.exponentialRampToValueAtTime(f2, at+dur*0.8);
+    gn.gain.setValueAtTime(0.0001, at); gn.gain.exponentialRampToValueAtTime(peak, at+attack); gn.gain.exponentialRampToValueAtTime(0.0001, at+dur);
+    let n = o; if (lp){ const fl = ac.createBiquadFilter(); fl.type='lowpass'; fl.frequency.value = lp; o.connect(fl); n = fl; }
+    n.connect(gn); gn.connect(master); o.start(at); o.stop(at+dur+0.05);
+  }
+  function noise({at, dur, type='lowpass', f=1000, f2, q=0.7, peak=0.3, attack=0.005}){
+    const s = ac.createBufferSource(), fl = ac.createBiquadFilter(), gn = ac.createGain();
+    s.buffer = noiseBuf; fl.type = type; fl.Q.value = q; fl.frequency.setValueAtTime(f, at); if (f2) fl.frequency.exponentialRampToValueAtTime(f2, at+attack);
+    gn.gain.setValueAtTime(0.0001, at); gn.gain.exponentialRampToValueAtTime(peak, at+attack); gn.gain.exponentialRampToValueAtTime(0.0001, at+dur);
+    s.connect(fl); fl.connect(gn); gn.connect(master); s.start(at); s.stop(at+dur+0.05);
+  }
+  function scheduleAudio(T){
+    // compressor hum, rising
+    { const o = ac.createOscillator(), lp = ac.createBiquadFilter(), gn = ac.createGain(); o.type='sawtooth';
+      o.frequency.setValueAtTime(46,T); o.frequency.linearRampToValueAtTime(64,T+2.95);
+      lp.type='lowpass'; lp.frequency.setValueAtTime(150,T); lp.frequency.linearRampToValueAtTime(480,T+2.95);
+      gn.gain.setValueAtTime(0,T); gn.gain.linearRampToValueAtTime(0.14,T+0.9); gn.gain.linearRampToValueAtTime(0.22,T+2.9); gn.gain.linearRampToValueAtTime(0,T+3.0);
+      o.connect(lp); lp.connect(gn); gn.connect(master); o.start(T); o.stop(T+3.05); }
+    [1.65,2.05,2.35].forEach(s => noise({at:T+s, dur:0.06, type:'highpass', f:3200, peak:0.28}));
+    noise({at:T+2.45, dur:0.62, type:'bandpass', f:300, f2:5200, q:1.3, peak:0.55, attack:0.5});          // whoosh
+    tone({f:140, f2:30, at:T+2.98, dur:1.4, peak:1.0});                                                     // door impact
+    noise({at:T+2.98, dur:0.55, f:900, peak:0.6});
+    tone({f:95, f2:38, at:T+3.73, dur:0.9, peak:0.8});                                                      // logo slam
+    noise({at:T+3.73, dur:0.25, type:'highpass', f:1600, peak:0.35});
+    tone({type:'triangle', f:1318.5, at:T+3.73, dur:1.6, peak:0.1}); tone({type:'triangle', f:1975.5, at:T+3.75, dur:1.3, peak:0.07});
+    [0,1,2,3,4].forEach(i => tone({type:'square', f:880, at:T+4.2+i*0.07, dur:0.05, peak:0.04, lp:3000})); // GAMES ticks
+    [2637,3136,3951,5274].forEach((f,i) => tone({f, at:T+4.55+i*0.06, dur:0.8, peak:0.06}));               // glint shimmer
+    { const lp = ac.createBiquadFilter(), pg = ac.createGain(); lp.type='lowpass'; lp.Q.value = 4;            // closing chord
+      lp.frequency.setValueAtTime(300,T+5.0); lp.frequency.exponentialRampToValueAtTime(2600,T+6.3); lp.frequency.exponentialRampToValueAtTime(900,T+8.9);
+      pg.gain.setValueAtTime(0,T+5.0); pg.gain.linearRampToValueAtTime(0.06,T+5.5); pg.gain.setValueAtTime(0.06,T+8.45); pg.gain.linearRampToValueAtTime(0,T+8.9);
+      lp.connect(pg); pg.connect(master);
+      [110,164.81,220,277.18,329.63].forEach(fr => [-9,9].forEach(dt => { const o = ac.createOscillator(); o.type='sawtooth';
+        o.frequency.value = fr; o.detune.value = dt; o.connect(lp); o.start(T+5.0); o.stop(T+9.0); })); }
+    [659.25,987.77,1318.5].forEach((f,i) => tone({type:'triangle', f, at:T+6.6+i*0.08, dur:0.5, peak:0.07}));   // invite chime
+    tone({f:1800, f2:50, at:T+8.5, dur:0.4, peak:0.09});                                                    // power-off zap
+  }
+
+  function scheduleHaptics(){
+    if (!navigator.vibrate || RECORD) return;
+    [[1650,[12]],[2050,[12]],[2350,[14]],[2980,[80,40,160]],[3730,[60]]].forEach(([ms,p]) =>
+      timers.push(setTimeout(() => { try { navigator.vibrate(p); } catch(e){} }, ms)));
+  }
+
+  /* ---------- recording (?record=1) ---------- */
+  let rec, chunks = [];
+  function startRec(){
+    if (!window.MediaRecorder || !cv.captureStream){ alert('Recording is not supported in this browser. Try Chrome.'); return; }
+    const stream = cv.captureStream(60);
+    if (recDest) recDest.stream.getAudioTracks().forEach(tr => stream.addTrack(tr));
+    const types = ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
+    const mime = types.find(m => MediaRecorder.isTypeSupported(m)) || '';
+    rec = new MediaRecorder(stream, mime ? { mimeType:mime, videoBitsPerSecond:12e6 } : {});
+    rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+    rec.onstop = () => { const type = rec.mimeType || 'video/webm', ext = type.includes('mp4') ? 'mp4' : 'webm';
+      dl.href = URL.createObjectURL(new Blob(chunks, { type })); dl.download = 'devfridge-games-intro.' + ext;
+      dl.textContent = 'Download video (.' + ext + ')'; dl.hidden = false; };
+    rec.start(100);
+  }
+
+  /* ---------- flow ---------- */
+  function loop(now){
+    if (done) return;
+    const t = Math.max(0, (now - t0)/1000);
+    draw(t);
+    if (t < END) requestAnimationFrame(loop); else finish();
+  }
+
+  async function decodeMusic(){
+    try { return await new Promise((res, rej) => ac.decodeAudioData(musicData.slice(0), res, rej)); } catch(e){ return null; }
+  }
+  function playMusic(buf, T){
+    const src = ac.createBufferSource(), gn = ac.createGain(), lag = CONFIG.musicHit - DOOR_HIT;
+    src.buffer = buf; gn.gain.setValueAtTime(1, T); gn.gain.setValueAtTime(1, T+END-0.5); gn.gain.linearRampToValueAtTime(0, T+END);
+    src.connect(gn); gn.connect(master); src.start(T+Math.max(0,-lag), Math.max(0,lag)); src.stop(T+END+0.1);
+  }
+
+  async function start(){
+    if (SOUND) initAudio();
+    if (ac && ac.state === 'suspended') ac.resume().catch(()=>{});
+    gate.style.pointerEvents = 'none';
+    await assetsReady; resize();
+    const buf = (ac && musicData && !qs.has('synth')) ? await decodeMusic() : null;
+    gate.remove();
+    if (RECORD) startRec();
+    const lead = 0.06;
+    if (ac){ const T = ac.currentTime + lead; if (buf) playMusic(buf, T); else scheduleAudio(T); }
+    scheduleHaptics();
+    if (!RECORD) timers.push(setTimeout(() => skipBtn.classList.add('on'), 800));
+    t0 = performance.now() + lead*1000;
+    requestAnimationFrame(loop);
+  }
+
+  function finish(){
+    if (done) return; done = true;
+    timers.forEach(clearTimeout); skipBtn.classList.remove('on'); ctaEl.classList.remove('on'); ctaEl.tabIndex = -1;
+    if (navigator.vibrate) try { navigator.vibrate(0); } catch(e){}
+    if (ac && master){ const n = ac.currentTime; master.gain.cancelScheduledValues(n); master.gain.setValueAtTime(master.gain.value, n); master.gain.linearRampToValueAtTime(0, n+0.25); }
+    g.setTransform(1,0,0,1,0,0); g.fillStyle = C.void; g.fillRect(0,0,cv.width,cv.height);
+    if (RECORD){ setTimeout(() => rec && rec.state !== 'inactive' && rec.stop(), 350); return; }
+    try { if (parent !== window) parent.postMessage({ type:'devfridge:intro-done' }, '*'); } catch(e){}
+    window.dispatchEvent(new CustomEvent('devfridge:intro-done'));
+    if (NEXT && /^\/(?!\/)/.test(NEXT)) setTimeout(() => location.replace(NEXT), 120);
+  }
+
+  const fontsReady = Promise.race([
+    Promise.all([document.fonts.load('100px Bungee'), document.fonts.load('700 40px "Chakra Petch"'), document.fonts.load('500 16px "Chakra Petch"')]),
+    new Promise(r => setTimeout(r, 2000))
+  ]).catch(()=>{});
+  const markReady = new Promise(r => { markImg.onload = () => { markOk = markImg.naturalWidth > 0; r(); }; markImg.onerror = () => r(); markImg.src = CONFIG.logo; });
+  const musicReady = CONFIG.music ? fetch(CONFIG.music).then(r => r.ok ? r.arrayBuffer() : null).then(b => { musicData = b; }).catch(() => {}) : Promise.resolve();
+  const assetsReady = Promise.race([Promise.all([fontsReady, markReady, musicReady]), new Promise(r => setTimeout(r, 3000))]);
+
+  if (RECORD) document.getElementById('gateLabel').textContent = 'Tap to record';
+  addEventListener('resize', () => { if (!RECORD) resize(); });
+  gate.addEventListener('click', start, { once:true });
+  skipBtn.addEventListener('click', finish);
+  assetsReady.then(resize);
+  if (AUTOSTART && !RECORD){ gate.click(); }
+})();
+</script>
+</body>
+</html>

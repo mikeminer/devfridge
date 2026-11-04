@@ -1,5 +1,15 @@
 # DevFridge Game Builder — Changelog
 
+## 1.12.0 — 2026-11-04
+
+Asks the owner whether to show the DevFridge Games intro before the game opens.
+
+- The question is separate from platform, Game Room, the market and both Free Play ads. Unanswered does not add the intro. Include copies the [intro directory](assets/devfridge-intro/) unchanged and plays the local HTML page once on a cold open, before the menu and the pass. Skip and the ending enter the game. The page links to https://world.devfridge.cool/skill.
+- On a Seeker APK, bundled or hosted, that directory is inside the package. The page does not fetch its logo, fonts or sound. No music file is in the package; the page uses its synth. The skill link is the only address outside the package, and it opens when tapped.
+- Pass, wallet and gameplay screens stay on the subscription copy. The copy checker ignores brand text only in the unchanged `devfridge-intro.html`.
+
+No program deploy, wallet signature or Store submission was performed to write this release.
+
 ## 1.11.0 — 2026-11-04
 
 Corrects Fridge `claim` for every Token-2022 mint, including $PASTA.

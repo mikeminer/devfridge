@@ -3,7 +3,7 @@ name: devfridge-game-builder
 description: Build Three.js games for browser, Seeker Android or both with Daily, Weekly and Monthly subscription passes paid in SOL. Use for wallet and optional in-game market integration, the vendored game-studio workflow, asset and audio pipelines, signed APKs, device tests, Store releases and optional Game Room or Free Play promotions.
 metadata:
   author: DevFridge
-  version: "1.11.0"
+  version: "1.12.0"
   sources-reviewed: "2026-11-04"
 ---
 # DevFridge Game Builder
@@ -28,6 +28,8 @@ For **Browser**, **Both**, or **Seeker with a hosted website**, offer **include 
 
 Before implementing gameplay, always resolve two independent owner choices: **include an OnlyFridge Club promotion before every new Free Play round?** and **include a DevFridge Scan sponsored-token / YOUR AD HERE card at the top during Free Play?** Offer both, either one, or neither. Reuse explicit answers for this game; otherwise ask and wait for those choices before building gameplay. Read-only discovery and setup may continue. Unanswered is unresolved, never consent or an automatic default; record each choice in the brief. These are build-time questions for the owner, not prompts to players on every run. If the owner chooses no Free Play, record both as not applicable and do not add a free mode just for ads.
 
+Before implementing gameplay, also ask **show the DevFridge Games intro before the game opens?** Reuse an explicit include or exclude; otherwise ask and wait. Unanswered does not add the intro. The choice is independent of platform, Game Room, the market and both Free Play ads. Include copies the packaged intro directory unchanged, into the APK when the game has one, and shows that local page once on a cold open. Read [the intro guide](references/devfridge-intro.md).
+
 Produce a short build brief: platform, applicable APK architecture and deliverables; Game Room and each ad decision separately; loop and win/loss condition; camera; desktop/touch controls; assets and rights; mint-to-character mapping; raw token threshold; lock duration semantics; optional modules; score authority; hosting and any Android package/release identity. Keep conditional unanswered choices pending, never consent; do not ask inapplicable questions. Separate confirmed requirements, proposed defaults and unresolved blockers. No example game's token, minimum, entry price, recipient, package ID or RPC endpoint is a universal requirement.
 
 ## Sell a subscription and give a reason to return
@@ -36,7 +38,7 @@ Read [the subscription pass](references/season-pass.md) and [retention and econo
 
 Access rule: the connected wallet has **at least one active deposit** of the configured mint. Never check that the deposited amount equals a price or quote; swap output varies and an exact check would reject valid purchases. The deposit amount is the swap's guaranteed minimum output. The countdown reads that deposit's end time (the latest one if several are active). Use the [subscription helper](assets/subscription.mjs) with the unchanged [evidence/freshness helper](assets/timelock-gate.mjs); neither authenticates wallets or verifies raw chain accounts by itself. Existing games keep their legacy token-amount Season Pass ([season-pass.mjs](assets/season-pass.mjs)) unless the owner asks to migrate.
 
-Players see a subscription, a price in SOL and a countdown. Player UI, wallet identity, errors and Store copy never mention timelocks, vaults, deposits, the DevFridge or Fridge program, PASTA, redemption or withdrawal. Before approval the review states the plan, SOL price, fees, end date and one plain sentence that the SOL buys the token, which stays set aside for the subscription and can change in value; the wallet shows that purchase anyway. Full mechanics belong in the terms page and reviewer notes. Run the [player-copy checker](assets/check-player-copy.mjs). Use the game's name and owned HTTPS domain as wallet identity; a missing real domain blocks release, not development.
+Players see a subscription, a price in SOL and a countdown. Player UI, wallet identity, errors and Store copy never mention timelocks, vaults, deposits, the DevFridge or Fridge program, PASTA, redemption or withdrawal. The opted-in intro file is the only exception, and only while it matches the packaged intro. Before approval the review states the plan, SOL price, fees, end date and one plain sentence that the SOL buys the token, which stays set aside for the subscription and can change in value; the wallet shows that purchase anyway. Full mechanics belong in the terms page and reviewer notes. Run the [player-copy checker](assets/check-player-copy.mjs). Use the game's name and owned HTTPS domain as wallet identity; a missing real domain blocks release, not development.
 
 Read [program reuse and verification](references/program-and-verification.md) for developer and reviewer documentation of the Fridge program. That material is for builders, reviewers and the terms page, not for game screens. If the game builds Fridge `claim`, for $PASTA or any other Token-2022, use the claim account list there. Those accounts stay on the instruction when no swap runs. The 2026-10-24 IDL pin does not include them.
 

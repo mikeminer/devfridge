@@ -32,6 +32,8 @@ Before implementing gameplay, ask the owner about both Free Play placements unle
 
 The choices are independent: both, one or neither. Do not preselect consent, treat silence as refusal/consent, infer consent from a free-mode request, or enable ads because an example game has them. An unanswered choice remains pending; wait before gameplay implementation, while continuing read-only discovery/setup. If the owner explicitly excludes Free Play, mark both not applicable. Reuse answers already given for this game instead of repeating questions. These questions are for the creator during planning, not for players before each round. For any approved placement, follow [the integration guide](free-play-sponsors.md).
 
+Ask separately: **“Show the DevFridge Games intro before the game opens?”** Record include, exclude or pending. This is not a Free Play ad and does not depend on platform, Game Room or the market. Pending does not add the intro. An include follows [the intro guide](devfridge-intro.md).
+
 Record in the brief:
 - Explicit platform decision, conditional APK architecture and web/APK/Store deliverables; unanswered choices have no default.
 - Conditional Game Room decision (include / exclude / pending / not applicable), owner's answer, target web URL and integration/review status; separate from Free Play and each ad.
@@ -44,6 +46,7 @@ Record in the brief:
 - Sign-in, in-app subscription purchase, prechecks, recheck policy and expired/unavailable behavior; optional separate market choice.
 - Selected modules, score authority, database, contract requirements and owner powers.
 - Free Play scope and each placement's decision (include / exclude / pending / not applicable), with the owner's answer; no unanswered ad setting may become enabled.
+- DevFridge intro (include / exclude / pending), separate from Free Play and Game Room. Pending does not add it.
 - Assets, deployment target, test matrix, assumptions and unresolved blockers.
 - For Android: package/versionCode/signing-certificate identity, bundled asset build or approved hosted origin/deployment, wallet integration, offline limits, upgrade plan, locale mapping, Store metadata and submission authorization/status. Never copy a reference game's package, wallet recipient, RPC or token as production configuration.
 
@@ -51,4 +54,4 @@ Defaults to propose, not impose: single-player; no paid entry/rewards; labeled d
 
 For production, reuse existing publisher/support/domain and actual privacy/data/payment facts; ask only for missing values needed by [the public-site generator](public-site.md). Store a provider RPC key only server-side and suggest a spending limit with the provider. Record the physical Seeker and representative performance scenario for APK releases, plus the saved checkpoint location. For deliverables over 25 MB, reuse an authorized private Drive destination or resolve the account/folder before delivery; this does not authorize public sharing or uploading unrelated files. See [release updates](release-updates.md).
 
-Once platform and applicable APK architecture, Game Room and Free Play placement choices are resolved, continue reversible scene work while mint/hosting answers are pending. Never invent production settings to make a build appear complete.
+Once platform and applicable APK architecture, Game Room, Free Play placement and DevFridge intro choices are resolved, continue reversible scene work while mint/hosting answers are pending. Never invent production settings to make a build appear complete.

@@ -22,6 +22,12 @@ TEXT_SUFFIXES = {'.md', '.yaml', '.mjs', '.py', '.json', '.txt',
                  '.js', '.ts', '.html', '.glsl', '.frag', '.vert', '.wgsl'}
 BARE_NAMES = {'LICENSE', 'NOTICE'}
 TEMPLATE_PATHS = {'assets/rpc-proxy/Dockerfile'}
+INTRO_BINARY = 'assets/devfridge-intro/'
+INTRO_BINARY_SUFFIXES = {'.jpg', '.woff2'}
+
+
+def intro_binary(relative):
+    return relative.startswith(INTRO_BINARY) and Path(relative).suffix.lower() in INTRO_BINARY_SUFFIXES
 
 
 def digest(data):
@@ -54,8 +60,11 @@ def build(source=SOURCE, dest=DEST):
     if len({name.lower() for name in names}) != len(names):
         raise ValueError('Case-colliding package paths')
     for path in files:
-        if path.suffix not in TEXT_SUFFIXES and path.name not in BARE_NAMES and path.relative_to(source).as_posix() not in TEMPLATE_PATHS:
-            raise ValueError('Unexpected package file: ' + path.relative_to(source).as_posix())
+        relative = path.relative_to(source).as_posix()
+        if intro_binary(relative):
+            continue
+        if path.suffix not in TEXT_SUFFIXES and path.name not in BARE_NAMES and relative not in TEMPLATE_PATHS:
+            raise ValueError('Unexpected package file: ' + relative)
 
     for document in [source / 'SKILL.md', *sorted((source / 'references').glob('*.md'))]:
         for link in re.findall(r'\[[^\]]+\]\(([^)]+)\)', document.read_text(encoding='utf-8')):
@@ -70,6 +79,9 @@ def build(source=SOURCE, dest=DEST):
     data_by_name = {}
     for relative, path in zip(names, files):
         data = path.read_bytes()
+        if intro_binary(relative):
+            data_by_name[relative] = data
+            continue
         data.decode('utf-8')
         if b'\r\n' in data:
             raise ValueError('Expected LF source bytes; check .gitattributes: ' + relative)

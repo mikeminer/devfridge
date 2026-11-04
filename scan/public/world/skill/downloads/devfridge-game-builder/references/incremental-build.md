@@ -4,7 +4,7 @@ Build one complete small game loop first: boot, controls, play, win/loss, restar
 
 At each coherent stage, normally one feature or about 20–40 minutes of work:
 
-1. Record the brief decisions and what changed. Reuse answered questions, including platform/architecture, Game Room and independent Free Play ads.
+1. Record the brief decisions and what changed. Reuse answered questions, including platform/architecture, Game Room, independent Free Play ads and the DevFridge intro.
 2. Run the stage's meaningful build/tests. Record actual commands and results, including failed/skipped checks and physical-device limitations. A checkpoint can preserve incomplete work but must not call it tested or release-ready.
 3. Save selected changed source/configuration files, stage summary, exact next action and blockers. Include an actual source revision if available. Keep large reproducible assets/builds referenced by their source/provenance hashes; do not fill checkpoints with APKs or dependency directories.
 4. Verify the snapshot, then proceed to the next stage. If the task is interrupted, inspect the latest valid checkpoint and current worktree before resuming. Do not redo or silently discard newer user edits.

@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 // Dependency-free lexical guard, NOT a full JS/TS parser or proof of rendered copy.
 // Scan dedicated UI/error modules plus DOM/screenshot assertions in the actual game.
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+
+// Brand findings are dropped only for this exact file. Any edit, rename, or paste into another screen still reports brand.
+const CANONICAL_INTRO_SHA256 = 'e907efb9e7d15a79d85d5bd5262c8c2515c91f4ae2cca4c8a5e7555b484e2bd6';
 
 const SCOPES = new Set(['general', 'pass', 'market', 'details', 'free-play']);
 const ATTRIBUTES = /^(?:alt|title|aria-label|aria-description|placeholder|value|content|android:label|android:text|android:contentDescription)$/i;
@@ -192,11 +196,16 @@ function markdownStrings(source, defaultScope) {
   return tokens;
 }
 
+function canonicalIntro(file, source) {
+  const base = String(file).replaceAll('\\', '/').split('/').pop();
+  return base === 'devfridge-intro.html' && crypto.createHash('sha256').update(source).digest('hex') === CANONICAL_INTRO_SHA256;
+}
+
 function permitted(finding, allowlist) {
   return allowlist.some(entry => {
     if (!entry || typeof entry.reason !== 'string' || !entry.reason.trim() || typeof entry.text !== 'string' || !entry.text || entry.text.length > 512) return false;
     if (entry.file !== finding.file || entry.scope !== finding.scope || entry.text !== finding.text || !Array.isArray(entry.rules) || !entry.rules.includes(finding.rule)) return false;
-    // Brand exemptions are confined to an explicitly opted-in Free Play sponsor card.
+    // Allowlisted brand exemptions stay on an opted-in Free Play card. The packaged intro is a separate exact-file exception.
     if (finding.rule === 'brand' && finding.scope !== 'free-play') return false;
     return true;
   });
@@ -249,7 +258,8 @@ export function scanPlayerCopy(source, { file = 'copy.txt', scope = 'general', f
     }
   }
   const unique = new Map(findings.map(item => [`${item.file}:${item.line}:${item.column}:${item.rule}`, item]));
-  return [...unique.values()];
+  const result = [...unique.values()];
+  return canonicalIntro(file, source) ? result.filter(item => item.rule !== 'brand') : result;
 }
 
 function filesAt(target) {

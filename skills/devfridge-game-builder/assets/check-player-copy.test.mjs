@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { scanPlayerCopy } from './check-player-copy.mjs';
 const scan = (source, options = {}) => scanPlayerCopy(source, { file: 'src/pass.tsx', scope: 'pass', ...options });
 
@@ -80,4 +81,14 @@ test('dist catches hidden identifiers and forbids a blanket bundle exemption', (
   assert.deepEqual(scanPlayerCopy('const host="scan.devfridge.cool";', { file: 'sponsor.js', scope: 'free-play', dist: true, allowlist: [entry] }), []);
   assert.ok(scanPlayerCopy('const host="scan.devfridge.cool";const devfridgeLeak=1;', { file: 'sponsor.js', scope: 'free-play', dist: true, allowlist: [entry] }).length);
   assert.ok(scan('const host="scan.devfridge.cool";', { dist: true, allowlist: [{ ...entry, file: 'src/pass.tsx', scope: 'pass' }] }).length);
+});
+
+test('brand findings are ignored only for the unchanged packaged intro file', () => {
+  const source = fs.readFileSync(new URL('./devfridge-intro/devfridge-intro.html', import.meta.url), 'utf8');
+  assert.equal(scanPlayerCopy(source, { file: 'public/devfridge-intro.html', scope: 'general', dist: true }).length, 0);
+  assert.equal(/fonts\.googleapis\.com|fonts\.gstatic\.com|games\.devfridge\.cool/.test(source), false);
+  assert.match(source, /logo-mark\.jpg/);
+  assert.match(source, /https:\/\/world\.devfridge\.cool\/skill/);
+  assert.ok(scanPlayerCopy(source, { file: 'public/index.html', scope: 'general' }).some(item => item.rule === 'brand'));
+  assert.ok(scanPlayerCopy(source + '\n<p>DevFridge</p>', { file: 'devfridge-intro.html', scope: 'general' }).some(item => item.rule === 'brand'));
 });
