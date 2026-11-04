@@ -23,16 +23,42 @@ DevFridge Scan reports observable on-chain and market signals. Its risk grade is
 | Tool | Status | Result |
 |------|--------|--------|
 | `cargo clippy -- -D warnings` | CI (every push) | Clean — zero warnings |
-| `cargo audit` | CI (every push) | 2 advisories in Solana SDK transitive deps (see below) |
+| `cargo audit` | CI (every push) | Two ignored Solana SDK advisories, plus informational warnings (see below). No unignored vulnerabilities. |
 | Sec3 X-ray v0.0.6 | CI (every push) | **No issues detected** across all 4 attack surfaces |
 
 **Sec3 X-ray report summary (2026-08-22):**
 Analyzed all 4 instruction entry points (`create_lock`, `claim`, `boost`, `crank_buyback`). Result: "No issues detected."
 Full report available as a GitHub Actions artifact on every push.
 
-**cargo audit known advisories (upstream, not fixable without Anchor version bump):**
-- `RUSTSEC-2024-0344`: `curve25519-dalek` timing variability — transitive dep from Solana SDK. Does not affect Fridge program logic (no custom scalar operations).
-- `RUSTSEC-2022-0093`: `ed25519-dalek` double-key oracle — transitive dep from Solana SDK. Does not affect Fridge (no custom ed25519 signing).
+**cargo audit (database 2026-11-03).** `rustsec/audit-check` fails the check only when a vulnerability has no `informational` tag (`critical` in that action). Unmaintained and unsound warnings are reported and do not fail the check, so they are not ignored.
+
+Ignored, because they are in Solana SDK crates pinned by Anchor 0.30.1 and are not Fridge logic. Both were already on `master` before this upgrade:
+
+- `RUSTSEC-2024-0344` (`curve25519-dalek`, low/timing): timing variability. Fridge does no custom scalar arithmetic.
+- `RUSTSEC-2022-0093` (`ed25519-dalek`, crypto-failure): double-key oracle. Fridge does no custom ed25519 signing.
+
+`RUSTSEC-2026-0385` (`ctutils` 0.4.2, crypto-failure, no CVSS; constant-time mask generation) was also already locked on `master` via `blake3` → `digest` (mac feature) → `solana-program` 1.18.26. It was not introduced by the buyback account changes. `digest` allows `ctutils` 0.4, so the lockfile now uses the patched 0.4.4. Fridge never calls `ctutils` directly.
+
+Informational warnings, same crates on `master`, not ignored:
+
+| ID | Crate | Kind | Notes |
+|----|--------|------|--------|
+| RUSTSEC-2024-0375 | atty 0.2.14 | unmaintained | Host-only CLI helper pulled by Solana SDK |
+| RUSTSEC-2021-0145 | atty 0.2.14 | unsound | Same crate; not used by program logic |
+| RUSTSEC-2025-0141 | bincode 1.3.3 | unmaintained | Solana SDK serialization |
+| RUSTSEC-2023-0033 | borsh 0.9.3 | unsound | Patched in 0.10.4, which is also in the tree; 0.9.3 remains via older Solana crates |
+| RUSTSEC-2026-0247 | bitmaps 2.1.0 | unmaintained | `im` / `sized-chunks` stack |
+| RUSTSEC-2024-0388 | derivative 2.2.0 | unmaintained | Proc-macro, not in the BPF program |
+| RUSTSEC-2026-0248 | im 15.1.0 | unmaintained | Solana SDK |
+| RUSTSEC-2023-0126 | im 15.1.0 | unsound | Same crate |
+| RUSTSEC-2025-0161 | libsecp256k1 0.6.0 | unmaintained | Solana SDK |
+| RUSTSEC-2024-0436 | paste 1.0.15 | unmaintained | Proc-macro |
+| RUSTSEC-2026-0186 | memmap2 0.5.10 | unsound | Host mmap; patched only in 0.9.11, which Solana 1.18 does not use |
+| RUSTSEC-2026-0097 | rand 0.7.3 | unsound | Needs a custom logger plus `thread_rng`; not Fridge code |
+| RUSTSEC-2026-0251 | sized-chunks 0.6.5 | unmaintained | Solana SDK |
+| RUSTSEC-2026-0255 | sized-chunks 0.6.5 | unsound | Same crate; no patched release |
+
+None of these are fixed by an Anchor 0.30.1-compatible bump except `ctutils`, which is updated above.
 
 ### Sealevel-Attacks Checklist
 
