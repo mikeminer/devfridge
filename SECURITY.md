@@ -119,6 +119,12 @@ We commit to:
 - Providing a fix timeline within 7 days
 - Crediting the reporter (unless they prefer anonymity)
 
+## Acknowledgments
+
+Hall of fame for responsible disclosure. Researchers are listed under the name they asked to be credited as.
+
+- **[KupiaSec](https://x.com/KupiaSecurity)** ([kupia.io](https://kupia.io)) responsibly disclosed two issues in the Fridge Solana program's claim fee and buyback path: a fee bypass and a boost-vault drain. Both were fixed in [PR #148](https://github.com/mikeminer/devfridge/pull/148) and deployed to mainnet at slot 465250134 on 2026-11-04.
+
 ## Known Limitations
 
 1. **No formal audit.** See above.

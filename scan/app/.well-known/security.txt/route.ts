@@ -6,6 +6,7 @@ Policy: https://docs.devfridge.cool/security
 Canonical: https://scan.devfridge.cool/.well-known/security.txt
 Preferred-Languages: en, it
 Expires: 2027-08-21T00:00:00.000Z
+Acknowledgments: https://github.com/mikeminer/devfridge/blob/master/SECURITY.md#acknowledgments
 `;
   return new Response(body, {
     headers: {
