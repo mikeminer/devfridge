@@ -3,3 +3,4 @@ Expires: 2027-09-01T00:00:00.000Z
 Preferred-Languages: en, it
 Policy: https://docs.devfridge.cool/security
 Canonical: https://team.devfridge.cool/.well-known/security.txt
+Acknowledgments: https://github.com/mikeminer/devfridge/blob/master/SECURITY.md#acknowledgments
