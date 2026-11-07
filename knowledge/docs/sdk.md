@@ -4,7 +4,7 @@ title: "Gate access with Fridge timelocks"
 description: "DevFridge investor knowledge: Gate access with Fridge timelocks"
 resource: "https://docs.devfridge.cool/sdk"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-06T14:15:09Z"
+timestamp: "2026-11-07T12:59:01Z"
 generated: true
 ---
 
@@ -12,7 +12,7 @@ generated: true
 
 Published documentation snapshot; source claims are not independent verification.
 
-[Canonical page](https://docs.devfridge.cool/sdk) · ok · last successful observation: 2026-11-06T14:15:09Z · last attempt: 2026-11-06T14:15:09Z.
+[Canonical page](https://docs.devfridge.cool/sdk) · ok · last successful observation: 2026-11-07T12:59:01Z · last attempt: 2026-11-07T12:59:01Z.
 
 SDK
 
