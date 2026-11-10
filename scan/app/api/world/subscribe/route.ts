@@ -12,7 +12,8 @@ function reply(status: number, success = false) {
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
   const local = process.env.NODE_ENV !== "production" && origin === new URL(request.url).origin;
-  if (origin !== "https://world.devfridge.cool" && !local) return reply(403);
+  const allowed = origin === "https://world.devfridge.cool" || origin === "https://press.devfridge.cool";
+  if (!allowed && !local) return reply(403);
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) return reply(415);
   if (Number(request.headers.get("content-length") || 0) > 2048) return reply(413);
 

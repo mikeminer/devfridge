@@ -139,6 +139,21 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (host.startsWith("press.")) {
+    const url = req.nextUrl.clone();
+    if (path === "/" || path === "") url.pathname = "/press";
+    else if (
+      !path.startsWith("/press") &&
+      !path.startsWith("/api") &&
+      !path.startsWith("/_next") &&
+      path !== "/sitemap.xml" &&
+      path !== "/robots.txt"
+    ) {
+      url.pathname = `/press${path}`;
+    }
+    return NextResponse.rewrite(url);
+  }
+
   if (host.startsWith("health.") || host.startsWith("connect.")) {
     const url = req.nextUrl.clone();
     if (path === "/" || path === "") {

@@ -3,7 +3,39 @@
 import { useRef, useState, type FormEvent } from "react";
 import styles from "./runway.module.css";
 
-export default function NewsletterSignup() {
+const paragraphSubscribe = "https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/subscribe";
+
+const worldCopy = {
+  label: "World updates on Paragraph",
+  intro: "Subscribe on Paragraph for World updates and insider perks.",
+  cta: "Subscribe on Paragraph",
+  success: "You are subscribed! World updates will arrive via Paragraph.",
+  rateLimit: "Too many attempts. Please try again in 10 minutes.",
+  error: "We could not confirm your subscription. Please try again or subscribe on Paragraph.",
+  offline: "We could not confirm your subscription. Check your connection and try again, or subscribe on Paragraph.",
+  emailLabel: "Your email",
+  emailId: "world-newsletter-email",
+  formId: "world-newsletter-form",
+  consent: "I agree to receive DevFridge updates via Paragraph. Unsubscribe anytime.",
+  pending: "Subscribing…",
+  submit: "Subscribe by email",
+  paragraph: "Prefer to subscribe on Paragraph? ↗",
+  paragraphHref: paragraphSubscribe,
+};
+
+export type NewsletterCopy = typeof worldCopy;
+
+export const pressTranscriptCopy: NewsletterCopy = {
+  ...worldCopy,
+  label: "Interview transcript on Paragraph",
+  intro: "Subscribe on Paragraph to receive the interview transcript.",
+  cta: "Subscribe for the transcript",
+  success: "You are subscribed. The interview transcript will arrive by email.",
+  emailId: "press-newsletter-email",
+  formId: "press-newsletter-form",
+};
+
+export default function NewsletterSignup({ copy = worldCopy }: { copy?: NewsletterCopy }) {
   const [expanded, setExpanded] = useState(false);
   const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -27,36 +59,36 @@ export default function NewsletterSignup() {
       const result = await response.json();
       if (!response.ok || result.success !== true) {
         setStatus("error");
-        setMessage(response.status === 429 ? "Too many attempts. Please try again in 10 minutes." : "We could not confirm your subscription. Please try again or subscribe on Paragraph.");
+        setMessage(response.status === 429 ? copy.rateLimit : copy.error);
         return;
       }
       form.reset();
       setStatus("success");
-      setMessage("You are subscribed! World updates will arrive via Paragraph.");
+      setMessage(copy.success);
     } catch {
       setStatus("error");
-      setMessage("We could not confirm your subscription. Check your connection and try again, or subscribe on Paragraph.");
+      setMessage(copy.offline);
     } finally {
       submitting.current = false;
     }
   }
 
   return (
-    <aside className={styles.launchNewsletter} aria-label="World updates on Paragraph">
-      <p>Subscribe on Paragraph for World updates and insider perks.</p>
+    <aside className={styles.launchNewsletter} aria-label={copy.label}>
+      <p>{copy.intro}</p>
       {!expanded ? (
-        <button type="button" aria-expanded={false} aria-controls="world-newsletter-form" onClick={() => setExpanded(true)}>Subscribe on Paragraph</button>
+        <button type="button" aria-expanded={false} aria-controls={copy.formId} onClick={() => setExpanded(true)}>{copy.cta}</button>
       ) : status === "success" ? (
         <p role="status">{message}</p>
       ) : (
-        <form id="world-newsletter-form" className={styles.newsletterForm} onSubmit={subscribe} aria-busy={status === "pending"}>
-          <label htmlFor="world-newsletter-email">Your email</label>
-          <input id="world-newsletter-email" name="email" type="email" autoComplete="email" inputMode="email" maxLength={254} placeholder="you@example.com" required autoFocus disabled={status === "pending"} />
+        <form id={copy.formId} className={styles.newsletterForm} onSubmit={subscribe} aria-busy={status === "pending"}>
+          <label htmlFor={copy.emailId}>{copy.emailLabel}</label>
+          <input id={copy.emailId} name="email" type="email" autoComplete="email" inputMode="email" maxLength={254} placeholder="you@example.com" required autoFocus disabled={status === "pending"} />
           <div hidden aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
-          <label className={styles.newsletterConsent}><input name="consent" type="checkbox" required disabled={status === "pending"} />I agree to receive DevFridge updates via Paragraph. Unsubscribe anytime.</label>
-          <button type="submit" disabled={status === "pending"}>{status === "pending" ? "Subscribing…" : "Subscribe by email"}</button>
+          <label className={styles.newsletterConsent}><input name="consent" type="checkbox" required disabled={status === "pending"} />{copy.consent}</label>
+          <button type="submit" disabled={status === "pending"}>{status === "pending" ? copy.pending : copy.submit}</button>
           {status === "error" && <p role="alert">{message}</p>}
-          <a href="https://paragraph.com/@0x5d69c42a3a481d0ccfd88cfa8a2a08e2bf456134/subscribe" target="_blank" rel="noopener noreferrer">Prefer to subscribe on Paragraph? ↗</a>
+          <a href={copy.paragraphHref} target="_blank" rel="noopener noreferrer">{copy.paragraph}</a>
         </form>
       )}
     </aside>

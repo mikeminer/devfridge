@@ -41,6 +41,12 @@ function harness(options = {}) {
   return { calls, send };
 }
 
+test('newsletter accepts the press site on the same Paragraph list', async () => {
+  const h = harness(), res = await h.send(undefined, { origin: 'https://press.devfridge.cool' });
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { success: true });
+  assert.equal(h.calls.paragraph[0].email, 'reader@example.com');
+});
 test('newsletter sends trimmed email only after consent and distributed rate check', async () => {
   const h = harness(), res = await h.send();
   assert.equal(res.status, 200); assert.deepEqual(await res.json(), { success: true });
