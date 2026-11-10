@@ -27,10 +27,10 @@ export type NewsletterCopy = typeof worldCopy;
 
 export const pressTranscriptCopy: NewsletterCopy = {
   ...worldCopy,
-  label: "Interview transcript on Paragraph",
-  intro: "Subscribe on Paragraph to receive the interview transcript.",
-  cta: "Subscribe for the transcript",
-  success: "You are subscribed. The interview transcript will arrive by email.",
+  label: "Interview transcript newsletter",
+  intro: "Subscribe to the newsletter.",
+  cta: "Subscribe to the newsletter",
+  success: "You are subscribed. The transcript will be sent to all subscribers as an exclusive preview, before it is published on press.devfridge.cool.",
   emailId: "press-newsletter-email",
   formId: "press-newsletter-form",
 };
