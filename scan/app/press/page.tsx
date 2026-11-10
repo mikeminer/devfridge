@@ -28,9 +28,6 @@ export default function PressPage() {
     <main className="mx-auto max-w-xl px-4 py-12">
       <p className="mb-6 text-xs font-bold tracking-[0.22em] text-ice">PRESS.DEVFRIDGE.COOL</p>
       <h1 className="text-4xl font-bold tracking-tight text-white">Get the interview transcript.</h1>
-      <p className="mt-4 text-base leading-6 text-mute">
-        The transcript is sent by email through the same Paragraph list as DevFridge World.
-      </p>
       <NewsletterSignup copy={pressTranscriptCopy} />
     </main>
   );
