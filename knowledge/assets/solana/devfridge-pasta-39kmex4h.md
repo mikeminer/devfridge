@@ -4,7 +4,7 @@ title: "DevFridge PASTA (solana)"
 description: "DevFridge investor knowledge: DevFridge PASTA (solana)"
 resource: "https://solscan.io/token/39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-11T14:20:17Z"
+timestamp: "2026-11-12T15:12:57Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:39kMeX4HVRW9qbbiHSPbRQ9xeXUF18GrNP6gL61Ppump`
 
-Registry status: ok · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-11T14:20:17Z.
+Registry status: stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-12T15:12:57Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ DevFridge ecosystem burn token. Claim fees and Get Featured payments feed the do
 
 ## On-chain observation
 
-ok · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-11T14:20:17Z.
+ok · last successful observation: 2026-11-12T15:12:57Z · last attempt: 2026-11-12T15:12:57Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 961904773.066651 |
 | Supply in base units | `961904773066651` |
 | Decimals | 6 |
-| Finalized slot | 468154639 |
+| Finalized slot | 468571212 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-11T14:20:17Z.
+ok · last successful observation: 2026-11-12T15:12:57Z · last attempt: 2026-11-12T15:12:57Z.
 
 ```json
 {
