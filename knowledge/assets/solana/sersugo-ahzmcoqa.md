@@ -4,7 +4,7 @@ title: "SerSugo (solana)"
 description: "DevFridge investor knowledge: SerSugo (solana)"
 resource: "https://solscan.io/token/AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-12T15:12:57Z"
+timestamp: "2026-11-13T14:33:51Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `solana:AHZMcoqA53trX8JcuoCRsQqWpeSk415cE4p7AsrZpump`
 
-Registry status: stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-12T15:12:57Z.
+Registry status: stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-13T14:33:51Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Brainrot character/community token in the official DevFridge collection. Review 
 
 ## On-chain observation
 
-ok · last successful observation: 2026-11-12T15:12:57Z · last attempt: 2026-11-12T15:12:57Z.
+ok · last successful observation: 2026-11-13T14:33:51Z · last attempt: 2026-11-13T14:33:51Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000` |
 | Decimals | 6 |
-| Finalized slot | 468571219 |
+| Finalized slot | 468961404 |
 | Token program | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
 | Token-2022 | True |
 | Mint authority | None at observation |
@@ -68,7 +68,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-ok · last successful observation: 2026-11-12T15:12:57Z · last attempt: 2026-11-12T15:12:57Z.
+ok · last successful observation: 2026-11-13T14:33:51Z · last attempt: 2026-11-13T14:33:51Z.
 
 ```json
 {
