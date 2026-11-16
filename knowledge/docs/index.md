@@ -4,7 +4,7 @@ title: "All documentation references"
 description: "DevFridge investor knowledge: All documentation references"
 resource: "https://docs.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-15T13:55:28Z"
+timestamp: "2026-11-16T15:43:49Z"
 generated: true
 ---
 
