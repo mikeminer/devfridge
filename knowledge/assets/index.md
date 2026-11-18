@@ -4,7 +4,7 @@ title: "Asset registry"
 description: "DevFridge investor knowledge: Asset registry"
 resource: "https://connect.devfridge.cool"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-17T15:58:53Z"
+timestamp: "2026-11-18T15:38:26Z"
 generated: true
 ---
 
@@ -15,4 +15,4 @@ generated: true
 - [Solana](./solana/index.md)
 - [Robinhood Chain](./robinhood/index.md)
 
-stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-17T15:58:53Z. Address replacements/removals require a reviewed change to the pinned identities in config.json.
+stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-18T15:38:26Z. Address replacements/removals require a reviewed change to the pinned identities in config.json.
