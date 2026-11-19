@@ -4,7 +4,7 @@ title: "Trust Me Capital (robinhood)"
 description: "DevFridge investor knowledge: Trust Me Capital (robinhood)"
 resource: "https://robinhoodchain.blockscout.com/token/0x5c845330b41D9Bef68B46DC254353A770f44dee8"
 tags: ["devfridge", "investors"]
-timestamp: "2026-11-18T15:38:26Z"
+timestamp: "2026-11-19T15:43:32Z"
 generated: true
 ---
 
@@ -18,7 +18,7 @@ generated: true
 
 **Identity:** `robinhood:0x5c845330b41d9bef68b46dc254353a770f44dee8`
 
-Registry status: stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-18T15:38:26Z.
+Registry status: stale · last successful observation: 2026-11-11T14:20:17Z · last attempt: 2026-11-19T15:43:32Z.
 
 ## Role and holder rights
 
@@ -26,14 +26,14 @@ Trust Me Capital token. The Hyperliquid vault and the token are separate product
 
 ## On-chain observation
 
-ok · last successful observation: 2026-11-18T15:38:26Z · last attempt: 2026-11-18T15:38:26Z.
+ok · last successful observation: 2026-11-19T15:43:32Z · last attempt: 2026-11-19T15:43:32Z.
 
 | Field | Observation |
 | --- | --- |
 | Total supply at observation | 1000000000 |
 | Supply in base units | `1000000000000000000000000000` |
 | Decimals | 18 |
-| Block | 117508413 |
+| Block | 118331104 |
 | Runtime bytecode length | 3248 bytes |
 
 Not established by ERC-20 supply/decimals reads; inspect verified source, roles and proxy implementation.
@@ -42,7 +42,7 @@ Total supply is not circulating supply. Do not add supplies across networks or a
 
 ## Market and concentration evidence
 
-stale · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-11-18T15:38:26Z.
+stale · last successful observation: 2026-10-06T13:17:43Z · last attempt: 2026-11-19T15:43:32Z.
 
 ```json
 {
